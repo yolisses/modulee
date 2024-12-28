@@ -1,29 +1,18 @@
 import { Editor } from '$lib/editor/Editor.svelte';
-import { Vector } from '$lib/space/Vector';
+import type { Node } from '$lib/types/Node';
 import { expect, test } from 'vitest';
 import { RemoveNodeCommand } from './RemoveNodeCommand';
 
 test('RemoveNodeCommand', () => {
 	const editor = new Editor();
-	editor.nodes = [
-		{ id: '1', position: Vector.zero(), size: Vector.one() },
-		{ id: '2', position: Vector.zero(), size: Vector.one() },
-		{ id: '3', position: Vector.zero(), size: Vector.one() }
-	];
+	editor.nodes = [{ id: '1' }, { id: '2' }, { id: '3' }] as Node[];
 
 	const removeNodeCommand = new RemoveNodeCommand('2');
 	removeNodeCommand.execute(editor);
 
-	expect(editor.nodes).toEqual([
-		{ id: '1', position: Vector.zero(), size: Vector.one() },
-		{ id: '3', position: Vector.zero(), size: Vector.one() }
-	]);
+	expect(editor.nodes).toEqual([{ id: '1' }, { id: '3' }]);
 
 	removeNodeCommand.undo(editor);
 
-	expect(editor.nodes).toEqual([
-		{ id: '1', position: Vector.zero(), size: Vector.one() },
-		{ id: '2', position: Vector.zero(), size: Vector.one() },
-		{ id: '3', position: Vector.zero(), size: Vector.one() }
-	]);
+	expect(editor.nodes).toEqual([{ id: '1' }, { id: '2' }, { id: '3' }]);
 });
