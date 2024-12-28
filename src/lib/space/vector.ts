@@ -12,6 +12,10 @@ export class Vector {
         return new Vector(1, 1)
     }
 
+    static fromNumber(number: number) {
+        return new Vector(number, number);
+    }
+
     add(vector: Vector) {
         return new Vector(
             this.x + vector.x,

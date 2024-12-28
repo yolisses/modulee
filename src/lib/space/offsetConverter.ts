@@ -5,16 +5,10 @@ export class OffsetConverter implements Converter {
     constructor(private offset: Vector) { }
 
     getScreenPosition(dataPosition: Vector): Vector {
-        return {
-            x: dataPosition.x + this.offset.x,
-            y: dataPosition.y + this.offset.y,
-        }
+        return dataPosition.add(this.offset)
     }
 
     getDataPosition(screenPosition: Vector): Vector {
-        return {
-            x: screenPosition.x - this.offset.x,
-            y: screenPosition.y - this.offset.y,
-        }
+        return screenPosition.subtract(this.offset)
     }
 }
