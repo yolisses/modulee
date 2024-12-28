@@ -9,14 +9,19 @@
 	const screenSize = space.getScreenSize(node.size);
 	const screenPosition = space.getScreenPosition(node.position);
 
-	function handleClick(e: MouseEvent) {
+	function handleClick(e: MouseEvent) {}
+
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
 		const removeNodeCommand = new RemoveNodeCommand(node.id);
 		editor.execute(removeNodeCommand);
+		return false;
 	}
 </script>
 
 <button
 	onclick={handleClick}
+	oncontextmenu={handleContextMenu}
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
