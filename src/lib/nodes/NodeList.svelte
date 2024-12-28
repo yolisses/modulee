@@ -15,6 +15,10 @@
 	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
 
 	function handleClick(e: MouseEvent) {
+		if (e.target !== element) {
+			return;
+		}
+
 		const rect = element.getBoundingClientRect();
 		const screenPosition = new Vector(e.clientX - rect.left, e.clientY - rect.top);
 		const dataPosition = space.getDataPosition(screenPosition);
