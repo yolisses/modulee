@@ -2,12 +2,25 @@ import type { Node } from '$lib/types/Node';
 import type { Command } from './Command';
 
 export class Editor {
-	history: Command[] = [];
 	nodes: Node[] = $state([]);
-	onChange?: () => void;
+	history: Command[] = $state([]);
 
-	run(command: Command) {
+	execute(command: Command) {
 		this.history.push(command);
 		command.execute(this);
+	}
+
+	undo() {
+		const command = this.history.pop();
+
+		if (!command) {
+			throw new Error("Can't undo with empty history");
+		}
+
+		command.undo(this);
+	}
+
+	getCanUndo() {
+		return this.history.length > 0;
 	}
 }

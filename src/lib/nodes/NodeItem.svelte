@@ -11,7 +11,7 @@
 
 	function handleClick(e: MouseEvent) {
 		const removeNodeCommand = new RemoveNodeCommand(node.id);
-		editor.run(removeNodeCommand);
+		editor.execute(removeNodeCommand);
 	}
 </script>
 

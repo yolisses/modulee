@@ -12,7 +12,7 @@ test('RemoveNodeCommand', () => {
 	];
 
 	const removeNodeCommand = new RemoveNodeCommand('2');
-	editor.run(removeNodeCommand);
+	editor.execute(removeNodeCommand);
 
 	expect(editor.nodes).toEqual([
 		{ id: '1', position: Vector.zero(), size: Vector.one() },
