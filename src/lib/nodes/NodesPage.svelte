@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Editor } from '$lib/editor/Editor.svelte';
+	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { Vector } from '$lib/space/Vector';
 	import NodeList from './NodeList.svelte';
@@ -13,4 +14,5 @@
 </script>
 
 <UndoButton {editor} />
+<RedoButton {editor} />
 <NodeList {editor} />
