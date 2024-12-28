@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Editor } from '$lib/editor/editor';
-	import { Vector } from '$lib/space/vector';
-	import NodeList from './nodeList.svelte';
+	import { Editor } from '$lib/editor/Editor';
+	import { Vector } from '$lib/space/Vector';
+	import NodeList from './NodeList.svelte';
 
 	const editor = new Editor();
 	editor.nodes = [

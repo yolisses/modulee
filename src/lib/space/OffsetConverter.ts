@@ -1,5 +1,5 @@
-import type { Converter } from './converter';
-import type { Vector } from './vector';
+import type { Converter } from './Converter';
+import type { Vector } from './Vector';
 
 export class OffsetConverter implements Converter {
 	constructor(private offset: Vector) {}

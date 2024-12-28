@@ -1,9 +1,9 @@
-import { Editor } from '$lib/editor/editor';
-import { Vector } from '$lib/space/vector';
+import { Editor } from '$lib/editor/Editor';
+import { Vector } from '$lib/space/Vector';
 import { expect, test } from 'vitest';
-import { RemoveNodeCommand } from './removeNodeCommand';
+import { RemoveNodeCommand } from './RemoveNodeCommand';
 
-test('removeNodeCommand', () => {
+test('RemoveNodeCommand', () => {
 	const editor = new Editor();
 	editor.nodes = [
 		{ id: '1', position: Vector.zero(), size: Vector.one() },

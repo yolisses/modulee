@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/editor';
-	import { OffsetConverter } from '$lib/space/offsetConverter';
-	import { Space } from '$lib/space/space';
-	import { Vector } from '$lib/space/vector';
-	import { ZoomConverter } from '$lib/space/zoomConverter';
-	import NodeItem from './nodeItem.svelte';
+	import type { Editor } from '$lib/editor/Editor';
+	import { OffsetConverter } from '$lib/space/OffsetConverter';
+	import { Space } from '$lib/space/Space';
+	import { Vector } from '$lib/space/Vector';
+	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import NodeItem from './NodeItem.svelte';
 
 	let { editor }: { editor: Editor } = $props();
 

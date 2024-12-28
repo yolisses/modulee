@@ -1,5 +1,5 @@
-import type { Command } from '$lib/editor/command';
-import type { Editor } from '$lib/editor/editor';
+import type { Command } from '$lib/editor/Command';
+import type { Editor } from '$lib/editor/Editor';
 
 export class RemoveNodeCommand implements Command {
 	constructor(private nodeId: string) {}

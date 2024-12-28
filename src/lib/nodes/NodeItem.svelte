@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/editor';
-	import type { Space } from '$lib/space/space';
-	import type { Node } from '$lib/types/node';
-	import { RemoveNodeCommand } from './commands/removeNodeCommand';
+	import type { Editor } from '$lib/editor/Editor';
+	import type { Space } from '$lib/space/Space';
+	import type { Node } from '$lib/types/Node';
+	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 

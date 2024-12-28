@@ -1,5 +1,5 @@
 <script>
-	import NodesPage from '$lib/nodes/nodesPage.svelte';
+	import NodesPage from '$lib/nodes/NodesPage.svelte';
 </script>
 
 <NodesPage />

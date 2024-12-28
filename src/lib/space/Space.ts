@@ -1,5 +1,5 @@
-import type { Converter } from './converter';
-import { Vector } from './vector';
+import type { Converter } from './Converter';
+import { Vector } from './Vector';
 
 export class Space {
 	constructor(private converters: Converter[] = []) {}

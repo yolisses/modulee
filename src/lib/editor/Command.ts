@@ -1,4 +1,4 @@
-import type { Editor } from './editor';
+import type { Editor } from './Editor';
 
 export interface Command {
 	execute(editor: Editor): void;
