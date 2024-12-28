@@ -3,5 +3,8 @@
     "editor.codeActionsOnSave": {
         "source.organizeImports": "always",
         "source.addMissingImports.ts": "always"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
