@@ -34,7 +34,7 @@
 		const node: Node = {
 			id: createId(),
 			size: defaultNodeSize,
-			position: dataPosition,
+			position: dataPosition.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		};
 		const addNodeCommand = new AddNodeCommand(node);
 		editor.execute(addNodeCommand);
