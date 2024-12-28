@@ -22,6 +22,10 @@ export class Vector {
 		return new Vector(this.x, this.y);
 	}
 
+	round() {
+		return new Vector(Math.round(this.x), Math.round(this.y));
+	}
+
 	add(vector: Vector) {
 		return new Vector(this.x + vector.x, this.y + vector.y);
 	}

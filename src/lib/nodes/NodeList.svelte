@@ -1,18 +1,24 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
+	import { RoundConverter } from '$lib/space/RoundConverter';
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import type { Node } from '$lib/types/Node';
 	import { createId } from '$lib/utils/createId';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
+	import { defaultNodeSize } from './defaultNodeSize';
 	import NodeItem from './NodeItem.svelte';
 
 	let { editor }: { editor: Editor } = $props();
 	let element: HTMLElement = $state();
 
-	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
+	const space = new Space([
+		new RoundConverter(),
+		new OffsetConverter(new Vector(2, 1)),
+		new ZoomConverter(10),
+	]);
 
 	function handleClick(e: MouseEvent) {
 		if (e.target !== element) {
@@ -25,7 +31,7 @@
 
 		const node: Node = {
 			id: createId(),
-			size: Vector.one(),
+			size: defaultNodeSize,
 			position: dataPosition,
 		};
 		const addNodeCommand = new AddNodeCommand(node);
