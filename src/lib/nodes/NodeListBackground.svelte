@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="absolute h-full w-full"
+	class="pointer-events-none absolute h-full w-full"
 	style="
     background-size: {gridSize.x}px {gridSize.y}px;
     background-position: {gridSize.x / 2}px {gridSize.x / 2}px;
