@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { Vector } from '$lib/space/vector';
 	import type { Node } from '$lib/types/node';
 	import NodeList from './nodeList.svelte';
 
 	const nodes: Node[] = [
-		{ id: '0', position: { x: 0, y: 0 } },
-		{ id: '1', position: { x: 1, y: 1 } },
-		{ id: '2', position: { x: 2, y: 2 } }
+		{ id: '0', position: new Vector(0, 0), size: Vector.one() },
+		{ id: '1', position: new Vector(1, 1), size: Vector.one() },
+		{ id: '2', position: new Vector(2, 2), size: Vector.one() }
 	];
 </script>
 
