@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Editor } from '$lib/editor/Editor';
+	import { Editor } from '$lib/editor/Editor.svelte';
 	import { Vector } from '$lib/space/Vector';
 	import NodeList from './NodeList.svelte';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor';
+	import type { Editor } from '$lib/editor/Editor.svelte.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
@@ -12,7 +12,7 @@
 </script>
 
 <div class="min-w-screen relative min-h-screen border">
-	{#each editor.nodes as node}
+	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
 </div>
