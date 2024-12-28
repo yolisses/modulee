@@ -5,6 +5,8 @@
 	let { nodes }: { nodes: Node[] } = $props();
 </script>
 
-{#each nodes as node}
-	<NodeItem {node} />
-{/each}
+<div class="relative h-screen w-screen border">
+	{#each nodes as node}
+		<NodeItem {node} />
+	{/each}
+</div>
