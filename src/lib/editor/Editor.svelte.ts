@@ -8,5 +8,6 @@ export class Editor {
 
 	run(command: Command) {
 		this.history.push(command);
+		command.execute(this);
 	}
 }

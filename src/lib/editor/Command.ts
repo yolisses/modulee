@@ -1,4 +1,4 @@
-import type { Editor } from './Editor.svelte.ts';
+import type { Editor } from './Editor.svelte';
 
 export interface Command {
 	execute(editor: Editor): void;
