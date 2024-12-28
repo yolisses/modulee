@@ -21,7 +21,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute w-fit bg-gray-500"
+	class="absolute w-fit break-words bg-gray-500"
 >
 	{node.id}
 </button>
