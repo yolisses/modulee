@@ -9,6 +9,7 @@ export class Editor {
 	execute(command: Command) {
 		this.history.push(command);
 		command.execute(this);
+		this.undoneHistory = [];
 	}
 
 	undo() {
@@ -29,7 +30,8 @@ export class Editor {
 			throw new Error("Can't redo with empty undo history");
 		}
 
-		this.execute(command);
+		this.history.push(command);
+		command.execute(this);
 	}
 
 	getCanUndo() {
