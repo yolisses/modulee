@@ -5,16 +5,12 @@
 	import type { Node } from '$lib/types/Node';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 
-	let {
-		node,
-		space,
-		editor,
-		parent
-	}: { node: Node; space: Space; editor: Editor; parent: HTMLElement } = $props();
+	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 
 	let pointerId = $state<number>();
 	let element: HTMLElement = $state();
 	let position = $state(node.position);
+	let initialMouseDistance = $state<Vector>();
 
 	const screenSize = space.getScreenSize(node.size);
 	const screenPosition = $derived(space.getScreenPosition(position));
@@ -33,14 +29,16 @@
 
 		pointerId = e.pointerId;
 		element.setPointerCapture(pointerId);
+		const mousePosition = new Vector(e.clientX, e.clientY);
+		initialMouseDistance = screenPosition.subtract(mousePosition);
 	}
 
 	function handlePointerMove(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!pointerId) return;
 
-		const rect = parent.getBoundingClientRect();
-		const screenPosition = new Vector(e.clientX - rect.left, e.clientY - rect.top);
+		const mousePosition = new Vector(e.clientX, e.clientY);
+		const screenPosition = mousePosition.add(initialMouseDistance!);
 		const dataPosition = space.getDataPosition(screenPosition);
 		position = dataPosition;
 	}
