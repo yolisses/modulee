@@ -14,7 +14,7 @@ export class Space {
 
 	getDataPosition(screenPosition: Vector): Vector {
 		let dataPosition = screenPosition;
-		this.converters.forEach((converter) => {
+		this.converters.toReversed().forEach((converter) => {
 			dataPosition = converter.getDataPosition(dataPosition);
 		});
 		return dataPosition;
