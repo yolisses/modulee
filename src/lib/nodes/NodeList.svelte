@@ -26,7 +26,7 @@
 		const node: Node = {
 			id: createId(),
 			size: Vector.one(),
-			position: dataPosition
+			position: dataPosition,
 		};
 		const addNodeCommand = new AddNodeCommand(node);
 		editor.execute(addNodeCommand);

@@ -8,7 +8,7 @@ export class MoveNodeCommand implements Command {
 
 	constructor(
 		private nodeId: string,
-		private position: Vector
+		private position: Vector,
 	) {}
 
 	execute(editor: Editor): void {

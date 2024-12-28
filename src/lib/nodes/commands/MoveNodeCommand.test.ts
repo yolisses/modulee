@@ -9,7 +9,7 @@ test('MoveNodeCommand', () => {
 	editor.nodes = [
 		{ id: '1', position: new Vector(1, 1) },
 		{ id: '2', position: new Vector(2, 2) },
-		{ id: '2', position: new Vector(3, 3) }
+		{ id: '2', position: new Vector(3, 3) },
 	] as Node[];
 
 	const moveNodeCommand = new MoveNodeCommand('2', new Vector(4, 4));
