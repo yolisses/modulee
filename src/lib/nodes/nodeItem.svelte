@@ -13,7 +13,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute w-fit rounded border"
+	class="absolute w-fit border"
 >
 	{node.id}
 </div>

@@ -8,7 +8,7 @@
 
 	let { nodes }: { nodes: Node[] } = $props();
 
-	const space = new Space([new OffsetConverter(new Vector(1, 0)), new ZoomConverter(100)]);
+	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
 </script>
 
 <div class="min-w-screen relative min-h-screen border">

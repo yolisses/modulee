@@ -1,5 +1,5 @@
 import type { Converter } from "./converter";
-import type { Vector } from "./vector";
+import { Vector } from "./vector";
 
 export class Space {
     constructor(private converters: Converter[] = []) { }
@@ -26,10 +26,12 @@ export class Space {
     // functions.
 
     getScreenSize(dataSize: Vector): Vector {
-        return this.getScreenPosition(dataSize)
+        const screenZero = this.getScreenPosition(Vector.zero())
+        return this.getScreenPosition(dataSize).subtract(screenZero)
     }
 
     getDataSize(screenSize: Vector): Vector {
-        return this.getDataPosition(screenSize)
+        const dataZero = this.getDataPosition(Vector.zero())
+        return this.getDataPosition(screenSize).add(dataZero)
     }
 }
