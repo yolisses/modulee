@@ -10,7 +10,7 @@
 	import NodeItem from './NodeItem.svelte';
 
 	let { editor }: { editor: Editor; space: Space } = $props();
-	let element: HTMLElement;
+	let element: HTMLElement = $state();
 
 	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
 
@@ -37,6 +37,6 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="min-w-screen relative min-h-screen border" bind:this={element} onclick={handleClick}>
 	{#each editor.nodes as node (node.id)}
-		<NodeItem {node} {space} {editor} />
+		<NodeItem {node} {space} {editor} parent={element} />
 	{/each}
 </div>
