@@ -9,9 +9,21 @@
 	const editor = new Editor();
 
 	editor.nodes = [
-		{ id: '0', position: new Vector(0, 0), size: defaultNodeSize },
-		{ id: '1', position: new Vector(1, 1), size: defaultNodeSize },
-		{ id: '2', position: new Vector(2, 2), size: defaultNodeSize },
+		{
+			id: '0',
+			size: defaultNodeSize,
+			position: defaultNodeSize.multiply(Vector.fromNumber(0)),
+		},
+		{
+			id: '1',
+			size: defaultNodeSize,
+			position: defaultNodeSize.multiply(Vector.fromNumber(1)),
+		},
+		{
+			id: '2',
+			size: defaultNodeSize,
+			position: defaultNodeSize.multiply(Vector.fromNumber(2)),
+		},
 	];
 </script>
 
