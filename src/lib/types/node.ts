@@ -1,5 +1,6 @@
+import type { Vector } from "$lib/space/vector"
+
 export type Node = {
     id: string
-    x: number
-    y: number
+    position: Vector
 }

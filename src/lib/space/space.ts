@@ -2,7 +2,7 @@ import type { Converter } from "./converter";
 import type { Vector } from "./vector";
 
 export class Space {
-    converters: Converter[] = []
+    constructor(private converters: Converter[] = []) { }
 
     getScreenPosition(dataPosition: Vector): Vector {
         let screenPosition = structuredClone(dataPosition)
