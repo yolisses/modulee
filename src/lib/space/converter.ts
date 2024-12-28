@@ -1,6 +1,6 @@
-import type { Vector } from "./vector";
+import type { Vector } from './vector';
 
 export interface Converter {
-    getScreenPosition(dataPosition: Vector): Vector
-    getDataPosition(screenPosition: Vector): Vector
+	getScreenPosition(dataPosition: Vector): Vector;
+	getDataPosition(screenPosition: Vector): Vector;
 }

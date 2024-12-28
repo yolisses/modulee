@@ -1,7 +1,7 @@
-import type { Vector } from "$lib/space/vector"
+import type { Vector } from '$lib/space/vector';
 
 export type Node = {
-    id: string
-    size: Vector
-    position: Vector
-}
+	id: string;
+	size: Vector;
+	position: Vector;
+};
