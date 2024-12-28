@@ -1,13 +1,14 @@
 <script lang="ts">
+	import { Editor } from '$lib/editor/editor';
 	import { Vector } from '$lib/space/vector';
-	import type { Node } from '$lib/types/node';
 	import NodeList from './nodeList.svelte';
 
-	const nodes: Node[] = [
+	const editor = new Editor();
+	editor.nodes = [
 		{ id: '0', position: new Vector(0, 0), size: Vector.one() },
 		{ id: '1', position: new Vector(1, 1), size: Vector.one() },
 		{ id: '2', position: new Vector(2, 2), size: Vector.one() }
 	];
 </script>
 
-<NodeList {nodes} />
+<NodeList {editor} />

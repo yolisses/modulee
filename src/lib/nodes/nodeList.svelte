@@ -1,18 +1,18 @@
 <script lang="ts">
-	import NodeItem from './nodeItem.svelte';
-	import type { Node } from '$lib/types/node';
-	import { Space } from '$lib/space/space';
+	import type { Editor } from '$lib/editor/editor';
 	import { OffsetConverter } from '$lib/space/offsetConverter';
-	import { ZoomConverter } from '$lib/space/zoomConverter';
+	import { Space } from '$lib/space/space';
 	import { Vector } from '$lib/space/vector';
+	import { ZoomConverter } from '$lib/space/zoomConverter';
+	import NodeItem from './nodeItem.svelte';
 
-	let { nodes }: { nodes: Node[] } = $props();
+	let { editor }: { editor: Editor } = $props();
 
 	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
 </script>
 
 <div class="min-w-screen relative min-h-screen border">
-	{#each nodes as node}
-		<NodeItem {node} {space} />
+	{#each editor.nodes as node}
+		<NodeItem {node} {space} {editor} />
 	{/each}
 </div>
