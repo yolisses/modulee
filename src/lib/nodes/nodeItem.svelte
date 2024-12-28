@@ -6,6 +6,10 @@
 	const zoom = 100;
 </script>
 
-<div class="absolute w-fit rounded border" style="left: {node.x * zoom}px; top: {node.y * zoom}px;">
+<div
+	style:top={node.y * zoom + 'px'}
+	style:left={node.x * zoom + 'px'}
+	class="absolute w-fit rounded border"
+>
 	{node.id}
 </div>
