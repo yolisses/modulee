@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte.svelte';
+	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import type { Node } from '$lib/types/Node';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';

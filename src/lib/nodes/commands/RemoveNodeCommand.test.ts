@@ -1,7 +1,7 @@
-import { Editor } from '$lib/editor/Editor.svelte.svelte';
 import { Vector } from '$lib/space/Vector';
 import { expect, test } from 'vitest';
 import { RemoveNodeCommand } from './RemoveNodeCommand';
+import { Editor } from '$lib/editor/Editor.svelte';
 
 test('RemoveNodeCommand', () => {
 	const editor = new Editor();

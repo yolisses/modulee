@@ -1,5 +1,5 @@
 import type { Command } from '$lib/editor/Command';
-import type { Editor } from '$lib/editor/Editor.svelte.svelte';
+import type { Editor } from '$lib/editor/Editor.svelte';
 
 export class RemoveNodeCommand implements Command {
 	constructor(private nodeId: string) {}

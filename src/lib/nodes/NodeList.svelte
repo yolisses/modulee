@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte.svelte';
+	import type { Editor } from '$lib/editor/Editor.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
