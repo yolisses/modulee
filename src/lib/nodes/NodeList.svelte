@@ -9,6 +9,7 @@
 	import { createId } from '$lib/utils/createId';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { defaultNodeSize } from './defaultNodeSize';
+	import { getPointerPosition } from './getPointerPosition';
 	import NodeItem from './NodeItem.svelte';
 
 	let { editor }: { editor: Editor } = $props();
@@ -26,7 +27,8 @@
 		}
 
 		const rect = element.getBoundingClientRect();
-		const screenPosition = new Vector(e.clientX - rect.left, e.clientY - rect.top);
+		const offsetVector = new Vector(rect.left, rect.top);
+		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		const node: Node = {

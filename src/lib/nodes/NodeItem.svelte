@@ -5,6 +5,7 @@
 	import type { Node } from '$lib/types/Node';
 	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
+	import { getPointerPosition } from './getPointerPosition';
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 
@@ -34,12 +35,12 @@
 
 		pointerId = e.pointerId;
 		element.setPointerCapture(pointerId);
-		const mousePosition = new Vector(e.clientX, e.clientY);
+		const mousePosition = getPointerPosition(e);
 		initialMouseDistance = screenPosition.subtract(mousePosition);
 	}
 
 	function getPointerDataPosition(e: PointerEvent) {
-		const mousePosition = new Vector(e.clientX, e.clientY);
+		const mousePosition = getPointerPosition(e);
 		const screenPosition = mousePosition.add(initialMouseDistance!);
 		const dataPosition = space.getDataPosition(screenPosition);
 		return dataPosition;
