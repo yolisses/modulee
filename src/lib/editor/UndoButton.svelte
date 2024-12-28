@@ -8,4 +8,4 @@
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanUndo()}> undo </button>
+<button onclick={handleClick} disabled={!editor.getCanUndo()} class="common-button"> undo </button>

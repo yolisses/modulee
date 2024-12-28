@@ -13,6 +13,8 @@
 	];
 </script>
 
-<UndoButton {editor} />
-<RedoButton {editor} />
+<div class="flex-row">
+	<UndoButton {editor} />
+	<RedoButton {editor} />
+</div>
 <NodeList {editor} />

@@ -9,3 +9,11 @@ html {
 button:disabled {
 	@apply opacity-50;
 }
+
+div {
+	@apply flex flex-col;
+}
+
+.common-button {
+	@apply rounded p-2 hover:bg-white/10;
+}

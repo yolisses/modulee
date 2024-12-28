@@ -8,4 +8,4 @@
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanRedo()}> redo </button>
+<button onclick={handleClick} disabled={!editor.getCanRedo()} class="common-button"> redo </button>
