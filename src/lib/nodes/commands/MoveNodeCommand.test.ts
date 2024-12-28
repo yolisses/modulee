@@ -7,16 +7,17 @@ import { MoveNodeCommand } from './MoveNodeCommand';
 test('MoveNodeCommand', () => {
 	const editor = new Editor();
 	editor.nodes = [
-		{ id: '1', position: new Vector(1, 2) },
-		{ id: '2', position: new Vector(3, 4) }
+		{ id: '1', position: new Vector(1, 1) },
+		{ id: '2', position: new Vector(2, 2) },
+		{ id: '2', position: new Vector(3, 3) }
 	] as Node[];
 
-	const moveNodeCommand = new MoveNodeCommand('2', new Vector(5, 6));
+	const moveNodeCommand = new MoveNodeCommand('2', new Vector(4, 4));
 	moveNodeCommand.execute(editor);
 
-	expect(editor.nodes[1].position).toEqual(new Vector(5, 6));
+	expect(editor.nodes[1].position).toEqual(new Vector(4, 4));
 
 	moveNodeCommand.undo(editor);
 
-	expect(editor.nodes[1].position).toEqual(new Vector(3, 4));
+	expect(editor.nodes[1].position).toEqual(new Vector(2, 2));
 });
