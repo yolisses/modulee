@@ -3,6 +3,7 @@
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import type { Node } from '$lib/types/Node';
+	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
@@ -11,6 +12,10 @@
 	let element: HTMLElement = $state();
 	let position = $state(node.position);
 	let initialMouseDistance = $state<Vector>();
+
+	$effect(() => {
+		position = node.position;
+	});
 
 	const screenSize = space.getScreenSize(node.size);
 	const screenPosition = $derived(space.getScreenPosition(position));
@@ -33,14 +38,18 @@
 		initialMouseDistance = screenPosition.subtract(mousePosition);
 	}
 
+	function getPointerDataPosition(e: PointerEvent) {
+		const mousePosition = new Vector(e.clientX, e.clientY);
+		const screenPosition = mousePosition.add(initialMouseDistance!);
+		const dataPosition = space.getDataPosition(screenPosition);
+		return dataPosition;
+	}
+
 	function handlePointerMove(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!pointerId) return;
 
-		const mousePosition = new Vector(e.clientX, e.clientY);
-		const screenPosition = mousePosition.add(initialMouseDistance!);
-		const dataPosition = space.getDataPosition(screenPosition);
-		position = dataPosition;
+		position = getPointerDataPosition(e);
 	}
 
 	function handlePointerUp(e: PointerEvent) {
@@ -49,6 +58,10 @@
 
 		element.releasePointerCapture(pointerId);
 		pointerId = undefined;
+
+		const dataPosition = getPointerDataPosition(e);
+		const moveNodeCommand = new MoveNodeCommand(node.id, dataPosition);
+		editor.execute(moveNodeCommand);
 	}
 </script>
 
