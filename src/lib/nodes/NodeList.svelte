@@ -5,6 +5,7 @@
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import type { Node } from '$lib/types/Node';
+	import { createId } from '$lib/utils/createId';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import NodeItem from './NodeItem.svelte';
 
@@ -19,9 +20,9 @@
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		const node: Node = {
-			id: 'newId', // TODO
-			position: dataPosition,
-			size: Vector.one()
+			id: createId(),
+			size: Vector.one(),
+			position: dataPosition
 		};
 		const addNodeCommand = new AddNodeCommand(node);
 		editor.execute(addNodeCommand);
