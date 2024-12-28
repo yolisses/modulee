@@ -3,6 +3,8 @@ import type { Command } from '$lib/editor/Command';
 import type { Editor } from '$lib/editor/Editor.svelte';
 import type { Node } from '$lib/types/Node';
 
+// It is considered that the list have only one item
+// per id.
 export class AddNodeCommand implements Command {
 	constructor(private node: Node) {}
 

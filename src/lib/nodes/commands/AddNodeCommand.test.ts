@@ -8,7 +8,11 @@ test('AddNodeCommand', () => {
 	editor.nodes = [{ id: '1' }, { id: '2' }] as Node[];
 
 	const addNodeCommand = new AddNodeCommand({ id: '3' } as Node);
-	editor.execute(addNodeCommand);
+	addNodeCommand.execute(editor);
 
 	expect(editor.nodes).toEqual([{ id: '1' }, { id: '2' }, { id: '3' }]);
+
+	addNodeCommand.undo(editor);
+
+	expect(editor.nodes).toEqual([{ id: '1' }, { id: '2' }]);
 });
