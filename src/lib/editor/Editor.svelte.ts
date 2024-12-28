@@ -7,12 +7,6 @@ export class Editor {
 	onChange?: () => void;
 
 	run(command: Command) {
-		command.execute(this);
 		this.history.push(command);
-		console.log(this.history);
-
-		if (this.onChange) {
-			this.onChange();
-		}
 	}
 }
