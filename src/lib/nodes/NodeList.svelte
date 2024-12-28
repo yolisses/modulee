@@ -4,14 +4,33 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import type { Node } from '$lib/types/Node';
+	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import NodeItem from './NodeItem.svelte';
 
-	let { editor }: { editor: Editor } = $props();
+	let { editor }: { editor: Editor; space: Space } = $props();
+	let element: HTMLElement;
 
 	const space = new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(100)]);
+
+	function handleClick(e: MouseEvent) {
+		const rect = element.getBoundingClientRect();
+		const screenPosition = new Vector(e.clientX - rect.left, e.clientY - rect.top);
+		const dataPosition = space.getDataPosition(screenPosition);
+
+		const node: Node = {
+			id: 'newId', // TODO
+			position: dataPosition,
+			size: Vector.one()
+		};
+		const addNodeCommand = new AddNodeCommand(node);
+		editor.execute(addNodeCommand);
+	}
 </script>
 
-<div class="min-w-screen relative min-h-screen border">
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="min-w-screen relative min-h-screen border" bind:this={element} onclick={handleClick}>
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
