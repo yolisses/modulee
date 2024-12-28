@@ -6,8 +6,8 @@
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 
-	const screenPosition = space.getScreenPosition(node.position);
 	const screenSize = space.getScreenSize(node.size);
+	const screenPosition = space.getScreenPosition(node.position);
 
 	function handleClick(e: MouseEvent) {
 		const removeNodeCommand = new RemoveNodeCommand(node.id);
