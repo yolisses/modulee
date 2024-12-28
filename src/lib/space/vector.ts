@@ -2,7 +2,9 @@ export class Vector {
     constructor(
         public x: number,
         public y: number
-    ) { }
+    ) {
+        Object.freeze(this)
+    }
 
     static zero() {
         return new Vector(0, 0)
@@ -14,6 +16,10 @@ export class Vector {
 
     static fromNumber(number: number) {
         return new Vector(number, number);
+    }
+
+    clone() {
+        return new Vector(this.x, this.y)
     }
 
     add(vector: Vector) {

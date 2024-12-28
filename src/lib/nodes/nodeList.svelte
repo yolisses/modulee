@@ -4,13 +4,14 @@
 	import { Space } from '$lib/space/space';
 	import { OffsetConverter } from '$lib/space/offsetConverter';
 	import { ZoomConverter } from '$lib/space/zoomConverter';
+	import { Vector } from '$lib/space/vector';
 
 	let { nodes }: { nodes: Node[] } = $props();
 
-	const space = new Space([new OffsetConverter({ x: 2, y: 1 }), new ZoomConverter(100)]);
+	const space = new Space([new OffsetConverter(new Vector(1, 0)), new ZoomConverter(100)]);
 </script>
 
-<div class="relative h-screen w-screen border">
+<div class="min-w-screen relative min-h-screen border">
 	{#each nodes as node}
 		<NodeItem {node} {space} />
 	{/each}
