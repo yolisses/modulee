@@ -1,7 +1,7 @@
 import { removeById } from '$lib/array/removeById';
 import type { Command } from '$lib/editor/Command';
 import type { Editor } from '$lib/editor/Editor.svelte';
-import type { Node } from '$lib/types/Node';
+import type { Node } from '../Node';
 
 // It is considered that the list have only one item
 // per id.

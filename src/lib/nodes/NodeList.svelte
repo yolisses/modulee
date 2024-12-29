@@ -5,11 +5,11 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import type { Node } from '$lib/types/Node';
 	import { createId } from '$lib/utils/createId';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { defaultNodeSize } from './defaultNodeSize';
 	import { getPointerPosition } from './getPointerPosition';
+	import type { Node } from './Node';
 	import NodeItem from './NodeItem.svelte';
 	import NodeListBackground from './NodeListBackground.svelte';
 

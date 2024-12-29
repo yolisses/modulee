@@ -1,4 +1,4 @@
-import type { Node } from '$lib/types/Node';
+import type { Node } from '$lib/nodes/Node';
 import type { Command } from './Command';
 
 export class Editor {
