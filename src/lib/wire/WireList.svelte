@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import TestUnitRectangle from './TestUnitRectangle.svelte';
+	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
 
 	const {
 		space,
@@ -17,6 +17,6 @@
 	class="absolute"
 	viewBox="{screenMinimumPosition.x} {screenMinimumPosition.y} {screenSize.x} {screenSize.y}"
 >
-	<TestUnitRectangle {space} />
+	<DevUnitRectangle {space} />
 	<!-- wires here -->
 </svg>
