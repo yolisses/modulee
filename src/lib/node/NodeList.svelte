@@ -25,6 +25,7 @@
 
 		const node: Node = {
 			id: createId(),
+			connectors: [],
 			size: defaultNodeSize,
 			position: dataPosition.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		};
