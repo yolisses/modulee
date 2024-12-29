@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import { getVectorStringPx } from '$lib/wire/utils/getVectorStringPx';
+	import { getVectorStringPx } from '$lib/utils/getVectorStringPx';
 
 	let { space }: { space: Space } = $props();
 

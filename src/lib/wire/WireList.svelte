@@ -2,9 +2,9 @@
 	import { getElementScreenSize } from '$lib/node/getElementScreenSize';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
+	import { getVectorsString } from '$lib/utils/getVectorsString';
 	import { onMount } from 'svelte';
 	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
-	import { getVectorsString } from './utils/getVectorsString';
 	import type { Wire } from './Wire';
 	import WireItem from './WireItem.svelte';
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import { getVectorsString } from './utils/getVectorsString';
-	import { getVectorString } from './utils/getVectorString';
+	import { getVectorsString } from '$lib/utils/getVectorsString';
+	import { getVectorString } from '$lib/utils/getVectorString';
 	import type { Wire } from './Wire';
 
 	const { space, wire }: { space: Space; wire: Wire } = $props();
