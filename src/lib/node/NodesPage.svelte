@@ -40,7 +40,7 @@
 	const space = new Space([
 		new RoundConverter(),
 		new OffsetConverter(dataMinimumPosition.negate()),
-		new ZoomConverter(8),
+		new ZoomConverter(20),
 	]);
 </script>
 
