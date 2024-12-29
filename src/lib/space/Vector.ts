@@ -32,6 +32,10 @@ export class Vector {
 		return new Vector(this.x, this.y);
 	}
 
+	negate() {
+		return new Vector(-this.x, -this.y);
+	}
+
 	round() {
 		return new Vector(Math.round(this.x), Math.round(this.y));
 	}

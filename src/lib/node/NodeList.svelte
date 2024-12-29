@@ -3,15 +3,21 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { createId } from '$lib/utils/createId';
+	import WireList from '$lib/wire/WireList.svelte';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { defaultNodeSize } from './defaultNodeSize';
+	import { getElementScreenSize } from './getElementScreenSize';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node';
 	import NodeItem from './NodeItem.svelte';
 	import NodeListBackground from './NodeListBackground.svelte';
 
-	let element: HTMLElement;
-	let { editor, space }: { editor: Editor; space: Space } = $props();
+	let element = $state<HTMLElement>();
+	let {
+		space,
+		editor,
+		dataMinimumPosition,
+	}: { editor: Editor; space: Space; dataMinimumPosition: Vector } = $props();
 
 	function handleClick(e: MouseEvent) {
 		if (e.target !== element) {
@@ -41,4 +47,7 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
+	{#if element}
+		<WireList {space} {dataMinimumPosition} screenSize={getElementScreenSize(element)} />
+	{/if}
 </div>

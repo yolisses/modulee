@@ -36,9 +36,10 @@
 		},
 	];
 
+	const dataMinimumPosition = new Vector(-2, -1);
 	const space = new Space([
 		new RoundConverter(),
-		new OffsetConverter(new Vector(2, 1)),
+		new OffsetConverter(dataMinimumPosition.negate()),
 		new ZoomConverter(20),
 	]);
 </script>
@@ -47,4 +48,4 @@
 	<UndoButton {editor} />
 	<RedoButton {editor} />
 </div>
-<NodeList {editor} {space} />
+<NodeList {editor} {space} {dataMinimumPosition} />
