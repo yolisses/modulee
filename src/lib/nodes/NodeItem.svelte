@@ -4,6 +4,7 @@
 	import { Vector } from '$lib/space/Vector';
 	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
+	import ConnectorList from './ConnectorList.svelte';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node';
 
@@ -80,4 +81,5 @@
 	class="absolute w-fit break-words bg-gray-500"
 >
 	{node.id}
+	<ConnectorList connectors={node.connectors} />
 </button>
