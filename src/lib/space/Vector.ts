@@ -1,3 +1,5 @@
+import type { VectorData } from './VectorData';
+
 export class Vector {
 	constructor(
 		public x: number,
@@ -16,6 +18,14 @@ export class Vector {
 
 	static fromNumber(number: number) {
 		return new Vector(number, number);
+	}
+
+	static fromData(vectorData: VectorData) {
+		return new Vector(vectorData.x, vectorData.y);
+	}
+
+	getData(): VectorData {
+		return { x: this.x, y: this.y };
 	}
 
 	clone() {
