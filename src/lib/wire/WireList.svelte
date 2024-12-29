@@ -14,7 +14,7 @@
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="absolute border border-red-500"
+	class="absolute"
 	viewBox="{screenMinimumPosition.x} {screenMinimumPosition.y} {screenSize.x} {screenSize.y}"
 >
 	<TestUnitRectangle {space} />
