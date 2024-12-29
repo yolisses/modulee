@@ -9,7 +9,7 @@
 
 	const screenStartPosition = space.getScreenPosition(wire.startPosition);
 	const screenEndPosition = space.getScreenPosition(wire.endPosition);
-	const screenStrokeWidth = space.getScreenSize(Vector.fromNumber(0.5)).x;
+	const screenStrokeWidth = space.getScreenSize(Vector.fromNumber(0.25)).x;
 
 	const screenPosition0 = new Vector(
 		(screenStartPosition.x + screenEndPosition.x) / 2,

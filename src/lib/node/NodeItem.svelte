@@ -89,6 +89,6 @@
 >
 	<div>
 		<NodeItemHeader {node} />
-		<ConnectorList connectors={node.connectors} />
+		<ConnectorList {space} connectors={node.connectors} />
 	</div>
 </button>

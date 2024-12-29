@@ -1,10 +1,11 @@
 <script lang="ts">
+	import type { Space } from '$lib/space/Space';
 	import type { Connector } from './Connector';
 	import ConnectorItem from './ConnectorItem.svelte';
 
-	let { connectors }: { connectors: Connector[] } = $props();
+	let { space, connectors }: { space: Space; connectors: Connector[] } = $props();
 </script>
 
 {#each connectors as connector (connector.id)}
-	<ConnectorItem {connector} />
+	<ConnectorItem {space} {connector} />
 {/each}
