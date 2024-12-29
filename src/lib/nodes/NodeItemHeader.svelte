@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
+	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import type { Node } from './Node';
 
 	const { node, space }: { node: Node; space: Space } = $props();
-	const lineHeight = space.getScreenSize(Vector.one()).y;
-	const fontSize = space.getScreenSize(Vector.fromNumber(2 / 3)).y;
+	const fontSize = getScreenFontSize(space);
+	const lineHeight = getScreenFontSize(space);
 </script>
 
 <div style="font-size: {fontSize}px; line-height: {lineHeight}px;">
