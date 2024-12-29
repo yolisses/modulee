@@ -6,7 +6,7 @@
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
-	import ConnectorList from './ConnectorList.svelte';
+	import ConnectorList from './connector/ConnectorList.svelte';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node';
 	import NodeItemHeader from './NodeItemHeader.svelte';
