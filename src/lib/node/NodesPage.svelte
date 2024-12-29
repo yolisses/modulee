@@ -7,34 +7,13 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { defaultNodeSize } from './defaultNodeSize';
+	import { devNodesData } from './dev/devNodesData';
+	import { Node } from './Node';
 	import NodeList from './NodeList.svelte';
 
 	const editor = new Editor();
 
-	editor.nodes = [
-		{
-			id: '0',
-			size: defaultNodeSize,
-			position: defaultNodeSize.multiply(Vector.fromNumber(0)),
-			connectors: [],
-		},
-		{
-			id: '1',
-			size: defaultNodeSize,
-			position: defaultNodeSize.multiply(Vector.fromNumber(1)),
-			connectors: [{ id: '1/1', name: 'some output' }],
-		},
-		{
-			id: '2|lpqA',
-			size: defaultNodeSize,
-			position: defaultNodeSize.multiply(Vector.fromNumber(2)),
-			connectors: [
-				{ id: '2/1', name: 'some input' },
-				{ id: '2/2', name: 'some output' },
-			],
-		},
-	];
+	editor.nodes = devNodesData.map((nodeData) => new Node(nodeData));
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = new Space([
