@@ -1,14 +1,10 @@
 <script lang="ts">
-	import type { Space } from '$lib/space/Space';
-	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import type { Node } from './Node';
 
-	const { node, space }: { node: Node; space: Space } = $props();
-	const fontSize = getScreenFontSize(space);
-	const lineHeight = getScreenFontSize(space);
+	const { node }: { node: Node } = $props();
 </script>
 
-<div style="font-size: {fontSize}px; line-height: {lineHeight}px;">
+<div>
 	<!-- TODO change to node.type -->
 	{node.id}
 </div>
