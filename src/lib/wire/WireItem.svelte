@@ -22,7 +22,7 @@
 </script>
 
 <path
-	stroke="red"
+	stroke="#22c55e"
 	fill="transparent"
 	stroke-width={screenStrokeWidth}
 	d={'M' +
