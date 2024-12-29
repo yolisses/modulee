@@ -10,8 +10,8 @@
 	import NodeItem from './NodeItem.svelte';
 	import NodeListBackground from './NodeListBackground.svelte';
 
+	let element: HTMLElement;
 	let { editor, space }: { editor: Editor; space: Space } = $props();
-	let element: HTMLElement = $state();
 
 	function handleClick(e: MouseEvent) {
 		if (e.target !== element) {

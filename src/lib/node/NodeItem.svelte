@@ -13,8 +13,8 @@
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 
+	let element: HTMLElement;
 	let pointerId = $state<number>();
-	let element: HTMLElement = $state();
 	let position = $state(node.position);
 	let initialMouseDistance = $state<Vector>();
 
