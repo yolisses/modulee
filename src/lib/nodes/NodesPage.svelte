@@ -22,7 +22,7 @@
 			connectors: [{ id: '1/1', name: 'some input' }],
 		},
 		{
-			id: '2',
+			id: '2|lpqA',
 			size: defaultNodeSize,
 			position: defaultNodeSize.multiply(Vector.fromNumber(2)),
 			connectors: [
