@@ -8,10 +8,29 @@
 	const screenStartPosition = space.getScreenPosition(wire.startPosition);
 	const screenEndPosition = space.getScreenPosition(wire.endPosition);
 	const screenStrokeWidth = space.getScreenSize(Vector.fromNumber(0.5)).x;
+
+	const screenPosition0 = new Vector(
+		(screenStartPosition.x + screenEndPosition.x) / 2,
+		screenStartPosition.y,
+	);
+	const screenPosition1 = new Vector(
+		(screenStartPosition.x + screenEndPosition.x) / 2,
+		screenEndPosition.y,
+	);
+
+	function getStringVector(vector: Vector) {
+		return vector.x + ' ' + vector.y + ' ';
+	}
 </script>
 
 <path
 	stroke="red"
+	fill="transparent"
 	stroke-width={screenStrokeWidth}
-	d="M{screenStartPosition.x} {screenStartPosition.y} L{screenEndPosition.x} {screenEndPosition.y}"
+	d={'M' +
+		getStringVector(screenStartPosition) +
+		'C' +
+		getStringVector(screenPosition0) +
+		getStringVector(screenPosition1) +
+		getStringVector(screenEndPosition)}
 />
