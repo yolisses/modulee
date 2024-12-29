@@ -4,6 +4,7 @@
 	import { Vector } from '$lib/space/Vector';
 	import { onMount } from 'svelte';
 	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
+	import { getVectorsString } from './utils/getVectorsString';
 	import type { Wire } from './Wire';
 	import WireItem from './WireItem.svelte';
 
@@ -33,7 +34,7 @@
 	bind:this={element}
 	xmlns="http://www.w3.org/2000/svg"
 	class="pointer-events-none absolute h-full w-full"
-	viewBox="{screenMinimumPosition.x} {screenMinimumPosition.y} {screenSize.x} {screenSize.y}"
+	viewBox={getVectorsString([screenMinimumPosition, screenSize])}
 >
 	<DevUnitRectangle {space} />
 	<WireItem {space} {wire} />

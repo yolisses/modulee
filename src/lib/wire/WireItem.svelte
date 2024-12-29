@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
+	import { getVectorsString } from './utils/getVectorsString';
+	import { getVectorString } from './utils/getVectorString';
 	import type { Wire } from './Wire';
 
 	const { space, wire }: { space: Space; wire: Wire } = $props();
@@ -17,10 +19,6 @@
 		(screenStartPosition.x + screenEndPosition.x) / 2,
 		screenEndPosition.y,
 	);
-
-	function getStringVector(vector: Vector) {
-		return vector.x + ' ' + vector.y + ' ';
-	}
 </script>
 
 <path
@@ -28,9 +26,7 @@
 	fill="transparent"
 	stroke-width={screenStrokeWidth}
 	d={'M' +
-		getStringVector(screenStartPosition) +
+		getVectorString(screenStartPosition) +
 		'C' +
-		getStringVector(screenPosition0) +
-		getStringVector(screenPosition1) +
-		getStringVector(screenEndPosition)}
+		getVectorsString([screenPosition0, screenPosition1, screenEndPosition])}
 />
