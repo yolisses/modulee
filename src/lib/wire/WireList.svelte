@@ -1,15 +1,16 @@
 <script lang="ts">
+	import { getElementScreenSize } from '$lib/node/getElementScreenSize';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
+	import { onMount } from 'svelte';
 	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
 	import type { Wire } from './Wire';
 	import WireItem from './WireItem.svelte';
 
-	const {
-		space,
-		screenSize,
-		dataMinimumPosition,
-	}: { space: Space; screenSize: Vector; dataMinimumPosition: Vector } = $props();
+	let element: Element;
+	let screenSize = $state(Vector.zero());
+
+	const { space, dataMinimumPosition }: { space: Space; dataMinimumPosition: Vector } = $props();
 
 	const screenMinimumPosition = space.getScreenPosition(dataMinimumPosition);
 
@@ -17,11 +18,21 @@
 		startPosition: new Vector(8.5, 9.5),
 		endPosition: new Vector(8.5 + 8, 9.5 + 8),
 	};
+
+	onMount(() => {
+		function updateScreenSize() {
+			screenSize = getElementScreenSize(element);
+		}
+		const resizeObserver = new ResizeObserver(updateScreenSize);
+		resizeObserver.observe(element);
+		return () => resizeObserver.disconnect();
+	});
 </script>
 
 <svg
+	bind:this={element}
 	xmlns="http://www.w3.org/2000/svg"
-	class="pointer-events-none absolute"
+	class="pointer-events-none absolute h-full w-full"
 	viewBox="{screenMinimumPosition.x} {screenMinimumPosition.y} {screenSize.x} {screenSize.y}"
 >
 	<DevUnitRectangle {space} />

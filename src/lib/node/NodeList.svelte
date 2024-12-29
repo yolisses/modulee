@@ -6,13 +6,12 @@
 	import WireList from '$lib/wire/WireList.svelte';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { defaultNodeSize } from './defaultNodeSize';
-	import { getElementScreenSize } from './getElementScreenSize';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node';
 	import NodeItem from './NodeItem.svelte';
 	import NodeListBackground from './NodeListBackground.svelte';
 
-	let element = $state<HTMLElement>();
+	let element: Element;
 	let {
 		space,
 		editor,
@@ -47,7 +46,5 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
-	{#if element}
-		<WireList {space} {dataMinimumPosition} screenSize={getElementScreenSize(element)} />
-	{/if}
+	<WireList {space} {dataMinimumPosition} />
 </div>
