@@ -86,7 +86,7 @@
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
 	style="
-	border-radius: {(1 / 2) * screenLineHeight}px;
+	border-radius: 0.5em;
 	font-size: {screenFontSize}px;
 	line-height: {screenLineHeight}px;
 	"
