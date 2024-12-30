@@ -16,7 +16,7 @@
 	let previewPosition = $state<Vector>();
 	let initialMouseDistance = $state<Vector>();
 
-	const screenSize = space.getScreenSize(node.size);
+	const screenSize = $derived(space.getScreenSize(node.size));
 	const screenPosition = $derived.by(() => {
 		const position = previewPosition ?? node.position;
 		return space.getScreenPosition(position);
