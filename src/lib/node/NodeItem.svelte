@@ -71,6 +71,7 @@
 <button
 	bind:this={element}
 	onclick={handleClick}
+	style:border-radius="0.5em"
 	onpointerup={handlePointerUp}
 	oncontextmenu={handleContextMenu}
 	onpointermove={handlePointerMove}
@@ -81,7 +82,6 @@
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
 >
-	<!-- style="border-radius: 0.5em;" -->
 	<div>
 		<NodeItemHeader {node} />
 		<ConnectorList {space} connectors={node.connectors} />
