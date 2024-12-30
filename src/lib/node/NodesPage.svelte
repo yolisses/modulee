@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CommandList from '$lib/editor/CommandList.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
@@ -31,4 +32,8 @@
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
 </div>
-<NodeList {editor} {space} {dataMinimumPosition} />
+<div class="flex-row">
+	<NodeList {editor} {space} {dataMinimumPosition} />
+	<CommandList commands={editor.history} />
+	<CommandList commands={editor.undoneHistory} />
+</div>

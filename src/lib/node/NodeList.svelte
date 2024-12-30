@@ -43,7 +43,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="min-w-screen dotted-grid relative min-h-screen border-4"
+	class="dotted-grid relative min-h-screen w-full border-4"
 	bind:this={element}
 	onclick={handleClick}
 	style:font-size={getScreenFontSize(space) + 'px'}
