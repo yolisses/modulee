@@ -13,6 +13,8 @@ export class Node {
 		this.id = id;
 		this.size = Vector.fromData(size);
 		this.position = Vector.fromData(position);
-		this.connectors = connectors.map((connectorData) => new Connector(connectorData));
+		this.connectors = connectors.map((connectorData, index) => {
+			return new Connector(connectorData, this, index);
+		});
 	}
 }
