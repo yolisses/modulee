@@ -4,9 +4,6 @@
 	import { Vector } from '$lib/space/Vector';
 	import { getVectorsString } from '$lib/utils/getVectorsString';
 	import { onMount } from 'svelte';
-	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
-	import { devWire } from './dev/devWire';
-	import WireItem from './WireItem.svelte';
 
 	interface Props {
 		space: Space;
@@ -40,8 +37,5 @@
 	class="pointer-events-none absolute h-full w-full"
 	viewBox={getVectorsString([screenMinimumPosition, screenSize])}
 >
-	<DevUnitRectangle {space} />
-	<WireItem {space} wire={devWire} />
-
 	{@render children?.()}
 </svg>

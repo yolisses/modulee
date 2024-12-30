@@ -7,16 +7,15 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { devNodesData } from './dev/devNodesData';
-	import { Node } from './Node.svelte';
+	import { devNodes } from './dev/devNodes';
 	import NodeList from './NodeList.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
 	let zoom = $state(20);
-	const editor = new Editor();
 
-	editor.nodes = devNodesData.map((nodeData) => new Node(nodeData));
+	const editor = new Editor();
+	editor.nodes = devNodes;
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(

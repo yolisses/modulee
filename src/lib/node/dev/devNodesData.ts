@@ -16,9 +16,9 @@ export const devNodesData: NodeData[] = [
 		connectors: [{ id: '1/1', name: 'some output' }],
 	},
 	{
-		id: '2|lpqA',
+		id: '2',
 		size: defaultNodeSize,
-		position: defaultNodeSize.multiply(Vector.fromNumber(2)).getData(),
+		position: defaultNodeSize.multiply(Vector.fromNumber(2)).add(new Vector(5, -16)).getData(),
 		connectors: [
 			{ id: '2/1', name: 'some input' },
 			{ id: '2/2', name: 'some output' },
