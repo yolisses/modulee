@@ -7,24 +7,18 @@
 
 	const { space, wire }: { space: Space; wire: Wire } = $props();
 
-	const screenStartPosition = space.getScreenPosition(wire.startPosition);
-	const screenEndPosition = space.getScreenPosition(wire.endPosition);
-	const screenStrokeWidth = space.getScreenSize(Vector.fromNumber(0.25)).x;
+	const screenStartPosition = $derived(space.getScreenPosition(wire.startPosition));
+	const screenEndPosition = $derived(space.getScreenPosition(wire.endPosition));
 
-	const screenPosition0 = new Vector(
-		(screenStartPosition.x + screenEndPosition.x) / 2,
-		screenStartPosition.y,
-	);
-	const screenPosition1 = new Vector(
-		(screenStartPosition.x + screenEndPosition.x) / 2,
-		screenEndPosition.y,
-	);
+	const screenMeanPosition = $derived(screenStartPosition.add(screenEndPosition).divideByNumber(2));
+	const screenPosition0 = $derived(new Vector(screenMeanPosition.x, screenStartPosition.y));
+	const screenPosition1 = $derived(new Vector(screenMeanPosition.x, screenEndPosition.y));
 </script>
 
 <path
 	stroke="#22c55e"
 	fill="transparent"
-	stroke-width={screenStrokeWidth}
+	stroke-width="0.25em"
 	d={'M' +
 		getVectorString(screenStartPosition) +
 		'C' +

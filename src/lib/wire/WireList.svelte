@@ -5,20 +5,15 @@
 	import { getVectorsString } from '$lib/utils/getVectorsString';
 	import { onMount } from 'svelte';
 	import DevUnitRectangle from './dev/DevUnitRectangle.svelte';
-	import type { Wire } from './Wire';
+	import { devWire } from './dev/devWire';
 	import WireItem from './WireItem.svelte';
 
 	let element: Element;
 	let screenSize = $state(Vector.zero());
 
-	const { space, dataMinimumPosition }: { space: Space; dataMinimumPosition: Vector } = $props();
+	let { space, dataMinimumPosition }: { space: Space; dataMinimumPosition: Vector } = $props();
 
-	const screenMinimumPosition = space.getScreenPosition(dataMinimumPosition);
-
-	const wire: Wire = {
-		startPosition: new Vector(8.5, 9.5),
-		endPosition: new Vector(8.5 + 8, 9.5 + 8),
-	};
+	const screenMinimumPosition = $derived(space.getScreenPosition(dataMinimumPosition));
 
 	onMount(() => {
 		function updateScreenSize() {
@@ -37,6 +32,6 @@
 	viewBox={getVectorsString([screenMinimumPosition, screenSize])}
 >
 	<DevUnitRectangle {space} />
-	<WireItem {space} {wire} />
+	<WireItem {space} wire={devWire} />
 	<!-- wires here -->
 </svg>
