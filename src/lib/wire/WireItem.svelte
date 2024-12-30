@@ -15,6 +15,8 @@
 	const screenPosition1 = $derived(new Vector(screenMeanPosition.x, screenEndPosition.y));
 </script>
 
+<!-- TODO consider renaming this component to Wire -->
+
 <path
 	stroke="#22c55e"
 	fill="transparent"
