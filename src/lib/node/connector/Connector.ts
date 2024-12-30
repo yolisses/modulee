@@ -23,7 +23,8 @@ export class Connector {
 
 	get position() {
 		const headerOffset = new Vector(0, 1);
+		const indexOffset = new Vector(0, this.index);
 		const centeringOffset = Vector.fromNumber(0.5);
-		return this.node.position.add(headerOffset).add(centeringOffset);
+		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
 	}
 }
