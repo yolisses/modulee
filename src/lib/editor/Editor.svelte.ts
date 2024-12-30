@@ -3,7 +3,6 @@ import type { Node } from '$lib/node/Node.svelte';
 import type { Command } from './Command';
 
 export class Editor {
-	onChange?: () => void;
 	nodes: Node[] = $state(devNodes);
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
@@ -12,7 +11,6 @@ export class Editor {
 		this.history.push(command);
 		command.execute(this);
 		this.undoneHistory = [];
-		this.onChange?.();
 	}
 
 	undo() {
@@ -24,7 +22,6 @@ export class Editor {
 
 		command.undo(this);
 		this.undoneHistory.push(command);
-		this.onChange?.();
 	}
 
 	redo() {
@@ -36,7 +33,6 @@ export class Editor {
 
 		this.history.push(command);
 		command.execute(this);
-		this.onChange?.();
 	}
 
 	getCanUndo() {

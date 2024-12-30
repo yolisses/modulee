@@ -13,15 +13,7 @@
 
 	let zoom = $state(20);
 
-	let editor = $state(new Editor());
-
-	$effect(() => {
-		editor.onChange = refreshEditor;
-	});
-
-	function refreshEditor() {
-		editor = editor;
-	}
+	const editor = new Editor();
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(
