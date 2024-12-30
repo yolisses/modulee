@@ -47,14 +47,22 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="min-w-screen relative min-h-screen border-4"
+	class="min-w-screen dotted-grid relative min-h-screen border-4"
 	bind:this={element}
 	onclick={handleClick}
 	style="font-size: {screenFontSize}px; line-height: {screenLineHeight}px;"
 >
-	<NodeListBackground {space} />
+	<NodeListBackground />
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
 	<WireList {space} {dataMinimumPosition} />
 </div>
+
+<style>
+	.dotted-grid {
+		background-size: 1em 1em;
+		background-position: 0.5em 0.5em;
+		background-image: radial-gradient(circle, #8888 0.125em, rgba(0, 0, 0, 0) 0.125em);
+	}
+</style>
