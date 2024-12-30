@@ -10,7 +10,10 @@
 		startConnector,
 	}: { space: Space; startConnector: Connector; endConnector: Connector } = $props();
 
-	const wire: Wire = { startPosition: startConnector.position, endPosition: endConnector.position };
+	const wire: Wire = $derived({
+		startPosition: startConnector.position,
+		endPosition: endConnector.position,
+	});
 </script>
 
 <WireItem {space} {wire} />
