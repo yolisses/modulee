@@ -85,7 +85,11 @@
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
-	style="font-size: {screenFontSize}px; line-height: {screenLineHeight}px;"
+	style="
+	border-radius: {(1 / 2) * screenLineHeight}px;
+	font-size: {screenFontSize}px;
+	line-height: {screenLineHeight}px;
+	"
 >
 	<div>
 		<NodeItemHeader {node} />
