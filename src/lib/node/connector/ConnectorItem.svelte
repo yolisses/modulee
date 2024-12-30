@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
-	import type { Connector } from './Connector';
+	import type { Connector } from './Connector.svelte';
 
 	let { space, connector }: { space: Space; connector: Connector } = $props();
 </script>

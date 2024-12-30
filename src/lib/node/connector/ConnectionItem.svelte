@@ -2,7 +2,7 @@
 	import type { Space } from '$lib/space/Space';
 	import type { Wire } from '$lib/wire/Wire';
 	import WireItem from '$lib/wire/WireItem.svelte';
-	import type { Connector } from './Connector';
+	import type { Connector } from './Connector.svelte';
 
 	const {
 		space,
