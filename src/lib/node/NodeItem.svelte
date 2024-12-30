@@ -80,8 +80,8 @@
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
-	style="border-radius: 0.5em;"
 >
+	<!-- style="border-radius: 0.5em;" -->
 	<div>
 		<NodeItemHeader {node} />
 		<ConnectorList {space} connectors={node.connectors} />

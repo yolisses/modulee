@@ -10,21 +10,28 @@
 	import { devNodesData } from './dev/devNodesData';
 	import { Node } from './Node.svelte';
 	import NodeList from './NodeList.svelte';
+	import ZoomInButton from './zoom/ZoomInButton.svelte';
+	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
+	let zoom = $state(20);
 	const editor = new Editor();
 
 	editor.nodes = devNodesData.map((nodeData) => new Node(nodeData));
 
 	const dataMinimumPosition = new Vector(-2, -1);
-	const space = new Space([
-		new RoundConverter(),
-		new OffsetConverter(dataMinimumPosition.negate()),
-		new ZoomConverter(20),
-	]);
+	const space = $derived(
+		new Space([
+			new RoundConverter(),
+			new OffsetConverter(dataMinimumPosition.negate()),
+			new ZoomConverter(zoom),
+		]),
+	);
 </script>
 
 <div class="flex-row">
 	<UndoButton {editor} />
 	<RedoButton {editor} />
+	<ZoomInButton bind:zoom />
+	<ZoomOutButton bind:zoom />
 </div>
 <NodeList {editor} {space} {dataMinimumPosition} />
