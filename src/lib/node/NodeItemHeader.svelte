@@ -6,5 +6,5 @@
 
 <div class="flex-row" style="padding-inline: 0.5em;">
 	<!-- TODO change to node.type -->
-	{node.id}
+	{node.id.slice(0, 6)}
 </div>
