@@ -11,7 +11,6 @@
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node.svelte';
 	import NodeItem from './NodeItem.svelte';
-	import NodeListBackground from './NodeListBackground.svelte';
 
 	let element: Element;
 	let {
@@ -52,7 +51,6 @@
 	onclick={handleClick}
 	style="font-size: {screenFontSize}px; line-height: {screenLineHeight}px;"
 >
-	<NodeListBackground />
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
