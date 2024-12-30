@@ -2,8 +2,6 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
-	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 	import ConnectorList from './connector/ConnectorList.svelte';
@@ -68,9 +66,6 @@
 		const moveNodeCommand = new MoveNodeCommand(node.id, dataPosition);
 		editor.execute(moveNodeCommand);
 	}
-
-	const screenFontSize = getScreenFontSize(space);
-	const screenLineHeight = getScreenLineHeight(space);
 </script>
 
 <button
@@ -85,11 +80,7 @@
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
-	style="
-	border-radius: 0.5em;
-	font-size: {screenFontSize}px;
-	line-height: {screenLineHeight}px;
-	"
+	style="border-radius: 0.5em;"
 >
 	<div>
 		<NodeItemHeader {node} />
