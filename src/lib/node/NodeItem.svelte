@@ -19,14 +19,10 @@
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();
-	let previewPosition = $state<Vector>();
 	let initialMouseDistance = $state<Vector>();
 
 	const screenSize = $derived(space.getScreenSize(node.size));
-	const screenPosition = $derived.by(() => {
-		const position = previewPosition ?? node.position;
-		return space.getScreenPosition(position);
-	});
+	const screenPosition = $derived(space.getScreenPosition(node.position));
 
 	function handleClick(e: MouseEvent) {}
 
@@ -57,7 +53,7 @@
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!pointerId) return;
 
-		previewPosition = getPointerDataPosition(e);
+		node.position = getPointerDataPosition(e);
 	}
 
 	function handlePointerUp(e: PointerEvent) {
@@ -66,7 +62,6 @@
 
 		element.releasePointerCapture(pointerId);
 		pointerId = undefined;
-		previewPosition = undefined;
 
 		const dataPosition = getPointerDataPosition(e);
 		const moveNodeCommand = new MoveNodeCommand(node.id, dataPosition);
