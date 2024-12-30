@@ -55,4 +55,20 @@ export class Vector {
 	divide(vector: Vector) {
 		return new Vector(this.x / vector.x, this.y / vector.y);
 	}
+
+	addByNumber(number: number) {
+		return new Vector(this.x + number, this.y + number);
+	}
+
+	subtractByNumber(number: number) {
+		return new Vector(this.x - number, this.y - number);
+	}
+
+	multiplyByNumber(number: number) {
+		return new Vector(this.x * number, this.y * number);
+	}
+
+	divideByNumber(number: number) {
+		return new Vector(this.x / number, this.y / number);
+	}
 }
