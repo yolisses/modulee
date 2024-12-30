@@ -1,24 +1,24 @@
 import { findById } from '$lib/array/findById';
 import type { Command } from '$lib/editor/Command';
-import type { Editor } from '$lib/editor/Editor.svelte';
-import type { Vector } from '$lib/space/Vector';
+import type { EditorData } from '$lib/editor/EditorData';
+import type { VectorData } from '$lib/space/VectorData';
 
 export class MoveNodeCommand implements Command {
-	previousPosition!: Vector;
+	previousPosition!: VectorData;
 
 	constructor(
 		private nodeId: string,
-		private position: Vector,
+		private position: VectorData,
 	) {}
 
-	execute(editor: Editor): void {
-		const node = findById(editor.nodes, this.nodeId);
+	execute(editorData: EditorData): void {
+		const node = findById(editorData.nodes, this.nodeId);
 		this.previousPosition = node.position;
 		node.position = this.position;
 	}
 
-	undo(editor: Editor): void {
-		const node = findById(editor.nodes, this.nodeId);
+	undo(editorData: EditorData): void {
+		const node = findById(editorData.nodes, this.nodeId);
 		node.position = this.previousPosition;
 	}
 }

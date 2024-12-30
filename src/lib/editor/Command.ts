@@ -1,6 +1,6 @@
-import type { Editor } from './Editor.svelte';
+import type { EditorData } from './EditorData';
 
 export interface Command {
-	execute(editor: Editor): void;
-	undo(editor: Editor): void;
+	execute(editorData: EditorData): void;
+	undo(editorData: EditorData): void;
 }

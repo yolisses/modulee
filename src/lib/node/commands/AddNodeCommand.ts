@@ -1,18 +1,18 @@
 import { removeById } from '$lib/array/removeById';
 import type { Command } from '$lib/editor/Command';
-import type { Editor } from '$lib/editor/Editor.svelte';
-import type { Node } from '../Node.svelte';
+import type { EditorData } from '$lib/editor/EditorData';
+import type { NodeData } from '../NodeData';
 
 // It is considered that the list have only one item
 // per id.
 export class AddNodeCommand implements Command {
-	constructor(private node: Node) {}
+	constructor(private node: NodeData) {}
 
-	execute(editor: Editor): void {
+	execute(editor: EditorData): void {
 		editor.nodes.push(this.node);
 	}
 
-	undo(editor: Editor): void {
+	undo(editor: EditorData): void {
 		removeById(editor.nodes, this.node.id);
 	}
 }
