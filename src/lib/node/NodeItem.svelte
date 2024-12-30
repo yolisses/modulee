@@ -2,6 +2,7 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
+	import { createId } from '$lib/utils/createId';
 	import { MoveNodeCommand } from './commands/MoveNodeCommand';
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 	import ConnectorList from './connector/ConnectorList.svelte';
@@ -28,7 +29,11 @@
 
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
-		const removeNodeCommand = new RemoveNodeCommand(node.id);
+		const removeNodeCommand = new RemoveNodeCommand({
+			id: createId(),
+			type: 'RemoveNodeCommand',
+			details: { nodeId: node.id },
+		});
 		editor.execute(removeNodeCommand);
 		return false;
 	}
@@ -64,7 +69,11 @@
 		pointerId = undefined;
 
 		const dataPosition = getPointerDataPosition(e);
-		const moveNodeCommand = new MoveNodeCommand(node.id, dataPosition);
+		const moveNodeCommand = new MoveNodeCommand({
+			id: createId(),
+			type: 'MoveNodeCommand',
+			details: { nodeId: node.id, position: dataPosition },
+		});
 		editor.execute(moveNodeCommand);
 	}
 </script>

@@ -27,4 +27,11 @@ export class Connector {
 		const centeringOffset = Vector.fromNumber(0.5);
 		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
 	}
+
+	getData(): ConnectorData {
+		return {
+			id: this.id,
+			name: this.name,
+		};
+	}
 }

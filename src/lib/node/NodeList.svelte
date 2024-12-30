@@ -9,7 +9,7 @@
 	import ConnectionList from './connector/ConnectionList.svelte';
 	import { defaultNodeSize } from './defaultNodeSize';
 	import { getPointerPosition } from './getPointerPosition';
-	import type { Node } from './Node.svelte';
+	import type { NodeData } from './NodeData';
 	import NodeItem from './NodeItem.svelte';
 
 	let element: Element;
@@ -29,13 +29,17 @@
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		const node: Node = {
+		const nodeData: NodeData = {
 			id: createId(),
 			connectors: [],
 			size: defaultNodeSize,
 			position: dataPosition.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		};
-		const addNodeCommand = new AddNodeCommand(node);
+		const addNodeCommand = new AddNodeCommand({
+			id: createId(),
+			type: 'AddNodeCommand',
+			details: { node: nodeData },
+		});
 		editor.execute(addNodeCommand);
 	}
 </script>

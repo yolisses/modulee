@@ -7,7 +7,7 @@ export class Editor {
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
 
-	execute(command: Command) {
+	execute(command: Command<any>) {
 		this.history.push(command);
 		command.execute(this);
 		this.undoneHistory = [];

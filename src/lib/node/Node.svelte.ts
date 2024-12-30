@@ -17,4 +17,13 @@ export class Node {
 			return new Connector(connectorData, this, index);
 		});
 	}
+
+	getData(): NodeData {
+		return {
+			id: this.id,
+			size: this.size,
+			position: this.position,
+			connectors: this.connectors.map((connector) => connector.getData()),
+		};
+	}
 }

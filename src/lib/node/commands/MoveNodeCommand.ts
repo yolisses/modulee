@@ -3,24 +3,20 @@ import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
 import type { VectorData } from '$lib/space/VectorData';
 
-export class MoveNodeCommand extends Command {
+export class MoveNodeCommand extends Command<{
+	nodeId: string;
+	position: VectorData;
+}> {
 	previousPosition!: VectorData;
 
-	constructor(
-		private nodeId: string,
-		private position: VectorData,
-	) {
-		super();
-	}
-
 	execute(editorData: EditorData): void {
-		const node = findById(editorData.nodes, this.nodeId);
+		const node = findById(editorData.nodes, this.details.nodeId);
 		this.previousPosition = node.position;
-		node.position = this.position;
+		node.position = this.details.position;
 	}
 
 	undo(editorData: EditorData): void {
-		const node = findById(editorData.nodes, this.nodeId);
+		const node = findById(editorData.nodes, this.details.nodeId);
 		node.position = this.previousPosition;
 	}
 }

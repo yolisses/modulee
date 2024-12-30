@@ -5,15 +5,13 @@ import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
 import type { NodeData } from '../NodeData';
 
-export class RemoveNodeCommand extends Command {
+export class RemoveNodeCommand extends Command<{
+	nodeId: string;
+}> {
 	remotion!: Remotion<NodeData>;
 
-	constructor(private nodeId: string) {
-		super();
-	}
-
 	execute(editorData: EditorData): void {
-		this.remotion = removeById(editorData.nodes, this.nodeId);
+		this.remotion = removeById(editorData.nodes, this.details.nodeId);
 	}
 
 	undo(editorData: EditorData): void {
