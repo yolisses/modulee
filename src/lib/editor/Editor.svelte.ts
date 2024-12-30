@@ -1,4 +1,4 @@
-import type { Node } from '$lib/node/Node';
+import type { Node } from '$lib/node/Node.svelte';
 import type { Command } from './Command';
 
 export class Editor {

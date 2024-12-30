@@ -7,7 +7,7 @@
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { defaultNodeSize } from './defaultNodeSize';
 	import { getPointerPosition } from './getPointerPosition';
-	import type { Node } from './Node';
+	import type { Node } from './Node.svelte';
 	import NodeItem from './NodeItem.svelte';
 	import NodeListBackground from './NodeListBackground.svelte';
 

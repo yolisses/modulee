@@ -1,7 +1,7 @@
 import { Editor } from '$lib/editor/Editor.svelte';
 import { Vector } from '$lib/space/Vector';
 import { expect, test } from 'vitest';
-import type { Node } from '../Node';
+import type { Node } from '../Node.svelte';
 import { MoveNodeCommand } from './MoveNodeCommand';
 
 test('MoveNodeCommand', () => {

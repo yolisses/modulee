@@ -5,7 +5,7 @@ import type { NodeData } from './NodeData';
 export class Node {
 	id: string;
 	size: Vector;
-	position: Vector;
+	position: Vector = $state()!;
 	connectors: Connector[] = [];
 
 	constructor(nodeData: NodeData) {

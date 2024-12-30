@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Node } from './Node';
+	import type { Node } from './Node.svelte';
 
 	const { node }: { node: Node } = $props();
 </script>

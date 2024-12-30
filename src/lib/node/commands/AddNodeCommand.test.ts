@@ -1,6 +1,6 @@
 import { Editor } from '$lib/editor/Editor.svelte';
 import { expect, test } from 'vitest';
-import type { Node } from '../Node';
+import type { Node } from '../Node.svelte';
 import { AddNodeCommand } from './AddNodeCommand';
 
 test('AddNodeCommand', () => {

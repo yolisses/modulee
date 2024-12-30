@@ -8,22 +8,17 @@
 	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 	import ConnectorList from './connector/ConnectorList.svelte';
 	import { getPointerPosition } from './getPointerPosition';
-	import type { Node } from './Node';
+	import type { Node } from './Node.svelte';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
 	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();
-	let position = $state(node.position);
 	let initialMouseDistance = $state<Vector>();
 
-	$effect(() => {
-		position = node.position;
-	});
-
 	const screenSize = space.getScreenSize(node.size);
-	const screenPosition = $derived(space.getScreenPosition(position));
+	const screenPosition = $derived(space.getScreenPosition(node.position));
 
 	function handleClick(e: MouseEvent) {}
 
@@ -54,7 +49,7 @@
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!pointerId) return;
 
-		position = getPointerDataPosition(e);
+		node.position = getPointerDataPosition(e);
 	}
 
 	function handlePointerUp(e: PointerEvent) {

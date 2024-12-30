@@ -8,7 +8,7 @@
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { devNodesData } from './dev/devNodesData';
-	import { Node } from './Node';
+	import { Node } from './Node.svelte';
 	import NodeList from './NodeList.svelte';
 
 	const editor = new Editor();
