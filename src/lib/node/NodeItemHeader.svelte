@@ -4,7 +4,7 @@
 	const { node }: { node: Node } = $props();
 </script>
 
-<div class="flex-row">
+<div class="flex-row" style="padding-inline: 0.5em;">
 	<!-- TODO change to node.type -->
 	{node.id}
 </div>
