@@ -38,9 +38,6 @@
 		const addNodeCommand = new AddNodeCommand(node);
 		editor.execute(addNodeCommand);
 	}
-
-	const screenFontSize = getScreenFontSize(space);
-	const screenLineHeight = getScreenLineHeight(space);
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -49,7 +46,8 @@
 	class="min-w-screen dotted-grid relative min-h-screen border-4"
 	bind:this={element}
 	onclick={handleClick}
-	style="font-size: {screenFontSize}px; line-height: {screenLineHeight}px;"
+	style:font-size={getScreenFontSize(space) + 'px'}
+	style:line-height={getScreenLineHeight(space) + 'px'}
 >
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
