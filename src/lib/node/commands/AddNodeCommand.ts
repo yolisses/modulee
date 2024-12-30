@@ -8,11 +8,11 @@ import type { NodeData } from '../NodeData';
 export class AddNodeCommand implements Command {
 	constructor(private node: NodeData) {}
 
-	execute(editor: EditorData): void {
-		editor.nodes.push(this.node);
+	execute(editorData: EditorData): void {
+		editorData.nodes.push(this.node);
 	}
 
-	undo(editor: EditorData): void {
-		removeById(editor.nodes, this.node.id);
+	undo(editorData: EditorData): void {
+		removeById(editorData.nodes, this.node.id);
 	}
 }

@@ -1,18 +1,16 @@
-import { Editor } from '$lib/editor/Editor.svelte';
+import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
-import type { Node } from '../Node.svelte';
 import { RemoveNodeCommand } from './RemoveNodeCommand';
 
 test('RemoveNodeCommand', () => {
-	const editor = new Editor();
-	editor.nodes = [{ id: '1' }, { id: '2' }, { id: '3' }] as Node[];
+	const editorData = { nodes: [{ id: '1' }, { id: '2' }, { id: '3' }] } as EditorData;
 
 	const removeNodeCommand = new RemoveNodeCommand('2');
-	removeNodeCommand.execute(editor);
+	removeNodeCommand.execute(editorData);
 
-	expect(editor.nodes).toEqual([{ id: '1' }, { id: '3' }]);
+	expect(editorData.nodes).toEqual([{ id: '1' }, { id: '3' }]);
 
-	removeNodeCommand.undo(editor);
+	removeNodeCommand.undo(editorData);
 
-	expect(editor.nodes).toEqual([{ id: '1' }, { id: '2' }, { id: '3' }]);
+	expect(editorData.nodes).toEqual([{ id: '1' }, { id: '2' }, { id: '3' }]);
 });
