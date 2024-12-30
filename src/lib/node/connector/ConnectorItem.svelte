@@ -1,8 +1,11 @@
 <script lang="ts">
-	import type { Space } from '$lib/space/Space';
 	import type { Connector } from './Connector.svelte';
 
-	let { space, connector }: { space: Space; connector: Connector } = $props();
+	interface Props {
+		connector: Connector;
+	}
+
+	let { connector }: Props = $props();
 </script>
 
 <div class="flex-row items-center whitespace-nowrap">

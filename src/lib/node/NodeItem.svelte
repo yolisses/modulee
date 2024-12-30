@@ -9,7 +9,13 @@
 	import type { Node } from './Node.svelte';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
-	let { node, space, editor }: { node: Node; space: Space; editor: Editor } = $props();
+	interface Props {
+		node: Node;
+		space: Space;
+		editor: Editor;
+	}
+
+	let { node, space, editor }: Props = $props();
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();
@@ -84,6 +90,6 @@
 >
 	<div>
 		<NodeItemHeader {node} />
-		<ConnectorList {space} connectors={node.connectors} />
+		<ConnectorList connectors={node.connectors} />
 	</div>
 </button>
