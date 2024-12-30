@@ -10,5 +10,5 @@
 
 <!-- {command.constructor.name} -->
 <div class="bg-gray-500">
-	{command.id}
+	{command.id.slice(0, 6)}
 </div>

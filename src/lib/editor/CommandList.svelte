@@ -9,7 +9,7 @@
 	const { commands }: Props = $props();
 </script>
 
-<div>
+<div class="min-w-20 border">
 	{#each commands as command (command.id)}
 		<CommandItem {command} />
 	{/each}
