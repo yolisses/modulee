@@ -8,10 +8,16 @@
 	import { devWire } from './dev/devWire';
 	import WireItem from './WireItem.svelte';
 
+	interface Props {
+		space: Space;
+		children?: any;
+		dataMinimumPosition: Vector;
+	}
+
+	let { space, dataMinimumPosition, children }: Props = $props();
+
 	let element: Element;
 	let screenSize = $state(Vector.zero());
-
-	let { space, dataMinimumPosition }: { space: Space; dataMinimumPosition: Vector } = $props();
 
 	const screenMinimumPosition = $derived(space.getScreenPosition(dataMinimumPosition));
 
@@ -36,5 +42,6 @@
 >
 	<DevUnitRectangle {space} />
 	<WireItem {space} wire={devWire} />
-	<!-- wires here -->
+
+	{@render children?.()}
 </svg>

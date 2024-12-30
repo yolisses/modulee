@@ -5,8 +5,8 @@
 	import { createId } from '$lib/utils/createId';
 	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
-	import WireList from '$lib/wire/WireList.svelte';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
+	import ConnectionList from './connector/ConnectionList.svelte';
 	import { defaultNodeSize } from './defaultNodeSize';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node.svelte';
@@ -52,7 +52,7 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
-	<WireList {space} {dataMinimumPosition} />
+	<ConnectionList nodes={editor.nodes} {space} {dataMinimumPosition} />
 </div>
 
 <style>
