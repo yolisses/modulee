@@ -5,7 +5,6 @@
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
-	import { RoundConverter } from '$lib/space/RoundConverter';
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
@@ -19,11 +18,7 @@
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(
-		new Space([
-			new RoundConverter(),
-			new OffsetConverter(dataMinimumPosition.negate()),
-			new ZoomConverter(zoom),
-		]),
+		new Space([new OffsetConverter(dataMinimumPosition.negate()), new ZoomConverter(zoom)]),
 	);
 </script>
 

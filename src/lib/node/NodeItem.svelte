@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
+	import { RoundConverter } from '$lib/space/RoundConverter';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { createId } from '$lib/utils/createId';
@@ -23,6 +24,7 @@
 	let initialDataPosition = $state<Vector>();
 	let initialMouseDistance = $state<Vector>();
 
+	const roundConverter = new RoundConverter();
 	const screenSize = $derived(space.getScreenSize(node.size));
 	const screenPosition = $derived(space.getScreenPosition(node.position));
 
@@ -54,7 +56,8 @@
 	function getPointerDataPosition(e: PointerEvent) {
 		const mousePosition = getPointerPosition(e);
 		const screenPosition = mousePosition.add(initialMouseDistance!);
-		const dataPosition = space.getDataPosition(screenPosition);
+		let dataPosition = space.getDataPosition(screenPosition);
+		dataPosition = roundConverter.getDataPosition(dataPosition);
 		return dataPosition;
 	}
 
