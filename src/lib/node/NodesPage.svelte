@@ -14,7 +14,7 @@
 
 	let zoom = $state(20);
 
-	const editor = new Editor();
+	const editor = Editor.createEmpty();
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(

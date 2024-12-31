@@ -1,16 +1,27 @@
-import { devNodes } from '$lib/node/dev/devNodes';
-import type { Node } from '$lib/node/Node.svelte';
+import { Node } from '$lib/node/Node.svelte';
 import type { Command } from './Command';
+import type { EditorData } from './EditorData';
 
 export class Editor {
-	nodes: Node[] = $state(devNodes);
+	nodes: Node[] = $state([]);
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
 
+	constructor(private editorData: EditorData) {}
+
+	static createEmpty() {
+		return new Editor({ nodes: [] });
+	}
+
+	recalculate() {
+		this.nodes = this.editorData.nodes.map((nodeData) => new Node(nodeData));
+	}
+
 	execute(command: Command<any>) {
 		this.history.push(command);
-		command.execute(this);
+		command.execute(this.editorData);
 		this.undoneHistory = [];
+		this.recalculate();
 	}
 
 	undo() {
@@ -20,8 +31,9 @@ export class Editor {
 			throw new Error("Can't undo with empty history");
 		}
 
-		command.undo(this);
+		command.undo(this.editorData);
 		this.undoneHistory.push(command);
+		this.recalculate();
 	}
 
 	redo() {
@@ -32,7 +44,8 @@ export class Editor {
 		}
 
 		this.history.push(command);
-		command.execute(this);
+		command.execute(this.editorData);
+		this.recalculate();
 	}
 
 	getCanUndo() {
