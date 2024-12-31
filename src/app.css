@@ -18,6 +18,10 @@ button {
 	@apply flex flex-row;
 }
 
+.hover-bg {
+	@apply hover:bg-white/10;
+}
+
 .common-button {
-	@apply rounded p-2 hover:bg-white/10;
+	@apply hover-bg rounded p-2;
 }

@@ -84,22 +84,24 @@
 	}
 </script>
 
-<button
-	bind:this={element}
-	onclick={handleClick}
+<div
 	style:border-radius="0.5em"
-	onpointerup={handlePointerUp}
-	oncontextmenu={handleContextMenu}
-	onpointermove={handlePointerMove}
-	onpointerdown={handlePointerDown}
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-gray-500"
 >
-	<div>
+	<button
+		bind:this={element}
+		onclick={handleClick}
+		onpointerup={handlePointerUp}
+		oncontextmenu={handleContextMenu}
+		onpointermove={handlePointerMove}
+		onpointerdown={handlePointerDown}
+		class="hover-bg"
+	>
 		<NodeItemHeader {node} />
-		<ConnectorList connectors={node.connectors} />
-	</div>
-</button>
+	</button>
+	<ConnectorList connectors={node.connectors} />
+</div>
