@@ -11,7 +11,7 @@
 	import { getPointerPosition } from './getPointerPosition';
 	import NodeItem from './NodeItem.svelte';
 
-	let element: Element;
+	let container: Element;
 	let {
 		space,
 		editor,
@@ -19,11 +19,11 @@
 	}: { editor: Editor; space: Space; dataMinimumPosition: Vector } = $props();
 
 	function handleClick(e: MouseEvent) {
-		if (e.target !== element) {
+		if (e.target !== container) {
 			return;
 		}
 
-		const rect = element.getBoundingClientRect();
+		const rect = container.getBoundingClientRect();
 		const offsetVector = new Vector(rect.left, rect.top);
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
@@ -45,7 +45,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="dotted-grid relative min-h-screen w-full border-4"
-	bind:this={element}
+	bind:this={container}
 	onclick={handleClick}
 	oncontextmenu={handleContextMenu}
 	style:font-size={getScreenFontSize(space) + 'px'}
