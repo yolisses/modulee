@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CommandList from '$lib/editor/CommandList.svelte';
+	import { devEditorData } from '$lib/editor/dev/devEditorData';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
@@ -14,7 +15,7 @@
 
 	let zoom = $state(20);
 
-	const editor = Editor.createEmpty();
+	const editor = new Editor(devEditorData);
 
 	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(

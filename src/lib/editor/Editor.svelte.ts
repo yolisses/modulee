@@ -7,7 +7,9 @@ export class Editor {
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
 
-	constructor(private editorData: EditorData) {}
+	constructor(private editorData: EditorData) {
+		this.recalculate();
+	}
 
 	static createEmpty() {
 		return new Editor({ nodes: [] });
