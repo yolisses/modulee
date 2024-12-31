@@ -7,9 +7,8 @@
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import ConnectionList from './connector/ConnectionList.svelte';
-	import { defaultNodeSize } from './defaultNodeSize';
+	import { createNodeData } from './createNodeData';
 	import { getPointerPosition } from './getPointerPosition';
-	import type { NodeData } from './NodeData';
 	import NodeItem from './NodeItem.svelte';
 
 	let element: Element;
@@ -29,16 +28,10 @@
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		const nodeData: NodeData = {
-			id: createId(),
-			connectors: [],
-			size: defaultNodeSize,
-			position: dataPosition.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
-		};
 		const addNodeCommand = new AddNodeCommand({
 			id: createId(),
 			type: 'AddNodeCommand',
-			details: { node: nodeData },
+			details: { node: createNodeData(dataPosition) },
 		});
 		editor.execute(addNodeCommand);
 	}
