@@ -11,12 +11,14 @@
 	import { getPointerPosition } from './getPointerPosition';
 	import NodeItem from './NodeItem.svelte';
 
+	interface Props {
+		editor: Editor;
+		space: Space;
+		dataMinimumPosition: Vector;
+	}
+
+	let { space, editor, dataMinimumPosition }: Props = $props();
 	let container: Element;
-	let {
-		space,
-		editor,
-		dataMinimumPosition,
-	}: { editor: Editor; space: Space; dataMinimumPosition: Vector } = $props();
 
 	function handleClick(e: MouseEvent) {
 		if (e.target !== container) {
