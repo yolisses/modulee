@@ -35,6 +35,10 @@
 		});
 		editor.execute(addNodeCommand);
 	}
+
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
+	}
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -43,6 +47,7 @@
 	class="dotted-grid relative min-h-screen w-full border-4"
 	bind:this={element}
 	onclick={handleClick}
+	oncontextmenu={handleContextMenu}
 	style:font-size={getScreenFontSize(space) + 'px'}
 	style:line-height={getScreenLineHeight(space) + 'px'}
 >
