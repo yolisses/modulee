@@ -29,7 +29,7 @@
 	<ZoomOutButton bind:zoom />
 </div>
 <div class="flex-row">
-	<NodeList {editor} {space} {dataMinimumPosition} />
 	<CommandList commands={editor.history} />
 	<CommandList commands={editor.undoneHistory} />
+	<NodeList {editor} {space} {dataMinimumPosition} />
 </div>
