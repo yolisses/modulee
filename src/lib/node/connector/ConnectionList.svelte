@@ -4,6 +4,7 @@
 	import WireList from '$lib/wire/WireList.svelte';
 	import type { Node } from '../Node.svelte';
 	import ConnectionItem from './ConnectionItem.svelte';
+	import PreviewWire from './PreviewWire.svelte';
 
 	const {
 		nodes,
@@ -20,4 +21,5 @@
 			{/if}
 		{/each}
 	{/each}
+	<PreviewWire {space} />
 </WireList>
