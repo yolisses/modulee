@@ -103,5 +103,5 @@
 	>
 		<NodeItemHeader {node} />
 	</button>
-	<ConnectorList connectors={node.connectors} />
+	<ConnectorList {space} connectors={node.connectors} />
 </div>
