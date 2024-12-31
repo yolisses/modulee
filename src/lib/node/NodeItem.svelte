@@ -20,6 +20,7 @@
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();
+	let initialDataPosition = $state<Vector>();
 	let initialMouseDistance = $state<Vector>();
 
 	const screenSize = $derived(space.getScreenSize(node.size));
@@ -43,6 +44,9 @@
 
 		pointerId = e.pointerId;
 		element.setPointerCapture(pointerId);
+
+		initialDataPosition = node.position;
+
 		const mousePosition = getPointerPosition(e);
 		initialMouseDistance = screenPosition.subtract(mousePosition);
 	}
@@ -69,12 +73,14 @@
 		pointerId = undefined;
 
 		const dataPosition = getPointerDataPosition(e);
-		const moveNodeCommand = new MoveNodeCommand({
-			id: createId(),
-			type: 'MoveNodeCommand',
-			details: { nodeId: node.id, position: dataPosition },
-		});
-		editor.execute(moveNodeCommand);
+		if (initialDataPosition && dataPosition.notEquals(initialDataPosition)) {
+			const moveNodeCommand = new MoveNodeCommand({
+				id: createId(),
+				type: 'MoveNodeCommand',
+				details: { nodeId: node.id, position: dataPosition },
+			});
+			editor.execute(moveNodeCommand);
+		}
 	}
 </script>
 

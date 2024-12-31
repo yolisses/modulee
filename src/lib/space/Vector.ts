@@ -40,6 +40,14 @@ export class Vector {
 		return new Vector(Math.round(this.x), Math.round(this.y));
 	}
 
+	equals(vector: Vector) {
+		return this.x === vector.x && this.y === vector.y;
+	}
+
+	notEquals(vector: Vector) {
+		return this.x !== vector.x || this.y !== vector.y;
+	}
+
 	add(vector: Vector) {
 		return new Vector(this.x + vector.x, this.y + vector.y);
 	}
