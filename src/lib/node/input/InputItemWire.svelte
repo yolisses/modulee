@@ -15,12 +15,12 @@
 	const { space, input, output }: Props = $props();
 
 	// Based on experiments with the Wire curve
-	const margin = new Vector(2, 0);
+	const margin = new Vector(2, 1);
 
 	function getScreenPosition(space: Space, input: Input) {
 		const dataDesiredPosition = viewStart;
 		const screenDesiredPosition = space.getScreenPosition(dataDesiredPosition);
-		const screenInputPosition = space.getScreenPosition(input.connectorPosition);
+		const screenInputPosition = space.getScreenPosition(input.position);
 		const screenPosition = screenDesiredPosition.subtract(screenInputPosition);
 		return screenPosition;
 	}
@@ -31,11 +31,10 @@
 	const screenPosition = $derived(getScreenPosition(space, input));
 
 	const dataSize = $derived(
-		output.position
-			.subtract(input.position)
+		output.connectorPosition
+			.subtract(input.connectorPosition)
 			.absolute()
-			.add(margin.multiplyByNumber(2))
-			.add(Vector.one()),
+			.add(margin.multiplyByNumber(2)),
 	);
 </script>
 
@@ -44,8 +43,8 @@
 	style:height={dataSize.y + 'em'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="pointer-events-none absolute"
-	viewBox="{getVectorString(viewStart.subtract(Vector.one()))} {getVectorString(dataSize)}"
+	class="pointer-events-none absolute bg-red-500/50"
+	viewBox="{getVectorString(viewStart)} {getVectorString(dataSize)}"
 >
-	<WireItem startPosition={output.position} endPosition={input.position} />
+	<WireItem startPosition={output.connectorPosition} endPosition={input.connectorPosition} />
 </svg>
