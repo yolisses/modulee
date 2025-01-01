@@ -29,8 +29,8 @@
 			dataPointerPosition: dataPosition,
 		};
 
-		containerWrapper.container.addEventListener('pointermove', handlePointerMove as any);
-		containerWrapper.container.addEventListener('pointerup', handlePointerUp as any);
+		containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
+		containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
 	}
 
 	function getDataPointerPosition(e: PointerEvent, container: Element) {
@@ -40,7 +40,7 @@
 		return dataPosition;
 	}
 
-	function handlePointerMove(e: PointerEvent) {
+	function handleContainerPointerMove(e: PointerEvent) {
 		if (!containerWrapper.container) return;
 		const dataPointerPosition = getDataPointerPosition(e, containerWrapper.container);
 		if (previewConnectionWrapper.previewConnection) {
@@ -48,14 +48,15 @@
 		}
 	}
 
-	function handlePointerUp(e: PointerEvent) {
-		console.log('pointerup');
-
+	function handleContainerPointerUp(e: PointerEvent) {
 		previewConnectionWrapper.previewConnection = undefined;
 
 		if (!containerWrapper.container) return;
-		containerWrapper.container.removeEventListener('pointermove', handlePointerMove as any);
-		containerWrapper.container.removeEventListener('pointerup', handlePointerUp as any);
+		containerWrapper.container.removeEventListener(
+			'pointermove',
+			handleContainerPointerMove as any,
+		);
+		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 	}
 </script>
 
