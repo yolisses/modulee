@@ -6,13 +6,13 @@
 	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
-	import ConnectionList from './input/ConnectionList.svelte';
-	import { setPreviewConnectionContext } from './input/previewConnectionContext';
-	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
 	import { getPointerPosition } from './getPointerPosition';
+	import ConnectionList from './input/ConnectionList.svelte';
+	import { setPreviewConnectionContext } from './input/previewConnectionContext';
+	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {

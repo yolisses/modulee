@@ -5,13 +5,14 @@ import type { NodeData } from './NodeData';
 
 export function createNodeData(position: Vector): NodeData {
 	return {
+		outputs: [],
 		id: createId(),
+		size: defaultNodeSize,
+		position: position.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		inputs: [
 			{ id: createId(), name: 'input1' },
 			{ id: createId(), name: 'input2' },
 			{ id: createId(), name: 'input3' },
 		],
-		size: defaultNodeSize,
-		position: position.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 	};
 }
