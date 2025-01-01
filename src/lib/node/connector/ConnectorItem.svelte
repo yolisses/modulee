@@ -48,6 +48,8 @@
 	function handlePointerUp(e: PointerEvent) {
 		console.log('pointerup');
 
+		previewConnectionWrapper.previewConnection = undefined;
+
 		if (!containerWrapper.container) return;
 		containerWrapper.container.removeEventListener('pointermove', handlePointerMove as any);
 		containerWrapper.container.removeEventListener('pointerup', handlePointerUp as any);
