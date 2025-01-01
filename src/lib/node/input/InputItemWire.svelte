@@ -12,7 +12,7 @@
 	const { space, input, output }: Props = $props();
 
 	function getScreenPosition(space: Space, input: Input) {
-		const dataDesiredPosition = output.connectorPosition;
+		const dataDesiredPosition = input.connectorPosition.min(output.connectorPosition);
 		const screenDesiredPosition = space.getScreenPosition(dataDesiredPosition);
 		const screenInputPosition = space.getScreenPosition(input.position);
 		const screenPosition = screenDesiredPosition.subtract(screenInputPosition);
