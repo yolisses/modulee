@@ -8,8 +8,8 @@
 	const { space, output, input }: { space: Space; input: Input; output: Output } = $props();
 
 	const wire: Wire = $derived({
-		endPosition: output.position,
-		startPosition: input.position,
+		endPosition: input.position,
+		startPosition: output.position,
 	});
 </script>
 
