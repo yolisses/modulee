@@ -14,7 +14,7 @@
 
 <div
 	id="DevUnitDiv"
-	class="absolute bg-blue-500"
+	class="absolute bg-blue-500/50"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}

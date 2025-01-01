@@ -4,6 +4,7 @@
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
 	import type { Input } from './Input.svelte';
+	import InputItemWire from './InputItemWire.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
@@ -60,17 +61,22 @@
 	}
 </script>
 
-<button class="hover-bg w-full" onpointerdown={handlePointerDown}>
-	<!-- TODO consider using some other approach to prevent
+<div class="relative">
+	<button class="hover-bg w-full" onpointerdown={handlePointerDown}>
+		<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
-	<div class="pointer-events-none flex-row items-center whitespace-nowrap">
-		<div
-			style:width="0.8em"
-			style:height="0.8em"
-			style:margin="0.1em"
-			class="shrink-0 rounded-full bg-green-500"
-		></div>
-		<div>{input.id.slice(0, 6)}</div>
-	</div>
-</button>
+		<div class="pointer-events-none flex-row items-center whitespace-nowrap">
+			<div
+				style:width="0.8em"
+				style:height="0.8em"
+				style:margin="0.1em"
+				class="shrink-0 rounded-full bg-green-500"
+			></div>
+			<div>{input.id.slice(0, 6)}</div>
+		</div>
+	</button>
+	{#if input.connectedOutput}
+		<InputItemWire {input} {space} />
+	{/if}
+</div>

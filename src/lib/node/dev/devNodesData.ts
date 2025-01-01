@@ -25,19 +25,19 @@ export const devNodesData: NodeData[] = [
 			{ id: 'RMQsV4r4BlDdhUQuqpHI6B', name: 'output1' },
 			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
 		],
-		position: { x: -2, y: 0 },
+		position: { x: 2, y: 0 },
 	},
-	{
-		id: '2dnLGjCkHDAmyiVllBiWvu',
-		inputs: [
-			{ id: 'gJ5yfwibHVMHIHD6JRWlXw', name: 'input1' },
-			{ id: 'grhuk6RwbYyXewICBn3qoB', name: 'input2' },
-			{ id: 'rBd4Il2mrZPdt4tKpcgjY2', name: 'input3' },
-		],
-		outputs: [
-			{ id: 'swNlAiRYLdYYqrjYvglhGx', name: 'output1' },
-			{ id: 'wqR7FgbMbKRUGArK6qd7ej', name: 'output2' },
-		],
-		position: { x: 3, y: 5 },
-	},
+	// {
+	// 	id: '2dnLGjCkHDAmyiVllBiWvu',
+	// 	inputs: [
+	// 		{ id: 'gJ5yfwibHVMHIHD6JRWlXw', name: 'input1' },
+	// 		{ id: 'grhuk6RwbYyXewICBn3qoB', name: 'input2' },
+	// 		{ id: 'rBd4Il2mrZPdt4tKpcgjY2', name: 'input3' },
+	// 	],
+	// 	outputs: [
+	// 		{ id: 'swNlAiRYLdYYqrjYvglhGx', name: 'output1' },
+	// 		{ id: 'wqR7FgbMbKRUGArK6qd7ej', name: 'output2' },
+	// 	],
+	// 	position: { x: 3, y: 5 },
+	// },
 ];
