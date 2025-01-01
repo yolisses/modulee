@@ -4,7 +4,7 @@
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
 	import type { Connector } from './Connector.svelte';
-	import { previewWireWrapper } from './previewWireWrapper.svelte';
+	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
 		space: Space;
@@ -15,6 +15,8 @@
 	let pointerId = $state<number>();
 
 	let containerWrapper = getContainerContext();
+
+	let previewConnectionWrapper = getPreviewConnectionContext();
 
 	function handlePointerDown(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
@@ -27,9 +29,9 @@
 		const screenPosition = getPointerPosition(e).subtract(containerPosition);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		previewWireWrapper.previewWire = {
-			startPosition: connector.position,
-			endPosition: dataPosition,
+		previewConnectionWrapper.previewConnection = {
+			startConnector: connector,
+			dataPointerPosition: dataPosition,
 		};
 
 		containerWrapper.container.addEventListener('pointermove', handlePointerMove as any);
@@ -44,8 +46,8 @@
 		const screenPosition = getPointerPosition(e).subtract(containerPosition);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		if (previewWireWrapper.previewWire) {
-			previewWireWrapper.previewWire.endPosition = dataPosition;
+		if (previewConnectionWrapper.previewConnection) {
+			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPosition;
 		}
 	}
 

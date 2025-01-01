@@ -4,9 +4,9 @@ import type { PreviewConnectionWrapper } from './PreviewConnectionWrapper';
 const previewConnectionKey = Symbol('previewConnection');
 
 export function setPreviewConnectionContext(previewConnectionWrapper: PreviewConnectionWrapper) {
-	setContext(previewConnectionKey, previewConnectionWrapper);
+	return setContext(previewConnectionKey, previewConnectionWrapper);
 }
 
 export function getPreviewConnectionContext() {
-	getContext(previewConnectionKey);
+	return getContext(previewConnectionKey) as PreviewConnectionWrapper;
 }

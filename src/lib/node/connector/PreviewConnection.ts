@@ -1,8 +1,8 @@
-import type { Wire } from '$lib/wire/Wire';
+import type { Vector } from '$lib/space/Vector';
 import type { Connector } from './Connector.svelte';
 
 export type PreviewConnection = {
-	wire: Wire;
+	dataPointerPosition: Vector;
 	startConnector: Connector;
-	finalConnector: Connector;
+	finalConnector?: Connector;
 };

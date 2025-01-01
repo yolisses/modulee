@@ -1,15 +1,23 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
 	import WireItem from '$lib/wire/WireItem.svelte';
-	import { previewWireWrapper } from './previewWireWrapper.svelte';
+	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
 		space: Space;
 	}
 
 	const { space }: Props = $props();
+
+	const previewConnectionWrapper = getPreviewConnectionContext();
 </script>
 
-{#if previewWireWrapper.previewWire}
-	<WireItem {space} wire={previewWireWrapper.previewWire} />
+{#if previewConnectionWrapper.previewConnection}
+	<WireItem
+		{space}
+		wire={{
+			endPosition: previewConnectionWrapper.previewConnection.dataPointerPosition,
+			startPosition: previewConnectionWrapper.previewConnection.startConnector.position,
+		}}
+	/>
 {/if}
