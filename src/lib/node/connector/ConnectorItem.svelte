@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
+	import { getContainerContext } from '../containerContext';
+	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
 	import type { Connector } from './Connector.svelte';
 	import { previewWireWrapper } from './previewWireWrapper.svelte';
@@ -14,22 +15,32 @@
 	let element: Element;
 	let pointerId = $state<number>();
 
+	let containerWrapper = getContainerContext();
+	$inspect(containerWrapper);
+
 	function handlePointerDown(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
+		if (!containerWrapper.container) return;
 
 		pointerId = e.pointerId;
 		element.setPointerCapture(pointerId);
 
+		const containerPosition = getElementPosition(containerWrapper.container);
+		const screenPosition = getPointerPosition(e).subtract(containerPosition);
+		const dataPosition = space.getDataPosition(screenPosition);
+
 		previewWireWrapper.previewWire = {
 			startPosition: connector.position,
-			endPosition: connector.position.add(new Vector(6, 6)),
+			endPosition: dataPosition,
 		};
 	}
 
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
+		if (!containerWrapper.container) return;
 
-		const screenPosition = getPointerPosition(e);
+		const containerPosition = getElementPosition(containerWrapper.container);
+		const screenPosition = getPointerPosition(e).subtract(containerPosition);
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		if (previewWireWrapper.previewWire) {

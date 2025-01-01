@@ -7,6 +7,8 @@
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import ConnectionList from './connector/ConnectionList.svelte';
+	import { setContainerContext } from './containerContext';
+	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
 	import { getPointerPosition } from './getPointerPosition';
 	import NodeItem from './NodeItem.svelte';
@@ -18,14 +20,16 @@
 	}
 
 	let { space, editor, dataMinimumPosition }: Props = $props();
-	let container: Element;
+	let containerWrapper = $state<ContainerWrapper>({});
+
+	setContainerContext(containerWrapper);
 
 	function handleClick(e: MouseEvent) {
-		if (e.target !== container) {
+		if (e.target !== containerWrapper.container) {
 			return;
 		}
 
-		const rect = container.getBoundingClientRect();
+		const rect = containerWrapper.container.getBoundingClientRect();
 		const offsetVector = new Vector(rect.left, rect.top);
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
@@ -46,12 +50,12 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="dotted-grid relative min-h-screen w-full border-4"
-	bind:this={container}
 	onclick={handleClick}
 	oncontextmenu={handleContextMenu}
+	bind:this={containerWrapper.container}
 	style:font-size={getScreenFontSize(space) + 'px'}
 	style:line-height={getScreenLineHeight(space) + 'px'}
+	class="dotted-grid relative min-h-screen w-full border-4"
 >
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
