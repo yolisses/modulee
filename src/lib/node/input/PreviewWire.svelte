@@ -16,9 +16,9 @@
 	<WireItem
 		{space}
 		wire={{
-			endPosition: previewConnectionWrapper.previewConnection.input.position,
+			endPosition: previewConnectionWrapper.previewConnection.input.connectorPosition,
 			startPosition:
-				previewConnectionWrapper.previewConnection.output?.position ??
+				previewConnectionWrapper.previewConnection.output?.connectorPosition ??
 				previewConnectionWrapper.previewConnection.dataPointerPosition,
 		}}
 	/>
