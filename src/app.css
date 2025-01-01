@@ -18,8 +18,13 @@ button {
 	@apply flex flex-row;
 }
 
+/* 
+DEBUG
 .hover-bg {
-	@apply hover:bg-white/10;
+	@apply hover:bg-white/50;
+} */
+.hover-bg {
+	@apply hover:bg-white/50;
 }
 
 .common-button {
