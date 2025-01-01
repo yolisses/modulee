@@ -7,6 +7,8 @@
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import ConnectionList from './connector/ConnectionList.svelte';
+	import { setPreviewConnectionContext } from './connector/previewConnectionContext';
+	import type { PreviewConnectionWrapper } from './connector/PreviewConnectionWrapper';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
@@ -20,9 +22,12 @@
 	}
 
 	let { space, editor, dataMinimumPosition }: Props = $props();
-	let containerWrapper = $state<ContainerWrapper>({});
 
+	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
+
+	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
+	setPreviewConnectionContext(previewConnectionWrapper);
 
 	function handleClick(e: MouseEvent) {
 		if (e.target !== containerWrapper.container) {
