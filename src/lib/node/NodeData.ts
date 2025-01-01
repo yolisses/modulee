@@ -4,8 +4,7 @@ import type { OutputData } from './output/OutputData';
 
 export type NodeData = {
 	id: string;
-	size: VectorData;
-	position: VectorData;
 	inputs: InputData[];
+	position: VectorData;
 	outputs: OutputData[];
 };

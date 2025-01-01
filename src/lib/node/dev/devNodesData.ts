@@ -4,7 +4,7 @@ export const devNodesData: NodeData[] = [
 	{
 		id: 'q5mZTharXy4VcuIs0nCK9c',
 		inputs: [
-			{ id: 'ruV5iYXvm0xkD55hXd8fvx', name: 'input1' },
+			{ id: 'ruV5iYXvm0xkD55hXd8fvx', name: 'input1', connectedOutputId: 't0SytXtzjOrh0i56iJQsw9' },
 			{ id: '4lJuJgrKr0Y4TbjnT2MU5l', name: 'input2' },
 			{ id: 'nOORajxulQlHG4qmiD6nCF', name: 'input3' },
 		],
@@ -12,13 +12,12 @@ export const devNodesData: NodeData[] = [
 			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
 			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
 		],
-		size: { x: 6, y: 4 },
-		position: { x: -2, y: -1 },
+		position: { x: 8, y: -1 },
 	},
 	{
 		id: 'Qiu0TEWRxm5siwHw5X5oA5',
 		inputs: [
-			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'input1', connectedOutputId: 'tHe0uuTlzmk3iLuEwDGFs9' },
+			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'input1' },
 			{ id: 'Lmr5u5oPwNSDg1fVWEeGri', name: 'input2' },
 			{ id: 'NkoIM7njHyWeKIAMtST3YG', name: 'input3' },
 		],
@@ -26,8 +25,7 @@ export const devNodesData: NodeData[] = [
 			{ id: 'RMQsV4r4BlDdhUQuqpHI6B', name: 'output1' },
 			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
 		],
-		size: { x: 6, y: 4 },
-		position: { x: 8, y: 0 },
+		position: { x: -2, y: 0 },
 	},
 	{
 		id: '2dnLGjCkHDAmyiVllBiWvu',
@@ -40,7 +38,6 @@ export const devNodesData: NodeData[] = [
 			{ id: 'swNlAiRYLdYYqrjYvglhGx', name: 'output1' },
 			{ id: 'wqR7FgbMbKRUGArK6qd7ej', name: 'output2' },
 		],
-		size: { x: 6, y: 4 },
 		position: { x: 3, y: 5 },
 	},
 ];

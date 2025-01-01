@@ -6,27 +6,38 @@ import { Output } from './output/Output.svelte';
 export class Node {
 	id: string;
 	size: Vector;
-	position: Vector = $state()!;
 	inputs: Input[] = [];
 	outputs: Output[] = [];
+	position: Vector = $state()!;
 
 	constructor(nodeData: NodeData) {
-		const { inputs, id, outputs, position, size } = nodeData;
+		const { inputs, id, outputs, position } = nodeData;
 		this.id = id;
-		this.size = Vector.fromData(size);
 		this.position = Vector.fromData(position);
-		this.inputs = inputs.map((inputData, index) => {
-			return new Input(inputData, this, index);
+
+		let offset = 0;
+
+		const headerOffset = 1;
+		offset += headerOffset;
+
+		this.outputs = outputs.map((outerData) => {
+			const output = new Output(outerData, this, offset);
+			offset++;
+			return output;
 		});
-		this.outputs = outputs.map((outerData, index) => {
-			return new Output(outerData, this, index);
+		this.inputs = inputs.map((inputData) => {
+			const input = new Input(inputData, this, offset);
+			offset++;
+			return input;
 		});
+
+		const width = 8;
+		this.size = new Vector(width, offset);
 	}
 
 	getData(): NodeData {
 		return {
 			id: this.id,
-			size: this.size,
 			position: this.position,
 			inputs: this.inputs.map((input) => input.getData()),
 			outputs: this.outputs.map((output) => output.getData()),

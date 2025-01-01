@@ -7,22 +7,23 @@ export class Input {
 	id: string;
 	name: string;
 	connectedOutput?: Output;
+	connectedOutputId?: string;
 
 	constructor(
 		inputData: InputData,
 		private node: Node,
-		private index: number,
+		private offset: number,
 	) {
-		const { id, name } = inputData;
+		const { id, name, connectedOutputId } = inputData;
 		this.id = id;
 		this.name = name;
+		this.connectedOutputId = connectedOutputId;
 	}
 
 	get position() {
-		const headerOffset = new Vector(0, 1);
-		const indexOffset = new Vector(0, this.index);
+		const indexOffset = new Vector(0, this.offset);
 		const centeringOffset = Vector.fromNumber(0.5);
-		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
+		return this.node.position.add(indexOffset).add(centeringOffset);
 	}
 
 	getData(): InputData {

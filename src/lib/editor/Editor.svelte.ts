@@ -17,6 +17,20 @@ export class Editor {
 
 	recalculate() {
 		this.nodes = this.editorData.nodes.map((nodeData) => new Node(nodeData));
+		const inputs = this.nodes.flatMap((node) => node.inputs);
+		const outputs = this.nodes.flatMap((node) => node.outputs);
+
+		inputs.forEach((input) => {
+			if (!input.connectedOutputId) return;
+			const connectedOutput = outputs.find((output) => {
+				return output.id === input.connectedOutputId;
+			});
+			if (!connectedOutput) return;
+			input.connectedOutput = connectedOutput;
+			connectedOutput.connectedInputs.push(input);
+		});
+
+		console.log(this.nodes);
 	}
 
 	execute(command: Command<any>) {

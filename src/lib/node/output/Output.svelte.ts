@@ -11,7 +11,7 @@ export class Output {
 	constructor(
 		outputData: OutputData,
 		private node: Node,
-		private index: number,
+		private offset: number,
 	) {
 		const { id, name } = outputData;
 		this.id = id;
@@ -19,10 +19,10 @@ export class Output {
 	}
 
 	get position() {
-		const headerOffset = new Vector(0, 1);
-		const indexOffset = new Vector(0, this.index);
+		const indexOffset = new Vector(0, this.offset);
 		const centeringOffset = Vector.fromNumber(0.5);
-		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
+		const widthOffset = new Vector(this.node.size.x - 1, 0);
+		return this.node.position.add(indexOffset).add(centeringOffset).add(widthOffset);
 	}
 
 	getData(): OutputData {
