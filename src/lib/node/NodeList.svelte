@@ -47,6 +47,7 @@
 	}
 </script>
 
+<!-- This element should not have border -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
@@ -55,7 +56,7 @@
 	bind:this={containerWrapper.container}
 	style:font-size={getScreenFontSize(space) + 'px'}
 	style:line-height={getScreenLineHeight(space) + 'px'}
-	class="dotted-grid relative min-h-screen w-full border-4"
+	class="dotted-grid relative min-h-screen w-full"
 >
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
