@@ -29,6 +29,6 @@ export const devNodesData: NodeData[] = [
 			{ id: 'rBd4Il2mrZPdt4tKpcgjY2', name: 'connector3' },
 		],
 		size: { x: 6, y: 4 },
-		position: { x: 14, y: 1 },
+		position: { x: 3, y: 5 },
 	},
 ];
