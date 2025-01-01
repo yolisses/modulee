@@ -35,7 +35,5 @@
 	}
 </script>
 
-<!-- TODO consider renaming this component to Wire -->
-
-<path d={pathD} class="stroke-green-700" fill="transparent" stroke-width="0.014em" />
-<path d={pathD} class="stroke-green-500" fill="transparent" stroke-width="0.0125em" />
+<path d={pathD} class="stroke-green-700" fill="transparent" stroke-width="0.25" />
+<path d={pathD} class="stroke-green-500" fill="transparent" stroke-width="0.2" />
