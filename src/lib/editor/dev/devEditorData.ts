@@ -18,7 +18,7 @@ export const devEditorData = {
 				{ id: 'NkoIM7njHyWeKIAMtST3YG', name: 'connector3' },
 			],
 			size: { x: 8, y: 8 },
-			position: { x: 6, y: 10 },
+			position: { x: 8, y: 0 },
 		},
 		{
 			id: '2dnLGjCkHDAmyiVllBiWvu',

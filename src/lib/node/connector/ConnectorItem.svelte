@@ -58,14 +58,33 @@
 		);
 		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 	}
+
+	function handlePointerEnter(e: PointerEvent) {
+		if (!previewConnectionWrapper.previewConnection) return;
+
+		previewConnectionWrapper.previewConnection.finalConnector = connector;
+	}
+
+	function handlePointerOut(e: PointerEvent) {
+		if (!previewConnectionWrapper.previewConnection) return;
+
+		if (previewConnectionWrapper.previewConnection.finalConnector === connector) {
+			previewConnectionWrapper.previewConnection.finalConnector = undefined;
+		}
+	}
 </script>
 
-<button onpointerdown={handlePointerDown} class="hover-bg w-full items-center whitespace-nowrap">
+<button
+	onpointerout={handlePointerOut}
+	onpointerdown={handlePointerDown}
+	onpointerenter={handlePointerEnter}
+	class="hover-bg w-full items-center whitespace-nowrap"
+>
 	<div
-		class="shrink-0 rounded-full bg-green-500"
 		style:width="0.9em"
 		style:height="0.9em"
 		style:margin="0.05em"
+		class="shrink-0 rounded-full bg-green-500"
 	></div>
-	<div>{connector.name}</div>
+	<div>{connector.id.slice(0, 6)}</div>
 </button>
