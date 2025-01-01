@@ -36,6 +36,10 @@ export class Vector {
 		return new Vector(-this.x, -this.y);
 	}
 
+	absolute() {
+		return new Vector(Math.abs(this.x), Math.abs(this.y));
+	}
+
 	round() {
 		return new Vector(Math.round(this.x), Math.round(this.y));
 	}

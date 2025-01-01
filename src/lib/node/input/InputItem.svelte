@@ -73,10 +73,16 @@
 				style:margin="0.1em"
 				class="shrink-0 rounded-full bg-green-500"
 			></div>
-			<div>{input.id.slice(0, 6)}</div>
+			<div>
+				{input.id.slice(0, 4)}
+
+				{#if input.connectedOutput}
+					{input.connectedOutput.id.slice(0, 4)}
+				{/if}
+			</div>
 		</div>
 	</button>
 	{#if input.connectedOutput}
-		<InputItemWire {input} {space} />
+		<InputItemWire {input} {space} output={input.connectedOutput} />
 	{/if}
 </div>
