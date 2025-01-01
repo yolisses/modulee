@@ -94,7 +94,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute w-fit break-words bg-gray-500 outline outline-gray-600"
+	class="absolute w-fit break-words bg-zinc-500 outline outline-zinc-600"
 >
 	<button
 		bind:this={element}

@@ -9,6 +9,6 @@
 </script>
 
 <!-- {command.constructor.name} -->
-<div class="bg-gray-500">
+<div class="bg-zinc-500">
 	{command.id.slice(0, 6)}
 </div>

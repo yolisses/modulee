@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 html {
-	@apply bg-white text-black dark:bg-black dark:text-white;
+	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
 
 button:disabled {
@@ -18,13 +18,8 @@ button {
 	@apply flex flex-row;
 }
 
-/* 
-DEBUG
 .hover-bg {
-	@apply hover:bg-white/50;
-} */
-.hover-bg {
-	@apply hover:bg-white/50;
+	@apply hover:bg-white/10;
 }
 
 .common-button {
