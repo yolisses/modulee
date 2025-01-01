@@ -7,7 +7,6 @@ export function createNodeData(position: Vector): NodeData {
 	return {
 		outputs: [],
 		id: createId(),
-		size: defaultNodeSize,
 		position: position.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		inputs: [
 			{ id: createId(), name: 'input1' },
