@@ -17,7 +17,10 @@
 
 	function getPathD(start: Vector, end: Vector) {
 		let offsetX = (end.x - start.x) / 2;
-		offsetX = clamp(offsetX, -10, 10);
+		if (offsetX < 0) {
+			offsetX *= 5;
+		}
+		offsetX = clamp(offsetX, -5, 5);
 		offsetX = Math.abs(offsetX);
 		offsetX = Math.min(offsetX, 10);
 
