@@ -22,7 +22,7 @@ export class Input {
 
 	get position() {
 		const indexOffset = new Vector(0, this.offset);
-		const centeringOffset = Vector.fromNumber(0.5);
+		const centeringOffset = new Vector(0, 0.5);
 		return this.node.position.add(indexOffset).add(centeringOffset);
 	}
 

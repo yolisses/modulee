@@ -12,7 +12,7 @@ export const devNodesData: NodeData[] = [
 			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
 			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
 		],
-		position: { x: 8, y: -1 },
+		position: { x: 14, y: 3 },
 	},
 	{
 		id: 'Qiu0TEWRxm5siwHw5X5oA5',

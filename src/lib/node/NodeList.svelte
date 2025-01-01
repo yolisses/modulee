@@ -63,10 +63,10 @@
 	style:line-height={getScreenLineHeight(space) + 'px'}
 	class="dotted-grid relative min-h-screen w-full"
 >
-	<ConnectionList nodes={editor.nodes} {space} {dataMinimumPosition} />
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
+	<ConnectionList nodes={editor.nodes} {space} {dataMinimumPosition} />
 </div>
 
 <style>
