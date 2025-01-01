@@ -10,10 +10,15 @@
 
 	const { space, input }: Props = $props();
 
-	const dataDesiredPosition = new Vector(0, 0);
-	const screenDesiredPosition = space.getScreenPosition(dataDesiredPosition);
-	const screenInputPosition = space.getScreenPosition(input.position);
-	const screenPosition = screenDesiredPosition.subtract(screenInputPosition);
+	function getScreenPosition(space: Space, input: Input) {
+		const dataDesiredPosition = new Vector(0, 0);
+		const screenDesiredPosition = space.getScreenPosition(dataDesiredPosition);
+		const screenInputPosition = space.getScreenPosition(input.position);
+		const screenPosition = screenDesiredPosition.subtract(screenInputPosition);
+		return screenPosition;
+	}
+
+	const screenPosition = $derived(getScreenPosition(space, input));
 </script>
 
 <svg
