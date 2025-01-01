@@ -29,5 +29,5 @@
 	style:height={dataSize.y + 'em'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute h-10 w-10 bg-red-500/50"
+	class="absolute bg-red-500/50"
 ></svg>
