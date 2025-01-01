@@ -18,11 +18,15 @@ export class Output {
 		this.name = name;
 	}
 
-	get connectorPosition() {
+	get position() {
 		const indexOffset = new Vector(0, this.offset);
-		const centeringOffset = new Vector(0.5, 0.5);
 		const widthOffset = new Vector(this.node.size.x - 1, 0);
-		return this.node.position.add(indexOffset).add(centeringOffset).add(widthOffset);
+		return this.node.position.add(indexOffset).add(widthOffset);
+	}
+
+	get connectorPosition() {
+		const centeringOffset = new Vector(0.5, 0.5);
+		return this.position.add(centeringOffset);
 	}
 
 	getData(): OutputData {

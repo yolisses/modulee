@@ -20,10 +20,14 @@ export class Input {
 		this.connectedOutputId = connectedOutputId;
 	}
 
-	get connectorPosition() {
+	get position() {
 		const indexOffset = new Vector(0, this.offset);
+		return this.node.position.add(indexOffset);
+	}
+
+	get connectorPosition() {
 		const centeringOffset = new Vector(0.5, 0.5);
-		return this.node.position.add(indexOffset).add(centeringOffset);
+		return this.position.add(centeringOffset);
 	}
 
 	getData(): InputData {

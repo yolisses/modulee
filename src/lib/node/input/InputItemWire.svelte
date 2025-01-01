@@ -12,7 +12,7 @@
 
 	const dataDesiredPosition = new Vector(0, 0);
 	const screenDesiredPosition = space.getScreenPosition(dataDesiredPosition);
-	const screenInputPosition = space.getScreenPosition(input.connectorPosition);
+	const screenInputPosition = space.getScreenPosition(input.position);
 	const screenPosition = screenDesiredPosition.subtract(screenInputPosition);
 </script>
 
