@@ -15,7 +15,6 @@
 	let pointerId = $state<number>();
 
 	let containerWrapper = getContainerContext();
-	$inspect(containerWrapper);
 
 	function handlePointerDown(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
