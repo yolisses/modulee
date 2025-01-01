@@ -29,8 +29,6 @@ export class Editor {
 			input.connectedOutput = connectedOutput;
 			connectedOutput.connectedInputs.push(input);
 		});
-
-		console.log(this.nodes);
 	}
 
 	execute(command: Command<any>) {

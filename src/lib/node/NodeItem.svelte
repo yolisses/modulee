@@ -14,7 +14,6 @@
 
 	let { node, space, editor }: Props = $props();
 
-	console.log(node.size);
 	const screenSize = $derived(space.getScreenSize(node.size));
 	const screenPosition = $derived(space.getScreenPosition(node.position));
 </script>
