@@ -16,7 +16,7 @@
 	const editor = new Editor(devEditorData);
 
 	const space = $derived(
-		new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(zoom)]),
+		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)]),
 	);
 </script>
 

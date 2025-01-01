@@ -25,7 +25,7 @@ export const devNodesData: NodeData[] = [
 			{ id: 'RMQsV4r4BlDdhUQuqpHI6B', name: 'output1' },
 			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
 		],
-		position: { x: 2, y: 0 },
+		position: { x: 2, y: 5 },
 	},
 	// {
 	// 	id: '2dnLGjCkHDAmyiVllBiWvu',
