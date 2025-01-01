@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
-	import ConnectorList from './connector/ConnectorList.svelte';
+	import InputList from './input/InputList.svelte';
 	import type { Node } from './Node.svelte';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
@@ -27,5 +27,5 @@
 	class="absolute w-fit overflow-hidden break-words bg-zinc-600 outline outline-zinc-700"
 >
 	<NodeItemHeader {editor} {node} {space} />
-	<ConnectorList {space} connectors={node.connectors} />
+	<InputList {space} inputs={node.inputs} />
 </div>

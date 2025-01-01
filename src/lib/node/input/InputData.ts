@@ -1,4 +1,4 @@
-export type ConnectorData = {
+export type InputData = {
 	id: string;
 	name: string;
 };

@@ -1,23 +1,23 @@
 import { Vector } from '$lib/space/Vector';
 import type { Node } from '../Node.svelte';
-import type { ConnectorData } from './ConnectorData';
+import type { InputData } from './InputData';
 
-export class Connector {
+export class Input {
 	id: string;
 	name: string;
-	connectedTo?: Connector;
+	connectedTo?: Input;
 
 	constructor(
-		connectorData: ConnectorData,
+		inputData: InputData,
 		private node: Node,
 		private index: number,
 	) {
-		const { id, name } = connectorData;
+		const { id, name } = inputData;
 		this.id = id;
 		this.name = name;
 	}
 
-	assignConnectedTo(connectedTo: Connector) {
+	assignConnectedTo(connectedTo: Input) {
 		this.connectedTo = connectedTo;
 	}
 
@@ -28,7 +28,7 @@ export class Connector {
 		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
 	}
 
-	getData(): ConnectorData {
+	getData(): InputData {
 		return {
 			id: this.id,
 			name: this.name,

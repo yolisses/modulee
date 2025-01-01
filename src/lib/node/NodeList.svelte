@@ -6,9 +6,9 @@
 	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
-	import ConnectionList from './connector/ConnectionList.svelte';
-	import { setPreviewConnectionContext } from './connector/previewConnectionContext';
-	import type { PreviewConnectionWrapper } from './connector/PreviewConnectionWrapper';
+	import ConnectionList from './input/ConnectionList.svelte';
+	import { setPreviewConnectionContext } from './input/previewConnectionContext';
+	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';

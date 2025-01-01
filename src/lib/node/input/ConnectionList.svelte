@@ -15,9 +15,9 @@
 
 <WireList {space} {dataMinimumPosition}>
 	{#each nodes as node (node.id)}
-		{#each node.connectors as connector (connector.id)}
-			{#if connector.connectedTo}
-				<ConnectionItem {space} startConnector={connector} endConnector={connector.connectedTo} />
+		{#each node.inputs as input (input.id)}
+			{#if input.connectedTo}
+				<ConnectionItem {space} startInput={input} endInput={input.connectedTo} />
 			{/if}
 		{/each}
 	{/each}

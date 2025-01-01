@@ -3,14 +3,14 @@
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
-	import type { Connector } from './Connector.svelte';
+	import type { Input } from './Input.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
 		space: Space;
-		connector: Connector;
+		input: Input;
 	}
-	let { space, connector }: Props = $props();
+	let { space, input }: Props = $props();
 
 	let containerWrapper = getContainerContext();
 
@@ -25,7 +25,7 @@
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		previewConnectionWrapper.previewConnection = {
-			startConnector: connector,
+			startInput: input,
 			dataPointerPosition: dataPosition,
 		};
 
@@ -62,14 +62,14 @@
 	function handlePointerEnter(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		previewConnectionWrapper.previewConnection.finalConnector = connector;
+		previewConnectionWrapper.previewConnection.finalInput = input;
 	}
 
 	function handlePointerOut(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		if (previewConnectionWrapper.previewConnection.finalConnector === connector) {
-			previewConnectionWrapper.previewConnection.finalConnector = undefined;
+		if (previewConnectionWrapper.previewConnection.finalInput === input) {
+			previewConnectionWrapper.previewConnection.finalInput = undefined;
 		}
 	}
 </script>
@@ -90,6 +90,6 @@
 			style:margin="0.05em"
 			class="shrink-0 rounded-full bg-green-500"
 		></div>
-		<div>{connector.id.slice(0, 6)}</div>
+		<div>{input.id.slice(0, 6)}</div>
 	</div>
 </button>

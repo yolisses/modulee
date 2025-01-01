@@ -1,9 +1,9 @@
 import type { VectorData } from '$lib/space/VectorData';
-import type { ConnectorData } from './connector/ConnectorData';
+import type { InputData } from './input/InputData';
 
 export type NodeData = {
 	id: string;
 	size: VectorData;
 	position: VectorData;
-	connectors: ConnectorData[];
+	inputs: InputData[];
 };

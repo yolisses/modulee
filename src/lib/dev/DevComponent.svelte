@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	const devValue = getContext('devValue');
+	const devValue: any = getContext('devValue');
 </script>
 
 <div>
