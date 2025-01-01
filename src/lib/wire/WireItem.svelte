@@ -43,4 +43,5 @@
 
 <!-- TODO consider renaming this component to Wire -->
 
-<path d={pathD} stroke="#22c55e" fill="transparent" stroke-width="0.25em" />
+<path d={pathD} class="stroke-green-700" fill="transparent" stroke-width="0.4em" />
+<path d={pathD} class="stroke-green-500" fill="transparent" stroke-width="0.25em" />
