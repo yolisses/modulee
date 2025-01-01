@@ -18,7 +18,7 @@ export const devNodesData: NodeData[] = [
 	{
 		id: 'Qiu0TEWRxm5siwHw5X5oA5',
 		inputs: [
-			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'input1' },
+			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'input1', connectedOutputId: 'tHe0uuTlzmk3iLuEwDGFs9' },
 			{ id: 'Lmr5u5oPwNSDg1fVWEeGri', name: 'input2' },
 			{ id: 'NkoIM7njHyWeKIAMtST3YG', name: 'input3' },
 		],
