@@ -33,15 +33,18 @@
 		containerWrapper.container.addEventListener('pointerup', handlePointerUp as any);
 	}
 
-	function handlePointerMove(e: PointerEvent) {
-		if (!containerWrapper.container) return;
-
-		const containerPosition = getElementPosition(containerWrapper.container);
+	function getDataPointerPosition(e: PointerEvent, container: Element) {
+		const containerPosition = getElementPosition(container);
 		const screenPosition = getPointerPosition(e).subtract(containerPosition);
 		const dataPosition = space.getDataPosition(screenPosition);
+		return dataPosition;
+	}
 
+	function handlePointerMove(e: PointerEvent) {
+		if (!containerWrapper.container) return;
+		const dataPointerPosition = getDataPointerPosition(e, containerWrapper.container);
 		if (previewConnectionWrapper.previewConnection) {
-			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPosition;
+			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPointerPosition;
 		}
 	}
 
