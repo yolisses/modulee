@@ -58,28 +58,9 @@
 		);
 		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 	}
-
-	function handlePointerEnter(e: PointerEvent) {
-		if (!previewConnectionWrapper.previewConnection) return;
-
-		previewConnectionWrapper.previewConnection.output = input;
-	}
-
-	function handlePointerOut(e: PointerEvent) {
-		if (!previewConnectionWrapper.previewConnection) return;
-
-		if (previewConnectionWrapper.previewConnection.output === input) {
-			previewConnectionWrapper.previewConnection.output = undefined;
-		}
-	}
 </script>
 
-<button
-	class="hover-bg w-full"
-	onpointerout={handlePointerOut}
-	onpointerdown={handlePointerDown}
-	onpointerenter={handlePointerEnter}
->
+<button class="hover-bg w-full" onpointerdown={handlePointerDown}>
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
