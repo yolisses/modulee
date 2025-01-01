@@ -7,22 +7,27 @@
 
 	const { space, wire }: { space: Space; wire: Wire } = $props();
 
-	const screenStartPosition = $derived(space.getScreenPosition(wire.startPosition));
-	const screenEndPosition = $derived(space.getScreenPosition(wire.endPosition));
+	const pathD = $derived(getPathD(wire.startPosition, wire.endPosition));
 
-	const screenMeanPosition = $derived(screenStartPosition.add(screenEndPosition).divideByNumber(2));
-	const screenPosition0 = $derived(new Vector(screenMeanPosition.x, screenStartPosition.y));
-	const screenPosition1 = $derived(new Vector(screenMeanPosition.x, screenEndPosition.y));
+	function getPathD(start: Vector, end: Vector) {
+		const mean = start.add(end).divideByNumber(2);
+		const point0 = new Vector(mean.x, start.y);
+		const point1 = new Vector(mean.x, end.y);
+
+		const screenEnd = space.getScreenPosition(end);
+		const screenStart = space.getScreenPosition(start);
+		const screenPoint0 = space.getScreenPosition(point0);
+		const screenPoint1 = space.getScreenPosition(point1);
+
+		return (
+			'M' +
+			getVectorString(screenStart) +
+			'C' +
+			getVectorsString([screenPoint0, screenPoint1, screenEnd])
+		);
+	}
 </script>
 
 <!-- TODO consider renaming this component to Wire -->
 
-<path
-	stroke="#22c55e"
-	fill="transparent"
-	stroke-width="0.25em"
-	d={'M' +
-		getVectorString(screenStartPosition) +
-		'C' +
-		getVectorsString([screenPosition0, screenPosition1, screenEndPosition])}
-/>
+<path d={pathD} stroke="#22c55e" fill="transparent" stroke-width="0.25em" />
