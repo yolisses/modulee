@@ -2,19 +2,6 @@ import type { NodeData } from '../NodeData';
 
 export const devNodesData: NodeData[] = [
 	{
-		id: 'q5mZTharXy4VcuIs0nCK9c',
-		inputs: [
-			{ id: 'ruV5iYXvm0xkD55hXd8fvx', name: 'input1', connectedOutputId: 't0SytXtzjOrh0i56iJQsw9' },
-			{ id: '4lJuJgrKr0Y4TbjnT2MU5l', name: 'input2' },
-			{ id: 'nOORajxulQlHG4qmiD6nCF', name: 'input3' },
-		],
-		outputs: [
-			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
-			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
-		],
-		position: { x: 14, y: 3 },
-	},
-	{
 		id: 'Qiu0TEWRxm5siwHw5X5oA5',
 		inputs: [
 			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'input1' },
@@ -26,6 +13,19 @@ export const devNodesData: NodeData[] = [
 			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
 		],
 		position: { x: 2, y: 5 },
+	},
+	{
+		id: 'q5mZTharXy4VcuIs0nCK9c',
+		inputs: [
+			{ id: 'ruV5iYXvm0xkD55hXd8fvx', name: 'input1', connectedOutputId: 't0SytXtzjOrh0i56iJQsw9' },
+			{ id: '4lJuJgrKr0Y4TbjnT2MU5l', name: 'input2' },
+			{ id: 'nOORajxulQlHG4qmiD6nCF', name: 'input3' },
+		],
+		outputs: [
+			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
+			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
+		],
+		position: { x: 14, y: 3 },
 	},
 	// {
 	// 	id: '2dnLGjCkHDAmyiVllBiWvu',
