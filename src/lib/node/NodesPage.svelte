@@ -15,9 +15,8 @@
 
 	const editor = new Editor(devEditorData);
 
-	const dataMinimumPosition = new Vector(-2, -1);
 	const space = $derived(
-		new Space([new OffsetConverter(dataMinimumPosition.negate()), new ZoomConverter(zoom)]),
+		new Space([new OffsetConverter(new Vector(2, 1)), new ZoomConverter(zoom)]),
 	);
 </script>
 
@@ -30,5 +29,5 @@
 <div class="flex-row">
 	<!-- <CommandList commands={editor.history} />
 	<CommandList commands={editor.undoneHistory} /> -->
-	<NodeList {editor} {space} {dataMinimumPosition} />
+	<NodeList {editor} {space} />
 </div>

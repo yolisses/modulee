@@ -10,7 +10,6 @@
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
 	import { getPointerPosition } from './getPointerPosition';
-	import ConnectionList from './input/ConnectionList.svelte';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
 	import NodeItem from './NodeItem.svelte';
@@ -18,10 +17,9 @@
 	interface Props {
 		editor: Editor;
 		space: Space;
-		dataMinimumPosition: Vector;
 	}
 
-	let { space, editor, dataMinimumPosition }: Props = $props();
+	let { space, editor }: Props = $props();
 
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
@@ -66,7 +64,6 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
-	<ConnectionList nodes={editor.nodes} {space} {dataMinimumPosition} />
 </div>
 
 <style>
