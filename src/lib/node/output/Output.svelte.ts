@@ -1,19 +1,19 @@
 import { Vector } from '$lib/space/Vector';
+import type { Input } from '../input/Input.svelte';
 import type { Node } from '../Node.svelte';
-import type { Output } from '../output/Output.svelte';
-import type { InputData } from './InputData';
+import type { OutputData } from './OutputData';
 
-export class Input {
+export class Output {
 	id: string;
 	name: string;
-	connectedOutput?: Output;
+	connectedInputs: Input[] = [];
 
 	constructor(
-		inputData: InputData,
+		outputData: OutputData,
 		private node: Node,
 		private index: number,
 	) {
-		const { id, name } = inputData;
+		const { id, name } = outputData;
 		this.id = id;
 		this.name = name;
 	}
@@ -25,7 +25,7 @@ export class Input {
 		return this.node.position.add(headerOffset).add(indexOffset).add(centeringOffset);
 	}
 
-	getData(): InputData {
+	getData(): OutputData {
 		return {
 			id: this.id,
 			name: this.name,

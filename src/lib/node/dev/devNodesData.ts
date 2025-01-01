@@ -8,6 +8,10 @@ export const devNodesData: NodeData[] = [
 			{ id: '4lJuJgrKr0Y4TbjnT2MU5l', name: 'input2' },
 			{ id: 'nOORajxulQlHG4qmiD6nCF', name: 'input3' },
 		],
+		outputs: [
+			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
+			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
+		],
 		size: { x: 6, y: 4 },
 		position: { x: -2, y: -1 },
 	},
@@ -18,6 +22,10 @@ export const devNodesData: NodeData[] = [
 			{ id: 'Lmr5u5oPwNSDg1fVWEeGri', name: 'input2' },
 			{ id: 'NkoIM7njHyWeKIAMtST3YG', name: 'input3' },
 		],
+		outputs: [
+			{ id: 'RMQsV4r4BlDdhUQuqpHI6B', name: 'output1' },
+			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
+		],
 		size: { x: 6, y: 4 },
 		position: { x: 8, y: 0 },
 	},
@@ -27,6 +35,10 @@ export const devNodesData: NodeData[] = [
 			{ id: 'gJ5yfwibHVMHIHD6JRWlXw', name: 'input1' },
 			{ id: 'grhuk6RwbYyXewICBn3qoB', name: 'input2' },
 			{ id: 'rBd4Il2mrZPdt4tKpcgjY2', name: 'input3' },
+		],
+		outputs: [
+			{ id: 'swNlAiRYLdYYqrjYvglhGx', name: 'output1' },
+			{ id: 'wqR7FgbMbKRUGArK6qd7ej', name: 'output2' },
 		],
 		size: { x: 6, y: 4 },
 		position: { x: 3, y: 5 },
