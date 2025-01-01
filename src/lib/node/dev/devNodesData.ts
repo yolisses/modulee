@@ -1,27 +1,34 @@
-import { Vector } from '$lib/space/Vector';
-import { defaultNodeSize } from '../defaultNodeSize';
 import type { NodeData } from '../NodeData';
 
 export const devNodesData: NodeData[] = [
 	{
-		id: '0',
-		size: defaultNodeSize.getData(),
-		position: defaultNodeSize.multiply(Vector.fromNumber(0)).getData(),
-		connectors: [],
-	},
-	{
-		id: '1',
-		size: defaultNodeSize,
-		position: defaultNodeSize.multiply(Vector.fromNumber(1)).getData(),
-		connectors: [{ id: '1/1', name: 'some output' }],
-	},
-	{
-		id: '2',
-		size: defaultNodeSize,
-		position: defaultNodeSize.multiply(Vector.fromNumber(2)).add(new Vector(5, -16)).getData(),
+		id: 'q5mZTharXy4VcuIs0nCK9c',
 		connectors: [
-			{ id: '2/1', name: 'some input' },
-			{ id: '2/2', name: 'some output' },
+			{ id: 'ruV5iYXvm0xkD55hXd8fvx', name: 'connector1' },
+			{ id: '4lJuJgrKr0Y4TbjnT2MU5l', name: 'connector2' },
+			{ id: 'nOORajxulQlHG4qmiD6nCF', name: 'connector3' },
 		],
+		size: { x: 6, y: 4 },
+		position: { x: -2, y: -1 },
+	},
+	{
+		id: 'Qiu0TEWRxm5siwHw5X5oA5',
+		connectors: [
+			{ id: 'llhibJ9q2jL7xq8JIHPHnH', name: 'connector1' },
+			{ id: 'Lmr5u5oPwNSDg1fVWEeGri', name: 'connector2' },
+			{ id: 'NkoIM7njHyWeKIAMtST3YG', name: 'connector3' },
+		],
+		size: { x: 6, y: 4 },
+		position: { x: 8, y: 0 },
+	},
+	{
+		id: '2dnLGjCkHDAmyiVllBiWvu',
+		connectors: [
+			{ id: 'gJ5yfwibHVMHIHD6JRWlXw', name: 'connector1' },
+			{ id: 'grhuk6RwbYyXewICBn3qoB', name: 'connector2' },
+			{ id: 'rBd4Il2mrZPdt4tKpcgjY2', name: 'connector3' },
+		],
+		size: { x: 6, y: 4 },
+		position: { x: 14, y: 1 },
 	},
 ];
