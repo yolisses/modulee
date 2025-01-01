@@ -75,16 +75,21 @@
 </script>
 
 <button
+	class="hover-bg w-full"
 	onpointerout={handlePointerOut}
 	onpointerdown={handlePointerDown}
 	onpointerenter={handlePointerEnter}
-	class="hover-bg w-full items-center whitespace-nowrap"
 >
-	<div
-		style:width="0.9em"
-		style:height="0.9em"
-		style:margin="0.05em"
-		class="shrink-0 rounded-full bg-green-500"
-	></div>
-	<div>{connector.id.slice(0, 6)}</div>
+	<!-- TODO consider using some other approach to prevent
+ children events of pointer out. E.g.: replace pointer events
+ by mouse events  -->
+	<div class="pointer-events-none flex-row items-center whitespace-nowrap">
+		<div
+			style:width="0.9em"
+			style:height="0.9em"
+			style:margin="0.05em"
+			class="shrink-0 rounded-full bg-green-500"
+		></div>
+		<div>{connector.id.slice(0, 6)}</div>
+	</div>
 </button>
