@@ -9,10 +9,20 @@
 
 	const pathD = $derived(getPathD(wire.startPosition, wire.endPosition));
 
+	function clamp(value: number, min: number, max: number) {
+		if (value > max) return max;
+		if (value < min) return min;
+		return value;
+	}
+
 	function getPathD(start: Vector, end: Vector) {
-		const mean = start.add(end).divideByNumber(2);
-		const point0 = new Vector(mean.x, start.y);
-		const point1 = new Vector(mean.x, end.y);
+		let offsetX = (end.x - start.x) / 2;
+		offsetX = clamp(offsetX, -10, 10);
+		offsetX = Math.abs(offsetX);
+		offsetX = Math.min(offsetX, 10);
+
+		const point0 = new Vector(start.x + offsetX, start.y);
+		const point1 = new Vector(end.x - offsetX, end.y);
 
 		const screenEnd = space.getScreenPosition(end);
 		const screenStart = space.getScreenPosition(start);
