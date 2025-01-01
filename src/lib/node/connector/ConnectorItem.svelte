@@ -12,7 +12,6 @@
 	}
 	let { space, connector }: Props = $props();
 
-	let element: Element;
 	let pointerId = $state<number>();
 
 	let containerWrapper = getContainerContext();
@@ -23,7 +22,7 @@
 		if (!containerWrapper.container) return;
 
 		pointerId = e.pointerId;
-		element.setPointerCapture(pointerId);
+		containerWrapper.container.setPointerCapture(pointerId);
 
 		const containerPosition = getElementPosition(containerWrapper.container);
 		const screenPosition = getPointerPosition(e).subtract(containerPosition);
@@ -33,6 +32,9 @@
 			startPosition: connector.position,
 			endPosition: dataPosition,
 		};
+
+		containerWrapper.container.addEventListener('pointermove', handlePointerMove as any);
+		containerWrapper.container.addEventListener('pointerup', handlePointerUp as any);
 	}
 
 	function handlePointerMove(e: PointerEvent) {
@@ -50,19 +52,14 @@
 
 	function handlePointerUp(e: PointerEvent) {
 		if (!pointerId) return;
+		if (!containerWrapper.container) return;
 
-		element.releasePointerCapture(pointerId);
+		containerWrapper.container.releasePointerCapture(pointerId);
 		pointerId = undefined;
 	}
 </script>
 
-<button
-	bind:this={element}
-	onpointerup={handlePointerUp}
-	onpointermove={handlePointerMove}
-	onpointerdown={handlePointerDown}
-	class="hover-bg w-full items-center whitespace-nowrap"
->
+<button onpointerdown={handlePointerDown} class="hover-bg w-full items-center whitespace-nowrap">
 	<div
 		class="shrink-0 rounded-full bg-green-500"
 		style:width="0.9em"

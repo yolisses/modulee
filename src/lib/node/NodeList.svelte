@@ -50,8 +50,8 @@
 <!-- This element should not have border -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- onclick={handleClick} -->
 <div
-	onclick={handleClick}
 	oncontextmenu={handleContextMenu}
 	bind:this={containerWrapper.container}
 	style:font-size={getScreenFontSize(space) + 'px'}
