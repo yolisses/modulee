@@ -12,8 +12,6 @@
 	}
 	let { space, connector }: Props = $props();
 
-	let pointerId = $state<number>();
-
 	let containerWrapper = getContainerContext();
 
 	let previewConnectionWrapper = getPreviewConnectionContext();
@@ -21,9 +19,6 @@
 	function handlePointerDown(e: PointerEvent) {
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!containerWrapper.container) return;
-
-		pointerId = e.pointerId;
-		containerWrapper.container.setPointerCapture(pointerId);
 
 		const containerPosition = getElementPosition(containerWrapper.container);
 		const screenPosition = getPointerPosition(e).subtract(containerPosition);
@@ -39,7 +34,6 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		if (!pointerId) return;
 		if (!containerWrapper.container) return;
 
 		const containerPosition = getElementPosition(containerWrapper.container);
@@ -52,11 +46,8 @@
 	}
 
 	function handlePointerUp(e: PointerEvent) {
-		if (!pointerId) return;
+		console.log('pointerup');
 		if (!containerWrapper.container) return;
-
-		containerWrapper.container.releasePointerCapture(pointerId);
-		pointerId = undefined;
 	}
 </script>
 
