@@ -9,7 +9,6 @@
 	import ConnectorList from './connector/ConnectorList.svelte';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node.svelte';
-	import NodeItemHeader from './NodeItemHeader.svelte';
 
 	interface Props {
 		node: Node;
@@ -97,15 +96,16 @@
 	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-700"
 >
 	<button
+		class="hover-bg"
 		bind:this={element}
 		onclick={handleClick}
+		style:padding-inline="0.5em"
 		onpointerup={handlePointerUp}
 		oncontextmenu={handleContextMenu}
 		onpointermove={handlePointerMove}
 		onpointerdown={handlePointerDown}
-		class="hover-bg"
 	>
-		<NodeItemHeader {node} />
+		{node.id.slice(0, 6)}
 	</button>
 	<ConnectorList {space} connectors={node.connectors} />
 </div>
