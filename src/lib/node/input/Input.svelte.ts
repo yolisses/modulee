@@ -11,7 +11,7 @@ export class Input {
 
 	constructor(
 		inputData: InputData,
-		private node: Node,
+		public node: Node,
 		private offset: number,
 	) {
 		const { id, name, connectedOutputId } = inputData;

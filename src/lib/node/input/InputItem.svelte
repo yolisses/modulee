@@ -4,6 +4,7 @@
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
 	import type { Input } from './Input.svelte';
+	import InputItemWire from './InputItemWire.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
@@ -60,7 +61,12 @@
 	}
 </script>
 
+<!-- This div forces the offset to be given by the 
+ input position instead of the node position -->
 <div class="relative">
+	{#if input.connectedOutput}
+		<InputItemWire {input} {space} output={input.connectedOutput} />
+	{/if}
 	<button class="hover-bg w-full" onpointerdown={handlePointerDown}>
 		<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
@@ -77,11 +83,9 @@
 
 				{#if input.connectedOutput}
 					{input.connectedOutput.id.slice(0, 4)}
+					{input.position}
 				{/if}
 			</div>
 		</div>
 	</button>
-	{#if input.connectedOutput}
-		<!-- <InputItemWire {input} {space} output={input.connectedOutput} /> -->
-	{/if}
 </div>

@@ -10,6 +10,7 @@
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
 	import DevUnitDiv from './dev/DevUnitDiv.svelte';
+	import DevUnitWire from './dev/DevUnitWire.svelte';
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
@@ -26,13 +27,7 @@
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
 
-	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({
-		previewConnection: {
-			dataPointerPosition: new Vector(4, 8),
-			input: editor.nodes[0].inputs[0],
-			output: editor.nodes[1].outputs[0],
-		},
-	});
+	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
 	setPreviewConnectionContext(previewConnectionWrapper);
 
 	function handleClick(e: MouseEvent) {
@@ -70,6 +65,7 @@
 	class="dotted-grid relative min-h-screen w-full"
 >
 	<DevUnitDiv {space} />
+	<DevUnitWire {space} />
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}

@@ -15,7 +15,7 @@
 
 <div
 	id="DevUnitDiv"
-	class="absolute whitespace-nowrap bg-blue-500/50 text-purple-500"
+	class="pointer-events-none absolute whitespace-nowrap bg-blue-500/50 text-purple-500"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}

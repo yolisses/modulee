@@ -12,7 +12,7 @@ export const devNodesData: NodeData[] = [
 			{ id: 'RMQsV4r4BlDdhUQuqpHI6B', name: 'output1' },
 			{ id: 't0SytXtzjOrh0i56iJQsw9', name: 'output2' },
 		],
-		position: { x: 2, y: 5 },
+		position: { x: 0, y: 0 },
 	},
 	{
 		id: 'q5mZTharXy4VcuIs0nCK9c',
@@ -25,7 +25,7 @@ export const devNodesData: NodeData[] = [
 			{ id: 'jnzwAGONgNlTPSSaP5CTke', name: 'output1' },
 			{ id: 'tHe0uuTlzmk3iLuEwDGFs9', name: 'output2' },
 		],
-		position: { x: 14, y: 3 },
+		position: { x: 8, y: 8 },
 	},
 	// {
 	// 	id: '2dnLGjCkHDAmyiVllBiWvu',
