@@ -14,17 +14,15 @@
 
 	// Based on experiments with the WirePath curve
 	// const margin = new Vector(2, 1);
-	const margin = new Vector(0, 0);
+	const margin = new Vector(2, 1);
 
 	const viewStart = $derived(startPosition.min(endPosition).subtract(margin));
+	const screenPosition = $derived(space.getScreenPosition(viewStart));
 
-	const dataSize = $derived(
+	const viewSize = $derived(
 		endPosition.subtract(startPosition).absolute().add(margin.multiplyByNumber(2)),
 	);
-	const screenSize = $derived(space.getScreenSize(dataSize));
-
-	const dataPosition = $derived(viewStart);
-	const screenPosition = $derived(space.getScreenSize(dataPosition));
+	const screenSize = $derived(space.getScreenSize(viewSize));
 </script>
 
 <svg
@@ -34,7 +32,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	viewBox="{getVectorString(viewStart)} {getVectorString(dataSize)}"
+	viewBox="{getVectorString(viewStart)} {getVectorString(viewSize)}"
 >
 	<WirePath {startPosition} {endPosition} />
 </svg>

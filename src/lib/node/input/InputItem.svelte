@@ -4,7 +4,6 @@
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
 	import type { Input } from './Input.svelte';
-	import InputItemWire from './InputItemWire.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext';
 
 	interface Props {
@@ -83,6 +82,6 @@
 		</div>
 	</button>
 	{#if input.connectedOutput}
-		<InputItemWire {input} {space} output={input.connectedOutput} />
+		<!-- <InputItemWire {input} {space} output={input.connectedOutput} /> -->
 	{/if}
 </div>

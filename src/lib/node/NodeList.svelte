@@ -5,6 +5,7 @@
 	import { createId } from '$lib/utils/createId';
 	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
+	import Wire from '$lib/wire/Wire.svelte';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
@@ -72,6 +73,7 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
+	<Wire {space} startPosition={new Vector(3, 3)} endPosition={new Vector(6, 6)} />
 	{#if previewConnectionWrapper.previewConnection}
 		<!-- <PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} /> -->
 	{/if}
