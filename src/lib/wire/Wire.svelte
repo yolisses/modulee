@@ -17,20 +17,23 @@
 	const margin = new Vector(0, 0);
 
 	const viewStart = $derived(startPosition.min(endPosition).subtract(margin));
-	const dataPosition = $derived(space.getDataPosition(startPosition.min(endPosition)));
 
 	const dataSize = $derived(
 		endPosition.subtract(startPosition).absolute().add(margin.multiplyByNumber(2)),
 	);
+	const screenSize = $derived(space.getScreenSize(dataSize));
+
+	const dataPosition = $derived(viewStart);
+	const screenPosition = $derived(space.getScreenSize(dataPosition));
 </script>
 
 <svg
 	style:background-color="#f008"
-	style:width={dataSize.x + 'em'}
-	style:height={dataSize.y + 'em'}
-	style:top={dataPosition.y + 'em'}
-	style:left={dataPosition.x + 'em'}
 	class="pointer-events-none absolute"
+	style:width={screenSize.x + 'px'}
+	style:height={screenSize.y + 'px'}
+	style:top={screenPosition.y + 'px'}
+	style:left={screenPosition.x + 'px'}
 	viewBox="{getVectorString(viewStart)} {getVectorString(dataSize)}"
 >
 	<WirePath {startPosition} {endPosition} />
