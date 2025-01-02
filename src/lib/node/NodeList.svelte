@@ -13,7 +13,6 @@
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
-	import PreviewWire from './input/PreviewWire.svelte';
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
@@ -74,7 +73,7 @@
 		<NodeItem {node} {space} {editor} />
 	{/each}
 	{#if previewConnectionWrapper.previewConnection}
-		<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
+		<!-- <PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} /> -->
 	{/if}
 </div>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space';
-	import WirePath from '$lib/wire/WirePath.svelte';
+	import Wire from '$lib/wire/Wire.svelte';
 	import type { PreviewConnection } from './PreviewConnection';
 
 	interface Props {
@@ -9,11 +9,10 @@
 	}
 
 	const { space, previewConnection }: Props = $props();
-
-	$inspect(previewConnection.output);
 </script>
 
-<WirePath
+<Wire
+	{space}
 	endPosition={previewConnection.input.connectorPosition}
 	startPosition={previewConnection.output?.connectorPosition ??
 		previewConnection.dataPointerPosition}
