@@ -5,12 +5,15 @@
 	interface Props {
 		space: Space;
 		text?: string;
+		parentPosition: Vector;
 	}
 
-	const { space, text }: Props = $props();
+	const { space, text, parentPosition }: Props = $props();
 
-	const screenPosition = $derived(space.getScreenPosition(Vector.zero()));
 	const screenSize = $derived(space.getScreenSize(Vector.one()));
+	const screenPosition = $derived(
+		space.getScreenPosition(Vector.zero()).subtract(space.getScreenPosition(parentPosition)),
+	);
 </script>
 
 <div

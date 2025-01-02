@@ -2,6 +2,7 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import DevUnitDiv from './dev/DevUnitDiv.svelte';
+	import DevUnitDivWithoutParentOffset from './dev/DevUnitDivWithoutParentOffset.svelte';
 	import InputList from './input/InputList.svelte';
 	import { Node } from './Node.svelte';
 	import NodeItemHeader from './NodeItemHeader.svelte';
@@ -28,11 +29,10 @@
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-700"
 >
-	{node.position.toString()}
 	<NodeItemHeader {editor} {node} {space} />
 	<OutputList {space} outputs={node.outputs} />
 	<InputList {space} inputs={node.inputs} />
-	<DevUnitDiv {space} text="inside node" />
+	<DevUnitDivWithoutParentOffset parentPosition={node.position} {space} text="inside node" />
 </div>
 
 <DevUnitDiv {space} text="outside node" />
