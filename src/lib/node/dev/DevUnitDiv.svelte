@@ -4,9 +4,10 @@
 
 	interface Props {
 		space: Space;
+		text?: string;
 	}
 
-	const { space }: Props = $props();
+	const { space, text }: Props = $props();
 
 	const screenPosition = space.getScreenPosition(Vector.zero());
 	const screenSize = space.getScreenSize(Vector.one());
@@ -14,9 +15,11 @@
 
 <div
 	id="DevUnitDiv"
-	class="absolute bg-blue-500/50"
+	class="absolute whitespace-nowrap bg-blue-500/50 text-purple-500"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-></div>
+>
+	{text}
+</div>
