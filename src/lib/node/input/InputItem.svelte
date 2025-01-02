@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { Editor } from '$lib/editor/Editor.svelte';
 	import { Space } from '$lib/space/Space';
+	import { createId } from '$lib/utils/createId';
+	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
@@ -10,8 +13,9 @@
 	interface Props {
 		space: Space;
 		input: Input;
+		editor: Editor;
 	}
-	let { space, input }: Props = $props();
+	let { space, input, editor }: Props = $props();
 
 	let containerWrapper = getContainerContext();
 
@@ -50,6 +54,16 @@
 	}
 
 	function handleContainerPointerUp(e: PointerEvent) {
+		if (previewConnectionWrapper.previewConnection) {
+			const { output } = previewConnectionWrapper.previewConnection;
+			const command = new SetInputConnectedOutput({
+				id: createId(),
+				type: 'SetInputConnectedOutput',
+				details: { inputId: input.id, outputId: output?.id },
+			});
+			editor.execute(command);
+		}
+
 		previewConnectionWrapper.previewConnection = undefined;
 
 		if (!containerWrapper.container) return;

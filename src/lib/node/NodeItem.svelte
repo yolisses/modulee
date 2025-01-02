@@ -29,5 +29,5 @@
 >
 	<NodeItemHeader {editor} {node} {space} />
 	<OutputList {space} outputs={node.outputs} />
-	<InputList {space} inputs={node.inputs} />
+	<InputList {editor} {space} inputs={node.inputs} />
 </div>
