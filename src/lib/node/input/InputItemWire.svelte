@@ -2,7 +2,7 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { getVectorString } from '$lib/utils/getVectorString';
-	import WireItem from '$lib/wire/WireItem.svelte';
+	import WirePath from '$lib/wire/WirePath.svelte';
 	import type { Output } from '../output/Output.svelte';
 	import type { Input } from './Input.svelte';
 
@@ -46,5 +46,5 @@
 	class="pointer-events-none absolute"
 	viewBox="{getVectorString(viewStart)} {getVectorString(dataSize)}"
 >
-	<WireItem startPosition={output.connectorPosition} endPosition={input.connectorPosition} />
+	<WirePath startPosition={output.connectorPosition} endPosition={input.connectorPosition} />
 </svg>

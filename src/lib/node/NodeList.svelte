@@ -13,6 +13,7 @@
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
+	import PreviewWire from './input/PreviewWire.svelte';
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
@@ -25,7 +26,13 @@
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
 
-	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
+	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({
+		previewConnection: {
+			dataPointerPosition: new Vector(4, 8),
+			input: editor.nodes[0].inputs[0],
+			output: editor.nodes[1].outputs[0],
+		},
+	});
 	setPreviewConnectionContext(previewConnectionWrapper);
 
 	function handleClick(e: MouseEvent) {
@@ -66,6 +73,9 @@
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}
+	{#if previewConnectionWrapper.previewConnection}
+		<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
+	{/if}
 </div>
 
 <style>
