@@ -25,7 +25,7 @@ export class Output {
 	}
 
 	get connectorPosition() {
-		const centeringOffset = new Vector(0.5, 0.5);
+		const centeringOffset = new Vector(0.75, 0.5);
 		return this.position.add(centeringOffset);
 	}
 

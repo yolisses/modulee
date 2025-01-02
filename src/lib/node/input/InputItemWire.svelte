@@ -43,7 +43,7 @@
 	style:height={dataSize.y + 'em'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="pointer-events-none absolute bg-red-500/50"
+	class="pointer-events-none absolute"
 	viewBox="{getVectorString(viewStart)} {getVectorString(dataSize)}"
 >
 	<WireItem startPosition={output.connectorPosition} endPosition={input.connectorPosition} />
