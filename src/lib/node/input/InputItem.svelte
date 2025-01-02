@@ -80,11 +80,6 @@
 			></div>
 			<div>
 				{input.id.slice(0, 4)}
-
-				{#if input.connectedOutput}
-					{input.connectedOutput.id.slice(0, 4)}
-					{input.position}
-				{/if}
 			</div>
 		</div>
 	</button>

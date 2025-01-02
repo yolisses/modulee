@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
-	import DevUnitDiv from './dev/DevUnitDiv.svelte';
 	import InputList from './input/InputList.svelte';
 	import { Node } from './Node.svelte';
 	import NodeItemHeader from './NodeItemHeader.svelte';
@@ -32,5 +31,3 @@
 	<OutputList {space} outputs={node.outputs} />
 	<InputList {space} inputs={node.inputs} />
 </div>
-
-<DevUnitDiv {space} text="outside node" />

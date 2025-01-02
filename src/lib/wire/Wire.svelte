@@ -25,8 +25,8 @@
 	const screenSize = $derived(space.getScreenSize(viewSize));
 </script>
 
+<!-- style:background-color="#f008" -->
 <svg
-	style:background-color="#f008"
 	class="pointer-events-none absolute"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}

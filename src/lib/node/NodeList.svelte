@@ -9,8 +9,6 @@
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
 	import { createNodeData } from './createNodeData';
-	import DevUnitDiv from './dev/DevUnitDiv.svelte';
-	import DevUnitWire from './dev/DevUnitWire.svelte';
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
@@ -64,8 +62,6 @@
 	style:line-height={getScreenLineHeight(space) + 'px'}
 	class="dotted-grid relative min-h-screen w-full"
 >
-	<DevUnitDiv {space} />
-	<DevUnitWire {space} />
 	{#each editor.nodes as node (node.id)}
 		<NodeItem {node} {space} {editor} />
 	{/each}

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Space } from '$lib/space/Space';
 	import Wire from '$lib/wire/Wire.svelte';
-	import DevUnitDiv from '../dev/DevUnitDiv.svelte';
 	import type { Output } from '../output/Output.svelte';
 	import type { Input } from './Input.svelte';
 
@@ -19,12 +18,11 @@
 	const screenInputPosition = $derived(space.getScreenPosition(input.position));
 </script>
 
-<!-- {startPosition} {endPosition} -->
+<!-- Prevents input offset -->
 <div
 	class="absolute"
 	style:top={-screenInputPosition.y + 'px'}
 	style:left={-screenInputPosition.x + 'px'}
 >
-	<DevUnitDiv {space} />
 	<Wire {space} {startPosition} {endPosition} />
 </div>
