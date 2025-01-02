@@ -97,4 +97,8 @@ export class Vector {
 	divideByNumber(number: number) {
 		return new Vector(this.x / number, this.y / number);
 	}
+
+	toString() {
+		return `(${this.x}, ${this.y})`;
+	}
 }
