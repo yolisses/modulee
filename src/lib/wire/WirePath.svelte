@@ -35,5 +35,5 @@
 	}
 </script>
 
-<path d={pathD} class="stroke-green-700" fill="transparent" stroke-width="0.25" />
+<path d={pathD} class="stroke-green-700" fill="transparent" stroke-width="0.3" />
 <path d={pathD} class="stroke-green-500" fill="transparent" stroke-width="0.2" />
