@@ -29,6 +29,10 @@
 
 	let screenMenuPosition = $state<Vector>();
 
+	function closeMenu() {
+		screenMenuPosition = undefined;
+	}
+
 	function handlePointerDown(e: MouseEvent) {
 		if (e.target !== containerWrapper.container) return;
 
@@ -89,7 +93,7 @@
 		{/if}
 	</div>
 	{#if screenMenuPosition}
-		<AddNodeMenu screenPosition={screenMenuPosition} />
+		<AddNodeMenu screenPosition={screenMenuPosition} closeModal={closeMenu} />
 	{/if}
 </div>
 

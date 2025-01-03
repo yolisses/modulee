@@ -3,11 +3,16 @@
 
 	interface Props {
 		nodeType: NodeType;
+		closeModal: () => void;
 	}
 
-	const { nodeType }: Props = $props();
+	const { nodeType, closeModal }: Props = $props();
+
+	function handleClick() {
+		closeModal();
+	}
 </script>
 
-<button class="common-button">
+<button onclick={handleClick} class="common-button">
 	{nodeType.name}
 </button>

@@ -4,10 +4,11 @@
 	import NodeTypeList from './NodeTypeList.svelte';
 
 	interface Props {
+		closeModal: () => void;
 		screenPosition: Vector;
 	}
 
-	const { screenPosition: screenInitialPosition }: Props = $props();
+	const { closeModal, screenPosition: screenInitialPosition }: Props = $props();
 	const screenOffset = new Vector(2, 56);
 	const screenPosition = $derived(screenInitialPosition.subtract(screenOffset));
 </script>
@@ -19,5 +20,5 @@
 >
 	<div class="p-2">Add Node</div>
 	<hr class="opacity-50" />
-	<NodeTypeList nodeTypes={devNodeTypes} />
+	<NodeTypeList nodeTypes={devNodeTypes} {closeModal} />
 </div>

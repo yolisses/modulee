@@ -4,11 +4,12 @@
 
 	interface Props {
 		nodeTypes: NodeType[];
+		closeModal: () => void;
 	}
 
-	const { nodeTypes }: Props = $props();
+	const { nodeTypes, closeModal }: Props = $props();
 </script>
 
 {#each nodeTypes as nodeType (nodeType.id)}
-	<NodeTypeItem {nodeType} />
+	<NodeTypeItem {nodeType} {closeModal} />
 {/each}
