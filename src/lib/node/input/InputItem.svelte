@@ -71,6 +71,26 @@
 		);
 		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 	}
+
+	function handlePointerEnter(e: PointerEvent) {
+		if (!previewConnectionWrapper.previewConnection) return;
+
+		const { startConnector } = previewConnectionWrapper.previewConnection;
+
+		if (startConnector instanceof Output) {
+			previewConnectionWrapper.previewConnection.endConnector = input;
+		}
+	}
+
+	function handlePointerOut(e: PointerEvent) {
+		if (!previewConnectionWrapper.previewConnection) return;
+
+		const { startConnector, endConnector } = previewConnectionWrapper.previewConnection;
+
+		if (startConnector instanceof Output && endConnector === input) {
+			previewConnectionWrapper.previewConnection.endConnector = undefined;
+		}
+	}
 </script>
 
 <!-- This div forces the offset to be given by the 
@@ -79,7 +99,12 @@
 	{#if input.connectedOutput}
 		<InputItemWire {input} {space} output={input.connectedOutput} />
 	{/if}
-	<button class="hover-bg w-full" onpointerdown={handlePointerDown}>
+	<button
+		class="hover-bg w-full"
+		onpointerout={handlePointerOut}
+		onpointerdown={handlePointerDown}
+		onpointerenter={handlePointerEnter}
+	>
 		<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->

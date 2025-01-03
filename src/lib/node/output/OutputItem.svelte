@@ -48,7 +48,9 @@
 	function handlePointerEnter(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		if (previewConnectionWrapper.previewConnection.startConnector instanceof Input) {
+		const { startConnector } = previewConnectionWrapper.previewConnection;
+
+		if (startConnector instanceof Input) {
 			previewConnectionWrapper.previewConnection.endConnector = output;
 		}
 	}
@@ -56,7 +58,9 @@
 	function handlePointerOut(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		if (previewConnectionWrapper.previewConnection.endConnector === output) {
+		const { startConnector, endConnector } = previewConnectionWrapper.previewConnection;
+
+		if (startConnector instanceof Input && endConnector === output) {
 			previewConnectionWrapper.previewConnection.endConnector = undefined;
 		}
 	}
