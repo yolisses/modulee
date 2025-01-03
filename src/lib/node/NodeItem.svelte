@@ -25,7 +25,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-900"
+	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-700"
 >
 	<NodeItemHeader {editor} {node} {space} />
 	<OutputList {editor} {space} outputs={node.outputs} />
