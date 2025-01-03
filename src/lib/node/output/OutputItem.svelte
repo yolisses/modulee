@@ -1,15 +1,39 @@
 <script lang="ts">
-	import { Space } from '$lib/space/Space';
+	import type { Editor } from '$lib/editor/Editor.svelte';
+	import type { Space } from '$lib/space/Space';
+	import { getContainerContext } from '../containerContext';
+	import { getElementPosition } from '../getElementPosition';
+	import { getPointerPosition } from '../getPointerPosition';
 	import { getPreviewConnectionContext } from '../input/previewConnectionContext';
 	import type { Output } from './Output.svelte';
 
 	interface Props {
 		space: Space;
 		output: Output;
+		editor: Editor;
 	}
-	let { space, output }: Props = $props();
+	let { space, output, editor }: Props = $props();
+
+	let containerWrapper = getContainerContext();
 
 	let previewConnectionWrapper = getPreviewConnectionContext();
+
+	function handlePointerDown(e: PointerEvent) {
+		if (e.pointerType !== 'mouse' || e.button === 1) return;
+		if (!containerWrapper.container) return;
+
+		const containerPosition = getElementPosition(containerWrapper.container);
+		const screenPosition = getPointerPosition(e).subtract(containerPosition);
+		const dataPosition = space.getDataPosition(screenPosition);
+
+		previewConnectionWrapper.previewConnection = {
+			output: output,
+			dataPointerPosition: dataPosition,
+		};
+
+		// containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
+		// containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
+	}
 
 	function handlePointerEnter(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
@@ -26,7 +50,12 @@
 	}
 </script>
 
-<button class="hover-bg w-full" onpointerout={handlePointerOut} onpointerenter={handlePointerEnter}>
+<button
+	class="hover-bg w-full"
+	onpointerout={handlePointerOut}
+	onpointerdown={handlePointerDown}
+	onpointerenter={handlePointerEnter}
+>
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->

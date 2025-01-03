@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Editor } from '$lib/editor/Editor.svelte';
-	import { Space } from '$lib/space/Space';
+	import type { Editor } from '$lib/editor/Editor.svelte';
+	import type { Space } from '$lib/space/Space';
 	import { createId } from '$lib/utils/createId';
 	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import { getContainerContext } from '../containerContext';
