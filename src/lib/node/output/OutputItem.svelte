@@ -2,6 +2,7 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
+	import Dot from '../connector/Dot.svelte';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
@@ -76,12 +77,7 @@
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
 	<div class="pointer-events-none w-full flex-row-reverse items-center whitespace-nowrap">
-		<div
-			style:width="0.8em"
-			style:height="0.8em"
-			style:margin="0.1em"
-			class="shrink-0 rounded-full bg-green-500"
-		></div>
+		<Dot />
 		<div>{output.id.slice(0, 6)}</div>
 	</div>
 </button>

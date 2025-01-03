@@ -4,6 +4,7 @@
 	import { createId } from '$lib/utils/createId';
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
 	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
+	import Dot from '../connector/Dot.svelte';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
@@ -109,15 +110,8 @@
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
 		<div class="pointer-events-none flex-row items-center whitespace-nowrap">
-			<div
-				style:width="0.8em"
-				style:height="0.8em"
-				style:margin="0.1em"
-				class="shrink-0 rounded-full bg-green-500"
-			></div>
-			<div>
-				{input.id.slice(0, 4)}
-			</div>
+			<Dot />
+			<div>{input.id.slice(0, 4)}</div>
 		</div>
 	</button>
 </div>
