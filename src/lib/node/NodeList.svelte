@@ -2,13 +2,11 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import { createId } from '$lib/utils/createId';
 	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
-	import { AddNodeCommand } from './commands/AddNodeCommand';
+	import AddNodeMenu from './AddNodeMenu.svelte';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
-	import { createNodeData } from './createNodeData';
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
@@ -28,20 +26,29 @@
 	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
 	setPreviewConnectionContext(previewConnectionWrapper);
 
+	let menuPosition = $state<Vector>();
+
 	function handlePointerDown(e: MouseEvent) {
 		if (e.target !== containerWrapper.container) return;
+
+		if (menuPosition) {
+			menuPosition = undefined;
+			return;
+		}
 
 		const rect = containerWrapper.container.getBoundingClientRect();
 		const offsetVector = new Vector(rect.left, rect.top);
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		const addNodeCommand = new AddNodeCommand({
-			id: createId(),
-			type: 'AddNodeCommand',
-			details: { node: createNodeData(dataPosition) },
-		});
-		editor.execute(addNodeCommand);
+		menuPosition = dataPosition;
+
+		// const addNodeCommand = new AddNodeCommand({
+		// 	id: createId(),
+		// 	type: 'AddNodeCommand',
+		// 	details: { node: createNodeData(dataPosition) },
+		// });
+		// editor.execute(addNodeCommand);
 	}
 
 	function handleContextMenu(e: MouseEvent) {
@@ -65,6 +72,9 @@
 	{/each}
 	{#if previewConnectionWrapper.previewConnection}
 		<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
+	{/if}
+	{#if menuPosition}
+		<AddNodeMenu {space} position={menuPosition} />
 	{/if}
 </div>
 
