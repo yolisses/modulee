@@ -12,8 +12,8 @@
 
 	const { space, input, output }: Props = $props();
 
-	const startPosition = $derived(output.connectorPosition);
-	const endPosition = $derived(input.connectorPosition);
+	const startPosition = $derived(output.jointPosition);
+	const endPosition = $derived(input.jointPosition);
 
 	const screenInputPosition = $derived(space.getScreenPosition(input.position));
 </script>

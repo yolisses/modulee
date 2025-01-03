@@ -25,7 +25,7 @@ export class Output implements Connector {
 		return this.node.position.add(indexOffset).add(widthOffset);
 	}
 
-	get connectorPosition() {
+	get jointPosition() {
 		const centeringOffset = new Vector(0.75, 0.5);
 		return this.position.add(centeringOffset);
 	}

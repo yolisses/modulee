@@ -13,7 +13,7 @@
 
 <Wire
 	{space}
-	endPosition={previewConnection.startConnector.connectorPosition}
-	startPosition={previewConnection.endConnector?.connectorPosition ??
+	endPosition={previewConnection.startConnector.jointPosition}
+	startPosition={previewConnection.endConnector?.jointPosition ??
 		previewConnection.dataPointerPosition}
 />
