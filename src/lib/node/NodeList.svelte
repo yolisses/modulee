@@ -7,6 +7,7 @@
 	import AddNodeMenu from './AddNodeMenu.svelte';
 	import { setContainerContext } from './containerContext';
 	import type { ContainerWrapper } from './ContainerWrapper';
+	import { getElementPosition } from './getElementPosition';
 	import { getPointerPosition } from './getPointerPosition';
 	import { setPreviewConnectionContext } from './input/previewConnectionContext';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
@@ -26,13 +27,13 @@
 	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
 	setPreviewConnectionContext(previewConnectionWrapper);
 
-	let menuPosition = $state<Vector>();
+	let screenMenuPosition = $state<Vector>();
 
 	function handlePointerDown(e: MouseEvent) {
 		if (e.target !== containerWrapper.container) return;
 
-		if (menuPosition) {
-			menuPosition = undefined;
+		if (screenMenuPosition) {
+			screenMenuPosition = undefined;
 			return;
 		}
 
@@ -41,7 +42,7 @@
 		const screenPosition = getPointerPosition(e).subtract(offsetVector);
 		const dataPosition = space.getDataPosition(screenPosition);
 
-		menuPosition = dataPosition;
+		screenMenuPosition = dataPosition;
 
 		// const addNodeCommand = new AddNodeCommand({
 		// 	id: createId(),
@@ -51,30 +52,44 @@
 		// editor.execute(addNodeCommand);
 	}
 
+	function handleClick(e: MouseEvent) {
+		if (e.button === 1) return;
+		screenMenuPosition = undefined;
+	}
+
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
+		if (!containerWrapper.container) return;
+
+		const screenPosition = new Vector(e.clientX, e.clientY);
+		const elementPosition = getElementPosition(containerWrapper.container);
+
+		screenMenuPosition = screenPosition.subtract(elementPosition);
 	}
 </script>
 
-<!-- This element should not have border -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<!-- onpointerdown={handlePointerDown} -->
-<div
-	oncontextmenu={handleContextMenu}
-	bind:this={containerWrapper.container}
-	style:font-size={getScreenFontSize(space) + 'px'}
-	style:line-height={getScreenLineHeight(space) + 'px'}
-	class="dotted-grid relative min-h-screen w-full"
->
-	{#each editor.nodes as node (node.id)}
-		<NodeItem {node} {space} {editor} />
-	{/each}
-	{#if previewConnectionWrapper.previewConnection}
-		<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
-	{/if}
-	{#if menuPosition}
-		<AddNodeMenu {space} position={menuPosition} />
+<div class="relative min-h-screen w-full">
+	<!-- This element should not have border -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<!-- onpointerdown={handlePointerDown} -->
+	<div
+		oncontextmenu={handleContextMenu}
+		onclick={handleClick}
+		bind:this={containerWrapper.container}
+		style:font-size={getScreenFontSize(space) + 'px'}
+		style:line-height={getScreenLineHeight(space) + 'px'}
+		class="dotted-grid absolute min-h-screen w-full"
+	>
+		{#each editor.nodes as node (node.id)}
+			<NodeItem {node} {space} {editor} />
+		{/each}
+		{#if previewConnectionWrapper.previewConnection}
+			<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
+		{/if}
+	</div>
+	{#if screenMenuPosition}
+		<AddNodeMenu screenPosition={screenMenuPosition} />
 	{/if}
 </div>
 

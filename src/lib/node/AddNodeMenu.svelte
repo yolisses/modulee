@@ -1,15 +1,13 @@
 <script lang="ts">
-	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 
 	interface Props {
-		space: Space;
-		position: Vector;
+		screenPosition: Vector;
 	}
 
-	const { space, position }: Props = $props();
-
-	const screenPosition = $derived(space.getScreenPosition(position.subtract(new Vector(0, 1))));
+	const { screenPosition: screenInitialPosition }: Props = $props();
+	const screenOffset = new Vector(2, 56);
+	const screenPosition = $derived(screenInitialPosition.subtract(screenOffset));
 </script>
 
 <div

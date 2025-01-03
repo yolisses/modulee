@@ -20,6 +20,11 @@
 	);
 </script>
 
+<div>
+	Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit laudantium impedit labore
+	alias expedita natus praesentium soluta fugiat a aspernatur optio, quasi inventore, autem
+	recusandae! Facere quod hic omnis!
+</div>
 <div class="flex-row">
 	<UndoButton {editor} />
 	<RedoButton {editor} />
