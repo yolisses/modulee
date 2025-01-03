@@ -36,4 +36,10 @@
 </script>
 
 <path d={pathD} class="stroke-green-900" fill="transparent" stroke-width="0.3" />
-<path d={pathD} class="stroke-green-500" fill="transparent" stroke-width="0.2" />
+<path
+	d={pathD}
+	fill="transparent"
+	stroke-width="0.2"
+	stroke-linecap="round"
+	class="stroke-green-500"
+/>
