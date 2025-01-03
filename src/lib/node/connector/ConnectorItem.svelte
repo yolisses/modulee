@@ -23,6 +23,8 @@
 	let previewConnectionWrapper = getPreviewConnectionContext();
 
 	function handlePointerDown(e: PointerEvent) {
+		e.stopPropagation();
+
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!containerWrapper.container) return;
 
@@ -40,7 +42,10 @@
 	}
 
 	function handleContainerPointerMove(e: PointerEvent) {
+		e.stopPropagation();
+
 		if (!containerWrapper.container) return;
+
 		const dataPointerPosition = getDataPointerPosition(e, space, containerWrapper.container);
 		if (previewConnectionWrapper.previewConnection) {
 			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPointerPosition;
@@ -48,6 +53,8 @@
 	}
 
 	function handleContainerPointerUp(e: PointerEvent) {
+		e.stopPropagation();
+
 		if (previewConnectionWrapper.previewConnection) {
 			onPreviewEnd(previewConnectionWrapper.previewConnection);
 			previewConnectionWrapper.previewConnection = undefined;

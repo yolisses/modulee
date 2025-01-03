@@ -28,10 +28,8 @@
 	let previewConnectionWrapper = $state<PreviewConnectionWrapper>({});
 	setPreviewConnectionContext(previewConnectionWrapper);
 
-	function handleClick(e: MouseEvent) {
-		if (e.target !== containerWrapper.container) {
-			return;
-		}
+	function handlePointerDown(e: MouseEvent) {
+		if (e.target !== containerWrapper.container) return;
 
 		const rect = containerWrapper.container.getBoundingClientRect();
 		const offsetVector = new Vector(rect.left, rect.top);
@@ -55,7 +53,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	onclick={handleClick}
+	onpointerdown={handlePointerDown}
 	oncontextmenu={handleContextMenu}
 	bind:this={containerWrapper.container}
 	style:font-size={getScreenFontSize(space) + 'px'}
