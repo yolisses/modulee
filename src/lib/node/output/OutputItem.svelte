@@ -27,7 +27,7 @@
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		previewConnectionWrapper.previewConnection = {
-			output: output,
+			startConnector: output,
 			dataPointerPosition: dataPosition,
 		};
 
@@ -38,14 +38,14 @@
 	function handlePointerEnter(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		previewConnectionWrapper.previewConnection.output = output;
+		previewConnectionWrapper.previewConnection.endConnector = output;
 	}
 
 	function handlePointerOut(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		if (previewConnectionWrapper.previewConnection.output === output) {
-			previewConnectionWrapper.previewConnection.output = undefined;
+		if (previewConnectionWrapper.previewConnection.endConnector === output) {
+			previewConnectionWrapper.previewConnection.endConnector = undefined;
 		}
 	}
 </script>

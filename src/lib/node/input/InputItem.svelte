@@ -6,6 +6,7 @@
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
+	import { Output } from '../output/Output.svelte';
 	import type { Input } from './Input.svelte';
 	import InputItemWire from './InputItemWire.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext';
@@ -30,7 +31,7 @@
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		previewConnectionWrapper.previewConnection = {
-			input: input,
+			startConnector: input,
 			dataPointerPosition: dataPosition,
 		};
 
@@ -55,13 +56,16 @@
 
 	function handleContainerPointerUp(e: PointerEvent) {
 		if (previewConnectionWrapper.previewConnection) {
-			const { output } = previewConnectionWrapper.previewConnection;
-			const command = new SetInputConnectedOutput({
-				id: createId(),
-				type: 'SetInputConnectedOutput',
-				details: { inputId: input.id, outputId: output?.id },
-			});
-			editor.execute(command);
+			const { endConnector: output } = previewConnectionWrapper.previewConnection;
+
+			if (output instanceof Output) {
+				const command = new SetInputConnectedOutput({
+					id: createId(),
+					type: 'SetInputConnectedOutput',
+					details: { inputId: input.id, outputId: output?.id },
+				});
+				editor.execute(command);
+			}
 		}
 
 		previewConnectionWrapper.previewConnection = undefined;

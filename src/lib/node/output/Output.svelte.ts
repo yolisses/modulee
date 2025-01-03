@@ -1,9 +1,10 @@
 import { Vector } from '$lib/space/Vector';
+import type { Connector } from '../connector/Connector';
 import type { Input } from '../input/Input.svelte';
 import type { Node } from '../Node.svelte';
 import type { OutputData } from './OutputData';
 
-export class Output {
+export class Output implements Connector {
 	id: string;
 	name: string;
 	connectedInputs: Input[] = [];
