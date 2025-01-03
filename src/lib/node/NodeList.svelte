@@ -59,8 +59,8 @@
 <!-- This element should not have border -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- onpointerdown={handlePointerDown} -->
 <div
-	onpointerdown={handlePointerDown}
 	oncontextmenu={handleContextMenu}
 	bind:this={containerWrapper.container}
 	style:font-size={getScreenFontSize(space) + 'px'}
