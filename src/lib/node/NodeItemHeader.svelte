@@ -95,5 +95,5 @@
 	onpointermove={handlePointerMove}
 	onpointerdown={handlePointerDown}
 >
-	{node.id.slice(0, 6)}
+	{node.constructor.name}
 </button>
