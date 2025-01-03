@@ -19,8 +19,8 @@
 </script>
 
 <div
-	style:outline-width="0.1em"
-	style:border-radius="0.5em"
+	style:outline-width="0.1lh"
+	style:border-radius="0.5lh"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}

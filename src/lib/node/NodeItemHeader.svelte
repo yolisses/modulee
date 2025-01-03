@@ -89,7 +89,7 @@
 	class="hover-bg"
 	bind:this={element}
 	onclick={handleClick}
-	style:padding-inline="0.5em"
+	style:padding-inline="0.5lh"
 	onpointerup={handlePointerUp}
 	oncontextmenu={handleContextMenu}
 	onpointermove={handlePointerMove}

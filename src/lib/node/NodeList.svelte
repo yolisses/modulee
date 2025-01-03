@@ -99,8 +99,8 @@
 
 <style>
 	.dotted-grid {
-		background-size: 1em 1em;
-		background-position: 0.5em 0.5em;
-		background-image: radial-gradient(circle, #8888 0.05em, rgba(0, 0, 0, 0) 0.05em);
+		background-size: 1lh 1lh;
+		background-position: 0.5lh 0.5lh;
+		background-image: radial-gradient(circle, #8888 0.05lh, rgba(0, 0, 0, 0) 0.05lh);
 	}
 </style>
