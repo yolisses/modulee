@@ -11,7 +11,7 @@
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
-	let zoom = $state(10);
+	let zoom = $state(20);
 
 	const editor = new Editor(devEditorData);
 
