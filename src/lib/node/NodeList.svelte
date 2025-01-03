@@ -93,7 +93,7 @@
 		{/if}
 	</div>
 	{#if screenMenuPosition}
-		<AddNodeMenu screenPosition={screenMenuPosition} closeModal={closeMenu} />
+		<AddNodeMenu {editor} {space} screenPosition={screenMenuPosition} closeModal={closeMenu} />
 	{/if}
 </div>
 

@@ -31,7 +31,7 @@ export class Node {
 			return input;
 		});
 
-		const width = 6;
+		const width = 8;
 		this.size = new Vector(width, offset);
 	}
 
