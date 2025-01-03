@@ -28,6 +28,6 @@
 	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-900"
 >
 	<NodeItemHeader {editor} {node} {space} />
-	<OutputList {space} outputs={node.outputs} />
+	<OutputList {editor} {space} outputs={node.outputs} />
 	<InputList {editor} {space} inputs={node.inputs} />
 </div>
