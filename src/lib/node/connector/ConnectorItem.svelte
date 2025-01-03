@@ -11,11 +11,12 @@
 
 	interface Props {
 		space: Space;
+		class?: string;
 		connector: Connector;
 		targetClass: any; // TODO use the real type
 		onPreviewEnd: (previewConnection: PreviewConnection) => void;
 	}
-	let { space, connector, onPreviewEnd: onContainerPointerUp, targetClass }: Props = $props();
+	let { space, connector, targetClass, onPreviewEnd, class: className }: Props = $props();
 
 	let containerWrapper = getContainerContext();
 
@@ -48,7 +49,7 @@
 
 	function handleContainerPointerUp(e: PointerEvent) {
 		if (previewConnectionWrapper.previewConnection) {
-			onContainerPointerUp(previewConnectionWrapper.previewConnection);
+			onPreviewEnd(previewConnectionWrapper.previewConnection);
 			previewConnectionWrapper.previewConnection = undefined;
 		}
 
@@ -83,15 +84,15 @@
 </script>
 
 <button
-	class="hover-bg w-full"
 	onpointerout={handlePointerOut}
 	onpointerdown={handlePointerDown}
 	onpointerenter={handlePointerEnter}
+	class="hover-bg w-full"
 >
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
-	<div class="pointer-events-none w-full flex-row items-center whitespace-nowrap">
+	<div class="pointer-events-none w-full flex-row items-center whitespace-nowrap {className}">
 		<JointCircle />
 		<div>{connector.id.slice(0, 4)}</div>
 	</div>

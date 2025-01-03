@@ -32,5 +32,11 @@
 <!-- This div forces the offset to be given by the 
  input position instead of the node position -->
 <div class="relative">
-	<ConnectorItem onPreviewEnd={handlePreviewEnd} {space} connector={output} targetClass={Input} />
+	<ConnectorItem
+		onPreviewEnd={handlePreviewEnd}
+		{space}
+		connector={output}
+		targetClass={Input}
+		class="flex-row-reverse"
+	/>
 </div>
