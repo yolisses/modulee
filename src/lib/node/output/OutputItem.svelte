@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
+	import { createId } from '$lib/utils/createId';
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
+	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import JointCircle from '../connector/JointCircle.svelte';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
@@ -35,7 +37,7 @@
 		};
 
 		containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
-		// containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
+		containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
 	}
 
 	function handleContainerPointerMove(e: PointerEvent) {
@@ -44,6 +46,30 @@
 		if (previewConnectionWrapper.previewConnection) {
 			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPointerPosition;
 		}
+	}
+
+	function handleContainerPointerUp(e: PointerEvent) {
+		if (previewConnectionWrapper.previewConnection) {
+			const { endConnector: input } = previewConnectionWrapper.previewConnection;
+
+			if (input instanceof Input) {
+				const command = new SetInputConnectedOutput({
+					id: createId(),
+					type: 'SetInputConnectedOutput',
+					details: { inputId: input.id, outputId: output.id },
+				});
+				editor.execute(command);
+			}
+		}
+
+		previewConnectionWrapper.previewConnection = undefined;
+
+		if (!containerWrapper.container) return;
+		containerWrapper.container.removeEventListener(
+			'pointermove',
+			handleContainerPointerMove as any,
+		);
+		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 	}
 
 	function handlePointerEnter(e: PointerEvent) {
