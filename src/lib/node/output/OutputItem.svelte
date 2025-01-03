@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
+	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
@@ -31,8 +32,16 @@
 			dataPointerPosition: dataPosition,
 		};
 
-		// containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
+		containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
 		// containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
+	}
+
+	function handleContainerPointerMove(e: PointerEvent) {
+		if (!containerWrapper.container) return;
+		const dataPointerPosition = getDataPointerPosition(e, space, containerWrapper.container);
+		if (previewConnectionWrapper.previewConnection) {
+			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPointerPosition;
+		}
 	}
 
 	function handlePointerEnter(e: PointerEvent) {

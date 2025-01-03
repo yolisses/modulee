@@ -2,6 +2,7 @@
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
 	import { createId } from '$lib/utils/createId';
+	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
 	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
@@ -39,16 +40,9 @@
 		containerWrapper.container.addEventListener('pointerup', handleContainerPointerUp as any);
 	}
 
-	function getDataPointerPosition(e: PointerEvent, container: Element) {
-		const containerPosition = getElementPosition(container);
-		const screenPosition = getPointerPosition(e).subtract(containerPosition);
-		const dataPosition = space.getDataPosition(screenPosition);
-		return dataPosition;
-	}
-
 	function handleContainerPointerMove(e: PointerEvent) {
 		if (!containerWrapper.container) return;
-		const dataPointerPosition = getDataPointerPosition(e, containerWrapper.container);
+		const dataPointerPosition = getDataPointerPosition(e, space, containerWrapper.container);
 		if (previewConnectionWrapper.previewConnection) {
 			previewConnectionWrapper.previewConnection.dataPointerPosition = dataPointerPosition;
 		}
