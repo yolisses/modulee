@@ -5,6 +5,7 @@
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
+	import { Input } from '../input/Input.svelte';
 	import { getPreviewConnectionContext } from '../input/previewConnectionContext';
 	import type { Output } from './Output.svelte';
 
@@ -47,7 +48,9 @@
 	function handlePointerEnter(e: PointerEvent) {
 		if (!previewConnectionWrapper.previewConnection) return;
 
-		previewConnectionWrapper.previewConnection.endConnector = output;
+		if (previewConnectionWrapper.previewConnection.startConnector instanceof Input) {
+			previewConnectionWrapper.previewConnection.endConnector = output;
+		}
 	}
 
 	function handlePointerOut(e: PointerEvent) {
