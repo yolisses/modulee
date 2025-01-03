@@ -1,23 +1,21 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
-	import { createId } from '$lib/utils/createId';
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
-	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import JointCircle from '../connector/JointCircle.svelte';
 	import { getContainerContext } from '../containerContext';
 	import { getElementPosition } from '../getElementPosition';
 	import { getPointerPosition } from '../getPointerPosition';
-	import { Input } from '../input/Input.svelte';
+	import type { PreviewConnection } from '../input/PreviewConnection';
 	import { getPreviewConnectionContext } from '../input/previewConnectionContext';
-	import type { Output } from './Output.svelte';
+	import type { Connector } from './Connector';
 
 	interface Props {
 		space: Space;
-		output: Output;
-		editor: Editor;
+		connector: Connector;
+		targetClass: any; // TODO use the real type
+		onPreviewEnd: (previewConnection: PreviewConnection) => void;
 	}
-	let { space, output, editor }: Props = $props();
+	let { space, connector, onPreviewEnd: onContainerPointerUp, targetClass }: Props = $props();
 
 	let containerWrapper = getContainerContext();
 
@@ -32,7 +30,7 @@
 		const dataPosition = space.getDataPosition(screenPosition);
 
 		previewConnectionWrapper.previewConnection = {
-			startConnector: output,
+			startConnector: connector,
 			dataPointerPosition: dataPosition,
 		};
 
@@ -50,26 +48,17 @@
 
 	function handleContainerPointerUp(e: PointerEvent) {
 		if (previewConnectionWrapper.previewConnection) {
-			const { endConnector: input } = previewConnectionWrapper.previewConnection;
-
-			if (input instanceof Input) {
-				const command = new SetInputConnectedOutput({
-					id: createId(),
-					type: 'SetInputConnectedOutput',
-					details: { inputId: input.id, outputId: output.id },
-				});
-				editor.execute(command);
-			}
+			onContainerPointerUp(previewConnectionWrapper.previewConnection);
+			previewConnectionWrapper.previewConnection = undefined;
 		}
 
-		previewConnectionWrapper.previewConnection = undefined;
-
-		if (!containerWrapper.container) return;
-		containerWrapper.container.removeEventListener(
-			'pointermove',
-			handleContainerPointerMove as any,
-		);
-		containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
+		if (containerWrapper.container) {
+			containerWrapper.container.removeEventListener(
+				'pointermove',
+				handleContainerPointerMove as any,
+			);
+			containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
+		}
 	}
 
 	function handlePointerEnter(e: PointerEvent) {
@@ -77,8 +66,8 @@
 
 		const { startConnector } = previewConnectionWrapper.previewConnection;
 
-		if (startConnector instanceof Input) {
-			previewConnectionWrapper.previewConnection.endConnector = output;
+		if (startConnector instanceof targetClass) {
+			previewConnectionWrapper.previewConnection.endConnector = connector;
 		}
 	}
 
@@ -87,7 +76,7 @@
 
 		const { startConnector, endConnector } = previewConnectionWrapper.previewConnection;
 
-		if (startConnector instanceof Input && endConnector === output) {
+		if (startConnector instanceof targetClass && endConnector === connector) {
 			previewConnectionWrapper.previewConnection.endConnector = undefined;
 		}
 	}
@@ -102,8 +91,8 @@
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
-	<div class="pointer-events-none w-full flex-row-reverse items-center whitespace-nowrap">
+	<div class="pointer-events-none w-full flex-row items-center whitespace-nowrap">
 		<JointCircle />
-		<div>{output.id.slice(0, 4)}</div>
+		<div>{connector.id.slice(0, 4)}</div>
 	</div>
 </button>
