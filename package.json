@@ -38,6 +38,8 @@
 		"vitest": "^2.0.4"
 	},
 	"dependencies": {
-		"nanoid": "^5.0.9"
+		"nanoid": "^5.0.9",
+		"vite-plugin-top-level-await": "^1.4.4",
+		"vite-plugin-wasm": "^3.4.1"
 	}
 }

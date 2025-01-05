@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
-	import DevComponent from './DevComponent.svelte';
+	import { onMount } from 'svelte';
+	import { greet } from '../engine/pkg/modulee_engine';
 
-	const devValue = { foo: 5 };
-
-	setContext('devValue', devValue);
+	onMount(() => {
+		greet();
+	});
 </script>
 
-<DevComponent />
+Hello, dev
