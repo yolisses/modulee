@@ -25,7 +25,14 @@
 
 	$effect(() => {
 		if (graph) {
-			graph.set_nodes([{ AddNode: { input1: 1, input2: 2, output: 3 } }]);
+			graph.set_nodes([
+				{
+					type: 'AddNode',
+					input1: 1,
+					input2: 2,
+					output: 3,
+				},
+			]);
 			graph.debug();
 		}
 	});
