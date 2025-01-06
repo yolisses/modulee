@@ -7,6 +7,8 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import { onMount } from 'svelte';
+	import { Graph, init_console, set_panic_hook } from '../../engine/pkg/modulee_engine';
 	import NodeList from './NodeList.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
@@ -18,13 +20,23 @@
 	const space = $derived(
 		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)]),
 	);
+
+	let graph = $state<Graph>();
+
+	$effect(() => {
+		if (graph) {
+			graph.set_nodes([{ AddNode: { input1: 1, input2: 2, output: 3 } }]);
+			graph.debug();
+		}
+	});
+
+	onMount(() => {
+		init_console();
+		graph = new Graph();
+		set_panic_hook();
+	});
 </script>
 
-<div>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit laudantium impedit labore
-	alias expedita natus praesentium soluta fugiat a aspernatur optio, quasi inventore, autem
-	recusandae! Facere quod hic omnis!
-</div>
 <div class="flex-row">
 	<UndoButton {editor} />
 	<RedoButton {editor} />
