@@ -9,6 +9,7 @@
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { onMount } from 'svelte';
 	import { Graph, init_console, set_panic_hook } from '../../engine/pkg/modulee_engine';
+	import type { NodeEngineData } from './NodeEngineData';
 	import NodeList from './NodeList.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
@@ -25,14 +26,16 @@
 
 	$effect(() => {
 		if (graph) {
-			graph.set_nodes([
+			const nodesEngineData: NodeEngineData[] = [
 				{
 					type: 'AddNode',
-					input1: 1,
-					input2: 2,
-					output: 3,
+					input_ids: {
+						input1: 1,
+						input2: 2,
+					},
 				},
-			]);
+			];
+			graph.set_nodes(nodesEngineData);
 			graph.debug();
 		}
 	});
