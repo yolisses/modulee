@@ -1,4 +1,6 @@
 export type NodeEngineData = {
-	id: string;
-	input_ids: Record<string, number>;
+	id: number;
+	type: string;
+	extras?: Record<string, unknown>;
+	input_ids?: Record<string, number>;
 };

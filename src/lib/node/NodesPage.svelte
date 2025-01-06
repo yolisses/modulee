@@ -28,6 +28,17 @@
 		if (graph) {
 			const nodesEngineData: NodeEngineData[] = [
 				{
+					id: 1,
+					type: 'ConstantNode',
+					extras: { value: 42 },
+				},
+				{
+					id: 2,
+					type: 'ConstantNode',
+					extras: { value: 100 },
+				},
+				{
+					id: 3,
 					type: 'AddNode',
 					input_ids: {
 						input1: 1,
@@ -37,6 +48,7 @@
 			];
 			graph.set_nodes(nodesEngineData);
 			graph.debug();
+			console.log(graph.process());
 		}
 	});
 
