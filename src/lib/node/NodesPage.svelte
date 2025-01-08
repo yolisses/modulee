@@ -7,9 +7,6 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { onMount } from 'svelte';
-	import { Graph, init_console, set_panic_hook } from '../../engine/pkg/modulee_engine';
-	import type { NodeEngineData } from './NodeEngineData';
 	import NodeList from './NodeList.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
@@ -21,42 +18,6 @@
 	const space = $derived(
 		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)]),
 	);
-
-	let graph = $state<Graph>();
-
-	$effect(() => {
-		if (graph) {
-			const nodesEngineData: NodeEngineData[] = [
-				{
-					id: 1,
-					type: 'ConstantNode',
-					extras: { value: 42 },
-				},
-				{
-					id: 2,
-					type: 'ConstantNode',
-					extras: { value: 100 },
-				},
-				{
-					id: 3,
-					type: 'AddNode',
-					input_ids: {
-						input1: 1,
-						input2: 2,
-					},
-				},
-			];
-			graph.set_nodes(nodesEngineData);
-			graph.debug();
-			console.log(graph.process());
-		}
-	});
-
-	onMount(() => {
-		init_console();
-		graph = new Graph();
-		set_panic_hook();
-	});
 </script>
 
 <div class="flex-row">
