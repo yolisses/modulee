@@ -95,5 +95,5 @@
 	onpointermove={handlePointerMove}
 	onpointerdown={handlePointerDown}
 >
-	{node.constructor.name}
+	{node.type}
 </button>
