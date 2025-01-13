@@ -1,4 +1,5 @@
 <script lang="ts">
+	import DevButton from '$lib/editor/dev/DevButton.svelte';
 	import { devEditorData } from '$lib/editor/dev/devEditorData';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
@@ -25,6 +26,7 @@
 	<RedoButton {editor} />
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
+	<DevButton />
 </div>
 <div class="flex-row">
 	<!-- <CommandList commands={editor.history} />
