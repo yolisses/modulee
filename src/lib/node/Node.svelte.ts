@@ -3,14 +3,16 @@ import { Input } from './input/Input.svelte';
 import type { NodeData } from './NodeData';
 import { Output } from './output/Output.svelte';
 
+// TODO check if it makes sense to keep data as a
+// froze object instead of copying its values
 export class Node {
 	id: string;
 	size: Vector;
 	type: string;
-	extras: object;
 	inputs: Input[] = [];
 	outputs: Output[] = [];
 	position: Vector = $state()!;
+	extras: Record<string, number>;
 
 	constructor(nodeData: NodeData) {
 		const { inputs, id, type, extras, outputs, position } = nodeData;
