@@ -2,13 +2,11 @@ import type { Node } from '$lib/node/Node.svelte';
 import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 
-export function getNodeEngineData(node: Node): NodeEngineData {
+export function getNodeEngineData(node: Node, fallbackId: number): NodeEngineData {
 	const inputIds: Record<string, number | undefined> = {};
 	node.inputs.forEach((input) => {
 		const outputId = input.connectedOutput?.node.id;
-		if (outputId) {
-			inputIds[input.name] = hashToUsize(outputId);
-		}
+		inputIds[input.name] = outputId ? hashToUsize(outputId) : fallbackId;
 	});
 
 	return {

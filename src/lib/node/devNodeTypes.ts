@@ -4,25 +4,25 @@ export const devNodeTypes: NodeType[] = [
 	{
 		id: 'add',
 		name: 'Add',
-		inputNames: ['addend1', 'addend2'],
+		inputNames: ['input1', 'input2'],
 		outputNames: ['sum'],
 	},
 	{
 		id: 'subtract',
 		name: 'Subtract',
-		inputNames: ['minuend', 'subtrahend'],
+		inputNames: ['input1', 'input2'],
 		outputNames: ['difference'],
 	},
 	{
 		id: 'multiply',
 		name: 'Multiply',
-		inputNames: ['multiplicand', 'multiplier'],
+		inputNames: ['input1', 'input2'],
 		outputNames: ['product'],
 	},
 	{
 		id: 'divide',
 		name: 'Divide',
-		inputNames: ['dividend', 'divisor'],
+		inputNames: ['input1', 'input2'],
 		outputNames: ['quotient'],
 	},
 ];

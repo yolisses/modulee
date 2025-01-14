@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getNodeEngineData } from '$lib/engine/getNodeEngineData';
+	import { getNodesEngineData } from '$lib/engine/getNodesEngineData';
 	import type { Editor } from '../Editor.svelte';
 
 	interface Props {
@@ -10,9 +10,7 @@
 
 	function handleClick() {
 		console.log('click');
-		const nodesEngineData = editor.nodes.map((node) => {
-			return getNodeEngineData(node);
-		});
+		const nodesEngineData = getNodesEngineData(editor.nodes);
 		const nodesEngineDataJson = JSON.stringify(nodesEngineData);
 
 		console.log(nodesEngineDataJson);
