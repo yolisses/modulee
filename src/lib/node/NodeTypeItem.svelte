@@ -5,6 +5,7 @@
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { getContainerContext } from './containerContext';
+	import type { NodeData } from './NodeData';
 	import type { NodeType } from './NodeType';
 
 	interface Props {
@@ -24,21 +25,23 @@
 
 		const dataPosition = getDataPointerPosition(e, space, containerWrapper.container);
 
+		const nodeData: NodeData = {
+			extras: {},
+			id: createId(),
+			position: dataPosition,
+			type: nodeType.name + 'Node',
+			inputs: nodeType.inputNames.map((inputName) => {
+				return { id: createId(), name: inputName };
+			}),
+			outputs: nodeType.outputNames.map((outputName) => {
+				return { id: createId(), name: outputName };
+			}),
+		};
+
 		const command = new AddNodeCommand({
 			id: createId(),
 			type: 'AddNodeCommand',
-			details: {
-				node: {
-					id: createId(),
-					position: dataPosition,
-					inputs: nodeType.inputNames.map((inputName) => {
-						return { id: createId(), name: inputName };
-					}),
-					outputs: nodeType.outputNames.map((outputName) => {
-						return { id: createId(), name: outputName };
-					}),
-				},
-			},
+			details: { node: nodeData },
 		});
 		editor.execute(command);
 	}

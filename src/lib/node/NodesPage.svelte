@@ -26,7 +26,7 @@
 	<RedoButton {editor} />
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
-	<DevButton />
+	<DevButton {editor} />
 </div>
 <div class="flex-row">
 	<!-- <CommandList commands={editor.history} />

@@ -12,7 +12,7 @@ export const devNodesData: NodeData[] = [
 		type: 'ConstantNode',
 		extras: { value: 42 },
 		position: { x: 0, y: 0 },
-		outputs: [{ id: 'constantNodeDefaultOutput', name: 'output' }],
+		outputs: [{ name: 'output', id: 'constantNodeDefaultOutput' }],
 	},
 	{
 		extras: {},

@@ -11,7 +11,7 @@ export class Output implements Connector {
 
 	constructor(
 		outputData: OutputData,
-		private node: Node,
+		public node: Node,
 		private offset: number,
 	) {
 		const { id, name } = outputData;

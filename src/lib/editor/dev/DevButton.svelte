@@ -1,32 +1,30 @@
 <script lang="ts">
-	let element: Element;
+	import { getNodeEngineData } from '$lib/engine/getNodeEngineData';
+	import type { Editor } from '../Editor.svelte';
+
+	interface Props {
+		editor: Editor;
+	}
+
+	let { editor }: Props = $props();
 
 	function handleClick() {
 		console.log('click');
+		const nodesEngineData = editor.nodes.map((node) => {
+			return getNodeEngineData(node);
+		});
+		const nodesEngineDataJson = JSON.stringify(nodesEngineData);
+
+		console.log(nodesEngineDataJson);
+
 		window.__JUCE__.backend.emitEvent('passSomeString', {
 			someString: 'hello, world',
 		});
 
-		const devNodesData = `[
-    {
-        "id": 1,
-        "type": "ConstantNode",
-        "extras": {
-            "value": 100
-        }
-    },
-    {
-        "id": 2,
-        "type": "OutputNode",
-        "input_ids": {
-            "input": 1
-        }
-    }
-]`;
 		window.__JUCE__.backend.emitEvent('graphChange', {
-			nodesData: devNodesData,
+			nodesData: nodesEngineDataJson,
 		});
 	}
 </script>
 
-<button class="common-button" bind:this={element} onclick={handleClick}>send event</button>
+<button class="common-button" onclick={handleClick}>send event</button>

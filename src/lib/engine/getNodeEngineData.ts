@@ -5,7 +5,7 @@ import type { NodeEngineData } from './NodeEngineData';
 export function getNodeEngineData(node: Node): NodeEngineData {
 	const inputIds: Record<string, number | undefined> = {};
 	node.inputs.forEach((input) => {
-		const outputId = input.connectedOutputId;
+		const outputId = input.connectedOutput?.node.id;
 		if (outputId) {
 			inputIds[input.name] = hashToUsize(outputId);
 		}
