@@ -21,15 +21,17 @@
 	);
 </script>
 
-<div class="flex-row">
-	<UndoButton {editor} />
-	<RedoButton {editor} />
-	<ZoomInButton bind:zoom />
-	<ZoomOutButton bind:zoom />
-	<DevButton {editor} />
-</div>
-<div class="flex-row">
-	<!-- <CommandList commands={editor.history} />
+<div class="select-none">
+	<div class="flex-row">
+		<UndoButton {editor} />
+		<RedoButton {editor} />
+		<ZoomInButton bind:zoom />
+		<ZoomOutButton bind:zoom />
+		<DevButton {editor} />
+	</div>
+	<div class="flex-row">
+		<!-- <CommandList commands={editor.history} />
 	<CommandList commands={editor.undoneHistory} /> -->
-	<NodeList {editor} {space} />
+		<NodeList {editor} {space} />
+	</div>
 </div>
