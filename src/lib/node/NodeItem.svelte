@@ -20,7 +20,7 @@
 
 <div
 	style:outline-width="0.1lh"
-	style:border-radius="0.5lh"
+	style:border-radius="0.4lh"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
