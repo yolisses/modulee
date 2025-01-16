@@ -2,6 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+body,
+html {
+	@apply h-full overflow-hidden;
+}
+
 html {
 	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }

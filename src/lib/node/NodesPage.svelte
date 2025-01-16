@@ -27,4 +27,6 @@
 	<ZoomOutButton bind:zoom />
 	<!-- <DevButton {editor} /> -->
 </div>
-<NodeList {editor} {space} />
+<div class="flex-1 overflow-auto">
+	<NodeList {editor} {space} />
+</div>

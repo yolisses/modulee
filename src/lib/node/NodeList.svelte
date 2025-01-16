@@ -78,12 +78,12 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<!-- onpointerdown={handlePointerDown} -->
 	<div
-		oncontextmenu={handleContextMenu}
 		onclick={handleClick}
+		oncontextmenu={handleContextMenu}
 		bind:this={containerWrapper.container}
 		style:font-size={getScreenFontSize(space) + 'px'}
 		style:line-height={getScreenLineHeight(space) + 'px'}
-		class="dotted-grid absolute min-h-screen w-full"
+		class="dotted-grid absolute min-h-full min-w-full"
 	>
 		{#each editor.nodes as node (node.id)}
 			<NodeItem {node} {space} {editor} />
