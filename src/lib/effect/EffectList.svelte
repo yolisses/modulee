@@ -9,7 +9,7 @@
 	const { effectsData }: Props = $props();
 </script>
 
-<div class="overflow-auto">
+<div>
 	{#each effectsData as effectData (effectData.id)}
 		<EffectItem {effectData} />
 	{/each}

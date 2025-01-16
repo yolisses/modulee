@@ -2,6 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+html,
+body {
+	min-height: 100dvh;
+}
+
+html,
+body {
+	@apply overflow-hidden;
+}
+
 html {
 	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
@@ -10,7 +20,9 @@ button:disabled {
 	@apply opacity-50;
 }
 
-div {
+div,
+html,
+body {
 	@apply flex flex-col;
 }
 
@@ -29,7 +41,8 @@ button {
 /* Scrollbar */
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 0.75rem;
+	height: 0.75rem;
 }
 
 /* Track */

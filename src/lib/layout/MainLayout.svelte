@@ -4,7 +4,7 @@
 	const { children } = $props();
 </script>
 
-<div class="flex-row">
+<div class="flex-1 flex-row">
 	<MainNavBar />
 	<div class="flex-1">
 		{@render children?.()}
