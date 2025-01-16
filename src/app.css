@@ -15,7 +15,7 @@ div {
 }
 
 button {
-	@apply flex flex-row;
+	@apply flex flex-row items-center;
 }
 
 .hover-bg {

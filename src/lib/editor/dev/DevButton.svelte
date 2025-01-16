@@ -25,4 +25,4 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}>send event</button>
+<button class="common-button" onclick={handleClick}>Send event</button>
