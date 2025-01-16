@@ -72,7 +72,7 @@
 	}
 </script>
 
-<div class="relative min-h-screen w-full">
+<div class="relative flex-1 overflow-auto">
 	<!-- This element should not have border -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
