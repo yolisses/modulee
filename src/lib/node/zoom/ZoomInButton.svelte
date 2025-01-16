@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
+
 	let { zoom = $bindable() }: { zoom: number } = $props();
 
 	function handleClick() {
@@ -6,4 +9,6 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}> + </button>
+<button class="common-button" onclick={handleClick}>
+	<Fa icon={faMagnifyingGlassPlus} />
+</button>
