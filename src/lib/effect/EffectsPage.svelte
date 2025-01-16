@@ -9,7 +9,5 @@
 		<h1 class="pl-2 text-lg font-medium">Effects</h1>
 		<TextSearchInput />
 	</div>
-	<div class="overflow-auto">
-		<EffectList effectsData={devEffectsData} />
-	</div>
+	<EffectList effectsData={devEffectsData} />
 </div>

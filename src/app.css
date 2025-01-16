@@ -2,16 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-html,
-body {
-	height: 100dvh;
-}
-
-html,
-body {
-	@apply overflow-hidden;
-}
-
 html {
 	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
@@ -20,9 +10,7 @@ button:disabled {
 	@apply opacity-50;
 }
 
-div,
-html,
-body {
+div {
 	@apply flex flex-col;
 }
 
