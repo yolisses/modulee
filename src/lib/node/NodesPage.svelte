@@ -7,7 +7,7 @@
 	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import NodeList from './NodeList.svelte';
+	import { NodeList } from 'nodes-editor';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
