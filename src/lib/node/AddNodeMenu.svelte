@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
 	import { devNodeTypes } from './devNodeTypes';
 	import NodeTypeList from './NodeTypeList.svelte';
 

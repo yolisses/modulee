@@ -1,7 +1,7 @@
-import { createId } from '$lib/node/data/createId';
-import { Vector } from '$lib/space/Vector';
+import { Vector } from 'nodes-editor';
+import { createId } from './data/createId';
+import type { NodeData } from './data/NodeData';
 import { defaultNodeSize } from './defaultNodeSize';
-import type { NodeData } from './NodeData';
 
 export function createNodeData(position: Vector): NodeData {
 	return {

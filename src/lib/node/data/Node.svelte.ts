@@ -1,7 +1,7 @@
 import { Vector } from 'nodes-editor';
-import type { Input } from './Input.svelte';
+import { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
-import type { Output } from './Output.svelte';
+import { Output } from './Output.svelte';
 
 // TODO check if it makes sense to keep data as a
 // froze object instead of copying its values
