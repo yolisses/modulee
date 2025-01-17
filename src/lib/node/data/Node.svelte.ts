@@ -1,7 +1,6 @@
-import { Vector } from '$lib/space/Vector';
-import { Input } from './input/Input.svelte';
+import type { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
-import { Output } from './output/Output.svelte';
+import type { Output } from './Output.svelte';
 
 // TODO check if it makes sense to keep data as a
 // froze object instead of copying its values

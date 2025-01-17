@@ -1,7 +1,5 @@
-import { Vector } from '$lib/space/Vector';
-import type { Connector } from '../connector/Connector';
-import type { Input } from '../input/Input.svelte';
-import type { Node } from '../Node.svelte';
+import type { Connector } from './Connector';
+import type { Input } from './Input.svelte';
 import type { OutputData } from './OutputData';
 
 export class Output implements Connector {

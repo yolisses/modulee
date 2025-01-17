@@ -5,7 +5,7 @@
 	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { getContainerContext } from './containerContext';
-	import type { NodeData } from './NodeData';
+	import type { NodeData } from './data/NodeData';
 	import type { NodeType } from './NodeType';
 
 	interface Props {
