@@ -4,10 +4,11 @@
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
-	import { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { NodeList } from 'nodes-editor';
+	import { devNodesData } from './dev/devNodesData';
+	import { Node } from './Node.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
@@ -18,6 +19,8 @@
 	const space = $derived(
 		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)]),
 	);
+
+	const nodes = devNodesData.map((nodeData) => new Node(nodeData));
 </script>
 
 <div class="flex-row border-b border-b-white/10">
@@ -28,5 +31,5 @@
 	<!-- <DevButton {editor} /> -->
 </div>
 <div class="flex-1 overflow-auto">
-	<NodeList {editor} {space} />
+	<NodeList {space} {nodes} />
 </div>
