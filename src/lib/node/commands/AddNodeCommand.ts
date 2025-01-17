@@ -1,7 +1,7 @@
 import { removeById } from '$lib/array/removeById';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
-import type { NodeData } from '../NodeData';
+import type { NodeData } from '../data/NodeData';
 
 export class AddNodeCommand extends Command<{
 	node: NodeData;

@@ -1,3 +1,4 @@
+import { Vector } from 'nodes-editor';
 import type { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
 import type { Output } from './Output.svelte';

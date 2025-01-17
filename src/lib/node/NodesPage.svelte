@@ -3,9 +3,9 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
-	import { NodeList } from 'nodes-editor';
+	import { NodeList, Vector } from 'nodes-editor';
 	import { Node } from './data/Node.svelte';
-	import { devNodesData } from './devNodesData
+	import { devNodesData } from './devNodesData';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 
@@ -14,6 +14,10 @@
 	const editor = new Editor(devEditorData);
 
 	const nodes = devNodesData.map((nodeData) => new Node(nodeData));
+
+	function changeNodePosition(node: Node, position: Vector) {
+		node.position = position;
+	}
 </script>
 
 <div class="flex-row border-b border-b-white/10">
@@ -24,5 +28,5 @@
 	<!-- <DevButton {editor} /> -->
 </div>
 <div class="flex-1 overflow-auto">
-	<NodeList {zoom} {nodes} />
+	<NodeList {zoom} {nodes} {changeNodePosition} />
 </div>

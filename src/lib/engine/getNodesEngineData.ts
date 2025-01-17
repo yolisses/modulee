@@ -1,4 +1,4 @@
-import type { Node } from '$lib/node/data/Node.sveltevelte';
+import type { Node } from '$lib/node/data/Node.svelte';
 import { getNodeEngineData } from './getNodeEngineData';
 import type { NodeEngineData } from './NodeEngineData';
 

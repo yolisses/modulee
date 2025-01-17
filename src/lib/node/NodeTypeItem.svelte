@@ -1,10 +1,9 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
-	import { createId } from '$lib/utils/createId';
-	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
+	import type { Space } from '../../../../nodes-editor/dist/space/Space';
 	import { AddNodeCommand } from './commands/AddNodeCommand';
 	import { getContainerContext } from './containerContext';
+	import { createId } from './data/createId';
 	import type { NodeData } from './data/NodeData';
 	import type { NodeType } from './NodeType';
 

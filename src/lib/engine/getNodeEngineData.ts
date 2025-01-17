@@ -1,4 +1,4 @@
-import type { Node } from '$lib/node/data/Node.sveltevelte';
+import type { Node } from '$lib/node/data/Node.svelte';
 import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 

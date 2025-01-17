@@ -3,7 +3,7 @@ import type { Remotion } from '$lib/array/remotion';
 import { removeById } from '$lib/array/removeById';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
-import type { NodeData } from '../NodeData';
+import type { NodeData } from '../data/NodeData';
 
 export class RemoveNodeCommand extends Command<{
 	nodeId: string;
