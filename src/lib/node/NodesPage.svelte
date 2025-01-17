@@ -5,7 +5,7 @@
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { NodeList } from 'nodes-editor';
 	import { Node } from './data/Node.svelte';
-	import { devNodesData } from './dev/devNodesData';
+	import { devNodesData } from './devNodesData
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
 

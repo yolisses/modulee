@@ -1,3 +1,3 @@
-import { devNodesData } from '$lib/node/dev/devNodesData';
+import { devNodesData } from '$lib/node/devNodesData';
 
 export const devEditorData = { nodes: devNodesData };
