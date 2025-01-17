@@ -1,5 +1,5 @@
 import type { EffectData } from '$lib/effect/EffectData';
-import { createId } from '$lib/utils/createId';
+import { createId } from '$lib/node/data/createId';
 
 export const devEffectsData: EffectData[] = [
 	{ id: createId(), name: 'effect1', nodes: [] },

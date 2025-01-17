@@ -1,4 +1,4 @@
-import { createId } from '$lib/utils/createId';
+import { createId } from '$lib/node/data/createId';
 import type { CommandData } from './CommandData';
 import type { EditorData } from './EditorData';
 import type { EmptyObject } from './EmptyObject';

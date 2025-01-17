@@ -1,5 +1,5 @@
+import { createId } from '$lib/node/data/createId';
 import { Vector } from '$lib/space/Vector';
-import { createId } from '$lib/utils/createId';
 import { defaultNodeSize } from './defaultNodeSize';
 import type { NodeData } from './NodeData';
 
