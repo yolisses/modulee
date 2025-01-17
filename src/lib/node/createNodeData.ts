@@ -5,8 +5,10 @@ import type { NodeData } from './NodeData';
 
 export function createNodeData(position: Vector): NodeData {
 	return {
+		extras: {},
 		outputs: [],
 		id: createId(),
+		type: 'DevNode',
 		position: position.subtract(defaultNodeSize.divide(Vector.fromNumber(2))),
 		inputs: [
 			{ id: createId(), name: 'input1' },
