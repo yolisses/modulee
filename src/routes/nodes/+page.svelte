@@ -3,4 +3,6 @@
 	import { NodesPage } from 'modulee-nodes-editor';
 </script>
 
-<NodesPage editorData={devEditorData} />
+<div class="min-h-screen">
+	<NodesPage editorData={devEditorData} />
+</div>
