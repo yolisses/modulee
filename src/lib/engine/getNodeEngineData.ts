@@ -1,4 +1,4 @@
-import type { Node } from '$lib/node/Node.svelte';
+import type { Node } from 'modulee-nodes-editor';
 import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 

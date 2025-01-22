@@ -1,5 +1,6 @@
 <script>
-	import NodesPage from '$lib/node/NodesPage.svelte';
+	import { devEditorData } from '$lib/dev/devEditorData';
+	import { NodesPage } from 'modulee-nodes-editor';
 </script>
 
-<NodesPage />
+<NodesPage editorData={devEditorData} />

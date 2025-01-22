@@ -1,4 +1,4 @@
-import type { NodeData } from '../NodeData';
+import type { NodeData } from 'modulee-nodes-editor';
 
 // Node::TimeNode(TimeNode::new(1)),
 // Node::ConstantNode(ConstantNode::new(2, 440.)),

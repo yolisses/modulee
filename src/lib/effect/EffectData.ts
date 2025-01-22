@@ -1,4 +1,4 @@
-import type { NodeData } from '$lib/node/NodeData';
+import type { NodeData } from 'modulee-nodes-editor';
 
 export type EffectData = {
 	id: string;
