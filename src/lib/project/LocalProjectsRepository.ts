@@ -1,9 +1,11 @@
-import type { ProjectData } from '$lib/data/ProjectData';
+import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class LocalProjectsRepository implements ProjectsRepository {
-	getUserProjects(): ProjectData[] {
-		throw new Error('Method not implemented.');
+	getProjects(): ProjectData[] {
+		const projectsString = localStorage.getItem('projects') || '[]';
+		const projectsData = JSON.parse(projectsString);
+		return projectsData;
 	}
 
 	getProject(id: string): ProjectData {

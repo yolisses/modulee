@@ -1,5 +1,5 @@
 <script>
-	import DevPage from '$lib/dev/DevPage.svelte';
+	import DevPage from '$dev/DevPage.svelte';
 </script>
 
 <DevPage />
