@@ -11,4 +11,11 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	getProject(id: string): ProjectData {
 		throw new Error('Method not implemented.');
 	}
+
+	createProject(projectData: ProjectData): void {
+		const projects = this.getProjects();
+		projects.push(projectData);
+		const projectsString = JSON.stringify(projects);
+		localStorage.setItem('projects', projectsString);
+	}
 }
