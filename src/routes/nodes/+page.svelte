@@ -1,8 +1,10 @@
 <script>
-	import { NodesPage } from 'modulee-nodes-editor';
+	import { Editor, NodesPage } from 'modulee-nodes-editor';
 	import { devEditorData } from '../../dev/devEditorData';
+
+	const editor = new Editor(devEditorData);
 </script>
 
 <div class="min-h-screen">
-	<NodesPage editorData={devEditorData} />
+	<NodesPage {editor} />
 </div>

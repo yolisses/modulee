@@ -1,3 +1,4 @@
+import { findById } from '$lib/array/findById';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
@@ -9,7 +10,8 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	}
 
 	getProject(id: string): ProjectData {
-		throw new Error('Method not implemented.');
+		const projects = this.getProjects();
+		return findById(projects, id);
 	}
 
 	createProject(projectData: ProjectData): void {
