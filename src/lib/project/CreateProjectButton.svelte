@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { createId } from '$lib/utils/createId';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -9,19 +10,22 @@
 		projectsRepository: ProjectsRepository;
 	}
 
+	let isLoading = $state(false);
 	const { projectsRepository }: Props = $props();
 
-	function handleClick() {
+	async function handleClick() {
+		isLoading = true;
 		const projectData: ProjectData = {
 			commands: [],
 			id: createId(),
 			name: 'New project',
 		};
-		projectsRepository.createProject(projectData);
+		await projectsRepository.createProject(projectData);
+		goto('/projects/' + projectData.id);
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}>
+<button disabled={isLoading} class="common-button" onclick={handleClick}>
 	<Fa icon={faPlus} />
 	Create project
 </button>
