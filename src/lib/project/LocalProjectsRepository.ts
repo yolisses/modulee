@@ -38,18 +38,22 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	 * @param projectId
 	 */
 	async getCommandsOfProject(projectId: string): Promise<CommandData[]> {
-		// Query using the composite index, sorted by `createdAt`
-		return this.database.getAllFromIndex(
-			'commands',
-			'projectId_createdAt',
-			IDBKeyRange.bound([projectId, -Infinity], [projectId, Infinity]),
+		// Define a range that includes all records with the given projectId
+		const range = IDBKeyRange.bound(
+			[projectId, ''], // Start of range: `projectId` with the earliest possible `createdAt`
+			[projectId, '\uFFFF'], // End of range: `projectId` with the highest possible `createdAt`
 		);
+
+		// Query using the composite index
+		return this.database.getAllFromIndex('commands', 'projectId_createdAt', range);
 	}
 
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
 		projectData.commands = await this.getCommandsOfProject(id);
-		console.log(projectData.commands);
+		projectData.commands.forEach((commandData) => {
+			console.log(commandData.details);
+		});
 		return projectData;
 	}
 
