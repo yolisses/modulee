@@ -2,6 +2,7 @@
 	import { LocalProjectsRepository } from '$lib/project/LocalProjectsRepository';
 	import type { ProjectData } from '$lib/project/ProjectData';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
+	import Spinner from '$lib/utils/Spinner.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
@@ -23,4 +24,8 @@
 
 {#if projectData}
 	<ProjectPage {projectData} {projectsRepository} />
+{:else}
+	<div class="h-full w-full items-center justify-center">
+		<Spinner />
+	</div>
 {/if}
