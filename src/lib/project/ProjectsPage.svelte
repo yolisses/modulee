@@ -14,8 +14,9 @@
 
 	let projectsData = $state<ProjectData[]>([]);
 
-	onMount(() => {
-		projectsData = projectsRepository.getProjects();
+	onMount(async () => {
+		await projectsRepository.initialize();
+		projectsData = await projectsRepository.getProjects();
 	});
 </script>
 
