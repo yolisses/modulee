@@ -2,6 +2,7 @@
 	import { LocalProjectsRepository } from '$lib/project/LocalProjectsRepository';
 	import type { ProjectData } from '$lib/project/ProjectData';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
+	import { doNothing } from '$lib/utils/doNothing';
 	import Spinner from '$lib/utils/Spinner.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
@@ -11,21 +12,25 @@
 	}
 
 	const { data }: Props = $props();
-
 	const projectsRepository = new LocalProjectsRepository();
 
-	let projectData = $state.raw<ProjectData>();
+	// This way to load data from the browser may be overcomplicated. It was
+	// chosen simply to use the standard await block
+	let projectDataPromise = $state<Promise<ProjectData>>(new Promise(doNothing));
 
-	onMount(async () => {
-		await projectsRepository.initialize();
-		projectData = await projectsRepository.getProject(data.projectId);
+	onMount(() => {
+		projectDataPromise = new Promise(async (resolve) => {
+			await projectsRepository.initialize();
+			const projectData = await projectsRepository.getProject(data.projectId);
+			resolve(projectData);
+		});
 	});
 </script>
 
-{#if projectData}
-	<ProjectPage {projectData} {projectsRepository} />
-{:else}
+{#await projectDataPromise}
 	<div class="h-full w-full items-center justify-center">
 		<Spinner />
 	</div>
-{/if}
+{:then projectData}
+	<ProjectPage {projectData} {projectsRepository} />
+{/await}
