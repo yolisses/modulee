@@ -33,8 +33,16 @@ export class LocalProjectsRepository implements ProjectsRepository {
 		return this.database.getAll('projects');
 	}
 
+	async getCommandsOfProject(projectId: string): Promise<CommandData[]> {
+		const transaction = this.database.transaction('commands', 'readonly');
+		const index = transaction.store.index('projectId');
+		return index.getAll(projectId);
+	}
+
 	async getProject(id: string) {
-		return this.database.get('projects', id);
+		const projectData: ProjectData = await this.database.get('projects', id);
+		projectData.commands = await this.getCommandsOfProject(id);
+		return projectData;
 	}
 
 	async addCommand(commandData: CommandData) {
