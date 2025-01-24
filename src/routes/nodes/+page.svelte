@@ -3,8 +3,9 @@
 	import { devEditorData } from '../../dev/devEditorData';
 
 	const editor = new Editor(devEditorData);
+	const projectId = 'devNodesPage';
 </script>
 
 <div class="min-h-screen">
-	<NodesPage {editor} />
+	<NodesPage {editor} {projectId} />
 </div>

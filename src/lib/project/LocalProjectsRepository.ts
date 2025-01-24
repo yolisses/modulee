@@ -1,5 +1,5 @@
 import { openDB, type IDBPDatabase } from 'idb';
-import type { CommandData } from '../../../../modulee-nodes-editor/dist/editor/CommandData';
+import type { CommandData } from 'modulee-nodes-editor';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
@@ -20,6 +20,11 @@ export class LocalProjectsRepository implements ProjectsRepository {
 				if (!database.objectStoreNames.contains('projects')) {
 					database.createObjectStore('projects', { keyPath: 'id', autoIncrement: false });
 				}
+
+				if (!database.objectStoreNames.contains('commands')) {
+					const objectStore = database.createObjectStore('commands', { keyPath: 'id' });
+					objectStore.createIndex('projectId', 'projectId', { unique: true });
+				}
 			},
 		});
 	}
@@ -32,12 +37,12 @@ export class LocalProjectsRepository implements ProjectsRepository {
 		return this.database.get('projects', id);
 	}
 
-	async addCommand(projectId: string, commandData: CommandData) {
-		throw new Error('Method not implemented.');
+	async addCommand(commandData: CommandData) {
+		const transaction = this.database.transaction('commands', 'readwrite');
+		await Promise.all([transaction.store.add(commandData), transaction.done]);
 	}
 
 	async createProject(projectData: ProjectData) {
-		console.log(projectData);
 		const transaction = this.database.transaction('projects', 'readwrite');
 		await Promise.all([transaction.store.add(projectData), transaction.done]);
 	}

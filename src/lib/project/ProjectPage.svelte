@@ -10,4 +10,4 @@
 	const editor = new Editor({ nodes: [] });
 </script>
 
-<NodesPage {editor}></NodesPage>
+<NodesPage {editor} projectId={projectData.id}></NodesPage>

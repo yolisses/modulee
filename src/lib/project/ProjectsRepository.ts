@@ -5,6 +5,6 @@ export interface ProjectsRepository {
 	initialize(): Promise<void>;
 	getProjects(): Promise<ProjectData[]>;
 	getProject(id: string): Promise<ProjectData>;
+	addCommand(commandData: CommandData): Promise<void>;
 	createProject(projectData: ProjectData): Promise<void>;
-	addCommand(projectId: string, commandData: CommandData): Promise<void>;
 }
