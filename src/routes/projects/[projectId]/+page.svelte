@@ -13,7 +13,7 @@
 
 	const projectsRepository = new LocalProjectsRepository();
 
-	let projectData = $state<ProjectData>();
+	let projectData = $state.raw<ProjectData>();
 
 	onMount(async () => {
 		await projectsRepository.initialize();

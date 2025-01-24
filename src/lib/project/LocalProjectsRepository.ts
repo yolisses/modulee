@@ -22,8 +22,8 @@ export class LocalProjectsRepository implements ProjectsRepository {
 				}
 
 				if (!database.objectStoreNames.contains('commands')) {
-					const objectStore = database.createObjectStore('commands', { keyPath: 'id' });
-					objectStore.createIndex('projectId', 'projectId', { unique: false });
+					const store = database.createObjectStore('commands', { keyPath: 'id' });
+					store.createIndex('projectId_createdAt', ['projectId', 'createdAt'], { unique: false });
 				}
 			},
 		});
@@ -33,21 +33,29 @@ export class LocalProjectsRepository implements ProjectsRepository {
 		return this.database.getAll('projects');
 	}
 
+	/**
+	 * Returns all the commands of a project ordered by creation date
+	 * @param projectId
+	 */
 	async getCommandsOfProject(projectId: string): Promise<CommandData[]> {
-		const transaction = this.database.transaction('commands', 'readonly');
-		const index = transaction.store.index('projectId');
-		return index.getAll(projectId);
+		// Query using the composite index, sorted by `createdAt`
+		return this.database.getAllFromIndex(
+			'commands',
+			'projectId_createdAt',
+			IDBKeyRange.bound([projectId, -Infinity], [projectId, Infinity]),
+		);
 	}
 
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
 		projectData.commands = await this.getCommandsOfProject(id);
+		console.log(projectData.commands);
 		return projectData;
 	}
 
 	async addCommand(commandData: CommandData) {
 		const transaction = this.database.transaction('commands', 'readwrite');
-		await Promise.all([transaction.store.add(commandData), transaction.done]);
+		await Promise.all([transaction.store.add(commandData), transaction.done]).catch(console.error);
 	}
 
 	async createProject(projectData: ProjectData) {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Editor, NodesPage } from 'modulee-nodes-editor';
+	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
 	import type { ProjectsRepository } from './ProjectsRepository';
 
@@ -9,9 +9,17 @@
 	}
 
 	const { projectData, projectsRepository }: Props = $props();
+
 	const editor = new Editor({ nodes: [] });
+
+	projectData.commands.map((commandData) => {
+		const command = instantiateCommand(commandData);
+		console.log(command);
+		editor.execute(command);
+	});
+
 	editor.onExecute = (command) => {
-		projectsRepository.addCommand(command.commandData).then(console.log);
+		projectsRepository.addCommand(command.commandData);
 	};
 </script>
 
