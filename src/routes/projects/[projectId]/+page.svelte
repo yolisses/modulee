@@ -22,5 +22,5 @@
 </script>
 
 {#if projectData}
-	<ProjectPage {projectData} />
+	<ProjectPage {projectData} {projectsRepository} />
 {/if}

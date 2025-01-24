@@ -23,7 +23,7 @@ export class LocalProjectsRepository implements ProjectsRepository {
 
 				if (!database.objectStoreNames.contains('commands')) {
 					const objectStore = database.createObjectStore('commands', { keyPath: 'id' });
-					objectStore.createIndex('projectId', 'projectId', { unique: true });
+					objectStore.createIndex('projectId', 'projectId', { unique: false });
 				}
 			},
 		});
