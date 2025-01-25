@@ -5,6 +5,7 @@
 	import type { ProjectData } from './ProjectData';
 	import ProjectList from './ProjectList.svelte';
 	import type { ProjectsRepository } from './ProjectsRepository';
+	import { setProjectsRepositoryContext } from './projectRepositoryContext';
 
 	interface Props {
 		projectsRepository: ProjectsRepository;
@@ -13,6 +14,8 @@
 	const { projectsRepository }: Props = $props();
 
 	let projectsData = $state<ProjectData[]>([]);
+
+	setProjectsRepositoryContext(projectsRepository);
 
 	onMount(async () => {
 		await projectsRepository.initialize();

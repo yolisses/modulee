@@ -35,16 +35,10 @@ export class LocalProjectsRepository implements ProjectsRepository {
 
 	/**
 	 * Returns all the commands of a project ordered by creation date
-	 * @param projectId
+	 * @param id
 	 */
-	async getCommandsOfProject(projectId: string): Promise<CommandData[]> {
-		// Define a range that includes all records with the given projectId
-		const range = IDBKeyRange.bound(
-			[projectId, ''], // Start of range: `projectId` with the earliest possible `createdAt`
-			[projectId, '\uFFFF'], // End of range: `projectId` with the highest possible `createdAt`
-		);
-
-		// Query using the composite index
+	async getCommandsOfProject(id: string): Promise<CommandData[]> {
+		const range = IDBKeyRange.bound([id, ''], [id, '\uFFFF']);
 		return this.database.getAllFromIndex('commands', 'projectId_createdAt', range);
 	}
 
@@ -54,9 +48,14 @@ export class LocalProjectsRepository implements ProjectsRepository {
 		return projectData;
 	}
 
+	async deleteProject(id: string) {
+		const transaction = this.database.transaction('projects', 'readwrite');
+		await Promise.all([transaction.store.delete(id), transaction.done]);
+	}
+
 	async addCommand(commandData: CommandData) {
 		const transaction = this.database.transaction('commands', 'readwrite');
-		await Promise.all([transaction.store.add(commandData), transaction.done]).catch(console.error);
+		await Promise.all([transaction.store.add(commandData), transaction.done]);
 	}
 
 	async createProject(projectData: ProjectData) {

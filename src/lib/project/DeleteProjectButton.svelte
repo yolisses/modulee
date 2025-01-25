@@ -5,8 +5,8 @@
 		projectId: string;
 	}
 
-	const { projectId }: Props = $props();
 	let isModalActive = $state(false);
+	const { projectId }: Props = $props();
 
 	function handleClick() {
 		isModalActive = true;

@@ -4,5 +4,8 @@
 		"source.organizeImports": "always",
 		"source.addMissingImports.ts": "always"
 	},
-	"editor.defaultFormatter": "esbenp.prettier-vscode"
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"cSpell.words": [
+		"IDBP"
+	]
 }
