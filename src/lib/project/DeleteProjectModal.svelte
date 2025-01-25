@@ -10,7 +10,7 @@
 </script>
 
 <Modal {closeModal}>
-	<div class="gap-2 rounded rounded bg-zinc-800 p-2">
+	<div class="gap-2 rounded bg-zinc-800 p-2">
 		<p>Delete project?</p>
 		<p>This action is irreversible.</p>
 		<div class="flex flex-row justify-end gap-2">
