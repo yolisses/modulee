@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { passSomeString } from '$dev/passSomeString';
 	import { handleGraphChange } from '$lib/engine/handleGraphChange';
 	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
@@ -23,8 +22,6 @@
 		projectsRepository.addCommand(command.commandData);
 		handleGraphChange(editor.nodes);
 	};
-
-	passSomeString('from code');
 </script>
 
 <NodesPage {editor} projectId={projectData.id}></NodesPage>
