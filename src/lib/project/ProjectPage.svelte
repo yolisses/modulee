@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { passSomeString } from '$dev/passSomeString';
+	import { handleGraphChange } from '$lib/engine/handleGraphChange';
 	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
 	import type { ProjectsRepository } from './ProjectsRepository';
@@ -20,6 +21,7 @@
 
 	editor.onExecute = (command) => {
 		projectsRepository.addCommand(command.commandData);
+		handleGraphChange(editor.nodes);
 	};
 
 	passSomeString('from code');
