@@ -51,9 +51,6 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
 		projectData.commands = await this.getCommandsOfProject(id);
-		projectData.commands.forEach((commandData) => {
-			console.log(commandData.details);
-		});
 		return projectData;
 	}
 

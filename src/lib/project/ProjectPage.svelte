@@ -14,7 +14,6 @@
 
 	projectData.commands.map((commandData) => {
 		const command = instantiateCommand(commandData);
-		console.log(command);
 		editor.execute(command);
 	});
 
