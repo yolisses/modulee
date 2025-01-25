@@ -3,7 +3,7 @@
 	import Fa from 'svelte-fa';
 </script>
 
-<div class="border-r border-white/10">
+<div class="border-r border-black">
 	<a class="common-button" href="/projects">
 		<Fa icon={faFile} />
 	</a>
