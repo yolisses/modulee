@@ -23,7 +23,7 @@
 	});
 </script>
 
-<div class="flex-row items-center justify-between gap-2 border-b border-white/10">
+<div class="flex-row items-center justify-between gap-2 border-b border-black">
 	<h1 class="pl-2 text-lg font-medium">Projects</h1>
 	<div class="flex-1"></div>
 	<CreateProjectButton {projectsRepository} />

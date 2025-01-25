@@ -4,7 +4,7 @@
 	import TextSearchInput from './TextSearchInput.svelte';
 </script>
 
-<div class="flex-row items-center justify-between border-b border-white/10">
+<div class="flex-row items-center justify-between border-b border-black">
 	<h1 class="pl-2 text-lg font-medium">Effects</h1>
 	<TextSearchInput />
 </div>
