@@ -1,7 +1,13 @@
 <script>
-	import Spinner from '$lib/ui/Spinner.svelte';
+	import Modal from '$lib/ui/Modal.svelte';
+
+	let isModalActive = $state(true);
+
+	function closeModal() {
+		isModalActive = false;
+	}
 </script>
 
-<div class="bg-green-500"></div>
-Hello, Dev
-<Spinner />
+{#if isModalActive}
+	<Modal {closeModal}>hello</Modal>
+{/if}
