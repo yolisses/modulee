@@ -20,8 +20,11 @@
 
 	editor.onExecute = (command) => {
 		projectsRepository.addCommand(command.commandData);
-		handleGraphChange(editor.nodes);
 	};
+
+	$effect(() => {
+		handleGraphChange(editor.nodes);
+	});
 </script>
 
 <NodesPage {editor} projectId={projectData.id}></NodesPage>

@@ -1,10 +1,5 @@
 import type { NodeData } from 'modulee-nodes-editor';
 
-// Node::TimeNode(TimeNode::new(1)),
-// Node::ConstantNode(ConstantNode::new(2, 440.)),
-// Node::PhaseNode(PhaseNode::new(3, 1, 2)),
-// Node::TriangleWaveNode(TriangleWaveNode::new(4, 3)),
-// Node::OutputNode(OutputNode::new(5, 4)),
 export const devNodesData: NodeData[] = [
 	{
 		inputs: [],
