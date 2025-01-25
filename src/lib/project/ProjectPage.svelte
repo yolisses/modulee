@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { passSomeString } from '$dev/passSomeString';
 	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
 	import type { ProjectsRepository } from './ProjectsRepository';
@@ -20,6 +21,8 @@
 	editor.onExecute = (command) => {
 		projectsRepository.addCommand(command.commandData);
 	};
+
+	passSomeString('from code');
 </script>
 
 <NodesPage {editor} projectId={projectData.id}></NodesPage>
