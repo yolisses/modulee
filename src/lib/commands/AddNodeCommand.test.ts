@@ -1,5 +1,6 @@
+import type { Node } from '$lib/data/Node.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
-import { test, expect } from 'vitest';
+import { expect, test } from 'vitest';
 import { AddNodeCommand } from './AddNodeCommand';
 import { mockCommandData } from './test/mockNodeData';
 

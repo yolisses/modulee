@@ -1,5 +1,5 @@
-import type { test, expect } from 'vitest';
-import type { findById } from './findById';
+import { expect, test } from 'vitest';
+import { findById } from './findById';
 import type { HasId } from './HasId';
 
 test('findById', () => {

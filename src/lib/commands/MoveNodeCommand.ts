@@ -1,4 +1,4 @@
-import type { findById } from '$lib/array/findById';
+import { findById } from '$lib/array/findById';
 import type { VectorData } from '$lib/data/VectorData';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
