@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { handleGraphChange } from '$lib/engine/handleGraphChange';
+	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
 	import type { ProjectsRepository } from './ProjectsRepository';
@@ -27,4 +28,8 @@
 	});
 </script>
 
-<NodesPage {editor} projectId={projectData.id}></NodesPage>
+<NodesPage {editor} projectId={projectData.id}>
+	{#snippet topBarChildren()}
+		<HomeButton />
+	{/snippet}
+</NodesPage>
