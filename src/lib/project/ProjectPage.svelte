@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { Editor } from '$lib/editor/Editor.svelte';
+	import { instantiateCommand } from '$lib/editor/instantiateCommand';
 	import { handleGraphChange } from '$lib/engine/handleGraphChange';
+	import NodesPage from '$lib/node/NodesPage.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
-	import { Editor, NodesPage, instantiateCommand } from 'modulee-nodes-editor';
 	import type { ProjectData } from './ProjectData';
 	import type { ProjectsRepository } from './ProjectsRepository';
 

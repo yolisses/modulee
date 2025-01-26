@@ -1,5 +1,6 @@
 import type { Connector } from 'nodes-editor';
 import type { Input } from './Input.svelte';
+import type { Node } from './Node.svelte';
 import type { OutputData } from './OutputData';
 
 export class Output implements Connector {
