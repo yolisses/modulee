@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextSearchInput from '$lib/effect/TextSearchInput.svelte';
+	import TextSearchInput from '$lib/ui/TextSearchInput.svelte';
 	import { onMount } from 'svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
