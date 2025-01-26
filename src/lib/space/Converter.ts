@@ -1,4 +1,4 @@
-import type { Vector } from './Vector';
+import { Vector } from 'nodes-editor';
 
 export interface Converter {
 	getScreenPosition(dataPosition: Vector): Vector;

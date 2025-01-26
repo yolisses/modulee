@@ -1,5 +1,5 @@
-import type { HasId } from './HasId';
-import type { Remotion } from './remotion';
+import type { HasId } from './HasId.js';
+import type { Remotion } from './remotion.js';
 
 export function removeById<T extends HasId>(items: T[], id: string): Remotion<T> {
 	const index = items.findIndex((item) => {
