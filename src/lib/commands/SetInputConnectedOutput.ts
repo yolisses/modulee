@@ -1,6 +1,6 @@
-import { Command } from '$lib/editor/Command.js';
-import type { EditorData } from '$lib/editor/EditorData.js';
-import { findInputDataInNodesData } from './utils/findInputDataInNodesData.js';
+import { Command } from '$lib/editor/Command';
+import type { EditorData } from '$lib/editor/EditorData';
+import type { findInputDataInNodesData } from './utils/findInputDataInNodesData';
 
 export class SetInputConnectedOutput extends Command<{
 	inputId: string;

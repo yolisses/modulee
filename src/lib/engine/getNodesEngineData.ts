@@ -1,7 +1,3 @@
-import type { Node } from 'modulee-nodes-editor';
-import { getNodeEngineData } from './getNodeEngineData';
-import type { NodeEngineData } from './NodeEngineData';
-
 export function getNodesEngineData(nodes: Node[]) {
 	const fallback: NodeEngineData = {
 		id: 0,

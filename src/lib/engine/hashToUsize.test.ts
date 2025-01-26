@@ -1,6 +1,3 @@
-import { expect, test } from 'vitest';
-import { hashToUsize } from './hashToUsize';
-
 test('hashToUsize', () => {
 	expect(hashToUsize('a')).toEqual(3826002220);
 	expect(hashToUsize('b')).toEqual(3876335076);

@@ -1,4 +1,4 @@
-import type { Vector } from '$lib/space/Vector';
+import type { Vector } from 'nodes-editor';
 import { getVectorStringPx } from './getVectorStringPx';
 
 export function getVectorsStringPx(vectors: Vector[]) {

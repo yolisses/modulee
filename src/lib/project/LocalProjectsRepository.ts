@@ -1,8 +1,3 @@
-import { openDB, type IDBPDatabase } from 'idb';
-import type { CommandData } from 'modulee-nodes-editor';
-import type { ProjectData } from './ProjectData';
-import type { ProjectsRepository } from './ProjectsRepository';
-
 export class LocalProjectsRepository implements ProjectsRepository {
 	databaseInstance?: IDBPDatabase;
 

@@ -1,7 +1,7 @@
-import type { EditorData } from '$lib/editor/EditorData.js';
+import type { EditorData } from '$lib/editor/EditorData';
 import { test, expect } from 'vitest';
-import { MoveNodeCommand } from './MoveNodeCommand.js';
-import { mockCommandData } from './test/mockNodeData.js';
+import { MoveNodeCommand } from './MoveNodeCommand';
+import { mockCommandData } from './test/mockNodeData';
 
 test('MoveNodeCommand', () => {
 	const editorData = {

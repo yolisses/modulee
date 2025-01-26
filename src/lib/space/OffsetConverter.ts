@@ -1,6 +1,3 @@
-import { Vector } from 'nodes-editor';
-import type { Converter } from './Converter.js';
-
 export class OffsetConverter implements Converter {
 	constructor(private offset: Vector) {}
 

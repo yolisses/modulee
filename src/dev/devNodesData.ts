@@ -1,4 +1,4 @@
-import type { NodeData } from 'modulee-nodes-editor';
+import type { NodeData } from '$lib/data/NodeData';
 
 export const devNodesData: NodeData[] = [
 	{

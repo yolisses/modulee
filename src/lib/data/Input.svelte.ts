@@ -1,7 +1,6 @@
-import type { Connector } from './Connector.js';
-import type { InputData } from './InputData.js';
-import type { Node } from './Node.svelte.js';
-import type { Output } from './Output.svelte.js';
+import type { Connector } from 'nodes-editor';
+import type { InputData } from './InputData';
+import type { Output } from './Output.svelte';
 
 export class Input implements Connector {
 	id: string;
@@ -11,7 +10,7 @@ export class Input implements Connector {
 
 	constructor(
 		inputData: InputData,
-		public node: Node
+		public node: Node,
 	) {
 		const { id, name, connectedOutputId } = inputData;
 		this.id = id;
@@ -22,7 +21,7 @@ export class Input implements Connector {
 	getData(): InputData {
 		return {
 			id: this.id,
-			name: this.name
+			name: this.name,
 		};
 	}
 }

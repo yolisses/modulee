@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
-import { reinsert } from './reinsert.js';
-import type { Remotion } from './remotion.js';
+import { reinsert } from './reinsert';
+import type { Remotion } from './remotion';
 
 test('reinsert', () => {
 	const items = ['1', '3'];

@@ -1,8 +1,7 @@
-import type { Node } from '$lib/data/Node.svelte.js';
-import type { EditorData } from '$lib/editor/EditorData.js';
-import { expect, test } from 'vitest';
-import { AddNodeCommand } from './AddNodeCommand.js';
-import { mockCommandData } from './test/mockNodeData.js';
+import type { EditorData } from '$lib/editor/EditorData';
+import { test, expect } from 'vitest';
+import { AddNodeCommand } from './AddNodeCommand';
+import { mockCommandData } from './test/mockNodeData';
 
 test('AddNodeCommand', () => {
 	const editorData = { nodes: [{ id: '1' }, { id: '2' }] } as EditorData;

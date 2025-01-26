@@ -1,5 +1,4 @@
-import type { Node } from 'modulee-nodes-editor';
-import { hashToUsize } from './hashToUsize';
+import type { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 
 export function getNodeEngineData(node: Node, fallbackId: number): NodeEngineData {

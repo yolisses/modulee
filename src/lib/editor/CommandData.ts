@@ -1,4 +1,4 @@
-import type { EmptyObject } from './EmptyObject.js';
+import type { EmptyObject } from './EmptyObject';
 
 export type CommandData<T = EmptyObject> = {
 	id: string;

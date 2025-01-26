@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest';
-import { findById } from './findById.js';
-import type { HasId } from './HasId.js';
+import type { test, expect } from 'vitest';
+import type { findById } from './findById';
+import type { HasId } from './HasId';
 
 test('findById', () => {
 	const items: HasId[] = [{ id: '1' }, { id: '2' }, { id: '3' }];

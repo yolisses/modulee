@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { createId } from './createId.js';
+import { createId } from './createId';
 
 test('createId', () => {
 	const id = createId();

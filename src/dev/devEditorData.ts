@@ -1,4 +1,4 @@
-import type { EditorData } from 'modulee-nodes-editor';
+import type { EditorData } from '$lib/editor/EditorData';
 import { devNodesData } from './devNodesData';
 
 export const devEditorData: EditorData = {

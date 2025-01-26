@@ -1,5 +1,5 @@
-import type { CommandClass } from './CommandClass.js';
-import { commandClasses } from './commandClasses.js';
+import type { CommandClass } from './CommandClass';
+import { commandClasses } from './commandClasses';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const commandClassesByType: Record<string, CommandClass<any>> = {};

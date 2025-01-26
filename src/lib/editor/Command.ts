@@ -1,7 +1,7 @@
-import { createId } from '$lib/data/createId.js';
-import type { CommandData } from './CommandData.js';
-import type { EditorData } from './EditorData.js';
-import type { EmptyObject } from './EmptyObject.js';
+import { createId } from '$lib/data/createId';
+import type { CommandData } from './CommandData';
+import type { EditorData } from './EditorData';
+import type { EmptyObject } from './EmptyObject';
 
 export abstract class Command<T = EmptyObject> {
 	id: string;

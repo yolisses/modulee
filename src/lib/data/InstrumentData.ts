@@ -1,4 +1,4 @@
-import type { EffectData } from '$lib/data/EffectData';
+import type { EffectData } from './EffectData';
 
 export type InstrumentData = {
 	id: string;

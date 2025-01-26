@@ -1,6 +1,3 @@
-import { Vector } from 'nodes-editor';
-import type { Converter } from './Converter.js';
-
 export class ZoomConverter implements Converter {
 	constructor(private zoom: number) {}
 

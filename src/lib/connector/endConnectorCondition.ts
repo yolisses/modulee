@@ -1,5 +1,5 @@
-import { Input } from '$lib/data/Input.svelte.js';
-import { Output } from '$lib/data/Output.svelte.js';
+import type { Input } from '$lib/data/Input.svelte';
+import type { Output } from '$lib/data/Output.svelte';
 import type { Connector } from 'nodes-editor';
 
 export function endConnectorCondition(endConnector: Connector, startConnector: Connector) {
