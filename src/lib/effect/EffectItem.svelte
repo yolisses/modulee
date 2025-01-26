@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SimpleItem from '$lib/ui/SimpleItem.svelte';
 	import type { EffectData } from './EffectData';
 
 	interface Props {
@@ -8,6 +9,4 @@
 	const { effectData }: Props = $props();
 </script>
 
-<button class="common-button">
-	{effectData.name}
-</button>
+<SimpleItem route="/effects/[id]" item={effectData}></SimpleItem>

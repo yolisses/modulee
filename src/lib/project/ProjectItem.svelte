@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SimpleItem from '$lib/ui/SimpleItem.svelte';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 
@@ -9,9 +10,8 @@
 	const { projectData }: Props = $props();
 </script>
 
-<div class="hover-bg flex flex-row items-stretch">
-	<a href="/projects/{projectData.id}" class="flex-1 p-2">
-		{projectData.name}
-	</a>
-	<DeleteProjectButton projectId={projectData.id} />
-</div>
+<SimpleItem item={projectData} route="/projects/[id]">
+	{#snippet buttons({ id })}
+		<DeleteProjectButton projectId={id} />
+	{/snippet}
+</SimpleItem>
