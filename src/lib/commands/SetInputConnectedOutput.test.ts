@@ -1,7 +1,7 @@
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
-import type { SetInputConnectedOutput } from './SetInputConnectedOutput';
-import type { mockCommandData } from './test/mockNodeData';
+import { SetInputConnectedOutput } from './SetInputConnectedOutput';
+import { mockCommandData } from './test/mockNodeData';
 
 test('SetInputConnectedOutput', () => {
 	const editorData = {

@@ -1,4 +1,4 @@
-import type { Node } from '$lib/data/Node.svelte';
+import { Node } from '$lib/data/Node.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 

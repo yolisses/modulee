@@ -1,3 +1,6 @@
+import { Vector } from 'nodes-editor';
+import type { Converter } from './Converter';
+
 export class Space {
 	constructor(private converters: Converter[] = []) {}
 

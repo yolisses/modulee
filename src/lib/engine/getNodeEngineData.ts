@@ -1,4 +1,5 @@
-import type { hashToUsize } from './hashToUsize';
+import type { Node } from '$lib/data/Node.svelte';
+import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 
 export function getNodeEngineData(node: Node, fallbackId: number): NodeEngineData {

@@ -1,3 +1,7 @@
+import type { Node } from '$lib/data/Node.svelte';
+import { getNodeEngineData } from './getNodeEngineData';
+import type { NodeEngineData } from './NodeEngineData';
+
 export function getNodesEngineData(nodes: Node[]) {
 	const fallback: NodeEngineData = {
 		id: 0,
