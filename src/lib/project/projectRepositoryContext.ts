@@ -1,3 +1,6 @@
+import { setContext, getContext } from 'svelte';
+import type { ProjectsRepository } from './ProjectsRepository';
+
 const projectsRepositoryKey = Symbol('projectsRepository');
 
 export function setProjectsRepositoryContext(projectsRepository: ProjectsRepository) {

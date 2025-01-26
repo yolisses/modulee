@@ -1,3 +1,8 @@
+import { createId } from '$lib/data/createId';
+import type { NodeData } from '$lib/data/NodeData';
+import type { Vector } from 'nodes-editor';
+import type { NodeType } from './NodeType';
+
 export function createNodeData(nodeType: NodeType, position: Vector): NodeData {
 	return {
 		position,

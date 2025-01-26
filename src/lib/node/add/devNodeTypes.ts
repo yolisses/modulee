@@ -1,3 +1,5 @@
+import type { NodeType } from './NodeType';
+
 export const devNodeTypes: NodeType[] = [
 	{
 		id: 'add',

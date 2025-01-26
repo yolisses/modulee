@@ -1,5 +1,5 @@
-import type { Input } from '$lib/data/Input.svelte';
-import type { Output } from '$lib/data/Output.svelte';
+import { Input } from '$lib/data/Input.svelte';
+import { Output } from '$lib/data/Output.svelte';
 import type { EndPreviewConnectionEvent } from 'nodes-editor';
 
 type PossibleInputAndOutput = {

@@ -1,3 +1,6 @@
+import type { CommandData } from '$lib/editor/CommandData';
+import type { ProjectData } from './ProjectData';
+
 export interface ProjectsRepository {
 	initialize(): Promise<void>;
 	getProjects(): Promise<ProjectData[]>;
