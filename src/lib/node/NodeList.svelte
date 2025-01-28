@@ -9,6 +9,7 @@
 		getPreviewConnectionContext,
 		PreviewConnectionPointerStrategy,
 		SelectionBoxPointerStrategy,
+		setDefaultContexts,
 		type EndPreviewConnectionEvent,
 	} from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
@@ -25,6 +26,7 @@
 		projectId: string;
 	}
 
+	setDefaultContexts();
 	let mouseEvent = $state<MouseEvent>();
 	const { nodes, space, editor, projectId }: Props = $props();
 
