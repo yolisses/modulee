@@ -2,6 +2,7 @@
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
+	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter.js';
 	import { Space } from '$lib/space/Space.js';
 	import { ZoomConverter } from '$lib/space/ZoomConverter.js';
@@ -31,6 +32,7 @@
 	<RedoButton {editor} />
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
+	<GroupNodesButton />
 </div>
 <div class="flex min-h-screen flex-col">
 	<NodeList {editor} {space} {projectId} nodes={editor.nodes} />
