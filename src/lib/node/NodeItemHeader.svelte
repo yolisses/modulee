@@ -48,9 +48,6 @@
 	}
 
 	function handleContextMenu(e: MouseEvent) {
-		e.preventDefault();
-		e.stopPropagation();
-
 		const removeNodeCommand = new RemoveNodeCommand({
 			projectId,
 			id: createId(),
