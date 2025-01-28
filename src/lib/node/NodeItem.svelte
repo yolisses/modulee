@@ -27,7 +27,8 @@
 		style:outline-width="0.1lh"
 		style:border-radius="0.4lh"
 		class:outline-blue-500={isSelected}
-		class="flex flex-col break-words bg-zinc-600 outline outline-zinc-700"
+		class:outline-zinc-700={!isSelected}
+		class="flex flex-col break-words bg-zinc-600 outline"
 	>
 		<NodeItemHeader {node} {space} {editor} {projectId} />
 		{#each node.outputs as output (output.id)}
