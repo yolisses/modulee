@@ -3,6 +3,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import type { Space } from '$lib/space/Space.js';
 	import {
 		NodeList as BaseNodeList,
@@ -72,6 +73,7 @@
 		{/each}
 		<PreviewConnectionWire {space} />
 		<AddNodeMenuWrapper {space} {editor} {projectId} {mouseEvent} />
+		<SelectionBox />
 	</BaseNodeList>
 </div>
 
