@@ -4,7 +4,13 @@
 	import { createId } from '$lib/data/createId.js';
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
-	import { NodeList as BaseNodeList, type EndPreviewConnectionEvent } from 'nodes-editor';
+	import {
+		NodeList as BaseNodeList,
+		getPreviewConnectionContext,
+		PreviewConnectionPointerStrategy,
+		SelectionBoxPointerStrategy,
+		type EndPreviewConnectionEvent,
+	} from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
 	import { getInputAndOutput } from './getInputAndOutput.js';
@@ -39,6 +45,18 @@
 		e.preventDefault();
 		mouseEvent = e;
 	}
+
+	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(
+		handleEndPreviewConnection,
+	);
+	const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy();
+
+	const previewConnectionContext = getPreviewConnectionContext();
+	const pointerStrategy = $derived(
+		previewConnectionContext.startConnector
+			? previewConnectionPointerStrategy
+			: selectionBoxPointerStrategy,
+	);
 </script>
 
 <div
@@ -46,7 +64,7 @@
 	style:font-size={getScreenFontSize(space) + 'px'}
 	style:line-height={getScreenLineHeight(space) + 'px'}
 >
-	<BaseNodeList oncontextmenu={handleContextMenu} onEndPreview={handleEndPreviewConnection}>
+	<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
 		{#each nodes as node (node.id)}
 			<NodeItem {node} {space} {editor} {projectId} />
 		{/each}

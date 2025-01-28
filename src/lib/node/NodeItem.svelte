@@ -20,7 +20,7 @@
 	const screenPosition = $derived(space.getScreenPosition(node.position));
 </script>
 
-<BaseNodeItem position={screenPosition}>
+<BaseNodeItem {node} position={screenPosition}>
 	<div
 		style:outline-width="0.1lh"
 		style:border-radius="0.4lh"
