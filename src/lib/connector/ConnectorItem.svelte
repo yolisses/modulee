@@ -13,7 +13,11 @@
 </script>
 
 <ConnectorArea {connector} {endConnectorCondition}>
-	<div class="relative flex items-center {direction === 'left' ? 'flex-row' : 'flex-row-reverse'}">
+	<div
+		class:flex-row={direction === 'left'}
+		class:flex-row-reverse={direction === 'right'}
+		class="relative flex items-center hover:bg-white/10"
+	>
 		<ConnectorJoint {connector} />
 		{connector.name}
 	</div>
