@@ -4,7 +4,7 @@
 	import OutputItem from '$lib/connector/OutputItem.svelte';
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
-	import { NodeItem as BaseNodeItem } from 'nodes-editor';
+	import { NodeItem as BaseNodeItem, getSelectedNodesContext } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
@@ -18,12 +18,15 @@
 	const { node, space, editor, projectId }: Props = $props();
 
 	const screenPosition = $derived(space.getScreenPosition(node.position));
+	const selectedNodesContext = getSelectedNodesContext();
+	const isSelected = $derived(selectedNodesContext.selectedNodes[node.id]);
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
 	<div
 		style:outline-width="0.1lh"
 		style:border-radius="0.4lh"
+		class:outline-blue-500={isSelected}
 		class="flex flex-col break-words bg-zinc-600 outline outline-zinc-700"
 	>
 		<NodeItemHeader {node} {space} {editor} {projectId} />

@@ -4,7 +4,7 @@
 	import { createId } from '$lib/data/createId.js';
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
-	import { Mover, Vector, type MoveEvent } from 'nodes-editor';
+	import { Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
 
@@ -62,13 +62,15 @@
 	}
 </script>
 
-<Mover
-	onMove={handleMove}
-	onEndMove={handleEndMove}
-	onStartMove={handleStartMove}
-	oncontextmenu={handleContextMenu}
->
-	<div class="hover-bg" style:padding-inline="0.5lh">
-		{nodesName[node.type]}
-	</div>
-</Mover>
+<Selector id={node.id}>
+	<Mover
+		onMove={handleMove}
+		onEndMove={handleEndMove}
+		onStartMove={handleStartMove}
+		oncontextmenu={handleContextMenu}
+	>
+		<div class="hover-bg" style:padding-inline="0.5lh">
+			{nodesName[node.type]}
+		</div>
+	</Mover>
+</Selector>
