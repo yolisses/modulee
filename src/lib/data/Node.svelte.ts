@@ -8,8 +8,8 @@ import { Output } from './Output.svelte';
 export class Node {
 	id: string;
 	type: string;
-	inputs: Input[] = [];
-	outputs: Output[] = [];
+	inputs: Input[];
+	outputs: Output[];
 	position: Vector = $state()!;
 	extras: Record<string, number>;
 

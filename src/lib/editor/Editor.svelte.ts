@@ -1,19 +1,17 @@
+import { Group } from '$lib/data/Group.svelte';
 import { Node } from '$lib/data/Node.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
 export class Editor {
 	nodes: Node[] = $state([]);
+	groups: Group[] = $state([]);
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
 	onExecute?: (command: Command) => void;
 
 	constructor(private editorData: EditorData) {
 		this.recalculate();
-	}
-
-	static createEmpty() {
-		return new Editor({ nodes: [] });
 	}
 
 	recalculate() {
@@ -30,6 +28,8 @@ export class Editor {
 			input.connectedOutput = connectedOutput;
 			connectedOutput.connectedInputs.push(input);
 		});
+
+		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
 	}
 
 	execute(command: Command<any>) {
