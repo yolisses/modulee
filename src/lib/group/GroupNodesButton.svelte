@@ -3,6 +3,6 @@
 	import Fa from 'svelte-fa';
 </script>
 
-<button class="common-button">
+<button class="common-button" title="Group nodes">
 	<Fa icon={faObjectGroup} />
 </button>

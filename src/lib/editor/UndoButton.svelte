@@ -10,6 +10,6 @@
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanUndo()} class="common-button">
+<button onclick={handleClick} disabled={!editor.getCanUndo()} class="common-button" title="Undo">
 	<Fa icon={faUndo} />
 </button>

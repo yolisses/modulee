@@ -9,6 +9,6 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}>
+<button class="common-button" onclick={handleClick} title="Zoom out">
 	<Fa icon={faMagnifyingGlassMinus} />
 </button>

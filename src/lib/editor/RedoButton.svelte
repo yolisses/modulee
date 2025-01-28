@@ -10,6 +10,6 @@
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanRedo()} class="common-button">
+<button onclick={handleClick} disabled={!editor.getCanRedo()} class="common-button" title="Redo">
 	<Fa icon={faRedo} />
 </button>
