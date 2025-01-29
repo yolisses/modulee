@@ -26,12 +26,11 @@
 	const projectIdContext = $state({ projectId: projectData.id });
 	setProjectIdContext(projectIdContext);
 
-	const editor = new Editor({ nodes: [], groups: [] });
-	const editorContext = $state({ editor });
-	setEditorContext(editorContext);
-
 	// TODO find a more encapsulated way to execute this initial changes
-	editor.groups.push(projectData.mainGroup);
+	const editor = new Editor({
+		nodes: [],
+		groups: [structuredClone(projectData.mainGroup)],
+	});
 
 	projectData.commands.map((commandData) => {
 		const command = instantiateCommand(commandData);
@@ -41,6 +40,9 @@
 	editor.onExecute = (command) => {
 		projectsRepository.addCommand(command.commandData);
 	};
+
+	const editorContext = $state({ editor });
+	setEditorContext(editorContext);
 
 	$effect(() => {
 		handleGraphChange(editor.nodes);
