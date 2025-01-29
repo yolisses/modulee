@@ -4,9 +4,10 @@
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import DevGroupList from '$lib/group/DevGroupList.svelte';
 	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
-	import { OffsetConverter } from '$lib/space/OffsetConverter.js';
+	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
-	import { ZoomConverter } from '$lib/space/ZoomConverter.js';
+	import { setSpaceContext } from '$lib/space/spaceContext';
+	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import ZoomInButton from '$lib/zoom/ZoomInButton.svelte';
 	import ZoomOutButton from '$lib/zoom/ZoomOutButton.svelte';
 	import { Vector } from 'nodes-editor';
@@ -20,10 +21,16 @@
 	const editorContext = getEditorContext();
 	const { topBarChildren }: Props = $props();
 
+	const spaceContext = $state({ space: new Space() });
+	setSpaceContext(spaceContext);
+
 	let zoom = $state(20);
-	const space = $derived(
-		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)]),
-	);
+	$effect(() => {
+		spaceContext.space = new Space([
+			new OffsetConverter(new Vector(3, 2)),
+			new ZoomConverter(zoom),
+		]);
+	});
 </script>
 
 <div class="flex-row border-b border-b-black">
