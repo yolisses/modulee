@@ -1,3 +1,4 @@
+import { RedoCommand } from '$lib/commands/RedoCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
 import { Group } from '$lib/data/Group.svelte';
 import { Node } from '$lib/data/Node.svelte';
@@ -7,9 +8,10 @@ import type { EditorData } from './EditorData';
 export class Editor {
 	nodes: Node[] = $state([]);
 	groups: Group[] = $state([]);
+	onExecute?: (command: Command) => void;
+	// TODO consider removing these if the commands are never shown
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
-	onExecute?: (command: Command) => void;
 
 	constructor(private editorData: EditorData) {
 		this.recalculate();
@@ -35,29 +37,21 @@ export class Editor {
 		this.undoneHistory = this.editorData.undoneHistory;
 	}
 
+	getIsUndoOrRedo(command: Command) {
+		return command instanceof UndoCommand || command instanceof RedoCommand;
+	}
+
 	execute(command: Command<any>) {
 		command.execute(this.editorData);
 
 		// TODO fix this potential data duplication
-		if (!(command instanceof UndoCommand)) {
+		if (!this.getIsUndoOrRedo(command)) {
 			this.editorData.history.push(command);
+			this.editorData.undoneHistory = [];
 		}
 
-		this.undoneHistory = [];
 		this.recalculate();
 		this.onExecute?.(command);
-	}
-
-	redo() {
-		const command = this.undoneHistory.pop();
-
-		if (!command) {
-			throw new Error("Can't redo with empty undo history");
-		}
-
-		this.history.push(command);
-		command.execute(this.editorData);
-		this.recalculate();
 	}
 
 	getCanUndo() {

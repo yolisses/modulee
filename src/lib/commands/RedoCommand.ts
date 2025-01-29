@@ -3,16 +3,16 @@ import { removeById } from '$lib/array/removeById';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
 
-export class UndoCommand extends Command<{
+export class RedoCommand extends Command<{
 	commandId: string;
 }> {
 	remotion!: Remotion<Command>;
 
 	execute(editorData: EditorData): void {
-		this.remotion = removeById(editorData.history, this.details.commandId);
+		this.remotion = removeById(editorData.undoneHistory, this.details.commandId);
 		const command = this.remotion.item;
-		editorData.undoneHistory.push(command);
-		command.undo(editorData);
+		editorData.history.push(command);
+		command.execute(editorData);
 	}
 
 	undo(): void {
