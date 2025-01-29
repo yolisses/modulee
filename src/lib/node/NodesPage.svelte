@@ -14,12 +14,11 @@
 	import NodeList from './NodeList.svelte';
 
 	interface Props {
-		projectId: string;
 		topBarChildren?: Snippet;
 	}
 
 	const editorContext = getEditorContext();
-	const { projectId, topBarChildren }: Props = $props();
+	const { topBarChildren }: Props = $props();
 
 	let zoom = $state(20);
 	const space = $derived(
@@ -37,6 +36,6 @@
 </div>
 
 <div class="flex min-h-screen flex-row">
-	<NodeList {space} {projectId} nodes={editorContext.editor.nodes} />
+	<NodeList {space} nodes={editorContext.editor.nodes} />
 	<DevGroupList groups={editorContext.editor.groups} />
 </div>

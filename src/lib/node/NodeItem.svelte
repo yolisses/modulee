@@ -10,10 +10,9 @@
 	interface Props {
 		node: Node;
 		space: Space;
-		projectId: string;
 	}
 
-	const { node, space, projectId }: Props = $props();
+	const { node, space }: Props = $props();
 
 	const screenPosition = $derived(space.getScreenPosition(node.position));
 	const selectedNodesContext = getSelectedNodesContext();
@@ -28,7 +27,7 @@
 		class:outline-zinc-700={!isSelected}
 		class="flex flex-col break-words bg-zinc-600 outline"
 	>
-		<NodeItemHeader {node} {space} {projectId} />
+		<NodeItemHeader {node} {space} />
 		{#each node.outputs as output (output.id)}
 			<OutputItem {output} />
 		{/each}

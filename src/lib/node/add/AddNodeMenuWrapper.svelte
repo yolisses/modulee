@@ -6,11 +6,10 @@
 
 	interface Props {
 		space: Space;
-		projectId: string;
 		mouseEvent?: MouseEvent;
 	}
 
-	let { space, projectId, mouseEvent = $bindable() }: Props = $props();
+	let { space, mouseEvent = $bindable() }: Props = $props();
 
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
@@ -49,6 +48,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<AddNodeMenu {space} {projectId} {closeModal} screenPosition={menuPosition}></AddNodeMenu>
+		<AddNodeMenu {space} {closeModal} screenPosition={menuPosition}></AddNodeMenu>
 	</div>
 {/if}

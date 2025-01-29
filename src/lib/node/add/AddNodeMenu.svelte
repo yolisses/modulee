@@ -3,6 +3,7 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getGroupIdContext } from '$lib/group/groupIdContext.js';
+	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
 	import type { Space } from '$lib/space/Space.js';
 	import type { Vector } from 'nodes-editor';
 	import { createNodeData } from './createNodeData.js';
@@ -12,24 +13,24 @@
 
 	interface Props {
 		space: Space;
-		projectId: string;
 		closeModal: () => void;
 		screenPosition: Vector;
 	}
 
 	const editorContext = getEditorContext();
 	const groupIdContext = getGroupIdContext();
-	const { space, projectId, closeModal, screenPosition }: Props = $props();
+	const projectIdContext = getProjectIdContext();
+	const { space, closeModal, screenPosition }: Props = $props();
 
 	function handleTypeClick(nodeType: NodeType) {
 		const dataPosition = space.getDataPosition(screenPosition).round();
 		const nodeData = createNodeData(nodeType, groupIdContext.groupId, dataPosition);
 		const addNodeCommand = new AddNodeCommand({
-			projectId,
 			id: createId(),
 			type: 'AddNodeCommand',
 			details: { node: nodeData },
 			createdAt: new Date().toJSON(),
+			projectId: projectIdContext.projectId,
 		});
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();

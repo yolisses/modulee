@@ -22,7 +22,6 @@
 	interface Props {
 		space: Space;
 		nodes: Node[];
-		projectId: string;
 	}
 
 	let mouseEvent = $state<MouseEvent>();
@@ -67,10 +66,10 @@
 >
 	<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
 		{#each nodes as node (node.id)}
-			<NodeItem {node} {space} {projectId} />
+			<NodeItem {node} {space} />
 		{/each}
 		<PreviewConnectionWire {space} />
-		<AddNodeMenuWrapper {space} {projectId} {mouseEvent} />
+		<AddNodeMenuWrapper {space} {mouseEvent} />
 		<SelectionBox />
 	</BaseNodeList>
 </div>
