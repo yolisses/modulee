@@ -2,6 +2,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { instantiateCommand } from '$lib/editor/instantiateCommand';
 	import { handleGraphChange } from '$lib/engine/handleGraphChange';
+	import { setGroupIdContext } from '$lib/group/groupContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import type { ProjectData } from './ProjectData';
@@ -14,7 +15,10 @@
 
 	const { projectData, projectsRepository }: Props = $props();
 
-	const editor = new Editor({ nodes: [] });
+	const groupContext = $state({ groupId: projectData.mainGroupId });
+	setGroupIdContext(groupContext);
+
+	const editor = new Editor({ nodes: [], groups: [] });
 
 	projectData.commands.map((commandData) => {
 		const command = instantiateCommand(commandData);

@@ -19,6 +19,7 @@
 			commands: [],
 			id: createId(),
 			name: 'New project',
+			mainGroupId: createId(),
 		};
 		await projectsRepository.createProject(projectData);
 		goto('/projects/' + projectData.id);

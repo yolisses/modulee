@@ -3,8 +3,9 @@ import type { NodeData } from '$lib/data/NodeData';
 import type { Vector } from 'nodes-editor';
 import type { NodeType } from './NodeType';
 
-export function createNodeData(nodeType: NodeType, position: Vector): NodeData {
+export function createNodeData(nodeType: NodeType, groupId: string, position: Vector): NodeData {
 	return {
+		groupId,
 		position,
 		id: createId(),
 		type: nodeType.name,
