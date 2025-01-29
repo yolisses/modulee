@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getShortString } from '$dev/getShortString.js';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import OutputItem from '$lib/connector/OutputItem.svelte';
@@ -27,7 +28,7 @@
 		class:outline-zinc-700={!isSelected}
 		class="flex flex-col break-words bg-zinc-600 outline"
 	>
-		{node.groupId}
+		{getShortString(node.groupId)}
 		<NodeItemHeader {node} />
 		{#each node.outputs as output (output.id)}
 			<OutputItem {output} />
