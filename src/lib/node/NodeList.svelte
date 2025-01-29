@@ -3,8 +3,9 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
+	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
-	import type { Space } from '$lib/space/Space.js';
+	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		NodeList as BaseNodeList,
 		getPreviewConnectionContext,
@@ -20,22 +21,23 @@
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
-		space: Space;
 		nodes: Node[];
 	}
 
+	const { nodes }: Props = $props();
 	let mouseEvent = $state<MouseEvent>();
+	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
-	const { nodes, space, projectId }: Props = $props();
+	const projectIdContext = getProjectIdContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
 		const { input, output } = getInputAndOutput(e);
 		if (!input) return;
 		const command = new SetInputConnectedOutput({
-			projectId,
 			id: createId(),
 			createdAt: new Date().toJSON(),
 			type: 'SetInputConnectedOutput',
+			projectId: projectIdContext.projectId,
 			details: { inputId: input.id, outputId: output?.id },
 		});
 		editorContext.editor.execute(command);
@@ -61,15 +63,15 @@
 
 <div
 	class="flex flex-1 select-none flex-col"
-	style:font-size={getScreenFontSize(space) + 'px'}
-	style:line-height={getScreenLineHeight(space) + 'px'}
+	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
+	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 >
 	<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
 		{#each nodes as node (node.id)}
-			<NodeItem {node} {space} />
+			<NodeItem {node} />
 		{/each}
-		<PreviewConnectionWire {space} />
-		<AddNodeMenuWrapper {space} {mouseEvent} />
+		<PreviewConnectionWire />
+		<AddNodeMenuWrapper {mouseEvent} />
 		<SelectionBox />
 	</BaseNodeList>
 </div>

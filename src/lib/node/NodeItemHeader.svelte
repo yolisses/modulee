@@ -4,27 +4,27 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
-	import type { Space } from '$lib/space/Space.js';
+	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
 
 	interface Props {
 		node: Node;
-		space: Space;
 	}
 
+	const { node }: Props = $props();
+	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const projectIdContext = getProjectIdContext();
 	let initialNodePosition = $state(Vector.zero());
-	const { node, space }: Props = $props();
 
 	function getMoveDataPosition({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
-		const screenInitialNodePosition = space.getScreenPosition(initialNodePosition);
+		const screenInitialNodePosition = spaceContext.space.getScreenPosition(initialNodePosition);
 		const screenNodePosition = mouseRelativePosition
 			.add(screenInitialNodePosition)
 			.subtract(initialMouseRelativePosition);
-		return space.getDataPosition(screenNodePosition).floor();
+		return spaceContext.space.getDataPosition(screenNodePosition).floor();
 	}
 
 	function handleStartMove(e: MoveEvent) {

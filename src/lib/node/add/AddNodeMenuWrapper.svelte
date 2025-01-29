@@ -1,15 +1,13 @@
 <script lang="ts">
-	import type { Space } from '$lib/space/Space.js';
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getNodeListContext } from 'nodes-editor';
 	import AddNodeMenu from './AddNodeMenu.svelte';
 
 	interface Props {
-		space: Space;
 		mouseEvent?: MouseEvent;
 	}
 
-	let { space, mouseEvent = $bindable() }: Props = $props();
+	let { mouseEvent = $bindable() }: Props = $props();
 
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
@@ -48,6 +46,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<AddNodeMenu {space} {closeModal} screenPosition={menuPosition}></AddNodeMenu>
+		<AddNodeMenu {closeModal} screenPosition={menuPosition}></AddNodeMenu>
 	</div>
 {/if}
