@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AddNodeCommand } from '$lib/commands/AddNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getGroupIdContext } from '$lib/group/groupIdContext.js';
 	import type { Space } from '$lib/space/Space.js';
 	import type { Vector } from 'nodes-editor';
@@ -12,14 +12,14 @@
 
 	interface Props {
 		space: Space;
-		editor: Editor;
 		projectId: string;
 		closeModal: () => void;
 		screenPosition: Vector;
 	}
 
+	const editorContext = getEditorContext();
 	const groupIdContext = getGroupIdContext();
-	const { space, editor, projectId, closeModal, screenPosition }: Props = $props();
+	const { space, projectId, closeModal, screenPosition }: Props = $props();
 
 	function handleTypeClick(nodeType: NodeType) {
 		const dataPosition = space.getDataPosition(screenPosition).round();
@@ -31,7 +31,7 @@
 			details: { node: nodeData },
 			createdAt: new Date().toJSON(),
 		});
-		editor.execute(addNodeCommand);
+		editorContext.editor.execute(addNodeCommand);
 		closeModal();
 	}
 </script>

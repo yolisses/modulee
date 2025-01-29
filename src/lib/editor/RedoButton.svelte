@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { Editor } from './Editor.svelte';
+	import { getEditorContext } from './editorContext';
 
-	const { editor }: { editor: Editor } = $props();
+	const editorContext = getEditorContext();
 
 	function handleClick() {
-		editor.redo();
+		editorContext.editor.redo();
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanRedo()} class="common-button" title="Redo">
+<button
+	title="Redo"
+	class="common-button"
+	onclick={handleClick}
+	disabled={!editorContext.editor.getCanRedo()}
+>
 	<Fa icon={faRedo} />
 </button>

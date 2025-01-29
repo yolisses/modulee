@@ -2,7 +2,7 @@
 	import { SetInputConnectedOutput } from '$lib/commands/SetInputConnectedOutput.js';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import type { Space } from '$lib/space/Space.js';
 	import {
@@ -22,12 +22,12 @@
 	interface Props {
 		space: Space;
 		nodes: Node[];
-		editor: Editor;
 		projectId: string;
 	}
 
 	let mouseEvent = $state<MouseEvent>();
-	const { nodes, space, editor, projectId }: Props = $props();
+	const editorContext = getEditorContext();
+	const { nodes, space, projectId }: Props = $props();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
 		const { input, output } = getInputAndOutput(e);
@@ -39,7 +39,7 @@
 			type: 'SetInputConnectedOutput',
 			details: { inputId: input.id, outputId: output?.id },
 		});
-		editor.execute(command);
+		editorContext.editor.execute(command);
 	}
 
 	function handleContextMenu(e: MouseEvent) {
@@ -67,10 +67,10 @@
 >
 	<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
 		{#each nodes as node (node.id)}
-			<NodeItem {node} {space} {editor} {projectId} />
+			<NodeItem {node} {space} {projectId} />
 		{/each}
 		<PreviewConnectionWire {space} />
-		<AddNodeMenuWrapper {space} {editor} {projectId} {mouseEvent} />
+		<AddNodeMenuWrapper {space} {projectId} {mouseEvent} />
 		<SelectionBox />
 	</BaseNodeList>
 </div>

@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { Editor } from './Editor.svelte';
+	import { getEditorContext } from './editorContext';
 
-	const { editor }: { editor: Editor } = $props();
+	const editorContext = getEditorContext();
 
 	function handleClick() {
-		editor.undo();
+		editorContext.editor.undo();
 	}
 </script>
 
-<button onclick={handleClick} disabled={!editor.getCanUndo()} class="common-button" title="Undo">
+<button
+	title="Undo"
+	class="common-button"
+	onclick={handleClick}
+	disabled={!editorContext.editor.getCanUndo()}
+>
 	<Fa icon={faUndo} />
 </button>

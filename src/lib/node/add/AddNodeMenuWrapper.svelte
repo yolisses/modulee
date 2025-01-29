@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getNodeListContext } from 'nodes-editor';
@@ -7,12 +6,11 @@
 
 	interface Props {
 		space: Space;
-		editor: Editor;
 		projectId: string;
 		mouseEvent?: MouseEvent;
 	}
 
-	let { space, editor, projectId, mouseEvent = $bindable() }: Props = $props();
+	let { space, projectId, mouseEvent = $bindable() }: Props = $props();
 
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
@@ -51,7 +49,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<AddNodeMenu {space} {editor} {projectId} {closeModal} screenPosition={menuPosition}
-		></AddNodeMenu>
+		<AddNodeMenu {space} {projectId} {closeModal} screenPosition={menuPosition}></AddNodeMenu>
 	</div>
 {/if}

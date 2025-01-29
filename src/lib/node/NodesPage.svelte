@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import { getEditorContext } from '$lib/editor/editorContext';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import DevGroupList from '$lib/group/DevGroupList.svelte';
@@ -14,12 +14,12 @@
 	import NodeList from './NodeList.svelte';
 
 	interface Props {
-		editor: Editor;
 		projectId: string;
 		topBarChildren?: Snippet;
 	}
 
-	const { editor, projectId, topBarChildren }: Props = $props();
+	const editorContext = getEditorContext();
+	const { projectId, topBarChildren }: Props = $props();
 
 	let zoom = $state(20);
 	const space = $derived(
@@ -29,14 +29,14 @@
 
 <div class="flex-row border-b border-b-black">
 	{@render topBarChildren?.()}
-	<UndoButton {editor} />
-	<RedoButton {editor} />
+	<UndoButton />
+	<RedoButton />
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
 	<GroupNodesButton />
 </div>
 
 <div class="flex min-h-screen flex-row">
-	<NodeList {editor} {space} {projectId} nodes={editor.nodes} />
-	<DevGroupList groups={editor.groups} />
+	<NodeList {space} {projectId} nodes={editorContext.editor.nodes} />
+	<DevGroupList groups={editorContext.editor.groups} />
 </div>

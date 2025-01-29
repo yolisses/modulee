@@ -2,7 +2,6 @@
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import OutputItem from '$lib/connector/OutputItem.svelte';
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
 	import { NodeItem as BaseNodeItem, getSelectedNodesContext } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
@@ -11,11 +10,10 @@
 	interface Props {
 		node: Node;
 		space: Space;
-		editor: Editor;
 		projectId: string;
 	}
 
-	const { node, space, editor, projectId }: Props = $props();
+	const { node, space, projectId }: Props = $props();
 
 	const screenPosition = $derived(space.getScreenPosition(node.position));
 	const selectedNodesContext = getSelectedNodesContext();
@@ -30,7 +28,7 @@
 		class:outline-zinc-700={!isSelected}
 		class="flex flex-col break-words bg-zinc-600 outline"
 	>
-		<NodeItemHeader {node} {space} {editor} {projectId} />
+		<NodeItemHeader {node} {space} {projectId} />
 		{#each node.outputs as output (output.id)}
 			<OutputItem {output} />
 		{/each}

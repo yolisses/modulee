@@ -2,7 +2,7 @@
 	import { MoveNodeCommand } from '$lib/commands/MoveNodeCommand.js';
 	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import type { Space } from '$lib/space/Space.js';
 	import { Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
@@ -11,12 +11,12 @@
 	interface Props {
 		node: Node;
 		space: Space;
-		editor: Editor;
 		projectId: string;
 	}
 
-	const { node, space, editor, projectId }: Props = $props();
+	const editorContext = getEditorContext();
 	let initialNodePosition = $state(Vector.zero());
+	const { node, space, projectId }: Props = $props();
 
 	function getMoveDataPosition({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
 		const screenInitialNodePosition = space.getScreenPosition(initialNodePosition);
@@ -44,7 +44,7 @@
 			createdAt: new Date().toJSON(),
 			details: { nodeId: node.id, position: dataPosition },
 		});
-		editor.execute(moveNodeCommand);
+		editorContext.editor.execute(moveNodeCommand);
 	}
 
 	function handleContextMenu(e: MouseEvent) {
@@ -55,7 +55,7 @@
 			details: { nodeId: node.id },
 			createdAt: new Date().toJSON(),
 		});
-		editor.execute(removeNodeCommand);
+		editorContext.editor.execute(removeNodeCommand);
 	}
 </script>
 
