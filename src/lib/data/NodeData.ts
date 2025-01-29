@@ -5,6 +5,7 @@ import type { VectorData } from './VectorData';
 export type NodeData = {
 	id: string;
 	type: string;
+	groupId: string;
 	inputs: InputData[];
 	position: VectorData;
 	outputs: OutputData[];
