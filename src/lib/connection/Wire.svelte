@@ -13,5 +13,5 @@
 </script>
 
 <WireSvg {startPosition} {endPosition} margin={screenMargin}>
-	<WirePath {startPosition} {endPosition} {space} />
+	<WirePath {startPosition} {endPosition} />
 </WireSvg>

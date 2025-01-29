@@ -36,6 +36,6 @@
 </div>
 
 <div class="flex min-h-screen flex-row">
-	<NodeList {space} nodes={editorContext.editor.nodes} />
+	<NodeList nodes={editorContext.editor.nodes} />
 	<DevGroupList groups={editorContext.editor.groups} />
 </div>

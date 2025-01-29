@@ -44,7 +44,7 @@
 	});
 </script>
 
-<NodesPage projectId={projectData.id}>
+<NodesPage>
 	{#snippet topBarChildren()}
 		<HomeButton />
 	{/snippet}
