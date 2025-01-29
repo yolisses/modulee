@@ -1,3 +1,4 @@
+import { UndoCommand } from '$lib/commands/UndoCommand';
 import { Group } from '$lib/data/Group.svelte';
 import { Node } from '$lib/data/Node.svelte';
 import type { Command } from './Command';
@@ -33,23 +34,17 @@ export class Editor {
 	}
 
 	execute(command: Command<any>) {
-		this.history.push(command);
 		command.execute(this.editorData);
+
+		// TODO fix this potential data duplication
+		if (!(command instanceof UndoCommand)) {
+			this.history.push(command);
+			this.editorData.history.push(command.commandData);
+		}
+
 		this.undoneHistory = [];
 		this.recalculate();
 		this.onExecute?.(command);
-	}
-
-	undo() {
-		const command = this.history.pop();
-
-		if (!command) {
-			throw new Error("Can't undo with empty history");
-		}
-
-		command.undo(this.editorData);
-		this.undoneHistory.push(command);
-		this.recalculate();
 	}
 
 	redo() {

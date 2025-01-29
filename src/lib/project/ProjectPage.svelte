@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
-	import { instantiateCommand } from '$lib/editor/instantiateCommand';
 	import { handleGraphChange } from '$lib/engine/handleGraphChange';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
@@ -35,7 +35,7 @@
 	});
 
 	projectData.commands.map((commandData) => {
-		const command = instantiateCommand(commandData);
+		const command = createCommand(commandData);
 		editor.execute(command);
 	});
 
