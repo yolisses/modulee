@@ -2,7 +2,6 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
-	import DevGroupList from '$lib/group/DevGroupList.svelte';
 	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
@@ -44,5 +43,5 @@
 
 <div class="flex min-h-screen flex-row">
 	<NodeList nodes={editorContext.editor.nodes} />
-	<DevGroupList groups={editorContext.editor.groups} />
+	<!-- <DevGroupList groups={editorContext.editor.groups} /> -->
 </div>
