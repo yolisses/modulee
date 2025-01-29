@@ -31,6 +31,8 @@ export class Editor {
 		});
 
 		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
+		this.history = this.editorData.history;
+		this.undoneHistory = this.editorData.undoneHistory;
 	}
 
 	execute(command: Command<any>) {
@@ -38,8 +40,7 @@ export class Editor {
 
 		// TODO fix this potential data duplication
 		if (!(command instanceof UndoCommand)) {
-			this.history.push(command);
-			this.editorData.history.push(command.commandData);
+			this.editorData.history.push(command);
 		}
 
 		this.undoneHistory = [];

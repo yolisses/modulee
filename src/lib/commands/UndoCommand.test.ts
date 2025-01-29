@@ -26,7 +26,7 @@ const mockCreateCommandCallback: CreateCommandCallback = (commandData: CommandDa
 test('AddNodeCommand', () => {
 	const editorData = {
 		nodes: [] as NodeData[],
-		history: [] as CommandData[],
+		history: [] as Command[],
 	} as EditorData;
 
 	// Execute mockCommand1
@@ -36,7 +36,7 @@ test('AddNodeCommand', () => {
 		details: { nodeId: 'node1' },
 	} as CommandData<MockCommandDetails>);
 	mockCommand1.execute(editorData);
-	editorData.history.push(mockCommand1.commandData);
+	editorData.history.push(mockCommand1);
 
 	expect(editorData.history).toHaveLength(1);
 	expect(editorData.nodes).toEqual([{ id: 'node1' }]);
@@ -48,7 +48,7 @@ test('AddNodeCommand', () => {
 		details: { nodeId: 'node2' },
 	} as MockCommandData);
 	mockCommand2.execute(editorData);
-	editorData.history.push(mockCommand2.commandData);
+	editorData.history.push(mockCommand2);
 
 	expect(editorData.history).toHaveLength(2);
 	expect(editorData.nodes).toEqual([{ id: 'node1' }, { id: 'node2' }]);

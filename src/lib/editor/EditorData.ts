@@ -1,10 +1,10 @@
 import type { GroupData } from '$lib/data/GroupData';
 import type { NodeData } from '$lib/data/NodeData';
-import type { CommandData } from './CommandData';
+import type { Command } from './Command';
 
 export type EditorData = {
 	nodes: NodeData[];
+	history: Command[];
 	groups: GroupData[];
-	history: CommandData[];
-	undoneHistory: CommandData[];
+	undoneHistory: Command[];
 };
