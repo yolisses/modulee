@@ -2,8 +2,8 @@
 	import { AddNodeCommand } from '$lib/commands/AddNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import type { Editor } from '$lib/editor/Editor.svelte.js';
-	import { getGroupIdContext } from '$lib/group/groupContext.js';
-	import { Space } from '$lib/space/Space.js';
+	import { getGroupIdContext } from '$lib/group/groupIdContext.js';
+	import type { Space } from '$lib/space/Space.js';
 	import type { Vector } from 'nodes-editor';
 	import { createNodeData } from './createNodeData.js';
 	import { devNodeTypes } from './devNodeTypes.js';

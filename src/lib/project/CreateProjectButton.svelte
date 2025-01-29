@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { createId } from '$lib/utils/createId';
+	import { createId } from '$lib/data/createId';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ProjectData } from './ProjectData';
