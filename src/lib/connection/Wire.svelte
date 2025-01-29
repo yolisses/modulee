@@ -6,10 +6,10 @@
 
 	const { endPosition, startPosition }: WireProps = $props();
 
-	const spaceContext = getSpaceContext();
 	// Found empirically with the WirePath curve
 	const dataMargin = new Vector(3, 1);
-	const screenMargin = spaceContext.space.getScreenSize(dataMargin);
+	const spaceContext = getSpaceContext();
+	const screenMargin = $derived(spaceContext.space.getScreenSize(dataMargin));
 </script>
 
 <WireSvg {startPosition} {endPosition} margin={screenMargin}>
