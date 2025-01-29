@@ -19,7 +19,11 @@
 			commands: [],
 			id: createId(),
 			name: 'New project',
-			mainGroupId: createId(),
+			// TODO consider using the same name than the project
+			mainGroup: {
+				id: createId(),
+				name: 'Main group',
+			},
 		};
 		await projectsRepository.createProject(projectData);
 		goto('/projects/' + projectData.id);

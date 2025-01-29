@@ -20,7 +20,7 @@
 
 	const { projectData, projectsRepository }: Props = $props();
 
-	const groupContext = $state({ groupId: projectData.mainGroupId });
+	const groupContext = $state({ groupId: projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
 
 	const projectIdContext = $state({ projectId: projectData.id });
@@ -29,6 +29,9 @@
 	const editor = new Editor({ nodes: [], groups: [] });
 	const editorContext = $state({ editor });
 	setEditorContext(editorContext);
+
+	// TODO find a more encapsulated way to execute this initial changes
+	editor.groups.push(projectData.mainGroup);
 
 	projectData.commands.map((commandData) => {
 		const command = instantiateCommand(commandData);

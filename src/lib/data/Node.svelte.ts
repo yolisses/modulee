@@ -9,7 +9,8 @@ export class Node {
 	id: string;
 	type: string;
 	inputs: Input[];
-	groupId: string;
+	// DEBUG remove $state from here
+	groupId: string = $state()!;
 	outputs: Output[];
 	position: Vector = $state()!;
 	extras: Record<string, number>;

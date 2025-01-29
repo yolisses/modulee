@@ -27,6 +27,7 @@
 		class:outline-zinc-700={!isSelected}
 		class="flex flex-col break-words bg-zinc-600 outline"
 	>
+		{node.groupId}
 		<NodeItemHeader {node} />
 		{#each node.outputs as output (output.id)}
 			<OutputItem {output} />
