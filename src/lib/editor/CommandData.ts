@@ -1,6 +1,4 @@
-import type { EmptyObject } from './EmptyObject';
-
-export type CommandData<T = EmptyObject> = {
+export type CommandData<T = unknown> = {
 	id: string;
 	details: T;
 	type: string;

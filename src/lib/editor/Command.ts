@@ -1,10 +1,11 @@
 import { createId } from '$lib/data/createId';
 import type { CommandData } from './CommandData';
+import type { CreateCommandCallback } from './CreateCommandCallback';
 import type { EditorData } from './EditorData';
-import type { EmptyObject } from './EmptyObject';
 
-export abstract class Command<T = EmptyObject> {
+export abstract class Command<T = unknown> {
 	id: string;
+	createCommandCallback!: CreateCommandCallback;
 
 	constructor(public commandData: CommandData<T>) {
 		this.id = createId();
