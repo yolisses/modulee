@@ -29,6 +29,8 @@
 	// TODO find a more encapsulated way to execute this initial changes
 	const editor = new Editor({
 		nodes: [],
+		history: [],
+		undoneHistory: [],
 		groups: [structuredClone(projectData.mainGroup)],
 	});
 
