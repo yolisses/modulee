@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { MoveNodeCommand } from '$lib/commands/MoveNodeCommand.js';
+	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
 	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
-	import { Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
+	import { getSelectedNodeIdsContext, Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
 
@@ -17,6 +17,7 @@
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const projectIdContext = getProjectIdContext();
+	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	let initialNodePosition = $state(Vector.zero());
 
 	// The criteria used to select this movement function is: Keep the cursor
@@ -42,11 +43,12 @@
 		const dataPosition = getMoveDataPosition(e);
 		const delta = dataPosition.subtract(initialNodePosition);
 		if (dataPosition.equals(initialNodePosition)) return;
-		const moveNodeCommand = new MoveNodeCommand({
+		const nodeIds = [...selectedNodeIdsContext.selectedNodeIds];
+		const moveNodeCommand = new MoveNodesCommand({
 			id: createId(),
-			type: 'MoveNodeCommand',
+			type: 'MoveNodesCommand',
+			details: { delta, nodeIds },
 			createdAt: new Date().toJSON(),
-			details: { nodeId: node.id, delta },
 			projectId: projectIdContext.projectId,
 		});
 		editorContext.editor.execute(moveNodeCommand);

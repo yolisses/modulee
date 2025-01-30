@@ -3,7 +3,7 @@
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import OutputItem from '$lib/connector/OutputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
-	import { NodeItem as BaseNodeItem, getSelectedNodesContext } from 'nodes-editor';
+	import { NodeItem as BaseNodeItem, getSelectedNodeIdsContext } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
@@ -14,9 +14,9 @@
 	const { node }: Props = $props();
 	const spaceContext = getSpaceContext();
 
+	const selectedNodeIdsContext = getSelectedNodeIdsContext();
+	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
-	const selectedNodesContext = getSelectedNodesContext();
-	const isSelected = $derived(selectedNodesContext.selectedNodes[node.id]);
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
