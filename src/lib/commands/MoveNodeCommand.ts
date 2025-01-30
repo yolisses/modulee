@@ -1,13 +1,15 @@
 import { findById } from '$lib/array/findById';
 import type { VectorData } from '$lib/data/VectorData';
 import { Command } from '$lib/editor/Command';
+import type { CommandData } from '$lib/editor/CommandData';
 import type { EditorData } from '$lib/editor/EditorData';
 import { Vector } from 'nodes-editor';
 
-export class MoveNodeCommand extends Command<{
-	nodeId: string;
-	delta: VectorData;
-}> {
+type MoveNodeCommandDetails = { nodeId: string; delta: VectorData };
+
+export type MoveNodeCommandData = CommandData<MoveNodeCommandDetails>;
+
+export class MoveNodeCommand extends Command<MoveNodeCommandDetails> {
 	execute(editorData: EditorData): void {
 		const node = findById(editorData.nodes, this.details.nodeId);
 		const nodePosition = Vector.fromData(node.position);
