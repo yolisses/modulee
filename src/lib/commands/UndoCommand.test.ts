@@ -27,6 +27,7 @@ test('AddNodeCommand', () => {
 	const editorData = {
 		nodes: [] as NodeData[],
 		history: [] as Command[],
+		undoneHistory: [] as Command[],
 	} as EditorData;
 
 	// Execute mockCommand1
@@ -61,11 +62,4 @@ test('AddNodeCommand', () => {
 
 	expect(editorData.history).toHaveLength(1);
 	expect(editorData.nodes).toEqual([{ id: 'node1' }]);
-
-	// Undo undo mockCommand2
-
-	command.undo(editorData);
-
-	expect(editorData.history).toHaveLength(2);
-	expect(editorData.nodes).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 });

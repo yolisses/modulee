@@ -15,7 +15,7 @@ export class UndoCommand extends Command<{
 		command.undo(editorData);
 	}
 
-	undo(): void {
+	undo(editorData: EditorData): void {
 		throw new Error('Method not implemented');
 	}
 }
