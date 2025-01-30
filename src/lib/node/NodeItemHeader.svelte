@@ -23,7 +23,7 @@
 
 	// The criteria to this movement function is: Keep the cursor always in the
 	// node area. Move the node only if the cursor passes the grid lines.
-	function getMoveDataDelta({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
+	function getMoveDataDelta({ mouseRelativePosition }: MoveEvent) {
 		const mouseDataPosition = spaceContext.space.getDataPosition(mouseRelativePosition).floor();
 		return mouseDataPosition.subtract(initialMouseDataPosition);
 	}
