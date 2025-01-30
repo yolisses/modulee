@@ -17,7 +17,7 @@
 	}
 </script>
 
-<div class="relative" style:left={0.3 * getDirection(connector) + 'lh'}>
+<div class="relative" style:left={0.25 * getDirection(connector) + 'lh'}>
 	<ConnectorItem {connector}>
 		<div
 			style:width="0.4lh"
