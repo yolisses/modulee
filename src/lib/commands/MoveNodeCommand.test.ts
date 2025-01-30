@@ -1,5 +1,5 @@
 import type { EditorData } from '$lib/editor/EditorData';
-import { test, expect } from 'vitest';
+import { expect, test } from 'vitest';
 import { MoveNodeCommand } from './MoveNodeCommand';
 import { mockCommandData } from './test/mockNodeData';
 
@@ -12,11 +12,11 @@ test('MoveNodeCommand', () => {
 		],
 	} as EditorData;
 
-	const commandDetails = { nodeId: '2', position: { x: 4, y: 4 } };
+	const commandDetails = { nodeId: '2', delta: { x: 4, y: 4 } };
 	const command = new MoveNodeCommand(mockCommandData(commandDetails));
 	command.execute(editorData);
 
-	expect(editorData.nodes[1].position).toEqual({ x: 4, y: 4 });
+	expect(editorData.nodes[1].position).toEqual({ x: 6, y: 6 });
 
 	command.undo(editorData);
 

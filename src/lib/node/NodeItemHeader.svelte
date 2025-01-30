@@ -40,13 +40,14 @@
 
 	function handleEndMove(e: MoveEvent) {
 		const dataPosition = getMoveDataPosition(e);
+		const delta = dataPosition.subtract(initialNodePosition);
 		if (dataPosition.equals(initialNodePosition)) return;
 		const moveNodeCommand = new MoveNodeCommand({
 			id: createId(),
 			type: 'MoveNodeCommand',
 			createdAt: new Date().toJSON(),
+			details: { nodeId: node.id, delta },
 			projectId: projectIdContext.projectId,
-			details: { nodeId: node.id, position: dataPosition },
 		});
 		editorContext.editor.execute(moveNodeCommand);
 	}
