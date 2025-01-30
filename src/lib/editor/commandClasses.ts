@@ -1,6 +1,7 @@
 import { AddNodeCommand } from '$lib/commands/AddNodeCommand';
 import { GroupNodesCommand } from '$lib/commands/GroupNodesCommand';
 import { MoveNodeCommand } from '$lib/commands/MoveNodeCommand';
+import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand';
 import { RedoCommand } from '$lib/commands/RedoCommand';
 import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand';
 import { SetInputConnectedOutput } from '$lib/commands/SetInputConnectedOutput';
@@ -13,6 +14,7 @@ export const commandClasses: CommandClass<any>[] = [
 	RedoCommand,
 	AddNodeCommand,
 	MoveNodeCommand,
+	MoveNodesCommand,
 	RemoveNodeCommand,
 	GroupNodesCommand,
 	SetInputConnectedOutput,

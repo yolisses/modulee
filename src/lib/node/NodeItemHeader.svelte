@@ -17,32 +17,40 @@
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const projectIdContext = getProjectIdContext();
+	let initialMouseDataPosition = $state(Vector.zero());
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
-	let initialNodePosition = $state(Vector.zero());
+	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
 
-	// The criteria used to select this movement function is: Keep the cursor
-	// always in the node area. Move the node only if the cursor passes the grid
-	// lines.
-	function getMoveDataPosition({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
-		const { space } = spaceContext;
-		const mouseDataPosition = space.getDataPosition(mouseRelativePosition).floor();
-		const initialMouseDataPosition = space.getDataPosition(initialMouseRelativePosition).floor();
-		return initialNodePosition.add(mouseDataPosition).subtract(initialMouseDataPosition);
+	// The criteria to this movement function is: Keep the cursor always in the
+	// node area. Move the node only if the cursor passes the grid lines.
+	function getMoveDataDelta({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
+		const mouseDataPosition = spaceContext.space.getDataPosition(mouseRelativePosition).floor();
+		return mouseDataPosition.subtract(initialMouseDataPosition);
 	}
 
-	function handleStartMove(e: MoveEvent) {
-		initialNodePosition = node.position.clone();
+	function handleStartMove({ initialMouseRelativePosition }: MoveEvent) {
+		initialMouseDataPosition = spaceContext.space
+			.getDataPosition(initialMouseRelativePosition)
+			.floor();
+
+		initialNodePositions = new Map();
+		editorContext.editor.nodes
+			.filter((node) => selectedNodeIdsContext.selectedNodeIds.has(node.id))
+			.forEach((node) => {
+				initialNodePositions.set(node, node.position);
+			});
 	}
 
 	function handleMove(e: MoveEvent) {
-		const dataPosition = getMoveDataPosition(e);
-		node.position = dataPosition;
+		const delta = getMoveDataDelta(e);
+		for (let [node, initialPosition] of initialNodePositions) {
+			node.position = initialPosition.add(delta);
+		}
 	}
 
 	function handleEndMove(e: MoveEvent) {
-		const dataPosition = getMoveDataPosition(e);
-		const delta = dataPosition.subtract(initialNodePosition);
-		if (dataPosition.equals(initialNodePosition)) return;
+		const delta = getMoveDataDelta(e);
+		if (delta.equals(Vector.zero())) return;
 		const nodeIds = [...selectedNodeIdsContext.selectedNodeIds];
 		const moveNodeCommand = new MoveNodesCommand({
 			id: createId(),
