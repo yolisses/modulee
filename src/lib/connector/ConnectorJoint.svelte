@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { Connector } from '$lib/data/Connector.js';
+	import { Input } from '$lib/data/Input.svelte';
+	import { Output } from '$lib/data/Output.svelte';
 	import { ConnectorItem } from 'nodes-editor';
 
 	interface Props {
@@ -7,12 +9,20 @@
 	}
 
 	const { connector }: Props = $props();
+
+	function getDirection(connector: Connector) {
+		if (connector instanceof Input) return -1;
+		if (connector instanceof Output) return 1;
+		return 0;
+	}
 </script>
 
-<ConnectorItem {connector} />
-<div
-	style:width="0.8lh"
-	style:height="0.8lh"
-	style:margin="0.1lh"
-	class="flex shrink-0 items-center justify-center rounded-full bg-green-500"
-></div>
+<div class="relative" style:left={0.3 * getDirection(connector) + 'lh'}>
+	<ConnectorItem {connector}>
+		<div
+			style:width="0.4lh"
+			style:height="0.4lh"
+			class="flex shrink-0 items-center justify-center rounded-full bg-green-500"
+		></div>
+	</ConnectorItem>
+</div>

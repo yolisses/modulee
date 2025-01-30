@@ -84,7 +84,7 @@
 		<div
 			style:padding-inline="0.2lh"
 			title={nodesName[node.type]}
-			class="hover-bg block overflow-hidden text-ellipsis"
+			class="hover-bg block overflow-hidden text-ellipsis whitespace-nowrap"
 		>
 			{nodesName[node.type]}
 		</div>

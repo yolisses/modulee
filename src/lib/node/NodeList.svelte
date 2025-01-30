@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { SetInputConnectedOutput } from '$lib/commands/SetInputConnectedOutput.js';
+	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
@@ -73,6 +74,14 @@
 		<PreviewConnectionWire />
 		<AddNodeMenuWrapper {mouseEvent} />
 		<SelectionBox />
+
+		<!-- This is here instead of in InputItem because BaseNodeItem there's
+		the node position offset -->
+		{#each nodes as node (node.id)}
+			{#each node.inputs as input (input.id)}
+				<ConnectionItem {input} />
+			{/each}
+		{/each}
 	</BaseNodeList>
 </div>
 
