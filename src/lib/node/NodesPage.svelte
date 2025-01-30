@@ -3,6 +3,7 @@
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import DevCommandList from '$lib/group/DevCommandList.svelte';
+	import { getGroupIdContext } from '$lib/group/groupIdContext';
 	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
@@ -20,6 +21,7 @@
 
 	const editorContext = getEditorContext();
 	const { topBarChildren }: Props = $props();
+	const groupIdContext = getGroupIdContext();
 
 	const spaceContext = $state({ space: new Space() });
 	setSpaceContext(spaceContext);
@@ -31,6 +33,12 @@
 			new ZoomConverter(zoom),
 		]);
 	});
+
+	const visibleNodes = $derived(
+		editorContext.editor.nodes.filter((node) => {
+			return node.groupId === groupIdContext.groupId;
+		}),
+	);
 </script>
 
 <div class="flex-row border-b border-b-black">
@@ -43,7 +51,7 @@
 </div>
 
 <div class="flex min-h-screen flex-row">
-	<NodeList nodes={editorContext.editor.nodes} />
+	<NodeList nodes={visibleNodes} />
 	<DevCommandList />
 	<!-- <DevGroupList groups={editorContext.editor.groups} /> -->
 </div>
