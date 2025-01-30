@@ -74,15 +74,15 @@
 	}
 </script>
 
-<Selector id={node.id}>
-	<Mover
-		onMove={handleMove}
-		onEndMove={handleEndMove}
-		onStartMove={handleStartMove}
-		oncontextmenu={handleContextMenu}
-	>
+<Mover
+	onMove={handleMove}
+	onEndMove={handleEndMove}
+	onStartMove={handleStartMove}
+	oncontextmenu={handleContextMenu}
+>
+	<Selector id={node.id}>
 		<div class="hover-bg" style:padding-inline="0.5lh">
 			{nodesName[node.type]}
 		</div>
-	</Mover>
-</Selector>
+	</Selector>
+</Mover>
