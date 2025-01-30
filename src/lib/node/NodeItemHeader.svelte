@@ -19,12 +19,14 @@
 	const projectIdContext = getProjectIdContext();
 	let initialNodePosition = $state(Vector.zero());
 
+	// The criteria used to select this movement function is: Keep the cursor
+	// always in the node area. Move the node only if the cursor passes the grid
+	// lines.
 	function getMoveDataPosition({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
-		const screenInitialNodePosition = spaceContext.space.getScreenPosition(initialNodePosition);
-		const screenNodePosition = mouseRelativePosition
-			.add(screenInitialNodePosition)
-			.subtract(initialMouseRelativePosition);
-		return spaceContext.space.getDataPosition(screenNodePosition).floor();
+		const { space } = spaceContext;
+		const mouseDataPosition = space.getDataPosition(mouseRelativePosition).floor();
+		const initialMouseDataPosition = space.getDataPosition(initialMouseRelativePosition).floor();
+		return initialNodePosition.add(mouseDataPosition).subtract(initialMouseDataPosition);
 	}
 
 	function handleStartMove(e: MoveEvent) {
