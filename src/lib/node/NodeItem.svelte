@@ -21,11 +21,12 @@
 
 <BaseNodeItem {node} position={screenPosition}>
 	<div
+		style:width="4lh"
 		style:outline-width="0.1lh"
 		style:border-radius="0.4lh"
 		class:outline-blue-500={isSelected}
 		class:outline-zinc-700={!isSelected}
-		class="flex flex-col break-words bg-zinc-600 outline"
+		class="flex flex-col overflow-hidden whitespace-nowrap break-words bg-zinc-600 outline"
 	>
 		<NodeItemHeader {node} />
 		{#each node.outputs as output (output.id)}

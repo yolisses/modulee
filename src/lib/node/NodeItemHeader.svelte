@@ -81,7 +81,11 @@
 	oncontextmenu={handleContextMenu}
 >
 	<Selector id={node.id}>
-		<div class="hover-bg" style:padding-inline="0.5lh">
+		<div
+			style:padding-inline="0.2lh"
+			title={nodesName[node.type]}
+			class="hover-bg block overflow-hidden text-ellipsis"
+		>
 			{nodesName[node.type]}
 		</div>
 	</Selector>
