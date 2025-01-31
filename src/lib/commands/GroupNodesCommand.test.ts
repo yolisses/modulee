@@ -1,4 +1,6 @@
+import type { ExtrasData } from '$lib/data/ExtrasData';
 import type { GroupData } from '$lib/data/GroupData';
+import type { NodeData } from '$lib/data/NodeData';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { GroupNodesCommand } from './GroupNodesCommand';
@@ -18,6 +20,12 @@ test('GroupNodesCommand', () => {
 		mockCommandData({
 			nodesId: ['node1', 'node2'],
 			group: { id: 'group2' } as GroupData,
+			groupNodeData: {
+				id: 'node4',
+				groupId: 'group1',
+				type: 'GroupNode',
+				extras: { targetGroupId: 'group2' } as ExtrasData,
+			} as NodeData,
 		}),
 	);
 	command.execute(editorData);
@@ -27,6 +35,12 @@ test('GroupNodesCommand', () => {
 		{ id: 'node1', groupId: 'group2' },
 		{ id: 'node2', groupId: 'group2' },
 		{ id: 'node3', groupId: 'group1' },
+		{
+			id: 'node4',
+			groupId: 'group1',
+			type: 'GroupNode',
+			extras: { targetGroupId: 'group2' } as ExtrasData,
+		},
 	]);
 
 	command.undo(editorData);
