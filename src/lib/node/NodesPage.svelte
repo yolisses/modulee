@@ -2,6 +2,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
+	import BackButton from '$lib/group/BackButton.svelte';
 	import DevCommandList from '$lib/group/DevCommandList.svelte';
 	import DevGroupList from '$lib/group/DevGroupList.svelte';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
@@ -49,6 +50,7 @@
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
 	<GroupNodesButton />
+	<BackButton />
 </div>
 
 <div class="flex min-h-screen flex-row">

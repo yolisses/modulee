@@ -15,8 +15,12 @@ html {
 	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
 
-button:disabled {
+.disabled {
 	@apply opacity-50;
+}
+
+button:disabled {
+	@apply disabled;
 }
 
 div {
