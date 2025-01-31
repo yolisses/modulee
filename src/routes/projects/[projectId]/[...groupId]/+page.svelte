@@ -10,7 +10,6 @@
 	const groupIdContext = getGroupIdContext();
 
 	$effect(() => {
-		console.log(data);
 		groupIdContext.groupId = data.groupId;
 	});
 </script>
