@@ -4,7 +4,7 @@
 	import { createId } from '$lib/data/createId.js';
 	import { GroupNode } from '$lib/data/GroupNode.svelte.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
+	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { getSelectedNodeIdsContext, Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
@@ -18,7 +18,7 @@
 	const { node }: Props = $props();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
-	const projectIdContext = getProjectIdContext();
+	const projectDataContext = getProjectDataContext();
 	let initialMouseDataPosition = $state(Vector.zero());
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
@@ -59,7 +59,7 @@
 			type: 'MoveNodesCommand',
 			details: { delta, nodeIds },
 			createdAt: new Date().toJSON(),
-			projectId: projectIdContext.projectId,
+			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(moveNodeCommand);
 	}
@@ -70,7 +70,7 @@
 			type: 'RemoveNodeCommand',
 			details: { nodeId: node.id },
 			createdAt: new Date().toJSON(),
-			projectId: projectIdContext.projectId,
+			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(removeNodeCommand);
 	}

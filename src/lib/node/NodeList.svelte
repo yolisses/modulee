@@ -4,7 +4,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
+	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
@@ -29,7 +29,7 @@
 	let mouseEvent = $state<MouseEvent>();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
-	const projectIdContext = getProjectIdContext();
+	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
 		const { input, output } = getInputAndOutput(e);
@@ -38,7 +38,7 @@
 			id: createId(),
 			createdAt: new Date().toJSON(),
 			type: 'SetInputConnectedOutput',
-			projectId: projectIdContext.projectId,
+			projectId: projectDataContext.projectData.id,
 			details: { inputId: input.id, outputId: output?.id },
 		});
 		editorContext.editor.execute(command);

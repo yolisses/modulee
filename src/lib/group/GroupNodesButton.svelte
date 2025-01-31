@@ -3,7 +3,7 @@
 	import { createId } from '$lib/data/createId';
 	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectIdContext } from '$lib/project/projectIdContext';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
 	import { getSelectedNodeIdsContext, Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
@@ -11,7 +11,7 @@
 
 	const editorContext = getEditorContext();
 	const groupIdContext = getGroupIdContext();
-	const projectIdContext = getProjectIdContext();
+	const projectDataContext = getProjectDataContext();
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	function getAverageNodesPosition(nodes: Node[]) {
@@ -32,10 +32,10 @@
 
 		const groupId = createId();
 		const groupNodesCommand = new GroupNodesCommand({
-			createdAt: new Date().toJSON(),
 			id: groupId,
-			projectId: projectIdContext.projectId,
 			type: 'GroupNodesCommand',
+			createdAt: new Date().toJSON(),
+			projectId: projectDataContext.projectData.id,
 			details: {
 				group: { id: groupId, name: 'New group' },
 				nodesId,

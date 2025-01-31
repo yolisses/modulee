@@ -3,7 +3,7 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getGroupIdContext } from '$lib/group/groupIdContext.js';
-	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
+	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import type { Vector } from 'nodes-editor';
 	import { createNodeData } from './createNodeData.js';
@@ -19,7 +19,7 @@
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const groupIdContext = getGroupIdContext();
-	const projectIdContext = getProjectIdContext();
+	const projectDataContext = getProjectDataContext();
 
 	const { closeModal, screenPosition }: Props = $props();
 
@@ -31,7 +31,7 @@
 			type: 'AddNodeCommand',
 			details: { node: nodeData },
 			createdAt: new Date().toJSON(),
-			projectId: projectIdContext.projectId,
+			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();
