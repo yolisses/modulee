@@ -2,12 +2,14 @@
 	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
 	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
+	import { GroupNode } from '$lib/data/GroupNode.svelte.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectIdContext } from '$lib/project/projectIdContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { getSelectedNodeIdsContext, Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
+	import EditGroupButton from './EditGroupButton.svelte';
 
 	interface Props {
 		node: Node;
@@ -81,12 +83,17 @@
 	oncontextmenu={handleContextMenu}
 >
 	<Selector id={node.id}>
-		<div
-			style:padding-inline="0.2lh"
-			title={nodesName[node.type]}
-			class="hover-bg block overflow-hidden text-ellipsis whitespace-nowrap"
-		>
-			{nodesName[node.type]}
+		<div class="flex-1 flex-row">
+			<div
+				style:padding-inline="0.2lh"
+				title={nodesName[node.type]}
+				class="hover-bg block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+			>
+				{nodesName[node.type]}
+			</div>
+			{#if node instanceof GroupNode}
+				<EditGroupButton group={node.targetGroup} />
+			{/if}
 		</div>
 	</Selector>
 </Mover>

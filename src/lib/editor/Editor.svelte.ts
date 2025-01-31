@@ -1,7 +1,9 @@
 import { RedoCommand } from '$lib/commands/RedoCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
 import { Group } from '$lib/data/Group.svelte';
+import { GroupNode } from '$lib/data/GroupNode.svelte';
 import { Node } from '$lib/data/Node.svelte';
+import type { NodeData } from '$lib/data/NodeData';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
@@ -17,12 +19,20 @@ export class Editor {
 		this.recalculate();
 	}
 
+	createNode(nodeData: NodeData, groups: Group[]) {
+		if (nodeData.type === 'GroupNode') {
+			return new GroupNode(nodeData, groups);
+		} else {
+			return new Node(nodeData);
+		}
+	}
+
 	recalculate() {
 		this.history = this.editorData.history;
 		this.undoneHistory = this.editorData.undoneHistory;
 		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
 
-		this.nodes = this.editorData.nodes.map((nodeData) => new Node(nodeData));
+		this.nodes = this.editorData.nodes.map((nodeData) => this.createNode(nodeData, this.groups));
 
 		const inputs = this.nodes.flatMap((node) => node.inputs);
 		const outputs = this.nodes.flatMap((node) => node.outputs);
