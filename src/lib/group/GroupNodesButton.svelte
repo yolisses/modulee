@@ -37,7 +37,7 @@
 			projectId: projectIdContext.projectId,
 			type: 'GroupNodesCommand',
 			details: {
-				group: { id: createId(), name: 'New group' },
+				group: { id: groupId, name: 'New group' },
 				nodesId,
 				groupNodeData: {
 					inputs: [],
