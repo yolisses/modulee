@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { Group } from '$lib/data/Group.svelte';
-	import { getGroupIdContext } from '$lib/group/groupIdContext';
 	import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
@@ -9,18 +9,17 @@
 	}
 
 	const { group }: Props = $props();
-	const groupIdContext = getGroupIdContext();
 
 	function handlePointerDown(e: PointerEvent) {
 		e.stopPropagation();
-		groupIdContext.groupId = group.id;
 	}
 </script>
 
-<button
+<a
 	title="Edit group"
+	href="{page.url}/{group.id}"
 	onpointerdown={handlePointerDown}
 	class="hover-bg flex flex-row items-center"
 >
 	<Fa icon={faPenToSquare} fw />
-</button>
+</a>
