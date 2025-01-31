@@ -18,7 +18,12 @@ export class Editor {
 	}
 
 	recalculate() {
+		this.history = this.editorData.history;
+		this.undoneHistory = this.editorData.undoneHistory;
+		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
+
 		this.nodes = this.editorData.nodes.map((nodeData) => new Node(nodeData));
+
 		const inputs = this.nodes.flatMap((node) => node.inputs);
 		const outputs = this.nodes.flatMap((node) => node.outputs);
 
@@ -31,10 +36,6 @@ export class Editor {
 			input.connectedOutput = connectedOutput;
 			connectedOutput.connectedInputs.push(input);
 		});
-
-		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
-		this.history = this.editorData.history;
-		this.undoneHistory = this.editorData.undoneHistory;
 	}
 
 	getIsUndoOrRedo(command: Command) {

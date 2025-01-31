@@ -1,4 +1,5 @@
 import { Vector } from 'nodes-editor';
+import type { ExtrasData } from './ExtrasData';
 import { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
 import { Output } from './Output.svelte';
@@ -9,11 +10,11 @@ export class Node {
 	id: string;
 	type: string;
 	inputs: Input[];
+	outputs: Output[];
+	extras: ExtrasData;
 	// DEBUG remove $state from here
 	groupId: string = $state()!;
-	outputs: Output[];
 	position: Vector = $state()!;
-	extras: Record<string, number>;
 
 	constructor(nodeData: NodeData) {
 		const { inputs, id, type, extras, outputs, position, groupId } = nodeData;

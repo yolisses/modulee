@@ -1,26 +1,53 @@
 <script lang="ts">
 	import { GroupNodesCommand } from '$lib/commands/GroupNodesCommand';
 	import { createId } from '$lib/data/createId';
+	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getProjectIdContext } from '$lib/project/projectIdContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
-	import { getSelectedNodeIdsContext } from 'nodes-editor';
+	import { getSelectedNodeIdsContext, Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
+	import { getGroupIdContext } from './groupIdContext';
 
 	const editorContext = getEditorContext();
+	const groupIdContext = getGroupIdContext();
 	const projectIdContext = getProjectIdContext();
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 
+	function getAverageNodesPosition(nodes: Node[]) {
+		let positionsSum = Vector.zero();
+		nodes.forEach((node) => {
+			positionsSum = positionsSum.add(node.position);
+		});
+		return positionsSum.divideByNumber(nodes.length).round();
+	}
+
 	function handleClick() {
-		const nodesId = [...selectedNodeIdsContext.selectedNodeIds];
+		const { selectedNodeIds } = selectedNodeIdsContext;
+		const nodesId = [...selectedNodeIds];
+		const nodes = editorContext.editor.nodes.filter((node) => {
+			return selectedNodeIds.has(node.id);
+		});
+		const averagePosition = getAverageNodesPosition(nodes);
+
+		const groupId = createId();
 		const groupNodesCommand = new GroupNodesCommand({
 			createdAt: new Date().toJSON(),
-			id: createId(),
+			id: groupId,
 			projectId: projectIdContext.projectId,
 			type: 'GroupNodesCommand',
 			details: {
 				group: { id: createId(), name: 'New group' },
 				nodesId,
+				groupNodeData: {
+					inputs: [],
+					outputs: [],
+					id: createId(),
+					type: 'GroupNode',
+					groupId: groupIdContext.groupId,
+					extras: { targetGroupId: groupId },
+					position: averagePosition.getData(),
+				},
 			},
 		});
 

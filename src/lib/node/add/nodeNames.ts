@@ -1,6 +1,7 @@
 export const nodesName: Record<string, string> = {
 	AddNode: 'Add',
 	TimeNode: 'Time',
+	GroupNode: 'Group',
 	PhaseNode: 'Phase',
 	DivideNode: 'Divide',
 	OutputNode: 'Output',
