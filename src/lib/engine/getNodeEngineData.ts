@@ -9,10 +9,21 @@ export function getNodeEngineData(node: Node, fallbackId: number): NodeEngineDat
 		inputIds[input.name] = outputId ? hashToUsize(outputId) : fallbackId;
 	});
 
+	const extras: Record<string, number> = {};
+
+	for (const key in node.extras) {
+		const value = node.extras[key];
+		if (typeof value === 'string') {
+			extras[key] = hashToUsize(value);
+		} else {
+			extras[key] = value;
+		}
+	}
+
 	return {
+		extras,
 		type: node.type,
 		input_ids: inputIds,
-		extras: node.extras,
 		id: hashToUsize(node.id),
 	};
 }
