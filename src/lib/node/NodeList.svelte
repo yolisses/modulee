@@ -8,10 +8,11 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
-		NodeList as BaseNodeList,
+		getNodeListContext,
 		getNodeRectsContext,
 		getPreviewConnectionContext,
 		getRectsBoundingRect,
+		PointerEventDispatcher,
 		PreviewConnectionPointerStrategy,
 		SelectionBoxPointerStrategy,
 		Vector,
@@ -32,6 +33,7 @@
 	let mouseEvent = $state<MouseEvent>();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
+	const nodeListContext = getNodeListContext();
 	const nodeRectsContext = getNodeRectsContext();
 	const projectDataContext = getProjectDataContext();
 
@@ -86,10 +88,15 @@
 	});
 </script>
 
-<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy} class="flex flex-1 flex-col">
+<PointerEventDispatcher
+	oncontextmenu={handleContextMenu}
+	{pointerStrategy}
+	class="flex flex-1 flex-col"
+>
 	<div
 		style:min-width={minSize.x + 'px'}
 		style:min-height={minSize.y + 'px'}
+		bind:this={nodeListContext.nodeList}
 		class="bg-dots relative flex-1 select-none"
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
@@ -110,7 +117,7 @@
 		<AddNodeMenuWrapper {mouseEvent} />
 		<SelectionBox />
 	</div>
-</BaseNodeList>
+</PointerEventDispatcher>
 
 <style lang="postcss">
 	.bg-dots {
