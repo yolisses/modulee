@@ -65,17 +65,24 @@
 			: selectionBoxPointerStrategy,
 	);
 
-	const minSize = $derived.by(() => {
+	let minSize = $state(Vector.zero());
+
+	$effect(() => {
 		const nodeRects = Object.values(nodeRectsContext.nodeRects);
-		if (nodeRects.length === 0) return Vector.zero();
+		if (nodeRects.length === 0) return;
 
 		const step = 200;
 		const boundingRect = getRectsBoundingRect(nodeRects);
-		return boundingRect.size
+
+		const currentMinSize = boundingRect.size
 			.add(boundingRect.position)
 			.divideByNumber(step)
 			.ceil()
 			.multiplyByNumber(step);
+
+		if (minSize.x < currentMinSize.x || minSize.y < currentMinSize.y) {
+			minSize = currentMinSize;
+		}
 	});
 </script>
 
