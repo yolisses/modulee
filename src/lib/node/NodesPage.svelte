@@ -38,7 +38,7 @@
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
 	<NodesToolbar bind:zoom {topBarChildren} />
-	<div class="flex-1 overflow-auto">
+	<div class="flex flex-1 flex-col overflow-auto">
 		<NodeList nodes={visibleNodes} />
 	</div>
 </div>

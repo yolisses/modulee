@@ -9,9 +9,12 @@
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		NodeList as BaseNodeList,
+		getNodeRectsContext,
 		getPreviewConnectionContext,
+		getRectsBoundingRect,
 		PreviewConnectionPointerStrategy,
 		SelectionBoxPointerStrategy,
+		Vector,
 		type EndPreviewConnectionEvent,
 	} from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
@@ -29,6 +32,7 @@
 	let mouseEvent = $state<MouseEvent>();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
+	const nodeRectsContext = getNodeRectsContext();
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
@@ -60,11 +64,26 @@
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);
+
+	const minSize = $derived.by(() => {
+		const nodeRects = Object.values(nodeRectsContext.nodeRects);
+		if (nodeRects.length === 0) return Vector.zero();
+
+		const step = 200;
+		const boundingRect = getRectsBoundingRect(nodeRects);
+		return boundingRect.size
+			.add(boundingRect.position)
+			.divideByNumber(step)
+			.ceil()
+			.multiplyByNumber(step);
+	});
 </script>
 
-<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
+<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy} class="flex flex-1 flex-col">
 	<div
-		class="bg-dots relative select-none"
+		style:min-width={minSize.x + 'px'}
+		style:min-height={minSize.y + 'px'}
+		class="bg-dots relative flex-1 select-none"
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 	>
