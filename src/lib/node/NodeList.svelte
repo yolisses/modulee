@@ -97,9 +97,6 @@
 		{#each nodes as node (node.id)}
 			<NodeItem {node} />
 		{/each}
-		<PreviewConnectionWire />
-		<AddNodeMenuWrapper {mouseEvent} />
-		<SelectionBox />
 
 		<!-- This is here instead of in InputItem because BaseNodeItem there's
 		the node position offset -->
@@ -108,6 +105,10 @@
 				<ConnectionItem {input} />
 			{/each}
 		{/each}
+
+		<PreviewConnectionWire />
+		<AddNodeMenuWrapper {mouseEvent} />
+		<SelectionBox />
 	</div>
 </BaseNodeList>
 
