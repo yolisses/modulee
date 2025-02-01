@@ -38,9 +38,9 @@
 	}
 </script>
 
-<div class="max-h-[75vh] rounded bg-zinc-700">
+<div class="flex max-h-[75vh] flex-col rounded bg-zinc-700">
 	<div class="border-b border-black p-2">Add node</div>
-	<div class="scroller overflow-auto">
+	<div class="scroll-small flex flex-col overflow-auto">
 		<NodeTypeList nodeTypes={devNodeTypes} onTypeClick={handleTypeClick} />
 	</div>
 </div>
@@ -48,7 +48,7 @@
 <style>
 	/* Scrollbar */
 	/* width */
-	.scroller::-webkit-scrollbar {
+	.scroll-small::-webkit-scrollbar {
 		width: 0.25rem;
 		height: 0.25rem;
 	}
