@@ -18,10 +18,6 @@ button:disabled {
 	@apply disabled;
 }
 
-div {
-	@apply flex flex-col;
-}
-
 button {
 	@apply flex flex-row items-center;
 }

@@ -62,12 +62,12 @@
 	);
 </script>
 
-<div
-	class="flex flex-1 select-none flex-col"
-	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
-	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
->
-	<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
+<BaseNodeList oncontextmenu={handleContextMenu} {pointerStrategy}>
+	<div
+		class="bg-dots relative select-none"
+		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
+		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
+	>
 		{#each nodes as node (node.id)}
 			<NodeItem {node} />
 		{/each}
@@ -82,11 +82,11 @@
 				<ConnectionItem {input} />
 			{/each}
 		{/each}
-	</BaseNodeList>
-</div>
+	</div>
+</BaseNodeList>
 
 <style lang="postcss">
-	:global(.node-list) {
+	.bg-dots {
 		background-size: 1lh 1lh;
 		background-position: 0.5lh 0.5lh;
 		background-image: radial-gradient(circle, #8888 0.05lh, rgba(0, 0, 0, 0) 0.05lh);

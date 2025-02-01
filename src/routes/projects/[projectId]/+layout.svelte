@@ -29,7 +29,7 @@
 </script>
 
 {#await projectDataPromise}
-	<div class="h-full w-full items-center justify-center">
+	<div class="fixed inset-0 flex items-center justify-center">
 		<Spinner />
 	</div>
 {:then projectData}

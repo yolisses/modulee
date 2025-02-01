@@ -41,8 +41,8 @@
 	);
 </script>
 
-<div class="flex min-h-screen overflow-hidden">
-	<div class="flex-row border-b border-b-black">
+<div class="flex h-screen w-screen flex-col overflow-hidden">
+	<div class="flex flex-row">
 		{@render topBarChildren?.()}
 		<UndoButton />
 		<RedoButton />
@@ -51,7 +51,7 @@
 		<GroupNodesButton />
 		<BackButton />
 	</div>
-	<div class="flex flex-1 overflow-auto">
+	<div class="flex-1 overflow-auto">
 		<NodeList nodes={visibleNodes} />
 	</div>
 </div>

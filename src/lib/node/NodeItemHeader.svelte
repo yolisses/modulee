@@ -83,7 +83,7 @@
 	oncontextmenu={handleContextMenu}
 >
 	<Selector id={node.id}>
-		<div class="flex-1 flex-row">
+		<div class="flex flex-1 flex-row">
 			<div
 				style:padding-inline="0.2lh"
 				title={nodesName[node.type]}
