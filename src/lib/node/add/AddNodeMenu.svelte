@@ -39,7 +39,7 @@
 </script>
 
 <div class="flex max-h-[75vh] flex-col rounded bg-zinc-700">
-	<div class="border-b border-black p-2">Add node</div>
+	<div class="border-b border-black/25 p-2">Add node</div>
 	<div class="scroll-small flex flex-col overflow-auto">
 		<NodeTypeList nodeTypes={devNodeTypes} onTypeClick={handleTypeClick} />
 	</div>
