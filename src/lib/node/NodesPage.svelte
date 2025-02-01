@@ -3,8 +3,6 @@
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import BackButton from '$lib/group/BackButton.svelte';
-	import DevCommandList from '$lib/group/DevCommandList.svelte';
-	import DevGroupList from '$lib/group/DevGroupList.svelte';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
 	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
@@ -43,18 +41,17 @@
 	);
 </script>
 
-<div class="flex-row border-b border-b-black">
-	{@render topBarChildren?.()}
-	<UndoButton />
-	<RedoButton />
-	<ZoomInButton bind:zoom />
-	<ZoomOutButton bind:zoom />
-	<GroupNodesButton />
-	<BackButton />
-</div>
-
-<div class="flex min-h-screen flex-row">
-	<NodeList nodes={visibleNodes} />
-	<DevGroupList groups={editorContext.editor.groups} />
-	<DevCommandList />
+<div class="flex min-h-screen overflow-hidden">
+	<div class="flex-row border-b border-b-black">
+		{@render topBarChildren?.()}
+		<UndoButton />
+		<RedoButton />
+		<ZoomInButton bind:zoom />
+		<ZoomOutButton bind:zoom />
+		<GroupNodesButton />
+		<BackButton />
+	</div>
+	<div class="flex flex-1 overflow-auto">
+		<NodeList nodes={visibleNodes} />
+	</div>
 </div>
