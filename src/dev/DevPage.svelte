@@ -1,14 +1,37 @@
 <script lang="ts">
-	import { initialize_logging, set_panic_hook } from 'modulee-engine-wasm';
 	import { onMount } from 'svelte';
+	import * as modulee_engine_wasm_bg from './modulee_engine_wasm_bg';
+	import { __wbg_set_wasm, Graph, initialize_logging } from './modulee_engine_wasm_bg';
 
 	onMount(async () => {
-		set_panic_hook();
+		const result = await fetch('modulee_engine_wasm_bg.wasm')
+			.then((response) => response.arrayBuffer())
+			.then((bytes) =>
+				WebAssembly.instantiate(bytes, {
+					'./modulee_engine_wasm_bg.js': modulee_engine_wasm_bg,
+				}),
+			);
+
+		console.log(result);
+
+		const wasm = result;
+		__wbg_set_wasm(wasm.instance.exports);
 		initialize_logging();
-		const audioContext = new AudioContext();
-		await audioContext.audioWorklet.addModule('engine-processor.js');
-		const engineNode = new AudioWorkletNode(audioContext, 'engine-processor');
-		engineNode.connect(audioContext.destination);
+		// wasm.__wbindgen_start();
+
+		const graph = new Graph();
+
+		graph.set_debug_string('test');
+		console.log(graph.get_debug_value());
+
+		// const audioContext = new AudioContext();
+		// await audioContext.audioWorklet.addModule('engine-processor.js');
+		// const engineNode = new AudioWorkletNode(audioContext, 'engine-processor', {
+		// 	processorOptions: {
+		// 		instance: result.module,
+		// 	},
+		// });
+		// engineNode.connect(audioContext.destination);
 	});
 </script>
 
