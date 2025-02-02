@@ -4,23 +4,17 @@
 	import { __wbg_set_wasm, Graph, initialize_logging } from './modulee_engine_wasm_bg';
 
 	onMount(async () => {
-		const result = await fetch('modulee_engine_wasm_bg.wasm')
-			.then((response) => response.arrayBuffer())
-			.then((bytes) =>
-				WebAssembly.instantiate(bytes, {
-					'./modulee_engine_wasm_bg.js': modulee_engine_wasm_bg,
-				}),
-			);
+		const response = await fetch('modulee_engine_wasm_bg.wasm');
+		const bytes = await response.arrayBuffer();
+		const result = await WebAssembly.instantiate(bytes, {
+			'./modulee_engine_wasm_bg.js': modulee_engine_wasm_bg,
+		});
+		const wasm = result.instance.exports;
+		__wbg_set_wasm(wasm);
 
-		console.log(result);
-
-		const wasm = result;
-		__wbg_set_wasm(wasm.instance.exports);
 		initialize_logging();
-		// wasm.__wbindgen_start();
 
 		const graph = new Graph();
-
 		graph.set_debug_string('test');
 		console.log(graph.get_debug_value());
 
