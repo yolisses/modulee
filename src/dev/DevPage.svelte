@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { Graph, initialize_logging, set_panic_hook } from 'modulee-engine-wasm';
+	import { initialize_logging, set_panic_hook } from 'modulee-engine-wasm';
 	import { onMount } from 'svelte';
 
-	function handleClick() {
-		const graph = new Graph();
-
-		const buffer = new Float32Array(100);
-		graph.process_block(buffer, buffer.length);
-		console.log(buffer);
+	async function handleClick() {
+		const audioContext = new AudioContext();
+		await audioContext.audioWorklet.addModule('engine-processor.js');
+		const engineNode = new AudioWorkletNode(audioContext, 'engine-processor');
+		engineNode.connect(audioContext.destination);
 	}
 
 	onMount(() => {
