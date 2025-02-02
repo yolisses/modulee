@@ -15,9 +15,10 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const wasm = result.instance.exports;
 		__wbg_set_wasm(wasm);
 		initialize_logging();
-		const graph = new Graph();
-		graph.set_debug_string('test');
-		console.log(graph.get_debug_value());
+
+		this.graph = new Graph();
+		this.graph.set_debug_string('test');
+		console.log(this.graph.get_debug_value());
 	}
 
 	process(inputs, outputs, parameters) {
