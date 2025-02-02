@@ -31,7 +31,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const output = outputs[0];
 		this.graph.process_block();
 
-		const outputBuffer = new Float32Array(this.wasm.memory, this.bufferPointer, 128);
+		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
 		console.log(outputBuffer);
 
 		for (let channel = 0; channel < output.length; channel++) {
