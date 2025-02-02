@@ -16,22 +16,28 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const result = await WebAssembly.instantiate(bytes, {
 			'./modulee_engine_wasm_bg.js': modulee_engine_wasm_bg,
 		});
-		const wasm = result.instance.exports;
-		__wbg_set_wasm(wasm);
+		this.wasm = result.instance.exports;
+		__wbg_set_wasm(this.wasm);
 		initialize_logging();
 
 		this.graph = new Graph();
+		this.bufferPointer = this.graph.get_buffer_pointer();
+
+		// DEBUG
 		this.graph.set_debug_string('test');
-		console.log(this.graph.get_debug_value());
 	}
 
 	process(inputs, outputs, parameters) {
 		const output = outputs[0];
-		output.forEach((channel) => {
-			for (let i = 0; i < channel.length; i++) {
-				channel[i] = Math.random() * 2 - 1;
-			}
-		});
+		this.graph.process_block();
+
+		const outputBuffer = new Float32Array(this.wasm.memory, this.bufferPointer, 128);
+		console.log(outputBuffer);
+
+		for (let channel = 0; channel < output.length; channel++) {
+			output[channel].set(outputBuffer);
+		}
+
 		return true;
 	}
 }
