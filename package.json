@@ -44,7 +44,6 @@
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"idb": "^8.0.1",
 		"nanoid": "^5.0.9",
-		"nodes-editor": "^0.0.10",
 		"svelte-fa": "^4.0.3",
 		"vite-plugin-top-level-await": "^1.4.4",
 		"vite-plugin-wasm": "^3.4.1"
