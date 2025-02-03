@@ -5,7 +5,8 @@
 	let isPlaying = $state(false);
 
 	onMount(async () => {
-		const response = await fetch('node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm');
+		const wasmFilePath = '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm';
+		const response = await fetch(wasmFilePath);
 		const bytes = await response.arrayBuffer();
 
 		audioContext = new AudioContext();

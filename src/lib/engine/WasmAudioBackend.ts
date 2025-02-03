@@ -9,7 +9,8 @@ export class WasmAudioBackend implements AudioBackend {
 	}
 
 	async initialize() {
-		const response = await fetch('node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm');
+		const wasmFilePath = '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm';
+		const response = await fetch(wasmFilePath);
 		const bytes = await response.arrayBuffer();
 
 		const audioContext = new AudioContext();

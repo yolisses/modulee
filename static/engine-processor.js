@@ -1,9 +1,9 @@
-import * as modulee_engine_wasm_bg from './node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.js';
+import * as modulee_engine_wasm_bg from '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.js';
 import {
 	__wbg_set_wasm,
 	Graph,
 	initialize_logging,
-} from './node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.js';
+} from '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.js';
 
 class EngineProcessor extends AudioWorkletProcessor {
 	constructor(params) {
