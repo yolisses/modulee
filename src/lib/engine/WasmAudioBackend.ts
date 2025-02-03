@@ -2,6 +2,7 @@ import type { AudioBackend } from './AudioBackend';
 import type { NodeEngineData } from './NodeEngineData';
 
 export class WasmAudioBackend implements AudioBackend {
+	audioContext?: AudioContext;
 	engineNode?: AudioWorkletNode;
 	lastUnsetNodes?: NodeEngineData[];
 
@@ -14,18 +15,31 @@ export class WasmAudioBackend implements AudioBackend {
 		const response = await fetch(wasmFilePath);
 		const bytes = await response.arrayBuffer();
 
-		const audioContext = new AudioContext();
-		await audioContext.audioWorklet.addModule('/engine-processor.js');
+		this.audioContext = new AudioContext();
+		await this.audioContext.audioWorklet.addModule('/engine-processor.js');
 
-		this.engineNode = new AudioWorkletNode(audioContext, 'engine-processor', {
+		this.engineNode = new AudioWorkletNode(this.audioContext, 'engine-processor', {
 			processorOptions: { bytes },
 		});
-		this.engineNode.connect(audioContext.destination);
+		this.engineNode.connect(this.audioContext.destination);
 
 		if (this.lastUnsetNodes) {
 			this.setNodes(this.lastUnsetNodes);
 		}
+
+		// If the audio context can't start because of the user hasn't
+		// interacted with the page
+		if (this.audioContext.state !== 'running') {
+			window.addEventListener('keydown', this.startAudioContext);
+			window.addEventListener('pointerdown', this.startAudioContext);
+		}
 	}
+
+	startAudioContext = () => {
+		this.audioContext?.resume();
+		window.removeEventListener('keydown', this.startAudioContext);
+		window.removeEventListener('pointerdown', this.startAudioContext);
+	};
 
 	setNodes(nodesEngineData: NodeEngineData[]): void {
 		if (!this.engineNode) {
