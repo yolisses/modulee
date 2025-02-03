@@ -2,7 +2,7 @@
 	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
-	import { AudioBackend } from '$lib/engine/AudioBackend';
+	import type { AudioBackend } from '$lib/engine/AudioBackend';
 	import { getNodesEngineData } from '$lib/engine/getNodesEngineData';
 	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
