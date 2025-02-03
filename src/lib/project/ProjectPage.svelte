@@ -2,12 +2,15 @@
 	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
-	import { handleGraphChange } from '$lib/engine/handleGraphChange';
+	import { AudioBackend } from '$lib/engine/AudioBackend';
+	import { getNodesEngineData } from '$lib/engine/getNodesEngineData';
+	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
+	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import type { ProjectData } from './ProjectData';
 	import { setProjectDataContext } from './projectDataContext';
 	import type { ProjectsRepository } from './ProjectsRepository';
@@ -48,8 +51,19 @@
 	const editorContext = $state({ editor });
 	setEditorContext(editorContext);
 
+	let audioBackend = $state<AudioBackend>();
+
 	$effect(() => {
-		handleGraphChange(editor.nodes);
+		const nodesEngineData = getNodesEngineData(editor.nodes);
+		audioBackend?.setNodes(nodesEngineData);
+	});
+
+	onMount(() => {
+		if (JuceAudioBackend.canBeCreated()) {
+			audioBackend = new JuceAudioBackend();
+		} else {
+			audioBackend = new WasmAudioBackend();
+		}
 	});
 </script>
 
