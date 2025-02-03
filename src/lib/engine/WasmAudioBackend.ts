@@ -44,7 +44,6 @@ export class WasmAudioBackend implements AudioBackend {
 	setNodes(nodesEngineData: NodeEngineData[]): void {
 		if (!this.engineNode) {
 			this.lastUnsetNodes = nodesEngineData;
-			console.warn('Attempt to set nodes engine data without audio worklet initialized');
 			return;
 		}
 
