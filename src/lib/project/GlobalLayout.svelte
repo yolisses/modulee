@@ -17,11 +17,13 @@
 	setAudioBackendContext(audioBackendContext);
 
 	onMount(() => {
-		if (JuceAudioBackend.canBeCreated()) {
-			audioBackendContext.audioBackend = new JuceAudioBackend();
-		} else {
-			audioBackendContext.audioBackend = new WasmAudioBackend();
-		}
+		const audioBackend = JuceAudioBackend.canBeCreated()
+			? new JuceAudioBackend()
+			: new WasmAudioBackend();
+		audioBackendContext.audioBackend = audioBackend;
+		return () => {
+			audioBackend.destroy();
+		};
 	});
 </script>
 

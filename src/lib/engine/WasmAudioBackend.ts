@@ -53,4 +53,9 @@ export class WasmAudioBackend implements AudioBackend {
 			data: { nodes: nodesEngineData },
 		});
 	}
+
+	destroy(): void {
+		console.log('destroy');
+		this.audioContext?.close();
+	}
 }

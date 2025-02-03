@@ -11,4 +11,8 @@ export class JuceAudioBackend implements AudioBackend {
 			nodesData: JSON.stringify(nodesEngineData),
 		});
 	}
+
+	destroy(): void {
+		throw new Error('Method not implemented.');
+	}
 }
