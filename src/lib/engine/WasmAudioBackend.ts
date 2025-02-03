@@ -55,7 +55,6 @@ export class WasmAudioBackend implements AudioBackend {
 	}
 
 	destroy(): void {
-		console.log('destroy');
 		this.audioContext?.close();
 	}
 }
