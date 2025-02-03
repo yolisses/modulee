@@ -9,7 +9,7 @@
 		const bytes = await response.arrayBuffer();
 
 		audioContext = new AudioContext();
-		await audioContext.audioWorklet.addModule('engine-processor.js');
+		await audioContext.audioWorklet.addModule('/engine-processor.js');
 		const engineNode = new AudioWorkletNode(audioContext, 'engine-processor', {
 			processorOptions: { bytes },
 		});

@@ -16,8 +16,10 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const result = await WebAssembly.instantiate(bytes, {
 			'./modulee_engine_wasm_bg.js': modulee_engine_wasm_bg,
 		});
+
 		this.wasm = result.instance.exports;
 		__wbg_set_wasm(this.wasm);
+
 		initialize_logging();
 
 		this.graph = new Graph();

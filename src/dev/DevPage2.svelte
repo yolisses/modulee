@@ -1,7 +1,7 @@
 <script lang="ts">
 	async function handleClick() {
 		const audioContext = new AudioContext();
-		await audioContext.audioWorklet.addModule('random-noise-processor.js');
+		await audioContext.audioWorklet.addModule('/random-noise-processor.js');
 		const randomNoiseNode = new AudioWorkletNode(audioContext, 'random-noise-processor');
 		randomNoiseNode.connect(audioContext.destination);
 	}
