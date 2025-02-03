@@ -63,7 +63,6 @@ class EngineProcessor extends AudioWorkletProcessor {
 			console.warn('Attempt to set nodes with graph not initialized');
 			return;
 		}
-		console.log(nodes);
 		const nodesJson = JSON.stringify(nodes);
 		this.graph.set_nodes_from_json(nodesJson);
 	};
