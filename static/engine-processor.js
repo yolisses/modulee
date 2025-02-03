@@ -37,9 +37,6 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 		this.graph = new Graph();
 		this.bufferPointer = this.graph.get_buffer_pointer();
-
-		// DEBUG
-		this.graph.set_debug_string('test');
 	}
 
 	/**
