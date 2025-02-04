@@ -1,6 +1,6 @@
 import type { NodeType } from './NodeType';
 
-export const devNodeTypes: NodeType[] = [
+export const nodeTypes: NodeType[] = [
 	{
 		id: 'add',
 		name: 'AddNode',
