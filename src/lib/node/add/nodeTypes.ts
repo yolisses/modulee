@@ -1,5 +1,6 @@
 import type { NodeType } from './NodeType';
 
+// TODO generate this data in the engine build
 export const nodeTypes: NodeType[] = [
 	{
 		id: 'add',
@@ -28,6 +29,20 @@ export const nodeTypes: NodeType[] = [
 		defaultExtras: {},
 		outputNames: ['phase'],
 		inputNames: ['time', 'frequency'],
+	},
+	{
+		id: 'pitch',
+		name: 'PitchNode',
+		defaultExtras: {},
+		outputNames: ['pitch'],
+		inputNames: [],
+	},
+	{
+		id: 'frequency',
+		name: 'FrequencyNode',
+		defaultExtras: {},
+		outputNames: ['frequency'],
+		inputNames: ['pitch'],
 	},
 	{
 		id: 'sine_wave',
