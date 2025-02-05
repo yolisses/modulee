@@ -28,7 +28,7 @@ export const nodeTypes: NodeType[] = [
 		name: 'PhaseNode',
 		defaultExtras: {},
 		outputNames: ['phase'],
-		inputNames: ['time', 'frequency'],
+		inputNames: ['frequency'],
 	},
 	{
 		id: 'pitch',
