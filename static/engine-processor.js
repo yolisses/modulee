@@ -39,6 +39,19 @@ class EngineProcessor extends AudioWorkletProcessor {
 		this.bufferPointer = this.graph.get_buffer_pointer();
 	}
 
+	process(inputs, outputs) {
+		this.graph.process_block();
+
+		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
+
+		const output = outputs[0];
+		for (let channel = 0; channel < output.length; channel++) {
+			output[channel].set(outputBuffer);
+		}
+
+		return true;
+	}
+
 	/**
 	 * @param {MessageEvent} messageEvent
 	 */
@@ -62,7 +75,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 			console.warn('Attempt to set groups with graph not initialized');
 			return;
 		}
-		const groupsJson = JSON.stringify(groupsEngineData);
+		const groupsJson = JSON.stringify(groupsEngineData, undefined, 2);
+		console.log(groupsJson);
 		this.graph.set_groups_from_json(groupsJson);
 	};
 
@@ -81,19 +95,6 @@ class EngineProcessor extends AudioWorkletProcessor {
 		}
 		this.graph.set_note_off(pitch);
 	};
-
-	process(inputs, outputs) {
-		this.graph.process_block();
-
-		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
-
-		const output = outputs[0];
-		for (let channel = 0; channel < output.length; channel++) {
-			output[channel].set(outputBuffer);
-		}
-
-		return true;
-	}
 }
 
 registerProcessor('engine-processor', EngineProcessor);
