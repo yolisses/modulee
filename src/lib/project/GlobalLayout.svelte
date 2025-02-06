@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { AudioBackend } from '$lib/engine/AudioBackend';
 	import {
 		setAudioBackendContext,
 		type AudioBackendContext,
@@ -18,17 +19,22 @@
 	setAudioBackendContext(audioBackendContext);
 
 	onMount(() => {
-		const audioBackend = JuceAudioBackend.canBeCreated()
-			? new JuceAudioBackend()
-			: new WasmAudioBackend();
-		audioBackendContext.audioBackend = audioBackend;
+		let audioBackend: AudioBackend;
+		let webMidiBackend: WebMidiBackend | undefined;
 
-		const webMidiBackend = new WebMidiBackend(audioBackend);
-		webMidiBackend.initialize();
+		if (JuceAudioBackend.canBeCreated()) {
+			audioBackend = new JuceAudioBackend();
+		} else {
+			audioBackend = new WasmAudioBackend();
+			webMidiBackend = new WebMidiBackend(audioBackend);
+			webMidiBackend.initialize();
+		}
+
+		audioBackendContext.audioBackend = audioBackend;
 
 		return () => {
 			audioBackend.destroy();
-			webMidiBackend.destroy();
+			webMidiBackend?.destroy();
 		};
 	});
 </script>
