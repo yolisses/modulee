@@ -1,5 +1,6 @@
 import type { AudioBackend } from './AudioBackend';
 import type { GroupEngineData } from './GroupEngineData';
+import { hashToUsize } from './hashToUsize';
 
 export class WasmAudioBackend implements AudioBackend {
 	audioContext?: AudioContext;
@@ -70,6 +71,14 @@ export class WasmAudioBackend implements AudioBackend {
 		this.engineNode.port.postMessage({
 			type: 'setNoteOff',
 			data: { pitch },
+		});
+	}
+
+	setMainGroupId(mainGroupId: string): void {
+		if (!this.engineNode) return;
+		this.engineNode.port.postMessage({
+			type: 'setMainGroupId',
+			data: { mainGroupId: hashToUsize(mainGroupId) },
 		});
 	}
 }

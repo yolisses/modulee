@@ -63,12 +63,15 @@ class EngineProcessor extends AudioWorkletProcessor {
 			setGroups: this.setGroups,
 			setNoteOn: this.setNoteOn,
 			setNoteOff: this.setNoteOff,
+			setMainGroupId: this.setMainGroupId,
 		};
 
 		// The command data have it's own `data` and `type`
 		const callback = callbacksByType[type];
 		callback(messageEvent.data.data);
 	};
+
+	// TODO check if all these warns are really needed
 
 	setGroups = ({ groupsEngineData }) => {
 		if (!this.graph) {
@@ -94,6 +97,14 @@ class EngineProcessor extends AudioWorkletProcessor {
 			return;
 		}
 		this.graph.set_note_off(pitch);
+	};
+
+	setMainGroupId = ({ mainGroupId }) => {
+		if (!this.graph) {
+			console.warn('Attempt to set main group id with graph not initialized');
+			return;
+		}
+		this.graph.set_main_group_id(mainGroupId);
 	};
 }
 

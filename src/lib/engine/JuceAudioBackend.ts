@@ -1,5 +1,6 @@
 import type { AudioBackend } from './AudioBackend';
 import type { GroupEngineData } from './GroupEngineData';
+import { hashToUsize } from './hashToUsize';
 
 export class JuceAudioBackend implements AudioBackend {
 	static canBeCreated() {
@@ -22,5 +23,9 @@ export class JuceAudioBackend implements AudioBackend {
 
 	setNoteOff(pitch: number): void {
 		window.__JUCE__?.backend.emitEvent('noteOff', { pitch });
+	}
+
+	setMainGroupId(mainGroupId: string): void {
+		window.__JUCE__?.backend.emitEvent('setMainGroupId', { pitch: hashToUsize(mainGroupId) });
 	}
 }

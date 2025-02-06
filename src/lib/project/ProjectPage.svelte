@@ -54,6 +54,11 @@
 		const groupsEngineData = editor.groups.map(getGroupEngineData);
 		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
 	});
+
+	$effect(() => {
+		const mainGroupId = projectData.mainGroup.id;
+		audioBackendContext.audioBackend?.setMainGroupId(mainGroupId);
+	});
 </script>
 
 <NodesPage>
