@@ -4,6 +4,7 @@ import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class LocalProjectsRepository implements ProjectsRepository {
+	onProjectsChange?: () => void;
 	databaseInstance?: IDBPDatabase;
 
 	get database() {
@@ -12,6 +13,10 @@ export class LocalProjectsRepository implements ProjectsRepository {
 		} else {
 			throw new Error('Database not initialized');
 		}
+	}
+
+	getIsInitialized(): boolean {
+		return !!this.databaseInstance;
 	}
 
 	async initialize() {
@@ -51,6 +56,7 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	async deleteProject(id: string) {
 		const transaction = this.database.transaction('projects', 'readwrite');
 		await Promise.all([transaction.store.delete(id), transaction.done]);
+		this.onProjectsChange?.();
 	}
 
 	async addCommand(commandData: CommandData) {
@@ -61,5 +67,6 @@ export class LocalProjectsRepository implements ProjectsRepository {
 	async createProject(projectData: ProjectData) {
 		const transaction = this.database.transaction('projects', 'readwrite');
 		await Promise.all([transaction.store.add(projectData), transaction.done]);
+		this.onProjectsChange?.();
 	}
 }

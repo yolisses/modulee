@@ -12,15 +12,19 @@
 	}
 
 	const { projectsRepository }: Props = $props();
+	setProjectsRepositoryContext(projectsRepository);
 
 	let projectsData = $state<ProjectData[]>([]);
 
-	setProjectsRepositoryContext(projectsRepository);
-
-	onMount(async () => {
-		await projectsRepository.initialize();
+	async function updateProjects() {
+		if (!projectsRepository.getIsInitialized()) {
+			await projectsRepository.initialize();
+		}
 		projectsData = await projectsRepository.getProjects();
-	});
+	}
+
+	onMount(updateProjects);
+	projectsRepository.onProjectsChange = updateProjects;
 </script>
 
 <div class="flex flex-row items-center justify-between gap-2 border-b border-black">
