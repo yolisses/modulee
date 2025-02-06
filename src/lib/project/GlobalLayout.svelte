@@ -5,6 +5,7 @@
 	} from '$lib/engine/audioBackendContext';
 	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
+	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
 
 	interface Props {
@@ -21,8 +22,13 @@
 			? new JuceAudioBackend()
 			: new WasmAudioBackend();
 		audioBackendContext.audioBackend = audioBackend;
+
+		const webMidiBackend = new WebMidiBackend(audioBackend);
+		webMidiBackend.initialize();
+
 		return () => {
 			audioBackend.destroy();
+			webMidiBackend.destroy();
 		};
 	});
 </script>

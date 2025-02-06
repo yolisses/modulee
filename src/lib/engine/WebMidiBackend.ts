@@ -14,6 +14,10 @@ export class WebMidiBackend {
 		});
 	}
 
+	async destroy() {
+		this.webMidi?.disable();
+	}
+
 	onNoteOn = (e: NoteMessageEvent) => {
 		this.audioBackend?.setNoteOn(e.note.number);
 	};
