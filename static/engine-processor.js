@@ -47,7 +47,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const { type } = messageEvent.data;
 
 		const callbacksByType = {
-			setNodes: this.handleSetNodes,
+			setNodes: this.handleSetGroups,
 			setNoteOn: this.handleSetNoteOn,
 			setNoteOff: this.handleSetNoteOff,
 		};
@@ -57,13 +57,13 @@ class EngineProcessor extends AudioWorkletProcessor {
 		callback(messageEvent.data.data);
 	};
 
-	handleSetNodes = ({ nodes }) => {
+	handleSetGroups = ({ groupsEngineData }) => {
 		if (!this.graph) {
-			console.warn('Attempt to set nodes with graph not initialized');
+			console.warn('Attempt to set groups with graph not initialized');
 			return;
 		}
-		const nodesJson = JSON.stringify(nodes);
-		this.graph.set_nodes_from_json(nodesJson);
+		const groupsJson = JSON.stringify(groupsEngineData);
+		this.graph.set_groups_from_json(groupsJson);
 	};
 
 	handleSetNoteOn = ({ pitch }) => {

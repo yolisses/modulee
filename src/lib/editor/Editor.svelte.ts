@@ -34,6 +34,8 @@ export class Editor {
 
 		this.nodes = this.editorData.nodes.map((nodeData) => this.createNode(nodeData, this.groups));
 
+		this.groups.forEach((group) => group.setNodesFromOptions(this.nodes));
+
 		const inputs = this.nodes.flatMap((node) => node.inputs);
 		const outputs = this.nodes.flatMap((node) => node.outputs);
 

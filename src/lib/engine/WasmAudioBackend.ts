@@ -1,10 +1,10 @@
 import type { AudioBackend } from './AudioBackend';
-import type { NodeEngineData } from './NodeEngineData';
+import type { GroupEngineData } from './GroupEngineData';
 
 export class WasmAudioBackend implements AudioBackend {
 	audioContext?: AudioContext;
 	engineNode?: AudioWorkletNode;
-	lastUnsetNodes?: NodeEngineData[];
+	lastUnsetGroups?: GroupEngineData[];
 
 	constructor() {
 		this.initialize();
@@ -23,8 +23,8 @@ export class WasmAudioBackend implements AudioBackend {
 		});
 		this.engineNode.connect(this.audioContext.destination);
 
-		if (this.lastUnsetNodes) {
-			this.setNodes(this.lastUnsetNodes);
+		if (this.lastUnsetGroups) {
+			this.setGroups(this.lastUnsetGroups);
 		}
 
 		// If the audio context can't start because of the user hasn't
@@ -45,15 +45,15 @@ export class WasmAudioBackend implements AudioBackend {
 		window.removeEventListener('pointerdown', this.startAudioContext);
 	};
 
-	setNodes(nodesEngineData: NodeEngineData[]): void {
+	setGroups(groupsEngineData: GroupEngineData[]): void {
 		if (!this.engineNode) {
-			this.lastUnsetNodes = nodesEngineData;
+			this.lastUnsetGroups = groupsEngineData;
 			return;
 		}
 
 		this.engineNode.port.postMessage({
-			type: 'setNodes',
-			data: { nodes: nodesEngineData },
+			type: 'setGroups',
+			data: { groupsEngineData },
 		});
 	}
 

@@ -3,7 +3,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-	import { getNodesEngineData } from '$lib/engine/getNodesEngineData';
+	import { getGroupEngineData } from '$lib/engine/getGroupEngineData';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
@@ -51,8 +51,8 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const nodesEngineData = getNodesEngineData(editor.nodes);
-		audioBackendContext.audioBackend?.setNodes(nodesEngineData);
+		const groupsEngineData = editor.groups.map(getGroupEngineData);
+		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
 	});
 </script>
 

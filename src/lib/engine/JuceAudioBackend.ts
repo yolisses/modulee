@@ -1,5 +1,5 @@
 import type { AudioBackend } from './AudioBackend';
-import type { NodeEngineData } from './NodeEngineData';
+import type { GroupEngineData } from './GroupEngineData';
 
 export class JuceAudioBackend implements AudioBackend {
 	static canBeCreated() {
@@ -10,9 +10,9 @@ export class JuceAudioBackend implements AudioBackend {
 		throw new Error('Method not implemented.');
 	}
 
-	setNodes(nodesEngineData: NodeEngineData[]) {
+	setGroups(groupsEngineData: GroupEngineData[]) {
 		window.__JUCE__?.backend.emitEvent('graphChange', {
-			nodesData: JSON.stringify(nodesEngineData),
+			groupsData: JSON.stringify(groupsEngineData),
 		});
 	}
 
