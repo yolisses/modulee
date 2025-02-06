@@ -1,6 +1,8 @@
 import type { NodeEngineData } from './NodeEngineData';
 
 export interface AudioBackend {
-	setNodes(nodesEngineData: NodeEngineData[]): void;
 	destroy(): void;
+	setNoteOn(pitch: number): void;
+	setNoteOff(pitch: number): void;
+	setNodes(nodesEngineData: NodeEngineData[]): void;
 }

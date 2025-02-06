@@ -1,35 +1,16 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import type { AudioBackend } from '$lib/engine/AudioBackend';
+	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 
-	let audioContext = $state<AudioContext>();
-	let isPlaying = $state(false);
-
-	onMount(async () => {
-		const wasmFilePath = '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm';
-		const response = await fetch(wasmFilePath);
-		const bytes = await response.arrayBuffer();
-
-		audioContext = new AudioContext();
-		await audioContext.audioWorklet.addModule('/engine-processor.js');
-		const engineNode = new AudioWorkletNode(audioContext, 'engine-processor', {
-			processorOptions: { bytes },
-		});
-		engineNode.connect(audioContext.destination);
-
-		isPlaying = audioContext.state === 'running';
-	});
+	const audioBackend = {
+		setNoteOn: console.log,
+		setNoteOff: console.log,
+	} as AudioBackend;
+	const webMidiBacked = new WebMidiBackend(audioBackend);
 
 	function handleClick() {
-		if (!audioContext) return;
-		if (isPlaying) {
-			audioContext.suspend();
-		} else {
-			audioContext.resume();
-		}
-		isPlaying = !isPlaying;
+		webMidiBacked.initialize();
 	}
 </script>
 
-<button onclick={handleClick}>
-	{isPlaying ? 'pause' : 'play'}
-</button>
+<button onclick={handleClick}>click me</button>

@@ -35,6 +35,10 @@ export class WasmAudioBackend implements AudioBackend {
 		}
 	}
 
+	destroy(): void {
+		this.audioContext?.close();
+	}
+
 	startAudioContext = () => {
 		this.audioContext?.resume();
 		window.removeEventListener('keydown', this.startAudioContext);
@@ -53,7 +57,19 @@ export class WasmAudioBackend implements AudioBackend {
 		});
 	}
 
-	destroy(): void {
-		this.audioContext?.close();
+	setNoteOn(pitch: number): void {
+		if (!this.engineNode) return;
+		this.engineNode.port.postMessage({
+			type: 'setNoteOn',
+			data: { pitch },
+		});
+	}
+
+	setNoteOff(pitch: number): void {
+		if (!this.engineNode) return;
+		this.engineNode.port.postMessage({
+			type: 'setNoteOff',
+			data: { pitch },
+		});
 	}
 }
