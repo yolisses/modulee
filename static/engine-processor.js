@@ -48,6 +48,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 		const callbacksByType = {
 			setNodes: this.handleSetNodes,
+			setNoteOn: this.handleSetNoteOn,
+			setNoteOff: this.handleSetNoteOff,
 		};
 
 		// The command data have it's own `data` and `type`
@@ -62,6 +64,22 @@ class EngineProcessor extends AudioWorkletProcessor {
 		}
 		const nodesJson = JSON.stringify(nodes);
 		this.graph.set_nodes_from_json(nodesJson);
+	};
+
+	handleSetNoteOn = ({ pitch }) => {
+		if (!this.graph) {
+			console.warn('Attempt to set note on with graph not initialized');
+			return;
+		}
+		this.graph.set_note_on(pitch);
+	};
+
+	handleSetNoteOff = ({ pitch }) => {
+		if (!this.graph) {
+			console.warn('Attempt to set note off with graph not initialized');
+			return;
+		}
+		this.graph.set_note_off(pitch);
 	};
 
 	process(inputs, outputs, parameters) {
