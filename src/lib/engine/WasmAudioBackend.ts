@@ -2,10 +2,15 @@ import type { AudioBackend } from './AudioBackend';
 import type { GroupEngineData } from './GroupEngineData';
 import { hashToUsize } from './hashToUsize';
 
+type Message = {
+	type: string;
+	data: object;
+};
+
 export class WasmAudioBackend implements AudioBackend {
 	audioContext?: AudioContext;
 	engineNode?: AudioWorkletNode;
-	lastUnsetGroups?: GroupEngineData[];
+	pendingMessages: Message[] = [];
 
 	constructor() {
 		this.initialize();
@@ -24,9 +29,10 @@ export class WasmAudioBackend implements AudioBackend {
 		});
 		this.engineNode.connect(this.audioContext.destination);
 
-		if (this.lastUnsetGroups) {
-			this.setGroups(this.lastUnsetGroups);
-		}
+		this.pendingMessages.forEach((message) => {
+			this.engineNode?.port.postMessage(message);
+		});
+		this.pendingMessages = [];
 
 		// If the audio context can't start because of the user hasn't
 		// interacted with the page
@@ -46,37 +52,37 @@ export class WasmAudioBackend implements AudioBackend {
 		window.removeEventListener('pointerdown', this.startAudioContext);
 	};
 
-	setGroups(groupsEngineData: GroupEngineData[]): void {
-		if (!this.engineNode) {
-			this.lastUnsetGroups = groupsEngineData;
-			return;
+	postOrSaveMessage(message: Message) {
+		if (this.engineNode) {
+			this.engineNode.port.postMessage(message);
+		} else {
+			this.pendingMessages.push(message);
 		}
+	}
 
-		this.engineNode.port.postMessage({
+	setGroups(groupsEngineData: GroupEngineData[]): void {
+		this.postOrSaveMessage({
 			type: 'setGroups',
 			data: { groupsEngineData },
 		});
 	}
 
 	setNoteOn(pitch: number): void {
-		if (!this.engineNode) return;
-		this.engineNode.port.postMessage({
+		this.postOrSaveMessage({
 			type: 'setNoteOn',
 			data: { pitch },
 		});
 	}
 
 	setNoteOff(pitch: number): void {
-		if (!this.engineNode) return;
-		this.engineNode.port.postMessage({
+		this.postOrSaveMessage({
 			type: 'setNoteOff',
 			data: { pitch },
 		});
 	}
 
 	setMainGroupId(mainGroupId: string): void {
-		if (!this.engineNode) return;
-		this.engineNode.port.postMessage({
+		this.postOrSaveMessage({
 			type: 'setMainGroupId',
 			data: { mainGroupId: hashToUsize(mainGroupId) },
 		});

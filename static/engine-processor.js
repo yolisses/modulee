@@ -74,36 +74,22 @@ class EngineProcessor extends AudioWorkletProcessor {
 	// TODO check if all these warns are really needed
 
 	setGroups = ({ groupsEngineData }) => {
-		if (!this.graph) {
-			console.warn('Attempt to set groups with graph not initialized');
-			return;
-		}
+		// DEBUG
+		// const groupsJson = JSON.stringify(groupsEngineData);
 		const groupsJson = JSON.stringify(groupsEngineData, undefined, 2);
 		console.log(groupsJson);
 		this.graph.set_groups_from_json(groupsJson);
 	};
 
 	setNoteOn = ({ pitch }) => {
-		if (!this.graph) {
-			console.warn('Attempt to set note on with graph not initialized');
-			return;
-		}
 		this.graph.set_note_on(pitch);
 	};
 
 	setNoteOff = ({ pitch }) => {
-		if (!this.graph) {
-			console.warn('Attempt to set note off with graph not initialized');
-			return;
-		}
 		this.graph.set_note_off(pitch);
 	};
 
 	setMainGroupId = ({ mainGroupId }) => {
-		if (!this.graph) {
-			console.warn('Attempt to set main group id with graph not initialized');
-			return;
-		}
 		this.graph.set_main_group_id(mainGroupId);
 	};
 }
