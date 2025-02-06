@@ -20,6 +20,7 @@
 	} from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
+	import ConstantNodeItem from './ConstantNodeItem.svelte';
 	import { getInputAndOutput } from './getInputAndOutput.js';
 	import { getScreenFontSize } from './getScreenFontSize.js';
 	import { getScreenLineHeight } from './getScreenLineHeight.js';
@@ -102,7 +103,11 @@
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 	>
 		{#each nodes as node (node.id)}
-			<NodeItem {node} />
+			{#if node.type === 'ConstantNode'}
+				<ConstantNodeItem {node} />
+			{:else}
+				<NodeItem {node} />
+			{/if}
 		{/each}
 
 		<!-- This is here instead of in InputItem because BaseNodeItem there's

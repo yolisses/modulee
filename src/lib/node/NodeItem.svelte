@@ -3,14 +3,16 @@
 	import OutputItem from '$lib/connector/OutputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { NodeItem as BaseNodeItem, getSelectedNodeIdsContext } from 'nodes-editor';
+	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 
 	interface Props {
 		node: Node;
+		children?: Snippet;
 	}
 
-	const { node }: Props = $props();
+	const { node, children }: Props = $props();
 	const spaceContext = getSpaceContext();
 
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
@@ -34,5 +36,6 @@
 		{#each node.inputs as input (input.id)}
 			<InputItem {input} />
 		{/each}
+		{@render children?.()}
 	</div>
 </BaseNodeItem>
