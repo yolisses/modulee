@@ -82,7 +82,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 		this.graph.set_note_off(pitch);
 	};
 
-	process(inputs, outputs, parameters) {
+	process(inputs, outputs) {
 		this.graph.process_block();
 
 		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
