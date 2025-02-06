@@ -32,17 +32,24 @@ export const nodeTypes: NodeType[] = [
 	},
 	{
 		id: 'pitch',
+		inputNames: [],
 		name: 'PitchNode',
 		defaultExtras: {},
 		outputNames: ['pitch'],
+	},
+	{
+		id: 'gate',
 		inputNames: [],
+		name: 'GateNode',
+		defaultExtras: {},
+		outputNames: ['gate'],
 	},
 	{
 		id: 'frequency',
-		name: 'FrequencyNode',
 		defaultExtras: {},
-		outputNames: ['frequency'],
 		inputNames: ['pitch'],
+		name: 'FrequencyNode',
+		outputNames: ['frequency'],
 	},
 	{
 		id: 'sine_wave',

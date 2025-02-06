@@ -3,6 +3,7 @@
 // TODO implement real internationalization.
 export const nodesName: Record<string, string> = {
 	AddNode: 'Add',
+	GateNode: 'Gate',
 	TimeNode: 'Time',
 	GroupNode: 'Group',
 	PhaseNode: 'Phase',
