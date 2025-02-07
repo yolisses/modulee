@@ -7,8 +7,15 @@
 	}
 
 	const { node }: Props = $props();
+
+	function handleBlur(e: Event & { currentTarget: HTMLInputElement }) {}
 </script>
 
 <NodeItem {node}>
-	<input type="number" class="bg-transparent text-right" bind:value={node.extras.value} />
+	<input
+		type="number"
+		class="bg-transparent text-right"
+		bind:value={node.extras.value}
+		onchange={handleBlur}
+	/>
 </NodeItem>
