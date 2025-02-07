@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { SetConstantNodeValue } from '$lib/commands/SetConstantNodeValue.js';
+	import { createId } from '$lib/data/createId.js';
+	import { getEditorContext } from '$lib/editor/editorContext.js';
+	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItem from './NodeItem.svelte';
 
@@ -7,15 +11,37 @@
 	}
 
 	const { node }: Props = $props();
+	const editorContext = getEditorContext();
+	let initialValue = $state(node.extras.value);
+	const projectDataContext = getProjectDataContext();
 
-	function handleBlur(e: Event & { currentTarget: HTMLInputElement }) {}
+	function handleFocus() {
+		initialValue = node.extras.value;
+	}
+
+	function handleBlur(e: Event & { currentTarget: HTMLInputElement }) {
+		const valueString = e.currentTarget.value;
+		const value = parseFloat(valueString);
+		if (Number.isNaN(value)) return;
+		if (value === initialValue) return;
+
+		const command = new SetConstantNodeValue({
+			id: createId(),
+			type: 'SetConstantNodeValue',
+			createdAt: new Date().toJSON(),
+			details: { nodeId: node.id, value },
+			projectId: projectDataContext.projectData.id,
+		});
+		editorContext.editor.execute(command);
+	}
 </script>
 
 <NodeItem {node}>
 	<input
 		type="number"
-		class="bg-transparent text-right"
-		bind:value={node.extras.value}
+		onfocus={handleFocus}
 		onchange={handleBlur}
+		bind:value={node.extras.value}
+		class="appearance-none bg-transparent text-right"
 	/>
 </NodeItem>
