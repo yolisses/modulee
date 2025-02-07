@@ -42,6 +42,26 @@
 		onfocus={handleFocus}
 		onchange={handleBlur}
 		bind:value={node.extras.value}
-		class="appearance-none bg-transparent text-right"
+		class="bg-transparent px-2 text-right"
 	/>
 </NodeItem>
+
+<style>
+	input {
+		padding-inline: 0.4lh;
+		border-bottom-left-radius: 0.4lh;
+		border-bottom-right-radius: 0.4lh;
+	}
+
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+</style>
