@@ -36,6 +36,12 @@ export class Editor {
 
 		this.groups.forEach((group) => group.setNodesFromOptions(this.nodes));
 
+		this.nodes.forEach((node) => {
+			if (node instanceof GroupNode) {
+				node.updateInputs();
+			}
+		});
+
 		const inputs = this.nodes.flatMap((node) => node.inputs);
 		const outputs = this.nodes.flatMap((node) => node.outputs);
 

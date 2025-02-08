@@ -24,6 +24,13 @@ export const nodeTypes: NodeType[] = [
 		inputNames: ['input'],
 	},
 	{
+		id: 'input',
+		inputNames: [],
+		name: 'InputNode',
+		outputNames: ['value'],
+		defaultExtras: { name: 'new input' },
+	},
+	{
 		id: 'phase',
 		name: 'PhaseNode',
 		defaultExtras: {},

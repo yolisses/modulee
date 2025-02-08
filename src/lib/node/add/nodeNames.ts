@@ -6,6 +6,7 @@ export const nodesName: Record<string, string> = {
 	GateNode: 'Gate',
 	TimeNode: 'Time',
 	GroupNode: 'Group',
+	InputNode: 'Input',
 	PhaseNode: 'Phase',
 	PitchNode: 'Pitch',
 	DivideNode: 'Divide',

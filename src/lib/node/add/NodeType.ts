@@ -3,5 +3,5 @@ export type NodeType = {
 	name: string;
 	inputNames: string[];
 	outputNames: string[];
-	defaultExtras: Record<string, number>;
+	defaultExtras: Record<string, number | string>;
 };

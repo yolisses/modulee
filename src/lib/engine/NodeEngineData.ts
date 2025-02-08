@@ -1,6 +1,12 @@
+type GroupNodeExtrasEngineData = {
+	input_target_ids: Map<number, number>;
+};
+type CommonNodeExtrasEngineData = Record<string, number>;
+export type NodeExtrasEngineData = CommonNodeExtrasEngineData | GroupNodeExtrasEngineData;
+
 export type NodeEngineData = {
 	id: number;
 	type: string;
-	extras: Record<string, number>;
-	input_ids: Record<string, number | undefined>;
+	extras: NodeExtrasEngineData;
+	input_ids: Record<string, number>;
 };
