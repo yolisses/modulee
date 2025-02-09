@@ -26,17 +26,4 @@ export class Node {
 		this.inputs = inputs.map((inputData) => new Input(inputData, this));
 		this.outputs = outputs.map((outerData) => new Output(outerData, this));
 	}
-
-	// TODO consider removing this
-	getData(): NodeData {
-		return {
-			id: this.id,
-			type: this.type,
-			extras: this.extras,
-			groupId: this.groupId,
-			position: this.position,
-			inputs: this.inputs.map((input) => input.getData()),
-			outputs: this.outputs.map((output) => output.getData()),
-		};
-	}
 }

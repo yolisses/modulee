@@ -16,11 +16,4 @@ export class Output implements Connector {
 		this.id = id;
 		this.name = name;
 	}
-
-	getData(): OutputData {
-		return {
-			id: this.id,
-			name: this.name,
-		};
-	}
 }

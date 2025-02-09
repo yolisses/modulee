@@ -17,13 +17,6 @@ export class Input implements Connector {
 		this.connectedOutputId = connectedOutputId;
 	}
 
-	// TODO consider removing this
-	getData(): InputData {
-		return {
-			name: this.name,
-		};
-	}
-
 	get id() {
 		return this.node.id + '/' + this.name;
 	}
