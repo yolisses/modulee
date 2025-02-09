@@ -9,7 +9,7 @@ export function getNodeExtrasEngineData(node: Node, fallbackNodeId: number): Nod
 		console.log(node.inputs);
 		node.inputs.forEach((input) => {
 			const { connectedOutputId } = input;
-			const inputId = hashToUsize(input.id);
+			const inputId = hashToUsize(input.name);
 			const targetId = connectedOutputId ? hashToUsize(connectedOutputId) : fallbackNodeId;
 			input_target_ids.set(inputId, targetId);
 		});

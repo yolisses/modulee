@@ -27,6 +27,7 @@ export class Node {
 		this.outputs = outputs.map((outerData) => new Output(outerData, this));
 	}
 
+	// TODO consider removing this
 	getData(): NodeData {
 		return {
 			id: this.id,

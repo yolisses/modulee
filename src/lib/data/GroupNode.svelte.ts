@@ -20,9 +20,8 @@ export class GroupNode extends Node {
 	updateInputs() {
 		const inputNodes = this.targetGroup.nodes.filter((node) => node.type === 'InputNode');
 		this.inputs = inputNodes.map((inputNode) => {
-			// TODO find a better way to create a unique id
-			const id = this.id + inputNode.id;
-			return new Input({ id, name: inputNode.extras.name as string }, this);
+			const name = inputNode.extras.name as string;
+			return new Input({ name }, this);
 		});
 	}
 }

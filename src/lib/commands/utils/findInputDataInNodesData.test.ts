@@ -4,22 +4,22 @@ import { findInputDataInNodesData } from './findInputDataInNodesData';
 
 test('findInputDataInNodesData', () => {
 	const nodesData = [
-		{ inputs: [{ id: '1', name: 'name1' }] },
-		{ inputs: [{ id: '2', name: 'name2' }] },
-		{ inputs: [{ id: '3', name: 'name3' }] },
+		{ id: 'node1', inputs: [{ name: 'input1' }] },
+		{ id: 'node2', inputs: [{ name: 'input2' }, { name: 'input3' }] },
+		{ id: 'node3', inputs: [{ name: 'input4' }] },
 	] as NodeData[];
 
-	const input2 = findInputDataInNodesData('2', nodesData);
-	expect(input2).toEqual({ id: '2', name: 'name2' });
+	const input2 = findInputDataInNodesData({ nodeId: 'node2', inputName: 'input3' }, nodesData);
+	expect(input2).toEqual({ name: 'input3' });
 });
 
 test('findInputDataInNodesData with missing input', () => {
 	const nodesData = [
-		{ inputs: [{ id: '1', name: 'name1' }] },
-		{ inputs: [{ id: '3', name: 'name3' }] },
+		{ id: 'node1', inputs: [{ name: 'input1' }] },
+		{ id: 'node2', inputs: [{ name: 'input2' }] },
 	] as NodeData[];
 
 	expect(() => {
-		findInputDataInNodesData('2', nodesData);
+		findInputDataInNodesData({ nodeId: 'node2', inputName: 'input3' }, nodesData);
 	}).toThrow();
 });

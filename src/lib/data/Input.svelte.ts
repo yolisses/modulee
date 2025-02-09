@@ -4,7 +4,6 @@ import type { Node } from './Node.svelte';
 import type { Output } from './Output.svelte';
 
 export class Input implements Connector {
-	id: string;
 	name: string;
 	connectedOutput?: Output;
 	connectedOutputId?: string;
@@ -13,16 +12,19 @@ export class Input implements Connector {
 		inputData: InputData,
 		public node: Node,
 	) {
-		const { id, name, connectedOutputId } = inputData;
-		this.id = id;
+		const { name, connectedOutputId } = inputData;
 		this.name = name;
 		this.connectedOutputId = connectedOutputId;
 	}
 
+	// TODO consider removing this
 	getData(): InputData {
 		return {
-			id: this.id,
 			name: this.name,
 		};
+	}
+
+	get id() {
+		return this.node.id + '/' + this.name;
 	}
 }

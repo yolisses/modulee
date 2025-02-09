@@ -46,7 +46,13 @@
 			createdAt: new Date().toJSON(),
 			type: 'SetInputConnectedOutput',
 			projectId: projectDataContext.projectData.id,
-			details: { inputId: input.id, outputId: output?.id },
+			details: {
+				inputPath: {
+					nodeId: input.node.id,
+					inputName: input.name,
+				},
+				outputId: output?.id,
+			},
 		});
 		editorContext.editor.execute(command);
 	}
@@ -113,7 +119,7 @@
 		<!-- This is here instead of in InputItem because BaseNodeItem there's
 		the node position offset -->
 		{#each nodes as node (node.id)}
-			{#each node.inputs as input (input.id)}
+			{#each node.inputs as input (input.name)}
 				<ConnectionItem {input} />
 			{/each}
 		{/each}

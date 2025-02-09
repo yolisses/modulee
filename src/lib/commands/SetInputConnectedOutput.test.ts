@@ -6,17 +6,18 @@ import { mockCommandData } from './test/mockNodeData';
 test('SetInputConnectedOutput', () => {
 	const editorData = {
 		nodes: [
-			{ inputs: [{ id: 'input1', connectedOutputId: 'output1' }] },
+			{ id: 'node1', inputs: [{ name: 'input1', connectedOutputId: 'output1' }] },
 			{
+				id: 'node2',
 				inputs: [
-					{ id: 'input2', connectedOutputId: 'output2' },
-					{ id: 'input3', connectedOutputId: 'output3' },
+					{ name: 'input2', connectedOutputId: 'output2' },
+					{ name: 'input3', connectedOutputId: 'output3' },
 				],
 			},
 		],
 	} as EditorData;
 	const command = new SetInputConnectedOutput(
-		mockCommandData({ inputId: 'input2', outputId: 'output4' }),
+		mockCommandData({ inputPath: { nodeId: 'node2', inputName: 'input2' }, outputId: 'output4' }),
 	);
 
 	command.execute(editorData);
@@ -31,16 +32,19 @@ test('SetInputConnectedOutput', () => {
 test('SetInputConnectedOutput with undefined outputId', () => {
 	const editorData = {
 		nodes: [
-			{ inputs: [{ id: 'input1', connectedOutputId: 'output1' }] },
+			{ id: 'node1', inputs: [{ name: 'input1', connectedOutputId: 'output1' }] },
 			{
+				id: 'node2',
 				inputs: [
-					{ id: 'input2', connectedOutputId: 'output2' },
-					{ id: 'input3', connectedOutputId: 'output3' },
+					{ name: 'input2', connectedOutputId: 'output2' },
+					{ name: 'input3', connectedOutputId: 'output3' },
 				],
 			},
 		],
 	} as EditorData;
-	const command = new SetInputConnectedOutput(mockCommandData({ inputId: 'input2' }));
+	const command = new SetInputConnectedOutput(
+		mockCommandData({ inputPath: { nodeId: 'node2', inputName: 'input2' } }),
+	);
 
 	command.execute(editorData);
 

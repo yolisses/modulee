@@ -33,7 +33,7 @@
 		{#each node.outputs as output (output.id)}
 			<OutputItem {output} />
 		{/each}
-		{#each node.inputs as input (input.id)}
+		{#each node.inputs as input (input.name)}
 			<InputItem {input} />
 		{/each}
 		{@render children?.()}
