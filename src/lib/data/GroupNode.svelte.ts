@@ -1,4 +1,5 @@
 import { findById } from '$lib/array/findById';
+import type { ConnectionData } from './ConnectionData';
 import type { Group } from './Group.svelte';
 import { Input } from './Input.svelte';
 import { Node } from './Node.svelte';
@@ -7,8 +8,8 @@ import type { NodeData } from './NodeData';
 export class GroupNode extends Node {
 	targetGroup: Group = $state()!;
 
-	constructor(nodeData: NodeData, groups: Group[]) {
-		super(nodeData);
+	constructor(nodeData: NodeData, connectionData: ConnectionData[], groups: Group[]) {
+		super(nodeData, connectionData);
 
 		const { targetGroupId } = nodeData.extras;
 		if (typeof targetGroupId !== 'string') {
@@ -17,9 +18,13 @@ export class GroupNode extends Node {
 		this.targetGroup = findById(groups, targetGroupId);
 	}
 
-	updateInputs() {
+	// It's called in Editor
+	//
+	// Uses a different name to prevent if from being called in super
+	customCalculateInputs() {
 		const inputNodes = this.targetGroup.nodes.filter((node) => node.type === 'InputNode');
-		this.inputs = inputNodes.map((inputNode) => {
+
+		return inputNodes.map((inputNode) => {
 			const name = inputNode.extras.name as string;
 			return new Input(name, this);
 		});

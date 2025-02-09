@@ -1,5 +1,6 @@
 import { RedoCommand } from '$lib/commands/RedoCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
+import type { ConnectionData } from '$lib/data/ConnectionData';
 import { Group } from '$lib/data/Group.svelte';
 import { GroupNode } from '$lib/data/GroupNode.svelte';
 import { Node } from '$lib/data/Node.svelte';
@@ -19,26 +20,30 @@ export class Editor {
 		this.recalculate();
 	}
 
-	createNode(nodeData: NodeData, groups: Group[]) {
+	createNode(nodeData: NodeData, connectionsData: ConnectionData[], groups: Group[]): Node {
 		if (nodeData.type === 'GroupNode') {
-			return new GroupNode(nodeData, groups);
+			return new GroupNode(nodeData, connectionsData, groups);
 		} else {
-			return new Node(nodeData);
+			return new Node(nodeData, connectionsData);
 		}
 	}
 
+	// TODO consider moving this creation step to a separate function, since all
+	// the parts are recreated instead of edited.
 	recalculate() {
 		this.history = this.editorData.history;
 		this.undoneHistory = this.editorData.undoneHistory;
 		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
 
-		this.nodes = this.editorData.nodes.map((nodeData) => this.createNode(nodeData, this.groups));
+		this.nodes = this.editorData.nodes.map((nodeData) =>
+			this.createNode(nodeData, this.editorData.connections, this.groups),
+		);
 
 		this.groups.forEach((group) => group.setNodesFromOptions(this.nodes));
 
 		this.nodes.forEach((node) => {
 			if (node instanceof GroupNode) {
-				node.updateInputs();
+				node.inputs = node.customCalculateInputs();
 			}
 		});
 

@@ -11,13 +11,13 @@ export class Node {
 	id: string;
 	type: string;
 	output: Output;
-	inputs!: Input[];
+	inputs: Input[];
 	extras: ExtrasData;
-	// DEBUG remove $state from here
+	// DEBUG consider removing $state from groupId
 	groupId: string = $state()!;
 	position: Vector = $state()!;
 
-	constructor(nodeData: NodeData) {
+	constructor(nodeData: NodeData, connectionsData: ConnectionData[]) {
 		const { id, type, extras, position, groupId } = nodeData;
 		this.id = id;
 		this.type = type;
@@ -25,17 +25,23 @@ export class Node {
 		this.groupId = groupId;
 		this.output = new Output(this);
 		this.position = Vector.fromData(position);
+		this.inputs = this.calculateInputs(connectionsData);
 	}
 
-	updateInputs(connectionsData: ConnectionData[]) {
+	calculateInputs(connectionsData: ConnectionData[]) {
+		const inputs: Input[] = [];
+
 		connectionsData.forEach((connectionData) => {
 			if (connectionData.nodeId !== this.id) return;
 			// The connected output is set in Editor
 			const input = new Input(connectionData.inputName, this);
-			this.inputs.push(input);
+			inputs.push(input);
 		});
-		this.inputs.sort((input1, input2) => {
+
+		inputs.sort((input1, input2) => {
 			return input1.name.localeCompare(input2.name);
 		});
+
+		return inputs;
 	}
 }
