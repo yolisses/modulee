@@ -31,6 +31,7 @@ export class Editor {
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
+		// TODO check if using history from editorData makes sense.
 		this.history = this.editorData.history;
 		this.undoneHistory = this.editorData.undoneHistory;
 		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
@@ -64,7 +65,7 @@ export class Editor {
 		return command instanceof UndoCommand || command instanceof RedoCommand;
 	}
 
-	execute(command: Command<any>) {
+	execute(command: Command<unknown>) {
 		command.execute(this.editorData);
 
 		// TODO fix this potential data duplication

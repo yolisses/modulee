@@ -16,6 +16,8 @@
 	const { node, children }: Props = $props();
 	const spaceContext = getSpaceContext();
 
+	console.log(node);
+
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
@@ -47,6 +49,7 @@
 		<!-- TODO move it to other file -->
 		<ConnectorArea connector={node.output} {endConnectorCondition}>
 			<div class="relative flex flex-row items-center hover:bg-white/10">
+				output
 				<ConnectorJoint connector={node.output} />
 			</div>
 		</ConnectorArea>
