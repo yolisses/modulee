@@ -1,6 +1,8 @@
 import type { HasId } from '$lib/array/HasId';
 
 // TODO consider creating a version not related with Svelte
+//
+// TODO find a better name for this
 export class ById<T extends HasId> {
 	private content: Record<string, T> = $state({});
 
