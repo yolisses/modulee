@@ -13,7 +13,16 @@ export class ById<T extends HasId> {
 	}
 
 	get(id: string) {
-		return this.content[id];
+		const item = this.content[id];
+		if (!item) {
+			throw new Error('Item not found with id: ' + id);
+		}
+		return item;
+	}
+
+	getOrNull(id: string) {
+		if (!this.containsId(id)) return null;
+		return this.get(id);
 	}
 
 	set(item: T) {
@@ -21,7 +30,7 @@ export class ById<T extends HasId> {
 	}
 
 	containsId(id: string) {
-		return !!this.content[id];
+		return this.content[id] === undefined;
 	}
 
 	ids() {
@@ -34,7 +43,13 @@ export class ById<T extends HasId> {
 
 	add(item: T) {
 		if (this.containsId(item.id)) {
-			throw new Error('Item already present');
+			let error: Error;
+			try {
+				error = new Error('Item already present: ' + JSON.stringify(item));
+			} catch {
+				error = new Error('Item already present, with id: ' + item.id);
+			}
+			throw error;
 		}
 		this.set(item);
 	}

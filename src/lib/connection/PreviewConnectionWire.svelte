@@ -16,7 +16,7 @@
 		if (!startConnectorId) {
 			return startPosition;
 		}
-		const startConnector = editorContext.editor.connections.get(startConnectorId);
+		const startConnector = editorContext.editor.connections.getOrNull(startConnectorId);
 		if (startConnector instanceof Output) {
 			return startPosition;
 		} else {
@@ -29,7 +29,7 @@
 		if (!endConnectorId) {
 			return endPosition;
 		}
-		const startConnector = editorContext.editor.connections.get(endConnectorId);
+		const startConnector = editorContext.editor.connections.getOrNull(endConnectorId);
 		if (startConnector instanceof Output) {
 			return endPosition;
 		} else {

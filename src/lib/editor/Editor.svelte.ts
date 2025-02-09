@@ -28,18 +28,21 @@ export class Editor {
 		this.undoneHistory = editorData.undoneHistory;
 
 		this.nodes.clear();
+		this.groups.clear();
+		this.connections.clear();
 
 		editorData.nodes.values().forEach((nodeData) => {
 			const node = new Node(nodeData, editorData.connections);
 			this.nodes.add(node);
 		});
 
-		editorData.groups.values().map((groupData) => {
+		console.log(this.groups);
+		editorData.groups.values().forEach((groupData) => {
 			const group = new Group(groupData, this.nodes);
 			this.groups.add(group);
 		});
 
-		editorData.connections.values().map((connectionData) => {
+		editorData.connections.values().forEach((connectionData) => {
 			const connection = new Connection(connectionData);
 			this.connections.add(connection);
 		});
