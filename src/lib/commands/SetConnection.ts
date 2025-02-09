@@ -1,9 +1,8 @@
 import type { Remotion } from '$lib/array/remotion';
-import { removeById } from '$lib/array/removeById';
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
-import { DisconnectCommand } from './Disconnect';
+import { DisconnectCommand } from './DisconnectCommand';
 import { mockCommandData } from './test/mockNodeData';
 
 // TODO add Command suffix
@@ -19,11 +18,11 @@ export class SetConnection extends Command<{
 			mockCommandData({ inputPath: connection.inputPath }),
 		);
 		this.disconnectCommand.execute(editorData);
-		editorData.connections.push(this.details.connection);
+		editorData.connections.set(this.details.connection);
 	}
 
 	undo(editorData: EditorData): void {
-		removeById(editorData.connections, this.details.connection.id);
+		editorData.connections.remove(this.details.connection);
 		this.disconnectCommand.undo(editorData);
 	}
 }

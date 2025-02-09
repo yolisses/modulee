@@ -1,5 +1,5 @@
-import { removeById } from '$lib/array/removeById';
 import type { NodeData } from '$lib/data/NodeData';
+import { ById } from '$lib/editor/ById.svelte';
 import { Command } from '$lib/editor/Command';
 import type { CommandData } from '$lib/editor/CommandData';
 import type { CreateCommandCallback } from '$lib/editor/CreateCommandCallback';
@@ -12,11 +12,13 @@ type MockCommandDetails = { nodeId: string };
 type MockCommandData = CommandData<MockCommandDetails>;
 class MockCommand extends Command<MockCommandDetails> {
 	execute(editorData: EditorData): void {
-		editorData.nodes.push({ id: this.details.nodeId } as NodeData);
+		const { nodeId } = this.details;
+		editorData.nodes.add({ id: nodeId } as NodeData);
 	}
 
 	undo(editorData: EditorData): void {
-		removeById(editorData.nodes, this.details.nodeId);
+		const { nodeId } = this.details;
+		editorData.nodes.removeById(nodeId);
 	}
 }
 const mockCreateCommandCallback: CreateCommandCallback = (commandData: CommandData) => {
@@ -25,7 +27,7 @@ const mockCreateCommandCallback: CreateCommandCallback = (commandData: CommandDa
 
 test('AddNodeCommand', () => {
 	const editorData = {
-		nodes: [] as NodeData[],
+		nodes: new ById(),
 		history: [] as Command[],
 		undoneHistory: [] as Command[],
 	} as EditorData;

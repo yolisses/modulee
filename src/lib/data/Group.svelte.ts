@@ -1,3 +1,4 @@
+import type { ById } from '$lib/editor/ById.svelte';
 import type { GroupData } from './GroupData';
 import type { Node } from './Node.svelte';
 
@@ -8,9 +9,9 @@ export class Group {
 	name: string;
 	nodes!: Node[];
 
-	constructor(groupData: GroupData, nodeOptions: Node[]) {
+	constructor(groupData: GroupData, nodeOptions: ById<Node>) {
 		this.id = groupData.id;
 		this.name = groupData.name;
-		this.nodes = nodeOptions.filter((node) => node.groupId === this.id);
+		this.nodes = nodeOptions.values().filter((node) => node.groupId === this.id);
 	}
 }

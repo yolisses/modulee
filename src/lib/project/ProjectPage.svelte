@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ById } from '$lib/editor/ById.svelte';
 	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
@@ -31,11 +32,11 @@
 
 	// TODO find a more encapsulated way to execute this initial changes
 	const editor = new Editor({
-		nodes: [],
 		history: [],
-		connections: [],
 		undoneHistory: [],
-		groups: [structuredClone(projectData.mainGroup)],
+		nodes: new ById(),
+		connections: new ById(),
+		groups: new ById([structuredClone(projectData.mainGroup)]),
 	});
 
 	projectData.commands.map((commandData) => {
@@ -52,7 +53,7 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const groupsEngineData = editor.groups.map(getGroupEngineData);
+		const groupsEngineData = editor.groups.values().map(getGroupEngineData);
 		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
 
 		const mainGroupId = projectData.mainGroup.id;

@@ -1,5 +1,5 @@
 import { getInputPathId } from '$lib/connection/getInputPathId';
-import type { Connector } from 'nodes-editor';
+import type { Connector } from './Connector';
 import type { Node } from './Node.svelte';
 import type { Output } from './Output.svelte';
 

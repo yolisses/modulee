@@ -37,6 +37,7 @@
 
 		initialNodePositions = new Map();
 		editorContext.editor.nodes
+			.values()
 			.filter((node) => selectedNodeIdsContext.selectedNodeIds.has(node.id))
 			.forEach((node) => {
 				initialNodePositions.set(node, node.position);

@@ -25,7 +25,7 @@
 	function handleClick() {
 		const { selectedNodeIds } = selectedNodeIdsContext;
 		const nodesId = [...selectedNodeIds];
-		const nodes = editorContext.editor.nodes.filter((node) => {
+		const nodes = editorContext.editor.nodes.values().filter((node) => {
 			return selectedNodeIds.has(node.id);
 		});
 		const averagePosition = getAverageNodesPosition(nodes);

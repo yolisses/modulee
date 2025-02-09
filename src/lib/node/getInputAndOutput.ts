@@ -1,5 +1,7 @@
+import type { Connector } from '$lib/data/Connector';
 import { Input } from '$lib/data/Input.svelte';
 import { Output } from '$lib/data/Output.svelte';
+import type { ById } from '$lib/editor/ById.svelte';
 import type { EndPreviewConnectionEvent } from 'nodes-editor';
 
 type PossibleInputAndOutput = {
@@ -7,23 +9,28 @@ type PossibleInputAndOutput = {
 	output?: Output;
 };
 
-export function getInputAndOutput(e: EndPreviewConnectionEvent): PossibleInputAndOutput {
+export function getInputAndOutput(
+	e: EndPreviewConnectionEvent,
+	connectors: ById<Connector>,
+): PossibleInputAndOutput {
 	const result: PossibleInputAndOutput = {
 		input: undefined,
 		output: undefined,
 	};
+	const startConnector = connectors.get(e.startConnectorId);
+	const endConnector = e.endConnectorId ? connectors.get(e.endConnectorId) : undefined;
 
-	if (e.startConnector instanceof Input) {
-		result.input = e.startConnector;
+	if (startConnector instanceof Input) {
+		result.input = startConnector;
 	}
-	if (e.startConnector instanceof Output) {
-		result.output = e.startConnector;
+	if (startConnector instanceof Output) {
+		result.output = startConnector;
 	}
-	if (e.endConnector instanceof Input) {
-		result.input = e.endConnector;
+	if (endConnector instanceof Input) {
+		result.input = endConnector;
 	}
-	if (e.endConnector instanceof Output) {
-		result.output = e.endConnector;
+	if (endConnector instanceof Output) {
+		result.output = endConnector;
 	}
 
 	return result;

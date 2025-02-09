@@ -1,32 +1,22 @@
 import { RedoCommand } from '$lib/commands/RedoCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
 import { Connection } from '$lib/data/Connection';
-import type { ConnectionData } from '$lib/data/ConnectionData';
 import { Group } from '$lib/data/Group.svelte';
-import { GroupNode } from '$lib/data/GroupNode.svelte';
 import { Node } from '$lib/data/Node.svelte';
-import type { NodeData } from '$lib/data/NodeData';
+import { ById } from './ById.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
 export class Editor {
-	nodes: Node[] = $state()!;
-	groups: Group[] = $state()!;
+	nodes = new ById<Node>();
+	groups = new ById<Group>();
+	connections = new ById<Connection>();
 	history: Command[] = $state()!;
 	undoneHistory: Command[] = $state()!;
-	connections: Connection[] = $state()!;
 	onExecute?: (command: Command) => void;
 
 	constructor(private editorData: EditorData) {
 		this.recalculate();
-	}
-
-	createNode(nodeData: NodeData, connectionsData: ConnectionData[], groups: Group[]): Node {
-		if (nodeData.type === 'GroupNode') {
-			return new GroupNode(nodeData, connectionsData, groups);
-		} else {
-			return new Node(nodeData, connectionsData);
-		}
 	}
 
 	// TODO consider moving this creation step to a separate function, since all
@@ -37,16 +27,21 @@ export class Editor {
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
 
-		this.nodes = editorData.nodes.map((nodeData) => {
-			return new Node(nodeData, editorData.connections);
+		this.nodes.clear();
+
+		editorData.nodes.values().forEach((nodeData) => {
+			const node = new Node(nodeData, editorData.connections);
+			this.nodes.add(node);
 		});
 
-		this.groups = editorData.groups.map((groupData) => {
-			return new Group(groupData, this.nodes);
+		editorData.groups.values().map((groupData) => {
+			const group = new Group(groupData, this.nodes);
+			this.groups.add(group);
 		});
 
-		this.connections = editorData.connections.map((connectionData) => {
-			return new Connection(connectionData);
+		editorData.connections.values().map((connectionData) => {
+			const connection = new Connection(connectionData);
+			this.connections.add(connection);
 		});
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { ConnectorCondition } from '$lib/connector/ConnectorCondition.js';
 	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
-	import { endConnectorCondition } from '$lib/connector/endConnectorCondition.js';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { NodeItem as BaseNodeItem, ConnectorArea, getSelectedNodeIdsContext } from 'nodes-editor';
@@ -19,10 +19,15 @@
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
+
+	const connectorCondition = new ConnectorCondition();
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
-	<ConnectorArea connector={node.output} {endConnectorCondition}>
+	<ConnectorArea
+		connectorId={node.output.id}
+		endConnectorCondition={connectorCondition.endConnectorCondition}
+	>
 		<div
 			style:width="4lh"
 			style:outline-width="0.1lh"

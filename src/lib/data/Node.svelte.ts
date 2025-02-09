@@ -1,3 +1,4 @@
+import type { ById } from '$lib/editor/ById.svelte';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
 import type { ConnectionData } from './ConnectionData';
@@ -18,7 +19,7 @@ export class Node {
 	groupId: string = $state()!;
 	position: Vector = $state()!;
 
-	constructor(nodeData: NodeData, connectionsData: ConnectionData[]) {
+	constructor(nodeData: NodeData, connectionsData: ById<ConnectionData>) {
 		const { id, type, extras, position, groupId } = nodeData;
 		this.id = id;
 		this.type = type;
@@ -29,10 +30,10 @@ export class Node {
 		this.inputs = this.calculateInputs(connectionsData);
 	}
 
-	calculateInputs(connectionsData: ConnectionData[]) {
+	calculateInputs(connectionsData: ById<ConnectionData>) {
 		const inputs: Input[] = [];
 
-		connectionsData.forEach((connectionData) => {
+		Object.values(connectionsData).forEach((connectionData) => {
 			if (connectionData.inputPath.nodeId !== this.id) return;
 			// The connected output is set in Editor
 			const input = new Input(connectionData.inputPath.inputName, this);

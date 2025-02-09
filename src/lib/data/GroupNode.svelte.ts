@@ -1,4 +1,5 @@
 import { findById } from '$lib/array/findById';
+import type { ById } from '$lib/editor/ById.svelte';
 import type { ConnectionData } from './ConnectionData';
 import type { Group } from './Group.svelte';
 import { Input } from './Input.svelte';
@@ -8,7 +9,7 @@ import type { NodeData } from './NodeData';
 export class GroupNode extends Node {
 	targetGroup: Group = $state()!;
 
-	constructor(nodeData: NodeData, connectionData: ConnectionData[], groups: Group[]) {
+	constructor(nodeData: NodeData, connectionData: ById<ConnectionData>, groups: Group[]) {
 		super(nodeData, connectionData);
 
 		const { targetGroupId } = nodeData.extras;

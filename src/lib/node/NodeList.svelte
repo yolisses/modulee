@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DisconnectCommand } from '$lib/commands/Disconnect';
+	import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
 	import { SetConnection } from '$lib/commands/SetConnection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
@@ -43,7 +43,7 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
-		const { input, output } = getInputAndOutput(e);
+		const { input, output } = getInputAndOutput(e, editorContext.editor.connections);
 		if (!input) return;
 
 		const inputPath: InputPath = {
@@ -90,7 +90,7 @@
 
 	const previewConnectionContext = getPreviewConnectionContext();
 	const pointerStrategy = $derived(
-		previewConnectionContext.startConnector
+		previewConnectionContext.startConnectorId
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);

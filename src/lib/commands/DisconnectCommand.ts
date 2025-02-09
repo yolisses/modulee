@@ -1,6 +1,3 @@
-import { reinsert } from '$lib/array/reinsert';
-import type { Remotion } from '$lib/array/remotion';
-import { removeByCondition } from '$lib/array/removeByCondition';
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import type { InputPath } from '$lib/data/InputPath';
@@ -10,17 +7,17 @@ import type { EditorData } from '$lib/editor/EditorData';
 export class DisconnectCommand extends Command<{
 	inputPath: InputPath;
 }> {
-	remotions!: Remotion<ConnectionData>[];
+	connectionsData!: ConnectionData[];
 
 	execute(editorData: EditorData): void {
-		this.remotions = removeByCondition(editorData.connections, (connectionData) =>
+		this.connectionsData = editorData.connections.removeByCondition((connectionData) =>
 			getAreInputPathsEqual(connectionData.inputPath, this.details.inputPath),
 		);
 	}
 
 	undo(editorData: EditorData): void {
-		this.remotions.forEach((remotion) => {
-			reinsert(editorData.connections, remotion);
+		this.connectionsData.forEach((connectionData) => {
+			editorData.connections.add(connectionData);
 		});
 	}
 }

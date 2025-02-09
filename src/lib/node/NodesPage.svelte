@@ -30,7 +30,7 @@
 	});
 
 	const visibleNodes = $derived(
-		editorContext.editor.nodes.filter((node) => {
+		editorContext.editor.nodes.values().filter((node) => {
 			return node.groupId === groupIdContext.groupId;
 		}),
 	);
@@ -39,6 +39,6 @@
 <div class="flex h-screen w-screen flex-col overflow-hidden">
 	<NodesToolbar bind:zoom {topBarChildren} />
 	<div class="flex flex-1 flex-col overflow-auto">
-		<NodeList nodes={visibleNodes} connections={editorContext.editor.connections} />
+		<NodeList nodes={visibleNodes} connections={editorContext.editor.connections.values()} />
 	</div>
 </div>
