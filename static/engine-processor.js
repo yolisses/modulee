@@ -74,10 +74,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 	// TODO check if all these warns are really needed
 
 	setGroups = ({ groupsEngineData }) => {
-		// DEBUG
-		// const groupsJson = JSON.stringify(groupsEngineData);
-		const groupsJson = JSON.stringify(groupsEngineData, undefined, 2);
-		console.log(groupsJson);
+		const groupsJson = JSON.stringify(groupsEngineData);
 		this.graph.set_groups_from_json(groupsJson);
 	};
 
