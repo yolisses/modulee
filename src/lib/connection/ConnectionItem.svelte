@@ -1,31 +1,30 @@
 <script lang="ts">
-	import type { Input } from '$lib/data/Input.svelte.js';
+	import type { Connection } from '$lib/data/Connection';
 	import { ConnectionItem, Vector } from 'nodes-editor';
 	import Wire from './Wire.svelte';
+	import { getInputPathId } from './getInputPathId';
 
 	interface Props {
-		input: Input;
+		connection: Connection;
 	}
 
-	const { input }: Props = $props();
+	const { connection }: Props = $props();
 </script>
 
-{#if input.connectedOutput?.id}
-	<ConnectionItem
-		connection={{
-			endConnectorId: input.id,
-			id: input.id + 'connectedOutput',
-			startConnectorId: input.connectedOutput.id,
-		}}
-	>
-		{#snippet children({
-			endPosition,
-			startPosition,
-		}: {
-			endPosition: Vector;
-			startPosition: Vector;
-		})}
-			<Wire {startPosition} {endPosition} />
-		{/snippet}
-	</ConnectionItem>
-{/if}
+<ConnectionItem
+	connection={{
+		id: connection.id,
+		endConnectorId: connection.targetNodeId,
+		startConnectorId: getInputPathId(connection.inputPath),
+	}}
+>
+	{#snippet children({
+		endPosition,
+		startPosition,
+	}: {
+		endPosition: Vector;
+		startPosition: Vector;
+	})}
+		<Wire {startPosition} {endPosition} />
+	{/snippet}
+</ConnectionItem>

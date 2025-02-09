@@ -1,28 +1,24 @@
 import { reinsert } from '$lib/array/reinsert';
 import type { Remotion } from '$lib/array/remotion';
+import { removeByCondition } from '$lib/array/removeByCondition';
 import type { ConnectionData } from '$lib/data/ConnectionData';
+import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
+import type { InputPath } from '$lib/data/InputPath';
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
-import { DisconnectCommand } from './Disconnect';
-import { mockCommandData } from './test/mockNodeData';
 
-// TODO add Command suffix
-export class SetConnection extends Command<{
-	connection: ConnectionData;
+export class DisconnectCommand extends Command<{
+	inputPath: InputPath;
 }> {
-	disconnectCommand!: DisconnectCommand;
 	remotions!: Remotion<ConnectionData>[];
 
 	execute(editorData: EditorData): void {
-		const { connection } = this.details;
-		this.disconnectCommand = new DisconnectCommand(
-			mockCommandData({ inputPath: connection.inputPath }),
+		this.remotions = removeByCondition(editorData.connections, (connectionData) =>
+			getAreInputPathsEqual(connectionData.inputPath, this.details.inputPath),
 		);
-		editorData.connections.push(this.details.connection);
 	}
 
 	undo(editorData: EditorData): void {
-		this.disconnectCommand.undo(editorData);
 		this.remotions.forEach((remotion) => {
 			reinsert(editorData.connections, remotion);
 		});

@@ -1,5 +1,6 @@
 import { RedoCommand } from '$lib/commands/RedoCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
+import { Connection } from '$lib/data/Connection';
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { Group } from '$lib/data/Group.svelte';
 import { GroupNode } from '$lib/data/GroupNode.svelte';
@@ -9,10 +10,11 @@ import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
 export class Editor {
-	nodes: Node[] = $state([]);
-	groups: Group[] = $state([]);
-	history: Command[] = $state([]);
-	undoneHistory: Command[] = $state([]);
+	nodes: Node[] = $state()!;
+	groups: Group[] = $state()!;
+	history: Command[] = $state()!;
+	undoneHistory: Command[] = $state()!;
+	connections: Connection[] = $state()!;
 	onExecute?: (command: Command) => void;
 
 	constructor(private editorData: EditorData) {
@@ -41,6 +43,10 @@ export class Editor {
 
 		this.groups = editorData.groups.map((groupData) => {
 			return new Group(groupData, this.nodes);
+		});
+
+		this.connections = editorData.connections.map((connectionData) => {
+			return new Connection(connectionData);
 		});
 	}
 

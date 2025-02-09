@@ -39,6 +39,6 @@
 <div class="flex h-screen w-screen flex-col overflow-hidden">
 	<NodesToolbar bind:zoom {topBarChildren} />
 	<div class="flex flex-1 flex-col overflow-auto">
-		<NodeList nodes={visibleNodes} />
+		<NodeList nodes={visibleNodes} connections={editorContext.editor.connections} />
 	</div>
 </div>

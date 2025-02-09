@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { DisconnectCommand } from '$lib/commands/Disconnect.js';
 	import { SetConnection } from '$lib/commands/SetConnection.js';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
+	import type { ConnectionData } from '$lib/data/ConnectionData.js';
 	import { createId } from '$lib/data/createId.js';
+	import type { InputPath } from '$lib/data/InputPath.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
@@ -28,9 +31,10 @@
 
 	interface Props {
 		nodes: Node[];
+		connections: ConnectionData[];
 	}
 
-	const { nodes }: Props = $props();
+	const { nodes, connections }: Props = $props();
 	let mouseEvent = $state<MouseEvent>();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
@@ -41,21 +45,37 @@
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
 		const { input, output } = getInputAndOutput(e);
 		if (!input) return;
-		const command = new SetConnection({
-			id: createId(),
-			type: 'SetConnection',
-			createdAt: new Date().toJSON(),
-			projectId: projectDataContext.projectData.id,
-			details: {
-				connection: {
-					id: createId(),
-					inputName: input.name,
-					nodeId: input.node.id,
-					targetNodeId: output?.node.id,
+
+		const inputPath: InputPath = {
+			inputName: input.name,
+			nodeId: input.node.id,
+		};
+
+		if (output) {
+			const command = new SetConnection({
+				id: createId(),
+				type: 'SetConnection',
+				createdAt: new Date().toJSON(),
+				projectId: projectDataContext.projectData.id,
+				details: {
+					connection: {
+						inputPath,
+						id: createId(),
+						targetNodeId: output?.node.id,
+					},
 				},
-			},
-		});
-		editorContext.editor.execute(command);
+			});
+			editorContext.editor.execute(command);
+		} else {
+			const command = new DisconnectCommand({
+				id: createId(),
+				details: { inputPath },
+				type: 'DisconnectCommand',
+				createdAt: new Date().toJSON(),
+				projectId: projectDataContext.projectData.id,
+			});
+			editorContext.editor.execute(command);
+		}
 	}
 
 	function handleContextMenu(e: MouseEvent) {
@@ -117,12 +137,8 @@
 			{/if}
 		{/each}
 
-		<!-- This is here instead of in InputItem because BaseNodeItem there's
-		the node position offset -->
-		{#each nodes as node (node.id)}
-			{#each node.inputs as input (input.name)}
-				<ConnectionItem {input} />
-			{/each}
+		{#each connections as connection (connection.id)}
+			<ConnectionItem {connection} />
 		{/each}
 
 		<PreviewConnectionWire />

@@ -10,10 +10,12 @@ test('SetConnection without remotion', () => {
 	const command = new SetConnection(
 		mockCommandData({
 			connection: {
-				nodeId: 'node1',
 				id: 'connection1',
-				inputName: 'input1',
 				targetNodeId: 'node2',
+				inputPath: {
+					nodeId: 'node1',
+					inputName: 'input1',
+				},
 			},
 		}),
 	);
@@ -38,10 +40,12 @@ test('SetConnection with remotion', () => {
 	const editorData = {
 		connections: [
 			{
-				nodeId: 'node1',
 				id: 'connection1',
-				inputName: 'input1',
 				targetNodeId: 'node2',
+				inputPath: {
+					nodeId: 'node1',
+					inputName: 'input1',
+				},
 			},
 		],
 	} as EditorData;
@@ -49,10 +53,12 @@ test('SetConnection with remotion', () => {
 	const command = new SetConnection(
 		mockCommandData({
 			connection: {
-				nodeId: 'node1',
 				id: 'connection2',
-				inputName: 'input1',
 				targetNodeId: 'node3',
+				inputPath: {
+					nodeId: 'node1',
+					inputName: 'input1',
+				},
 			},
 		}),
 	);

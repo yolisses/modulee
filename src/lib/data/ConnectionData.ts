@@ -1,6 +1,7 @@
+import type { InputPath } from './InputPath';
+
 export type ConnectionData = {
 	id: string;
-	nodeId: string;
-	inputName: string;
-	targetNodeId?: string;
+	inputPath: InputPath;
+	targetNodeId: string;
 };

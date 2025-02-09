@@ -33,9 +33,9 @@ export class Node {
 		const inputs: Input[] = [];
 
 		connectionsData.forEach((connectionData) => {
-			if (connectionData.nodeId !== this.id) return;
+			if (connectionData.inputPath.nodeId !== this.id) return;
 			// The connected output is set in Editor
-			const input = new Input(connectionData.inputName, this);
+			const input = new Input(connectionData.inputPath.inputName, this);
 			inputs.push(input);
 		});
 
