@@ -4,7 +4,7 @@
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { doNothing } from '$lib/utils/doNothing';
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet, onMount } from 'svelte';
 	import type { LayoutData } from './$types';
 
 	interface Props {

@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { DisconnectCommand } from '$lib/commands/Disconnect.js';
-	import { SetConnection } from '$lib/commands/SetConnection.js';
+	import { DisconnectCommand } from '$lib/commands/Disconnect';
+	import { SetConnection } from '$lib/commands/SetConnection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
-	import type { ConnectionData } from '$lib/data/ConnectionData.js';
-	import { createId } from '$lib/data/createId.js';
-	import type { InputPath } from '$lib/data/InputPath.js';
-	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
+	import type { Connection } from '$lib/data/Connection';
+	import { createId } from '$lib/data/createId';
+	import type { InputPath } from '$lib/data/InputPath';
+	import type { Node } from '$lib/data/Node.svelte';
+	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
-	import { getSpaceContext } from '$lib/space/spaceContext.js';
+	import { getSpaceContext } from '$lib/space/spaceContext';
 	import {
 		getNodeListContext,
 		getNodeRectsContext,
@@ -21,17 +22,16 @@
 		Vector,
 		type EndPreviewConnectionEvent,
 	} from 'nodes-editor';
-	import type { Node } from '../data/Node.svelte.js';
 	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
 	import ConstantNodeItem from './ConstantNodeItem.svelte';
-	import { getInputAndOutput } from './getInputAndOutput.js';
-	import { getScreenFontSize } from './getScreenFontSize.js';
-	import { getScreenLineHeight } from './getScreenLineHeight.js';
+	import { getInputAndOutput } from './getInputAndOutput';
+	import { getScreenFontSize } from './getScreenFontSize';
+	import { getScreenLineHeight } from './getScreenLineHeight';
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
 		nodes: Node[];
-		connections: ConnectionData[];
+		connections: Connection[];
 	}
 
 	const { nodes, connections }: Props = $props();
