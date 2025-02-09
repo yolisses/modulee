@@ -30,7 +30,7 @@ export class ById<T extends HasId> {
 	}
 
 	containsId(id: string) {
-		return this.content[id] === undefined;
+		return this.content[id] !== undefined;
 	}
 
 	ids() {

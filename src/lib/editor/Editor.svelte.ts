@@ -36,11 +36,12 @@ export class Editor {
 			this.nodes.add(node);
 		});
 
-		console.log(this.groups);
+		console.log(1, this.groups.values());
 		editorData.groups.values().forEach((groupData) => {
 			const group = new Group(groupData, this.nodes);
 			this.groups.add(group);
 		});
+		console.log(2, this.groups.values());
 
 		editorData.connections.values().forEach((connectionData) => {
 			const connection = new Connection(connectionData);
