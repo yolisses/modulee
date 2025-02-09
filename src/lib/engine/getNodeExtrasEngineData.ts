@@ -6,7 +6,6 @@ import type { NodeExtrasEngineData } from './NodeEngineData';
 export function getNodeExtrasEngineData(node: Node, fallbackNodeId: number): NodeExtrasEngineData {
 	if (node instanceof GroupNode) {
 		const input_target_ids = new Map();
-		console.log(node.inputs);
 		node.inputs.forEach((input) => {
 			const { connectedOutput } = input;
 			const inputId = hashToUsize(input.name);

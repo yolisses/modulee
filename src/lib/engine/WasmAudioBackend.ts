@@ -65,7 +65,7 @@ export class WasmAudioBackend implements AudioBackend {
 		// DEBUG
 		const sortedGroupsEngineData = sortJsonObjectKeys(groupsEngineData);
 		const dataJson = JSON.stringify(sortedGroupsEngineData, undefined, 2);
-		console.log(dataJson);
+		console.debug(dataJson);
 
 		this.postOrSaveMessage({
 			type: 'setGroups',
