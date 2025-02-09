@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetInputConnectedOutput } from '$lib/commands/SetInputConnectedOutput.js';
+	import { SetConnection } from '$lib/commands/SetConnection.js';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { createId } from '$lib/data/createId.js';
@@ -41,17 +41,18 @@
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
 		const { input, output } = getInputAndOutput(e);
 		if (!input) return;
-		const command = new SetInputConnectedOutput({
+		const command = new SetConnection({
 			id: createId(),
+			type: 'SetConnection',
 			createdAt: new Date().toJSON(),
-			type: 'SetInputConnectedOutput',
 			projectId: projectDataContext.projectData.id,
 			details: {
-				inputPath: {
-					nodeId: input.node.id,
+				connection: {
+					id: createId(),
 					inputName: input.name,
+					nodeId: input.node.id,
+					targetNodeId: output?.node.id,
 				},
-				outputId: output?.id,
 			},
 		});
 		editorContext.editor.execute(command);

@@ -1,19 +1,11 @@
 import type { Connector } from 'nodes-editor';
-import type { Input } from './Input.svelte';
 import type { Node } from './Node.svelte';
-import type { OutputData } from './OutputData';
 
+// TODO consider removing it, since every node have only one output.
 export class Output implements Connector {
 	id: string;
-	name: string;
-	connectedInputs: Input[] = [];
 
-	constructor(
-		outputData: OutputData,
-		public node: Node,
-	) {
-		const { id, name } = outputData;
-		this.id = id;
-		this.name = name;
+	constructor(public node: Node) {
+		this.id = node.id + '/output';
 	}
 }

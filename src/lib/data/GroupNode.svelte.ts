@@ -21,7 +21,7 @@ export class GroupNode extends Node {
 		const inputNodes = this.targetGroup.nodes.filter((node) => node.type === 'InputNode');
 		this.inputs = inputNodes.map((inputNode) => {
 			const name = inputNode.extras.name as string;
-			return new Input({ name }, this);
+			return new Input(name, this);
 		});
 	}
 }

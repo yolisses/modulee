@@ -40,8 +40,6 @@
 				group: { id: groupId, name: 'New group' },
 				nodesId,
 				groupNodeData: {
-					inputs: [],
-					outputs: [],
 					id: createId(),
 					type: 'GroupNode',
 					groupId: groupIdContext.groupId,

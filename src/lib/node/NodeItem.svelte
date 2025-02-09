@@ -1,8 +1,9 @@
 <script lang="ts">
+	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
+	import { endConnectorCondition } from '$lib/connector/endConnectorCondition.js';
 	import InputItem from '$lib/connector/InputItem.svelte';
-	import OutputItem from '$lib/connector/OutputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
-	import { NodeItem as BaseNodeItem, getSelectedNodeIdsContext } from 'nodes-editor';
+	import { NodeItem as BaseNodeItem, ConnectorArea, getSelectedNodeIdsContext } from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
@@ -30,9 +31,26 @@
 		class="flex flex-col bg-zinc-600 outline"
 	>
 		<NodeItemHeader {node} />
-		{#each node.outputs as output (output.id)}
-			<OutputItem {output} />
-		{/each}
+		<script lang="ts">
+			import type { Input } from '$lib/data/Input.svelte.js';
+			import { ConnectorArea } from 'nodes-editor';
+			import ConnectorJoint from './ConnectorJoint.svelte';
+			import { endConnectorCondition } from './endConnectorCondition.js';
+
+			interface Props {
+				input: Input;
+			}
+
+			const { input }: Props = $props();
+		</script>
+
+		<!-- TODO move it to other file -->
+		<ConnectorArea connector={node.output} {endConnectorCondition}>
+			<div class="relative flex flex-row items-center hover:bg-white/10">
+				<ConnectorJoint connector={node.output} />
+			</div>
+		</ConnectorArea>
+
 		{#each node.inputs as input (input.name)}
 			<InputItem {input} />
 		{/each}

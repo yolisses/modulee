@@ -8,9 +8,9 @@ export function getNodeExtrasEngineData(node: Node, fallbackNodeId: number): Nod
 		const input_target_ids = new Map();
 		console.log(node.inputs);
 		node.inputs.forEach((input) => {
-			const { connectedOutputId } = input;
+			const { connectedOutput } = input;
 			const inputId = hashToUsize(input.name);
-			const targetId = connectedOutputId ? hashToUsize(connectedOutputId) : fallbackNodeId;
+			const targetId = connectedOutput ? hashToUsize(connectedOutput.id) : fallbackNodeId;
 			input_target_ids.set(inputId, targetId);
 		});
 		return { input_target_ids };

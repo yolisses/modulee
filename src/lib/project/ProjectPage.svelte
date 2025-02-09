@@ -33,6 +33,7 @@
 	const editor = new Editor({
 		nodes: [],
 		history: [],
+		connections: [],
 		undoneHistory: [],
 		groups: [structuredClone(projectData.mainGroup)],
 	});

@@ -10,12 +10,12 @@
 	const { input }: Props = $props();
 </script>
 
-{#if input.connectedOutputId}
+{#if input.connectedOutput?.id}
 	<ConnectionItem
 		connection={{
 			endConnectorId: input.id,
 			id: input.id + 'connectedOutput',
-			startConnectorId: input.connectedOutputId,
+			startConnectorId: input.connectedOutput.id,
 		}}
 	>
 		{#snippet children({

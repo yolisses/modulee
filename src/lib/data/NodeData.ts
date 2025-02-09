@@ -1,6 +1,4 @@
 import type { ExtrasData } from './ExtrasData';
-import type { InputData } from './InputData';
-import type { OutputData } from './OutputData';
 import type { VectorData } from './VectorData';
 
 // TODO implement single output
@@ -9,7 +7,5 @@ export type NodeData = {
 	type: string;
 	groupId: string;
 	extras: ExtrasData;
-	inputs: InputData[];
 	position: VectorData;
-	outputs: OutputData[];
 };

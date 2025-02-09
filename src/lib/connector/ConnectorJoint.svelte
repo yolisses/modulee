@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { Connector } from '$lib/data/Connector.js';
 	import { Input } from '$lib/data/Input.svelte';
 	import { Output } from '$lib/data/Output.svelte';
-	import { ConnectorItem } from 'nodes-editor';
+	import { ConnectorItem, type Connector } from 'nodes-editor';
 
 	interface Props {
 		connector: Connector;

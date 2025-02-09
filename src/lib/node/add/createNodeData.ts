@@ -10,14 +10,5 @@ export function createNodeData(nodeType: NodeType, groupId: string, position: Ve
 		id: createId(),
 		type: nodeType.name,
 		extras: structuredClone(nodeType.defaultExtras),
-		inputs: nodeType.inputNames.map((inputName) => ({
-			id: createId(),
-			name: inputName,
-			connectedOutputId: undefined,
-		})),
-		outputs: nodeType.outputNames.map((outputName) => ({
-			id: createId(),
-			name: outputName,
-		})),
 	};
 }

@@ -42,17 +42,16 @@ export class Editor {
 			}
 		});
 
+		const outputs = this.nodes.map((node) => node.output);
 		const inputs = this.nodes.flatMap((node) => node.inputs);
-		const outputs = this.nodes.flatMap((node) => node.outputs);
 
 		inputs.forEach((input) => {
-			if (!input.connectedOutputId) return;
+			if (!input.connectedOutput) return;
 			const connectedOutput = outputs.find((output) => {
-				return output.id === input.connectedOutputId;
+				return output.id === input.connectedOutput?.id;
 			});
 			if (!connectedOutput) return;
 			input.connectedOutput = connectedOutput;
-			connectedOutput.connectedInputs.push(input);
 		});
 	}
 

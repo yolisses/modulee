@@ -76,6 +76,7 @@
 	}
 </script>
 
+<!-- TODO consider using just strategies instead of wrappers -->
 <Mover
 	onMove={handleMove}
 	onEndMove={handleEndMove}
