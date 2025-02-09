@@ -8,12 +8,9 @@ export class Group {
 	name: string;
 	nodes!: Node[];
 
-	constructor(groupData: GroupData) {
+	constructor(groupData: GroupData, nodeOptions: Node[]) {
 		this.id = groupData.id;
 		this.name = groupData.name;
-	}
-
-	setNodesFromOptions(nodeOptions: Node[]) {
 		this.nodes = nodeOptions.filter((node) => node.groupId === this.id);
 	}
 }

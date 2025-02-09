@@ -11,10 +11,9 @@ import type { EditorData } from './EditorData';
 export class Editor {
 	nodes: Node[] = $state([]);
 	groups: Group[] = $state([]);
-	onExecute?: (command: Command) => void;
-	// TODO consider removing these if the commands are never shown
 	history: Command[] = $state([]);
 	undoneHistory: Command[] = $state([]);
+	onExecute?: (command: Command) => void;
 
 	constructor(private editorData: EditorData) {
 		this.recalculate();
@@ -31,33 +30,17 @@ export class Editor {
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
+		const { editorData } = this;
 		// TODO check if using history from editorData makes sense.
-		this.history = this.editorData.history;
-		this.undoneHistory = this.editorData.undoneHistory;
-		this.groups = this.editorData.groups.map((groupData) => new Group(groupData));
+		this.history = editorData.history;
+		this.undoneHistory = editorData.undoneHistory;
 
-		this.nodes = this.editorData.nodes.map((nodeData) =>
-			this.createNode(nodeData, this.editorData.connections, this.groups),
-		);
-
-		this.groups.forEach((group) => group.setNodesFromOptions(this.nodes));
-
-		this.nodes.forEach((node) => {
-			if (node instanceof GroupNode) {
-				node.inputs = node.customCalculateInputs();
-			}
+		this.nodes = editorData.nodes.map((nodeData) => {
+			return new Node(nodeData, editorData.connections);
 		});
 
-		const outputs = this.nodes.map((node) => node.output);
-		const inputs = this.nodes.flatMap((node) => node.inputs);
-
-		inputs.forEach((input) => {
-			if (!input.connectedOutput) return;
-			const connectedOutput = outputs.find((output) => {
-				return output.id === input.connectedOutput?.id;
-			});
-			if (!connectedOutput) return;
-			input.connectedOutput = connectedOutput;
+		this.groups = editorData.groups.map((groupData) => {
+			return new Group(groupData, this.nodes);
 		});
 	}
 
