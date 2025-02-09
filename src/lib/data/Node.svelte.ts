@@ -1,3 +1,4 @@
+import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
 import type { ConnectionData } from './ConnectionData';
 import type { ExtrasData } from './ExtrasData';
@@ -35,6 +36,16 @@ export class Node {
 			if (connectionData.nodeId !== this.id) return;
 			// The connected output is set in Editor
 			const input = new Input(connectionData.inputName, this);
+			inputs.push(input);
+		});
+
+		const nodeType = nodeTypesByName[this.type];
+		nodeType.inputNames.forEach((inputName) => {
+			const alreadyExists = inputs.some((input) => {
+				return input.name === inputName;
+			});
+			if (alreadyExists) return;
+			const input = new Input(inputName, this);
 			inputs.push(input);
 		});
 
