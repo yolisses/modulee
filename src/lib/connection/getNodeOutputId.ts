@@ -1,3 +1,3 @@
 export function getNodeOutputId(nodeId: string) {
-	return nodeId + '/output';
+	return nodeId;
 }

@@ -14,8 +14,8 @@
 <ConnectionItem
 	connection={{
 		id: connection.id,
-		endConnectorId: connection.targetNodeId,
-		startConnectorId: getInputPathId(connection.inputPath),
+		startConnectorId: connection.targetNodeId,
+		endConnectorId: getInputPathId(connection.inputPath),
 	}}
 >
 	{#snippet children({
