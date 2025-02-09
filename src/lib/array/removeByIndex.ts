@@ -1,7 +1,6 @@
-import type { HasId } from './HasId';
 import type { Remotion } from './remotion';
 
-export function removeByIndex<T extends HasId>(items: T[], index: number): Remotion<T> {
+export function removeByIndex<T>(items: T[], index: number): Remotion<T> {
 	if (index < 0 || index >= items.length) {
 		throw new Error('Index out of range');
 	}
