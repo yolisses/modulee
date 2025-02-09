@@ -8,7 +8,7 @@ import { mockCommandData } from './test/mockNodeData';
 test('AddNodeCommand', () => {
 	const editorData = {
 		nodes: new ById([{ id: 'node1' }, { id: 'node2' }]),
-	} as unknown as EditorData;
+	} as EditorData;
 
 	const command = new AddNodeCommand(mockCommandData({ node: { id: 'node3' } as NodeData }));
 	command.execute(editorData);

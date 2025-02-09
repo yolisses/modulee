@@ -17,11 +17,11 @@ test('SetConstantNodeValue', () => {
 
 	command.execute(editorData);
 
-	expect(editorData.nodes.get('node1').extras.value).toBe(2);
+	expect(editorData.nodes.get('node2').extras.value).toBe(2);
 
 	command.undo(editorData);
 
-	expect(editorData.nodes.get('node1').extras.value).toBe(1);
+	expect(editorData.nodes.get('node2').extras.value).toBe(1);
 });
 
 test('SetConstantNodeValue with wrong type', () => {

@@ -31,8 +31,8 @@ test('GroupNodesCommand', () => {
 	);
 	command.execute(editorData);
 
-	expect(editorData.groups).toEqual([{ id: 'group1' }, { id: 'group2' }]);
-	expect(editorData.nodes).toEqual([
+	expect(editorData.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
+	expect(editorData.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group2' },
 		{ id: 'node2', groupId: 'group2' },
 		{ id: 'node3', groupId: 'group1' },
@@ -46,8 +46,8 @@ test('GroupNodesCommand', () => {
 
 	command.undo(editorData);
 
-	expect(editorData.groups).toEqual([{ id: 'group1' }]);
-	expect(editorData.nodes).toEqual([
+	expect(editorData.groups.values()).toEqual([{ id: 'group1' }]);
+	expect(editorData.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group1' },
 		{ id: 'node2', groupId: 'group1' },
 		{ id: 'node3', groupId: 'group1' },

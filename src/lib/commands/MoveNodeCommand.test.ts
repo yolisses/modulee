@@ -17,9 +17,9 @@ test('MoveNodeCommand', () => {
 	const command = new MoveNodeCommand(mockCommandData(commandDetails));
 	command.execute(editorData);
 
-	expect(editorData.nodes.get('node1').position).toEqual({ x: 6, y: 6 });
+	expect(editorData.nodes.get('node2').position).toEqual({ x: 6, y: 6 });
 
 	command.undo(editorData);
 
-	expect(editorData.nodes.get('node1').position).toEqual({ x: 2, y: 2 });
+	expect(editorData.nodes.get('node2').position).toEqual({ x: 2, y: 2 });
 });

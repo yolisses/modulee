@@ -42,7 +42,7 @@ test('AddNodeCommand', () => {
 	editorData.history.push(mockCommand1);
 
 	expect(editorData.history).toHaveLength(1);
-	expect(editorData.nodes).toEqual([{ id: 'node1' }]);
+	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }]);
 
 	// Execute mockCommand2
 
@@ -54,7 +54,7 @@ test('AddNodeCommand', () => {
 	editorData.history.push(mockCommand2);
 
 	expect(editorData.history).toHaveLength(2);
-	expect(editorData.nodes).toEqual([{ id: 'node1' }, { id: 'node2' }]);
+	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 
 	// Undo mockCommand2
 
@@ -63,5 +63,5 @@ test('AddNodeCommand', () => {
 	command.execute(editorData);
 
 	expect(editorData.history).toHaveLength(1);
-	expect(editorData.nodes).toEqual([{ id: 'node1' }]);
+	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }]);
 });

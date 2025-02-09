@@ -22,7 +22,7 @@ test('SetConnection without remotion', () => {
 
 	command.execute(editorData);
 
-	expect(editorData.connections).toEqual([
+	expect(editorData.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',
@@ -35,7 +35,7 @@ test('SetConnection without remotion', () => {
 
 	command.undo(editorData);
 
-	expect(editorData.connections).toEqual([]);
+	expect(editorData.connections.values()).toEqual([]);
 });
 
 test('SetConnection with remotion', () => {
@@ -67,7 +67,7 @@ test('SetConnection with remotion', () => {
 
 	command.execute(editorData);
 
-	expect(editorData.connections).toEqual([
+	expect(editorData.connections.values()).toEqual([
 		{
 			id: 'connection2',
 			targetNodeId: 'node3',
@@ -80,7 +80,7 @@ test('SetConnection with remotion', () => {
 
 	command.undo(editorData);
 
-	expect(editorData.connections).toEqual([
+	expect(editorData.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',
