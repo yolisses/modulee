@@ -11,6 +11,7 @@
 	}
 
 	const { node }: Props = $props();
+	let value = $state(node.extras.value);
 	const editorContext = getEditorContext();
 	let initialValue = $state(node.extras.value);
 	const projectDataContext = getProjectDataContext();
@@ -38,10 +39,10 @@
 
 <NodeItem {node}>
 	<input
+		bind:value
 		type="number"
 		onfocus={handleFocus}
 		onchange={handleBlur}
-		bind:value={node.extras.value}
 		class="bg-transparent px-2 text-right"
 	/>
 </NodeItem>
