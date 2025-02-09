@@ -24,10 +24,12 @@ test('SetConnection without remotion', () => {
 
 	expect(editorData.connections).toEqual([
 		{
-			nodeId: 'node1',
 			id: 'connection1',
-			inputName: 'input1',
 			targetNodeId: 'node2',
+			inputPath: {
+				nodeId: 'node1',
+				inputName: 'input1',
+			},
 		},
 	]);
 
@@ -67,10 +69,12 @@ test('SetConnection with remotion', () => {
 
 	expect(editorData.connections).toEqual([
 		{
-			nodeId: 'node1',
 			id: 'connection2',
-			inputName: 'input1',
 			targetNodeId: 'node3',
+			inputPath: {
+				nodeId: 'node1',
+				inputName: 'input1',
+			},
 		},
 	]);
 
@@ -78,10 +82,12 @@ test('SetConnection with remotion', () => {
 
 	expect(editorData.connections).toEqual([
 		{
-			nodeId: 'node1',
 			id: 'connection1',
-			inputName: 'input1',
 			targetNodeId: 'node2',
+			inputPath: {
+				nodeId: 'node1',
+				inputName: 'input1',
+			},
 		},
 	]);
 });
