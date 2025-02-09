@@ -16,47 +16,45 @@
 	const { node, children }: Props = $props();
 	const spaceContext = getSpaceContext();
 
-	console.log(node);
-
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
-	<div
-		style:width="4lh"
-		style:outline-width="0.1lh"
-		style:border-radius="0.4lh"
-		class:outline-blue-500={isSelected}
-		class:outline-zinc-700={!isSelected}
-		class="flex flex-col bg-zinc-600 outline"
-	>
-		<NodeItemHeader {node} />
-		<script lang="ts">
-			import type { Input } from '$lib/data/Input.svelte.js';
-			import { ConnectorArea } from 'nodes-editor';
-			import ConnectorJoint from './ConnectorJoint.svelte';
-			import { endConnectorCondition } from './endConnectorCondition.js';
+	<ConnectorArea connector={node.output} {endConnectorCondition}>
+		<div
+			style:width="4lh"
+			style:outline-width="0.1lh"
+			style:border-radius="0.4lh"
+			class:outline-blue-500={isSelected}
+			class:outline-zinc-700={!isSelected}
+			class="flex flex-col bg-zinc-600 outline"
+		>
+			<NodeItemHeader {node} />
+			<script lang="ts">
+				import type { Input } from '$lib/data/Input.svelte.js';
+				import { ConnectorArea } from 'nodes-editor';
+				import ConnectorJoint from './ConnectorJoint.svelte';
+				import { endConnectorCondition } from './endConnectorCondition.js';
 
-			interface Props {
-				input: Input;
-			}
+				interface Props {
+					input: Input;
+				}
 
-			const { input }: Props = $props();
-		</script>
+				const { input }: Props = $props();
+			</script>
 
-		<!-- TODO move it to other file -->
-		<ConnectorArea connector={node.output} {endConnectorCondition}>
+			<!-- TODO move it to other file -->
 			<div class="relative flex flex-row items-center hover:bg-white/10">
 				output
 				<ConnectorJoint connector={node.output} />
 			</div>
-		</ConnectorArea>
 
-		{#each node.inputs as input (input.name)}
-			<InputItem {input} />
-		{/each}
-		{@render children?.()}
-	</div>
+			{#each node.inputs as input (input.name)}
+				<InputItem {input} />
+			{/each}
+			{@render children?.()}
+		</div>
+	</ConnectorArea>
 </BaseNodeItem>

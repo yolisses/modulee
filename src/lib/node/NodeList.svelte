@@ -117,9 +117,9 @@
 </script>
 
 <PointerEventDispatcher
-	oncontextmenu={handleContextMenu}
 	{pointerStrategy}
 	class="flex flex-1 flex-col"
+	oncontextmenu={handleContextMenu}
 >
 	<div
 		style:min-width={minSize.x + 'px'}
