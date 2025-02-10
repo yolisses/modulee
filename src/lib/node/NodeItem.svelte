@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ConnectorCondition } from '$lib/connector/ConnectorCondition.js';
-	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import { NodeItem as BaseNodeItem, ConnectorArea, getSelectedNodeIdsContext } from 'nodes-editor';
@@ -24,30 +23,25 @@
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
-	<div
-		style:width="4lh"
-		style:outline-width="0.1lh"
-		style:border-radius="0.4lh"
-		class:outline-blue-500={isSelected}
-		class:outline-zinc-700={!isSelected}
-		class="flex flex-col bg-zinc-600 outline"
+	<ConnectorArea
+		connectorId={node.output.id}
+		endConnectorCondition={connectorCondition.endConnectorCondition}
 	>
-		<NodeItemHeader {node} />
-		<ConnectorArea
-			connectorId={node.output.id}
-			endConnectorCondition={connectorCondition.endConnectorCondition}
+		<div
+			style:width="4lh"
+			style:outline-width="0.1lh"
+			style:border-radius="0.4lh"
+			class:outline-blue-500={isSelected}
+			class:outline-zinc-700={!isSelected}
+			class="flex flex-col bg-zinc-600 outline"
 		>
-			<!-- TODO move it to other file -->
-			<div class="relative flex flex-row items-center hover:bg-white/10">
-				output
-				<ConnectorJoint connector={node.output} />
-			</div>
-		</ConnectorArea>
+			<NodeItemHeader {node} />
 
-		{#each node.inputs as input (input.name)}
-			<InputItem {input} />
-		{/each}
+			{#each node.inputs as input (input.name)}
+				<InputItem {input} />
+			{/each}
 
-		{@render children?.()}
-	</div>
+			{@render children?.()}
+		</div>
+	</ConnectorArea>
 </BaseNodeItem>
