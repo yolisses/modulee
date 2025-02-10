@@ -20,17 +20,20 @@ export class GroupNode extends Node {
 
 	updateGroup(groups: ById<Group>) {
 		this.targetGroup = groups.get(this.targetGroupId);
+		this.updateInputs();
 	}
 
-	// It's called in Editor
-	//
 	// Uses a different name to prevent if from being called in super
-	customCalculateInputs() {
-		const inputNodes = this.targetGroup.nodes.filter((node) => node.type === 'InputNode');
-
-		return inputNodes.map((inputNode) => {
+	updateInputs() {
+		this.inputs = [];
+		const inputNodes = this.targetGroup.nodes.filter((node) => {
+			return node.type === 'InputNode';
+		});
+		inputNodes.forEach((inputNode) => {
 			const name = inputNode.extras.name as string;
-			return new Input(name, this);
+			if (this.inputs.some((input) => input.name === name)) return;
+			const input = new Input(name, this);
+			this.inputs.push(input);
 		});
 	}
 }
