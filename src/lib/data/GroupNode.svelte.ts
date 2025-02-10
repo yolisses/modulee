@@ -1,4 +1,3 @@
-import { findById } from '$lib/array/findById';
 import type { ById } from '$lib/editor/ById.svelte';
 import type { ConnectionData } from './ConnectionData';
 import type { Group } from './Group.svelte';
@@ -7,16 +6,20 @@ import { Node } from './Node.svelte';
 import type { NodeData } from './NodeData';
 
 export class GroupNode extends Node {
+	targetGroupId: string;
 	targetGroup: Group = $state()!;
 
-	constructor(nodeData: NodeData, connectionData: ById<ConnectionData>, groups: Group[]) {
+	constructor(nodeData: NodeData, connectionData: ById<ConnectionData>) {
 		super(nodeData, connectionData);
-
 		const { targetGroupId } = nodeData.extras;
 		if (typeof targetGroupId !== 'string') {
 			throw new Error('Invalid type for targetGroupId. Received: ' + targetGroupId);
 		}
-		this.targetGroup = findById(groups, targetGroupId);
+		this.targetGroupId = targetGroupId;
+	}
+
+	updateGroup(groups: ById<Group>) {
+		this.targetGroup = groups.get(this.targetGroupId);
 	}
 
 	// It's called in Editor
