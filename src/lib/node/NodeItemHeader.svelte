@@ -122,7 +122,7 @@
 	}}
 	oncontextmenu={handleContextMenu}
 >
-	<div class="hover-bg flex flex-1 flex-row items-center">
+	<div class="hover-bg flex flex-1 flex-row items-center" bind:this={element}>
 		<div
 			style:padding-inline="0.2lh"
 			title={nodesName[node.type]}
