@@ -33,6 +33,5 @@ export function getInputAndOutput(
 		result.output = endConnector;
 	}
 
-	console.log(result);
 	return result;
 }

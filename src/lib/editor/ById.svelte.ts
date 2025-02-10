@@ -15,7 +15,6 @@ export class ById<T extends HasId> {
 	get(id: string) {
 		const item = this.content[id];
 		if (!item) {
-			console.log(this.values());
 			throw new Error('Item not found with id: ' + id);
 		}
 		return item;
