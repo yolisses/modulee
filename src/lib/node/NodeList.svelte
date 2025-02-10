@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
-	import { SetConnection } from '$lib/commands/SetConnection';
+	import { SetConnectionCommand } from '$lib/commands/SetConnectionCommand';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
@@ -52,9 +52,9 @@
 		};
 
 		if (output) {
-			const command = new SetConnection({
+			const command = new SetConnectionCommand({
 				id: createId(),
-				type: 'SetConnection',
+				type: 'SetConnectionCommand',
 				createdAt: new Date().toJSON(),
 				projectId: projectDataContext.projectData.id,
 				details: {

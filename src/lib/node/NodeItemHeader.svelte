@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
 	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
+	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { GroupNode } from '$lib/data/GroupNode.svelte.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
@@ -85,17 +86,18 @@
 	oncontextmenu={handleContextMenu}
 >
 	<Selector id={node.id}>
-		<div class="flex flex-1 flex-row">
+		<div class="hover-bg flex flex-1 flex-row items-center">
 			<div
 				style:padding-inline="0.2lh"
 				title={nodesName[node.type]}
-				class="hover-bg block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+				class="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
 			>
 				{nodesName[node.type]}
 			</div>
 			{#if node instanceof GroupNode}
 				<EditGroupButton group={node.targetGroup} />
 			{/if}
+			<ConnectorJoint connector={node.output} />
 		</div>
 	</Selector>
 </Mover>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetConstantNodeValue } from '$lib/commands/SetConstantNodeValue.js';
+	import { SetConstantNodeValueCommand } from '$lib/commands/SetConstantNodeValueCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
@@ -26,10 +26,10 @@
 		if (Number.isNaN(value)) return;
 		if (value === initialValue) return;
 
-		const command = new SetConstantNodeValue({
+		const command = new SetConstantNodeValueCommand({
 			id: createId(),
-			type: 'SetConstantNodeValue',
 			createdAt: new Date().toJSON(),
+			type: 'SetConstantNodeValueCommand',
 			details: { nodeId: node.id, value },
 			projectId: projectDataContext.projectData.id,
 		});
