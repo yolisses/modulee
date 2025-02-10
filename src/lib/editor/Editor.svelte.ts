@@ -3,6 +3,7 @@ import { UndoCommand } from '$lib/commands/UndoCommand';
 import { Connection } from '$lib/data/Connection';
 import { Group } from '$lib/data/Group.svelte';
 import { Node } from '$lib/data/Node.svelte';
+import { Output } from '$lib/data/Output.svelte';
 import { ById } from './ById.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
@@ -10,6 +11,7 @@ import type { EditorData } from './EditorData';
 export class Editor {
 	nodes = new ById<Node>();
 	groups = new ById<Group>();
+	outputs = new ById<Output>();
 	connections = new ById<Connection>();
 	history: Command[] = $state()!;
 	undoneHistory: Command[] = $state()!;
@@ -29,6 +31,7 @@ export class Editor {
 
 		this.nodes.clear();
 		this.groups.clear();
+		this.outputs.clear();
 		this.connections.clear();
 
 		editorData.nodes.values().forEach((nodeData) => {
@@ -44,6 +47,10 @@ export class Editor {
 		editorData.connections.values().forEach((connectionData) => {
 			const connection = new Connection(connectionData);
 			this.connections.add(connection);
+		});
+
+		this.nodes.values().forEach((node) => {
+			this.outputs.add(node.output);
 		});
 	}
 
