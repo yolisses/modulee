@@ -16,6 +16,6 @@
 	);
 </script>
 
-{#each sortedNodeTypes as nodeType (nodeType.id)}
+{#each sortedNodeTypes as nodeType (nodeType.name)}
 	<NodeTypeItem {nodeType} {onTypeClick} />
 {/each}
