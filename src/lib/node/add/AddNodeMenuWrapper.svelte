@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { computePosition, flip, shift } from '@floating-ui/dom';
-	import { getMouseRelativePosition, getNodeListContext } from 'nodes-editor';
+	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
 	import AddNodeMenu from './AddNodeMenu.svelte';
 
 	interface Props {
@@ -12,11 +12,11 @@
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
 
-	const nodeListContext = getNodeListContext();
+	const rootElementContext = getRootElementContext();
 	const menuPosition = $derived.by(() => {
 		if (!mouseEvent) return;
-		if (!nodeListContext.nodeList) return;
-		return getMouseRelativePosition(mouseEvent, nodeListContext.nodeList);
+		if (!rootElementContext.rootElement) return;
+		return getMouseRelativePosition(mouseEvent, rootElementContext.rootElement);
 	});
 
 	function closeModal() {

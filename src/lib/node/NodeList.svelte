@@ -12,10 +12,10 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import {
-		getNodeListContext,
 		getNodeRectsContext,
 		getPreviewConnectionContext,
 		getRectsBoundingRect,
+		getRootElementContext,
 		PointerEventDispatcher,
 		PreviewConnectionPointerStrategy,
 		SelectionBoxPointerStrategy,
@@ -38,8 +38,8 @@
 	let mouseEvent = $state<MouseEvent>();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
-	const nodeListContext = getNodeListContext();
 	const nodeRectsContext = getNodeRectsContext();
+	const rootElementContext = getRootElementContext();
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
@@ -124,7 +124,7 @@
 	<div
 		style:min-width={minSize.x + 'px'}
 		style:min-height={minSize.y + 'px'}
-		bind:this={nodeListContext.nodeList}
+		bind:this={rootElementContext.rootElement}
 		class="bg-dots relative flex-1 select-none"
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}

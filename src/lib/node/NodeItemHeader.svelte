@@ -7,7 +7,16 @@
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
-	import { getSelectedNodeIdsContext, Mover, Selector, Vector, type MoveEvent } from 'nodes-editor';
+	import {
+		EmptyPointerStrategy,
+		getPreviewConnectionContext,
+		getSelectedNodeIdsContext,
+		MoverPointerStrategy,
+		PointerEventDispatcher,
+		SelectOnClickPointerStrategy,
+		Vector,
+		type MoveEvent,
+	} from 'nodes-editor';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
 	import EditGroupButton from './EditGroupButton.svelte';
@@ -16,12 +25,14 @@
 		node: Node;
 	}
 
+	let element = $state<Element>();
 	const { node }: Props = $props();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 	let initialMouseDataPosition = $state(Vector.zero());
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
+	const previewConnectionContext = getPreviewConnectionContext();
 	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
 
 	// The criteria to this movement function is: Keep the cursor always in the
@@ -76,28 +87,52 @@
 		});
 		editorContext.editor.execute(removeNodeCommand);
 	}
+
+	const emptyPointerStrategy = new EmptyPointerStrategy();
+	const selectOnClickPointerStrategy = new SelectOnClickPointerStrategy(node.id);
+	const moverPointerStrategy = $derived(
+		element
+			? new MoverPointerStrategy(element, {
+					onMove: handleMove,
+					onEndMove: handleEndMove,
+					onStartMove: handleStartMove,
+				})
+			: undefined,
+	);
+
+	const pointerStrategy = $derived.by(() => {
+		// If connecting
+		if (previewConnectionContext.startConnectorId) {
+			return emptyPointerStrategy;
+		}
+
+		if (moverPointerStrategy) {
+			return moverPointerStrategy;
+		}
+
+		return emptyPointerStrategy;
+	});
 </script>
 
-<!-- TODO consider using just strategies instead of wrappers -->
-<Mover
-	onMove={handleMove}
-	onEndMove={handleEndMove}
-	onStartMove={handleStartMove}
+<PointerEventDispatcher
+	{pointerStrategy}
+	onpointerdown={(e) => {
+		selectOnClickPointerStrategy.onpointerdown(e);
+		moverPointerStrategy?.onpointerdown(e);
+	}}
 	oncontextmenu={handleContextMenu}
 >
-	<Selector id={node.id}>
-		<div class="hover-bg flex flex-1 flex-row items-center">
-			<div
-				style:padding-inline="0.2lh"
-				title={nodesName[node.type]}
-				class="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
-			>
-				{nodesName[node.type]}
-			</div>
-			{#if node instanceof GroupNode}
-				<EditGroupButton group={node.targetGroup} />
-			{/if}
-			<ConnectorJoint connector={node.output} />
+	<div class="hover-bg flex flex-1 flex-row items-center">
+		<div
+			style:padding-inline="0.2lh"
+			title={nodesName[node.type]}
+			class="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+		>
+			{nodesName[node.type]}
 		</div>
-	</Selector>
-</Mover>
+		{#if node instanceof GroupNode}
+			<EditGroupButton group={node.targetGroup} />
+		{/if}
+		<ConnectorJoint connector={node.output} />
+	</div>
+</PointerEventDispatcher>

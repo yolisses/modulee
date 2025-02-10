@@ -2,7 +2,12 @@
 	import { ConnectorCondition } from '$lib/connector/ConnectorCondition.js';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
-	import { NodeItem as BaseNodeItem, ConnectorArea, getSelectedNodeIdsContext } from 'nodes-editor';
+	import {
+		NodeItem as BaseNodeItem,
+		ConnectorAreaPointerStrategy,
+		getSelectedNodeIdsContext,
+		PointerEventDispatcher,
+	} from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
@@ -19,14 +24,16 @@
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
 
+	const connectorId = node.output.id;
 	const connectorCondition = new ConnectorCondition();
+	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
+		connectorId,
+		// connectorCondition.endConnectorCondition,
+	);
 </script>
 
 <BaseNodeItem {node} position={screenPosition}>
-	<ConnectorArea
-		connectorId={node.output.id}
-		endConnectorCondition={connectorCondition.endConnectorCondition}
-	>
+	<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
 		<div
 			style:width="4lh"
 			style:outline-width="0.1lh"
@@ -43,5 +50,5 @@
 
 			{@render children?.()}
 		</div>
-	</ConnectorArea>
+	</PointerEventDispatcher>
 </BaseNodeItem>

@@ -1,12 +1,13 @@
 import { Input } from '$lib/data/Input.svelte';
 import { Output } from '$lib/data/Output.svelte';
 import { getEditorContext } from '$lib/editor/editorContext';
+import type { ConnectionCondition } from 'nodes-editor';
 
 // TODO Find a better name for this
 export class ConnectorCondition {
 	editorContext = getEditorContext();
 
-	endConnectorCondition = (endConnectorId: string, startConnectorId: string) => {
+	endConnectorCondition: ConnectionCondition = ({ endConnectorId, startConnectorId }) => {
 		if (endConnectorId === startConnectorId) return false;
 
 		const { editor } = this.editorContext;
