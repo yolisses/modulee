@@ -28,12 +28,12 @@
 	const connectorCondition = new ConnectorCondition();
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
 		connectorId,
-		// connectorCondition.endConnectorCondition,
+		connectorCondition.endConnectorCondition,
 	);
 </script>
 
-<BaseNodeItem {node} position={screenPosition}>
-	<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
+<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
+	<BaseNodeItem {node} position={screenPosition}>
 		<div
 			style:width="4lh"
 			style:outline-width="0.1lh"
@@ -50,5 +50,5 @@
 
 			{@render children?.()}
 		</div>
-	</PointerEventDispatcher>
-</BaseNodeItem>
+	</BaseNodeItem>
+</PointerEventDispatcher>
