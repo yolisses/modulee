@@ -16,6 +16,7 @@
 </script>
 
 <a
+	draggable="false"
 	title="Edit group"
 	href="{page.url}/{group.id}"
 	onpointerdown={handlePointerDown}
