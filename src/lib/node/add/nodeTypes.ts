@@ -3,6 +3,13 @@ import type { NodeType } from './NodeType';
 // TODO generate this data in the engine build
 export const nodeTypes: NodeType[] = [
 	{
+		id: 'group',
+		inputNames: [],
+		name: 'GroupNode',
+		defaultExtras: {},
+		outputNames: ['output'],
+	},
+	{
 		id: 'add',
 		name: 'AddNode',
 		defaultExtras: {},
