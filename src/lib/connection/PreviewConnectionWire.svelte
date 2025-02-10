@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Output } from '$lib/data/Output.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import {
 		PreviewConnectionWire as BasePreviewConnectionWire,
@@ -9,8 +10,10 @@
 	const editorContext = getEditorContext();
 	const previewConnectionContext = getPreviewConnectionContext();
 	const startOnOutput = $derived.by(() => {
-		if (!previewConnectionContext.startConnectorId) return false;
-		return editorContext.editor.outputs.containsId(previewConnectionContext.startConnectorId);
+		const { startConnectorId } = previewConnectionContext;
+		if (!startConnectorId) return false;
+		const connector = editorContext.editor.connectors.getOrNull(startConnectorId);
+		return connector instanceof Output;
 	});
 </script>
 
