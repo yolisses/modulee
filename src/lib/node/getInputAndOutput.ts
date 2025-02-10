@@ -17,8 +17,8 @@ export function getInputAndOutput(
 		input: undefined,
 		output: undefined,
 	};
-	const startConnector = connectors.get(e.startConnectorId);
-	const endConnector = e.endConnectorId ? connectors.get(e.endConnectorId) : undefined;
+	const startConnector = connectors.getOrNull(e.startConnectorId);
+	const endConnector = e.endConnectorId ? connectors.getOrNull(e.endConnectorId) : undefined;
 
 	if (startConnector instanceof Input) {
 		result.input = startConnector;
