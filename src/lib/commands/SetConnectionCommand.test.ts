@@ -1,13 +1,13 @@
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
-import { SetConnection } from './SetConnection';
+import { SetConnectionCommand } from './SetConnectionCommand';
 import { mockCommandData } from './test/mockNodeData';
 
-test('SetConnection without remotion', () => {
+test('SetConnectionCommand without remotion', () => {
 	const editorData = { connections: new ById() } as EditorData;
 
-	const command = new SetConnection(
+	const command = new SetConnectionCommand(
 		mockCommandData({
 			connection: {
 				id: 'connection1',
@@ -38,7 +38,7 @@ test('SetConnection without remotion', () => {
 	expect(editorData.connections.values()).toEqual([]);
 });
 
-test('SetConnection with remotion', () => {
+test('SetConnectionCommand with remotion', () => {
 	const editorData = {
 		connections: new ById([
 			{
@@ -52,7 +52,7 @@ test('SetConnection with remotion', () => {
 		]),
 	} as EditorData;
 
-	const command = new SetConnection(
+	const command = new SetConnectionCommand(
 		mockCommandData({
 			connection: {
 				id: 'connection2',

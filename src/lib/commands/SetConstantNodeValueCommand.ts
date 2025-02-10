@@ -1,7 +1,7 @@
 import { Command } from '$lib/editor/Command';
 import type { EditorData } from '$lib/editor/EditorData';
 
-export class SetConstantNodeValue extends Command<{
+export class SetConstantNodeValueCommand extends Command<{
 	value: number;
 	nodeId: string;
 }> {

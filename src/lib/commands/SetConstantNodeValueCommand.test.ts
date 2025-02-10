@@ -2,10 +2,10 @@ import type { ExtrasData } from '$lib/data/ExtrasData';
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
-import { SetConstantNodeValue } from './SetConstantNodeValue';
+import { SetConstantNodeValueCommand } from './SetConstantNodeValueCommand';
 import { mockCommandData } from './test/mockNodeData';
 
-test('SetConstantNodeValue', () => {
+test('SetConstantNodeValueCommand', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
@@ -13,7 +13,7 @@ test('SetConstantNodeValue', () => {
 			{ id: 'node3' },
 		]),
 	} as EditorData;
-	const command = new SetConstantNodeValue(mockCommandData({ nodeId: 'node2', value: 2 }));
+	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node2', value: 2 }));
 
 	command.execute(editorData);
 
@@ -24,7 +24,7 @@ test('SetConstantNodeValue', () => {
 	expect(editorData.nodes.get('node2').extras.value).toBe(1);
 });
 
-test('SetConstantNodeValue with wrong type', () => {
+test('SetConstantNodeValueCommand with wrong type', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
@@ -32,7 +32,7 @@ test('SetConstantNodeValue with wrong type', () => {
 			{ id: 'node3' },
 		]),
 	} as EditorData;
-	const command = new SetConstantNodeValue(mockCommandData({ nodeId: 'node3', value: 2 }));
+	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node3', value: 2 }));
 
 	expect(() => {
 		command.execute(editorData);

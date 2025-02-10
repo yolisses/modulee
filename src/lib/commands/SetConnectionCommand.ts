@@ -6,7 +6,7 @@ import { DisconnectCommand } from './DisconnectCommand';
 import { mockCommandData } from './test/mockNodeData';
 
 // TODO add Command suffix
-export class SetConnection extends Command<{
+export class SetConnectionCommand extends Command<{
 	connection: ConnectionData;
 }> {
 	disconnectCommand!: DisconnectCommand;
