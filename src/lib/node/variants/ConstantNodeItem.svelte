@@ -43,21 +43,22 @@
 
 <BaseNodeItem {node}>
 	{#snippet preInputsChildren()}
-		<input
-			bind:value
-			type="number"
-			onfocus={handleFocus}
-			onchange={handleBlur}
-			onpointerdown={handlePointerDown}
-			class="bg-transparent px-2 text-right"
-		/>
+		<label onpointerdown={handlePointerDown} class="flex flex-row items-center">
+			<div style:padding-left="0.25lh">value</div>
+			<input
+				bind:value
+				type="number"
+				onfocus={handleFocus}
+				onchange={handleBlur}
+				style:padding-right="0.25lh"
+				class="w-full bg-transparent text-right"
+			/>
+		</label>
 	{/snippet}
 </BaseNodeItem>
 
 <style>
 	input {
-		padding-inline: 0.4lh;
-		border-bottom-left-radius: 0.4lh;
 		border-bottom-right-radius: 0.4lh;
 	}
 
