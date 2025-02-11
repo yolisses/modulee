@@ -17,8 +17,8 @@
 	draggable="false"
 	title="Edit group"
 	href="{page.url}/{group.id}"
+	style:padding-inline="0.25lh"
 	onpointerdown={handlePointerDown}
-	style:padding-inline={0.25 + 'lh'}
 	class="hover-bg flex flex-1 flex-row items-center underline"
 >
 	{group.name}
