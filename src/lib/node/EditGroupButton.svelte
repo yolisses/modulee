@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { Group } from '$lib/data/Group.svelte';
-	import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-	import Fa from 'svelte-fa';
 
 	interface Props {
 		group: Group;
@@ -20,7 +18,8 @@
 	title="Edit group"
 	href="{page.url}/{group.id}"
 	onpointerdown={handlePointerDown}
-	class="hover-bg flex flex-row items-center"
+	style:padding-inline={0.25 + 'lh'}
+	class="hover-bg flex flex-1 flex-row items-center underline"
 >
-	<Fa icon={faPenToSquare} fw />
+	{group.name}
 </a>
