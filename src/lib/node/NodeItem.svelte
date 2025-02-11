@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
 	import { ConnectorCondition } from '$lib/connector/ConnectorCondition.js';
 	import InputItem from '$lib/connector/InputItem.svelte';
+	import { createId } from '$lib/data/createId.js';
+	import { getEditorContext } from '$lib/editor/editorContext.js';
+	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		NodeItem as BaseNodeItem,
@@ -30,9 +34,28 @@
 		connectorId,
 		connectorCondition.endConnectorCondition,
 	);
+
+	const editorContext = getEditorContext();
+	const projectDataContext = getProjectDataContext();
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		const removeNodeCommand = new RemoveNodeCommand({
+			id: createId(),
+			type: 'RemoveNodeCommand',
+			details: { nodeId: node.id },
+			createdAt: new Date().toJSON(),
+			projectId: projectDataContext.projectData.id,
+		});
+		editorContext.editor.execute(removeNodeCommand);
+		selectedNodeIdsContext.selectedNodeIds.delete(node.id);
+	}
 </script>
 
-<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
+<PointerEventDispatcher
+	pointerStrategy={connectorAreaPointerStrategy}
+	oncontextmenu={handleContextMenu}
+>
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
 			style:width="4lh"

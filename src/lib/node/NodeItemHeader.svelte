@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
-	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
 	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { GroupNode } from '$lib/data/GroupNode.svelte.js';
@@ -77,17 +76,6 @@
 		editorContext.editor.execute(moveNodeCommand);
 	}
 
-	function handleContextMenu(e: MouseEvent) {
-		const removeNodeCommand = new RemoveNodeCommand({
-			id: createId(),
-			type: 'RemoveNodeCommand',
-			details: { nodeId: node.id },
-			createdAt: new Date().toJSON(),
-			projectId: projectDataContext.projectData.id,
-		});
-		editorContext.editor.execute(removeNodeCommand);
-	}
-
 	const emptyPointerStrategy = new EmptyPointerStrategy();
 	const selectOnClickPointerStrategy = new SelectOnClickPointerStrategy(node.id);
 	const moverPointerStrategy = $derived(
@@ -120,7 +108,6 @@
 		selectOnClickPointerStrategy.onpointerdown(e);
 		moverPointerStrategy?.onpointerdown(e);
 	}}
-	oncontextmenu={handleContextMenu}
 >
 	<div class="hover-bg flex flex-1 flex-row items-center" bind:this={element}>
 		<div
