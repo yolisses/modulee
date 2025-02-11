@@ -102,22 +102,24 @@
 	});
 </script>
 
-<PointerEventDispatcher
-	{pointerStrategy}
-	onpointerdown={(e) => {
-		selectOnClickPointerStrategy.onpointerdown(e);
-		moverPointerStrategy?.onpointerdown(e);
-	}}
->
-	<div class="hover-bg flex flex-1 flex-row items-center" bind:this={element}>
+<div class="hover-bg flex flex-1 flex-row items-center">
+	<PointerEventDispatcher
+		class="flex-1"
+		{pointerStrategy}
+		onpointerdown={(e) => {
+			selectOnClickPointerStrategy.onpointerdown(e);
+			moverPointerStrategy?.onpointerdown(e);
+		}}
+	>
 		<div
+			bind:this={element}
 			style:padding-inline="0.2lh"
 			title={nodesName[node.type]}
 			class="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
 		>
 			{nodesName[node.type]}
 		</div>
-		{@render children?.()}
-		<ConnectorJoint connector={node.output} />
-	</div>
-</PointerEventDispatcher>
+	</PointerEventDispatcher>
+	{@render children?.()}
+	<ConnectorJoint connector={node.output} />
+</div>
