@@ -18,12 +18,13 @@
 
 	interface Props {
 		node: Node;
-		children?: Snippet;
 		headerChildren?: Snippet;
+		preInputsChildren?: Snippet;
+		postInputsChildren?: Snippet;
 	}
 
 	const spaceContext = getSpaceContext();
-	const { node, children, headerChildren }: Props = $props();
+	const { node, postInputsChildren, preInputsChildren, headerChildren }: Props = $props();
 
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
@@ -70,11 +71,13 @@
 				{@render headerChildren?.()}
 			</NodeItemHeader>
 
+			{@render preInputsChildren?.()}
+
 			{#each node.inputs as input (input.name)}
 				<InputItem {input} />
 			{/each}
 
-			{@render children?.()}
+			{@render postInputsChildren?.()}
 		</div>
 	</BaseNodeItem>
 </PointerEventDispatcher>

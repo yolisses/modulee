@@ -38,13 +38,15 @@
 </script>
 
 <NodeItem {node}>
-	<input
-		bind:value
-		type="number"
-		onfocus={handleFocus}
-		onchange={handleBlur}
-		class="bg-transparent px-2 text-right"
-	/>
+	{#snippet preInputsChildren()}
+		<input
+			bind:value
+			type="number"
+			onfocus={handleFocus}
+			onchange={handleBlur}
+			class="bg-transparent px-2 text-right"
+		/>
+	{/snippet}
 </NodeItem>
 
 <style>
