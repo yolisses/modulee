@@ -130,7 +130,7 @@
 		>
 			{nodesName[node.type]}
 		</div>
-		{#if node instanceof GroupNode}
+		{#if node instanceof GroupNode && node.targetGroup}
 			<EditGroupButton group={node.targetGroup} />
 		{/if}
 		<ConnectorJoint connector={node.output} />
