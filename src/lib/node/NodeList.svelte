@@ -5,6 +5,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
 	import { createId } from '$lib/data/createId';
+	import { GroupNode } from '$lib/data/GroupNode.svelte';
 	import type { InputPath } from '$lib/data/InputPath';
 	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
@@ -27,6 +28,7 @@
 	import { getInputAndOutput } from './getInputAndOutput';
 	import { getScreenFontSize } from './getScreenFontSize';
 	import { getScreenLineHeight } from './getScreenLineHeight';
+	import GroupNodeItem from './GroupNodeItem.svelte';
 	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
@@ -130,7 +132,9 @@
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 	>
 		{#each nodes as node (node.id)}
-			{#if node.type === 'ConstantNode'}
+			{#if node instanceof GroupNode}
+				<GroupNodeItem groupNode={node} />
+			{:else if node.type === 'ConstantNode'}
 				<ConstantNodeItem {node} />
 			{:else}
 				<NodeItem {node} />

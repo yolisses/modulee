@@ -19,10 +19,11 @@
 	interface Props {
 		node: Node;
 		children?: Snippet;
+		headerChildren?: Snippet;
 	}
 
-	const { node, children }: Props = $props();
 	const spaceContext = getSpaceContext();
+	const { node, children, headerChildren }: Props = $props();
 
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
@@ -58,14 +59,16 @@
 >
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
-			style:width="4lh"
+			style:width="5lh"
 			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-700={!isSelected}
 			class="flex flex-col bg-zinc-600 outline"
 		>
-			<NodeItemHeader {node} />
+			<NodeItemHeader {node}>
+				{@render headerChildren?.()}
+			</NodeItemHeader>
 
 			{#each node.inputs as input (input.name)}
 				<InputItem {input} />

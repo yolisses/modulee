@@ -2,7 +2,6 @@
 	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
 	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import { createId } from '$lib/data/createId.js';
-	import { GroupNode } from '$lib/data/GroupNode.svelte.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
@@ -16,18 +15,19 @@
 		Vector,
 		type MoveEvent,
 	} from 'nodes-editor';
+	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
 	import { nodesName } from './add/nodeNames.js';
-	import EditGroupButton from './EditGroupButton.svelte';
 
 	interface Props {
 		node: Node;
+		children?: Snippet;
 	}
 
 	let element = $state<Element>();
-	const { node }: Props = $props();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
+	const { node, children }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	let initialMouseDataPosition = $state(Vector.zero());
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
@@ -117,9 +117,7 @@
 		>
 			{nodesName[node.type]}
 		</div>
-		{#if node instanceof GroupNode && node.targetGroup}
-			<EditGroupButton group={node.targetGroup} />
-		{/if}
+		{@render children?.()}
 		<ConnectorJoint connector={node.output} />
 	</div>
 </PointerEventDispatcher>
