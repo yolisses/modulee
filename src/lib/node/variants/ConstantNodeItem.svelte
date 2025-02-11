@@ -35,6 +35,10 @@
 		});
 		editorContext.editor.execute(command);
 	}
+
+	function handlePointerDown(e: PointerEvent) {
+		e.stopPropagation();
+	}
 </script>
 
 <BaseNodeItem {node}>
@@ -44,6 +48,7 @@
 			type="number"
 			onfocus={handleFocus}
 			onchange={handleBlur}
+			onpointerdown={handlePointerDown}
 			class="bg-transparent px-2 text-right"
 		/>
 	{/snippet}
