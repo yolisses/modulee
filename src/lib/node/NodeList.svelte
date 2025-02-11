@@ -24,12 +24,12 @@
 		type EndPreviewConnectionEvent,
 	} from 'nodes-editor';
 	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
-	import ConstantNodeItem from './ConstantNodeItem.svelte';
 	import { getInputAndOutput } from './getInputAndOutput';
 	import { getScreenFontSize } from './getScreenFontSize';
 	import { getScreenLineHeight } from './getScreenLineHeight';
-	import GroupNodeItem from './GroupNodeItem.svelte';
 	import NodeItem from './NodeItem.svelte';
+	import ConstantNodeItem from './variants/ConstantNodeItem.svelte';
+	import GroupNodeItem from './variants/GroupNodeItem.svelte';
 
 	interface Props {
 		nodes: Node[];

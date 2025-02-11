@@ -3,8 +3,8 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
-	import type { Node } from '../data/Node.svelte.js';
-	import NodeItem from './NodeItem.svelte';
+	import type { Node } from '../../data/Node.svelte.js';
+	import BaseNodeItem from '../BaseNodeItem.svelte';
 
 	interface Props {
 		node: Node;
@@ -37,7 +37,7 @@
 	}
 </script>
 
-<NodeItem {node}>
+<BaseNodeItem {node}>
 	{#snippet preInputsChildren()}
 		<input
 			bind:value
@@ -47,7 +47,7 @@
 			class="bg-transparent px-2 text-right"
 		/>
 	{/snippet}
-</NodeItem>
+</BaseNodeItem>
 
 <style>
 	input {

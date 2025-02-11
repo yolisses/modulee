@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GroupNode } from '$lib/data/GroupNode.svelte.js';
-	import EditGroupButton from './EditGroupButton.svelte';
-	import NodeItem from './NodeItem.svelte';
+	import BaseNodeItem from '../BaseNodeItem.svelte';
+	import EditGroupButton from '../EditGroupButton.svelte';
 
 	interface Props {
 		groupNode: GroupNode;
@@ -10,7 +10,7 @@
 	const { groupNode }: Props = $props();
 </script>
 
-<NodeItem node={groupNode}>
+<BaseNodeItem node={groupNode}>
 	{#snippet preInputsChildren()}
 		<div
 			class="block overflow-hidden text-ellipsis whitespace-nowrap rounded bg-zinc-800"
@@ -30,4 +30,4 @@
 			<EditGroupButton group={groupNode.targetGroup} />
 		{/if}
 	{/snippet}
-</NodeItem>
+</BaseNodeItem>
