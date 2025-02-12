@@ -53,7 +53,10 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const groupsEngineData = editor.groups.values().map(getGroupEngineData);
+		// TODO consider creating a separate function for this code
+		const groupsEngineData = editor.groups
+			.values()
+			.map((group) => getGroupEngineData(group, editor.connections.values()));
 		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
 
 		const mainGroupId = projectData.mainGroup.id;

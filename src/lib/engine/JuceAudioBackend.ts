@@ -26,8 +26,6 @@ export class JuceAudioBackend implements AudioBackend {
 	}
 
 	setMainGroupId(mainGroupId: string): void {
-		console.log(mainGroupId);
-		console.log(hashToUsize(mainGroupId));
 		window.__JUCE__?.backend.emitEvent('setMainGroupId', {
 			mainGroupId: hashToUsize(mainGroupId),
 		});
