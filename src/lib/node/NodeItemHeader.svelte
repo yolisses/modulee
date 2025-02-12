@@ -102,20 +102,21 @@
 	});
 </script>
 
-<div class="hover-bg flex flex-1 flex-row items-center">
+<div class="hover-bg flex w-full flex-row items-center">
 	<PointerEventDispatcher
-		class="flex-1"
+		class="flex flex-row items-center"
 		{pointerStrategy}
 		onpointerdown={(e) => {
 			selectOnClickPointerStrategy.onpointerdown(e);
 			moverPointerStrategy?.onpointerdown(e);
 		}}
+		style="width: calc(100% - 0.4lh);"
 	>
 		<div
 			bind:this={element}
 			style:padding-inline="0.2lh"
 			title={nodesName[node.type]}
-			class="block flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+			class="overflow-and-ellipsis"
 		>
 			{nodesName[node.type]}
 		</div>

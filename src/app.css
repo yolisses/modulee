@@ -30,6 +30,10 @@ button {
 	@apply hover-bg gap-1 rounded p-2;
 }
 
+.overflow-and-ellipsis {
+	@apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
 /* Scrollbar */
 /* width */
 ::-webkit-scrollbar {
