@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GroupNode } from '$lib/data/GroupNode.svelte.js';
+	import SelectGroupButton from '../../group/SelectGroupButton.svelte';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 	import EditGroupButton from '../EditGroupButton.svelte';
 
@@ -16,9 +17,7 @@
 			{#if groupNode.targetGroup}
 				<EditGroupButton group={groupNode.targetGroup} />
 			{:else}
-				<button style:padding-inline="0.25lh" class="overflow-and-ellipsis opacity-50">
-					Select group
-				</button>
+				<SelectGroupButton groupNodeId={groupNode.id} />
 			{/if}
 		</div>
 	{/snippet}
