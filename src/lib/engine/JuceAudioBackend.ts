@@ -11,21 +11,25 @@ export class JuceAudioBackend implements AudioBackend {
 		throw new Error('Method not implemented.');
 	}
 
+	setNoteOn(pitch: number): void {
+		window.__JUCE__?.backend.emitEvent('setNoteOn', { pitch });
+	}
+
+	setNoteOff(pitch: number): void {
+		window.__JUCE__?.backend.emitEvent('setNoteOff', { pitch });
+	}
+
 	setGroups(groupsEngineData: GroupEngineData[]) {
-		window.__JUCE__?.backend.emitEvent('graphChange', {
+		window.__JUCE__?.backend.emitEvent('setGroups', {
 			groupsData: JSON.stringify(groupsEngineData),
 		});
 	}
 
-	setNoteOn(pitch: number): void {
-		window.__JUCE__?.backend.emitEvent('noteOn', { pitch });
-	}
-
-	setNoteOff(pitch: number): void {
-		window.__JUCE__?.backend.emitEvent('noteOff', { pitch });
-	}
-
 	setMainGroupId(mainGroupId: string): void {
-		window.__JUCE__?.backend.emitEvent('setMainGroupId', { pitch: hashToUsize(mainGroupId) });
+		console.log(mainGroupId);
+		console.log(hashToUsize(mainGroupId));
+		window.__JUCE__?.backend.emitEvent('setMainGroupId', {
+			mainGroupId: hashToUsize(mainGroupId),
+		});
 	}
 }

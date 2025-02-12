@@ -61,18 +61,6 @@ export class WasmAudioBackend implements AudioBackend {
 		}
 	}
 
-	setGroups(groupsEngineData: GroupEngineData[]): void {
-		// DEBUG
-		const sortedGroupsEngineData = sortJsonObjectKeys(groupsEngineData);
-		const dataJson = JSON.stringify(sortedGroupsEngineData, undefined, 2);
-		console.debug(dataJson);
-
-		this.postOrSaveMessage({
-			type: 'setGroups',
-			data: { groupsEngineData },
-		});
-	}
-
 	setNoteOn(pitch: number): void {
 		this.postOrSaveMessage({
 			type: 'setNoteOn',
@@ -84,6 +72,18 @@ export class WasmAudioBackend implements AudioBackend {
 		this.postOrSaveMessage({
 			type: 'setNoteOff',
 			data: { pitch },
+		});
+	}
+
+	setGroups(groupsEngineData: GroupEngineData[]): void {
+		// DEBUG
+		const sortedGroupsEngineData = sortJsonObjectKeys(groupsEngineData);
+		const dataJson = JSON.stringify(sortedGroupsEngineData, undefined, 2);
+		console.debug(dataJson);
+
+		this.postOrSaveMessage({
+			type: 'setGroups',
+			data: { groupsEngineData },
 		});
 	}
 
