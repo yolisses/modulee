@@ -9,6 +9,7 @@
 	import { getName } from '$lib/ui/getName.js';
 	import type { Vector } from 'nodes-editor';
 	import { createNodeData } from './createNodeData.js';
+	import { nodesName } from './nodeNames.js';
 	import type { NodeType } from './NodeType.js';
 	import { nodeTypes } from './nodeTypes.js';
 
@@ -37,12 +38,21 @@
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();
 	}
+
+	function getNodeTypeName(nodeType: NodeType) {
+		return nodesName[nodeType.name];
+	}
 </script>
 
 <div class="flex max-h-[75vh] flex-col rounded bg-zinc-700">
 	<div class="border-b border-black/25 p-2">Add node</div>
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
-		<BasicList values={nodeTypes} getId={getName} {getName} onClick={handleTypeClick} />
+		<BasicList
+			getId={getName}
+			values={nodeTypes}
+			getName={getNodeTypeName}
+			onClick={handleTypeClick}
+		/>
 	</div>
 </div>
 
