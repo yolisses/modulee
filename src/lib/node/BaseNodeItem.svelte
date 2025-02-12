@@ -64,8 +64,8 @@
 			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
 			class:outline-blue-500={isSelected}
-			class:outline-zinc-700={!isSelected}
-			class="flex flex-col bg-zinc-600 outline"
+			class:outline-zinc-800={!isSelected}
+			class="flex flex-col bg-zinc-700 outline"
 		>
 			<NodeItemHeader {node}>
 				{@render headerChildren?.()}
