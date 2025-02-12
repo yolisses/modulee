@@ -7,11 +7,15 @@ import type { Node } from './Node.svelte';
 export class Group {
 	id: string;
 	name: string;
+	type: string;
 	nodes!: Node[];
 
 	constructor(groupData: GroupData, nodeOptions: ById<Node>) {
-		this.id = groupData.id;
-		this.name = groupData.name;
+		const { id, name, type } = groupData;
+		this.id = id;
+		this.name = name;
+		this.type = type;
+
 		this.nodes = nodeOptions.values().filter((node) => node.groupId === this.id);
 	}
 }

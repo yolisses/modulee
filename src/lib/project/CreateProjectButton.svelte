@@ -22,6 +22,7 @@
 			// TODO consider using the same name than the project
 			mainGroup: {
 				id: createId(),
+				type: 'common',
 				name: 'Main group',
 			},
 		};

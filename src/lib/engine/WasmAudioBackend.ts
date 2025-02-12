@@ -62,6 +62,7 @@ export class WasmAudioBackend implements AudioBackend {
 	}
 
 	setNoteOn(pitch: number): void {
+		console.log('setNoteOn', pitch);
 		this.postOrSaveMessage({
 			type: 'setNoteOn',
 			data: { pitch },

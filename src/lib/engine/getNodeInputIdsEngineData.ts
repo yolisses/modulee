@@ -5,8 +5,8 @@ import { hashToUsize } from './hashToUsize';
 
 export function getNodeInputIdsEngineData(
 	node: Node,
-	connections: Connection[],
 	fallbackNodeId: number,
+	connections: Connection[],
 ) {
 	const inputIds: Record<string, number> = {};
 	node.inputs.forEach((input) => {

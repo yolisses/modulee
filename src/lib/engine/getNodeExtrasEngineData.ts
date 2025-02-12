@@ -7,8 +7,8 @@ import type { NodeExtrasEngineData } from './NodeEngineData';
 
 export function getNodeExtrasEngineData(
 	node: Node,
-	connections: Connection[],
 	fallbackNodeId: number,
+	connections: Connection[],
 ): NodeExtrasEngineData {
 	if (node instanceof GroupNode) {
 		const input_target_ids = new Map();

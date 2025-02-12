@@ -37,7 +37,11 @@
 			createdAt: new Date().toJSON(),
 			projectId: projectDataContext.projectData.id,
 			details: {
-				group: { id: groupId, name: 'New group' },
+				group: {
+					id: groupId,
+					type: 'common',
+					name: 'New group',
+				},
 				nodesId,
 				groupNodeData: {
 					id: createId(),
