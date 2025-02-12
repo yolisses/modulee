@@ -10,7 +10,7 @@ export function getNodeEngineData(
 	connections: Connection[],
 	fallbackNodeId: number,
 ): NodeEngineData {
-	const extras = getNodeExtrasEngineData(node, fallbackNodeId);
+	const extras = getNodeExtrasEngineData(node, connections, fallbackNodeId);
 	const inputIds = getNodeInputIdsEngineData(node, connections, fallbackNodeId);
 	return {
 		extras,

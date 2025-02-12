@@ -1,16 +1,26 @@
+import type { Connection } from '$lib/data/Connection';
+import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import { GroupNode } from '$lib/data/GroupNode.svelte';
 import type { Node } from '$lib/data/Node.svelte';
 import { hashToUsize } from './hashToUsize';
 import type { NodeExtrasEngineData } from './NodeEngineData';
 
-export function getNodeExtrasEngineData(node: Node, fallbackNodeId: number): NodeExtrasEngineData {
+export function getNodeExtrasEngineData(
+	node: Node,
+	connections: Connection[],
+	fallbackNodeId: number,
+): NodeExtrasEngineData {
 	if (node instanceof GroupNode) {
 		const input_target_ids = new Map();
 		node.inputs.forEach((input) => {
-			const { connectedOutput } = input;
-			const inputId = hashToUsize(input.name);
-			const targetId = connectedOutput ? hashToUsize(connectedOutput.id) : fallbackNodeId;
-			input_target_ids.set(inputId, targetId);
+			const inputIdHash = hashToUsize(input.id);
+			connections.forEach((connection) => {
+				if (getAreInputPathsEqual(connection.inputPath, input.inputPath)) {
+					input_target_ids.set(inputIdHash, hashToUsize(connection.targetNodeId));
+					return;
+				}
+			});
+			input_target_ids.set(inputIdHash, fallbackNodeId);
 		});
 		return { input_target_ids };
 	} else {
