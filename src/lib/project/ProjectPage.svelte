@@ -64,9 +64,16 @@
 	});
 </script>
 
-<NodesPage>
-	{#snippet topBarChildren()}
-		<HomeButton />
-	{/snippet}
-</NodesPage>
+<div class="flex flex-row">
+	<NodesPage>
+		{#snippet topBarChildren()}
+			<HomeButton />
+		{/snippet}
+	</NodesPage>
+	<div class="border-l border-black">lateral bar</div>
+</div>
+
+<!-- TODO consider removing it -->
+<!-- This is here only to allow other +page.svelte files to use the contexts
+declared. -->
 {@render children?.()}
