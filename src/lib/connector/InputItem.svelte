@@ -20,6 +20,8 @@
 <PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
 	<div class="relative flex flex-row items-center hover:bg-white/10">
 		<ConnectorJoint connector={input} />
-		{input.name}
+		<div style:padding-inline="0.1lh" class="overflow-and-ellipsis">
+			{input.name}
+		</div>
 	</div>
 </PointerEventDispatcher>
