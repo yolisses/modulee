@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetGroupNodeGroupIdCommand } from '$lib/commands/SetGroupNodeGroupIdCommand';
+	import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/SetGroupNodeTargetGroupIdCommand';
 	import { createId } from '$lib/data/createId.js';
 	import type { Group } from '$lib/data/Group.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
@@ -19,10 +19,10 @@
 	const { closeModal, groupNodeId }: Props = $props();
 
 	function handleTypeClick(group: Group) {
-		const addNodeCommand = new SetGroupNodeGroupIdCommand({
+		const addNodeCommand = new SetGroupNodeTargetGroupIdCommand({
 			id: createId(),
-			type: 'SetGroupNodeGroupIdCommand',
-			details: { groupId: group.id, nodeId: groupNodeId },
+			type: 'SetGroupNodeTargetGroupIdCommand',
+			details: { targetGroupId: group.id, groupNodeId: groupNodeId },
 			createdAt: new Date().toJSON(),
 			projectId: projectDataContext.projectData.id,
 		});

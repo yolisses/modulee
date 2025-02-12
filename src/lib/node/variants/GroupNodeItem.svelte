@@ -9,6 +9,8 @@
 	}
 
 	const { groupNode }: Props = $props();
+
+	console.log(groupNode);
 </script>
 
 <BaseNodeItem node={groupNode}>

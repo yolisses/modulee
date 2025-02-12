@@ -7,6 +7,7 @@ import { RedoCommand } from '$lib/commands/RedoCommand';
 import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand';
 import { SetConnectionCommand } from '$lib/commands/SetConnectionCommand';
 import { SetConstantNodeValueCommand } from '$lib/commands/SetConstantNodeValueCommand';
+import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/SetGroupNodeTargetGroupIdCommand';
 import { UndoCommand } from '$lib/commands/UndoCommand';
 import type { CommandClass } from './CommandClass';
 
@@ -22,4 +23,5 @@ export const commandClasses: CommandClass<any>[] = [
 	RemoveNodeCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
+	SetGroupNodeTargetGroupIdCommand,
 ];
