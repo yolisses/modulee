@@ -13,12 +13,10 @@
 
 <BaseNodeItem node={groupNode}>
 	{#snippet preInputsChildren()}
-		<div class="">
-			{#if groupNode.targetGroup}
-				<EditGroupButton group={groupNode.targetGroup} />
-			{:else}
-				<SelectGroupButton groupNodeId={groupNode.id} />
-			{/if}
-		</div>
+		{#if groupNode.targetGroup}
+			<EditGroupButton group={groupNode.targetGroup} />
+		{:else}
+			<SelectGroupButton groupNodeId={groupNode.id} />
+		{/if}
 	{/snippet}
 </BaseNodeItem>
