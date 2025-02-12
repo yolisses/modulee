@@ -8,6 +8,11 @@ export const nodeTypes: NodeType[] = [
 		defaultExtras: {},
 	},
 	{
+		inputNames: [],
+		defaultExtras: {},
+		name: 'GroupVoicesNode',
+	},
+	{
 		name: 'AddNode',
 		defaultExtras: {},
 		inputNames: ['input1', 'input2'],

@@ -37,7 +37,7 @@ export class Editor {
 
 		editorData.nodes.values().forEach((nodeData) => {
 			let node: Node;
-			if (nodeData.type === 'GroupNode') {
+			if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
 				node = new GroupNode(nodeData, editorData.connections);
 			} else {
 				node = new Node(nodeData, editorData.connections);
