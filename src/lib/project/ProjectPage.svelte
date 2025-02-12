@@ -6,6 +6,8 @@
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGroupEngineData } from '$lib/engine/getGroupEngineData';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
+	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
+	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
@@ -23,6 +25,9 @@
 	setDefaultContexts();
 
 	const { children, projectData, projectsRepository }: Props = $props();
+
+	const selectedTabContext = $state({ selectedTab: 'group' });
+	setSelectedTabContext(selectedTabContext);
 
 	const groupContext = $state({ groupId: projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
@@ -70,7 +75,7 @@
 			<HomeButton />
 		{/snippet}
 	</NodesPage>
-	<div class="border-l border-black">lateral bar</div>
+	<LateralBar />
 </div>
 
 <!-- TODO consider removing it -->
