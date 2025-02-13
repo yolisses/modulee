@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GroupNodesCommand } from '$lib/commands/GroupNodesCommand';
+	import { GroupNodesCommand } from '$lib/commands/group/GroupNodesCommand';
 	import { createId } from '$lib/data/createId';
 	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';

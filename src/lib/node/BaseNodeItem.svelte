@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand.js';
+	import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand.js';
 	import { ConnectorCondition } from '$lib/connector/ConnectorCondition.js';
 	import InputItem from '$lib/connector/InputItem.svelte';
 	import { createId } from '$lib/data/createId.js';

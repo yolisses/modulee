@@ -1,14 +1,14 @@
-import { AddNodeCommand } from '$lib/commands/AddNodeCommand';
+import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
 import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
-import { GroupNodesCommand } from '$lib/commands/GroupNodesCommand';
-import { MoveNodeCommand } from '$lib/commands/MoveNodeCommand';
-import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand';
-import { RedoCommand } from '$lib/commands/RedoCommand';
-import { RemoveNodeCommand } from '$lib/commands/RemoveNodeCommand';
-import { SetConnectionCommand } from '$lib/commands/SetConnectionCommand';
-import { SetConstantNodeValueCommand } from '$lib/commands/SetConstantNodeValueCommand';
-import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/SetGroupNodeTargetGroupIdCommand';
-import { UndoCommand } from '$lib/commands/UndoCommand';
+import { RedoCommand } from '$lib/commands/editor/RedoCommand';
+import { UndoCommand } from '$lib/commands/editor/UndoCommand';
+import { GroupNodesCommand } from '$lib/commands/group/GroupNodesCommand';
+import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
+import { MoveNodeCommand } from '$lib/commands/node/MoveNodeCommand';
+import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand';
+import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand';
+import { SetConstantNodeValueCommand } from '$lib/commands/node/SetConstantNodeValueCommand';
+import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/node/SetGroupNodeTargetGroupIdCommand';
 import type { CommandClass } from './CommandClass';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

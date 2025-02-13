@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/SetGroupNodeTargetGroupIdCommand';
+	import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/node/SetGroupNodeTargetGroupIdCommand';
 	import { createId } from '$lib/data/createId.js';
 	import type { Group } from '$lib/data/Group.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext.js';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UndoCommand } from '$lib/commands/UndoCommand';
+	import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 	import { createId } from '$lib/data/createId';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';

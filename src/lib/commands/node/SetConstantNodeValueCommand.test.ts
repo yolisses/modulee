@@ -2,8 +2,8 @@ import type { ExtrasData } from '$lib/data/ExtrasData';
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
+import { mockCommandData } from '../test/mockNodeData';
 import { SetConstantNodeValueCommand } from './SetConstantNodeValueCommand';
-import { mockCommandData } from './test/mockNodeData';
 
 test('SetConstantNodeValueCommand', () => {
 	const editorData = {

@@ -1,8 +1,8 @@
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
+import { mockCommandData } from '../test/mockNodeData';
 import { MoveNodesCommand } from './MoveNodesCommand';
-import { mockCommandData } from './test/mockNodeData';
 
 test('MoveNodesCommand', () => {
 	const editorData = {

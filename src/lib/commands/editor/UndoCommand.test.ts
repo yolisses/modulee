@@ -5,7 +5,7 @@ import type { CommandData } from '$lib/editor/CommandData';
 import type { CreateCommandCallback } from '$lib/editor/CreateCommandCallback';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
-import { mockCommandData } from './test/mockNodeData';
+import { mockCommandData } from '../test/mockNodeData';
 import { UndoCommand } from './UndoCommand';
 
 type MockCommandDetails = { nodeId: string };

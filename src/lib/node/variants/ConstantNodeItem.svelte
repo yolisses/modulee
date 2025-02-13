@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetConstantNodeValueCommand } from '$lib/commands/SetConstantNodeValueCommand.js';
+	import { SetConstantNodeValueCommand } from '$lib/commands/node/SetConstantNodeValueCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';

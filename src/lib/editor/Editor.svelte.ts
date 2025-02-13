@@ -1,5 +1,5 @@
-import { RedoCommand } from '$lib/commands/RedoCommand';
-import { UndoCommand } from '$lib/commands/UndoCommand';
+import { RedoCommand } from '$lib/commands/editor/RedoCommand';
+import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { Connection } from '$lib/data/Connection';
 import type { Connector } from '$lib/data/Connector';
 import { Group } from '$lib/data/Group.svelte';

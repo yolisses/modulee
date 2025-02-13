@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
 	import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
-	import { SetConnectionCommand } from '$lib/commands/SetConnectionCommand';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';

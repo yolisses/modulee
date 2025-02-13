@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AddNodeCommand } from '$lib/commands/AddNodeCommand.js';
+	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getGroupIdContext } from '$lib/group/groupIdContext.js';

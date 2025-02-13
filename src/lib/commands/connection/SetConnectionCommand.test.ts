@@ -1,8 +1,8 @@
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
+import { mockCommandData } from '../test/mockNodeData';
 import { SetConnectionCommand } from './SetConnectionCommand';
-import { mockCommandData } from './test/mockNodeData';
 
 test('SetConnectionCommand without remotion', () => {
 	const editorData = { connections: new ById() } as EditorData;

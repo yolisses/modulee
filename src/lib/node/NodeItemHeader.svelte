@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MoveNodesCommand } from '$lib/commands/MoveNodesCommand.js';
+	import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand.js';
 	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';

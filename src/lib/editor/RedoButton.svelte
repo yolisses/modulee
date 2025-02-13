@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RedoCommand } from '$lib/commands/RedoCommand';
+	import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 	import { createId } from '$lib/data/createId';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
