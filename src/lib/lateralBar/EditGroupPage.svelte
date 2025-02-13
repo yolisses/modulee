@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
+	import GroupTypeInput from './GroupTypeInput.svelte';
 
 	const groupContext = getGroupIdContext();
 	const editorContext = getEditorContext();
@@ -19,9 +20,6 @@
 	</label>
 	<label class="flex flex-col">
 		Type
-		<select class="hover-bg rounded border border-white/10 bg-zinc-900 p-2">
-			<option class="bg-zinc-800" value="common">Common</option>
-			<option class="bg-zinc-800" value="common">Voice</option>
-		</select>
+		<GroupTypeInput {group} />
 	</label>
 </div>
