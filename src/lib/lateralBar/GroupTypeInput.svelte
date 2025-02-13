@@ -29,7 +29,11 @@
 	}
 </script>
 
-<select onchange={handleChange} class="hover-bg rounded border border-white/10 bg-zinc-900 p-2">
+<select
+	value={group.type}
+	onchange={handleChange}
+	class="hover-bg rounded border border-white/10 bg-zinc-900 p-2"
+>
 	<option class="bg-zinc-800" value="common">Common</option>
 	<option class="bg-zinc-800" value="voice">Voice</option>
 </select>
