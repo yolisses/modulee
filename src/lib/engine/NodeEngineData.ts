@@ -1,4 +1,5 @@
 type GroupNodeExtrasEngineData = {
+	target_group_id: number;
 	input_target_ids: Map<number, number>;
 };
 type CommonNodeExtrasEngineData = Record<string, number>;
