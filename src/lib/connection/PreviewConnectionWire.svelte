@@ -1,18 +1,18 @@
 <script lang="ts">
+	import { getGraphContext } from '$lib/data/graphContext';
 	import { Output } from '$lib/data/Output.svelte';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import {
 		PreviewConnectionWire as BasePreviewConnectionWire,
 		getPreviewConnectionContext,
 	} from 'nodes-editor';
 	import Wire from './Wire.svelte';
 
-	const editorContext = getEditorContext();
+	const graphContext = getGraphContext();
 	const previewConnectionContext = getPreviewConnectionContext();
 	const startOnOutput = $derived.by(() => {
 		const { startConnectorId } = previewConnectionContext;
 		if (!startConnectorId) return false;
-		const connector = editorContext.editor.graph.connectors.getOrNull(startConnectorId);
+		const connector = graphContext.graph.connectors.getOrNull(startConnectorId);
 		return connector instanceof Output;
 	});
 </script>

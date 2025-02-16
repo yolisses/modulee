@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { GroupNodesCommand } from '$lib/commands/group/GroupNodesCommand';
 	import { createId } from '$lib/data/createId';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
@@ -9,6 +10,7 @@
 	import Fa from 'svelte-fa';
 	import { getGroupIdContext } from './groupIdContext';
 
+	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
 	const groupIdContext = getGroupIdContext();
 	const projectDataContext = getProjectDataContext();
@@ -25,7 +27,7 @@
 	function handleClick() {
 		const { selectedNodeIds } = selectedNodeIdsContext;
 		const nodesId = [...selectedNodeIds];
-		const nodes = editorContext.editor.graph.nodes.values().filter((node) => {
+		const nodes = graphContext.graph.nodes.values().filter((node) => {
 			return selectedNodeIds.has(node.id);
 		});
 		const averagePosition = getAverageNodesPosition(nodes);

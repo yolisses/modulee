@@ -6,10 +6,10 @@ import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
 export class Editor {
-	// TODO consider injecting setGraph
-	graph: Graph = $state()!;
 	history: Command[] = $state()!;
 	undoneHistory: Command[] = $state()!;
+
+	setGraph?: (graph: Graph) => void;
 	onExecute?: (command: Command) => void;
 
 	constructor(
@@ -27,7 +27,8 @@ export class Editor {
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
 
-		this.graph = new Graph(graphData);
+		const graph = new Graph(graphData);
+		this.setGraph?.(graph);
 	}
 
 	getIsUndoOrRedo(command: Command) {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SetGroupNodeTargetGroupIdCommand } from '$lib/commands/node/SetGroupNodeTargetGroupIdCommand';
 	import { createId } from '$lib/data/createId.js';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Group } from '$lib/data/Group.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
@@ -13,6 +14,7 @@
 		closeModal: () => void;
 	}
 
+	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
@@ -38,7 +40,7 @@
 			{getId}
 			{getName}
 			onClick={handleTypeClick}
-			values={editorContext.editor.graph.groups.values()}
+			values={graphContext.graph.groups.values()}
 		/>
 	</div>
 </div>

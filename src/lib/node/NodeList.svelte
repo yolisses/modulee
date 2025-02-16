@@ -5,6 +5,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
 	import { createId } from '$lib/data/createId';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import type { InputPath } from '$lib/data/InputPath';
 	import type { Node } from '$lib/data/Node.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
@@ -35,6 +36,8 @@
 
 	const { nodes, connections }: Props = $props();
 	let mouseEvent = $state<MouseEvent>();
+
+	const graphContext = getGraphContext();
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
 	const nodeRectsContext = getNodeRectsContext();
@@ -42,7 +45,7 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
-		const { input, output } = getInputAndOutput(e, editorContext.editor.graph.connectors);
+		const { input, output } = getInputAndOutput(e, graphContext.graph.connectors);
 		if (!input) return;
 
 		const inputPath: InputPath = {

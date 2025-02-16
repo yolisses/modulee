@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
 
+	const graphContext = getGraphContext();
 	const groupContext = getGroupIdContext();
-	const editorContext = getEditorContext();
 
-	const group = $derived(editorContext.editor.graph.groups.get(groupContext.groupId));
+	const group = $derived(graphContext.graph.groups.get(groupContext.groupId));
 </script>
 
 <div class="flex flex-col items-stretch gap-2 p-2">

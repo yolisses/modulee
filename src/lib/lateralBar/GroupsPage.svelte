@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Group } from '$lib/data/Group.svelte';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicLinkList from '$lib/ui/BasicLinkList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
 	import { getSelectedTabContext } from './selectedTabContext';
 
-	const editorContext = getEditorContext();
+	const graphContext = getGraphContext();
 	const selectedTabContext = getSelectedTabContext();
 	const projectDataContext = getProjectDataContext();
 
@@ -26,6 +26,6 @@
 		{getLink}
 		{getName}
 		onClick={handleClick}
-		values={editorContext.editor.graph.groups.values()}
+		values={graphContext.graph.groups.values()}
 	/>
 </div>

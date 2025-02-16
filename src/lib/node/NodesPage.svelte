@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
@@ -14,7 +14,7 @@
 		topBarChildren?: Snippet;
 	}
 
-	const editorContext = getEditorContext();
+	const graphContext = getGraphContext();
 	const { topBarChildren }: Props = $props();
 	const groupIdContext = getGroupIdContext();
 
@@ -30,7 +30,7 @@
 	});
 
 	const visibleNodes = $derived(
-		editorContext.editor.graph.nodes.values().filter((node) => {
+		graphContext.graph.nodes.values().filter((node) => {
 			return node.groupId === groupIdContext.groupId;
 		}),
 	);
@@ -39,6 +39,6 @@
 <div class="flex h-screen w-screen flex-col overflow-hidden">
 	<NodesToolbar bind:zoom {topBarChildren} />
 	<div class="flex flex-1 flex-col overflow-auto">
-		<NodeList nodes={visibleNodes} connections={editorContext.editor.graph.connections.values()} />
+		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 	</div>
 </div>

@@ -2,6 +2,7 @@
 	import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand.js';
 	import ConnectorJoint from '$lib/connector/ConnectorJoint.svelte';
 	import { createId } from '$lib/data/createId.js';
+	import { getGraphContext } from '$lib/data/graphContext.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
@@ -26,6 +27,7 @@
 
 	let element = $state<Element>();
 	const spaceContext = getSpaceContext();
+	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
 	const { node, children }: Props = $props();
 	const projectDataContext = getProjectDataContext();
@@ -47,7 +49,7 @@
 			.floor();
 
 		initialNodePositions = new Map();
-		editorContext.editor.graph.nodes
+		graphContext.graph.nodes
 			.values()
 			.filter((node) => selectedNodeIdsContext.selectedNodeIds.has(node.id))
 			.forEach((node) => {

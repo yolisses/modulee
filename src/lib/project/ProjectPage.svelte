@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { Graph } from '$lib/data/Graph.svelte';
+	import { setGraphContext } from '$lib/data/graphContext';
+	import type { GraphData } from '$lib/data/GraphData';
 	import { ById } from '$lib/editor/ById';
 	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
@@ -37,14 +40,21 @@
 	setProjectDataContext(projectDataContext);
 
 	// TODO find a more encapsulated way to execute this initial changes
-	const editor = new Editor(
-		{
-			nodes: new ById(),
-			connections: new ById(),
-			groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
-		},
-		{ history: [], undoneHistory: [] },
-	);
+
+	const initialGraphData: GraphData = {
+		nodes: new ById(),
+		connections: new ById(),
+		groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
+	};
+
+	const graph = new Graph(initialGraphData);
+	const graphContext = $state({ graph });
+	setGraphContext(graphContext);
+
+	const editor = new Editor(initialGraphData, { history: [], undoneHistory: [] });
+	editor.setGraph = (graph: Graph) => {
+		graphContext.graph = graph;
+	};
 
 	projectData.commands.map((commandData) => {
 		const command = createCommand(commandData);
@@ -60,7 +70,7 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const processedGraphData = getProcessedGraphData(editorContext.editor.graph.getData());
+		const processedGraphData = getProcessedGraphData(graphContext.graph.getData());
 		const graphEngineData = getGraphEngineData(processedGraphData);
 
 		// TODO replace by setGraph
