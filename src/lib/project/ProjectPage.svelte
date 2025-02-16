@@ -4,7 +4,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-	import { getGroupEngineData } from '$lib/engine/data/getGroupEngineData';
+	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
@@ -58,12 +58,10 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		// TODO consider creating a separate function for this code
-		const groups = editor.groups.values();
-		const groupsEngineData = groups.map((group) =>
-			getGroupEngineData(group, editor.connections.values()),
-		);
-		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
+		const groupsEngineData = getGraphEngineData(editorContext.editor.editorData);
+
+		// TODO replace by setGraph
+		audioBackendContext.audioBackend?.setGroups(groupsEngineData.groups);
 
 		const mainGroupId = projectData.mainGroup.id;
 		audioBackendContext.audioBackend?.setMainGroupId(mainGroupId);

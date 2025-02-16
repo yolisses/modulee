@@ -1,24 +1,16 @@
-import type { Connection } from '$lib/data/Connection';
-import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
-import type { Node } from '$lib/data/Node.svelte';
+import type { GraphData } from '$lib/data/GraphData';
+import type { NodeData } from '$lib/data/NodeData';
 import { hashToUsize } from './hashToUsize';
 
-export function getNodeInputIdsEngineData(
-	node: Node,
-	fallbackNodeId: number,
-	connections: Connection[],
-) {
+export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphData) {
 	const inputIds: Record<string, number> = {};
-	node.inputs.forEach((input) => {
-		const connection = connections.find((connection) => {
-			const { inputPath } = connection;
-			return getAreInputPathsEqual(inputPath, {
-				nodeId: node.id,
-				inputName: input.name,
-			});
-		});
-		const outputId = connection?.targetNodeId;
-		inputIds[input.name] = outputId ? hashToUsize(outputId) : fallbackNodeId;
+	graphData.connections.values().forEach((connectionData) => {
+		if (connectionData.inputPath.nodeId !== nodeData.id) {
+			return;
+		}
+		const { inputName } = connectionData.inputPath;
+		const outputId = connectionData.targetNodeId;
+		inputIds[inputName] = hashToUsize(outputId);
 	});
 	return inputIds;
 }

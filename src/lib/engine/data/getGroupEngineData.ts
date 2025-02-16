@@ -1,13 +1,16 @@
-import type { Connection } from '$lib/data/Connection';
-import type { Group } from '$lib/data/Group.svelte';
-import { getNodesEngineData } from './getNodesEngineData';
+import type { GraphData } from '$lib/data/GraphData';
+import type { GroupData } from '$lib/data/GroupData';
+import { getNodeEngineData } from './getNodeEngineData';
 import type { GroupEngineData } from './GroupEngineData';
 import { hashToUsize } from './hashToUsize';
 
 // TODO use just GroupData instead of group
-export function getGroupEngineData(group: Group, connections: Connection[]): GroupEngineData {
+export function getGroupEngineData(groupData: GroupData, graphData: GraphData): GroupEngineData {
+	const groupNodes = graphData.nodes.values().filter((nodeData) => {
+		return nodeData.groupId === groupData.id;
+	});
 	return {
-		id: hashToUsize(group.id),
-		nodes: getNodesEngineData(group.nodes, connections),
+		id: hashToUsize(groupData.id),
+		nodes: groupNodes.map((nodeData) => getNodeEngineData(nodeData, graphData)),
 	};
 }

@@ -5,5 +5,6 @@ export interface AudioBackend {
 	setNoteOn(pitch: number): void;
 	setNoteOff(pitch: number): void;
 	setMainGroupId(mainGroupId: string): void;
+	// TODO replace by setGraph
 	setGroups(groupsEngineData: GroupEngineData[]): void;
 }

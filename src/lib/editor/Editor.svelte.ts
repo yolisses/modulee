@@ -18,8 +18,12 @@ export class Editor {
 	undoneHistory: Command[] = $state()!;
 	onExecute?: (command: Command) => void;
 
-	constructor(private editorData: EditorData) {
+	constructor(private _editorData: EditorData) {
 		this.recalculate();
+	}
+
+	get editorData() {
+		return this._editorData;
 	}
 
 	// TODO consider moving this creation step to a separate function, since all

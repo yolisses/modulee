@@ -76,6 +76,7 @@ export class WasmAudioBackend implements AudioBackend {
 		});
 	}
 
+	// TODO replace by setGraph
 	setGroups(groupsEngineData: GroupEngineData[]): void {
 		// DEBUG
 		const sortedGroupsEngineData = sortJsonObjectKeys(groupsEngineData);

@@ -1,22 +1,18 @@
-import type { Connection } from '$lib/data/Connection';
-import type { Node } from '$lib/data/Node.svelte';
+import type { GraphData } from '$lib/data/GraphData';
+import type { NodeData } from '$lib/data/NodeData';
 import { getNodeExtrasEngineData } from './getNodeExtrasEngineData';
 import { getNodeInputIdsEngineData } from './getNodeInputIdsEngineData';
 import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 
-export function getNodeEngineData(
-	node: Node,
-	fallbackNodeId: number,
-	connections: Connection[],
-): NodeEngineData {
-	const extras = getNodeExtrasEngineData(node, fallbackNodeId, connections);
-	const inputIds = getNodeInputIdsEngineData(node, fallbackNodeId, connections);
+export function getNodeEngineData(nodeData: NodeData, graphData: GraphData): NodeEngineData {
+	const extras = getNodeExtrasEngineData(nodeData, graphData);
+	const inputIds = getNodeInputIdsEngineData(nodeData, graphData);
 
 	return {
 		extras,
-		type: node.type,
+		type: nodeData.type,
 		input_ids: inputIds,
-		id: hashToUsize(node.id),
+		id: hashToUsize(nodeData.id),
 	};
 }
