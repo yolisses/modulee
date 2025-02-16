@@ -11,6 +11,7 @@ export const nodesName: Record<string, string> = {
 	PitchNode: 'Pitch',
 	DivideNode: 'Divide',
 	OutputNode: 'Output',
+	EnvelopeNode: 'Envelope',
 	ConstantNode: 'Constant',
 	SubtractNode: 'Subtract',
 	MultiplyNode: 'Multiply',
