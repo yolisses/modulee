@@ -1,5 +1,4 @@
 import { ById } from '$lib/editor/ById';
-import { ReactiveById } from '$lib/editor/ReactiveById.svelte';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
 import type { GraphData } from './GraphData';
@@ -8,10 +7,10 @@ import { GroupNode } from './GroupNode.svelte';
 import { Node } from './Node.svelte';
 
 export class Graph {
-	nodes = new ReactiveById<Node>();
-	groups = new ReactiveById<Group>();
-	connectors = new ReactiveById<Connector>();
-	connections = new ReactiveById<Connection>();
+	nodes = new ById<Node>($state({}));
+	groups = new ById<Group>($state({}));
+	connectors = new ById<Connector>($state({}));
+	connections = new ById<Connection>($state({}));
 
 	constructor(graphData: GraphData) {
 		graphData.nodes.values().forEach((nodeData) => {

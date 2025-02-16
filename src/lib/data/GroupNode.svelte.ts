@@ -1,5 +1,4 @@
 import type { ById } from '$lib/editor/ById';
-import type { ByIdBase } from '$lib/editor/ByIdBase';
 import type { ConnectionData } from './ConnectionData';
 import type { Group } from './Group.svelte';
 import { Input } from './Input.svelte';
@@ -24,7 +23,7 @@ export class GroupNode extends Node {
 		}
 	}
 
-	updateGroup(groups: ByIdBase<Group>) {
+	updateGroup(groups: ById<Group>) {
 		if (this.targetGroupId) {
 			this.targetGroup = groups.get(this.targetGroupId);
 		} else {

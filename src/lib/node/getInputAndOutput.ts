@@ -1,7 +1,7 @@
 import type { Connector } from '$lib/data/Connector';
 import { Input } from '$lib/data/Input.svelte';
 import { Output } from '$lib/data/Output.svelte';
-import type { ByIdBase } from '$lib/editor/ByIdBase';
+import type { ById } from '$lib/editor/ById';
 import type { EndPreviewConnectionEvent } from 'nodes-editor';
 
 type PossibleInputAndOutput = {
@@ -11,7 +11,7 @@ type PossibleInputAndOutput = {
 
 export function getInputAndOutput(
 	e: EndPreviewConnectionEvent,
-	connectors: ByIdBase<Connector>,
+	connectors: ById<Connector>,
 ): PossibleInputAndOutput {
 	const result: PossibleInputAndOutput = {
 		input: undefined,
