@@ -60,7 +60,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 		const { type } = messageEvent.data;
 
 		const callbacksByType = {
-			setGroups: this.setGroups,
+			setGraph: this.setGraph,
 			setNoteOn: this.setNoteOn,
 			setNoteOff: this.setNoteOff,
 			setMainGroupId: this.setMainGroupId,
@@ -72,10 +72,9 @@ class EngineProcessor extends AudioWorkletProcessor {
 	};
 
 	// TODO check if all these warns are really needed
-
-	setGroups = ({ groupsEngineData }) => {
-		const groupsJson = JSON.stringify(groupsEngineData);
-		this.graph.set_groups_from_json(groupsJson);
+	setGraph = ({ graphEngineData }) => {
+		const graphJson = JSON.stringify(graphEngineData);
+		this.graph.set_graph(graphJson);
 	};
 
 	setNoteOn = ({ pitch }) => {

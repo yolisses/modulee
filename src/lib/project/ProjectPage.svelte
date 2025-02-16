@@ -40,9 +40,9 @@
 	setProjectDataContext(projectDataContext);
 
 	// TODO find a more encapsulated way to execute this initial changes
-
 	const initialGraphData: GraphData = {
 		nodes: new ById(),
+		mainGroupId: projectData.id,
 		connections: new ById(),
 		groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
 	};
@@ -72,12 +72,7 @@
 	$effect(() => {
 		const processedGraphData = getProcessedGraphData(graphContext.graph.getData());
 		const graphEngineData = getGraphEngineData(processedGraphData);
-
-		// TODO replace by setGraph
-		audioBackendContext.audioBackend?.setGroups(graphEngineData.groups);
-
-		const mainGroupId = projectData.mainGroup.id;
-		audioBackendContext.audioBackend?.setMainGroupId(mainGroupId);
+		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 </script>
 

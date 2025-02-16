@@ -1,5 +1,5 @@
 import type { AudioBackend } from './AudioBackend';
-import type { GroupEngineData } from './data/GroupEngineData';
+import type { GraphEngineData } from './data/GraphEngineData';
 import { hashToUsize } from './data/hashToUsize';
 
 type Message = {
@@ -60,6 +60,13 @@ export class WasmAudioBackend implements AudioBackend {
 		}
 	}
 
+	setGraph(graphEngineData: GraphEngineData): void {
+		this.postOrSaveMessage({
+			type: 'setGraph',
+			data: { graphEngineData },
+		});
+	}
+
 	setNoteOn(pitch: number): void {
 		console.log('setNoteOn', pitch);
 		this.postOrSaveMessage({
@@ -72,14 +79,6 @@ export class WasmAudioBackend implements AudioBackend {
 		this.postOrSaveMessage({
 			type: 'setNoteOff',
 			data: { pitch },
-		});
-	}
-
-	// TODO replace by setGraph
-	setGroups(groupsEngineData: GroupEngineData[]): void {
-		this.postOrSaveMessage({
-			type: 'setGroups',
-			data: { groupsEngineData },
 		});
 	}
 
