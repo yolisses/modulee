@@ -44,7 +44,7 @@
 	}
 </script>
 
-<div class="flex max-h-[75vh] flex-col rounded bg-zinc-700">
+<div class="flex max-h-[75vh] flex-col rounded bg-zinc-700 outline outline-1 outline-zinc-800">
 	<div class="border-b border-black/25 p-2">Add node</div>
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
 		<BasicList
