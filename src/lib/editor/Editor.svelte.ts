@@ -1,37 +1,22 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-import { Connection } from '$lib/data/Connection';
-import type { Connector } from '$lib/data/Connector';
+import { Graph } from '$lib/data/Graph.svelte';
 import type { GraphData } from '$lib/data/GraphData';
-import { Group } from '$lib/data/Group.svelte';
-import { GroupNode } from '$lib/data/GroupNode.svelte';
-import { Node } from '$lib/data/Node.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
-import { ReactiveById } from './ReactiveById.svelte';
 
 export class Editor {
-	nodes = new ReactiveById<Node>();
-	groups = new ReactiveById<Group>();
-	connectors = new ReactiveById<Connector>();
-	connections = new ReactiveById<Connection>();
+	// TODO consider injecting setGraph
+	graph: Graph = $state()!;
 	history: Command[] = $state()!;
 	undoneHistory: Command[] = $state()!;
 	onExecute?: (command: Command) => void;
 
 	constructor(
-		private _graphData: GraphData,
-		private _editorData: EditorData,
+		private graphData: GraphData,
+		private editorData: EditorData,
 	) {
 		this.recalculate();
-	}
-
-	get graphData() {
-		return this._graphData;
-	}
-
-	get editorData() {
-		return this._editorData;
 	}
 
 	// TODO consider moving this creation step to a separate function, since all
@@ -42,43 +27,7 @@ export class Editor {
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
 
-		this.nodes.clear();
-		this.groups.clear();
-		this.connectors.clear();
-		this.connections.clear();
-
-		graphData.nodes.values().forEach((nodeData) => {
-			let node: Node;
-			if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-				node = new GroupNode(nodeData, graphData.connections);
-			} else {
-				node = new Node(nodeData, graphData.connections);
-			}
-			this.nodes.add(node);
-		});
-
-		graphData.groups.values().forEach((groupData) => {
-			const group = new Group(groupData, this.nodes);
-			this.groups.add(group);
-		});
-
-		this.nodes.values().forEach((node) => {
-			if (node instanceof GroupNode) {
-				node.updateGroup(this.groups);
-			}
-		});
-
-		graphData.connections.values().forEach((connectionData) => {
-			const connection = new Connection(connectionData);
-			this.connections.add(connection);
-		});
-
-		this.nodes.values().forEach((node) => {
-			this.connectors.add(node.output);
-			node.inputs.forEach((input) => {
-				this.connectors.add(input);
-			});
-		});
+		this.graph = new Graph(graphData);
 	}
 
 	getIsUndoOrRedo(command: Command) {

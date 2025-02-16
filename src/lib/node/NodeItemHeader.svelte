@@ -47,7 +47,7 @@
 			.floor();
 
 		initialNodePositions = new Map();
-		editorContext.editor.nodes
+		editorContext.editor.graph.nodes
 			.values()
 			.filter((node) => selectedNodeIdsContext.selectedNodeIds.has(node.id))
 			.forEach((node) => {

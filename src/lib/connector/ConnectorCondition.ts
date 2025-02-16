@@ -11,8 +11,8 @@ export class ConnectorCondition {
 		if (endConnectorId === startConnectorId) return false;
 
 		const { editor } = this.editorContext;
-		const endConnector = editor.connectors.getOrNull(endConnectorId);
-		const startConnector = editor.connectors.getOrNull(startConnectorId);
+		const endConnector = editor.graph.connectors.getOrNull(endConnectorId);
+		const startConnector = editor.graph.connectors.getOrNull(startConnectorId);
 
 		if (startConnector instanceof Input && endConnector instanceof Input) return false;
 		if (startConnector instanceof Output && endConnector instanceof Output) return false;

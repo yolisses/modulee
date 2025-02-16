@@ -5,7 +5,7 @@
 	const groupContext = getGroupIdContext();
 	const editorContext = getEditorContext();
 
-	const group = $derived(editorContext.editor.groups.get(groupContext.groupId));
+	const group = $derived(editorContext.editor.graph.groups.get(groupContext.groupId));
 </script>
 
 <div class="flex flex-col items-stretch gap-2 p-2">

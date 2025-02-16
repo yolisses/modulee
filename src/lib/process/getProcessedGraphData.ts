@@ -4,9 +4,9 @@ import { addFallbackNodes } from './addFallbackNodes';
 
 function cloneGraphData(graphData: GraphData): GraphData {
 	return {
-		nodes: new ById(graphData.nodes.values()),
-		groups: new ById(graphData.groups.values()),
-		connections: new ById(graphData.connections.values()),
+		nodes: ById.fromItems(graphData.nodes.values()),
+		groups: ById.fromItems(graphData.groups.values()),
+		connections: ById.fromItems(graphData.connections.values()),
 	};
 }
 

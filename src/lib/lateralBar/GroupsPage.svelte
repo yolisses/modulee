@@ -26,6 +26,6 @@
 		{getLink}
 		{getName}
 		onClick={handleClick}
-		values={editorContext.editor.groups.values()}
+		values={editorContext.editor.graph.groups.values()}
 	/>
 </div>

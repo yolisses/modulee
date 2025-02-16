@@ -12,7 +12,7 @@
 	const startOnOutput = $derived.by(() => {
 		const { startConnectorId } = previewConnectionContext;
 		if (!startConnectorId) return false;
-		const connector = editorContext.editor.connectors.getOrNull(startConnectorId);
+		const connector = editorContext.editor.graph.connectors.getOrNull(startConnectorId);
 		return connector instanceof Output;
 	});
 </script>

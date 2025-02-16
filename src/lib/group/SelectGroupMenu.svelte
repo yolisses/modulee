@@ -38,7 +38,7 @@
 			{getId}
 			{getName}
 			onClick={handleTypeClick}
-			values={editorContext.editor.groups.values()}
+			values={editorContext.editor.graph.groups.values()}
 		/>
 	</div>
 </div>

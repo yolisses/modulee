@@ -29,6 +29,16 @@ export class Node<T extends NodeData = NodeData> {
 		this.inputs = this.calculateInputs(connectionsData);
 	}
 
+	getData(): NodeData {
+		return {
+			id: this.id,
+			type: this.type,
+			extras: this.extras,
+			groupId: this.groupId,
+			position: this.position.getData(),
+		};
+	}
+
 	calculateInputs(connectionsData: ById<ConnectionData>) {
 		const inputs: Input[] = [];
 

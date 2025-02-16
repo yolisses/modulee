@@ -60,7 +60,7 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const processedGraphData = getProcessedGraphData(editorContext.editor.graphData);
+		const processedGraphData = getProcessedGraphData(editorContext.editor.graph.getData());
 		const graphEngineData = getGraphEngineData(processedGraphData);
 
 		// TODO replace by setGraph

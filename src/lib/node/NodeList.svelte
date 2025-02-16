@@ -42,7 +42,7 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
-		const { input, output } = getInputAndOutput(e, editorContext.editor.connectors);
+		const { input, output } = getInputAndOutput(e, editorContext.editor.graph.connectors);
 		if (!input) return;
 
 		const inputPath: InputPath = {
