@@ -7,10 +7,15 @@ import { GroupNode } from './GroupNode.svelte';
 import { Node } from './Node.svelte';
 
 export class Graph {
-	nodes = new ById<Node>($state({}));
-	groups = new ById<Group>($state({}));
-	connectors = new ById<Connector>($state({}));
-	connections = new ById<Connection>($state({}));
+	nodesContent: Record<string, Node> = $state({});
+	groupsContent: Record<string, Group> = $state({});
+	connectorsContent: Record<string, Connector> = $state({});
+	connectionsContent: Record<string, Connection> = $state({});
+
+	nodes = new ById<Node>(this.nodesContent);
+	groups = new ById<Group>(this.groupsContent);
+	connectors = new ById<Connector>(this.connectorsContent);
+	connections = new ById<Connection>(this.connectionsContent);
 
 	constructor(graphData: GraphData) {
 		graphData.nodes.values().forEach((nodeData) => {
