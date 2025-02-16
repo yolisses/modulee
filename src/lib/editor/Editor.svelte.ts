@@ -2,6 +2,7 @@ import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { Connection } from '$lib/data/Connection';
 import type { Connector } from '$lib/data/Connector';
+import type { GraphData } from '$lib/data/GraphData';
 import { Group } from '$lib/data/Group.svelte';
 import { GroupNode } from '$lib/data/GroupNode.svelte';
 import { Node } from '$lib/data/Node.svelte';
@@ -18,8 +19,15 @@ export class Editor {
 	undoneHistory: Command[] = $state()!;
 	onExecute?: (command: Command) => void;
 
-	constructor(private _editorData: EditorData) {
+	constructor(
+		private _graphData: GraphData,
+		private _editorData: EditorData,
+	) {
 		this.recalculate();
+	}
+
+	get graphData() {
+		return this._graphData;
 	}
 
 	get editorData() {
@@ -29,7 +37,7 @@ export class Editor {
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
-		const { editorData } = this;
+		const { editorData, graphData } = this;
 		// TODO check if using history from editorData makes sense.
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
@@ -39,17 +47,17 @@ export class Editor {
 		this.connectors.clear();
 		this.connections.clear();
 
-		editorData.nodes.values().forEach((nodeData) => {
+		graphData.nodes.values().forEach((nodeData) => {
 			let node: Node;
 			if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-				node = new GroupNode(nodeData, editorData.connections);
+				node = new GroupNode(nodeData, graphData.connections);
 			} else {
-				node = new Node(nodeData, editorData.connections);
+				node = new Node(nodeData, graphData.connections);
 			}
 			this.nodes.add(node);
 		});
 
-		editorData.groups.values().forEach((groupData) => {
+		graphData.groups.values().forEach((groupData) => {
 			const group = new Group(groupData, this.nodes);
 			this.groups.add(group);
 		});
@@ -60,7 +68,7 @@ export class Editor {
 			}
 		});
 
-		editorData.connections.values().forEach((connectionData) => {
+		graphData.connections.values().forEach((connectionData) => {
 			const connection = new Connection(connectionData);
 			this.connections.add(connection);
 		});
@@ -78,7 +86,7 @@ export class Editor {
 	}
 
 	execute(command: Command<unknown>) {
-		command.execute(this.editorData);
+		command.execute(this.graphData, this.editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {

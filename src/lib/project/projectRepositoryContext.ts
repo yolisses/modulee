@@ -1,4 +1,4 @@
-import { setContext, getContext } from 'svelte';
+import { getContext, setContext } from 'svelte';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 const projectsRepositoryKey = Symbol('projectsRepository');

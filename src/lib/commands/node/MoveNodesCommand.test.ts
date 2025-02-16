@@ -1,17 +1,17 @@
+import type { GraphData } from '$lib/data/GraphData';
 import { ById } from '$lib/editor/ById.svelte';
-import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { MoveNodesCommand } from './MoveNodesCommand';
 
 test('MoveNodesCommand', () => {
-	const editorData = {
+	const graphData = {
 		nodes: new ById([
 			{ id: 'node1', position: { x: 1, y: 1 } },
 			{ id: 'node2', position: { x: 2, y: 2 } },
 			{ id: 'node3', position: { x: 3, y: 3 } },
 		]),
-	} as EditorData;
+	} as GraphData;
 
 	const command = new MoveNodesCommand(
 		mockCommandData({
@@ -19,13 +19,13 @@ test('MoveNodesCommand', () => {
 			nodeIds: ['node2', 'node3'],
 		}),
 	);
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect(editorData.nodes.get('node2').position).toEqual({ x: 6, y: 6 });
-	expect(editorData.nodes.get('node3').position).toEqual({ x: 7, y: 7 });
+	expect(graphData.nodes.get('node2').position).toEqual({ x: 6, y: 6 });
+	expect(graphData.nodes.get('node3').position).toEqual({ x: 7, y: 7 });
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect(editorData.nodes.get('node2').position).toEqual({ x: 2, y: 2 });
-	expect(editorData.nodes.get('node3').position).toEqual({ x: 3, y: 3 });
+	expect(graphData.nodes.get('node2').position).toEqual({ x: 2, y: 2 });
+	expect(graphData.nodes.get('node3').position).toEqual({ x: 3, y: 3 });
 });

@@ -1,11 +1,11 @@
+import type { GraphData } from '$lib/data/GraphData';
 import { ById } from '$lib/editor/ById.svelte';
-import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetConnectionCommand } from './SetConnectionCommand';
 
 test('SetConnectionCommand without remotion', () => {
-	const editorData = { connections: new ById() } as EditorData;
+	const graphData = { connections: new ById() } as GraphData;
 
 	const command = new SetConnectionCommand(
 		mockCommandData({
@@ -20,9 +20,9 @@ test('SetConnectionCommand without remotion', () => {
 		}),
 	);
 
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect(editorData.connections.values()).toEqual([
+	expect(graphData.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',
@@ -33,13 +33,13 @@ test('SetConnectionCommand without remotion', () => {
 		},
 	]);
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect(editorData.connections.values()).toEqual([]);
+	expect(graphData.connections.values()).toEqual([]);
 });
 
 test('SetConnectionCommand with remotion', () => {
-	const editorData = {
+	const graphData = {
 		connections: new ById([
 			{
 				id: 'connection1',
@@ -50,7 +50,7 @@ test('SetConnectionCommand with remotion', () => {
 				},
 			},
 		]),
-	} as EditorData;
+	} as GraphData;
 
 	const command = new SetConnectionCommand(
 		mockCommandData({
@@ -65,9 +65,9 @@ test('SetConnectionCommand with remotion', () => {
 		}),
 	);
 
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect(editorData.connections.values()).toEqual([
+	expect(graphData.connections.values()).toEqual([
 		{
 			id: 'connection2',
 			targetNodeId: 'node3',
@@ -78,9 +78,9 @@ test('SetConnectionCommand with remotion', () => {
 		},
 	]);
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect(editorData.connections.values()).toEqual([
+	expect(graphData.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',

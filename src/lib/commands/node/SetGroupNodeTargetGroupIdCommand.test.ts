@@ -1,44 +1,44 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById.svelte';
-import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetGroupNodeTargetGroupIdCommand } from './SetGroupNodeTargetGroupIdCommand';
 
 test('SetGroupNodeTargetGroupIdCommand', () => {
-	const editorData = {
+	const graphData = {
 		nodes: new ById([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
-	} as EditorData;
+	} as GraphData;
 	const command = new SetGroupNodeTargetGroupIdCommand(
 		mockCommandData({ groupNodeId: 'node2', targetGroupId: 'group2' }),
 	);
 
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect((editorData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group2');
+	expect((graphData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group2');
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect((editorData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group1');
+	expect((graphData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group1');
 });
 
 test('SetGroupNodeTargetGroupIdCommand with wrong type', () => {
-	const editorData = {
+	const graphData = {
 		nodes: new ById([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
-	} as EditorData;
+	} as GraphData;
 	const command = new SetGroupNodeTargetGroupIdCommand(
 		mockCommandData({ groupNodeId: 'node3', targetGroupId: 'group1' }),
 	);
 
 	expect(() => {
-		command.execute(editorData);
+		command.execute(graphData);
 	}).toThrow();
 });

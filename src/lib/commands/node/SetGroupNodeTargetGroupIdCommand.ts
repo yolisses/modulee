@@ -1,5 +1,5 @@
+import type { GraphData } from '$lib/data/GraphData';
 import { Command } from '$lib/editor/Command';
-import type { EditorData } from '$lib/editor/EditorData';
 
 export class SetGroupNodeTargetGroupIdCommand extends Command<{
 	targetGroupId: string;
@@ -7,9 +7,9 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 }> {
 	previousTargetGroupId!: string;
 
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		const { targetGroupId, groupNodeId } = this.details;
-		const node = editorData.nodes.get(groupNodeId);
+		const node = graphData.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}
@@ -17,9 +17,9 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 		node.extras.targetGroupId = targetGroupId;
 	}
 
-	undo(editorData: EditorData): void {
+	undo(graphData: GraphData): void {
 		const { groupNodeId } = this.details;
-		const node = editorData.nodes.get(groupNodeId);
+		const node = graphData.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}

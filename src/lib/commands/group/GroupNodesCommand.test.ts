@@ -1,20 +1,20 @@
 import type { GroupData } from '$lib/data/GroupData';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById.svelte';
-import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { GroupNodesCommand } from './GroupNodesCommand';
+import type { GraphData } from '$lib/data/GraphData';
 
 test('GroupNodesCommand', () => {
-	const editorData = {
+	const graphData = {
 		groups: new ById([{ id: 'group1' }]),
 		nodes: new ById([
 			{ id: 'node1', groupId: 'group1' },
 			{ id: 'node2', groupId: 'group1' },
 			{ id: 'node3', groupId: 'group1' },
 		]),
-	} as EditorData;
+	} as GraphData;
 
 	const command = new GroupNodesCommand(
 		mockCommandData({
@@ -28,10 +28,10 @@ test('GroupNodesCommand', () => {
 			} as GroupNodeData,
 		}),
 	);
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect(editorData.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
-	expect(editorData.nodes.values()).toEqual([
+	expect(graphData.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
+	expect(graphData.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group2' },
 		{ id: 'node2', groupId: 'group2' },
 		{ id: 'node3', groupId: 'group1' },
@@ -43,10 +43,10 @@ test('GroupNodesCommand', () => {
 		},
 	]);
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect(editorData.groups.values()).toEqual([{ id: 'group1' }]);
-	expect(editorData.nodes.values()).toEqual([
+	expect(graphData.groups.values()).toEqual([{ id: 'group1' }]);
+	expect(graphData.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group1' },
 		{ id: 'node2', groupId: 'group1' },
 		{ id: 'node3', groupId: 'group1' },

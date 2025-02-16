@@ -37,13 +37,14 @@
 	setProjectDataContext(projectDataContext);
 
 	// TODO find a more encapsulated way to execute this initial changes
-	const editor = new Editor({
-		history: [],
-		undoneHistory: [],
-		nodes: new ById(),
-		connections: new ById(),
-		groups: new ById([structuredClone(projectData.mainGroup)]),
-	});
+	const editor = new Editor(
+		{
+			nodes: new ById(),
+			connections: new ById(),
+			groups: new ById([structuredClone(projectData.mainGroup)]),
+		},
+		{ history: [], undoneHistory: [] },
+	);
 
 	projectData.commands.map((commandData) => {
 		const command = createCommand(commandData);
@@ -59,7 +60,7 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const processedGraphData = getProcessedGraphData(editorContext.editor.editorData);
+		const processedGraphData = getProcessedGraphData(editorContext.editor.graphData);
 		const graphEngineData = getGraphEngineData(processedGraphData);
 
 		// TODO replace by setGraph

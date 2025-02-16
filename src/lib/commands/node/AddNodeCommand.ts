@@ -1,17 +1,17 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { Command } from '$lib/editor/Command';
-import type { EditorData } from '$lib/editor/EditorData';
 
 export class AddNodeCommand extends Command<{
 	node: NodeData;
 }> {
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		const { node } = this.details;
-		editorData.nodes.add(node);
+		graphData.nodes.add(node);
 	}
 
-	undo(editorData: EditorData): void {
+	undo(graphData: GraphData): void {
 		const { node } = this.details;
-		editorData.nodes.remove(node);
+		graphData.nodes.remove(node);
 	}
 }

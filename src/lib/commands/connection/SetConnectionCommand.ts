@@ -1,7 +1,7 @@
 import type { Remotion } from '$lib/array/remotion';
 import type { ConnectionData } from '$lib/data/ConnectionData';
+import type { GraphData } from '$lib/data/GraphData';
 import { Command } from '$lib/editor/Command';
-import type { EditorData } from '$lib/editor/EditorData';
 import { DisconnectCommand } from '../DisconnectCommand';
 import { mockCommandData } from '../test/mockNodeData';
 
@@ -12,17 +12,17 @@ export class SetConnectionCommand extends Command<{
 	disconnectCommand!: DisconnectCommand;
 	remotions!: Remotion<ConnectionData>[];
 
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		const { connection } = this.details;
 		this.disconnectCommand = new DisconnectCommand(
 			mockCommandData({ inputPath: connection.inputPath }),
 		);
-		this.disconnectCommand.execute(editorData);
-		editorData.connections.set(this.details.connection);
+		this.disconnectCommand.execute(graphData);
+		graphData.connections.set(this.details.connection);
 	}
 
-	undo(editorData: EditorData): void {
-		editorData.connections.remove(this.details.connection);
-		this.disconnectCommand.undo(editorData);
+	undo(graphData: GraphData): void {
+		graphData.connections.remove(this.details.connection);
+		this.disconnectCommand.undo(graphData);
 	}
 }

@@ -1,3 +1,4 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById.svelte';
 import { Command } from '$lib/editor/Command';
@@ -11,26 +12,23 @@ import { UndoCommand } from './UndoCommand';
 type MockCommandDetails = { nodeId: string };
 type MockCommandData = CommandData<MockCommandDetails>;
 class MockCommand extends Command<MockCommandDetails> {
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		const { nodeId } = this.details;
-		editorData.nodes.add({ id: nodeId } as NodeData);
+		graphData.nodes.add({ id: nodeId } as NodeData);
 	}
 
-	undo(editorData: EditorData): void {
+	undo(graphData: GraphData): void {
 		const { nodeId } = this.details;
-		editorData.nodes.removeById(nodeId);
+		graphData.nodes.removeById(nodeId);
 	}
 }
 const mockCreateCommandCallback: CreateCommandCallback = (commandData: CommandData) => {
 	return new MockCommand(commandData as MockCommandData);
 };
 
-test('AddNodeCommand', () => {
-	const editorData = {
-		nodes: new ById(),
-		history: [] as Command[],
-		undoneHistory: [] as Command[],
-	} as EditorData;
+test('UndoCommand', () => {
+	const graphData = { nodes: new ById() } as GraphData;
+	const editorData = { history: [] as Command[], undoneHistory: [] as Command[] } as EditorData;
 
 	// Execute mockCommand1
 
@@ -38,11 +36,11 @@ test('AddNodeCommand', () => {
 		id: 'mockCommand1',
 		details: { nodeId: 'node1' },
 	} as CommandData<MockCommandDetails>);
-	mockCommand1.execute(editorData);
+	mockCommand1.execute(graphData);
 	editorData.history.push(mockCommand1);
 
 	expect(editorData.history).toHaveLength(1);
-	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }]);
+	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }]);
 
 	// Execute mockCommand2
 
@@ -50,18 +48,18 @@ test('AddNodeCommand', () => {
 		id: 'mockCommand2',
 		details: { nodeId: 'node2' },
 	} as MockCommandData);
-	mockCommand2.execute(editorData);
+	mockCommand2.execute(graphData);
 	editorData.history.push(mockCommand2);
 
 	expect(editorData.history).toHaveLength(2);
-	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
+	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 
 	// Undo mockCommand2
 
 	const command = new UndoCommand(mockCommandData({ commandId: 'mockCommand2' }));
 	command.createCommandCallback = mockCreateCommandCallback;
-	command.execute(editorData);
+	command.execute(graphData, editorData);
 
 	expect(editorData.history).toHaveLength(1);
-	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }]);
+	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }]);
 });

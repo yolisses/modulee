@@ -1,21 +1,21 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById.svelte';
-import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
 test('AddNodeCommand', () => {
-	const editorData = {
+	const graphData = {
 		nodes: new ById([{ id: 'node1' }, { id: 'node2' }]),
-	} as EditorData;
+	} as GraphData;
 
 	const command = new AddNodeCommand(mockCommandData({ node: { id: 'node3' } as NodeData }));
-	command.execute(editorData);
+	command.execute(graphData);
 
-	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }, { id: 'node3' }]);
+	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }, { id: 'node3' }]);
 
-	command.undo(editorData);
+	command.undo(graphData);
 
-	expect(editorData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
+	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 });

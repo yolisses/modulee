@@ -1,5 +1,5 @@
+import type { GraphData } from '$lib/data/GraphData';
 import { Command } from '$lib/editor/Command';
-import type { EditorData } from '$lib/editor/EditorData';
 
 export class SetConstantNodeValueCommand extends Command<{
 	value: number;
@@ -7,9 +7,9 @@ export class SetConstantNodeValueCommand extends Command<{
 }> {
 	previousValue!: number;
 
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		const { value, nodeId } = this.details;
-		const node = editorData.nodes.get(nodeId);
+		const node = graphData.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {
 			throw new Error("Can't change the value of a node with type different than ConstantNode");
 		}
@@ -17,9 +17,9 @@ export class SetConstantNodeValueCommand extends Command<{
 		node.extras.value = value;
 	}
 
-	undo(editorData: EditorData): void {
+	undo(graphData: GraphData): void {
 		const { nodeId } = this.details;
-		const node = editorData.nodes.get(nodeId);
+		const node = graphData.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {
 			throw new Error("Can't change the value of a node with type different than ConstantNode");
 		}

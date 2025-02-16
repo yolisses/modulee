@@ -1,7 +1,6 @@
-import type { GraphData } from '$lib/data/GraphData';
 import type { Command } from './Command';
 
-export type EditorData = GraphData & {
+export type EditorData = {
 	history: Command[];
 	undoneHistory: Command[];
 };

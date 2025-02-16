@@ -1,6 +1,6 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { VectorData } from '$lib/data/VectorData';
 import { Command } from '$lib/editor/Command';
-import type { EditorData } from '$lib/editor/EditorData';
 import { MoveNodeCommand, type MoveNodeCommandData } from './MoveNodeCommand';
 
 export class MoveNodesCommand extends Command<{
@@ -9,7 +9,7 @@ export class MoveNodesCommand extends Command<{
 }> {
 	commands!: MoveNodeCommand[];
 
-	execute(editorData: EditorData): void {
+	execute(graphData: GraphData): void {
 		this.commands = this.details.nodeIds.map((nodeId) => {
 			return new MoveNodeCommand({
 				type: 'MoveNodeCommand',
@@ -17,13 +17,13 @@ export class MoveNodesCommand extends Command<{
 			} as MoveNodeCommandData);
 		});
 		this.commands.forEach((command) => {
-			command.execute(editorData);
+			command.execute(graphData);
 		});
 	}
 
-	undo(editorData: EditorData): void {
+	undo(graphData: GraphData): void {
 		this.commands.forEach((command) => {
-			command.undo(editorData);
+			command.undo(graphData);
 		});
 	}
 }
