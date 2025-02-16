@@ -10,8 +10,8 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 	execute(editorData: EditorData): void {
 		const { targetGroupId, groupNodeId } = this.details;
 		const node = editorData.nodes.get(groupNodeId);
-		if (node.type !== 'GroupNode') {
-			throw new Error("Can't change the groupId of a node with type different than GroupNode");
+		if (!['GroupNode', 'GroupVoicesNode'].includes(node.type)) {
+			throw new Error("Can't change the groupId of a non group node");
 		}
 		this.previousTargetGroupId = node.extras.targetGroupId as number;
 		node.extras.targetGroupId = targetGroupId;
@@ -20,8 +20,8 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 	undo(editorData: EditorData): void {
 		const { groupNodeId } = this.details;
 		const node = editorData.nodes.get(groupNodeId);
-		if (node.type !== 'GroupNode') {
-			throw new Error("Can't change the groupId of a node with type different than GroupNode");
+		if (!['GroupNode', 'GroupVoicesNode'].includes(node.type)) {
+			throw new Error("Can't change the groupId of a non group node");
 		}
 		node.extras.targetGroupId = this.previousTargetGroupId;
 	}

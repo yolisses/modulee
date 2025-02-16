@@ -23,7 +23,8 @@ export function getNodeExtrasEngineData(
 			input_target_ids.set(inputIdHash, fallbackNodeId);
 		});
 
-		return { input_target_ids, target_group_id: hashToUsize(node.targetGroupId!) };
+		const target_group_id = node.targetGroupId ? hashToUsize(node.targetGroupId) : undefined;
+		return { input_target_ids, target_group_id };
 	} else {
 		const extras: Record<string, number> = {};
 		for (const key in node.extras) {
