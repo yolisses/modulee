@@ -1,4 +1,4 @@
-import type { GroupEngineData } from './GroupEngineData';
+import type { GroupEngineData } from './data/GroupEngineData';
 
 export interface AudioBackend {
 	destroy(): void;

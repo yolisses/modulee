@@ -4,7 +4,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-	import { getGroupEngineData } from '$lib/engine/getGroupEngineData';
+	import { getGroupEngineData } from '$lib/engine/data/getGroupEngineData';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';

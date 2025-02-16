@@ -1,7 +1,7 @@
 import type { Connection } from '$lib/data/Connection';
 import type { Node } from '$lib/data/Node.svelte';
-import { getNodeEngineData } from './getNodeEngineData';
 import type { NodeEngineData } from './NodeEngineData';
+import { getNodeEngineData } from './getNodeEngineData';
 
 // TODO use just Nodes data instead of Nodes
 export function getNodesEngineData(nodes: Node[], connections: Connection[]) {

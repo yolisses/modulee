@@ -1,6 +1,6 @@
 import type { AudioBackend } from './AudioBackend';
-import type { GroupEngineData } from './GroupEngineData';
-import { hashToUsize } from './hashToUsize';
+import type { GroupEngineData } from './data/GroupEngineData';
+import { hashToUsize } from './data/hashToUsize';
 import { sortJsonObjectKeys } from './sortJsonObjectKeys';
 
 type Message = {
