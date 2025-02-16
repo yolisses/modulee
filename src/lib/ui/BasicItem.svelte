@@ -17,11 +17,11 @@
 	}
 </script>
 
-<div class="common-button">
-	<button onclick={handleClick}>
+<div class="hover-bg flex flex-row">
+	<button onclick={handleClick} class="flex-1 p-2">
 		{text}
 	</button>
 	{#if onDelete}
-		<button onclick={handleDeleteClick}> Delete </button>
+		<button onclick={handleDeleteClick} class="common-button"> Delete </button>
 	{/if}
 </div>
