@@ -10,9 +10,11 @@
 	}
 
 	const { values, onClick, getId, getName, getLink }: Props = $props();
-	const sortedValues = values.toSorted((a, b) => {
-		return getName(a).localeCompare(getName(b));
-	});
+	const sortedValues = $derived(
+		values.toSorted((a, b) => {
+			return getName(a).localeCompare(getName(b));
+		}),
+	);
 </script>
 
 {#each sortedValues as value (getId(value))}
