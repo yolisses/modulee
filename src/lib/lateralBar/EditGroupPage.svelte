@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
-	import GroupTypeInput from './GroupTypeInput.svelte';
 
 	const groupContext = getGroupIdContext();
 	const editorContext = getEditorContext();
@@ -17,9 +16,5 @@
 			value={group.name}
 			class="rounded border border-white/10 bg-transparent p-2"
 		/>
-	</label>
-	<label class="flex flex-col">
-		Type
-		<GroupTypeInput {group} />
 	</label>
 </div>

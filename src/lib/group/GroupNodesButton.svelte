@@ -39,7 +39,6 @@
 			details: {
 				group: {
 					id: groupId,
-					type: 'common',
 					name: 'New group',
 				},
 				nodesId,

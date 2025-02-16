@@ -1,5 +1,4 @@
 import type { Connection } from '$lib/data/Connection';
-import type { Group } from '$lib/data/Group.svelte';
 import type { Node } from '$lib/data/Node.svelte';
 import { getNodeEngineDataType } from './getNodeEngineDataType';
 import { getNodeExtrasEngineData } from './getNodeExtrasEngineData';
@@ -9,11 +8,10 @@ import type { NodeEngineData } from './NodeEngineData';
 
 export function getNodeEngineData(
 	node: Node,
-	groups: Group[],
 	fallbackNodeId: number,
 	connections: Connection[],
 ): NodeEngineData {
-	const type = getNodeEngineDataType(node, groups);
+	const type = getNodeEngineDataType(node);
 	const extras = getNodeExtrasEngineData(node, fallbackNodeId, connections);
 	const inputIds = getNodeInputIdsEngineData(node, fallbackNodeId, connections);
 

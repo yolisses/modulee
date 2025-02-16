@@ -61,7 +61,7 @@
 		// TODO consider creating a separate function for this code
 		const groups = editor.groups.values();
 		const groupsEngineData = groups.map((group) =>
-			getGroupEngineData(group, groups, editor.connections.values()),
+			getGroupEngineData(group, editor.connections.values()),
 		);
 		audioBackendContext.audioBackend?.setGroups(groupsEngineData);
 
