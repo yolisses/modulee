@@ -4,20 +4,23 @@ import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 
-function createFallbackNode(id: string, groupId: string): NodeData {
+function getGroupFallbackNodeId(groupId: string) {
+	return 'fallback' + groupId;
+}
+
+function createFallbackNode(groupId: string): NodeData {
 	return {
-		id,
 		groupId,
 		type: 'ConstantNode',
 		extras: { value: 0 },
 		position: { x: 0, y: 0 },
+		id: getGroupFallbackNodeId(groupId),
 	};
 }
 
 export function addFallbackNodes(graphData: GraphData) {
-	const fallbackNodeId = 'fallback';
 	graphData.groups.values().forEach((groupData) => {
-		const fallbackNodeData = createFallbackNode(fallbackNodeId, groupData.id);
+		const fallbackNodeData = createFallbackNode(groupData.id);
 		graphData.nodes.add(fallbackNodeData);
 	});
 
@@ -32,8 +35,8 @@ export function addFallbackNodes(graphData: GraphData) {
 
 			const connectionData: ConnectionData = {
 				id: createId(),
-				targetNodeId: fallbackNodeId,
 				inputPath: { inputName, nodeId: nodeData.id },
+				targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
 			};
 			graphData.connections.add(connectionData);
 		});
