@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { AddGroupCommand } from '$lib/commands/group/AddGroupCommand';
+	import { RemoveGroupCommand } from '$lib/commands/group/RemoveGroupCommand';
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Group } from '$lib/data/Group.svelte';
@@ -19,6 +20,17 @@
 
 	function handleClick(group: Group) {
 		selectedTabContext.selectedTab = 'group';
+	}
+
+	function handleDelete(group: Group) {
+		const command = new RemoveGroupCommand({
+			id: createId(),
+			type: 'RemoveGroupCommand',
+			createdAt: new Date().toJSON(),
+			details: { groupId: group.id },
+			projectId: projectDataContext.projectData.id,
+		});
+		editorContext.editor.execute(command);
 	}
 
 	function getLink(group: Group) {
@@ -52,6 +64,7 @@
 		{getLink}
 		{getName}
 		onClick={handleClick}
+		onDelete={handleDelete}
 		values={graphContext.graph.groups.values()}
 	/>
 </div>
