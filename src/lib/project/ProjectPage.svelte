@@ -9,6 +9,7 @@
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
+	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
@@ -58,10 +59,11 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const groupsEngineData = getGraphEngineData(editorContext.editor.editorData);
+		const processedGraphData = getProcessedGraphData(editorContext.editor.editorData);
+		const graphEngineData = getGraphEngineData(processedGraphData);
 
 		// TODO replace by setGraph
-		audioBackendContext.audioBackend?.setGroups(groupsEngineData.groups);
+		audioBackendContext.audioBackend?.setGroups(graphEngineData.groups);
 
 		const mainGroupId = projectData.mainGroup.id;
 		audioBackendContext.audioBackend?.setMainGroupId(mainGroupId);
