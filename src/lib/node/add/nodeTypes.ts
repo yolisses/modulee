@@ -2,84 +2,20 @@ import type { NodeType } from './NodeType';
 
 // TODO generate this data in the engine build
 export const nodeTypes: NodeType[] = [
-	{
-		inputNames: [],
-		name: 'GroupNode',
-		defaultExtras: {},
-	},
-	{
-		inputNames: [],
-		defaultExtras: {},
-		name: 'GroupVoicesNode',
-	},
-	{
-		name: 'AddNode',
-		defaultExtras: {},
-		inputNames: ['input1', 'input2'],
-	},
-	{
-		inputNames: [],
-		name: 'ConstantNode',
-		defaultExtras: { value: 1 },
-	},
-	{
-		defaultExtras: {},
-		name: 'OutputNode',
-		inputNames: ['input'],
-	},
-	{
-		inputNames: [],
-		name: 'InputNode',
-		defaultExtras: { name: 'new input' },
-	},
-	{
-		name: 'PhaseNode',
-		defaultExtras: {},
-		inputNames: ['frequency'],
-	},
-	{
-		inputNames: [],
-		name: 'PitchNode',
-		defaultExtras: {},
-	},
-	{
-		inputNames: [],
-		name: 'GateNode',
-		defaultExtras: {},
-	},
-	{
-		defaultExtras: {},
-		inputNames: ['pitch'],
-		name: 'FrequencyNode',
-	},
-	{
-		defaultExtras: {},
-		name: 'SineWaveNode',
-		inputNames: ['phase'],
-	},
-	{
-		defaultExtras: {},
-		inputNames: ['phase'],
-		name: 'TriangleWaveNode',
-	},
-	{
-		inputNames: [],
-		name: 'TimeNode',
-		defaultExtras: {},
-	},
-	{
-		defaultExtras: {},
-		name: 'SubtractNode',
-		inputNames: ['input1', 'input2'],
-	},
-	{
-		defaultExtras: {},
-		name: 'MultiplyNode',
-		inputNames: ['input1', 'input2'],
-	},
-	{
-		defaultExtras: {},
-		name: 'DivideNode',
-		inputNames: ['input1', 'input2'],
-	},
+	{ name: 'GateNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'TimeNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'PitchNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'GroupNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'GroupVoicesNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'OutputNode', defaultExtras: {}, inputNames: ['input'] },
+	{ name: 'SineWaveNode', defaultExtras: {}, inputNames: ['phase'] },
+	{ name: 'PhaseNode', defaultExtras: {}, inputNames: ['frequency'] },
+	{ name: 'FrequencyNode', defaultExtras: {}, inputNames: ['pitch'] },
+	{ name: 'ConstantNode', defaultExtras: { value: 1 }, inputNames: [] },
+	{ name: 'TriangleWaveNode', defaultExtras: {}, inputNames: ['phase'] },
+	{ name: 'AddNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
+	{ name: 'InputNode', defaultExtras: { name: 'new input' }, inputNames: [] },
+	{ name: 'DivideNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
+	{ name: 'SubtractNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
+	{ name: 'MultiplyNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
 ];
