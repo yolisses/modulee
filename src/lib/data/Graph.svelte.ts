@@ -1,6 +1,7 @@
 import { ById } from '$lib/editor/ById';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
+import { ConstantNode } from './ConstantNode.svelte';
 import type { GraphData } from './GraphData';
 import { Group } from './Group.svelte';
 import { GroupNode } from './GroupNode.svelte';
@@ -22,6 +23,8 @@ export class Graph {
 			let node: Node;
 			if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
 				node = new GroupNode(nodeData, graphData.connections);
+			} else if (nodeData.type === 'ConstantNode') {
+				node = new ConstantNode(nodeData, graphData.connections);
 			} else {
 				node = new Node(nodeData, graphData.connections);
 			}
