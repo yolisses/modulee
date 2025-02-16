@@ -1,4 +1,4 @@
-import type { ExtrasData } from '$lib/data/ExtrasData';
+import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
@@ -9,7 +9,7 @@ test('SetGroupNodeTargetGroupIdCommand', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
-			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } as ExtrasData },
+			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
 	} as EditorData;
@@ -19,18 +19,18 @@ test('SetGroupNodeTargetGroupIdCommand', () => {
 
 	command.execute(editorData);
 
-	expect(editorData.nodes.get('node2').extras.targetGroupId).toBe('group2');
+	expect((editorData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group2');
 
 	command.undo(editorData);
 
-	expect(editorData.nodes.get('node2').extras.targetGroupId).toBe('group1');
+	expect((editorData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group1');
 });
 
 test('SetGroupNodeTargetGroupIdCommand with wrong type', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
-			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 1 } as ExtrasData },
+			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
 	} as EditorData;

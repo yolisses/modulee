@@ -2,19 +2,18 @@ import type { ById } from '$lib/editor/ById.svelte';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
 import type { ConnectionData } from './ConnectionData';
-import type { ExtrasData } from './ExtrasData';
 import { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
 import { Output } from './Output.svelte';
 
 // TODO check if it makes sense to keep data as a froze object instead of
 // copying its values
-export class Node {
+export class Node<T extends NodeData = NodeData> {
 	id: string;
-	type: string;
 	output: Output;
 	inputs: Input[];
-	extras: ExtrasData;
+	type: T['type'];
+	extras: T['extras'];
 	// DEBUG consider removing $state from groupId
 	groupId: string = $state()!;
 	position: Vector = $state()!;

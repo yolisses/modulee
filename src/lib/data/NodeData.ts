@@ -1,11 +1,7 @@
-import type { ExtrasData } from './ExtrasData';
-import type { VectorData } from './VectorData';
+import type { ConstantNodeData } from './variants/ConstantNodeData';
+import type { GroupNodeData } from './variants/GroupNodeData';
+import type { GroupVoicesNodeData } from './variants/GroupVoicesNodeData';
+import type { InputNodeData } from './variants/InputNodeData';
 
 // TODO implement single output
-export type NodeData = {
-	id: string;
-	type: string;
-	groupId: string;
-	extras: ExtrasData;
-	position: VectorData;
-};
+export type NodeData = InputNodeData | GroupNodeData | ConstantNodeData | GroupVoicesNodeData;

@@ -1,6 +1,5 @@
-import type { ExtrasData } from '$lib/data/ExtrasData';
 import type { GroupData } from '$lib/data/GroupData';
-import type { NodeData } from '$lib/data/NodeData';
+import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
@@ -25,8 +24,8 @@ test('GroupNodesCommand', () => {
 				id: 'node4',
 				groupId: 'group1',
 				type: 'GroupNode',
-				extras: { targetGroupId: 'group2' } as ExtrasData,
-			} as NodeData,
+				extras: { targetGroupId: 'group2' },
+			} as GroupNodeData,
 		}),
 	);
 	command.execute(editorData);
@@ -40,7 +39,7 @@ test('GroupNodesCommand', () => {
 			id: 'node4',
 			groupId: 'group1',
 			type: 'GroupNode',
-			extras: { targetGroupId: 'group2' } as ExtrasData,
+			extras: { targetGroupId: 'group2' },
 		},
 	]);
 

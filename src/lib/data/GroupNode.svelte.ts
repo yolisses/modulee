@@ -2,14 +2,18 @@ import type { ById } from '$lib/editor/ById.svelte';
 import type { ConnectionData } from './ConnectionData';
 import type { Group } from './Group.svelte';
 import { Input } from './Input.svelte';
+import { InputNode } from './InputNode.svelte';
 import { Node } from './Node.svelte';
-import type { NodeData } from './NodeData';
+import type { GroupNodeData } from './variants/GroupNodeData';
+import type { GroupNodeExtrasData } from './variants/GroupNodeExtrasData';
+import type { GroupVoicesNodeData } from './variants/GroupVoicesNodeData';
 
 export class GroupNode extends Node {
 	targetGroupId?: string;
 	targetGroup?: Group = $state()!;
+	declare extras: GroupNodeExtrasData;
 
-	constructor(nodeData: NodeData, connectionData: ById<ConnectionData>) {
+	constructor(nodeData: GroupNodeData | GroupVoicesNodeData, connectionData: ById<ConnectionData>) {
 		super(nodeData, connectionData);
 		const { targetGroupId } = nodeData.extras;
 		if (typeof targetGroupId === 'string' || typeof targetGroupId === 'undefined') {
@@ -32,11 +36,11 @@ export class GroupNode extends Node {
 	updateInputs() {
 		this.inputs = [];
 		if (!this.targetGroup) return;
-		const inputNodes = this.targetGroup.nodes.filter((node) => {
-			return node.type === 'InputNode';
-		});
-		inputNodes.forEach((inputNode) => {
-			const name = inputNode.extras.name as string;
+		this.targetGroup.nodes.filter((node) => {
+			if (!(node instanceof InputNode)) {
+				return;
+			}
+			const name = node.extras.name;
 			if (this.inputs.some((input) => input.name === name)) return;
 			const input = new Input(name, this);
 			this.inputs.push(input);

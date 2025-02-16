@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { SetConstantNodeValueCommand } from '$lib/commands/node/SetConstantNodeValueCommand.js';
+	import type { ConstantNode } from '$lib/data/ConstantNode.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
-	import type { Node } from '../../data/Node.svelte.js';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 
 	interface Props {
-		node: Node;
+		constantNode: ConstantNode;
 	}
 
-	const { node }: Props = $props();
-	let value = $state(node.extras.value);
+	const { constantNode }: Props = $props();
+	let value = $state(constantNode.extras.value);
 	const editorContext = getEditorContext();
-	let initialValue = $state(node.extras.value);
+	let initialValue = $state(constantNode.extras.value);
 	const projectDataContext = getProjectDataContext();
 
 	function handleFocus() {
-		initialValue = node.extras.value;
+		initialValue = constantNode.extras.value;
 	}
 
 	function handleBlur(e: Event & { currentTarget: HTMLInputElement }) {
@@ -30,7 +30,7 @@
 			id: createId(),
 			createdAt: new Date().toJSON(),
 			type: 'SetConstantNodeValueCommand',
-			details: { nodeId: node.id, value },
+			details: { nodeId: constantNode.id, value },
 			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(command);
@@ -41,7 +41,7 @@
 	}
 </script>
 
-<BaseNodeItem {node}>
+<BaseNodeItem node={constantNode}>
 	{#snippet preInputsChildren()}
 		<label onpointerdown={handlePointerDown} class="flex flex-row items-center">
 			<div style:padding-left="0.25lh">value</div>

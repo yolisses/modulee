@@ -8,7 +8,7 @@ export function getNodeExtrasEngineData(
 	nodeData: NodeData,
 	graphData: GraphData,
 ): NodeExtrasEngineData {
-	if (['GroupNode', 'GroupVoicesNode'].includes(nodeData.type)) {
+	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
 		return getGroupNodeExtrasEngineData(nodeData, graphData);
 	} else {
 		return getDefaultNodeExtrasEngineData(nodeData);

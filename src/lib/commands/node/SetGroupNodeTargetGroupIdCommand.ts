@@ -5,22 +5,22 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 	targetGroupId: string;
 	groupNodeId: string;
 }> {
-	previousTargetGroupId!: number;
+	previousTargetGroupId!: string;
 
 	execute(editorData: EditorData): void {
 		const { targetGroupId, groupNodeId } = this.details;
 		const node = editorData.nodes.get(groupNodeId);
-		if (!['GroupNode', 'GroupVoicesNode'].includes(node.type)) {
+		if (node.type !== 'GroupNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}
-		this.previousTargetGroupId = node.extras.targetGroupId as number;
+		this.previousTargetGroupId = node.extras.targetGroupId;
 		node.extras.targetGroupId = targetGroupId;
 	}
 
 	undo(editorData: EditorData): void {
 		const { groupNodeId } = this.details;
 		const node = editorData.nodes.get(groupNodeId);
-		if (!['GroupNode', 'GroupVoicesNode'].includes(node.type)) {
+		if (node.type !== 'GroupNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}
 		node.extras.targetGroupId = this.previousTargetGroupId;

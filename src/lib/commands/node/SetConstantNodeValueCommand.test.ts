@@ -1,4 +1,4 @@
-import type { ExtrasData } from '$lib/data/ExtrasData';
+import type { ConstantNodeData } from '$lib/data/variants/ConstantNodeData';
 import { ById } from '$lib/editor/ById.svelte';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
@@ -9,7 +9,7 @@ test('SetConstantNodeValueCommand', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
-			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } as ExtrasData },
+			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
 			{ id: 'node3' },
 		]),
 	} as EditorData;
@@ -17,18 +17,18 @@ test('SetConstantNodeValueCommand', () => {
 
 	command.execute(editorData);
 
-	expect(editorData.nodes.get('node2').extras.value).toBe(2);
+	expect((editorData.nodes.get('node2') as ConstantNodeData).extras.value).toBe(2);
 
 	command.undo(editorData);
 
-	expect(editorData.nodes.get('node2').extras.value).toBe(1);
+	expect((editorData.nodes.get('node2') as ConstantNodeData).extras.value).toBe(1);
 });
 
 test('SetConstantNodeValueCommand with wrong type', () => {
 	const editorData = {
 		nodes: new ById([
 			{ id: 'node1' },
-			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } as ExtrasData },
+			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
 			{ id: 'node3' },
 		]),
 	} as EditorData;
