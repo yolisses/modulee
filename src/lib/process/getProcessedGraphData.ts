@@ -1,5 +1,5 @@
 import type { GraphData } from '$lib/data/GraphData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { addFallbackNodes } from './addFallbackNodes';
 
 function cloneGraphData(graphData: GraphData): GraphData {

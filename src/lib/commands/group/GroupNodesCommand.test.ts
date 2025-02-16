@@ -1,15 +1,15 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { GroupData } from '$lib/data/GroupData';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { GroupNodesCommand } from './GroupNodesCommand';
-import type { GraphData } from '$lib/data/GraphData';
 
 test('GroupNodesCommand', () => {
 	const graphData = {
-		groups: new ById([{ id: 'group1' }]),
-		nodes: new ById([
+		groups: ById.fromItems([{ id: 'group1' }]),
+		nodes: ById.fromItems([
 			{ id: 'node1', groupId: 'group1' },
 			{ id: 'node2', groupId: 'group1' },
 			{ id: 'node3', groupId: 'group1' },

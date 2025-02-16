@@ -1,4 +1,4 @@
-import type { ById } from '$lib/editor/ById.svelte';
+import type { ByIdBase } from '$lib/editor/ByIdBase';
 import type { GroupData } from './GroupData';
 import type { Node } from './Node.svelte';
 
@@ -9,7 +9,7 @@ export class Group {
 	name: string;
 	nodes!: Node[];
 
-	constructor(groupData: GroupData, nodeOptions: ById<Node>) {
+	constructor(groupData: GroupData, nodeOptions: ByIdBase<Node>) {
 		const { id, name } = groupData;
 		this.id = id;
 		this.name = name;

@@ -3,14 +3,8 @@ import type { HasId } from '$lib/array/HasId';
 // TODO consider creating a version not related with Svelte
 //
 // TODO find a better name for this
-export class ById<T extends HasId> {
-	private content: Record<string, T> = $state({});
-
-	constructor(items: T[] = []) {
-		items.forEach((item) => {
-			this.content[item.id] = item;
-		});
-	}
+export abstract class ByIdBase<T extends HasId> {
+	protected abstract content: Record<string, T>;
 
 	get(id: string) {
 		const item = this.content[id];

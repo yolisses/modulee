@@ -1,12 +1,12 @@
 import type { GraphData } from '$lib/data/GraphData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { MoveNodesCommand } from './MoveNodesCommand';
 
 test('MoveNodesCommand', () => {
 	const graphData = {
-		nodes: new ById([
+		nodes: ById.fromItems([
 			{ id: 'node1', position: { x: 1, y: 1 } },
 			{ id: 'node2', position: { x: 2, y: 2 } },
 			{ id: 'node3', position: { x: 3, y: 3 } },

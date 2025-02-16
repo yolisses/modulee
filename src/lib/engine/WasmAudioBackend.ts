@@ -1,7 +1,6 @@
 import type { AudioBackend } from './AudioBackend';
 import type { GroupEngineData } from './data/GroupEngineData';
 import { hashToUsize } from './data/hashToUsize';
-import { sortJsonObjectKeys } from './sortJsonObjectKeys';
 
 type Message = {
 	type: string;
@@ -78,11 +77,6 @@ export class WasmAudioBackend implements AudioBackend {
 
 	// TODO replace by setGraph
 	setGroups(groupsEngineData: GroupEngineData[]): void {
-		// DEBUG
-		const sortedGroupsEngineData = sortJsonObjectKeys(groupsEngineData);
-		const dataJson = JSON.stringify(sortedGroupsEngineData, undefined, 2);
-		console.debug(dataJson);
-
 		this.postOrSaveMessage({
 			type: 'setGroups',
 			data: { groupsEngineData },

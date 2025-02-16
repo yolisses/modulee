@@ -1,13 +1,13 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
 test('AddNodeCommand', () => {
 	const graphData = {
-		nodes: new ById([{ id: 'node1' }, { id: 'node2' }]),
+		nodes: ById.fromItems([{ id: 'node1' }, { id: 'node2' }]),
 	} as GraphData;
 
 	const command = new AddNodeCommand(mockCommandData({ node: { id: 'node3' } as NodeData }));

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ById } from '$lib/editor/ById.svelte';
+	import { ById } from '$lib/editor/ById';
 	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
@@ -41,7 +41,7 @@
 		{
 			nodes: new ById(),
 			connections: new ById(),
-			groups: new ById([structuredClone(projectData.mainGroup)]),
+			groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
 		},
 		{ history: [], undoneHistory: [] },
 	);

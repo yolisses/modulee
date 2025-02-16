@@ -1,5 +1,5 @@
 import type { GraphData } from '$lib/data/GraphData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetConnectionCommand } from './SetConnectionCommand';
@@ -40,7 +40,7 @@ test('SetConnectionCommand without remotion', () => {
 
 test('SetConnectionCommand with remotion', () => {
 	const graphData = {
-		connections: new ById([
+		connections: ById.fromItems([
 			{
 				id: 'connection1',
 				targetNodeId: 'node2',

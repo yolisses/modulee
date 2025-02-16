@@ -1,6 +1,6 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
-import { ById } from '$lib/editor/ById.svelte';
+import { ById } from '$lib/editor/ById';
 import { Command } from '$lib/editor/Command';
 import type { CommandData } from '$lib/editor/CommandData';
 import type { CreateCommandCallback } from '$lib/editor/CreateCommandCallback';

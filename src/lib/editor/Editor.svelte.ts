@@ -6,15 +6,15 @@ import type { GraphData } from '$lib/data/GraphData';
 import { Group } from '$lib/data/Group.svelte';
 import { GroupNode } from '$lib/data/GroupNode.svelte';
 import { Node } from '$lib/data/Node.svelte';
-import { ById } from './ById.svelte';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
+import { ReactiveById } from './ReactiveById.svelte';
 
 export class Editor {
-	nodes = new ById<Node>();
-	groups = new ById<Group>();
-	connectors = new ById<Connector>();
-	connections = new ById<Connection>();
+	nodes = new ReactiveById<Node>();
+	groups = new ReactiveById<Group>();
+	connectors = new ReactiveById<Connector>();
+	connections = new ReactiveById<Connection>();
 	history: Command[] = $state()!;
 	undoneHistory: Command[] = $state()!;
 	onExecute?: (command: Command) => void;
