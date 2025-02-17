@@ -42,8 +42,8 @@
 	// TODO find a more encapsulated way to execute this initial changes
 	const initialGraphData: GraphData = {
 		nodes: new ById(),
-		mainGroupId: projectData.id,
 		connections: new ById(),
+		mainGroupId: projectData.mainGroup.id,
 		groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
 	};
 
