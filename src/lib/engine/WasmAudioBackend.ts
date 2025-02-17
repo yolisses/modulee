@@ -1,6 +1,5 @@
 import type { AudioBackend } from './AudioBackend';
 import type { GraphEngineData } from './data/GraphEngineData';
-import { hashToUsize } from './data/hashToUsize';
 
 type Message = {
 	type: string;
@@ -79,13 +78,6 @@ export class WasmAudioBackend implements AudioBackend {
 		this.postOrSaveMessage({
 			type: 'setNoteOff',
 			data: { pitch },
-		});
-	}
-
-	setMainGroupId(mainGroupId: string): void {
-		this.postOrSaveMessage({
-			type: 'setMainGroupId',
-			data: { mainGroupId: hashToUsize(mainGroupId) },
 		});
 	}
 }

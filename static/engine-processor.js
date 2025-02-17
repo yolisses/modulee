@@ -63,7 +63,6 @@ class EngineProcessor extends AudioWorkletProcessor {
 			setGraph: this.setGraph,
 			setNoteOn: this.setNoteOn,
 			setNoteOff: this.setNoteOff,
-			setMainGroupId: this.setMainGroupId,
 		};
 
 		// The command data have it's own `data` and `type`
@@ -83,10 +82,6 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 	setNoteOff = ({ pitch }) => {
 		this.graph.set_note_off(pitch);
-	};
-
-	setMainGroupId = ({ mainGroupId }) => {
-		this.graph.set_main_group_id(mainGroupId);
 	};
 }
 
