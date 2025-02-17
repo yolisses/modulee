@@ -55,3 +55,7 @@ button {
 ::-webkit-scrollbar-thumb:hover {
 	background: #6e6e71;
 }
+
+::-webkit-scrollbar-corner {
+	background: 27272b;
+}
