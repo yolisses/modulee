@@ -6,16 +6,10 @@
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { Vector } from 'nodes-editor';
-	import type { Snippet } from 'svelte';
 	import NodeList from './NodeList.svelte';
 	import NodesToolbar from './NodesToolbar.svelte';
 
-	interface Props {
-		topBarChildren?: Snippet;
-	}
-
 	const graphContext = getGraphContext();
-	const { topBarChildren }: Props = $props();
 	const groupIdContext = getGroupIdContext();
 
 	const spaceContext = $state({ space: new Space() });
@@ -37,7 +31,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
-	<NodesToolbar bind:zoom {topBarChildren} />
+	<NodesToolbar bind:zoom />
 	<div class="flex flex-1 flex-col overflow-auto">
 		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 	</div>

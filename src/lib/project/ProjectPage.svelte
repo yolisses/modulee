@@ -9,11 +9,11 @@
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
+	import { setIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
-	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
 	import type { ProjectData } from './ProjectData';
@@ -25,6 +25,9 @@
 		projectData: ProjectData;
 		projectsRepository: ProjectsRepository;
 	}
+
+	let isLateralBarVisibleContext = $state({ isLateralBarVisible: true });
+	setIsLateralBarVisibleContext(isLateralBarVisibleContext);
 
 	setDefaultContexts();
 
@@ -77,12 +80,10 @@
 </script>
 
 <div class="flex flex-row">
-	<NodesPage>
-		{#snippet topBarChildren()}
-			<HomeButton />
-		{/snippet}
-	</NodesPage>
-	<LateralBar />
+	<NodesPage></NodesPage>
+	{#if isLateralBarVisibleContext.isLateralBarVisible}
+		<LateralBar />
+	{/if}
 </div>
 
 <!-- TODO consider removing it -->
