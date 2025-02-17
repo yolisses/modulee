@@ -80,4 +80,11 @@ export class WasmAudioBackend implements AudioBackend {
 			data: { pitch },
 		});
 	}
+
+	setIsMuted(isMuted: boolean): void {
+		this.postOrSaveMessage({
+			type: 'setIsMuted',
+			data: { isMuted },
+		});
+	}
 }

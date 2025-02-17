@@ -9,6 +9,7 @@ import {
 class EngineProcessor extends AudioWorkletProcessor {
 	constructor(params) {
 		super();
+		this.isMuted = false;
 		const { bytes } = params.processorOptions;
 		const messageEventsBeforeInitialization = [];
 
@@ -42,6 +43,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 	process(inputs, outputs) {
 		this.graph.process_block();
 
+		if (this.isMuted) return true;
+
 		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
 
 		const output = outputs[0];
@@ -63,6 +66,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 			setGraph: this.setGraph,
 			setNoteOn: this.setNoteOn,
 			setNoteOff: this.setNoteOff,
+			setIsMuted: this.setIsMuted,
 		};
 
 		// The command data have it's own `data` and `type`
@@ -82,6 +86,10 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 	setNoteOff = ({ pitch }) => {
 		this.graph.set_note_off(pitch);
+	};
+
+	setIsMuted = ({ isMuted }) => {
+		this.isMuted = isMuted;
 	};
 }
 

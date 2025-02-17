@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MuteButton from '$lib/audio/MuteButton.svelte';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import BackButton from '$lib/group/BackButton.svelte';
@@ -23,4 +24,5 @@
 	<ZoomOutButton bind:zoom />
 	<GroupNodesButton />
 	<BackButton />
+	<MuteButton />
 </div>
