@@ -4,6 +4,7 @@ import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { AddGroupCommand } from '$lib/commands/group/AddGroupCommand';
 import { GroupNodesCommand } from '$lib/commands/group/GroupNodesCommand';
+import { RemoveGroupCommand } from '$lib/commands/group/RemoveGroupCommand';
 import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { MoveNodeCommand } from '$lib/commands/node/MoveNodeCommand';
 import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand';
@@ -23,6 +24,7 @@ export const commandClasses: CommandClass<any>[] = [
 	DisconnectCommand,
 	GroupNodesCommand,
 	RemoveNodeCommand,
+	RemoveGroupCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
 	SetGroupNodeTargetGroupIdCommand,
