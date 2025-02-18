@@ -18,15 +18,16 @@
 	let { zoom = $bindable(), topBarChildren }: Props = $props();
 </script>
 
-<div class="flex flex-row border-b border-black">
-	<HomeButton />
-	<UndoButton />
-	<RedoButton />
-	<ZoomInButton bind:zoom />
-	<ZoomOutButton bind:zoom />
-	<GroupNodesButton />
-	<BackButton />
-	<MuteButton />
-	<div class="flex-1"></div>
+<div class="flex flex-row items-start border-b border-black">
+	<div class="flex flex-1 flex-row overflow-auto">
+		<HomeButton />
+		<UndoButton />
+		<RedoButton />
+		<ZoomInButton bind:zoom />
+		<ZoomOutButton bind:zoom />
+		<GroupNodesButton />
+		<BackButton />
+		<MuteButton />
+	</div>
 	<LateralBarVisibilityButton />
 </div>
