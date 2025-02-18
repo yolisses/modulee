@@ -2,80 +2,85 @@ digraph G {
 node [shape=box]
 edge[arrowsize=0.5]; // Globally
 
+amplitude_modulation [label="Amplitude modulation"]
 bass [label="Bass"]
-sine [label="Sine"]
-kick [label="Kick"]
 bell [label="Bell"]
-notch [label="Notch"]
-snare [label="Snare"]
-phase [label="Phase"]
-piano [label="Piano"]
-noise [label="Noise"]
-drums [label="Drums"]
-pitch [label="Pitch"]
-round [label="Round"]
-phonk [label="Phonk"]
-hihat [label="Hi-hat"]
-cowbell [label="Cowbell"]
-rain [label="Rain sound"]
-lowpass [label="Low pass"]
 bitcrush [label="Bitcrush"]
-chiptune [label="Chiptune"]
-lofi [label="Lo-Fi HipHop"]
-vinyl [label="Vinyl sound"]
-highpass [label="High pass"]
-perlin [label="Perlin noise"]
-polyphony [label="Polyphony"]
 breakcore [label="Breakcore"]
-pulsewave [label="Pulse wave"]
-squarewave [label="Square wave"]
-sawtooth [label="Sawtooth wave"]
-seedednoise [label="Seeded noise"]
-trianglewave [label="Triangle wave"]
 butterworth [label="Butterworth filters"]
-minimalinstruments [label="Minimal instruments"]
-frequencymodulation [label="Frequency modulation"]
-amplitudemodulation [label="Amplitude modulation"]
+chiptune [label="Chiptune"]
+cowbell [label="Cowbell"]
+delay [label="Delay"]
+drums [label="Drums"]
+frequency_modulation [label="Frequency modulation"]
+graph_analysis [label="Graph analysis"]
+hi_hat [label="Hi-hat"]
+high_pass [label="High pass"]
+kick [label="Kick"]
+lo_fi [label="Lo-Fi HipHop"]
+low_pass [label="Low pass"]
+minimal_instruments [label="Minimal instruments"]
+noise [label="Noise"]
+notch [label="Notch"]
+sine [label="Sine"]
+snare [label="Snare"]
+perlin [label="Perlin noise"]
+phase [label="Phase"]
+phonk [label="Phonk"]
+piano [label="Piano"]
+pitch [label="Pitch"]
+polyphony [label="Polyphony"]
+pulse_wave [label="Pulse wave"]
+rain [label="Rain sound"]
+reverb [label="Reverb"]
+round [label="Round"]
+sawtooth_wave [label="Sawtooth wave"]
+seeded_noise [label="Seeded noise"]
+square_wave [label="Square wave"]
+triangle_wave [label="Triangle wave"]
+vinyl [label="Vinyl sound"]
 
-lofi -> rain
-kick -> sine
-lofi -> vinyl
-drums -> kick
-vinyl -> noise
-snare -> notch
-drums -> hihat
-drums -> snare
-snare -> noise
-hihat -> noise
-piano -> perlin
-bass -> lowpass
-bass -> sawtooth
-phonk -> cowbell
-vinyl -> lowpass
-hihat -> highpass
+amplitude_modulation -> phase
+bass -> low_pass
+bass -> sawtooth_wave
+bell -> amplitude_modulation
 bitcrush -> round
-piano -> polyphony
-polyphony -> pitch
-cowbell -> pulsewave
-notch -> butterworth
+breakcore -> minimal_instruments
 chiptune -> bitcrush
-snare -> trianglewave
-perlin -> seedednoise
-chiptune -> squarewave
-lowpass -> butterworth
-highpass -> butterworth
-squarewave -> pulsewave
-lofi -> minimalinstruments
-minimalinstruments -> bass
-phonk -> minimalinstruments
-bell -> amplitudemodulation
-minimalinstruments -> piano
-minimalinstruments -> drums
-kick -> frequencymodulation
-amplitudemodulation -> phase
-frequencymodulation -> phase
-chiptune -> minimalinstruments
-breakcore -> minimalinstruments
+chiptune -> minimal_instruments
+chiptune -> square_wave
+cowbell -> pulse_wave
+delay -> graph_analysis
+drums -> hi_hat
+drums -> kick
+drums -> snare
+frequency_modulation -> phase
+high_pass -> butterworth
+hi_hat -> high_pass
+hi_hat -> noise
+kick -> frequency_modulation
+kick -> sine
+lo_fi -> minimal_instruments
+lo_fi -> rain
+lo_fi -> reverb
+lo_fi -> vinyl
+low_pass -> butterworth
+minimal_instruments -> bass
+minimal_instruments -> drums
+minimal_instruments -> piano
+notch -> butterworth
+perlin -> seeded_noise
+phonk -> cowbell
+phonk -> minimal_instruments
+piano -> perlin
+piano -> polyphony
+piano -> reverb
+polyphony -> pitch
+reverb -> delay
+snare -> noise
+snare -> notch
+snare -> triangle_wave
+square_wave -> pulse_wave
+vinyl -> low_pass
+vinyl -> noise
 }
-
-
