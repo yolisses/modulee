@@ -24,8 +24,9 @@ export class JuceProjectsRepository implements ProjectsRepository {
 	}
 
 	async deleteProject(id: string): Promise<void> {
-		const deleteProject = this.juceLibrary.getNativeFunction('getProjects');
+		const deleteProject = this.juceLibrary.getNativeFunction('deleteProject');
 		await deleteProject(id);
+		this.onProjectsChange?.();
 	}
 
 	async getProject(id: string): Promise<ProjectData> {
@@ -45,5 +46,6 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		const createProject = this.juceLibrary.getNativeFunction('createProject');
 		const projectDataJson = JSON.stringify(projectData);
 		await createProject(projectDataJson);
+		this.onProjectsChange?.();
 	}
 }
