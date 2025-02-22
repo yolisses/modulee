@@ -4,12 +4,17 @@ import type { ProjectsRepository } from './ProjectsRepository';
 
 export class JuceProjectsRepository implements ProjectsRepository {
 	isInitialized = false;
+	juceLibrary!: typeof import('../juce/index');
 
 	async initialize(): Promise<void> {
-		const juceLibrary = await import('../juce');
-		const getSavedData = juceLibrary.getNativeFunction('getSavedData');
+		this.juceLibrary = await import('../juce');
+		const getSavedData = this.juceLibrary.getNativeFunction('getSavedData');
+		const setSavedData = this.juceLibrary.getNativeFunction('setSavedData');
 		const savedData = await getSavedData();
 		console.log('savedData', savedData);
+		const newData = 'newSavedData 1';
+		await setSavedData(newData);
+		console.log('savedData', await getSavedData());
 		this.isInitialized = true;
 	}
 
@@ -20,23 +25,31 @@ export class JuceProjectsRepository implements ProjectsRepository {
 	onProjectsChange?: (() => void) | undefined;
 
 	async getProjects(): Promise<ProjectData[]> {
-		// throw new Error('getProjects not implemented.');
-		return [];
+		const getProjects = this.juceLibrary.getNativeFunction('getProjects');
+		const projectsJson = await getProjects();
+		return JSON.parse(projectsJson);
 	}
 
-	deleteProject(id: string): Promise<void> {
-		throw new Error('deleteProject not implemented.');
+	async deleteProject(id: string): Promise<void> {
+		const deleteProject = this.juceLibrary.getNativeFunction('getProjects');
+		await deleteProject(id);
 	}
 
-	getProject(id: string): Promise<ProjectData> {
-		throw new Error('getProject not implemented.');
+	async getProject(id: string): Promise<ProjectData> {
+		const getProject = this.juceLibrary.getNativeFunction('getProject');
+		const projectJson = await getProject(id);
+		return JSON.parse(projectJson);
 	}
 
-	addCommand(commandData: CommandData): Promise<void> {
-		throw new Error('addCommand not implemented.');
+	async addCommand(commandData: CommandData): Promise<void> {
+		const addCommand = this.juceLibrary.getNativeFunction('addCommand');
+		const commandDataJson = JSON.stringify(commandData);
+		await addCommand(commandDataJson);
 	}
 
-	createProject(projectData: ProjectData): Promise<void> {
-		throw new Error('createProject not implemented.');
+	async createProject(projectData: ProjectData): Promise<void> {
+		const createProject = this.juceLibrary.getNativeFunction('createProject');
+		const projectDataJson = JSON.stringify(projectData);
+		await createProject(projectDataJson);
 	}
 }
