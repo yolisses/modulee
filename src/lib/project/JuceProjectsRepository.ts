@@ -4,17 +4,10 @@ import type { ProjectsRepository } from './ProjectsRepository';
 
 export class JuceProjectsRepository implements ProjectsRepository {
 	isInitialized = false;
-	juceLibrary!: typeof import('../juce/index');
+	juceLibrary!: typeof import('../juce');
 
 	async initialize(): Promise<void> {
 		this.juceLibrary = await import('../juce');
-		const getSavedData = this.juceLibrary.getNativeFunction('getSavedData');
-		const setSavedData = this.juceLibrary.getNativeFunction('setSavedData');
-		const savedData = await getSavedData();
-		console.log('savedData', savedData);
-		const newData = 'newSavedData 1';
-		await setSavedData(newData);
-		console.log('savedData', await getSavedData());
 		this.isInitialized = true;
 	}
 
@@ -38,6 +31,7 @@ export class JuceProjectsRepository implements ProjectsRepository {
 	async getProject(id: string): Promise<ProjectData> {
 		const getProject = this.juceLibrary.getNativeFunction('getProject');
 		const projectJson = await getProject(id);
+		console.log('here', projectJson);
 		return JSON.parse(projectJson);
 	}
 
