@@ -3,12 +3,12 @@ import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class JuceProjectsRepository implements ProjectsRepository {
+	isInitialized = $state(false);
+	juceLibrary!: typeof import('../juce');
+
 	static canBeCreated() {
 		return !!window.__JUCE__?.initialisationData.isRunningOnJucePlugin;
 	}
-
-	isInitialized = false;
-	juceLibrary!: typeof import('../juce');
 
 	async initialize(): Promise<void> {
 		this.juceLibrary = await import('../juce');

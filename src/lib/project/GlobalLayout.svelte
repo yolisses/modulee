@@ -9,7 +9,7 @@
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
 	import { IndexedDBProjectsRepository } from './IndexedDBProjectsRepository.svelte';
-	import { JuceProjectsRepository } from './JuceProjectsRepository';
+	import { JuceProjectsRepository } from './JuceProjectsRepository.svelte';
 	import type { ProjectsRepository } from './ProjectsRepository';
 	import {
 		setProjectsRepositoryContext,
