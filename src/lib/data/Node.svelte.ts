@@ -36,7 +36,7 @@ export class Node<T extends NodeData = NodeData> {
 			extras: this.extras,
 			groupId: this.groupId,
 			position: this.position.getData(),
-		};
+		} as NodeData;
 	}
 
 	calculateInputs(connectionsData: ById<ConnectionData>) {
