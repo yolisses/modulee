@@ -3,6 +3,10 @@ import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class JuceProjectsRepository implements ProjectsRepository {
+	static canBeCreated() {
+		return !!window.__JUCE__;
+	}
+
 	isInitialized = false;
 	juceLibrary!: typeof import('../juce');
 
