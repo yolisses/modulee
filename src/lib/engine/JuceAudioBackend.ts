@@ -3,11 +3,12 @@ import type { GraphEngineData } from './data/GraphEngineData';
 
 export class JuceAudioBackend implements AudioBackend {
 	static canBeCreated() {
-		return !!window.__JUCE__;
+		// TODO find a more elegant solution
+		return window.__JUCE__?.postMessage.length ?? 0 > 0;
 	}
 
 	destroy(): void {
-		throw new Error('Method not implemented.');
+		throw new Error('destroy not implemented.');
 	}
 
 	setGraph(graphEngineData: GraphEngineData) {
@@ -25,6 +26,6 @@ export class JuceAudioBackend implements AudioBackend {
 	}
 
 	setIsMuted(isMuted: boolean): void {
-		throw new Error('Method not implemented.');
+		throw new Error('setIsMuted not implemented.');
 	}
 }

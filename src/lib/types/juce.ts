@@ -6,6 +6,7 @@ declare global {
 			backend: {
 				emitEvent(eventId: string, eventData: object): void;
 			};
+			postMessage: () => void;
 		};
 	}
 }

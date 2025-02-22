@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Modal from '$lib/ui/Modal.svelte';
-	import { getProjectsRepositoryContext } from './projectRepositoryContext';
+	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
 	interface Props {
 		closeModal: () => void;
@@ -8,10 +8,11 @@
 	}
 
 	const { closeModal, projectId }: Props = $props();
-	const projectsRepository = getProjectsRepositoryContext();
+	const projectsRepositoryContext = getProjectsRepositoryContext();
 
 	function handleClick() {
-		projectsRepository.deleteProject(projectId);
+		const { projectsRepository } = projectsRepositoryContext;
+		projectsRepository?.deleteProject(projectId);
 	}
 </script>
 

@@ -4,14 +4,10 @@
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ProjectData } from './ProjectData';
-	import type { ProjectsRepository } from './ProjectsRepository';
-
-	interface Props {
-		projectsRepository: ProjectsRepository;
-	}
+	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
 	let isLoading = $state(false);
-	const { projectsRepository }: Props = $props();
+	const projectsRepositoryContext = getProjectsRepositoryContext();
 
 	async function handleClick() {
 		isLoading = true;
@@ -25,7 +21,7 @@
 				name: 'Main group',
 			},
 		};
-		await projectsRepository.createProject(projectData);
+		await projectsRepositoryContext.projectsRepository?.createProject(projectData);
 		goto('/projects/' + projectData.id);
 	}
 </script>

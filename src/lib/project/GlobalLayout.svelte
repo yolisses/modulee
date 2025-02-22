@@ -8,6 +8,13 @@
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
+	import { IndexedDBProjectsRepository } from './IndexedDBProjectsRepository.svelte';
+	import { JuceProjectsRepository } from './JuceProjectsRepository';
+	import type { ProjectsRepository } from './ProjectsRepository';
+	import {
+		setProjectsRepositoryContext,
+		type ProjectsRepositoryContext,
+	} from './projectsRepositoryContext';
 
 	interface Props {
 		children: Snippet;
@@ -17,6 +24,9 @@
 
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
+
+	const projectsRepositoryContext: ProjectsRepositoryContext = $state({});
+	setProjectsRepositoryContext(projectsRepositoryContext);
 
 	onMount(() => {
 		let audioBackend: AudioBackend;
@@ -36,6 +46,19 @@
 			audioBackend.destroy();
 			webMidiBackend?.destroy();
 		};
+	});
+
+	onMount(() => {
+		let projectsRepository: ProjectsRepository;
+
+		if (JuceProjectsRepository.canBeCreated()) {
+			projectsRepository = new JuceProjectsRepository();
+		} else {
+			projectsRepository = new IndexedDBProjectsRepository();
+		}
+
+		projectsRepository.initialize();
+		projectsRepositoryContext.projectsRepository = projectsRepository;
 	});
 </script>
 

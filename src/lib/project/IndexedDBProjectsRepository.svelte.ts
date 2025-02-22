@@ -4,6 +4,7 @@ import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class IndexedDBProjectsRepository implements ProjectsRepository {
+	isInitialized = $state(false);
 	onProjectsChange?: () => void;
 	databaseInstance?: IDBPDatabase;
 
@@ -16,7 +17,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	getIsInitialized(): boolean {
-		return !!this.databaseInstance;
+		return this.isInitialized;
 	}
 
 	async initialize() {
@@ -32,6 +33,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 				}
 			},
 		});
+		this.isInitialized = true;
 	}
 
 	async getProjects() {
