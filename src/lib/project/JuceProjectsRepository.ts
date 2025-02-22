@@ -36,7 +36,6 @@ export class JuceProjectsRepository implements ProjectsRepository {
 	async getProject(id: string): Promise<ProjectData> {
 		const getProject = this.juceLibrary.getNativeFunction('getProject');
 		const projectJson = await getProject(id);
-		console.log('here', projectJson);
 		return JSON.parse(projectJson);
 	}
 
