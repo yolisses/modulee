@@ -4,7 +4,7 @@ import type { ProjectsRepository } from './ProjectsRepository';
 
 export class JuceProjectsRepository implements ProjectsRepository {
 	static canBeCreated() {
-		return window.__JUCE__?.postMessage.length ?? 0 > 0;
+		return !!window.__JUCE__?.initialisationData.isRunningOnJucePlugin;
 	}
 
 	isInitialized = false;

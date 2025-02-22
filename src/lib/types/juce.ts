@@ -7,6 +7,9 @@ declare global {
 				emitEvent(eventId: string, eventData: object): void;
 			};
 			postMessage: () => void;
+			initialisationData: {
+				isRunningOnJucePlugin?: [boolean];
+			};
 		};
 	}
 }

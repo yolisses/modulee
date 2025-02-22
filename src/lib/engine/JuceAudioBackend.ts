@@ -3,13 +3,10 @@ import type { GraphEngineData } from './data/GraphEngineData';
 
 export class JuceAudioBackend implements AudioBackend {
 	static canBeCreated() {
-		// TODO find a more elegant solution
-		return window.__JUCE__?.postMessage.length ?? 0 > 0;
+		return !!window.__JUCE__?.initialisationData.isRunningOnJucePlugin;
 	}
 
-	destroy(): void {
-		throw new Error('destroy not implemented.');
-	}
+	destroy(): void {}
 
 	setGraph(graphEngineData: GraphEngineData) {
 		window.__JUCE__?.backend.emitEvent('setGraph', {
