@@ -23,4 +23,8 @@ export class JuceAudioBackend implements AudioBackend {
 	setNoteOff(pitch: number): void {
 		window.__JUCE__?.backend.emitEvent('setNoteOff', { pitch });
 	}
+
+	setIsMuted(isMuted: boolean): void {
+		throw new Error('Method not implemented.');
+	}
 }
