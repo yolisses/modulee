@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { JuceProjectsRepository } from '$lib/project/JuceProjectsRepository';
 	import type { ProjectData } from '$lib/project/ProjectData';
+	import { setProjectDataContext, type ProjectDataContext } from '$lib/project/projectDataContext';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
+	import { getProjectsRepositoryContext } from '$lib/project/projectsRepositoryContext';
 	import Spinner from '$lib/ui/Spinner.svelte';
-	import { doNothing } from '$lib/utils/doNothing';
-	import { type Snippet, onMount } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import type { LayoutData } from './$types';
 
 	interface Props {
@@ -13,27 +13,30 @@
 	}
 
 	const { data, children }: Props = $props();
-	const projectsRepository = new JuceProjectsRepository();
 
-	// This way to load data from the browser may be overcomplicated. It was
-	// chosen simply to use the standard await block
-	let projectDataPromise = $state<Promise<ProjectData>>(new Promise(doNothing));
+	let projectData = $state.raw<ProjectData>();
 
-	onMount(() => {
-		projectDataPromise = new Promise(async (resolve) => {
-			await projectsRepository.initialize();
-			const projectData = await projectsRepository.getProject(data.projectId);
-			resolve(projectData);
+	const projectDataContext: ProjectDataContext = $state({});
+	setProjectDataContext(projectDataContext);
+
+	const projectsRepositoryContext = getProjectsRepositoryContext();
+
+	$effect(() => {
+		const { projectsRepository } = projectsRepositoryContext;
+		if (!projectsRepository) return;
+		if (!projectsRepository.getIsInitialized()) return;
+		projectsRepository.getProject(data.projectId).then((data) => {
+			projectData = data;
 		});
 	});
 </script>
 
-{#await projectDataPromise}
+{#if projectData}
+	<ProjectPage {projectData}>
+		{@render children?.()}
+	</ProjectPage>
+{:else}
 	<div class="fixed inset-0 flex items-center justify-center">
 		<Spinner />
 	</div>
-{:then projectData}
-	<ProjectPage {projectData} {projectsRepository}>
-		{@render children?.()}
-	</ProjectPage>
-{/await}
+{/if}

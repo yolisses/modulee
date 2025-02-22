@@ -17,13 +17,12 @@
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
 	import type { ProjectData } from './ProjectData';
-	import { setProjectDataContext } from './projectDataContext';
-	import type { ProjectsRepository } from './ProjectsRepository';
+	import { getProjectDataContext } from './projectDataContext';
+	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
 	interface Props {
 		children: Snippet;
 		projectData: ProjectData;
-		projectsRepository: ProjectsRepository;
 	}
 
 	let isLateralBarVisibleContext = $state({ isLateralBarVisible: true });
@@ -31,16 +30,16 @@
 
 	setDefaultContexts();
 
-	const { children, projectData, projectsRepository }: Props = $props();
+	const { children, projectData }: Props = $props();
+
+	const projectDataContext = getProjectDataContext();
+	projectDataContext.projectData = projectData;
 
 	const selectedTabContext = $state({ selectedTab: 'group' });
 	setSelectedTabContext(selectedTabContext);
 
 	const groupContext = $state({ groupId: projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
-
-	const projectDataContext = $state({ projectData });
-	setProjectDataContext(projectDataContext);
 
 	// TODO find a more encapsulated way to execute this initial changes
 	const initialGraphData: GraphData = {
@@ -64,8 +63,10 @@
 		editor.execute(command);
 	});
 
+	const projectsRepositoryContext = getProjectsRepositoryContext();
 	editor.onExecute = (command) => {
-		projectsRepository.addCommand(command.commandData);
+		const { projectsRepository } = projectsRepositoryContext;
+		projectsRepository?.addCommand(command.commandData);
 	};
 
 	const editorContext = $state({ editor });
