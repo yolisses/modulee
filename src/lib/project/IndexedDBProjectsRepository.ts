@@ -3,7 +3,7 @@ import { type IDBPDatabase, openDB } from 'idb';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
-export class LocalProjectsRepository implements ProjectsRepository {
+export class IndexedDBProjectsRepository implements ProjectsRepository {
 	onProjectsChange?: () => void;
 	databaseInstance?: IDBPDatabase;
 

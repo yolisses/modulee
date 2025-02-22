@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LocalProjectsRepository } from '$lib/project/LocalProjectsRepository';
+	import { IndexedDBProjectsRepository } from '$lib/project/IndexedDBProjectsRepository';
 	import type { ProjectData } from '$lib/project/ProjectData';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
@@ -13,7 +13,7 @@
 	}
 
 	const { data, children }: Props = $props();
-	const projectsRepository = new LocalProjectsRepository();
+	const projectsRepository = new IndexedDBProjectsRepository();
 
 	// This way to load data from the browser may be overcomplicated. It was
 	// chosen simply to use the standard await block
