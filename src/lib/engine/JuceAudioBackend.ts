@@ -23,6 +23,6 @@ export class JuceAudioBackend implements AudioBackend {
 	}
 
 	setIsMuted(isMuted: boolean): void {
-		throw new Error('setIsMuted not implemented.');
+		window.__JUCE__?.backend.emitEvent('setIsMuted', { isMuted });
 	}
 }
