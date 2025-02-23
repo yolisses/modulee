@@ -6,6 +6,7 @@ export const nodeTypes: NodeType[] = [
 	{ name: 'TimeNode', defaultExtras: {}, inputNames: [] },
 	{ name: 'PitchNode', defaultExtras: {}, inputNames: [] },
 	{ name: 'GroupNode', defaultExtras: {}, inputNames: [] },
+	{ name: 'NoiseNode', defaultExtras: {}, inputNames: [] },
 	{ name: 'GroupVoicesNode', defaultExtras: {}, inputNames: [] },
 	{ name: 'OutputNode', defaultExtras: {}, inputNames: ['input'] },
 	{ name: 'SineWaveNode', defaultExtras: {}, inputNames: ['phase'] },
