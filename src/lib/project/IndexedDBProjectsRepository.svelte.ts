@@ -52,7 +52,6 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
 		projectData.commands = await this.getCommandsOfProject(id);
-		console.log(projectData);
 		return projectData;
 	}
 
@@ -70,6 +69,14 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	async createProject(projectData: ProjectData) {
 		const transaction = this.database.transaction('projects', 'readwrite');
 		await Promise.all([transaction.store.add(projectData), transaction.done]);
+		this.onProjectsChange?.();
+	}
+
+	async renameProject(id: string, name: string): Promise<void> {
+		const transaction = this.database.transaction('projects', 'readwrite');
+		const projectData: ProjectData = await transaction.store.get(id);
+		projectData.name = name;
+		await Promise.all([transaction.store.put(projectData), transaction.done]);
 		this.onProjectsChange?.();
 	}
 }
