@@ -2,6 +2,7 @@
 	import EditGroupPage from './EditGroupPage.svelte';
 	import GroupsPage from './GroupsPage.svelte';
 	import LateralBarTabs from './LateralBarTabs.svelte';
+	import ProjectTab from './ProjectTab.svelte';
 	import { getSelectedTabContext } from './selectedTabContext';
 
 	const selectedTabContext = getSelectedTabContext();
@@ -13,5 +14,7 @@
 		<EditGroupPage />
 	{:else if selectedTabContext.selectedTab === 'groups'}
 		<GroupsPage />
+	{:else if selectedTabContext.selectedTab === 'project'}
+		<ProjectTab />
 	{/if}
 </div>

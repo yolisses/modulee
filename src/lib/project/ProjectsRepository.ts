@@ -10,4 +10,5 @@ export interface ProjectsRepository {
 	getProject(id: string): Promise<ProjectData>;
 	addCommand(commandData: CommandData): Promise<void>;
 	createProject(projectData: ProjectData): Promise<void>;
+	renameProject(id: string, name: string): Promise<void>;
 }

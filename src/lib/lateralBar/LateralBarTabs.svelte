@@ -5,4 +5,5 @@
 <div class="flex flex-row border-b border-black">
 	<Tab tab={'group'}>Group</Tab>
 	<Tab tab={'groups'}>Groups</Tab>
+	<Tab tab={'project'}>Project</Tab>
 </div>
