@@ -7,7 +7,7 @@ html {
 }
 
 html {
-	@apply bg-white text-black dark:bg-zinc-900 dark:text-white;
+	@apply cursor-default bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
 
 .disabled {
