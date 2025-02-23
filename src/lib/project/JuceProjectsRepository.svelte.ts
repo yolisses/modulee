@@ -51,4 +51,10 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		await createProject(projectDataJson);
 		this.onProjectsChange?.();
 	}
+
+	async renameProject(id: string, name: string): Promise<void> {
+		const renameProject = this.juceLibrary.getNativeFunction('renameProject');
+		await renameProject(id, name);
+		this.onProjectsChange?.();
+	}
 }
