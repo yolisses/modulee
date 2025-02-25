@@ -19,6 +19,7 @@ export const nodeTypes: NodeType[] = [
 	{ name: 'DivideNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
 	{ name: 'SubtractNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
 	{ name: 'MultiplyNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
+	{ name: 'HighPassNode', defaultExtras: {}, inputNames: ['input', 'frequency', 'resonance'] },
 	{
 		name: 'EnvelopeNode',
 		defaultExtras: {},

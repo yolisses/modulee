@@ -19,5 +19,6 @@ export const nodesName: Record<string, string> = {
 	SineWaveNode: 'Sine wave',
 	FrequencyNode: 'Frequency',
 	GroupVoicesNode: 'Group voices',
+	HighPassNode: 'High-pass filter',
 	TriangleWaveNode: 'Triangle wave',
 };
