@@ -18,6 +18,7 @@ export const nodesName: Record<string, string> = {
 	MultiplyNode: 'Multiply',
 	SineWaveNode: 'Sine wave',
 	FrequencyNode: 'Frequency',
+	LowPassNode: 'Low-pass filter',
 	GroupVoicesNode: 'Group voices',
 	HighPassNode: 'High-pass filter',
 	TriangleWaveNode: 'Triangle wave',
