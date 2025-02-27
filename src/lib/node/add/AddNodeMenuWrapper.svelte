@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
 	import AddNodeMenu from './AddNodeMenu.svelte';
@@ -35,10 +36,16 @@
 			Object.assign(menu!.style, { top: `${y}px`, left: `${x}px` });
 		});
 	});
+
+	function handleWindowClick(e: InputMouseEvent) {
+		const clickedInside = menu?.contains(e.target as Node);
+		if (!clickedInside) {
+			closeModal();
+		}
+	}
 </script>
 
 {#if menuPosition}
-	<button onclick={closeModal} class="absolute h-full w-full" aria-label="overlay"></button>
 	<div
 		class="absolute"
 		bind:this={positioner}
@@ -49,3 +56,5 @@
 		<AddNodeMenu {closeModal} screenPosition={menuPosition}></AddNodeMenu>
 	</div>
 {/if}
+
+<svelte:window onpointerdown={handleWindowClick} />
