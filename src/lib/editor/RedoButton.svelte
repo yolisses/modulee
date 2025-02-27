@@ -4,7 +4,7 @@
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { createCommand } from './createCommand';
+	import { createCommand } from '../commands/createCommand';
 	import { getEditorContext } from './editorContext';
 
 	const editorContext = getEditorContext();

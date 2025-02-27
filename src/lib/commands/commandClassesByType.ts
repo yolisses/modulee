@@ -1,4 +1,4 @@
-import type { CommandClass } from './CommandClass';
+import type { CommandClass } from '$lib/editor/CommandClass';
 import { commandClasses } from './commandClasses';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

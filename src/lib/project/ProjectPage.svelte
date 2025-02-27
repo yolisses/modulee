@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { createCommand } from '$lib/commands/createCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
 	import type { GraphData } from '$lib/data/GraphData';
 	import { ById } from '$lib/editor/ById';
-	import { createCommand } from '$lib/editor/createCommand';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
