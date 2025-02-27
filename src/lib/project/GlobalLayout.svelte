@@ -65,7 +65,6 @@
 	$effect(() => {
 		const url = new URL(page.url);
 		const path = url.pathname;
-		console.log(path);
 		window.__JUCE__?.backend.emitEvent('setPath', { path });
 	});
 	$inspect(page);
