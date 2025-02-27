@@ -22,7 +22,9 @@
 		return commandNames[commandClass.name];
 	}
 
-	function handleClick() {}
+	function handleClick() {
+		// TODO
+	}
 
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = div?.contains(e.target as Node);

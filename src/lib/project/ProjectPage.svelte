@@ -80,7 +80,7 @@
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 
-	let isCommandPaletteActive = $state(true);
+	let isCommandPaletteActive = $state(false);
 </script>
 
 <div class="flex flex-row">
