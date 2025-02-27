@@ -43,19 +43,19 @@ button {
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #27272b;
+	background: rgba(255, 255, 255, 0.1);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #4e4e52;
+	background: rgba(255, 255, 255, 0.1);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #6e6e71;
+	background: rgba(255, 255, 255, 0.2);
 }
 
 ::-webkit-scrollbar-corner {
-	background: #19191b;
+	background: rgba(255, 255, 255, 0);
 }
