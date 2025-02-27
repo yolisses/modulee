@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { AudioBackend } from '$lib/engine/AudioBackend';
 	import {
 		setAudioBackendContext,
@@ -60,6 +61,14 @@
 		projectsRepository.initialize();
 		projectsRepositoryContext.projectsRepository = projectsRepository;
 	});
+
+	$effect(() => {
+		const url = new URL(page.url);
+		const path = url.pathname;
+		console.log(path);
+		window.__JUCE__?.backend.emitEvent('setPath', { path });
+	});
+	$inspect(page);
 </script>
 
 {@render children()}
