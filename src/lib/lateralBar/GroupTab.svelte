@@ -16,16 +16,13 @@
 
 	// TODO prevent command if name don't change
 	function handleBlur(e: InputBlurEvent) {
-		const { projectData } = projectDataContext;
-		if (!projectData) return;
-
 		const { editor } = editorContext;
 		const value = e.currentTarget.value;
 		const command = new RenameGroupCommand({
 			id: createId(),
-			projectId: projectData.id,
 			type: 'RenameGroupCommand',
 			createdAt: new Date().toJSON(),
+			projectId: projectDataContext.projectData.id,
 			details: { name: value, groupId: groupIdContext.groupId },
 		});
 		editor.execute(command);

@@ -45,9 +45,6 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
-		const { projectData } = projectDataContext;
-		if (!projectData) return;
-
 		const { input, output } = getInputAndOutput(e, graphContext.graph.connectors);
 		if (!input) return;
 
@@ -59,9 +56,9 @@
 		if (output) {
 			const command = new SetConnectionCommand({
 				id: createId(),
-				projectId: projectData.id,
 				type: 'SetConnectionCommand',
 				createdAt: new Date().toJSON(),
+				projectId: projectDataContext.projectData.id,
 				details: {
 					connection: {
 						inputPath,
@@ -76,8 +73,8 @@
 				id: createId(),
 				details: { inputPath },
 				type: 'DisconnectCommand',
-				projectId: projectData.id,
 				createdAt: new Date().toJSON(),
+				projectId: projectDataContext.projectData.id,
 			});
 			editorContext.editor.execute(command);
 		}

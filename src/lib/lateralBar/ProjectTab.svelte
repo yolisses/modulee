@@ -10,11 +10,8 @@
 		const { projectsRepository } = projectsRepositoryContext;
 		if (!projectsRepository) return;
 
-		const { projectData } = projectDataContext;
-		if (!projectData) return;
-
 		const value = e.currentTarget.value;
-		projectsRepository.renameProject(projectData.id, value);
+		projectsRepository.renameProject(projectDataContext.projectData.id, value);
 	}
 </script>
 

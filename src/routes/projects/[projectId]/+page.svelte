@@ -6,8 +6,6 @@
 	const projectDataContext = getProjectDataContext();
 
 	$effect(() => {
-		const { projectData } = projectDataContext;
-		if (!projectData) return;
-		groupIdContext.groupId = projectData.mainGroup.id;
+		groupIdContext.groupId = projectDataContext.projectData.mainGroup.id;
 	});
 </script>

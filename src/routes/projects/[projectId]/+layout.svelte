@@ -16,7 +16,7 @@
 
 	let projectData = $state.raw<ProjectData>();
 
-	const projectDataContext: ProjectDataContext = $state({});
+	const projectDataContext: ProjectDataContext = $state({} as ProjectDataContext);
 	setProjectDataContext(projectDataContext);
 
 	const projectsRepositoryContext = getProjectsRepositoryContext();

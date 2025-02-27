@@ -3,7 +3,7 @@ import { setContext } from 'svelte';
 import type { ProjectData } from './ProjectData';
 
 export type ProjectDataContext = {
-	projectData?: ProjectData;
+	projectData: ProjectData;
 };
 
 const projectDataContextKey = Symbol('projectDataContextKey');
