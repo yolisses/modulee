@@ -13,9 +13,11 @@
 	function handleClick() {}
 </script>
 
-<div class="fixed top-0 flex flex-col gap-2 rounded border border-black bg-zinc-800 p-2">
+<div
+	class="fixed top-0 flex max-h-[50vh] max-w-[50vw] flex-col gap-2 rounded border border-black bg-zinc-800 p-2"
+>
 	<input type="text" class="rounded border border-white/20 bg-transparent p-2" />
-	<div class="">
+	<div class="overflow-auto">
 		<BasicList {values} getId={(commandClass) => commandClass} {getName} onClick={handleClick} />
 	</div>
 </div>
