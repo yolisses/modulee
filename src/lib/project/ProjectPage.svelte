@@ -79,6 +79,8 @@
 		const graphEngineData = getGraphEngineData(processedGraphData);
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
+
+	let isCommandPaletteActive = $state(true);
 </script>
 
 <div class="flex flex-row">
@@ -93,4 +95,6 @@
 declared. -->
 {@render children?.()}
 
-<CommandPalette />
+{#if isCommandPaletteActive}
+	<CommandPalette bind:isActive={isCommandPaletteActive} />
+{/if}
