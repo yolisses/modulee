@@ -1,5 +1,5 @@
+import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
-import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { AddGroupCommand } from '$lib/commands/group/AddGroupCommand';

@@ -2,8 +2,8 @@ import type { Remotion } from '$lib/array/remotion';
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import type { GraphData } from '$lib/data/GraphData';
 import { Command } from '$lib/editor/Command';
-import { DisconnectCommand } from '../DisconnectCommand';
 import { mockCommandData } from '../test/mockNodeData';
+import { DisconnectCommand } from './DisconnectCommand';
 
 // TODO add Command suffix
 export class SetConnectionCommand extends Command<{
