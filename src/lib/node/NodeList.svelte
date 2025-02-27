@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 	import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
-	import { DisconnectCommand } from '$lib/commands/DisconnectCommand';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
@@ -45,6 +45,9 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleEndPreviewConnection(e: EndPreviewConnectionEvent) {
+		const { projectData } = projectDataContext;
+		if (!projectData) return;
+
 		const { input, output } = getInputAndOutput(e, graphContext.graph.connectors);
 		if (!input) return;
 
@@ -56,9 +59,9 @@
 		if (output) {
 			const command = new SetConnectionCommand({
 				id: createId(),
+				projectId: projectData.id,
 				type: 'SetConnectionCommand',
 				createdAt: new Date().toJSON(),
-				projectId: projectDataContext.projectData.id,
 				details: {
 					connection: {
 						inputPath,
@@ -73,8 +76,8 @@
 				id: createId(),
 				details: { inputPath },
 				type: 'DisconnectCommand',
+				projectId: projectData.id,
 				createdAt: new Date().toJSON(),
-				projectId: projectDataContext.projectData.id,
 			});
 			editorContext.editor.execute(command);
 		}
