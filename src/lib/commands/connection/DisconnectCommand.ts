@@ -7,6 +7,8 @@ import { Command } from '$lib/editor/Command';
 export class DisconnectCommand extends Command<{
 	inputPath: InputPath;
 }> {
+	static name = 'DisconnectCommand';
+
 	connectionsData!: ConnectionData[];
 
 	execute(graphData: GraphData): void {

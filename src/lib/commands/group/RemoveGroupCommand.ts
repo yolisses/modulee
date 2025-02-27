@@ -5,6 +5,8 @@ import { Command } from '$lib/editor/Command';
 export class RemoveGroupCommand extends Command<{
 	groupId: string;
 }> {
+	static name = 'RemoveGroupCommand';
+
 	groupData!: GroupData;
 
 	execute(graphData: GraphData): void {

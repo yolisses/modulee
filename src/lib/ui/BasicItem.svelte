@@ -17,7 +17,7 @@
 	}
 </script>
 
-<div class="hover-bg flex flex-row">
+<div class="hover-bg flex flex-row rounded">
 	<button onclick={handleClick} class="flex-1 p-2">
 		{text}
 	</button>

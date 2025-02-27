@@ -5,6 +5,8 @@ import { Command } from '$lib/editor/Command';
 export class RemoveNodeCommand extends Command<{
 	nodeId: string;
 }> {
+	static name = 'RemoveNodeCommand';
+
 	nodeData!: NodeData;
 
 	execute(graphData: GraphData): void {

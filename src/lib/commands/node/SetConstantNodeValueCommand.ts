@@ -5,6 +5,8 @@ export class SetConstantNodeValueCommand extends Command<{
 	value: number;
 	nodeId: string;
 }> {
+	static name = 'SetConstantNodeValueCommand';
+
 	previousValue!: number;
 
 	execute(graphData: GraphData): void {

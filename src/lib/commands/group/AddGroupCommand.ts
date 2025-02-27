@@ -5,6 +5,8 @@ import { Command } from '$lib/editor/Command';
 export class AddGroupCommand extends Command<{
 	group: GroupData;
 }> {
+	static name = 'AddGroupCommand';
+
 	execute(graphData: GraphData): void {
 		const { group } = this.details;
 		graphData.groups.add(group);

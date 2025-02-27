@@ -1,4 +1,4 @@
-import type { CommandClass } from '$lib/editor/CommandClass';
+import type { CommandClass } from './CommandClass';
 import { DisconnectCommand } from './connection/DisconnectCommand';
 import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
@@ -14,8 +14,7 @@ import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
 import { SetGroupNodeTargetGroupIdCommand } from './node/SetGroupNodeTargetGroupIdCommand';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const commandClasses: CommandClass<any>[] = [
+export const commandClasses = [
 	RedoCommand,
 	UndoCommand,
 	AddNodeCommand,
@@ -30,4 +29,4 @@ export const commandClasses: CommandClass<any>[] = [
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
 	SetGroupNodeTargetGroupIdCommand,
-];
+] as CommandClass[];

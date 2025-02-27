@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CommandPalette from '$lib/CommandPalette/CommandPalette.svelte';
 	import { createCommand } from '$lib/commands/createCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
@@ -91,3 +92,5 @@
 <!-- This is here only to allow other +page.svelte files to use the contexts
 declared. -->
 {@render children?.()}
+
+<CommandPalette />

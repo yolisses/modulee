@@ -5,6 +5,8 @@ import { Command } from '$lib/editor/Command';
 export class AddNodeCommand extends Command<{
 	node: NodeData;
 }> {
+	static name = 'AddNodeCommand';
+
 	execute(graphData: GraphData): void {
 		const { node } = this.details;
 		graphData.nodes.add(node);

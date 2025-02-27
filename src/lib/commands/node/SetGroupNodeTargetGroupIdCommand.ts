@@ -5,6 +5,8 @@ export class SetGroupNodeTargetGroupIdCommand extends Command<{
 	targetGroupId: string;
 	groupNodeId: string;
 }> {
+	static name = 'SetGroupNodeTargetGroupIdCommand';
+
 	previousTargetGroupId!: string;
 
 	execute(graphData: GraphData): void {

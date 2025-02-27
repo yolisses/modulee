@@ -7,6 +7,11 @@ import type { EditorData } from '$lib/editor/EditorData';
 export class UndoCommand extends Command<{
 	commandId: string;
 }> {
+	static getName() {
+		return 'test1';
+	}
+	static name = 'UndoCommand';
+
 	remotion!: Remotion<Command>;
 
 	execute(graphData: GraphData, editorData: EditorData): void {

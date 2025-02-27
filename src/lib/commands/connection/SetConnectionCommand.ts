@@ -9,6 +9,8 @@ import { DisconnectCommand } from './DisconnectCommand';
 export class SetConnectionCommand extends Command<{
 	connection: ConnectionData;
 }> {
+	static name = 'SetConnectionCommand';
+
 	disconnectCommand!: DisconnectCommand;
 	remotions!: Remotion<ConnectionData>[];
 

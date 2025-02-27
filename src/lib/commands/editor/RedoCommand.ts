@@ -7,6 +7,8 @@ import type { EditorData } from '$lib/editor/EditorData';
 export class RedoCommand extends Command<{
 	commandId: string;
 }> {
+	static name = 'RedoCommand';
+
 	remotion!: Remotion<Command>;
 
 	execute(graphData: GraphData, editorData: EditorData): void {
