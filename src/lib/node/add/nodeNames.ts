@@ -22,4 +22,5 @@ export const nodesName: Record<string, string> = {
 	GroupVoicesNode: 'Group voices',
 	HighPassNode: 'High-pass filter',
 	TriangleWaveNode: 'Triangle wave',
+	SawtoothWaveNode: 'Sawtooth wave',
 };
