@@ -67,7 +67,6 @@
 		const path = url.pathname;
 		window.__JUCE__?.backend.emitEvent('setPath', { path });
 	});
-	$inspect(page);
 </script>
 
 {@render children()}
