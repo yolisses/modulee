@@ -1,6 +1,8 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { createId } from '$lib/data/createId';
+import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import type { GraphData } from '$lib/data/GraphData';
+import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 
@@ -18,21 +20,40 @@ function createFallbackNode(groupId: string): NodeData {
 	};
 }
 
-function addNodeConnections(nodeData: NodeData, graphData: GraphData) {
+function getNodeInputPaths(nodeData: NodeData) {
+	const inputPaths: InputPath[] = [];
+
 	const nodeType = nodeTypesByName[nodeData.type];
 	nodeType.inputNames.forEach((inputName) => {
-		const isConnectionPresent = graphData.connections.values().some((connectionData) => {
-			const { inputPath } = connectionData;
-			return inputPath.nodeId === nodeData.id && inputPath.inputName === inputName;
-		});
-		if (isConnectionPresent) return;
+		inputPaths.push({ inputName, nodeId: nodeData.id });
+	});
 
-		const connectionData: ConnectionData = {
-			id: createId(),
-			inputPath: { inputName, nodeId: nodeData.id },
-			targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
-		};
-		graphData.connections.add(connectionData);
+	return inputPaths;
+}
+
+function getIsInputConnected(inputPath: InputPath, graphData: GraphData) {
+	return graphData.connections.values().some((connectionData) => {
+		return getAreInputPathsEqual(inputPath, connectionData.inputPath);
+	});
+}
+
+function createInputFallbackConnection(inputPath: InputPath, nodeData: NodeData): ConnectionData {
+	return {
+		inputPath,
+		id: createId(),
+		targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
+	};
+}
+
+function addNodeConnections(nodeData: NodeData, graphData: GraphData) {
+	const inputPaths = getNodeInputPaths(nodeData);
+
+	inputPaths.forEach((inputPath) => {
+		const isInputConnected = getIsInputConnected(inputPath, graphData);
+		if (isInputConnected) return;
+
+		const inputFallbackConnection = createInputFallbackConnection(inputPath, nodeData);
+		graphData.connections.add(inputFallbackConnection);
 	});
 }
 
