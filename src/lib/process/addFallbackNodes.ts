@@ -18,27 +18,28 @@ function createFallbackNode(groupId: string): NodeData {
 	};
 }
 
+function addNodeConnections(nodeData: NodeData, graphData: GraphData) {
+	const nodeType = nodeTypesByName[nodeData.type];
+	nodeType.inputNames.forEach((inputName) => {
+		const isConnectionPresent = graphData.connections.values().some((connectionData) => {
+			const { inputPath } = connectionData;
+			return inputPath.nodeId === nodeData.id && inputPath.inputName === inputName;
+		});
+		if (isConnectionPresent) return;
+
+		const connectionData: ConnectionData = {
+			id: createId(),
+			inputPath: { inputName, nodeId: nodeData.id },
+			targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
+		};
+		graphData.connections.add(connectionData);
+	});
+}
+
 export function addFallbackNodes(graphData: GraphData) {
 	graphData.groups.values().forEach((groupData) => {
 		const fallbackNodeData = createFallbackNode(groupData.id);
 		graphData.nodes.add(fallbackNodeData);
 	});
-
-	graphData.nodes.values().forEach((nodeData) => {
-		const nodeType = nodeTypesByName[nodeData.type];
-		nodeType.inputNames.forEach((inputName) => {
-			const isConnectionPresent = graphData.connections.values().some((connectionData) => {
-				const { inputPath } = connectionData;
-				return inputPath.nodeId === nodeData.id && inputPath.inputName === inputName;
-			});
-			if (isConnectionPresent) return;
-
-			const connectionData: ConnectionData = {
-				id: createId(),
-				inputPath: { inputName, nodeId: nodeData.id },
-				targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
-			};
-			graphData.connections.add(connectionData);
-		});
-	});
+	graphData.nodes.values().forEach((nodeData) => addNodeConnections(nodeData, graphData));
 }
