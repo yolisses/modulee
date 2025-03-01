@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
+	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { setZoomContext } from '$lib/ui/zoomContext';
 	import { Vector } from 'nodes-editor';
+	import { onMount } from 'svelte';
 	import NodeList from './NodeList.svelte';
 	import NodesToolbar from './NodesToolbar.svelte';
 
@@ -31,6 +33,13 @@
 			return node.groupId === groupIdContext.groupId;
 		}),
 	);
+
+	const shortcutHandler = new ShortcutHandler();
+
+	onMount(() => {
+		shortcutHandler.initialize();
+		return () => shortcutHandler.destroy();
+	});
 </script>
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
