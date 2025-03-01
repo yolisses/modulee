@@ -60,7 +60,6 @@ export class WasmAudioBackend implements AudioBackend {
 	}
 
 	setGraph(graphEngineData: GraphEngineData): void {
-		console.log(graphEngineData);
 		this.postOrSaveMessage({
 			type: 'setGraph',
 			data: { graphEngineData },
