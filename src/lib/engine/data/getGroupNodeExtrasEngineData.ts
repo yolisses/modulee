@@ -23,10 +23,9 @@ export function getGroupNodeExtrasEngineData(
 	const targetGroupId = groupNodeData.extras.targetGroupId
 		? hashToUsize(groupNodeData.extras.targetGroupId as string)
 		: undefined;
-	console.log(JSON.stringify({ inputTargetIds }));
 
 	return {
 		target_group_id: targetGroupId,
-		input_target_ids: inputTargetIds,
+		input_target_ids: Object.fromEntries(inputTargetIds.entries()),
 	};
 }
