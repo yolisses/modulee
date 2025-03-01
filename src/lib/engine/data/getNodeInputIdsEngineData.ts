@@ -4,6 +4,11 @@ import { hashToUsize } from './hashToUsize';
 
 export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphData) {
 	const inputIds: Record<string, number> = {};
+
+	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
+		return inputIds;
+	}
+
 	graphData.connections.values().forEach((connectionData) => {
 		if (connectionData.inputPath.nodeId !== nodeData.id) {
 			return;
