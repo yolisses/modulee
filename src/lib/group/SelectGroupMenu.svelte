@@ -8,6 +8,7 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName.js';
+	import CreateGroupButton from './CreateGroupButton.svelte';
 
 	interface Props {
 		groupNodeId: string;
@@ -20,7 +21,7 @@
 
 	const { closeModal, groupNodeId }: Props = $props();
 
-	function handleTypeClick(group: Group) {
+	function handleGroupSelect(group: Group) {
 		const addNodeCommand = new SetGroupNodeTargetGroupIdCommand({
 			id: createId(),
 			type: 'SetGroupNodeTargetGroupIdCommand',
@@ -39,9 +40,10 @@
 		<BasicList
 			{getId}
 			{getName}
-			onClick={handleTypeClick}
+			onClick={handleGroupSelect}
 			values={graphContext.graph.groups.values()}
 		/>
+		<CreateGroupButton onGroupCreated={handleGroupSelect} />
 	</div>
 </div>
 
