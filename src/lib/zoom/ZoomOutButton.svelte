@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { ZoomOutContextualCommand } from '$lib/shortcut/ZoomOutContextualCommand.svelte';
+	import { ZoomOutCommand } from '$lib/shortcut/ZoomOutCommand';
+	import { getZoomContext } from '$lib/ui/zoomContext';
 	import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	const command = new ZoomOutContextualCommand();
+	const zoomContext = getZoomContext();
 
 	function handleClick() {
+		const command = new ZoomOutCommand({ zoomContext });
 		command.execute();
 	}
 </script>

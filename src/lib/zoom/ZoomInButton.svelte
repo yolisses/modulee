@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { ZoomInContextualCommand } from '$lib/shortcut/ZoomInContextualCommand.svelte';
+	import { ZoomInCommand } from '$lib/shortcut/ZoomInCommand';
+	import { getZoomContext } from '$lib/ui/zoomContext';
 	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	const command = new ZoomInContextualCommand();
+	const zoomContext = getZoomContext();
 
 	function handleClick() {
+		const command = new ZoomInCommand({ zoomContext });
 		command.execute();
 	}
 </script>
