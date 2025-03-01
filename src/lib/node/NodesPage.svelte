@@ -5,6 +5,7 @@
 	import { Space } from '$lib/space/Space.js';
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import { setZoomContext } from '$lib/ui/zoomContext';
 	import { Vector } from 'nodes-editor';
 	import NodeList from './NodeList.svelte';
 	import NodesToolbar from './NodesToolbar.svelte';
@@ -15,11 +16,13 @@
 	const spaceContext = $state({ space: new Space() });
 	setSpaceContext(spaceContext);
 
-	let zoom = $state(20);
+	const zoomContext = $state({ zoom: 20 });
+	setZoomContext(zoomContext);
+
 	$effect(() => {
 		spaceContext.space = new Space([
 			new OffsetConverter(new Vector(3, 2)),
-			new ZoomConverter(zoom),
+			new ZoomConverter(zoomContext.zoom),
 		]);
 	});
 
@@ -31,7 +34,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
-	<NodesToolbar bind:zoom />
+	<NodesToolbar />
 	<div class="flex flex-1 flex-col overflow-auto">
 		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 	</div>

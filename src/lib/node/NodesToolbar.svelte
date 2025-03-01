@@ -11,11 +11,10 @@
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		zoom: number;
 		topBarChildren?: Snippet;
 	}
 
-	let { zoom = $bindable(), topBarChildren }: Props = $props();
+	let { topBarChildren }: Props = $props();
 </script>
 
 <div class="flex flex-row items-start border-b border-black">
@@ -23,8 +22,8 @@
 		<HomeButton />
 		<UndoButton />
 		<RedoButton />
-		<ZoomInButton bind:zoom />
-		<ZoomOutButton bind:zoom />
+		<ZoomInButton />
+		<ZoomOutButton />
 		<GroupNodesButton />
 		<BackButton />
 		<MuteButton />

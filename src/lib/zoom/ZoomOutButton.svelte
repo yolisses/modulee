@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { getZoomContext } from '$lib/ui/zoomContext';
 	import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	let { zoom = $bindable() }: { zoom: number } = $props();
+	const zoomContext = getZoomContext();
 
 	function handleClick() {
-		zoom -= 1;
+		zoomContext.zoom -= 1;
 	}
 </script>
 
