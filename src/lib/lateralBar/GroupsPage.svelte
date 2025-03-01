@@ -16,10 +16,6 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
-	function handleClick(group: Group) {
-		selectedTabContext.selectedTab = 'group';
-	}
-
 	function handleDelete(group: Group) {
 		const command = new RemoveGroupCommand({
 			id: createId(),
@@ -42,7 +38,6 @@
 		{getId}
 		{getLink}
 		{getName}
-		onClick={handleClick}
 		onDelete={handleDelete}
 		values={graphContext.graph.groups.values()}
 	/>

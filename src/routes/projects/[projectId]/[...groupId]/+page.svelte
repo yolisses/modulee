@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
+	import { getSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -11,5 +13,11 @@
 
 	$effect(() => {
 		groupIdContext.groupId = data.groupId;
+	});
+
+	const selectedTabContext = getSelectedTabContext();
+	$effect(() => {
+		page.params; // Force the effect to run on change [...groupId]
+		selectedTabContext.selectedTab = 'group';
 	});
 </script>

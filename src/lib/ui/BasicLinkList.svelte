@@ -4,7 +4,7 @@
 	interface Props {
 		values: T[];
 		getId: (value: T) => any;
-		onClick: (value: T) => void;
+		onClick?: (value: T) => void;
 		getName: (value: T) => string;
 		getLink: (value: T) => string;
 		onDelete?: (value: T) => void;
