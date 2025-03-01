@@ -1,4 +1,3 @@
-import { getInputPathId } from '$lib/connection/getInputPathId';
 import type { GraphData } from '$lib/data/GraphData';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import type { GroupVoicesNodeData } from '$lib/data/variants/GroupVoicesNodeData';
@@ -16,8 +15,7 @@ export function getGroupNodeExtrasEngineData(
 			return;
 		}
 
-		const inputId = getInputPathId(inputPath);
-		const inputIdHash = hashToUsize(inputId);
+		const inputIdHash = hashToUsize(inputPath.inputName);
 		const targetNodeIdHash = hashToUsize(connectionData.targetNodeId);
 		inputTargetIds.set(inputIdHash, targetNodeIdHash);
 	});
@@ -25,6 +23,7 @@ export function getGroupNodeExtrasEngineData(
 	const targetGroupId = groupNodeData.extras.targetGroupId
 		? hashToUsize(groupNodeData.extras.targetGroupId as string)
 		: undefined;
+	console.log(JSON.stringify({ inputTargetIds }));
 
 	return {
 		target_group_id: targetGroupId,
