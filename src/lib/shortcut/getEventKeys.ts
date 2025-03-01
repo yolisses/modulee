@@ -9,7 +9,7 @@ export function getEventKeys(e: KeyboardEvent) {
 		keys.push('Shift');
 	}
 
-	if (e.shiftKey) {
+	if (e.altKey) {
 		keys.push('Alt');
 	}
 
