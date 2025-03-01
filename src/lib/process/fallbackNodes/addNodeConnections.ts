@@ -4,6 +4,7 @@ import { createInputFallbackConnection } from './createInputFallbackConnection';
 import { getIsInputConnected } from './getIsInputConnected';
 import { getNodeInputPaths } from './getNodeInputPaths';
 
+// TODO consider adopting an OOP approach
 export function addFallbackNodeConnections(nodeData: NodeData, graphData: GraphData) {
 	const inputPaths = getNodeInputPaths(nodeData, graphData);
 

@@ -1,9 +1,13 @@
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
-import type { Vector } from 'nodes-editor';
+import type { VectorData } from '$lib/data/VectorData';
 import type { NodeType } from './NodeType';
 
-export function createNodeData(nodeType: NodeType, groupId: string, position: Vector): NodeData {
+export function createNodeData(
+	nodeType: NodeType,
+	groupId: string,
+	position: VectorData,
+): NodeData {
 	// TODO find a more secure way to type this result
 	return {
 		groupId,

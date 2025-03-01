@@ -1,5 +1,6 @@
 import type { GraphData } from '$lib/data/GraphData';
 import { addFallbackNodes } from './fallbackNodes/addFallbackNodes';
+import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
 
 function cloneGraphData(graphData: GraphData): GraphData {
 	return {
@@ -12,6 +13,7 @@ function cloneGraphData(graphData: GraphData): GraphData {
 
 export function getProcessedGraphData(graphData: GraphData) {
 	const graphDataClone = cloneGraphData(graphData);
+	addImplicitNodes(graphDataClone);
 	addFallbackNodes(graphDataClone);
 	return graphDataClone;
 }

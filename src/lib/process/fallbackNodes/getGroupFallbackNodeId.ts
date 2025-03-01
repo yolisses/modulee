@@ -1,3 +1,3 @@
 export function getGroupFallbackNodeId(groupId: string) {
-	return 'fallback' + groupId;
+	return 'fallback_node_for_group_' + groupId;
 }
