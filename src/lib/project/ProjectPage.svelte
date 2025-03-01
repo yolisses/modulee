@@ -26,7 +26,7 @@
 		projectData: ProjectData;
 	}
 
-	let isLateralBarVisibleContext = $state({ isLateralBarVisible: true });
+	let isLateralBarVisibleContext = $state({ isLateralBarVisible: false });
 	setIsLateralBarVisibleContext(isLateralBarVisibleContext);
 
 	setDefaultContexts();
