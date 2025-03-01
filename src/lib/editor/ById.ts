@@ -82,4 +82,8 @@ export class ById<T extends HasId> {
 			this.removeById(id);
 		});
 	}
+
+	clone() {
+		return ById.fromItems(this.values());
+	}
 }

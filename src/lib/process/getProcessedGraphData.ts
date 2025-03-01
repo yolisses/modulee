@@ -1,13 +1,12 @@
 import type { GraphData } from '$lib/data/GraphData';
-import { ById } from '$lib/editor/ById';
 import { addFallbackNodes } from './fallbackNodes/addFallbackNodes';
 
 function cloneGraphData(graphData: GraphData): GraphData {
 	return {
 		mainGroupId: graphData.mainGroupId,
-		nodes: ById.fromItems(graphData.nodes.values()),
-		groups: ById.fromItems(graphData.groups.values()),
-		connections: ById.fromItems(graphData.connections.values()),
+		nodes: graphData.nodes.clone(),
+		groups: graphData.groups.clone(),
+		connections: graphData.connections.clone(),
 	};
 }
 
