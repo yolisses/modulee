@@ -4,7 +4,7 @@
 	import WirePath from './WirePath.svelte';
 	import type { WireProps } from './WireProps.js';
 
-	const { endPosition, startPosition }: WireProps = $props();
+	const { endPosition, startPosition, isSelected }: WireProps = $props();
 
 	// Found empirically with the WirePath curve
 	const dataMargin = new Vector(3, 1);
@@ -13,5 +13,5 @@
 </script>
 
 <WireSvg {startPosition} {endPosition} margin={screenMargin}>
-	<WirePath {startPosition} {endPosition} />
+	<WirePath {startPosition} {endPosition} {isSelected} />
 </WireSvg>

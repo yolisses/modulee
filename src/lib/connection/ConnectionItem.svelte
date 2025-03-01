@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Connection } from '$lib/data/Connection';
-	import { ConnectionItem, Vector } from 'nodes-editor';
+	import { ConnectionItem, getSelectedNodeIdsContext, Vector } from 'nodes-editor';
 	import Wire from './Wire.svelte';
 	import { getInputPathId } from './getInputPathId';
 
@@ -8,7 +8,16 @@
 		connection: Connection;
 	}
 
+	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const { connection }: Props = $props();
+
+	const isSelected = $derived.by(() => {
+		const { selectedNodeIds } = selectedNodeIdsContext;
+		return (
+			selectedNodeIds.has(connection.targetNodeId) &&
+			selectedNodeIds.has(connection.inputPath.nodeId)
+		);
+	});
 </script>
 
 <ConnectionItem
@@ -25,6 +34,6 @@
 		endPosition: Vector;
 		startPosition: Vector;
 	})}
-		<Wire {startPosition} {endPosition} />
+		<Wire {startPosition} {endPosition} {isSelected} />
 	{/snippet}
 </ConnectionItem>
