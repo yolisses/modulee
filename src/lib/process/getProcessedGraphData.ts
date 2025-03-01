@@ -1,6 +1,6 @@
 import type { GraphData } from '$lib/data/GraphData';
 import { ById } from '$lib/editor/ById';
-import { addFallbackNodes } from './addFallbackNodes';
+import { addFallbackNodes } from './fallback/addFallbackNodes';
 
 function cloneGraphData(graphData: GraphData): GraphData {
 	return {
