@@ -8,12 +8,12 @@ import { DisconnectCommand } from './DisconnectCommand';
 test('DisconnectCommand', () => {
 	const graphData = {
 		connections: ById.fromItems([
-			{ id: 'connection2', inputPath: { nodeId: 'node2', inputName: 'input2' } },
+			{ id: 'connection2', inputPath: { nodeId: 'node2', inputKey: 'input2' } },
 		] as ConnectionData[]),
 	} as GraphData;
 
 	const command = new DisconnectCommand(
-		mockCommandData({ inputPath: { nodeId: 'node2', inputName: 'input2' } }),
+		mockCommandData({ inputPath: { nodeId: 'node2', inputKey: 'input2' } }),
 	);
 
 	command.execute(graphData);

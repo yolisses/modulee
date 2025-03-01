@@ -1,7 +1,5 @@
-import type { ById } from '$lib/editor/ById';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
-import type { ConnectionData } from './ConnectionData';
 import { Input } from './Input.svelte';
 import type { NodeData } from './NodeData';
 import { Output } from './Output.svelte';
@@ -18,15 +16,15 @@ export class Node<T extends NodeData = NodeData> {
 	groupId: string = $state()!;
 	position: Vector = $state()!;
 
-	constructor(nodeData: NodeData, connectionsData: ById<ConnectionData>) {
+	constructor(nodeData: NodeData) {
 		const { id, type, extras, position, groupId } = nodeData;
 		this.id = id;
 		this.type = type;
 		this.extras = extras;
 		this.groupId = groupId;
 		this.output = new Output(this);
+		this.inputs = this.getInputs();
 		this.position = Vector.fromData(position);
-		this.inputs = this.calculateInputs(connectionsData);
 	}
 
 	getData(): NodeData {
@@ -39,28 +37,13 @@ export class Node<T extends NodeData = NodeData> {
 		} as NodeData;
 	}
 
-	calculateInputs(connectionsData: ById<ConnectionData>) {
+	getInputs() {
 		const inputs: Input[] = [];
-
-		connectionsData.values().forEach((connectionData) => {
-			if (connectionData.inputPath.nodeId !== this.id) return;
-			// The connected output is set in Editor
-			const input = new Input(connectionData.inputPath.inputName, this);
-			inputs.push(input);
-		});
 
 		const nodeType = nodeTypesByName[this.type];
 		nodeType.inputNames.forEach((inputName) => {
-			const alreadyExists = inputs.some((input) => {
-				return input.name === inputName;
-			});
-			if (alreadyExists) return;
-			const input = new Input(inputName, this);
+			const input = new Input(inputName, inputName, this);
 			inputs.push(input);
-		});
-
-		inputs.sort((input1, input2) => {
-			return input1.name.localeCompare(input2.name);
 		});
 
 		return inputs;

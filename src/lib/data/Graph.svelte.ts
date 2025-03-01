@@ -1,11 +1,10 @@
 import { ById } from '$lib/editor/ById';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
-import { ConstantNode } from './ConstantNode.svelte';
 import type { GraphData } from './GraphData';
 import { Group } from './Group.svelte';
 import { GroupNode } from './GroupNode.svelte';
-import { InputNode } from './InputNode.svelte';
+import { instantiateNode } from './instantiateNode';
 import { Node } from './Node.svelte';
 
 export class Graph {
@@ -24,16 +23,7 @@ export class Graph {
 		this.mainGroupId = graphData.mainGroupId;
 
 		graphData.nodes.values().forEach((nodeData) => {
-			let node: Node;
-			if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-				node = new GroupNode(nodeData, graphData.connections);
-			} else if (nodeData.type === 'ConstantNode') {
-				node = new ConstantNode(nodeData, graphData.connections);
-			} else if (nodeData.type === 'InputNode') {
-				node = new InputNode(nodeData, graphData.connections);
-			} else {
-				node = new Node(nodeData, graphData.connections);
-			}
+			const node = instantiateNode(nodeData);
 			this.nodes.add(node);
 		});
 

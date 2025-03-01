@@ -49,7 +49,7 @@
 		if (!input) return;
 
 		const inputPath: InputPath = {
-			inputName: input.name,
+			inputKey: input.key,
 			nodeId: input.node.id,
 		};
 

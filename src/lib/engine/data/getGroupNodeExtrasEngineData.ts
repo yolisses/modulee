@@ -15,7 +15,7 @@ export function getGroupNodeExtrasEngineData(
 			return;
 		}
 
-		const inputIdHash = hashToUsize(inputPath.inputName);
+		const inputIdHash = hashToUsize(inputPath.inputKey);
 		const targetNodeIdHash = hashToUsize(connectionData.targetNodeId);
 		inputTargetIds.set(inputIdHash, targetNodeIdHash);
 	});

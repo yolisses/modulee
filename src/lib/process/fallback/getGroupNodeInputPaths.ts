@@ -14,7 +14,7 @@ export function getGroupNodeInputPaths(
 		if (nodeData.type !== 'InputNode') return;
 		if (nodeData.groupId !== targetGroupId) return;
 		inputPaths.push({
-			inputName: nodeData.id,
+			inputKey: nodeData.id,
 			nodeId: groupNodeData.id,
 		});
 	});

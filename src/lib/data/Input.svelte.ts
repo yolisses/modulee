@@ -8,13 +8,11 @@ export class Input implements Connector {
 	inputPath: InputPath;
 
 	constructor(
+		public key: string,
 		public name: string,
 		public node: Node,
 	) {
-		this.inputPath = {
-			nodeId: node.id,
-			inputName: name,
-		};
+		this.inputPath = { inputKey: key, nodeId: node.id };
 		this.id = getInputPathId(this.inputPath);
 	}
 }

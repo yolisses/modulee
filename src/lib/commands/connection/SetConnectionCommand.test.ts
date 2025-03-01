@@ -14,7 +14,7 @@ test('SetConnectionCommand without remotion', () => {
 				targetNodeId: 'node2',
 				inputPath: {
 					nodeId: 'node1',
-					inputName: 'input1',
+					inputKey: 'input1',
 				},
 			},
 		}),
@@ -28,7 +28,7 @@ test('SetConnectionCommand without remotion', () => {
 			targetNodeId: 'node2',
 			inputPath: {
 				nodeId: 'node1',
-				inputName: 'input1',
+				inputKey: 'input1',
 			},
 		},
 	]);
@@ -46,7 +46,7 @@ test('SetConnectionCommand with remotion', () => {
 				targetNodeId: 'node2',
 				inputPath: {
 					nodeId: 'node1',
-					inputName: 'input1',
+					inputKey: 'input1',
 				},
 			},
 		]),
@@ -59,7 +59,7 @@ test('SetConnectionCommand with remotion', () => {
 				targetNodeId: 'node3',
 				inputPath: {
 					nodeId: 'node1',
-					inputName: 'input1',
+					inputKey: 'input1',
 				},
 			},
 		}),
@@ -73,7 +73,7 @@ test('SetConnectionCommand with remotion', () => {
 			targetNodeId: 'node3',
 			inputPath: {
 				nodeId: 'node1',
-				inputName: 'input1',
+				inputKey: 'input1',
 			},
 		},
 	]);
@@ -86,7 +86,7 @@ test('SetConnectionCommand with remotion', () => {
 			targetNodeId: 'node2',
 			inputPath: {
 				nodeId: 'node1',
-				inputName: 'input1',
+				inputKey: 'input1',
 			},
 		},
 	]);

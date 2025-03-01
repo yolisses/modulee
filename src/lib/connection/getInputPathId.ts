@@ -1,5 +1,5 @@
 import type { InputPath } from '$lib/data/InputPath';
 
 export function getInputPathId(inputPath: InputPath) {
-	return inputPath.nodeId + '/' + inputPath.inputName;
+	return inputPath.nodeId + '/' + inputPath.inputKey;
 }

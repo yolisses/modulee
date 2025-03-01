@@ -13,9 +13,9 @@ export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphDa
 		if (connectionData.inputPath.nodeId !== nodeData.id) {
 			return;
 		}
-		const { inputName } = connectionData.inputPath;
+		const { inputKey } = connectionData.inputPath;
 		const outputId = connectionData.targetNodeId;
-		inputIds[inputName] = hashToUsize(outputId);
+		inputIds[inputKey] = hashToUsize(outputId);
 	});
 	return inputIds;
 }
