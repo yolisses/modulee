@@ -43,7 +43,6 @@ function getNodeTypeName(inputKey: string) {
 
 export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData) {
 	const nodeTypeName = getNodeTypeName(inputPath.inputKey);
-	console.log(nodeTypeName);
 	const nodeType = nodeTypesByName[nodeTypeName];
 	if (!nodeType) return;
 
@@ -97,7 +96,6 @@ export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphData) {
 	inputPaths.forEach((inputPath) => {
 		const isInputConnected = getIsInputConnected(inputPath, graphData);
 		if (isInputConnected) return;
-		console.log(inputPath);
 
 		addInputImplicitNode(inputPath, nodeData, graphData);
 	});
