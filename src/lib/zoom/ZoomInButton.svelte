@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { getZoomContext } from '$lib/ui/zoomContext';
+	import { ZoomInContextualCommand } from '$lib/shortcut/ZoomInContextualCommand.svelte';
 	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	const zoomContext = getZoomContext();
+	const command = new ZoomInContextualCommand();
 
 	function handleClick() {
-		zoomContext.zoom += 1;
+		command.execute();
 	}
 </script>
 

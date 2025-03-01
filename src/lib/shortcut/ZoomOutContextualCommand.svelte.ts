@@ -1,9 +1,9 @@
 import { getZoomContext } from '$lib/ui/zoomContext';
 
-export class ZoomInContextualCommand {
+export class ZoomOutContextualCommand {
 	zoomContext = getZoomContext();
 
 	execute() {
-		this.zoomContext.zoom += 1;
+		this.zoomContext.zoom -= 1;
 	}
 }
