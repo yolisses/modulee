@@ -4,6 +4,7 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
+	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 
 	interface Props {
@@ -20,7 +21,7 @@
 		initialValue = constantNode.extras.value;
 	}
 
-	function handleBlur(e: Event & { currentTarget: HTMLInputElement }) {
+	function handleChange(e: InputChangeEvent) {
 		const valueString = e.currentTarget.value;
 		const value = parseFloat(valueString);
 		if (Number.isNaN(value)) return;
@@ -49,7 +50,7 @@
 				bind:value
 				type="number"
 				onfocus={handleFocus}
-				onchange={handleBlur}
+				onchange={handleChange}
 				style:padding-right="0.25lh"
 				class="w-full bg-transparent text-right"
 			/>
