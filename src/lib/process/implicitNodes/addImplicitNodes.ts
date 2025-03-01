@@ -6,7 +6,6 @@ import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
 import type { NodeType } from '$lib/node/add/NodeType';
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
-import { createInputFallbackConnection } from '../fallbackNodes/createInputFallbackConnection';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
 
@@ -38,8 +37,13 @@ export function getNodeDataFromNodeType(
 	} as unknown as NodeData;
 }
 
+function getNodeTypeName(inputKey: string) {
+	return inputKey[0].toUpperCase() + inputKey.slice(1) + 'Node';
+}
+
 export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData) {
-	const nodeTypeName = inputPath.inputKey;
+	const nodeTypeName = getNodeTypeName(inputPath.inputKey);
+	console.log(nodeTypeName);
 	const nodeType = nodeTypesByName[nodeTypeName];
 	if (!nodeType) return;
 
@@ -91,9 +95,9 @@ export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphData) {
 	inputPaths.forEach((inputPath) => {
 		const isInputConnected = getIsInputConnected(inputPath, graphData);
 		if (isInputConnected) return;
+		console.log(inputPath);
 
-		const inputFallbackConnection = createInputFallbackConnection(inputPath, nodeData);
-		graphData.connections.add(inputFallbackConnection);
+		addInputImplicitNode(inputPath, nodeData, graphData);
 	});
 }
 
