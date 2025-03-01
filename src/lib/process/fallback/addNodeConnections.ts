@@ -4,7 +4,7 @@ import { createInputFallbackConnection } from './createInputFallbackConnection';
 import { getIsInputConnected } from './getIsInputConnected';
 import { getNodeInputPaths } from './getNodeInputPaths';
 
-export function addNodeConnections(nodeData: NodeData, graphData: GraphData) {
+export function addFallbackNodeConnections(nodeData: NodeData, graphData: GraphData) {
 	const inputPaths = getNodeInputPaths(nodeData, graphData);
 
 	inputPaths.forEach((inputPath) => {
