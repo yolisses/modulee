@@ -84,6 +84,8 @@ export function addInputImplicitNode(
 		);
 
 		graphData.connections.add(implicitConnectionData);
+
+		addNodeImplicitNodes(implicitNodeData, graphData);
 	}
 }
 
