@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -6,13 +7,21 @@
 		closeModal: () => void;
 	}
 
+	let modal = $state<HTMLElement>();
 	const { children, closeModal }: Props = $props();
+
+	function handleWindowClick(e: InputMouseEvent) {
+		const clickedInside = modal?.contains(e.target as Node);
+		if (!clickedInside) {
+			closeModal();
+		}
+	}
 </script>
 
-<button class="fixed inset-0 bg-black/25" onclick={closeModal} aria-label="Close modal"></button>
-
-<div class="pointer-events-none fixed inset-0 flex items-center justify-center">
-	<div class="pointer-events-auto contents">
+<div class="pointer-events-none fixed inset-0 flex items-center justify-center bg-black/25">
+	<div class="pointer-events-auto contents" bind:this={modal}>
 		{@render children?.()}
 	</div>
 </div>
+
+<svelte:window onpointerdown={handleWindowClick} />
