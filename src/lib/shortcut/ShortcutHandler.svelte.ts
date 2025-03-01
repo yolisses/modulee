@@ -17,10 +17,19 @@ export class ShortcutHandler {
 	}
 
 	handleKeyPress = (e: KeyboardEvent) => {
-		const shortcut = this.shortcuts.find((shortcut) => {
-			const eventKeys = getEventKeys(e);
+		const eventKeys = getEventKeys(e);
+		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
+
+		let shortcut = this.shortcuts.find((shortcut) => {
 			return getAreKeyListsEqual(eventKeys, shortcut.keys);
 		});
+
+		if (!shortcut) {
+			shortcut = this.shortcuts.find((shortcut) => {
+				return getAreKeyListsEqual(eventKeysWithoutShift, shortcut.keys);
+			});
+		}
+
 		if (!shortcut) return;
 
 		const contexts = this.getContexts();
