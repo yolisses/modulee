@@ -19,7 +19,7 @@
 	href="{page.url}/{group.id}"
 	style:padding-inline="0.25lh"
 	onpointerdown={handlePointerDown}
-	class="overflow-and-ellipsis hover-bg flex flex-1 flex-row items-center underline"
+	class="overflow-and-ellipsis hover-bg flex flex-1 flex-row items-center text-blue-300"
 >
 	{group.name}
 </a>
