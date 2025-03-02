@@ -6,5 +6,5 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', '-'], commandType: 'ZoomOutCommand' },
 	{ keys: ['Ctrl', '_'], commandType: 'ZoomOutCommand' },
 	{ keys: ['Ctrl', '0'], commandType: 'ResetZoomCommand' },
-	{ keys: ['Delete'], commandType: 'RemoveNodesCommandV2' },
+	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
 ];
