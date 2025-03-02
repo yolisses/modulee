@@ -1,11 +1,11 @@
-<script lang="ts">
+<script lang="ts" generics="T extends Item">
 	import type { Item } from '$lib/array/Item';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		item: Item;
+		item: T;
 		route: string;
-		buttons?: Snippet<[{ id: string; item: Item }]>;
+		buttons?: Snippet<[{ id: string; item: T }]>;
 	}
 
 	const { item, route, buttons }: Props = $props();
