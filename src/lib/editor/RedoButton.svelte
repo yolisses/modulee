@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { createEditorCommand } from '$lib/commands/createEditorCommand';
-	import { RedoCommand } from '$lib/commands/editor/RedoCommand';
-	import { createId } from '$lib/data/createId';
+	import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import type { Contexts } from '$lib/shortcut/contexts';
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getEditorContext } from './editorContext';
@@ -11,19 +10,12 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
-		const lastCommand = editorContext.editor.undoneHistory.at(-1);
-		if (!lastCommand) return;
-
-		const redoCommand = new RedoCommand({
-			id: createId(),
-			type: 'RedoCommand',
-			createdAt: new Date().toJSON(),
-			details: { commandId: lastCommand.id },
-			projectId: projectDataContext.projectData.id,
-		});
-		redoCommand.createCommandCallback = createEditorCommand;
-
-		editorContext.editor.execute(redoCommand);
+		const actionCommand = new RedoActionCommand();
+		// TODO find a more type safe way of doing this
+		actionCommand.execute({
+			editorContext,
+			projectDataContext,
+		} as Contexts);
 	}
 </script>
 
