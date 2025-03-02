@@ -32,7 +32,6 @@ export class VirtualPianoMidiBackend {
 		const pitch = this.getKeyPitch(key);
 		if (pitch === undefined) return;
 
-		console.log('setNoteOn', pitch);
 		this.audioBackend?.setNoteOn(pitch);
 	};
 
@@ -43,7 +42,6 @@ export class VirtualPianoMidiBackend {
 		const pitch = this.getKeyPitch(key);
 		if (pitch === undefined) return;
 
-		console.log('setNoteOff', pitch);
 		this.audioBackend?.setNoteOff(pitch);
 	};
 }
