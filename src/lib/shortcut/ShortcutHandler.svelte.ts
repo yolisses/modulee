@@ -1,5 +1,7 @@
 import { getGraphContext } from '$lib/data/graphContext';
 import { getEditorContext } from '$lib/editor/editorContext';
+import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
+import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 import { getGraphDataContext } from '$lib/graph/graphDataContext';
 import { getGroupIdContext } from '$lib/group/groupIdContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
@@ -17,8 +19,10 @@ export class ShortcutHandler {
 	graphContext = getGraphContext();
 	editorContext = getEditorContext();
 	groupIdContext = getGroupIdContext();
+	isMutedContext = getIsMutedContext();
 	graphDataContext = getGraphDataContext();
 	projectDataContext = getProjectDataContext();
+	audioBackendContext = getAudioBackendContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	constructor() {}
@@ -29,8 +33,10 @@ export class ShortcutHandler {
 			graphContext: this.graphContext,
 			editorContext: this.editorContext,
 			groupIdContext: this.groupIdContext,
+			isMutedContext: this.isMutedContext,
 			graphDataContext: this.graphDataContext,
 			projectDataContext: this.projectDataContext,
+			audioBackendContext: this.audioBackendContext,
 			selectedNodeIdsContext: this.selectedNodeIdsContext,
 		};
 	}

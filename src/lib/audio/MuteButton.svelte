@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
+	import { getIsMutedContext } from '$lib/engine/isMutedContexts';
+	import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
+	import type { Contexts } from '$lib/shortcut/contexts';
 	import { faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	const audioBackendContext = getAudioBackendContext();
-	let isMuted = $state(false);
+	const isMutedContext = getIsMutedContext();
 
 	function handleClick() {
-		const { audioBackend } = audioBackendContext;
-		if (!audioBackend) return;
-		isMuted = !isMuted;
-		audioBackend.setIsMuted(isMuted);
+		const actionCommand = new ToggleIsMuteActionCommand();
+		// TODO find a more type safe way of doing this
+		actionCommand.execute({ isMutedContext } as Contexts);
 	}
 </script>
 
 <button
 	class="common-button"
 	onclick={handleClick}
-	class:text-red-500={isMuted}
-	title={isMuted ? 'Unmute' : 'Mute'}
+	class:text-red-500={isMutedContext.isMuted}
+	title={isMutedContext.isMuted ? 'Unmute' : 'Mute'}
 >
-	<Fa icon={isMuted ? faVolumeMute : faVolumeUp} />
+	<Fa icon={isMutedContext.isMuted ? faVolumeMute : faVolumeUp} />
 </button>

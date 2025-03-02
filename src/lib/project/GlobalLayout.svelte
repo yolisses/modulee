@@ -5,6 +5,7 @@
 		setAudioBackendContext,
 		type AudioBackendContext,
 	} from '$lib/engine/audioBackendContext';
+	import { setIsMutedContext, type IsMutedContext } from '$lib/engine/isMutedContexts';
 	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
@@ -26,8 +27,17 @@
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
 
+	const isMutedContext: IsMutedContext = $state({ isMuted: false });
+	setIsMutedContext(isMutedContext);
+
 	const projectsRepositoryContext: ProjectsRepositoryContext = $state({});
 	setProjectsRepositoryContext(projectsRepositoryContext);
+
+	$effect(() => {
+		const { isMuted } = isMutedContext;
+		const { audioBackend } = audioBackendContext;
+		audioBackend?.setIsMuted(isMuted);
+	});
 
 	onMount(() => {
 		let audioBackend: AudioBackend;

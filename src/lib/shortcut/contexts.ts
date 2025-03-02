@@ -1,5 +1,7 @@
 import type { GraphContext } from '$lib/data/graphContext';
 import type { EditorContext } from '$lib/editor/editorContext';
+import type { AudioBackendContext } from '$lib/engine/audioBackendContext';
+import type { IsMutedContext } from '$lib/engine/isMutedContexts';
 import type { GraphDataContext } from '$lib/graph/graphDataContext';
 import type { GroupIdContext } from '$lib/group/groupIdContext';
 import type { ProjectDataContext } from '$lib/project/projectDataContext';
@@ -11,8 +13,10 @@ export type Contexts = {
 	graphContext: GraphContext;
 	editorContext: EditorContext;
 	groupIdContext: GroupIdContext;
+	isMutedContext: IsMutedContext;
 	graphDataContext: GraphDataContext;
 	projectDataContext: ProjectDataContext;
+	audioBackendContext: AudioBackendContext;
 	selectedNodeIdsContext: SelectedNodeIdsContext;
 };
 
