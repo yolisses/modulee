@@ -1,4 +1,4 @@
-import type { CommandData } from '$lib/editor/CommandData';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import type { ProjectData } from './ProjectData';
 
 export interface ProjectsRepository {
@@ -8,7 +8,7 @@ export interface ProjectsRepository {
 	getProjects(): Promise<ProjectData[]>;
 	deleteProject(id: string): Promise<void>;
 	getProject(id: string): Promise<ProjectData>;
-	addCommand(commandData: CommandData): Promise<void>;
+	addCommand(commandData: EditorCommandData): Promise<void>;
 	createProject(projectData: ProjectData): Promise<void>;
 	renameProject(id: string, name: string): Promise<void>;
 }

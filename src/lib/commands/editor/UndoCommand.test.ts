@@ -1,16 +1,16 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
-import type { CommandData } from '$lib/editor/CommandData';
-import type { CreateCommandCallback } from '$lib/editor/CreateCommandCallback';
+import type { CreateEditorCommandCallback } from '$lib/editor/CreateEditorCommandCallback';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import type { EditorData } from '$lib/editor/EditorData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { UndoCommand } from './UndoCommand';
 
 type MockCommandDetails = { nodeId: string };
-type MockCommandData = CommandData<MockCommandDetails>;
+type MockCommandData = EditorCommandData<MockCommandDetails>;
 class MockCommand extends EditorCommand<MockCommandDetails> {
 	execute(graphData: GraphData): void {
 		const { nodeId } = this.details;
@@ -22,7 +22,7 @@ class MockCommand extends EditorCommand<MockCommandDetails> {
 		graphData.nodes.removeById(nodeId);
 	}
 }
-const mockCreateCommandCallback: CreateCommandCallback = (commandData: CommandData) => {
+const mockCreateCommandCallback: CreateEditorCommandCallback = (commandData: EditorCommandData) => {
 	return new MockCommand(commandData as MockCommandData);
 };
 
@@ -38,7 +38,7 @@ test('UndoCommand', () => {
 	const mockCommand1 = new MockCommand({
 		id: 'mockCommand1',
 		details: { nodeId: 'node1' },
-	} as CommandData<MockCommandDetails>);
+	} as EditorCommandData<MockCommandDetails>);
 	mockCommand1.execute(graphData);
 	editorData.history.push(mockCommand1);
 

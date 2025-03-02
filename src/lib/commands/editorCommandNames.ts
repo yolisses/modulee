@@ -1,7 +1,8 @@
 // This object is someway similar to internationalization. It should not be
 // interpreted as important to the logic of the application
+//
 // TODO implement real internationalization.
-export const commandNames: Record<string, string> = {
+export const editorCommandNames: Record<string, string> = {
 	RedoCommand: 'Redo last command',
 	UndoCommand: 'Undo last command',
 	AddNodeCommand: 'Add node',

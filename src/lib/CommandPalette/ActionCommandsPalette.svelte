@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { CommandClass } from '$lib/commands/CommandClass';
-	import { commandClasses } from '$lib/commands/commandClasses';
-	import { commandNames } from '$lib/commands/commandNames';
+	import type { EditorCommandClass } from '$lib/commands/EditorCommandClass';
+	import { editorCommandClasses } from '$lib/commands/editorCommandClasses';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getSame } from '$lib/ui/getSame';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
@@ -15,11 +14,11 @@
 	let { isActive = $bindable() }: Props = $props();
 
 	const values = $derived(
-		commandClasses.filter((commandClass) => getName(commandClass).includes(text)),
+		editorCommandClasses.filter((editorCommandClass) => getName(editorCommandClass).includes(text)),
 	);
 
-	function getName(commandClass: CommandClass) {
-		return commandNames[commandClass.name];
+	function getName(editorCommandClass: EditorCommandClass) {
+		return (editorCommandClass as any)[editorCommandClass.name];
 	}
 
 	function handleClick() {

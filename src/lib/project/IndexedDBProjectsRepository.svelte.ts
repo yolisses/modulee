@@ -1,4 +1,4 @@
-import type { CommandData } from '$lib/editor/CommandData';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import { type IDBPDatabase, openDB } from 'idb';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
@@ -44,7 +44,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	 * Returns all the commands of a project ordered by creation date
 	 * @param id
 	 */
-	async getCommandsOfProject(id: string): Promise<CommandData[]> {
+	async getCommandsOfProject(id: string): Promise<EditorCommandData[]> {
 		const range = IDBKeyRange.bound([id, ''], [id, '\uFFFF']);
 		return this.database.getAllFromIndex('commands', 'projectId_createdAt', range);
 	}
@@ -61,7 +61,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 		this.onProjectsChange?.();
 	}
 
-	async addCommand(commandData: CommandData) {
+	async addCommand(commandData: EditorCommandData) {
 		const transaction = this.database.transaction('commands', 'readwrite');
 		await Promise.all([transaction.store.add(commandData), transaction.done]);
 	}

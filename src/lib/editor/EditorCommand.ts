@@ -1,14 +1,14 @@
 import type { GraphData } from '$lib/data/GraphData';
-import type { CommandData } from './CommandData';
-import type { CreateCommandCallback } from './CreateCommandCallback';
+import type { CreateEditorCommandCallback } from './CreateEditorCommandCallback';
+import type { EditorCommandData } from './EditorCommandData';
 import type { EditorData } from './EditorData';
 
 // TODO find a better name
 export abstract class EditorCommand<T = unknown> {
 	id: string;
-	createCommandCallback!: CreateCommandCallback;
+	createCommandCallback!: CreateEditorCommandCallback;
 
-	constructor(public commandData: CommandData<T>) {
+	constructor(public commandData: EditorCommandData<T>) {
 		this.id = commandData.id;
 	}
 

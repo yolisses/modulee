@@ -1,5 +1,5 @@
-import type { CommandData } from '$lib/editor/CommandData';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 
-export function mockCommandData<T>(details: T): CommandData<T> {
-	return { details } as CommandData<T>;
+export function mockCommandData<T>(details: T): EditorCommandData<T> {
+	return { details } as EditorCommandData<T>;
 }

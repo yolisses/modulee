@@ -1,6 +1,6 @@
 <script lang="ts">
-	import CommandPalette from '$lib/CommandPalette/CommandPalette.svelte';
-	import { createCommand } from '$lib/commands/createCommand';
+	import ActionCommandsPalette from '$lib/CommandPalette/ActionCommandsPalette.svelte';
+	import { createEditorCommand } from '$lib/commands/createEditorCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
 	import type { GraphData } from '$lib/data/GraphData';
@@ -64,7 +64,7 @@
 	};
 
 	projectData.commands.map((commandData) => {
-		const command = createCommand(commandData);
+		const command = createEditorCommand(commandData);
 		editor.execute(command);
 	});
 
@@ -100,5 +100,5 @@ declared. -->
 {@render children?.()}
 
 {#if isCommandPaletteActive}
-	<CommandPalette bind:isActive={isCommandPaletteActive} />
+	<ActionCommandsPalette bind:isActive={isCommandPaletteActive} />
 {/if}

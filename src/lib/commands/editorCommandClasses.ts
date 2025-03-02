@@ -1,4 +1,4 @@
-import type { CommandClass } from './CommandClass';
+import type { EditorCommandClass } from './EditorCommandClass';
 import { DisconnectCommand } from './connection/DisconnectCommand';
 import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
@@ -14,7 +14,7 @@ import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
 import { SetGroupNodeTargetGroupIdCommand } from './node/SetGroupNodeTargetGroupIdCommand';
 
-export const commandClasses = [
+export const editorCommandClasses = [
 	RedoCommand,
 	UndoCommand,
 	AddNodeCommand,
@@ -29,4 +29,4 @@ export const commandClasses = [
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
 	SetGroupNodeTargetGroupIdCommand,
-] as CommandClass[];
+] as EditorCommandClass[];

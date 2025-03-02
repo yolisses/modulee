@@ -1,4 +1,4 @@
-import type { CommandData } from '$lib/editor/CommandData';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
@@ -39,7 +39,7 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		return JSON.parse(projectJson);
 	}
 
-	async addCommand(commandData: CommandData): Promise<void> {
+	async addCommand(commandData: EditorCommandData): Promise<void> {
 		const addCommand = this.juceLibrary.getNativeFunction('addCommand');
 		const commandDataJson = JSON.stringify(commandData);
 		await addCommand(commandDataJson);

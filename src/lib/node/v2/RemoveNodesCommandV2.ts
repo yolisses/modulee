@@ -1,10 +1,10 @@
 import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand';
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
-import { Command } from '$lib/shortcut/Command';
+import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/contexts';
 
-export class RemoveNodesCommandV2 extends Command {
+export class RemoveNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {

@@ -3,7 +3,7 @@ import { getGraphDataContext } from '$lib/graph/graphDataContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
-import { commandClassesByType } from './commandClassesByType';
+import { actionCommandClassesByType } from './actionCommandClassesByType';
 import type { Contexts } from './contexts';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
@@ -47,7 +47,7 @@ export class ShortcutHandler {
 		if (!shortcut) return;
 
 		const contexts = this.getContexts();
-		const commandClass = commandClassesByType[shortcut.commandType];
+		const commandClass = actionCommandClassesByType[shortcut.commandType];
 
 		if (commandClass) {
 			e.preventDefault();

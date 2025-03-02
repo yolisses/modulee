@@ -1,10 +1,10 @@
 <script lang="ts">
+	import { createEditorCommand } from '$lib/commands/createEditorCommand';
 	import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 	import { createId } from '$lib/data/createId';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { createCommand } from '../commands/createCommand';
 	import { getEditorContext } from './editorContext';
 
 	const editorContext = getEditorContext();
@@ -21,7 +21,7 @@
 			details: { commandId: lastCommand.id },
 			projectId: projectDataContext.projectData.id,
 		});
-		undoCommand.createCommandCallback = createCommand;
+		undoCommand.createCommandCallback = createEditorCommand;
 
 		editorContext.editor.execute(undoCommand);
 	}

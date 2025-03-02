@@ -1,4 +1,4 @@
-export type CommandData<T = unknown> = {
+export type EditorCommandData<T = unknown> = {
 	id: string;
 	details: T;
 	type: string;
