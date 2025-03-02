@@ -1,3 +1,4 @@
+import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
 import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
 import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
@@ -14,5 +15,6 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	ResetZoomCommand,
 	UndoActionCommand,
 	RedoActionCommand,
+	GroupNodesActionCommand,
 	RemoveNodesActionCommand,
 ];

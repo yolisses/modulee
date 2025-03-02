@@ -1,5 +1,7 @@
+import { getGraphContext } from '$lib/data/graphContext';
 import { getEditorContext } from '$lib/editor/editorContext';
 import { getGraphDataContext } from '$lib/graph/graphDataContext';
+import { getGroupIdContext } from '$lib/group/groupIdContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
@@ -12,7 +14,9 @@ import { getEventKeys } from './getEventKeys';
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
 	zoomContext = getZoomContext();
+	graphContext = getGraphContext();
 	editorContext = getEditorContext();
+	groupIdContext = getGroupIdContext();
 	graphDataContext = getGraphDataContext();
 	projectDataContext = getProjectDataContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
@@ -22,7 +26,9 @@ export class ShortcutHandler {
 	getContexts(): Contexts {
 		return {
 			zoomContext: this.zoomContext,
+			graphContext: this.graphContext,
 			editorContext: this.editorContext,
+			groupIdContext: this.groupIdContext,
 			graphDataContext: this.graphDataContext,
 			projectDataContext: this.projectDataContext,
 			selectedNodeIdsContext: this.selectedNodeIdsContext,
