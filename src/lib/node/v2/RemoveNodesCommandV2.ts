@@ -1,24 +1,26 @@
+import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand';
+import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
-import { CommandWithUndo } from '$lib/shortcut/CommandWithUndo';
+import { Command } from '$lib/shortcut/Command';
 import type { Contexts } from '$lib/shortcut/contexts';
 
-export class RemoveNodesCommandV2 extends CommandWithUndo {
+export class RemoveNodesCommandV2 extends Command {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {
-		const { graphData } = contexts.graphDataContext;
+		const { editor } = contexts.editorContext;
+		const { projectData } = contexts.projectDataContext;
 		const { selectedNodeIds } = contexts.selectedNodeIdsContext;
 
-		this.nodesData = graphData.nodes.removeByCondition((node) => {
-			return selectedNodeIds.has(node.id);
-		});
-	}
+		const nodeId = [...selectedNodeIds][0];
 
-	undo(contexts: Contexts): void {
-		const { graphData } = contexts.graphDataContext;
-
-		this.nodesData.forEach((nodeData) => {
-			graphData.nodes.add(nodeData);
+		const command = new RemoveNodeCommand({
+			id: createId(),
+			details: { nodeId },
+			projectId: projectData.id,
+			type: 'RemoveNodeCommand',
+			createdAt: new Date().toJSON(),
 		});
+		editor.execute(command);
 	}
 }

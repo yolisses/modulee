@@ -1,4 +1,6 @@
+import { getEditorContext } from '$lib/editor/editorContext';
 import { getGraphDataContext } from '$lib/graph/graphDataContext';
+import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
 import { commandClassesByType } from './commandClassesByType';
@@ -10,21 +12,26 @@ import { getEventKeys } from './getEventKeys';
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
 	zoomContext = getZoomContext();
-	selectedNodeIdsContext = getSelectedNodeIdsContext();
+	editorContext = getEditorContext();
 	graphDataContext = getGraphDataContext();
+	projectDataContext = getProjectDataContext();
+	selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	constructor() {}
 
 	getContexts(): Contexts {
 		return {
 			zoomContext: this.zoomContext,
+			editorContext: this.editorContext,
 			graphDataContext: this.graphDataContext,
+			projectDataContext: this.projectDataContext,
 			selectedNodeIdsContext: this.selectedNodeIdsContext,
 		};
 	}
 
 	handleKeyPress = (e: KeyboardEvent) => {
 		const eventKeys = getEventKeys(e);
+		console.log(eventKeys);
 		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
 
 		let shortcut = this.shortcuts.find((shortcut) => {
