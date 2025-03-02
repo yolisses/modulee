@@ -11,4 +11,5 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
 	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
+	{ keys: ['Ctrl', 'A'], commandType: 'SelectedAllNodesActionCommand' },
 ];
