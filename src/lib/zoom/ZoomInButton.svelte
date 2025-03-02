@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ZoomInCommand } from '$lib/shortcut/ZoomInCommand';
-	import { getZoomContext } from '$lib/ui/zoomContext';
+	import { getZoomContext } from '$lib/space/zoom/zoomContext';
 	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 

@@ -1,4 +1,4 @@
-import type { ZoomContext } from '$lib/ui/zoomContext';
+import type { ZoomContext } from '$lib/space/zoom/zoomContext';
 
 export type Contexts = {
 	zoomContext: ZoomContext;

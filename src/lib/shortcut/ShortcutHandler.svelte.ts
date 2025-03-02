@@ -1,4 +1,4 @@
-import { getZoomContext } from '$lib/ui/zoomContext';
+import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { commandClassesByType } from './commandClassesByType';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';

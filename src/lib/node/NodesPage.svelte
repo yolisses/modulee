@@ -5,8 +5,8 @@
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
 	import { setSpaceContext } from '$lib/space/spaceContext';
+	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { setZoomContext } from '$lib/ui/zoomContext';
 	import { Vector } from 'nodes-editor';
 	import { onMount } from 'svelte';
 	import NodeList from './NodeList.svelte';
