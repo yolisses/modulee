@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { createEditorCommand } from '$lib/commands/createEditorCommand';
-	import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-	import { createId } from '$lib/data/createId';
+	import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import type { Contexts } from '$lib/shortcut/contexts';
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getEditorContext } from './editorContext';
@@ -11,19 +10,12 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
-		const lastCommand = editorContext.editor.history.at(-1);
-		if (!lastCommand) return;
-
-		const undoCommand = new UndoCommand({
-			id: createId(),
-			type: 'UndoCommand',
-			createdAt: new Date().toJSON(),
-			details: { commandId: lastCommand.id },
-			projectId: projectDataContext.projectData.id,
-		});
-		undoCommand.createCommandCallback = createEditorCommand;
-
-		editorContext.editor.execute(undoCommand);
+		const actionCommand = new UndoActionCommand();
+		// TODO find a more type safe way of doing this
+		actionCommand.execute({
+			editorContext,
+			projectDataContext,
+		} as Contexts);
 	}
 </script>
 
