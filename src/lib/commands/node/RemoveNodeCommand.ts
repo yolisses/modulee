@@ -1,10 +1,13 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 
-export class RemoveNodeCommand extends EditorCommand<{
-	nodeId: string;
-}> {
+type RemoveNodeCommandDetails = { nodeId: string };
+
+export type RemoveNodeCommandData = EditorCommandData<RemoveNodeCommandDetails>;
+
+export class RemoveNodeCommand extends EditorCommand<RemoveNodeCommandDetails> {
 	static name = 'RemoveNodeCommand';
 
 	nodeData!: NodeData;
