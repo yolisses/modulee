@@ -1,4 +1,4 @@
-import type { Command } from './Command';
 import type { CommandData } from './CommandData';
+import type { EditorCommand } from './EditorCommand';
 
-export type CreateCommandCallback = (commandData: CommandData) => Command;
+export type CreateCommandCallback = (commandData: CommandData) => EditorCommand;

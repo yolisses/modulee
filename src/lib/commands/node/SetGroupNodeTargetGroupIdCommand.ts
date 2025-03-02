@@ -1,7 +1,7 @@
 import type { GraphData } from '$lib/data/GraphData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class SetGroupNodeTargetGroupIdCommand extends Command<{
+export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
 	targetGroupId: string;
 	groupNodeId: string;
 }> {

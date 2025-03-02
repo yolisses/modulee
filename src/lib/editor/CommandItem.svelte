@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Command } from './Command.js';
+	import type { Command } fromEditorCommandmand.js';
 
 	interface Props {
 		command: Command;
 	}
 
-	const { command }: Props = $props();
+	coEditorCommandommand }: Props = $props();
 </script>
 
 <!-- {command.constructor.name} -->

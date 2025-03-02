@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Command } from './Command.js';
+	import type { Command } fromEditorCommandmand.js';
 	import CommandItem from './CommandItem.svelte';
 
 	interface Props {
 		commands: Command[];
 	}
 
-	const { commands }: Props = $props();
+EditorCommand{ commands }: Props = $props();
 </script>
 
 <div class="min-w-20 border">

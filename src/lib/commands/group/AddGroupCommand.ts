@@ -1,8 +1,8 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { GroupData } from '$lib/data/GroupData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class AddGroupCommand extends Command<{
+export class AddGroupCommand extends EditorCommand<{
 	group: GroupData;
 }> {
 	static name = 'AddGroupCommand';

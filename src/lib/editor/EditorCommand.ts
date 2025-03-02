@@ -3,7 +3,8 @@ import type { CommandData } from './CommandData';
 import type { CreateCommandCallback } from './CreateCommandCallback';
 import type { EditorData } from './EditorData';
 
-export abstract class Command<T = unknown> {
+// TODO find a better name
+export abstract class EditorCommand<T = unknown> {
 	id: string;
 	createCommandCallback!: CreateCommandCallback;
 

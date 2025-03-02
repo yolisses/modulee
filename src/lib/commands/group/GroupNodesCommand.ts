@@ -1,11 +1,11 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { GroupData } from '$lib/data/GroupData';
 import type { NodeData } from '$lib/data/NodeData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddGroupCommand } from './AddGroupCommand';
 
-export class GroupNodesCommand extends Command<{
+export class GroupNodesCommand extends EditorCommand<{
 	group: GroupData;
 	nodesId: string[];
 	groupNodeData: NodeData;

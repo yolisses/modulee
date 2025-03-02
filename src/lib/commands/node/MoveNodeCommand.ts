@@ -1,14 +1,14 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { VectorData } from '$lib/data/VectorData';
-import { Command } from '$lib/editor/Command';
 import type { CommandData } from '$lib/editor/CommandData';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 import { Vector } from 'nodes-editor';
 
 type MoveNodeCommandDetails = { nodeId: string; delta: VectorData };
 
 export type MoveNodeCommandData = CommandData<MoveNodeCommandDetails>;
 
-export class MoveNodeCommand extends Command<MoveNodeCommandDetails> {
+export class MoveNodeCommand extends EditorCommand<MoveNodeCommandDetails> {
 	execute(graphData: GraphData): void {
 		const { delta, nodeId } = this.details;
 		const node = graphData.nodes.get(nodeId);

@@ -2,15 +2,15 @@ import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { Graph } from '$lib/data/Graph.svelte';
 import type { GraphDataContext } from '$lib/graph/graphDataContext';
-import type { Command } from './Command';
+import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
 
 export class Editor {
-	history: Command[] = $state()!;
-	undoneHistory: Command[] = $state()!;
+	history: EditorCommand[] = $state()!;
+	undoneHistory: EditorCommand[] = $state()!;
 
 	setGraph?: (graph: Graph) => void;
-	onExecute?: (command: Command) => void;
+	onExecute?: (command: EditorCommand) => void;
 
 	constructor(
 		private graphDataContext: GraphDataContext,
@@ -31,11 +31,11 @@ export class Editor {
 		this.setGraph?.(graph);
 	}
 
-	getIsUndoOrRedo(command: Command) {
+	getIsUndoOrRedo(command: EditorCommand) {
 		return command instanceof UndoCommand || command instanceof RedoCommand;
 	}
 
-	execute(command: Command<unknown>) {
+	execute(command: EditorCommand<unknown>) {
 		const { graphData } = this.graphDataContext;
 		command.execute(graphData, this.editorData);
 

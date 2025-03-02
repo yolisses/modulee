@@ -1,6 +1,6 @@
-import type { Command } from './Command';
+import type { EditorCommand } from './EditorCommand';
 
 export type EditorData = {
-	history: Command[];
-	undoneHistory: Command[];
+	history: EditorCommand[];
+	undoneHistory: EditorCommand[];
 };

@@ -1,8 +1,8 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { NodeData } from '$lib/data/NodeData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class AddNodeCommand extends Command<{
+export class AddNodeCommand extends EditorCommand<{
 	node: NodeData;
 }> {
 	static name = 'AddNodeCommand';

@@ -2,9 +2,9 @@ import type { ConnectionData } from '$lib/data/ConnectionData';
 import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import type { GraphData } from '$lib/data/GraphData';
 import type { InputPath } from '$lib/data/InputPath';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class DisconnectCommand extends Command<{
+export class DisconnectCommand extends EditorCommand<{
 	inputPath: InputPath;
 }> {
 	static name = 'DisconnectCommand';

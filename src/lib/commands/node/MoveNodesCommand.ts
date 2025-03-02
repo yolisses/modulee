@@ -1,9 +1,9 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { VectorData } from '$lib/data/VectorData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 import { MoveNodeCommand, type MoveNodeCommandData } from './MoveNodeCommand';
 
-export class MoveNodesCommand extends Command<{
+export class MoveNodesCommand extends EditorCommand<{
 	nodeIds: string[];
 	delta: VectorData;
 }> {

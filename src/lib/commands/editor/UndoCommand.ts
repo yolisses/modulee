@@ -1,10 +1,10 @@
 import type { Remotion } from '$lib/array/remotion';
 import { removeById } from '$lib/array/removeById';
 import type { GraphData } from '$lib/data/GraphData';
-import { Command } from '$lib/editor/Command';
+import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
 
-export class UndoCommand extends Command<{
+export class UndoCommand extends EditorCommand<{
 	commandId: string;
 }> {
 	static getName() {
@@ -12,7 +12,7 @@ export class UndoCommand extends Command<{
 	}
 	static name = 'UndoCommand';
 
-	remotion!: Remotion<Command>;
+	remotion!: Remotion<EditorCommand>;
 
 	execute(graphData: GraphData, editorData: EditorData): void {
 		this.remotion = removeById(editorData.history, this.details.commandId);
