@@ -43,7 +43,6 @@ export class ShortcutHandler {
 
 	handleKeyPress = (e: KeyboardEvent) => {
 		const eventKeys = getEventKeys(e);
-		console.log(eventKeys);
 		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
 
 		let shortcut = this.shortcuts.find((shortcut) => {
