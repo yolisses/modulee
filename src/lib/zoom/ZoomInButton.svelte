@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ZoomInCommand } from '$lib/shortcut/ZoomInCommand';
+	import { ZoomInCommand } from '$lib/space/zoom/ZoomInCommand';
 	import { getZoomContext } from '$lib/space/zoom/zoomContext';
 	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

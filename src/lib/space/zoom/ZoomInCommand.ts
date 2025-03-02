@@ -1,5 +1,5 @@
+import type { Command } from '$lib/shortcut/command';
 import { type ZoomContext } from '$lib/space/zoom/zoomContext';
-import type { Command } from './command';
 
 type Contexts = { zoomContext: ZoomContext };
 

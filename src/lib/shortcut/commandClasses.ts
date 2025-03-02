@@ -1,7 +1,7 @@
+import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
+import { ZoomInCommand } from '../space/zoom/ZoomInCommand';
+import { ZoomOutCommand } from '../space/zoom/ZoomOutCommand';
 import type { CommandClass } from './commandClass';
-import { ResetZoomCommand } from './ResetZoomCommand';
-import { ZoomInCommand } from './ZoomInCommand';
-import { ZoomOutCommand } from './ZoomOutCommand';
 
 // TODO remove name duplication of this command list and the nodes editor
 // command list
