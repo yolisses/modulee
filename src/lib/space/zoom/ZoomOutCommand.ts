@@ -1,4 +1,4 @@
-import type { Command } from '$lib/shortcut/command';
+import type { Command } from '$lib/shortcut/Command';
 import { type ZoomContext } from '$lib/space/zoom/zoomContext';
 
 export class ZoomOutCommand implements Command {
