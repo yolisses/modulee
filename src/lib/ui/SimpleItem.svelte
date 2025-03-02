@@ -5,7 +5,7 @@
 	interface Props {
 		item: Item;
 		route: string;
-		buttons?: Snippet<[{ id: string }]>;
+		buttons?: Snippet<[{ id: string; item: Item }]>;
 	}
 
 	const { item, route, buttons }: Props = $props();
@@ -15,5 +15,5 @@
 	<a href={route.replace('[id]', item.id)} class="flex-1 p-2">
 		{item.name}
 	</a>
-	{@render buttons?.({ id: item.id })}
+	{@render buttons?.({ id: item.id, item })}
 </div>
