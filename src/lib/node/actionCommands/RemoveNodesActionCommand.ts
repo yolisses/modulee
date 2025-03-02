@@ -18,7 +18,7 @@ export class RemoveNodesActionCommand extends ActionCommand {
 			id: createId(),
 			details: { nodeIds },
 			projectId: projectData.id,
-			type: 'RemoveNodeCommand',
+			type: 'RemoveNodesCommand',
 			createdAt: new Date().toJSON(),
 		});
 		editor.execute(command);

@@ -1,4 +1,4 @@
-import { RemoveNodesActionCommand } from '$lib/node/v2/RemoveNodesActionCommand';
+import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
 import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
 import { ZoomInCommand } from '../space/zoom/ZoomInCommand';
 import { ZoomOutCommand } from '../space/zoom/ZoomOutCommand';

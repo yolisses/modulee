@@ -11,6 +11,7 @@ import { AddNodeCommand } from './node/AddNodeCommand';
 import { MoveNodeCommand } from './node/MoveNodeCommand';
 import { MoveNodesCommand } from './node/MoveNodesCommand';
 import { RemoveNodeCommand } from './node/RemoveNodeCommand';
+import { RemoveNodesCommand } from './node/RemoveNodesCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
 import { SetGroupNodeTargetGroupIdCommand } from './node/SetGroupNodeTargetGroupIdCommand';
 
@@ -25,6 +26,7 @@ export const editorCommandClasses = [
 	GroupNodesCommand,
 	RemoveNodeCommand,
 	RemoveGroupCommand,
+	RemoveNodesCommand,
 	RenameGroupCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,

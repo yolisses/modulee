@@ -8,6 +8,7 @@ export class RemoveNodesCommand extends EditorCommand<{
 	commands!: RemoveNodeCommand[];
 
 	execute(graphData: GraphData): void {
+		console.log(this.details.nodeIds);
 		this.commands = this.details.nodeIds.map((nodeId) => {
 			return new RemoveNodeCommand({
 				type: 'RemoveNodeCommand',
