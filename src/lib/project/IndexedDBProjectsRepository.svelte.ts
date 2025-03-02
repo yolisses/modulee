@@ -56,8 +56,18 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	async deleteProject(id: string) {
-		const transaction = this.database.transaction('projects', 'readwrite');
-		await Promise.all([transaction.store.delete(id), transaction.done]);
+		const transaction = this.database.transaction(['projects', 'commands'], 'readwrite');
+		const commandsRange = IDBKeyRange.bound([id, ''], [id, '\uFFFF']);
+		const commands = await transaction
+			.objectStore('commands')
+			.index('projectId_createdAt')
+			.getAll(commandsRange);
+		await Promise.all(
+			commands.map((command) => transaction.objectStore('commands').delete(command.id)),
+		);
+		await transaction.objectStore('projects').delete(id);
+		await transaction.done;
+
 		this.onProjectsChange?.();
 	}
 
