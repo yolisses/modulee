@@ -6,10 +6,6 @@ export class JuceProjectsRepository implements ProjectsRepository {
 	isInitialized = $state(false);
 	juceLibrary!: typeof import('../juce');
 
-	static canBeCreated() {
-		return !!window.__JUCE__?.initialisationData.isRunningOnJucePlugin;
-	}
-
 	async initialize(): Promise<void> {
 		this.juceLibrary = await import('../juce');
 		this.isInitialized = true;

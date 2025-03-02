@@ -41,7 +41,7 @@ export class ShortcutHandler {
 		};
 	}
 
-	handleKeyPress = (e: KeyboardEvent) => {
+	handleKeyDown = (e: KeyboardEvent) => {
 		const eventKeys = getEventKeys(e);
 		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
 
@@ -69,10 +69,10 @@ export class ShortcutHandler {
 	};
 
 	initialize() {
-		window.addEventListener('keydown', this.handleKeyPress);
+		window.addEventListener('keydown', this.handleKeyDown);
 	}
 
 	destroy() {
-		window.removeEventListener('keydown', this.handleKeyPress);
+		window.removeEventListener('keydown', this.handleKeyDown);
 	}
 }

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import type { AudioBackend } from '$lib/engine/AudioBackend';
 	import {
 		setAudioBackendContext,
 		type AudioBackendContext,
 	} from '$lib/engine/audioBackendContext';
+	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
 	import { setIsMutedContext, type IsMutedContext } from '$lib/engine/isMutedContexts';
 	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
+	import { VirtualPianoMidiBackend } from '$lib/engine/VirtualPianoMidiBackend';
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
@@ -40,29 +41,39 @@
 	});
 
 	onMount(() => {
-		let audioBackend: AudioBackend;
-		let webMidiBackend: WebMidiBackend | undefined;
+		if (getHaveJuceSupport()) {
+			const audioBackend = new JuceAudioBackend();
+			audioBackendContext.audioBackend = audioBackend;
 
-		if (JuceAudioBackend.canBeCreated()) {
-			audioBackend = new JuceAudioBackend();
-		} else {
-			audioBackend = new WasmAudioBackend();
-			webMidiBackend = new WebMidiBackend(audioBackend);
-			webMidiBackend.initialize();
+			return () => {
+				audioBackend.destroy();
+			};
 		}
+	});
 
-		audioBackendContext.audioBackend = audioBackend;
+	onMount(() => {
+		if (!getHaveJuceSupport()) {
+			const audioBackend = new WasmAudioBackend();
+			audioBackendContext.audioBackend = audioBackend;
 
-		return () => {
-			audioBackend.destroy();
-			webMidiBackend?.destroy();
-		};
+			const webMidiBackend = new WebMidiBackend(audioBackend);
+			webMidiBackend.initialize();
+
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			virtualPianoMidiBackend.initialize();
+
+			return () => {
+				audioBackend.destroy();
+				webMidiBackend.destroy();
+				virtualPianoMidiBackend.destroy();
+			};
+		}
 	});
 
 	onMount(() => {
 		let projectsRepository: ProjectsRepository;
 
-		if (JuceProjectsRepository.canBeCreated()) {
+		if (getHaveJuceSupport()) {
 			projectsRepository = new JuceProjectsRepository();
 		} else {
 			projectsRepository = new IndexedDBProjectsRepository();

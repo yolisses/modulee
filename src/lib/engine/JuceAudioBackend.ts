@@ -2,10 +2,6 @@ import type { AudioBackend } from './AudioBackend';
 import type { GraphEngineData } from './data/GraphEngineData';
 
 export class JuceAudioBackend implements AudioBackend {
-	static canBeCreated() {
-		return !!window.__JUCE__?.initialisationData.isRunningOnJucePlugin;
-	}
-
 	destroy(): void {}
 
 	setGraph(graphEngineData: GraphEngineData) {
