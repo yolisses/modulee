@@ -1,4 +1,4 @@
-import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand';
+import { RemoveNodesCommand } from '$lib/commands/node/RemoveNodesCommand';
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
@@ -12,11 +12,11 @@ export class RemoveNodesActionCommand extends ActionCommand {
 		const { projectData } = contexts.projectDataContext;
 		const { selectedNodeIds } = contexts.selectedNodeIdsContext;
 
-		const nodeId = [...selectedNodeIds][0];
+		const nodeIds = [...selectedNodeIds];
 
-		const command = new RemoveNodeCommand({
+		const command = new RemoveNodesCommand({
 			id: createId(),
-			details: { nodeId },
+			details: { nodeIds },
 			projectId: projectData.id,
 			type: 'RemoveNodeCommand',
 			createdAt: new Date().toJSON(),
