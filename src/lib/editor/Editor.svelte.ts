@@ -1,7 +1,7 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { Graph } from '$lib/data/Graph.svelte';
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphDataContext } from '$lib/graph/graphDataContext';
 import type { Command } from './Command';
 import type { EditorData } from './EditorData';
 
@@ -13,7 +13,7 @@ export class Editor {
 	onExecute?: (command: Command) => void;
 
 	constructor(
-		private graphData: GraphData,
+		private graphDataContext: GraphDataContext,
 		private editorData: EditorData,
 	) {
 		this.recalculate();
@@ -22,12 +22,12 @@ export class Editor {
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
-		const { editorData, graphData } = this;
+		const { editorData, graphDataContext } = this;
 		// TODO check if using history from editorData makes sense.
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
 
-		const graph = new Graph(graphData);
+		const graph = new Graph(graphDataContext.graphData);
 		this.setGraph?.(graph);
 	}
 
@@ -36,7 +36,8 @@ export class Editor {
 	}
 
 	execute(command: Command<unknown>) {
-		command.execute(this.graphData, this.editorData);
+		const { graphData } = this.graphDataContext;
+		command.execute(graphData, this.editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {

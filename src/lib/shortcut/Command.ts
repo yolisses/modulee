@@ -1,8 +1,5 @@
-export abstract class Command<C, P> {
-	constructor(
-		public contexts: C,
-		public params: P,
-	) {}
+import type { Contexts } from './contexts';
 
-	abstract execute(): void;
+export abstract class Command {
+	abstract execute(contexts: Contexts): void;
 }

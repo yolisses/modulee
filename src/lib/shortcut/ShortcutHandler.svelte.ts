@@ -1,5 +1,8 @@
+import { getGraphDataContext } from '$lib/graph/graphDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
+import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
 import { commandClassesByType } from './commandClassesByType';
+import type { Contexts } from './contexts';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
 import { getEventKeys } from './getEventKeys';
@@ -7,12 +10,16 @@ import { getEventKeys } from './getEventKeys';
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
 	zoomContext = getZoomContext();
+	selectedNodeIdsContext = getSelectedNodeIdsContext();
+	graphDataContext = getGraphDataContext();
 
 	constructor() {}
 
-	getContexts() {
+	getContexts(): Contexts {
 		return {
 			zoomContext: this.zoomContext,
+			graphDataContext: this.graphDataContext,
+			selectedNodeIdsContext: this.selectedNodeIdsContext,
 		};
 	}
 
@@ -38,8 +45,8 @@ export class ShortcutHandler {
 		if (commandClass) {
 			e.preventDefault();
 			e.stopPropagation();
-			const command = new commandClass(contexts);
-			command.execute();
+			const command = new commandClass();
+			command.execute(contexts);
 		}
 	};
 

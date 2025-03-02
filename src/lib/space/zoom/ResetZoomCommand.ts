@@ -1,14 +1,8 @@
-import type { Command } from '$lib/shortcut/Command';
-import { type ZoomContext } from '$lib/space/zoom/zoomContext';
+import { Command } from '$lib/shortcut/Command';
+import type { Contexts } from '$lib/shortcut/contexts';
 
-export class ResetZoomCommand implements Command {
-	constructor(
-		private contexts: {
-			zoomContext: ZoomContext;
-		},
-	) {}
-
-	execute() {
-		this.contexts.zoomContext.zoom = 20;
+export class ResetZoomCommand extends Command {
+	execute(contexts: Contexts): void {
+		contexts.zoomContext.zoom = 20;
 	}
 }

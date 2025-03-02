@@ -7,8 +7,8 @@
 	const zoomContext = getZoomContext();
 
 	function handleClick() {
-		const command = new ZoomInCommand({ zoomContext });
-		command.execute();
+		const command = new ZoomInCommand();
+		command.execute({ zoomContext });
 	}
 </script>
 

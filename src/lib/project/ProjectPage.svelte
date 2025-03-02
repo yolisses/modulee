@@ -9,6 +9,7 @@
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
+	import { setGraphDataContext } from '$lib/graph/graphDataContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import { setIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
@@ -50,11 +51,14 @@
 		groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
 	};
 
-	const graph = new Graph(initialGraphData);
+	const graphDataContext = $state({ graphData: initialGraphData });
+	setGraphDataContext(graphDataContext);
+
+	const graph = new Graph(graphDataContext.graphData);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(initialGraphData, { history: [], undoneHistory: [] });
+	const editor = new Editor(graphDataContext, { history: [], undoneHistory: [] });
 	editor.setGraph = (graph: Graph) => {
 		graphContext.graph = graph;
 	};
