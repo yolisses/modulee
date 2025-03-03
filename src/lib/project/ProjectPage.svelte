@@ -11,9 +11,8 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphDataContext } from '$lib/graph/graphDataContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
-	import { setIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
+	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
-	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
 	import { setDefaultContexts } from 'nodes-editor';
@@ -21,24 +20,20 @@
 	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext } from './projectDataContext';
 	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
+	import { setMenuContexts } from './setMenuContexts.svelte';
 
 	interface Props {
 		children: Snippet;
 		projectData: ProjectData;
 	}
 
-	let isLateralBarVisibleContext = $state({ isLateralBarVisible: false });
-	setIsLateralBarVisibleContext(isLateralBarVisibleContext);
-
+	setMenuContexts();
 	setDefaultContexts();
 
 	const { children, projectData }: Props = $props();
 
 	const projectDataContext = getProjectDataContext();
 	projectDataContext.projectData = projectData;
-
-	const selectedTabContext = $state({ selectedTab: 'group' });
-	setSelectedTabContext(selectedTabContext);
 
 	const groupContext = $state({ groupId: projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
@@ -89,7 +84,10 @@
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 
+	// TODO create a context and set it on setMenuContexts
 	let isCommandPaletteActive = $state(false);
+
+	const isLateralBarVisibleContext = getIsLateralBarVisibleContext();
 </script>
 
 <div class="flex flex-row">
