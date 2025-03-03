@@ -6,27 +6,20 @@ import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
 
 export class Editor {
-	history: EditorCommand[] = $state()!;
-	undoneHistory: EditorCommand[] = $state()!;
+	history: EditorCommand[] = $state([])!;
+	undoneHistory: EditorCommand[] = $state([])!;
 
 	setGraph?: (graph: Graph) => void;
 	onExecute?: (command: EditorCommand) => void;
 
-	constructor(
-		private graphDataContext: GraphDataContext,
-		private editorData: EditorData,
-	) {
+	constructor(private graphDataContext: GraphDataContext) {
 		this.recalculate();
 	}
 
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
-		const { editorData, graphDataContext } = this;
-		// TODO check if using history from editorData makes sense.
-		this.history = editorData.history;
-		this.undoneHistory = editorData.undoneHistory;
-
+		const { graphDataContext } = this;
 		const graph = new Graph(graphDataContext.graphData);
 		this.setGraph?.(graph);
 	}
@@ -37,12 +30,16 @@ export class Editor {
 
 	execute(command: EditorCommand<unknown>) {
 		const { graphData } = this.graphDataContext;
-		command.execute(graphData, this.editorData);
+		const editorData: EditorData = {
+			history: this.history,
+			undoneHistory: this.undoneHistory,
+		};
+		command.execute(graphData, editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {
-			this.editorData.history.push(command);
-			this.editorData.undoneHistory = [];
+			this.history.push(command);
+			this.undoneHistory = [];
 		}
 
 		this.recalculate();

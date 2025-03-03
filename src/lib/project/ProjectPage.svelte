@@ -57,7 +57,7 @@
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(graphDataContext, { history: [], undoneHistory: [] });
+	const editor = new Editor(graphDataContext);
 	editor.setGraph = (graph: Graph) => {
 		graphContext.graph = graph;
 	};
