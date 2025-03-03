@@ -41,6 +41,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 	}
 
 	process(inputs, outputs) {
+		if (!this.graph) return true;
+
 		this.graph.process_block();
 
 		if (this.isMuted) return true;
