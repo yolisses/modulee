@@ -14,18 +14,14 @@
 	const { constantNode }: Props = $props();
 	let value = $state(constantNode.extras.value);
 	const editorContext = getEditorContext();
-	let initialValue = $state(constantNode.extras.value);
+	let previousValue = $state(constantNode.extras.value);
 	const projectDataContext = getProjectDataContext();
 
-	function handleFocus() {
-		initialValue = constantNode.extras.value;
-	}
-
-	function handleChange(e: InputChangeEvent) {
+	function handleInput(e: InputChangeEvent) {
 		const valueString = e.currentTarget.value;
 		const value = parseFloat(valueString);
 		if (Number.isNaN(value)) return;
-		if (value === initialValue) return;
+		if (value === previousValue) return;
 
 		const command = new SetConstantNodeValueCommand({
 			id: createId(),
@@ -35,6 +31,7 @@
 			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(command);
+		previousValue = value;
 	}
 
 	function handlePointerDown(e: PointerEvent) {
@@ -49,8 +46,7 @@
 			<input
 				bind:value
 				type="number"
-				onfocus={handleFocus}
-				onchange={handleChange}
+				oninput={handleInput}
 				style:padding-right="0.25lh"
 				class="w-full bg-transparent text-right"
 			/>
