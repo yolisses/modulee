@@ -57,7 +57,7 @@
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(graphDataContext);
+	const editor = new Editor(initialGraphData);
 	editor.setGraph = (graph: Graph) => {
 		graphContext.graph = graph;
 	};

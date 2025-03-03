@@ -1,26 +1,28 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { Graph } from '$lib/data/Graph.svelte';
-import type { GraphDataContext } from '$lib/graph/graphDataContext';
+import type { GraphData } from '$lib/data/GraphData';
+import { cloneGraphData } from '$lib/process/cloneGraphData';
 import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
 
 export class Editor {
 	history: EditorCommand[] = $state([])!;
 	undoneHistory: EditorCommand[] = $state([])!;
+	private graphData = $state<GraphData>()!;
 
 	setGraph?: (graph: Graph) => void;
 	onExecute?: (command: EditorCommand) => void;
 
-	constructor(private graphDataContext: GraphDataContext) {
+	constructor(initialGraphData: GraphData) {
+		this.graphData = cloneGraphData(initialGraphData);
 		this.recalculate();
 	}
 
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
-		const { graphDataContext } = this;
-		const graph = new Graph(graphDataContext.graphData);
+		const graph = new Graph(this.graphData);
 		this.setGraph?.(graph);
 	}
 
@@ -29,12 +31,11 @@ export class Editor {
 	}
 
 	execute(command: EditorCommand<unknown>) {
-		const { graphData } = this.graphDataContext;
 		const editorData: EditorData = {
 			history: this.history,
 			undoneHistory: this.undoneHistory,
 		};
-		command.execute(graphData, editorData);
+		command.execute(this.graphData, editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {
