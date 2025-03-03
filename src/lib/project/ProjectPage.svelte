@@ -36,7 +36,7 @@
 	const projectDataContext = getProjectDataContext();
 	projectDataContext.projectData = projectData;
 
-	const selectedTabContext = $state({ selectedTab: 'group' });
+	const selectedTabContext = $state({ selectedTab: 'project' });
 	setSelectedTabContext(selectedTabContext);
 
 	const groupContext = $state({ groupId: projectData.mainGroup.id });
