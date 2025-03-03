@@ -1,9 +1,6 @@
 <script lang="ts">
 	import ActionCommandsPalette from '$lib/CommandPalette/ActionCommandsPalette.svelte';
-	import {
-		setIsCommandPaletteActiveContext,
-		type IsCommandPaletteActiveContext,
-	} from '$lib/CommandPalette/isCommandPaletteActiveContext';
+	import { getIsCommandPaletteActiveContext } from '$lib/CommandPalette/isCommandPaletteActiveContext';
 	import { createEditorCommand } from '$lib/commands/createEditorCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
@@ -15,7 +12,7 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphDataContext } from '$lib/graph/graphDataContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
-	import { setIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
+	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
@@ -25,14 +22,12 @@
 	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext } from './projectDataContext';
 	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
+	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
 
 	interface Props {
 		children: Snippet;
 		projectData: ProjectData;
 	}
-
-	let isLateralBarVisibleContext = $state({ isLateralBarVisible: false });
-	setIsLateralBarVisibleContext(isLateralBarVisibleContext);
 
 	setDefaultContexts();
 
@@ -88,10 +83,9 @@
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 
-	const isCommandPaletteActiveContext: IsCommandPaletteActiveContext = $state({
-		isCommandPaletteActive: false,
-	});
-	setIsCommandPaletteActiveContext(isCommandPaletteActiveContext);
+	setMenuVisibilityContexts();
+	const isLateralBarVisibleContext = getIsLateralBarVisibleContext();
+	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 </script>
 
 <div class="flex flex-row">
