@@ -1,19 +1,21 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-import { Graph } from '$lib/data/Graph.svelte';
-import type { GraphDataContext } from '$lib/graph/graphDataContext';
+import type { GraphData } from '$lib/data/GraphData';
 import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
 
+/* This piece uses a different graph data than the one from graph data context
+to ensure all the changes are deterministic and allow undo, while still allow
+other pieces to modify the graph data context to create change previews. */
 export class Editor {
 	history: EditorCommand[] = $state()!;
 	undoneHistory: EditorCommand[] = $state()!;
 
-	setGraph?: (graph: Graph) => void;
 	onExecute?: (command: EditorCommand) => void;
+	onGraphDataChange?: (graphData: GraphData) => void;
 
 	constructor(
-		private graphDataContext: GraphDataContext,
+		private graphData: GraphData,
 		private editorData: EditorData,
 	) {
 		this.recalculate();
@@ -22,13 +24,12 @@ export class Editor {
 	// TODO consider moving this creation step to a separate function, since all
 	// the parts are recreated instead of edited.
 	recalculate() {
-		const { editorData, graphDataContext } = this;
+		const { editorData, graphData } = this;
 		// TODO check if using history from editorData makes sense.
 		this.history = editorData.history;
 		this.undoneHistory = editorData.undoneHistory;
 
-		const graph = new Graph(graphDataContext.graphData);
-		this.setGraph?.(graph);
+		this.onGraphDataChange?.(graphData);
 	}
 
 	getIsUndoOrRedo(command: EditorCommand) {
@@ -36,8 +37,7 @@ export class Editor {
 	}
 
 	execute(command: EditorCommand<unknown>) {
-		const { graphData } = this.graphDataContext;
-		command.execute(graphData, this.editorData);
+		command.execute(this.graphData, this.editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {

@@ -58,15 +58,20 @@
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(graphDataContext, { history: [], undoneHistory: [] });
-	editor.setGraph = (graph: Graph) => {
-		graphContext.graph = graph;
-	};
+	$effect(() => {
+		graphContext.graph = new Graph(graphDataContext.graphData);
+	});
+
+	const editor = new Editor(initialGraphData, { history: [], undoneHistory: [] });
 
 	projectData.commands.map((commandData) => {
 		const command = createEditorCommand(commandData);
 		editor.execute(command);
 	});
+
+	// editor.onGraphDataChange = (graphData: GraphData) => {
+	// 	graphDataContext.graphData = graphData;
+	// };
 
 	const projectsRepositoryContext = getProjectsRepositoryContext();
 	editor.onExecute = (command) => {
@@ -79,7 +84,7 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const processedGraphData = getProcessedGraphData(graphContext.graph.getData());
+		const processedGraphData = getProcessedGraphData(graphDataContext.graphData);
 		const graphEngineData = getGraphEngineData(processedGraphData);
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
