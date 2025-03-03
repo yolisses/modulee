@@ -4,14 +4,11 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getSame } from '$lib/ui/getSame';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
-
-	interface Props {
-		isActive: boolean;
-	}
+	import { getIsCommandPaletteActiveContext } from './isCommandPaletteActiveContext';
 
 	let text = $state<string>('');
 	let div = $state<HTMLElement>();
-	let { isActive = $bindable() }: Props = $props();
+	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 
 	const values = $derived(
 		editorCommandClasses.filter((editorCommandClass) => getName(editorCommandClass).includes(text)),
@@ -28,7 +25,7 @@
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = div?.contains(e.target as Node);
 		if (!clickedInside) {
-			isActive = false;
+			isCommandPaletteActiveContext.isCommandPaletteActive = false;
 		}
 	}
 </script>

@@ -1,5 +1,9 @@
 <script lang="ts">
 	import ActionCommandsPalette from '$lib/CommandPalette/ActionCommandsPalette.svelte';
+	import {
+		setIsCommandPaletteActiveContext,
+		type IsCommandPaletteActiveContext,
+	} from '$lib/CommandPalette/isCommandPaletteActiveContext';
 	import { createEditorCommand } from '$lib/commands/createEditorCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
@@ -84,7 +88,10 @@
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 
-	let isCommandPaletteActive = $state(false);
+	const isCommandPaletteActiveContext: IsCommandPaletteActiveContext = $state({
+		isCommandPaletteActive: false,
+	});
+	setIsCommandPaletteActiveContext(isCommandPaletteActiveContext);
 </script>
 
 <div class="flex flex-row">
@@ -99,6 +106,6 @@
 declared. -->
 {@render children?.()}
 
-{#if isCommandPaletteActive}
-	<ActionCommandsPalette bind:isActive={isCommandPaletteActive} />
+{#if isCommandPaletteActiveContext.isCommandPaletteActive}
+	<ActionCommandsPalette />
 {/if}
