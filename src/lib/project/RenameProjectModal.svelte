@@ -30,10 +30,10 @@
 		<p>Rename project "{projectData?.name}"</p>
 		<input
 			type="text"
-			bind:this={textInput}
 			bind:value={name}
+			class="common-input"
+			bind:this={textInput}
 			onchange={handleSubmit}
-			class="rounded border border-white/20 bg-transparent p-2"
 		/>
 		<div class="flex flex-row justify-end gap-2">
 			<button class="common-button" onclick={closeModal}> Cancel </button>
