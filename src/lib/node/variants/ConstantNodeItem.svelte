@@ -19,6 +19,13 @@
 	const projectDataContext = getProjectDataContext();
 	const graphDataContext = getGraphDataContext();
 
+	$effect(() => {
+		const nodeData = graphDataContext.graphData.nodes.get(constantNode.id);
+		if (nodeData.type === 'ConstantNode') {
+			value = nodeData.extras.value;
+		}
+	});
+
 	function handleInput(e: InputChangeEvent) {
 		const valueString = e.currentTarget.value;
 		const value = parseFloat(valueString);
