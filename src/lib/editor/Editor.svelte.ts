@@ -1,6 +1,5 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-import { Graph } from '$lib/data/Graph.svelte';
 import type { GraphData } from '$lib/data/GraphData';
 import { cloneGraphData } from '$lib/process/cloneGraphData';
 import type { EditorCommand } from './EditorCommand';
@@ -19,11 +18,8 @@ export class Editor {
 		this.recalculate();
 	}
 
-	// TODO consider moving this creation step to a separate function, since all
-	// the parts are recreated instead of edited.
 	recalculate() {
-		const graph = new Graph(this.graphData);
-		this.setGraphData?.(graph);
+		this.setGraphData?.(cloneGraphData(this.graphData));
 	}
 
 	getIsUndoOrRedo(command: EditorCommand) {
