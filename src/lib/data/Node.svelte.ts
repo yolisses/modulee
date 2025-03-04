@@ -11,9 +11,8 @@ export class Node<T extends NodeData = NodeData> {
 	output: Output;
 	inputs: Input[];
 	type: T['type'];
+	groupId: string;
 	extras: T['extras'];
-	// DEBUG consider removing $state from groupId
-	groupId: string = $state()!;
 	position: Vector = $state()!;
 
 	constructor(nodeData: NodeData) {
