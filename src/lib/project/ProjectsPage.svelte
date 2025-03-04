@@ -1,5 +1,4 @@
 <script lang="ts">
-	import TextSearchInput from '$lib/ui/TextSearchInput.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import ProjectList from './ProjectList.svelte';
@@ -32,7 +31,6 @@
 			<h1 class="pl-2 text-lg font-medium">Projects</h1>
 			<div class="flex-1"></div>
 			<CreateProjectButton />
-			<TextSearchInput />
 		</div>
 		<div>
 			<ProjectList {projectsData} />
