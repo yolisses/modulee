@@ -11,8 +11,8 @@ export class Editor {
 	undoneHistory: EditorCommand[] = $state([])!;
 	private graphData = $state<GraphData>()!;
 
-	setGraph?: (graph: Graph) => void;
 	onExecute?: (command: EditorCommand) => void;
+	setGraphData?: (graphData: GraphData) => void;
 
 	constructor(initialGraphData: GraphData) {
 		this.graphData = cloneGraphData(initialGraphData);
@@ -23,7 +23,7 @@ export class Editor {
 	// the parts are recreated instead of edited.
 	recalculate() {
 		const graph = new Graph(this.graphData);
-		this.setGraph?.(graph);
+		this.setGraphData?.(graph);
 	}
 
 	getIsUndoOrRedo(command: EditorCommand) {

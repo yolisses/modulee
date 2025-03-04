@@ -58,8 +58,9 @@
 	setGraphContext(graphContext);
 
 	const editor = new Editor(initialGraphData);
-	editor.setGraph = (graph: Graph) => {
-		graphContext.graph = graph;
+	editor.setGraphData = (graphData) => {
+		graphDataContext.graphData = graphData;
+		graphContext.graph = new Graph(graphDataContext.graphData);
 	};
 
 	projectData.commands.map((commandData) => {
