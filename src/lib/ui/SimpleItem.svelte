@@ -11,7 +11,7 @@
 	const { item, route, buttons }: Props = $props();
 </script>
 
-<div class="hover-bg flex flex-row items-stretch">
+<div class="hover-bg flex flex-row items-stretch rounded">
 	<a href={route.replace('[id]', item.id)} class="flex-1 p-2">
 		{item.name}
 	</a>
