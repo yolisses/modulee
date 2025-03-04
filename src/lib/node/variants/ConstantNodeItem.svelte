@@ -3,6 +3,8 @@
 	import type { ConstantNode } from '$lib/data/ConstantNode.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
+	import { getGraphDataContext } from '$lib/graph/graphDataContext';
+	import { cloneGraphData } from '$lib/process/cloneGraphData';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
@@ -14,14 +16,25 @@
 	const { constantNode }: Props = $props();
 	let value = $state(constantNode.extras.value);
 	const editorContext = getEditorContext();
-	let previousValue = $state(constantNode.extras.value);
 	const projectDataContext = getProjectDataContext();
+	const graphDataContext = getGraphDataContext();
 
 	function handleInput(e: InputChangeEvent) {
 		const valueString = e.currentTarget.value;
 		const value = parseFloat(valueString);
 		if (Number.isNaN(value)) return;
-		if (value === previousValue) return;
+
+		const nodeData = graphDataContext.graphData.nodes.get(constantNode.id);
+		if (nodeData.type === 'ConstantNode') {
+			nodeData.extras.value = value;
+		}
+		graphDataContext.graphData = cloneGraphData(graphDataContext.graphData);
+	}
+
+	function handleChange(e: InputChangeEvent) {
+		const valueString = e.currentTarget.value;
+		const value = parseFloat(valueString);
+		if (Number.isNaN(value)) return;
 
 		const command = new SetConstantNodeValueCommand({
 			id: createId(),
@@ -31,7 +44,6 @@
 			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(command);
-		previousValue = value;
 	}
 
 	function handlePointerDown(e: PointerEvent) {
@@ -47,6 +59,7 @@
 				bind:value
 				type="number"
 				oninput={handleInput}
+				onchange={handleChange}
 				style:padding-right="0.25lh"
 				class="w-full bg-transparent text-right"
 			/>
