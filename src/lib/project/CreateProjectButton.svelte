@@ -26,7 +26,11 @@
 	}
 </script>
 
-<button disabled={isLoading} class="common-button" onclick={handleClick}>
+<button
+	disabled={isLoading}
+	class="rounded bg-blue-500 p-2 hover:bg-blue-600"
+	onclick={handleClick}
+>
 	<Fa icon={faPlus} />
 	Create project
 </button>
