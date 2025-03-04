@@ -50,13 +50,4 @@ export class Graph {
 			});
 		});
 	}
-
-	getData(): GraphData {
-		return {
-			mainGroupId: this.mainGroupId,
-			groups: ById.fromItems(this.groups.values()),
-			connections: ById.fromItems(this.connections.values()),
-			nodes: ById.fromItems(this.nodes.values().map((node) => node.getData())),
-		};
-	}
 }

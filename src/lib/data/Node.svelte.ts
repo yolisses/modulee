@@ -27,16 +27,6 @@ export class Node<T extends NodeData = NodeData> {
 		this.position = Vector.fromData(position);
 	}
 
-	getData(): NodeData {
-		return {
-			id: this.id,
-			type: this.type,
-			extras: this.extras,
-			groupId: this.groupId,
-			position: this.position.getData(),
-		} as NodeData;
-	}
-
 	getInputs() {
 		const inputs: Input[] = [];
 
