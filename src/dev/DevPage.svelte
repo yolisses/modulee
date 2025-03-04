@@ -1,53 +1,31 @@
 <script lang="ts">
 	import { createId } from '$lib/data/createId';
-	import { getGraphContext, setGraphContext } from '$lib/data/graphContext.svelte';
+	import { Graph } from '$lib/data/Graph.svelte';
+	import type { GraphData } from '$lib/data/GraphData';
+	import type { GroupData } from '$lib/data/GroupData';
 	import { ById } from '$lib/editor/ById';
-	import { setGraphDataContext, type GraphDataContext } from '$lib/graph/graphDataContext';
 
-	const test1 = $state({
-		a: { b: { c: {} } },
+	const groupsContent = $state<Record<string, GroupData>>({});
+
+	const graphData = $state<GraphData>({
+		nodes: new ById(),
+		connections: new ById(),
+		groups: new ById(groupsContent),
+		mainGroupId: '1',
 	});
 
-	const groups = $state({});
-	const graphDataContext: GraphDataContext = $state({
-		graphData: {
-			mainGroupId: '1',
-			nodes: new ById({}),
-			groups: new ById(groups),
-			connections: new ById({}),
-		},
-	});
-	setGraphDataContext(graphDataContext);
-
-	setGraphContext();
-	const graphContext = getGraphContext();
+	const graph = new Graph(graphData);
 
 	function handleClick() {
-		// graphDataContext.graphData = {
-		// 	connections: new ById(),
-		// 	nodes: new ById(),
-		// 	groups: new ById(),
-		// 	mainGroupId: createId(),
-		// };
-		graphDataContext.graphData.groups.add({ id: createId(), name: 'test' });
-		// graphDataContext.graphData = cloneGraphData(graphDataContext.graphData);
-		console.log(graphDataContext.graphData.groups.values().length);
-		test1.a.b.c[createId()] = 1;
+		graphData.groups.add({
+			id: createId(),
+			name: '1',
+		});
 	}
 </script>
 
-<button onclick={handleClick}>click me</button>
-<div>hello, dev</div>
-<div>
-	{JSON.stringify(graphDataContext.graphData.groups, undefined, 2)}
+<div class="flex flex-col gap-2">
+	<button onclick={handleClick}>click me</button>
+	<div>{JSON.stringify(graphData)}</div>
+	<div>{JSON.stringify(new Graph(graphData))}</div>
 </div>
-<div>
-	{JSON.stringify(graphContext.graph.groups, undefined, 2)}
-</div>
-<div>
-	{graphDataContext.graphData.groups.values().length}
-</div>
-<div>
-	{graphDataContext.graphData.mainGroupId}
-</div>
-<div>{JSON.stringify(test1.a.b.c, undefined, 2)}</div>
