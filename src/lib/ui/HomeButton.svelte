@@ -3,6 +3,6 @@
 	import Fa from 'svelte-fa';
 </script>
 
-<a class="common-button" href="/">
+<a class="common-button" href="/" title="Go to projects page">
 	<Fa icon={faHome} />
 </a>
