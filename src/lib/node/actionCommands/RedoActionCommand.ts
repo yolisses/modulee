@@ -3,7 +3,7 @@ import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
-import type { Contexts } from '$lib/shortcut/contexts';
+import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 
 export class RedoActionCommand extends ActionCommand {
 	nodesData!: NodeData[];

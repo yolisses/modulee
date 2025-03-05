@@ -1,48 +1,12 @@
-import { getGraphContext } from '$lib/data/graphContext';
-import { getEditorContext } from '$lib/editor/editorContext';
-import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-import { getIsMutedContext } from '$lib/engine/isMutedContexts';
-import { getGraphDataContext } from '$lib/graph/graphDataContext';
-import { getGroupIdContext } from '$lib/group/groupIdContext';
-import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
-import { getProjectDataContext } from '$lib/project/projectDataContext';
-import { getZoomContext } from '$lib/space/zoom/zoomContext';
-import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
 import { actionCommandClassesByType } from './actionCommandClassesByType';
-import type { Contexts } from './contexts';
+import { getContextsContext } from './contextsContext';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
 import { getEventKeys } from './getEventKeys';
 
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
-	zoomContext = getZoomContext();
-	graphContext = getGraphContext();
-	editorContext = getEditorContext();
-	groupIdContext = getGroupIdContext();
-	isMutedContext = getIsMutedContext();
-	graphDataContext = getGraphDataContext();
-	projectDataContext = getProjectDataContext();
-	audioBackendContext = getAudioBackendContext();
-	selectedNodeIdsContext = getSelectedNodeIdsContext();
-	isLateralBarVisibleContext = getIsLateralBarVisibleContext();
-
-	constructor() {}
-
-	getContexts(): Contexts {
-		return {
-			zoomContext: this.zoomContext,
-			graphContext: this.graphContext,
-			editorContext: this.editorContext,
-			groupIdContext: this.groupIdContext,
-			isMutedContext: this.isMutedContext,
-			graphDataContext: this.graphDataContext,
-			projectDataContext: this.projectDataContext,
-			audioBackendContext: this.audioBackendContext,
-			selectedNodeIdsContext: this.selectedNodeIdsContext,
-			isLateralBarVisibleContext: this.isLateralBarVisibleContext,
-		};
-	}
+	contextsContext = getContextsContext();
 
 	handleKeyDown = (e: KeyboardEvent) => {
 		const eventKeys = getEventKeys(e);
@@ -60,7 +24,7 @@ export class ShortcutHandler {
 
 		if (!shortcut) return;
 
-		const contexts = this.getContexts();
+		const { contexts } = this.contextsContext;
 		const commandClass = actionCommandClassesByType[shortcut.commandType];
 
 		if (commandClass) {
@@ -77,5 +41,17 @@ export class ShortcutHandler {
 
 	destroy() {
 		window.removeEventListener('keydown', this.handleKeyDown);
+	}
+
+	getShortcutForCommandType(commandType: string) {
+		return this.shortcuts.find((shortcut) => {
+			return shortcut.commandType === commandType;
+		});
+	}
+
+	getShortcutStringForCommandType(commandType: string) {
+		const shortcut = this.getShortcutForCommandType(commandType);
+		if (!shortcut) return '';
+		return '(' + shortcut.keys.join('+') + ')';
 	}
 }

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
+	import { Contexts } from '$lib/shortcut/Contexts.svelte';
+	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
@@ -33,6 +35,10 @@
 			return node.groupId === groupIdContext.groupId;
 		}),
 	);
+
+	const contexts = new Contexts();
+	const contextsContext = { contexts };
+	setContextsContext(contextsContext);
 
 	const shortcutHandler = new ShortcutHandler();
 

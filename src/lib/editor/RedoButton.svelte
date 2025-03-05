@@ -1,21 +1,16 @@
 <script lang="ts">
 	import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import type { Contexts } from '$lib/shortcut/contexts';
+	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getEditorContext } from './editorContext';
 
 	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const contextsContext = getContextsContext();
 
 	function handleClick() {
 		const actionCommand = new RedoActionCommand();
-		// TODO find a more type safe way of doing this
-		actionCommand.execute({
-			editorContext,
-			projectDataContext,
-		} as Contexts);
+		actionCommand.execute(contextsContext.contexts);
 	}
 </script>
 

@@ -3,7 +3,7 @@ import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
-import type { Contexts } from '$lib/shortcut/contexts';
+import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 
 export class UndoActionCommand extends ActionCommand {
 	nodesData!: NodeData[];

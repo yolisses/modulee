@@ -2,7 +2,7 @@ import { RemoveNodesCommand } from '$lib/commands/node/RemoveNodesCommand';
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
-import type { Contexts } from '$lib/shortcut/contexts';
+import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 
 export class RemoveNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
