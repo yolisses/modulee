@@ -4,6 +4,7 @@
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
 	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
+	import { setShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
 	import { setSpaceContext } from '$lib/space/spaceContext';
@@ -37,10 +38,10 @@
 	);
 
 	const contexts = new Contexts();
-	const contextsContext = { contexts };
-	setContextsContext(contextsContext);
+	setContextsContext({ contexts });
 
 	const shortcutHandler = new ShortcutHandler();
+	setShortcutHandlerContext({ shortcutHandler });
 
 	onMount(() => {
 		shortcutHandler.initialize();
