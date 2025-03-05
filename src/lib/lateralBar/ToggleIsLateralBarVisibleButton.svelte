@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ToggleIsLateralBarVisibleActionCommand } from '$lib/node/actionCommands/ToggleLateralBarActionCommand';
+	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import {
 		faChevronLeft,
 		faChevronRight,
@@ -7,11 +9,12 @@
 	import Fa, { FaLayers } from 'svelte-fa';
 	import { getIsLateralBarVisibleContext } from './isLateralBarVisibleContext';
 
+	const contextsContext = getContextsContext();
 	const isLateralBarVisibleContext = getIsLateralBarVisibleContext();
 
 	function handleClick() {
-		isLateralBarVisibleContext.isLateralBarVisible =
-			!isLateralBarVisibleContext.isLateralBarVisible;
+		const actionCommand = new ToggleIsLateralBarVisibleActionCommand();
+		actionCommand.execute(contextsContext.contexts);
 	}
 </script>
 
