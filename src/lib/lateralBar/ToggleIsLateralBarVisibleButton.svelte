@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
 	import { ToggleIsLateralBarVisibleActionCommand } from '$lib/node/actionCommands/ToggleLateralBarActionCommand';
 	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import {
@@ -16,9 +17,17 @@
 		const actionCommand = new ToggleIsLateralBarVisibleActionCommand();
 		actionCommand.execute(contextsContext.contexts);
 	}
+
+	const shortcutString = getShortcutStringForCommandType('ToggleIsLateralBarVisibleActionCommand');
 </script>
 
-<button class="common-button" onclick={handleClick}>
+<button
+	class="common-button"
+	onclick={handleClick}
+	title={(isLateralBarVisibleContext.isLateralBarVisible ? 'Hide' : 'Show') +
+		' lateral bar ' +
+		shortcutString}
+>
 	<FaLayers>
 		<Fa icon={faWindowMaximize} rotate={-90} />
 		<Fa

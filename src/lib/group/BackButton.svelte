@@ -18,6 +18,12 @@
 	});
 </script>
 
-<a href={url} aria-disabled={!isActive} class:disabled={!isActive} class="common-button">
+<a
+	href={url}
+	aria-disabled={!isActive}
+	class:disabled={!isActive}
+	class="common-button"
+	title="Previous page (Alt+←)"
+>
 	<Fa icon={faArrowLeft} />
 </a>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
 	import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
 	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
@@ -12,12 +13,14 @@
 		const actionCommand = new GroupNodesActionCommand();
 		actionCommand.execute(contextsContext.contexts);
 	}
+
+	const shortcutString = getShortcutStringForCommandType('GroupNodesActionCommand');
 </script>
 
 <button
-	title="Group nodes"
 	class="common-button"
 	onclick={handleClick}
+	title="Group nodes {shortcutString}"
 	disabled={!selectedNodeIdsContext.selectedNodeIds.size}
 >
 	<Fa icon={faObjectGroup} />

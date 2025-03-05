@@ -4,6 +4,7 @@
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getEditorContext } from './editorContext';
+	import { getShortcutStringForCommandType } from './getShortcutStringForCommandType.svelte';
 
 	const editorContext = getEditorContext();
 	const contextsContext = getContextsContext();
@@ -12,12 +13,14 @@
 		const actionCommand = new UndoActionCommand();
 		actionCommand.execute(contextsContext.contexts);
 	}
+
+	const shortcutString = getShortcutStringForCommandType('UndoActionCommand');
 </script>
 
 <button
-	title="Undo"
 	class="common-button"
 	onclick={handleClick}
+	title="Undo {shortcutString}"
 	disabled={!editorContext.editor.getCanUndo()}
 >
 	<Fa icon={faUndo} />
