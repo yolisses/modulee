@@ -4,6 +4,7 @@ import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 import { getGraphDataContext } from '$lib/graph/graphDataContext';
 import { getGroupIdContext } from '$lib/group/groupIdContext';
+import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
@@ -24,6 +25,7 @@ export class ShortcutHandler {
 	projectDataContext = getProjectDataContext();
 	audioBackendContext = getAudioBackendContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
+	isLateralBarVisibleContext = getIsLateralBarVisibleContext();
 
 	constructor() {}
 
@@ -38,6 +40,7 @@ export class ShortcutHandler {
 			projectDataContext: this.projectDataContext,
 			audioBackendContext: this.audioBackendContext,
 			selectedNodeIdsContext: this.selectedNodeIdsContext,
+			isLateralBarVisibleContext: this.isLateralBarVisibleContext,
 		};
 	}
 

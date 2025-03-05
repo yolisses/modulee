@@ -3,6 +3,7 @@ import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
 import { SelectedAllNodesActionCommand } from '$lib/node/actionCommands/SelectedAllNodesActionCommand';
 import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
+import { ToggleIsLateralBarVisibleActionCommand } from '$lib/node/actionCommands/ToggleLateralBarActionCommand';
 import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
 import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
 import { ZoomInCommand } from '../space/zoom/ZoomInCommand';
@@ -21,4 +22,5 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	RemoveNodesActionCommand,
 	ToggleIsMuteActionCommand,
 	SelectedAllNodesActionCommand,
+	ToggleIsLateralBarVisibleActionCommand,
 ];
