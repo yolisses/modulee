@@ -28,7 +28,7 @@
 
 <button
 	disabled={isLoading}
-	class="rounded bg-blue-500 p-2 hover:bg-blue-600"
+	class="gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600"
 	onclick={handleClick}
 >
 	<Fa icon={faPlus} />
