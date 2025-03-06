@@ -9,10 +9,8 @@
 	import BasicLinkList from '$lib/ui/BasicLinkList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
-	import { getSelectedTabContext } from './selectedTabContext';
 
 	const graphContext = getGraphContext();
-	const selectedTabContext = getSelectedTabContext();
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
@@ -28,7 +26,8 @@
 	}
 
 	function getLink(group: Group) {
-		return `/projects/${projectDataContext.projectData.id}/${group.id}`;
+		const { projectData } = projectDataContext;
+		return `/projects/${projectData.id}/groups/${group.id}`;
 	}
 </script>
 
