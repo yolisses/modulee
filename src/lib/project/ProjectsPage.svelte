@@ -1,13 +1,13 @@
 <script lang="ts">
+	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
-	import type { ProjectData } from './ProjectData';
+	import { getProjectsRepository } from './getProjectsRepository';
 	import ProjectList from './ProjectList.svelte';
 
-	interface Props {
-		projectsData: ProjectData[];
-	}
-
-	const { projectsData }: Props = $props();
+	const projectsRepository = getProjectsRepository();
+	const projectsDataPromise = projectsRepository.initialize().then(() => {
+		return projectsRepository.getProjects();
+	});
 </script>
 
 <div class="flex flex-col items-center">
@@ -18,7 +18,18 @@
 			<CreateProjectButton />
 		</div>
 		<div>
-			<ProjectList {projectsData} />
+			{#await projectsDataPromise}
+				<div class="flex h-full flex-1 flex-col items-center p-8">
+					<Spinner></Spinner>
+				</div>
+			{:then projectsData}
+				<ProjectList {projectsData} />
+			{:catch error}
+				<div class="text-red-500">
+					<div>It was not possible to load the projects</div>
+					<div>{error}</div>
+				</div>
+			{/await}
 		</div>
 	</div>
 </div>
