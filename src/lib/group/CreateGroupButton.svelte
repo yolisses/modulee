@@ -41,7 +41,7 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleCreateClick}>
+<button class="primary-button" onclick={handleCreateClick}>
 	<Fa icon={faPlus} />
 	Create group
 </button>

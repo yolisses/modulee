@@ -28,8 +28,8 @@
 
 <button
 	disabled={isLoading}
-	class="gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600"
 	onclick={handleClick}
+	class="gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600"
 >
 	<Fa icon={faPlus} />
 	Create project

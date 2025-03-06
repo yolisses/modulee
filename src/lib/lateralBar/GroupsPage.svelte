@@ -32,7 +32,9 @@
 </script>
 
 <div class="flex flex-col">
-	<CreateGroupButton />
+	<div class="p-2">
+		<CreateGroupButton />
+	</div>
 	<BasicLinkList
 		{getId}
 		{getLink}
