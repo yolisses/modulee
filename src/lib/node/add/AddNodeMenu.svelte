@@ -27,7 +27,7 @@
 
 	const { closeModal, screenPosition }: Props = $props();
 
-	function handleTypeClick(nodeType: NodeType) {
+	function handleTypeSelect(nodeType: NodeType) {
 		const dataPosition = spaceContext.space.getDataPosition(screenPosition).round();
 		const nodeData = createNodeData(nodeType, groupIdContext.groupId, dataPosition);
 		const addNodeCommand = new AddNodeCommand({
@@ -43,6 +43,14 @@
 
 	function getNodeTypeName(nodeType: NodeType) {
 		return nodesName[nodeType.name];
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key !== 'Enter') return;
+		if (searchText.length === 0) return;
+		const option = options[0];
+		if (!option) return;
+		handleTypeSelect(option);
 	}
 
 	const options = $derived(
@@ -61,13 +69,14 @@
 		placeholder="Search"
 		class="common-input"
 		bind:value={searchText}
+		onkeydown={handleKeyDown}
 	/>
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
 		<BasicList
 			getId={getName}
 			values={options}
 			getName={getNodeTypeName}
-			onClick={handleTypeClick}
+			onClick={handleTypeSelect}
 		/>
 	</div>
 </div>
