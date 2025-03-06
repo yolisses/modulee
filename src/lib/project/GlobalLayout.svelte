@@ -11,9 +11,6 @@
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
-	import { IndexedDBProjectsRepository } from './IndexedDBProjectsRepository.svelte';
-	import { JuceProjectsRepository } from './JuceProjectsRepository.svelte';
-	import type { ProjectsRepository } from './ProjectsRepository';
 	import {
 		setProjectsRepositoryContext,
 		type ProjectsRepositoryContext,
@@ -68,19 +65,6 @@
 				virtualPianoMidiBackend.destroy();
 			};
 		}
-	});
-
-	onMount(() => {
-		let projectsRepository: ProjectsRepository;
-
-		if (getHaveJuceSupport()) {
-			projectsRepository = new JuceProjectsRepository();
-		} else {
-			projectsRepository = new IndexedDBProjectsRepository();
-		}
-
-		projectsRepository.initialize();
-		projectsRepositoryContext.projectsRepository = projectsRepository;
 	});
 
 	$effect(() => {

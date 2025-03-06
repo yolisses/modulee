@@ -2,27 +2,12 @@
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import ProjectList from './ProjectList.svelte';
-	import type { ProjectsRepository } from './ProjectsRepository';
-	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
-	let projectsData = $state<ProjectData[]>([]);
-	const projectsRepositoryContext = getProjectsRepositoryContext();
-
-	function updateProjects(projectsRepository: ProjectsRepository) {
-		projectsRepository.getProjects().then((data) => {
-			projectsData = data;
-		});
+	interface Props {
+		projectsData: ProjectData[];
 	}
 
-	$effect(() => {
-		const { projectsRepository } = projectsRepositoryContext;
-		if (!projectsRepository) return;
-		if (!projectsRepository.getIsInitialized()) return;
-		updateProjects(projectsRepository);
-		projectsRepository.onProjectsChange = () => {
-			updateProjects(projectsRepository);
-		};
-	});
+	const { projectsData }: Props = $props();
 </script>
 
 <div class="flex flex-col items-center">

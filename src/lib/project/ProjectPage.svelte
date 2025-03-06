@@ -19,35 +19,33 @@
 	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
-	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext } from './projectDataContext';
 	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
 
 	interface Props {
 		children: Snippet;
-		projectData: ProjectData;
 	}
 
 	setDefaultContexts();
 
-	const { children, projectData }: Props = $props();
+	const { children }: Props = $props();
 
 	const projectDataContext = getProjectDataContext();
-	projectDataContext.projectData = projectData;
 
 	const selectedTabContext = $state({ selectedTab: 'project' });
 	setSelectedTabContext(selectedTabContext);
 
-	const groupContext = $state({ groupId: projectData.mainGroup.id });
+	const groupContext = $state({ groupId: projectDataContext.projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
 
 	// TODO find a more encapsulated way to execute this initial changes
+	// TODO move to a separate function
 	const initialGraphData: GraphData = {
 		nodes: new ById(),
 		connections: new ById(),
-		mainGroupId: projectData.mainGroup.id,
-		groups: ById.fromItems([structuredClone(projectData.mainGroup)]),
+		mainGroupId: projectDataContext.projectData.mainGroup.id,
+		groups: ById.fromItems([structuredClone(projectDataContext.projectData.mainGroup)]),
 	};
 
 	const graphDataContext = $state({ graphData: initialGraphData });
@@ -63,7 +61,7 @@
 		graphContext.graph = new Graph(graphDataContext.graphData);
 	};
 
-	projectData.commands.map((commandData) => {
+	projectDataContext.projectData.commands.map((commandData) => {
 		const command = createEditorCommand(commandData);
 		editor.execute(command);
 	});
