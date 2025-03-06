@@ -25,7 +25,7 @@
 </script>
 
 <Modal {closeModal}>
-	<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2">
+	<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 		<p>Rename project "{projectData?.name}"</p>
 		<input
 			type="text"
