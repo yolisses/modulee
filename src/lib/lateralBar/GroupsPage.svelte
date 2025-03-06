@@ -5,6 +5,7 @@
 	import type { Group } from '$lib/data/Group.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import CreateGroupButton from '$lib/group/CreateGroupButton.svelte';
+	import ImportGroupButton from '$lib/import/ImportGroupButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicLinkList from '$lib/ui/BasicLinkList.svelte';
 	import { getId } from '$lib/ui/getId';
@@ -32,8 +33,9 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="p-2">
+	<div class="flex flex-row gap-2 p-2">
 		<CreateGroupButton />
+		<ImportGroupButton />
 	</div>
 	<BasicLinkList
 		{getId}
