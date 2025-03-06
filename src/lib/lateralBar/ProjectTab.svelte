@@ -1,15 +1,12 @@
 <script lang="ts">
+	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import { getProjectsRepositoryContext } from '$lib/project/projectsRepositoryContext';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 
 	const projectDataContext = getProjectDataContext();
-	const projectsRepositoryContext = getProjectsRepositoryContext();
+	const projectsRepository = getProjectsRepository();
 
 	function handleBlur(e: InputBlurEvent) {
-		const { projectsRepository } = projectsRepositoryContext;
-		if (!projectsRepository) return;
-
 		const value = e.currentTarget.value;
 		projectsRepository.renameProject(projectDataContext.projectData.id, value);
 	}

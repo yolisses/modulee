@@ -19,8 +19,8 @@
 	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
+	import { getProjectsRepository } from './getProjectsRepository';
 	import { getProjectDataContext } from './projectDataContext';
-	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
 
 	interface Props {
@@ -66,10 +66,9 @@
 		editor.execute(command);
 	});
 
-	const projectsRepositoryContext = getProjectsRepositoryContext();
 	editor.onExecute = (command) => {
-		const { projectsRepository } = projectsRepositoryContext;
-		projectsRepository?.addCommand(command.commandData);
+		const projectsRepository = getProjectsRepository();
+		projectsRepository.addCommand(command.commandData);
 	};
 
 	const editorContext = $state({ editor });

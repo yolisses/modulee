@@ -11,10 +11,6 @@
 	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
 	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { onMount, type Snippet } from 'svelte';
-	import {
-		setProjectsRepositoryContext,
-		type ProjectsRepositoryContext,
-	} from './projectsRepositoryContext';
 
 	interface Props {
 		children: Snippet;
@@ -27,9 +23,6 @@
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
-
-	const projectsRepositoryContext: ProjectsRepositoryContext = $state({});
-	setProjectsRepositoryContext(projectsRepositoryContext);
 
 	$effect(() => {
 		const { isMuted } = isMutedContext;

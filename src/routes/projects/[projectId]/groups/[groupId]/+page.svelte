@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
 	import { getSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
-	import type { PageData } from '../../[...groupId]/$types';
+	import type { PageData } from './$types';
 
 	interface Props {
 		data: PageData;

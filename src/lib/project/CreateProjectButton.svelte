@@ -3,11 +3,11 @@
 	import { createId } from '$lib/data/createId';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getProjectsRepository } from './getProjectsRepository';
 	import type { ProjectData } from './ProjectData';
-	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
 	let isLoading = $state(false);
-	const projectsRepositoryContext = getProjectsRepositoryContext();
+	const projectsRepository = getProjectsRepository();
 
 	async function handleClick() {
 		isLoading = true;
@@ -21,7 +21,7 @@
 				name: 'Main group',
 			},
 		};
-		await projectsRepositoryContext.projectsRepository?.createProject(projectData);
+		await projectsRepository.createProject(projectData);
 		goto('/projects/' + projectData.id);
 	}
 </script>

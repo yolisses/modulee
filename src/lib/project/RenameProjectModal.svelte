@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
+	import { getProjectsRepository } from './getProjectsRepository';
 	import type { ProjectData } from './ProjectData';
-	import { getProjectsRepositoryContext } from './projectsRepositoryContext';
 
 	interface Props {
 		closeModal: () => void;
@@ -12,10 +12,9 @@
 	const { closeModal, projectData }: Props = $props();
 	let name = $state(projectData.name);
 	let textInput: HTMLInputElement;
-	const projectsRepositoryContext = getProjectsRepositoryContext();
 
 	function handleSubmit() {
-		const { projectsRepository } = projectsRepositoryContext;
+		const projectsRepository = getProjectsRepository();
 		projectsRepository?.renameProject(projectData.id, name);
 		closeModal();
 	}
