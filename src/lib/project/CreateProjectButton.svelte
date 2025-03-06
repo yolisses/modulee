@@ -26,11 +26,7 @@
 	}
 </script>
 
-<button
-	disabled={isLoading}
-	onclick={handleClick}
-	class="gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600"
->
+<button disabled={isLoading} onclick={handleClick} class="primary-button">
 	<Fa icon={faPlus} />
 	Create project
 </button>

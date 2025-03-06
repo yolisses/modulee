@@ -36,9 +36,7 @@
 		/>
 		<div class="flex flex-row justify-end gap-2">
 			<button class="common-button" onclick={closeModal}> Cancel </button>
-			<button class="rounded bg-blue-500 p-2 hover:bg-blue-600" onclick={handleSubmit}>
-				Rename
-			</button>
+			<button class="primary-button" onclick={handleSubmit}> Rename </button>
 		</div>
 	</div>
 </Modal>
