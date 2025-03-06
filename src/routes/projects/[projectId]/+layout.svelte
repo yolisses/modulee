@@ -12,8 +12,7 @@
 	const { data, children }: Props = $props();
 	const { projectData } = data;
 
-	const projectDataContext = $state.raw({ projectData });
-	setProjectDataContext(projectDataContext);
+	setProjectDataContext({ projectData });
 </script>
 
 <ProjectPage>
