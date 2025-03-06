@@ -23,6 +23,8 @@
 	const groupIdContext = getGroupIdContext();
 	const projectDataContext = getProjectDataContext();
 
+	let searchText = $state('');
+
 	const { closeModal, screenPosition }: Props = $props();
 
 	function handleTypeClick(nodeType: NodeType) {
@@ -42,14 +44,28 @@
 	function getNodeTypeName(nodeType: NodeType) {
 		return nodesName[nodeType.name];
 	}
+
+	const options = $derived(
+		nodeTypes.filter((nodeType) => {
+			return getNodeTypeName(nodeType).toLowerCase().includes(searchText.toLowerCase());
+		}),
+	);
 </script>
 
+<!-- TODO consider adding a descriptive text like "Add node" -->
 <div class="flex max-h-[75vh] flex-col rounded bg-zinc-700 outline outline-1 outline-zinc-800">
-	<div class="border-b border-black/25 p-2">Add node</div>
+	<!-- svelte-ignore a11y_autofocus -->
+	<input
+		autofocus
+		type="search"
+		placeholder="Search"
+		class="common-input"
+		bind:value={searchText}
+	/>
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
 		<BasicList
 			getId={getName}
-			values={nodeTypes}
+			values={options}
 			getName={getNodeTypeName}
 			onClick={handleTypeClick}
 		/>
