@@ -5,6 +5,11 @@
 	import ProjectList from './ProjectList.svelte';
 
 	const projectsRepository = getProjectsRepository();
+
+	let projectsDataPromise = $state(projectsRepository.getProjects());
+	projectsRepository.onProjectsChange = () => {
+		projectsDataPromise = projectsRepository.getProjects();
+	};
 </script>
 
 <div class="flex flex-col items-center">
@@ -15,7 +20,7 @@
 			<CreateProjectButton />
 		</div>
 		<div>
-			{#await projectsRepository.getProjects()}
+			{#await projectsDataPromise}
 				<div class="flex h-full flex-1 flex-col items-center p-8">
 					<Spinner></Spinner>
 				</div>

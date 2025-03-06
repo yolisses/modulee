@@ -14,6 +14,7 @@
 
 	function handleClick() {
 		projectsRepository.deleteProject(projectId);
+		closeModal();
 	}
 
 	onMount(() => {
