@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getRootElementContext } from 'nodes-editor';
 	import Portal from 'svelte-portal';
-	import SelectGroupMenuWrapper from './SelectGroupMenuWrapper.svelte';
+	import SetTargetGroupMenuWrapper from './SetTargetGroupMenuWrapper.svelte';
 
 	interface Props {
 		groupNodeId: string;
@@ -28,11 +28,11 @@
 	onpointerdown={handlePointerDown}
 	class="hover-bg overflow-and-ellipsis"
 >
-	<span class="opacity-50">Select group</span>
+	<span class="opacity-50">Set group</span>
 </button>
 
 {#if rootElementContext.rootElement}
 	<Portal target={rootElementContext.rootElement as HTMLElement}>
-		<SelectGroupMenuWrapper {mouseEvent} {groupNodeId} />
+		<SetTargetGroupMenuWrapper {mouseEvent} {groupNodeId} />
 	</Portal>
 {/if}

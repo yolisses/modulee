@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { GroupNode } from '$lib/data/GroupNode.svelte.js';
-	import SelectGroupButton from '../../group/SelectGroupButton.svelte';
+	import SetTargetGroupButton from '../../group/SetTargetGroupButton.svelte';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 	import EditGroupButton from '../EditGroupButton.svelte';
 
@@ -16,7 +16,7 @@
 		{#if groupNode.targetGroup}
 			<EditGroupButton group={groupNode.targetGroup} />
 		{:else}
-			<SelectGroupButton groupNodeId={groupNode.id} />
+			<SetTargetGroupButton groupNodeId={groupNode.id} />
 		{/if}
 	{/snippet}
 </BaseNodeItem>

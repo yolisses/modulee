@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
-	import SelectGroupMenu from './SelectGroupMenu.svelte';
+	import SetTargetGroupMenu from './SetTargetGroupMenu.svelte';
 
 	interface Props {
 		groupNodeId: string;
@@ -47,6 +47,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<SelectGroupMenu {closeModal} {groupNodeId} />
+		<SetTargetGroupMenu {closeModal} {groupNodeId} />
 	</div>
 {/if}
