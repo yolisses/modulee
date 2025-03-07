@@ -34,7 +34,7 @@
 
 <div class="flex flex-col">
 	<div class="flex flex-row gap-2 p-2">
-		<CreateGroupButton />
+		<CreateGroupButton class="primary-button" />
 		<ImportGroupButton />
 	</div>
 	<BasicLinkList

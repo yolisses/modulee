@@ -43,7 +43,7 @@
 			onClick={handleGroupSelect}
 			values={graphContext.graph.groups.values()}
 		/>
-		<CreateGroupButton onGroupCreated={handleGroupSelect} />
+		<CreateGroupButton class="common-button" onGroupCreated={handleGroupSelect} />
 	</div>
 </div>
 

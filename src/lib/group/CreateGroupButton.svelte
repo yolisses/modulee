@@ -9,10 +9,11 @@
 	import Fa from 'svelte-fa';
 
 	interface Props {
+		class: string;
 		onGroupCreated?: (group: Group) => void;
 	}
 
-	const { onGroupCreated }: Props = $props();
+	const { onGroupCreated, class: classString }: Props = $props();
 
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
@@ -41,7 +42,7 @@
 	}
 </script>
 
-<button class="primary-button" onclick={handleCreateClick}>
+<button class={classString} onclick={handleCreateClick}>
 	<Fa icon={faPlus} />
 	Create group
 </button>
