@@ -16,6 +16,11 @@
 	}
 </script>
 
-<button onclick={handleClick} class="hover-bg border-white/25 p-2" class:border-b-4={isSelected}>
+<button
+	onclick={handleClick}
+	class:pb-1={isSelected}
+	class:border-b-4={isSelected}
+	class="hover-bg border-white/25 p-2"
+>
 	{@render children()}
 </button>
