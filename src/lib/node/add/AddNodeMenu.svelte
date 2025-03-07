@@ -61,7 +61,9 @@
 </script>
 
 <!-- TODO consider adding a descriptive text like "Add node" -->
-<div class="flex max-h-[75vh] flex-col rounded bg-zinc-700 outline outline-1 outline-zinc-800">
+<div
+	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline outline-1 outline-zinc-800"
+>
 	<!-- svelte-ignore a11y_autofocus -->
 	<input
 		autofocus
