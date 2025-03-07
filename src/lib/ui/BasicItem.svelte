@@ -1,19 +1,17 @@
 <script lang="ts" generics="T">
+	import type { Snippet } from 'svelte';
+
 	interface Props {
 		value: T;
 		text: string;
 		onClick: (value: T) => void;
-		onDelete?: (value: T) => void;
+		buttons?: Snippet<[value: T]>;
 	}
 
-	const { text, value, onClick, onDelete }: Props = $props();
+	const { text, value, onClick, buttons }: Props = $props();
 
 	function handleClick() {
 		onClick(value);
-	}
-
-	function handleDeleteClick() {
-		onDelete?.(value);
 	}
 </script>
 
@@ -21,7 +19,5 @@
 	<button onclick={handleClick} class="flex-1 p-2">
 		{text}
 	</button>
-	{#if onDelete}
-		<button onclick={handleDeleteClick} class="common-button"> Delete </button>
-	{/if}
+	{@render buttons?.(value)}
 </div>
