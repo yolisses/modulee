@@ -1,13 +1,6 @@
-export function downloadSomeFile() {
-	// Create a JSON object
-	const jsonData = {
-		name: 'John Doe',
-		age: 30,
-		city: 'New York',
-	};
-
+export function downloadJson(data: unknown, fileName: string) {
 	// Convert the JSON object to a string
-	const jsonString = JSON.stringify(jsonData);
+	const jsonString = JSON.stringify(data);
 
 	// Create a Blob with the JSON data
 	const blob = new Blob([jsonString], { type: 'application/json' });
@@ -15,7 +8,9 @@ export function downloadSomeFile() {
 	// Create a link element
 	const link = document.createElement('a');
 	link.href = URL.createObjectURL(blob);
-	link.download = 'data.json'; // The name of the file to be downloaded
+
+	// Set the name of the file to be downloaded
+	link.download = fileName;
 
 	// Append the link to the body (required for Firefox)
 	document.body.appendChild(link);
