@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GroupTab from './GroupTab.svelte';
-	import GroupsPage from './GroupsPage.svelte';
+	import GroupsTab from './GroupsTab.svelte';
 	import LateralBarTabs from './LateralBarTabs.svelte';
 	import ProjectTab from './ProjectTab.svelte';
 	import { getSelectedTabContext } from './selectedTabContext';
@@ -13,7 +13,7 @@
 	{#if selectedTabContext.selectedTab === 'group'}
 		<GroupTab />
 	{:else if selectedTabContext.selectedTab === 'groups'}
-		<GroupsPage />
+		<GroupsTab />
 	{:else if selectedTabContext.selectedTab === 'project'}
 		<ProjectTab />
 	{/if}
