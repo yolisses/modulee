@@ -2,6 +2,7 @@
 	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
+	import ExportGroupButton from './ExportProjectButton.svelte';
 
 	const projectDataContext = getProjectDataContext();
 	const projectsRepository = getProjectsRepository();
@@ -24,4 +25,5 @@
 			class="rounded border border-white/10 bg-transparent p-2"
 		/>
 	</label>
+	<ExportGroupButton />
 </div>
