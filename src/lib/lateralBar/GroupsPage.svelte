@@ -7,7 +7,7 @@
 	import CreateGroupButton from '$lib/group/CreateGroupButton.svelte';
 	import ImportGroupButton from '$lib/import/ImportGroupButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import BasicLinkList from '$lib/ui/BasicLinkList.svelte';
+	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
 
@@ -26,7 +26,7 @@
 		editorContext.editor.execute(command);
 	}
 
-	function getLink(group: Group) {
+	function getHref(group: Group) {
 		const { projectData } = projectDataContext;
 		return `/projects/${projectData.id}/groups/${group.id}`;
 	}
@@ -37,11 +37,5 @@
 		<CreateGroupButton class="primary-button" />
 		<ImportGroupButton />
 	</div>
-	<BasicLinkList
-		{getId}
-		{getLink}
-		{getName}
-		onDelete={handleDelete}
-		values={graphContext.graph.groups.values()}
-	/>
+	<BasicList {getId} {getName} {getHref} values={graphContext.graph.groups.values()} />
 </div>

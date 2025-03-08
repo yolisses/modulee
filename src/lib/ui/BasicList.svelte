@@ -2,15 +2,16 @@
 	import type { Snippet } from 'svelte';
 	import BasicItem from './BasicItem.svelte';
 
-	interface Props {
+	type Props = {
 		values: T[];
 		getId: (value: T) => any;
-		onClick: (value: T) => void;
+		onClick?: (value: T) => void;
 		getName: (value: T) => string;
 		buttons?: Snippet<[value: T]>;
-	}
+		getHref?: (value: T) => string;
+	};
 
-	const { values, onClick, getId, getName, buttons }: Props = $props();
+	const { values, onClick, getId, getName, buttons, getHref }: Props = $props();
 	const sortedValues = $derived(
 		values.toSorted((a, b) => {
 			return getName(a).localeCompare(getName(b));
@@ -19,5 +20,5 @@
 </script>
 
 {#each sortedValues as value (getId(value))}
-	<BasicItem {value} {onClick} text={getName(value)} {buttons} />
+	<BasicItem {value} {onClick} text={getName(value)} {buttons} href={getHref?.(value)} />
 {/each}

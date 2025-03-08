@@ -1,23 +1,25 @@
 <script lang="ts" generics="T">
 	import type { Snippet } from 'svelte';
+	import ButtonOrLink from './ButtonOrLink.svelte';
 
-	interface Props {
+	type Props = {
 		value: T;
 		text: string;
-		onClick: (value: T) => void;
+		href?: string;
+		onClick?: (value: T) => void;
 		buttons?: Snippet<[value: T]>;
-	}
+	};
 
-	const { text, value, onClick, buttons }: Props = $props();
+	const { text, value, onClick, buttons, href }: Props = $props();
 
 	function handleClick() {
-		onClick(value);
+		onClick?.(value);
 	}
 </script>
 
 <div class="hover-bg flex flex-row rounded">
-	<button onclick={handleClick} class="flex-1 p-2">
+	<ButtonOrLink {href} onclick={handleClick} class="flex-1 p-2">
 		{text}
-	</button>
+	</ButtonOrLink>
 	{@render buttons?.(value)}
 </div>
