@@ -37,5 +37,9 @@
 		<CreateGroupButton class="primary-button" />
 		<ImportGroupButton />
 	</div>
-	<BasicList {getId} {getName} {getHref} values={graphContext.graph.groups.values()} />
+	<BasicList {getId} {getName} {getHref} values={graphContext.graph.groups.values()}>
+		{#snippet buttons(group)}
+			<button class="common-button" onclick={() => handleDelete(group)}>Delete</button>
+		{/snippet}
+	</BasicList>
 </div>
