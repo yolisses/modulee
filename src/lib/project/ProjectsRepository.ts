@@ -1,7 +1,6 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { ProjectData } from './ProjectData';
 
-// TODO remove commands from persistent storage
 export interface ProjectsRepository {
 	initialize(): Promise<void>;
 	getIsInitialized(): boolean;
@@ -9,6 +8,7 @@ export interface ProjectsRepository {
 	getProjects(): Promise<ProjectData[]>;
 	deleteProject(id: string): Promise<void>;
 	getProject(id: string): Promise<ProjectData>;
+	// TODO consider renaming createProject to addProject since it doesn't create a new id
 	createProject(projectData: ProjectData): Promise<void>;
 	renameProject(id: string, name: string): Promise<void>;
 	updateProjectGraphData(id: string, graphData: GraphData): Promise<void>;

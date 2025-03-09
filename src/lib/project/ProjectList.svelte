@@ -2,6 +2,7 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
+	import CreateModuleButton from './CreateModuleButton.svelte';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import RenameProjectButton from './RenameProjectButton.svelte';
@@ -21,5 +22,6 @@
 	{#snippet buttons(value)}
 		<RenameProjectButton projectData={value} />
 		<DeleteProjectButton projectId={value.id} />
+		<CreateModuleButton projectData={value} />
 	{/snippet}
 </BasicList>

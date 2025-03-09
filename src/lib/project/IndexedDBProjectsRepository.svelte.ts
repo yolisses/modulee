@@ -4,6 +4,7 @@ import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
 export class IndexedDBProjectsRepository implements ProjectsRepository {
+	storeName = 'projects';
 	isInitialized = $state(false);
 	onProjectsChange?: () => void;
 	databaseInstance?: IDBPDatabase;
@@ -21,10 +22,10 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	async initialize() {
-		this.databaseInstance = await openDB('modulee', 1, {
-			upgrade(database) {
-				if (!database.objectStoreNames.contains('projects')) {
-					database.createObjectStore('projects', { keyPath: 'id', autoIncrement: false });
+		this.databaseInstance = await openDB('modulee-projects', 1, {
+			upgrade: (database) => {
+				if (!database.objectStoreNames.contains(this.storeName)) {
+					database.createObjectStore(this.storeName, { keyPath: 'id', autoIncrement: false });
 				}
 			},
 		});
@@ -32,27 +33,27 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	async getProjects() {
-		return this.database.getAll('projects');
+		return this.database.getAll(this.storeName);
 	}
 
 	async getProject(id: string) {
-		const projectData: ProjectData = await this.database.get('projects', id);
+		const projectData: ProjectData = await this.database.get(this.storeName, id);
 		return projectData;
 	}
 
 	async deleteProject(id: string) {
-		await this.database.delete('projects', id);
+		await this.database.delete(this.storeName, id);
 		this.onProjectsChange?.();
 	}
 
 	async createProject(projectData: ProjectData) {
-		const transaction = this.database.transaction('projects', 'readwrite');
+		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		await Promise.all([transaction.store.add(projectData), transaction.done]);
 		this.onProjectsChange?.();
 	}
 
 	async renameProject(id: string, name: string): Promise<void> {
-		const transaction = this.database.transaction('projects', 'readwrite');
+		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		const projectData: ProjectData = await transaction.store.get(id);
 		projectData.name = name;
 		await Promise.all([transaction.store.put(projectData), transaction.done]);
@@ -60,7 +61,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
-		const transaction = this.database.transaction('projects', 'readwrite');
+		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		const projectData: ProjectData = await transaction.store.get(id);
 		projectData.graphData = graphData;
 		await Promise.all([transaction.store.put(projectData), transaction.done]);
