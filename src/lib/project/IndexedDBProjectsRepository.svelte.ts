@@ -51,7 +51,6 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
-		projectData.commands = await this.getCommandsOfProject(id);
 		return projectData;
 	}
 

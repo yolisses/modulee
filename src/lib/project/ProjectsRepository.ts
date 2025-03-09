@@ -1,6 +1,7 @@
 import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import type { ProjectData } from './ProjectData';
 
+// TODO remove commands from persistent storage
 export interface ProjectsRepository {
 	initialize(): Promise<void>;
 	getIsInitialized(): boolean;

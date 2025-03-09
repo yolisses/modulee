@@ -1,9 +1,7 @@
-import type { GroupData } from '$lib/data/GroupData';
-import type { EditorCommandData } from '$lib/editor/EditorCommandData';
+import type { GraphData } from '$lib/data/GraphData';
 
 export type ProjectData = {
 	id: string;
 	name: string;
-	mainGroup: GroupData;
-	commands: EditorCommandData[];
+	graphData: GraphData;
 };

@@ -1,4 +1,4 @@
-import type { GraphDataV2 } from '$lib/data/GraphDataV2';
+import type { GraphData } from '$lib/data/GraphData';
 
 /**
  * The probable next format of project data. This was created instead of simply
@@ -8,5 +8,5 @@ import type { GraphDataV2 } from '$lib/data/GraphDataV2';
 export type ProjectDataV2 = {
 	id: string;
 	name: string;
-	graphDataV2: GraphDataV2;
+	graphDataV2: GraphData;
 };

@@ -11,14 +11,15 @@
 
 	async function handleClick() {
 		isLoading = true;
+		const mainGroupId = createId();
 		const projectData: ProjectData = {
-			commands: [],
 			id: createId(),
 			name: 'New project',
-			// TODO consider using the same name than the project
-			mainGroup: {
-				id: createId(),
-				name: 'Main group',
+			graphData: {
+				nodes: [],
+				mainGroupId,
+				connections: [],
+				groups: [{ id: mainGroupId, name: 'Main group' }],
 			},
 		};
 		await projectsRepository.createProject(projectData);
