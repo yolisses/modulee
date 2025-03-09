@@ -30,10 +30,10 @@
 
 	const { children }: Props = $props();
 
-	const projectDataContext = getProjectDataContext();
-
 	const selectedTabContext = $state({ selectedTab: 'project' });
 	setSelectedTabContext(selectedTabContext);
+
+	const projectDataContext = getProjectDataContext();
 
 	const groupContext = $state({ groupId: projectDataContext.projectData.graphData.mainGroupId });
 	setGroupIdContext(groupContext);
