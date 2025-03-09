@@ -21,7 +21,7 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 	}
 
 	async initialize() {
-		this.databaseInstance = await openDB('Modulee', 1, {
+		this.databaseInstance = await openDB('modulee', 1, {
 			upgrade(database) {
 				if (!database.objectStoreNames.contains('projects')) {
 					database.createObjectStore('projects', { keyPath: 'id', autoIncrement: false });
