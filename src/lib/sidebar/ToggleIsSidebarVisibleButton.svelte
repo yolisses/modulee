@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
-	import { ToggleIsLateralBarVisibleActionCommand } from '$lib/node/actionCommands/ToggleLateralBarActionCommand';
+	import { ToggleIsSidebarVisibleActionCommand } from '$lib/node/actionCommands/ToggleSidebarActionCommand';
 	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import {
 		faChevronLeft,
@@ -8,30 +8,30 @@
 		faWindowMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa, { FaLayers } from 'svelte-fa';
-	import { getIsLateralBarVisibleContext } from './isLateralBarVisibleContext';
+	import { getIsSidebarVisibleContext } from './isSidebarVisibleContext';
 
 	const contextsContext = getContextsContext();
-	const isLateralBarVisibleContext = getIsLateralBarVisibleContext();
+	const isSidebarVisibleContext = getIsSidebarVisibleContext();
 
 	function handleClick() {
-		const actionCommand = new ToggleIsLateralBarVisibleActionCommand();
+		const actionCommand = new ToggleIsSidebarVisibleActionCommand();
 		actionCommand.execute(contextsContext.contexts);
 	}
 
-	const shortcutString = getShortcutStringForCommandType('ToggleIsLateralBarVisibleActionCommand');
+	const shortcutString = getShortcutStringForCommandType('ToggleIsSidebarVisibleActionCommand');
 </script>
 
 <button
 	class="common-button"
 	onclick={handleClick}
-	title={(isLateralBarVisibleContext.isLateralBarVisible ? 'Hide' : 'Show') +
-		' lateral bar ' +
+	title={(isSidebarVisibleContext.isSidebarVisible ? 'Hide' : 'Show') +
+		' sidebar ' +
 		shortcutString}
 >
 	<FaLayers>
 		<Fa icon={faWindowMaximize} rotate={-90} />
 		<Fa
-			icon={isLateralBarVisibleContext.isLateralBarVisible ? faChevronRight : faChevronLeft}
+			icon={isSidebarVisibleContext.isSidebarVisible ? faChevronRight : faChevronLeft}
 			scale={0.5}
 			class="text-zinc-900"
 			translateX={0.1}

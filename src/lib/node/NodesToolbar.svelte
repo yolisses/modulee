@@ -4,7 +4,7 @@
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import BackButton from '$lib/group/BackButton.svelte';
 	import GroupNodesButton from '$lib/group/GroupNodesButton.svelte';
-	import ToggleIsLateralBarVisibleButton from '$lib/lateralBar/ToggleIsLateralBarVisibleButton.svelte';
+	import ToggleIsSidebarVisibleButton from '$lib/sidebar/ToggleIsSidebarVisibleButton.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import ZoomInButton from '$lib/zoom/ZoomInButton.svelte';
 	import ZoomOutButton from '$lib/zoom/ZoomOutButton.svelte';
@@ -28,5 +28,5 @@
 		<BackButton />
 		<MuteButton />
 	</div>
-	<ToggleIsLateralBarVisibleButton />
+	<ToggleIsSidebarVisibleButton />
 </div>

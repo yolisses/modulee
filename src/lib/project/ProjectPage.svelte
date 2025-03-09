@@ -9,12 +9,12 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
-	import { getGraphData } from '$lib/lateralBar/getGraphData';
-	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
-	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
-	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
+	import { getGraphData } from '$lib/sidebar/getGraphData';
+	import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
+	import { setSelectedTabContext } from '$lib/sidebar/selectedTabContext';
+	import Sidebar from '$lib/sidebar/Sidebar.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
@@ -72,14 +72,14 @@
 	});
 
 	setMenuVisibilityContexts();
-	const isLateralBarVisibleContext = getIsLateralBarVisibleContext();
+	const isSidebarVisibleContext = getIsSidebarVisibleContext();
 	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 </script>
 
 <div class="flex flex-row">
 	<NodesPage></NodesPage>
-	{#if isLateralBarVisibleContext.isLateralBarVisible}
-		<LateralBar />
+	{#if isSidebarVisibleContext.isSidebarVisible}
+		<Sidebar />
 	{/if}
 </div>
 

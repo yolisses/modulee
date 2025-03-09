@@ -13,5 +13,5 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'M'], commandType: 'ToggleIsMuteActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
 	{ keys: ['Ctrl', 'A'], commandType: 'SelectedAllNodesActionCommand' },
-	{ keys: ['Ctrl', 'L'], commandType: 'ToggleIsLateralBarVisibleActionCommand' },
+	{ keys: ['Ctrl', 'L'], commandType: 'ToggleIsSidebarVisibleActionCommand' },
 ];

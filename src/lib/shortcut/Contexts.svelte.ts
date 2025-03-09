@@ -4,8 +4,8 @@ import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 import { getGroupIdContext } from '$lib/group/groupIdContext';
-import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
+import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
 import { defaultShortcuts } from './defaultShortcuts';
@@ -22,5 +22,5 @@ export class Contexts {
 	projectDataContext = getProjectDataContext();
 	audioBackendContext = getAudioBackendContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
-	isLateralBarVisibleContext = getIsLateralBarVisibleContext();
+	isSidebarVisibleContext = getIsSidebarVisibleContext();
 }

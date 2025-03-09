@@ -2,11 +2,11 @@ import {
 	type IsCommandPaletteActiveContext,
 	setIsCommandPaletteActiveContext,
 } from '$lib/CommandPalette/isCommandPaletteActiveContext';
-import { setIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
+import { setIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 
 export function setMenuVisibilityContexts() {
-	const isLateralBarVisibleContext = $state({ isLateralBarVisible: false });
-	setIsLateralBarVisibleContext(isLateralBarVisibleContext);
+	const isSidebarVisibleContext = $state({ isSidebarVisible: false });
+	setIsSidebarVisibleContext(isSidebarVisibleContext);
 
 	const isCommandPaletteActiveContext: IsCommandPaletteActiveContext = $state({
 		isCommandPaletteActive: false,

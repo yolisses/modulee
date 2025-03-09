@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { getGroupIdContext } from '$lib/group/groupIdContext';
-	import { getSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
+	import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 	import type { PageData } from './$types';
 
 	interface Props {
