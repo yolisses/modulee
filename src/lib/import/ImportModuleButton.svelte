@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import ImportGroupModal from './ImportGroupModal.svelte';
+	import ImportModuleModal from './ImportModuleModal.svelte';
 
 	let isModalActive = $state(false);
 
@@ -16,9 +16,9 @@
 
 <button class="common-button" onclick={handleClick}>
 	<Fa icon={faArrowCircleDown} />
-	Import group
+	Import module
 </button>
 
 {#if isModalActive}
-	<ImportGroupModal {closeModal} />
+	<ImportModuleModal {closeModal} />
 {/if}

@@ -17,7 +17,7 @@
 	}
 </script>
 
-<div class="hover-bg flex flex-row rounded">
+<div class="hover-bg flex flex-row items-center rounded">
 	<ButtonOrLink {href} onclick={handleClick} class="flex-1 p-2">
 		{text}
 	</ButtonOrLink>

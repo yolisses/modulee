@@ -5,6 +5,7 @@
 	import { getName } from '$lib/ui/getName';
 	import Modal from '$lib/ui/Modal.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
+	import { getVersionString } from './getVersionString';
 
 	const modulesRepository = getModulesRepository();
 
@@ -29,7 +30,7 @@
 		<div class="flex flex-col items-center">
 			<div class="flex w-full max-w-xl flex-col gap-4">
 				<div class="flex flex-row items-center justify-between gap-2">
-					<h1 class="pl-2 text-xl font-medium">Import group</h1>
+					<h1 class="pl-2 text-xl font-medium">Import module</h1>
 				</div>
 				<div>
 					{#await modulesDataPromise}
@@ -37,7 +38,13 @@
 							<Spinner></Spinner>
 						</div>
 					{:then modulesData}
-						<BasicList {getId} values={modulesData} {getName} onClick={handleModuleSelect} />
+						<BasicList {getId} values={modulesData} {getName} onClick={handleModuleSelect}>
+							{#snippet buttons(moduleData)}
+								<div class="p-2">
+									{getVersionString(moduleData.version)}
+								</div>
+							{/snippet}
+						</BasicList>
 					{:catch error}
 						<div class="text-red-500">
 							<div>It was not possible to load the modules</div>

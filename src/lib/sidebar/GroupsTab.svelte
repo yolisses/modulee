@@ -5,7 +5,7 @@
 	import type { Group } from '$lib/data/Group.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import CreateGroupButton from '$lib/group/CreateGroupButton.svelte';
-	import ImportGroupButton from '$lib/import/ImportGroupButton.svelte';
+	import ImportModuleButton from '$lib/import/ImportModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
@@ -35,7 +35,7 @@
 <div class="flex flex-col">
 	<div class="flex flex-row gap-2 p-2">
 		<CreateGroupButton class="primary-button" />
-		<ImportGroupButton />
+		<ImportModuleButton />
 	</div>
 	<BasicList {getId} {getName} {getHref} values={graphContext.graph.groups.values()}>
 		{#snippet buttons(group)}
