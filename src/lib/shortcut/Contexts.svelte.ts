@@ -6,11 +6,11 @@ import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 import { getGroupIdContext } from '$lib/group/groupIdContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
+import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
 import { defaultShortcuts } from './defaultShortcuts';
 
-// TODO find a better and shorter name for it
 export class Contexts {
 	shortcuts = defaultShortcuts;
 	zoomContext = getZoomContext();
@@ -18,9 +18,10 @@ export class Contexts {
 	editorContext = getEditorContext();
 	groupIdContext = getGroupIdContext();
 	isMutedContext = getIsMutedContext();
-	graphRegistryContext = getGraphRegistryContext();
 	projectDataContext = getProjectDataContext();
+	selectedTabContext = getSelectedTabContext();
 	audioBackendContext = getAudioBackendContext();
+	graphRegistryContext = getGraphRegistryContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
 	isSidebarVisibleContext = getIsSidebarVisibleContext();
 }
