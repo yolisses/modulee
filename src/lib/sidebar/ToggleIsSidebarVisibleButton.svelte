@@ -7,7 +7,7 @@
 		faWindowMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa, { FaLayers } from 'svelte-fa';
-	import { ToggleIsSidebarVisibleActionCommand } from './actionCommands/ToggleSidebarActionCommand';
+	import { ToggleIsSidebarVisibleActionCommand } from './actionCommands/ToggleIsSidebarVisibleActionCommand';
 	import { getIsSidebarVisibleContext } from './isSidebarVisibleContext';
 
 	const contextsContext = getContextsContext();

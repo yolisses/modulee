@@ -6,7 +6,7 @@ import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMute
 import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
 import { ShowGroupsTabActionCommand } from '$lib/sidebar/actionCommands/ShowGroupsTabActionCommand';
 import { ShowProjectTabActionCommand } from '$lib/sidebar/actionCommands/ShowProjectTabActionCommand';
-import { ToggleIsSidebarVisibleActionCommand } from '$lib/sidebar/actionCommands/ToggleSidebarActionCommand';
+import { ToggleIsSidebarVisibleActionCommand } from '$lib/sidebar/actionCommands/ToggleIsSidebarVisibleActionCommand';
 import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
 import { ZoomInCommand } from '../space/zoom/ZoomInCommand';
 import { ZoomOutCommand } from '../space/zoom/ZoomOutCommand';
