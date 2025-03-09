@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
 export class RenameGroupCommand extends EditorCommand<{
@@ -7,13 +7,13 @@ export class RenameGroupCommand extends EditorCommand<{
 }> {
 	previousName!: string;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		const groupData = graphData.groups.get(this.details.groupId);
 		this.previousName = groupData.name;
 		groupData.name = this.details.name;
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		const groupData = graphData.groups.get(this.details.groupId);
 		groupData.name = this.previousName;
 	}

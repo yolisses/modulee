@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import { RemoveNodeCommand, type RemoveNodeCommandData } from './RemoveNodeCommand';
 
@@ -7,7 +7,7 @@ export class RemoveNodesCommand extends EditorCommand<{
 }> {
 	commands!: RemoveNodeCommand[];
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		this.commands = this.details.nodeIds.map((nodeId) => {
 			return new RemoveNodeCommand({
 				type: 'RemoveNodeCommand',
@@ -19,7 +19,7 @@ export class RemoveNodesCommand extends EditorCommand<{
 		});
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		this.commands.forEach((command) => {
 			command.undo(graphData);
 		});

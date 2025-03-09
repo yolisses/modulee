@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { ConstantNodeData } from '$lib/data/variants/ConstantNodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
@@ -12,7 +12,7 @@ test('SetConstantNodeValueCommand', () => {
 			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
 			{ id: 'node3' },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node2', value: 2 }));
 
 	command.execute(graphData);
@@ -31,7 +31,7 @@ test('SetConstantNodeValueCommand with wrong type', () => {
 			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
 			{ id: 'node3' },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node3', value: 2 }));
 
 	expect(() => {

@@ -1,13 +1,13 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
-import { RemoveGroupCommand } from './RemoveGroupCommand';
 import { mockCommandData } from '../test/mockNodeData';
+import { RemoveGroupCommand } from './RemoveGroupCommand';
 
 test('RemoveGroupCommand', () => {
 	const graphData = {
 		groups: ById.fromItems([{ id: 'group1' }, { id: 'group2' }, { id: 'group3' }]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const commandDetails = { groupId: 'group2' };
 	const command = new RemoveGroupCommand(mockCommandData(commandDetails));

@@ -1,8 +1,8 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { hashToUsize } from './hashToUsize';
 
-export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphData) {
+export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphRegistry) {
 	const inputIds: Record<string, number> = {};
 
 	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {

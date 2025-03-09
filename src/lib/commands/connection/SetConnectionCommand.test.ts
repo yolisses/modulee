@@ -1,11 +1,11 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetConnectionCommand } from './SetConnectionCommand';
 
 test('SetConnectionCommand without remotion', () => {
-	const graphData = { connections: new ById() } as GraphData;
+	const graphData = { connections: new ById() } as GraphRegistry;
 
 	const command = new SetConnectionCommand(
 		mockCommandData({
@@ -50,7 +50,7 @@ test('SetConnectionCommand with remotion', () => {
 				},
 			},
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new SetConnectionCommand(
 		mockCommandData({

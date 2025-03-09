@@ -1,6 +1,6 @@
 import type { Remotion } from '$lib/array/remotion';
 import { removeById } from '$lib/array/removeById';
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
 
@@ -11,7 +11,7 @@ export class RedoCommand extends EditorCommand<{
 
 	remotion!: Remotion<EditorCommand>;
 
-	execute(graphData: GraphData, editorData: EditorData): void {
+	execute(graphData: GraphRegistry, editorData: EditorData): void {
 		this.remotion = removeById(editorData.undoneHistory, this.details.commandId);
 		const command = this.remotion.item;
 		editorData.history.push(command);

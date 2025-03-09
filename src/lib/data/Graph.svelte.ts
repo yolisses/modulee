@@ -2,7 +2,7 @@ import { ById } from '$lib/editor/ById';
 import { cloneGraphData } from '$lib/process/cloneGraphData';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
-import type { GraphData } from './GraphData';
+import type { GraphRegistry } from './GraphRegistry';
 import { Group } from './Group.svelte';
 import { GroupNode } from './GroupNode.svelte';
 import { instantiateNode } from './instantiateNode';
@@ -15,7 +15,7 @@ export class Graph {
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
 
-	constructor(graphData: GraphData) {
+	constructor(graphData: GraphRegistry) {
 		graphData = cloneGraphData(graphData);
 		this.mainGroupId = graphData.mainGroupId;
 

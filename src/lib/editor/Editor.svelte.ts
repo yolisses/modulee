@@ -1,6 +1,6 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { cloneGraphData } from '$lib/process/cloneGraphData';
 import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
@@ -8,12 +8,12 @@ import type { EditorData } from './EditorData';
 export class Editor {
 	history: EditorCommand[] = $state([])!;
 	undoneHistory: EditorCommand[] = $state([])!;
-	private graphData = $state<GraphData>()!;
+	private graphData = $state<GraphRegistry>()!;
 
 	onExecute?: (command: EditorCommand) => void;
-	setGraphData?: (graphData: GraphData) => void;
+	setGraphData?: (graphData: GraphRegistry) => void;
 
-	constructor(initialGraphData: GraphData) {
+	constructor(initialGraphData: GraphRegistry) {
 		this.graphData = cloneGraphData(initialGraphData);
 		this.recalculate();
 	}

@@ -1,6 +1,6 @@
 import { getInputPathId } from '$lib/connection/getInputPathId';
 import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
@@ -71,7 +71,7 @@ function createImplicitConnection(
 export function addInputImplicitNode(
 	inputPath: InputPath,
 	nodeData: NodeData,
-	graphData: GraphData,
+	graphData: GraphRegistry,
 ) {
 	const implicitNodeData = createInputImplicitNode(inputPath, nodeData);
 	if (implicitNodeData) {
@@ -88,7 +88,7 @@ export function addInputImplicitNode(
 	}
 }
 
-export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphData) {
+export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphRegistry) {
 	if (getIsSomeGroupNode(nodeData)) return;
 
 	const inputPaths = getNodeInputPaths(nodeData, graphData);
@@ -102,7 +102,7 @@ export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphData) {
 }
 
 // TODO consider adopting an OOP approach
-export function addImplicitNodes(graphData: GraphData) {
+export function addImplicitNodes(graphData: GraphRegistry) {
 	graphData.nodes.values().forEach((nodeData) => {
 		addNodeImplicitNodes(nodeData, graphData);
 	});

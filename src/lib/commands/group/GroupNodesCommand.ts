@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupData } from '$lib/data/GroupData';
 import type { NodeData } from '$lib/data/NodeData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
@@ -13,7 +13,7 @@ export class GroupNodesCommand extends EditorCommand<{
 	addGroupCommand!: AddGroupCommand;
 	previousGroupIds!: Record<string, string>;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		const { group, nodesId, groupNodeData } = this.details;
 
 		// TODO find better way to instantiate this command
@@ -31,7 +31,7 @@ export class GroupNodesCommand extends EditorCommand<{
 		graphData.nodes.add(groupNodeData);
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		this.addGroupCommand.undo(graphData);
 		graphData.nodes.remove(this.details.groupNodeData);
 		graphData.nodes.values().forEach((nodeData) => {

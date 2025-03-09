@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupData } from '$lib/data/GroupData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
@@ -9,11 +9,11 @@ export class RemoveGroupCommand extends EditorCommand<{
 
 	groupData!: GroupData;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		this.groupData = graphData.groups.removeById(this.details.groupId);
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		graphData.groups.add(this.groupData);
 	}
 }

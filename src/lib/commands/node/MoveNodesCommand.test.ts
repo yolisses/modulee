@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
@@ -11,7 +11,7 @@ test('MoveNodesCommand', () => {
 			{ id: 'node2', position: { x: 2, y: 2 } },
 			{ id: 'node3', position: { x: 3, y: 3 } },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new MoveNodesCommand(
 		mockCommandData({

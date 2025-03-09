@@ -1,6 +1,6 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 
-export function cloneGraphData(graphData: GraphData): GraphData {
+export function cloneGraphData(graphData: GraphRegistry): GraphRegistry {
 	return {
 		mainGroupId: graphData.mainGroupId,
 		nodes: graphData.nodes.clone(),

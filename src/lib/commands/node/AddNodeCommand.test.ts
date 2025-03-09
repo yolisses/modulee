@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
@@ -8,7 +8,7 @@ import { AddNodeCommand } from './AddNodeCommand';
 test('AddNodeCommand', () => {
 	const graphData = {
 		nodes: ById.fromItems([{ id: 'node1' }, { id: 'node2' }]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new AddNodeCommand(mockCommandData({ node: { id: 'node3' } as NodeData }));
 	command.execute(graphData);

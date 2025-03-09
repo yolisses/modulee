@@ -1,7 +1,7 @@
-import type { GraphData } from '$lib/data/GraphData';
 import type { GraphDataV2 } from '$lib/data/GraphDataV2';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 
-export function getGraphDataV2(graphData: GraphData): GraphDataV2 {
+export function getGraphDataV2(graphData: GraphRegistry): GraphDataV2 {
 	return {
 		mainGroupId: graphData.mainGroupId,
 		nodes: graphData.nodes.values(),

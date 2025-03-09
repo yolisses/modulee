@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupData } from '$lib/data/GroupData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
@@ -8,7 +8,7 @@ import { AddGroupCommand } from './AddGroupCommand';
 test('AddGroupCommand', () => {
 	const graphData = {
 		groups: ById.fromItems([{ id: 'group1' }]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new AddGroupCommand(mockCommandData({ group: { id: 'group2' } as GroupData }));
 	command.execute(graphData);

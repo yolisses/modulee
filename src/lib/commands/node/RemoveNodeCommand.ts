@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorCommandData } from '$lib/editor/EditorCommandData';
@@ -12,11 +12,11 @@ export class RemoveNodeCommand extends EditorCommand<RemoveNodeCommandDetails> {
 
 	nodeData!: NodeData;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		this.nodeData = graphData.nodes.removeById(this.details.nodeId);
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		graphData.nodes.add(this.nodeData);
 	}
 }

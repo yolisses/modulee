@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
@@ -12,7 +12,7 @@ test('SetGroupNodeTargetGroupIdCommand', () => {
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 	const command = new SetGroupNodeTargetGroupIdCommand(
 		mockCommandData({ groupNodeId: 'node2', targetGroupId: 'group2' }),
 	);
@@ -33,7 +33,7 @@ test('SetGroupNodeTargetGroupIdCommand with wrong type', () => {
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
 			{ id: 'node3' },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 	const command = new SetGroupNodeTargetGroupIdCommand(
 		mockCommandData({ groupNodeId: 'node3', targetGroupId: 'group1' }),
 	);

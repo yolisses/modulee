@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { CreateEditorCommandCallback } from './CreateEditorCommandCallback';
 import type { EditorCommandData } from './EditorCommandData';
 import type { EditorData } from './EditorData';
@@ -12,8 +12,8 @@ export abstract class EditorCommand<T = unknown> {
 		this.id = commandData.id;
 	}
 
-	abstract execute(graphData: GraphData, editorData: EditorData): void;
-	abstract undo(graphData: GraphData, editorData: EditorData): void;
+	abstract execute(graphData: GraphRegistry, editorData: EditorData): void;
+	abstract undo(graphData: GraphRegistry, editorData: EditorData): void;
 
 	get details() {
 		return this.commandData.details;

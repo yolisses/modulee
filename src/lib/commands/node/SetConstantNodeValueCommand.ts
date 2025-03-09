@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
 export class SetConstantNodeValueCommand extends EditorCommand<{
@@ -9,7 +9,7 @@ export class SetConstantNodeValueCommand extends EditorCommand<{
 
 	previousValue!: number;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		const { value, nodeId } = this.details;
 		const node = graphData.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {
@@ -19,7 +19,7 @@ export class SetConstantNodeValueCommand extends EditorCommand<{
 		node.extras.value = value;
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		const { nodeId } = this.details;
 		const node = graphData.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {

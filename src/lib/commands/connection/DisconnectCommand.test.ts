@@ -1,5 +1,5 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
@@ -10,7 +10,7 @@ test('DisconnectCommand', () => {
 		connections: ById.fromItems([
 			{ id: 'connection2', inputPath: { nodeId: 'node2', inputKey: 'input2' } },
 		] as ConnectionData[]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new DisconnectCommand(
 		mockCommandData({ inputPath: { nodeId: 'node2', inputKey: 'input2' } }),

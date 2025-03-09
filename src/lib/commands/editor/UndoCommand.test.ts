@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import type { CreateEditorCommandCallback } from '$lib/editor/CreateEditorCommandCallback';
@@ -12,12 +12,12 @@ import { UndoCommand } from './UndoCommand';
 type MockCommandDetails = { nodeId: string };
 type MockCommandData = EditorCommandData<MockCommandDetails>;
 class MockCommand extends EditorCommand<MockCommandDetails> {
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		const { nodeId } = this.details;
 		graphData.nodes.add({ id: nodeId } as NodeData);
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		const { nodeId } = this.details;
 		graphData.nodes.removeById(nodeId);
 	}
@@ -27,7 +27,7 @@ const mockCreateCommandCallback: CreateEditorCommandCallback = (commandData: Edi
 };
 
 test('UndoCommand', () => {
-	const graphData = { nodes: new ById() } as GraphData;
+	const graphData = { nodes: new ById() } as GraphRegistry;
 	const editorData = {
 		history: [] as EditorCommand[],
 		undoneHistory: [] as EditorCommand[],

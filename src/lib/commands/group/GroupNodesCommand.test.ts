@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupData } from '$lib/data/GroupData';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import { ById } from '$lib/editor/ById';
@@ -14,7 +14,7 @@ test('GroupNodesCommand', () => {
 			{ id: 'node2', groupId: 'group1' },
 			{ id: 'node3', groupId: 'group1' },
 		]),
-	} as GraphData;
+	} as GraphRegistry;
 
 	const command = new GroupNodesCommand(
 		mockCommandData({

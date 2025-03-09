@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import type { GroupVoicesNodeData } from '$lib/data/variants/GroupVoicesNodeData';
@@ -6,7 +6,7 @@ import type { GroupVoicesNodeData } from '$lib/data/variants/GroupVoicesNodeData
 // TODO consider adopting an OOP approach
 export function getGroupNodeInputPaths(
 	groupNodeData: GroupNodeData | GroupVoicesNodeData,
-	graphData: GraphData,
+	graphData: GraphRegistry,
 ) {
 	const inputPaths: InputPath[] = [];
 	const { targetGroupId } = groupNodeData.extras;

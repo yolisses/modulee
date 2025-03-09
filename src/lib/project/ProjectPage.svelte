@@ -4,8 +4,6 @@
 	import { createEditorCommand } from '$lib/commands/createEditorCommand';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
-	import type { GraphData } from '$lib/data/GraphData';
-	import { ById } from '$lib/editor/ById';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
@@ -19,6 +17,7 @@
 	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
+	import { createInitialGraphRegistry } from './createInitialGraphRegistry';
 	import { getProjectsRepository } from './getProjectsRepository';
 	import { getProjectDataContext } from './projectDataContext';
 	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
@@ -39,23 +38,16 @@
 	const groupContext = $state({ groupId: projectDataContext.projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
 
-	// TODO find a more encapsulated way to execute this initial changes
-	// TODO move to a separate function
-	const initialGraphData: GraphData = {
-		nodes: new ById(),
-		connections: new ById(),
-		mainGroupId: projectDataContext.projectData.mainGroup.id,
-		groups: ById.fromItems([structuredClone(projectDataContext.projectData.mainGroup)]),
-	};
-
-	const graphDataContext = $state({ graphData: initialGraphData });
+	const graphDataContext = $state({
+		graphData: createInitialGraphRegistry(projectDataContext.projectData),
+	});
 	setGraphDataContext(graphDataContext);
 
 	const graph = new Graph(graphDataContext.graphData);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(initialGraphData);
+	const editor = new Editor(graphDataContext.graphData);
 	editor.setGraphData = (graphData) => {
 		graphDataContext.graphData = graphData;
 		graphContext.graph = new Graph(graphDataContext.graphData);

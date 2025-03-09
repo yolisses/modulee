@@ -1,11 +1,11 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { GroupNodeData } from '$lib/data/variants/GroupNodeData';
 import type { GroupVoicesNodeData } from '$lib/data/variants/GroupVoicesNodeData';
 import { hashToUsize } from './hashToUsize';
 
 export function getGroupNodeExtrasEngineData(
 	groupNodeData: GroupNodeData | GroupVoicesNodeData,
-	graphData: GraphData,
+	graphData: GraphRegistry,
 ) {
 	const inputTargetIds = new Map();
 

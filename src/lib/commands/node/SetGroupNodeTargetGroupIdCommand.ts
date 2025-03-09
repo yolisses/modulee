@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
 export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
@@ -9,7 +9,7 @@ export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
 
 	previousTargetGroupId!: string;
 
-	execute(graphData: GraphData): void {
+	execute(graphData: GraphRegistry): void {
 		const { targetGroupId, groupNodeId } = this.details;
 		const node = graphData.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
@@ -19,7 +19,7 @@ export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
 		node.extras.targetGroupId = targetGroupId;
 	}
 
-	undo(graphData: GraphData): void {
+	undo(graphData: GraphRegistry): void {
 		const { groupNodeId } = this.details;
 		const node = graphData.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
