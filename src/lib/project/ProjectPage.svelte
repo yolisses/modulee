@@ -9,7 +9,7 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
-	import { getGraphData } from '$lib/lateralBar/getGraphDataV2';
+	import { getGraphData } from '$lib/lateralBar/getGraphData';
 	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
@@ -53,11 +53,12 @@
 		graphRegistryContext.graphRegistry = graphRegistry;
 		graphContext.graph = new Graph(graphRegistryContext.graphRegistry);
 
+		const graphData = getGraphData(graphRegistry);
+
+		projectDataContext.projectData.graphData = graphData;
+
 		const projectsRepository = getProjectsRepository();
-		projectsRepository.updateProjectGraphData(
-			projectDataContext.projectData.id,
-			getGraphData(graphRegistry),
-		);
+		projectsRepository.updateProjectGraphData(projectDataContext.projectData.id, graphData);
 	};
 
 	const editorContext = $state({ editor });
