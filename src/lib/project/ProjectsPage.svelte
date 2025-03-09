@@ -2,6 +2,7 @@
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
+	import ImportProjectButton from './ImportProjectButton.svelte';
 	import ProjectList from './ProjectList.svelte';
 
 	const projectsRepository = getProjectsRepository();
@@ -18,6 +19,7 @@
 			<h1 class="pl-2 text-xl font-medium">Projects</h1>
 			<div class="flex-1"></div>
 			<CreateProjectButton />
+			<ImportProjectButton />
 		</div>
 		<div>
 			{#await projectsDataPromise}
