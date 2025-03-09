@@ -1,4 +1,4 @@
-import type { EditorCommandData } from '$lib/editor/EditorCommandData';
+import type { GraphData } from '$lib/data/GraphData';
 import { type IDBPDatabase, openDB } from 'idb';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
@@ -26,11 +26,6 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 				if (!database.objectStoreNames.contains('projects')) {
 					database.createObjectStore('projects', { keyPath: 'id', autoIncrement: false });
 				}
-
-				if (!database.objectStoreNames.contains('commands')) {
-					const store = database.createObjectStore('commands', { keyPath: 'id' });
-					store.createIndex('projectId_createdAt', ['projectId', 'createdAt'], { unique: false });
-				}
 			},
 		});
 		this.isInitialized = true;
@@ -40,39 +35,14 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 		return this.database.getAll('projects');
 	}
 
-	/**
-	 * Returns all the commands of a project ordered by creation date
-	 * @param id
-	 */
-	async getCommandsOfProject(id: string): Promise<EditorCommandData[]> {
-		const range = IDBKeyRange.bound([id, ''], [id, '\uFFFF']);
-		return this.database.getAllFromIndex('commands', 'projectId_createdAt', range);
-	}
-
 	async getProject(id: string) {
 		const projectData: ProjectData = await this.database.get('projects', id);
 		return projectData;
 	}
 
 	async deleteProject(id: string) {
-		const transaction = this.database.transaction(['projects', 'commands'], 'readwrite');
-		const commandsRange = IDBKeyRange.bound([id, ''], [id, '\uFFFF']);
-		const commands = await transaction
-			.objectStore('commands')
-			.index('projectId_createdAt')
-			.getAll(commandsRange);
-		await Promise.all(
-			commands.map((command) => transaction.objectStore('commands').delete(command.id)),
-		);
-		await transaction.objectStore('projects').delete(id);
-		await transaction.done;
-
+		await this.database.delete('projects', id);
 		this.onProjectsChange?.();
-	}
-
-	async addCommand(commandData: EditorCommandData) {
-		const transaction = this.database.transaction('commands', 'readwrite');
-		await Promise.all([transaction.store.add(commandData), transaction.done]);
 	}
 
 	async createProject(projectData: ProjectData) {
@@ -85,6 +55,14 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 		const transaction = this.database.transaction('projects', 'readwrite');
 		const projectData: ProjectData = await transaction.store.get(id);
 		projectData.name = name;
+		await Promise.all([transaction.store.put(projectData), transaction.done]);
+		this.onProjectsChange?.();
+	}
+
+	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
+		const transaction = this.database.transaction('projects', 'readwrite');
+		const projectData: ProjectData = await transaction.store.get(id);
+		projectData.graphData = graphData;
 		await Promise.all([transaction.store.put(projectData), transaction.done]);
 		this.onProjectsChange?.();
 	}

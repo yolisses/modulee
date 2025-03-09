@@ -9,6 +9,7 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
+	import { getGraphData } from '$lib/lateralBar/getGraphDataV2';
 	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
@@ -47,14 +48,16 @@
 	setGraphContext(graphContext);
 
 	const editor = new Editor(graphRegistryContext.graphRegistry);
-	editor.setGraphRegistry = (graphRegistry) => {
+
+	editor.onExecute = (command, graphRegistry) => {
 		graphRegistryContext.graphRegistry = graphRegistry;
 		graphContext.graph = new Graph(graphRegistryContext.graphRegistry);
-	};
 
-	editor.onExecute = (command) => {
 		const projectsRepository = getProjectsRepository();
-		projectsRepository.addCommand(command.commandData);
+		projectsRepository.updateProjectGraphData(
+			projectDataContext.projectData.id,
+			getGraphData(graphRegistry),
+		);
 	};
 
 	const editorContext = $state({ editor });

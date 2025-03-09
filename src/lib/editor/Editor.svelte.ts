@@ -10,16 +10,10 @@ export class Editor {
 	undoneHistory: EditorCommand[] = $state([])!;
 	private graphRegistry = $state<GraphRegistry>()!;
 
-	onExecute?: (command: EditorCommand) => void;
-	setGraphRegistry?: (graphRegistry: GraphRegistry) => void;
+	onExecute?: (command: EditorCommand, graphRegistry: GraphRegistry) => void;
 
 	constructor(initialGraphRegistry: GraphRegistry) {
 		this.graphRegistry = cloneGraphRegistry(initialGraphRegistry);
-		this.recalculate();
-	}
-
-	recalculate() {
-		this.setGraphRegistry?.(cloneGraphRegistry(this.graphRegistry));
 	}
 
 	getIsUndoOrRedo(command: EditorCommand) {
@@ -39,8 +33,7 @@ export class Editor {
 			this.undoneHistory = [];
 		}
 
-		this.recalculate();
-		this.onExecute?.(command);
+		this.onExecute?.(command, this.graphRegistry);
 	}
 
 	getCanUndo() {

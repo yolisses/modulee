@@ -1,4 +1,4 @@
-import type { EditorCommandData } from '$lib/editor/EditorCommandData';
+import type { GraphData } from '$lib/data/GraphData';
 import type { ProjectData } from './ProjectData';
 import type { ProjectsRepository } from './ProjectsRepository';
 
@@ -35,12 +35,6 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		return JSON.parse(projectJson);
 	}
 
-	async addCommand(commandData: EditorCommandData): Promise<void> {
-		const addCommand = this.juceLibrary.getNativeFunction('addCommand');
-		const commandDataJson = JSON.stringify(commandData);
-		await addCommand(commandDataJson);
-	}
-
 	async createProject(projectData: ProjectData): Promise<void> {
 		const createProject = this.juceLibrary.getNativeFunction('createProject');
 		const projectDataJson = JSON.stringify(projectData);
@@ -52,5 +46,10 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		const renameProject = this.juceLibrary.getNativeFunction('renameProject');
 		await renameProject(id, name);
 		this.onProjectsChange?.();
+	}
+
+	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
+		const updateProjectGraphData = this.juceLibrary.getNativeFunction('updateProjectGraphData');
+		await updateProjectGraphData(id, graphData);
 	}
 }
