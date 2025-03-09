@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
-	import { ToggleIsSidebarVisibleActionCommand } from '$lib/node/actionCommands/ToggleSidebarActionCommand';
 	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import {
 		faChevronLeft,
@@ -8,6 +7,7 @@
 		faWindowMaximize,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa, { FaLayers } from 'svelte-fa';
+	import { ToggleIsSidebarVisibleActionCommand } from './actionCommands/ToggleSidebarActionCommand';
 	import { getIsSidebarVisibleContext } from './isSidebarVisibleContext';
 
 	const contextsContext = getContextsContext();
