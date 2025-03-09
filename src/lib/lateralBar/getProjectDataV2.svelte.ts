@@ -10,5 +10,5 @@ export function getProjectDataV2(
 	const { id, name } = projectData;
 	const graphRegistryV2 = getGraphData(graphRegistry);
 	const rawGraphRegistry2 = $state.snapshot(graphRegistryV2);
-	return { id, name, graphRegistry: rawGraphRegistry2 };
+	return { id, name, graphDataV2: rawGraphRegistry2 };
 }

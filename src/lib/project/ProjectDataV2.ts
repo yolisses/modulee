@@ -8,5 +8,5 @@ import type { GraphDataV2 } from '$lib/data/GraphDataV2';
 export type ProjectDataV2 = {
 	id: string;
 	name: string;
-	graphRegistry: GraphDataV2;
+	graphDataV2: GraphDataV2;
 };
