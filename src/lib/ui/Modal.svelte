@@ -16,6 +16,12 @@
 			closeModal();
 		}
 	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
+			closeModal();
+		}
+	}
 </script>
 
 <div class="pointer-events-none fixed inset-0 flex items-center justify-center bg-black/25">
@@ -24,4 +30,4 @@
 	</div>
 </div>
 
-<svelte:window onpointerdown={handleWindowClick} />
+<svelte:window onpointerdown={handleWindowClick} onkeydown={handleKeydown} />
