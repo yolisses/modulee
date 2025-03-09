@@ -6,16 +6,16 @@ import { mockCommandData } from '../test/mockNodeData';
 import { AddGroupCommand } from './AddGroupCommand';
 
 test('AddGroupCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		groups: ById.fromItems([{ id: 'group1' }]),
 	} as GraphRegistry;
 
 	const command = new AddGroupCommand(mockCommandData({ group: { id: 'group2' } as GroupData }));
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
+	expect(graphRegistry.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.groups.values()).toEqual([{ id: 'group1' }]);
+	expect(graphRegistry.groups.values()).toEqual([{ id: 'group1' }]);
 });

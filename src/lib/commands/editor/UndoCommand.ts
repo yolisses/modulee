@@ -14,15 +14,15 @@ export class UndoCommand extends EditorCommand<{
 
 	remotion!: Remotion<EditorCommand>;
 
-	execute(graphData: GraphRegistry, editorData: EditorData): void {
+	execute(graphRegistry: GraphRegistry, editorData: EditorData): void {
 		this.remotion = removeById(editorData.history, this.details.commandId);
 		const command = this.remotion.item;
 		editorData.undoneHistory.push(command);
-		command.undo(graphData, editorData);
+		command.undo(graphRegistry, editorData);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	undo(graphData: GraphRegistry, editorData: EditorData): void {
+	undo(graphRegistry: GraphRegistry, editorData: EditorData): void {
 		throw new Error('Method not implemented');
 	}
 }

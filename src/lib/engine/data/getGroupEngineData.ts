@@ -7,13 +7,13 @@ import { hashToUsize } from './hashToUsize';
 // TODO use just GroupData instead of group
 export function getGroupEngineData(
 	groupData: GroupData,
-	graphData: GraphRegistry,
+	graphRegistry: GraphRegistry,
 ): GroupEngineData {
-	const groupNodes = graphData.nodes.values().filter((nodeData) => {
+	const groupNodes = graphRegistry.nodes.values().filter((nodeData) => {
 		return nodeData.groupId === groupData.id;
 	});
 	return {
 		id: hashToUsize(groupData.id),
-		nodes: groupNodes.map((nodeData) => getNodeEngineData(nodeData, graphData)),
+		nodes: groupNodes.map((nodeData) => getNodeEngineData(nodeData, graphRegistry)),
 	};
 }

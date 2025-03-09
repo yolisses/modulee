@@ -2,14 +2,14 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { hashToUsize } from './hashToUsize';
 
-export function getNodeInputIdsEngineData(nodeData: NodeData, graphData: GraphRegistry) {
+export function getNodeInputIdsEngineData(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const inputIds: Record<string, number> = {};
 
 	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
 		return inputIds;
 	}
 
-	graphData.connections.values().forEach((connectionData) => {
+	graphRegistry.connections.values().forEach((connectionData) => {
 		if (connectionData.inputPath.nodeId !== nodeData.id) {
 			return;
 		}

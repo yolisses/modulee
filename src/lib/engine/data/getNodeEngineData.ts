@@ -5,9 +5,12 @@ import { getNodeInputIdsEngineData } from './getNodeInputIdsEngineData';
 import { hashToUsize } from './hashToUsize';
 import type { NodeEngineData } from './NodeEngineData';
 
-export function getNodeEngineData(nodeData: NodeData, graphData: GraphRegistry): NodeEngineData {
-	const extras = getNodeExtrasEngineData(nodeData, graphData);
-	const inputIds = getNodeInputIdsEngineData(nodeData, graphData);
+export function getNodeEngineData(
+	nodeData: NodeData,
+	graphRegistry: GraphRegistry,
+): NodeEngineData {
+	const extras = getNodeExtrasEngineData(nodeData, graphRegistry);
+	const inputIds = getNodeInputIdsEngineData(nodeData, graphRegistry);
 
 	return {
 		extras,

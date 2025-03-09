@@ -5,7 +5,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { SetConnectionCommand } from './SetConnectionCommand';
 
 test('SetConnectionCommand without remotion', () => {
-	const graphData = { connections: new ById() } as GraphRegistry;
+	const graphRegistry = { connections: new ById() } as GraphRegistry;
 
 	const command = new SetConnectionCommand(
 		mockCommandData({
@@ -20,9 +20,9 @@ test('SetConnectionCommand without remotion', () => {
 		}),
 	);
 
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.connections.values()).toEqual([
+	expect(graphRegistry.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',
@@ -33,13 +33,13 @@ test('SetConnectionCommand without remotion', () => {
 		},
 	]);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.connections.values()).toEqual([]);
+	expect(graphRegistry.connections.values()).toEqual([]);
 });
 
 test('SetConnectionCommand with remotion', () => {
-	const graphData = {
+	const graphRegistry = {
 		connections: ById.fromItems([
 			{
 				id: 'connection1',
@@ -65,9 +65,9 @@ test('SetConnectionCommand with remotion', () => {
 		}),
 	);
 
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.connections.values()).toEqual([
+	expect(graphRegistry.connections.values()).toEqual([
 		{
 			id: 'connection2',
 			targetNodeId: 'node3',
@@ -78,9 +78,9 @@ test('SetConnectionCommand with remotion', () => {
 		},
 	]);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.connections.values()).toEqual([
+	expect(graphRegistry.connections.values()).toEqual([
 		{
 			id: 'connection1',
 			targetNodeId: 'node2',

@@ -12,11 +12,11 @@ export class RemoveNodeCommand extends EditorCommand<RemoveNodeCommandDetails> {
 
 	nodeData!: NodeData;
 
-	execute(graphData: GraphRegistry): void {
-		this.nodeData = graphData.nodes.removeById(this.details.nodeId);
+	execute(graphRegistry: GraphRegistry): void {
+		this.nodeData = graphRegistry.nodes.removeById(this.details.nodeId);
 	}
 
-	undo(graphData: GraphRegistry): void {
-		graphData.nodes.add(this.nodeData);
+	undo(graphRegistry: GraphRegistry): void {
+		graphRegistry.nodes.add(this.nodeData);
 	}
 }

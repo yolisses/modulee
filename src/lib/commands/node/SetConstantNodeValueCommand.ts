@@ -9,9 +9,9 @@ export class SetConstantNodeValueCommand extends EditorCommand<{
 
 	previousValue!: number;
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { value, nodeId } = this.details;
-		const node = graphData.nodes.get(nodeId);
+		const node = graphRegistry.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {
 			throw new Error("Can't change the value of a node with type different than ConstantNode");
 		}
@@ -19,9 +19,9 @@ export class SetConstantNodeValueCommand extends EditorCommand<{
 		node.extras.value = value;
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		const { nodeId } = this.details;
-		const node = graphData.nodes.get(nodeId);
+		const node = graphRegistry.nodes.get(nodeId);
 		if (node.type !== 'ConstantNode') {
 			throw new Error("Can't change the value of a node with type different than ConstantNode");
 		}

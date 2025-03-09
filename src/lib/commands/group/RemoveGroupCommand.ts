@@ -9,11 +9,11 @@ export class RemoveGroupCommand extends EditorCommand<{
 
 	groupData!: GroupData;
 
-	execute(graphData: GraphRegistry): void {
-		this.groupData = graphData.groups.removeById(this.details.groupId);
+	execute(graphRegistry: GraphRegistry): void {
+		this.groupData = graphRegistry.groups.removeById(this.details.groupId);
 	}
 
-	undo(graphData: GraphRegistry): void {
-		graphData.groups.add(this.groupData);
+	undo(graphRegistry: GraphRegistry): void {
+		graphRegistry.groups.add(this.groupData);
 	}
 }

@@ -6,7 +6,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { DisconnectCommand } from './DisconnectCommand';
 
 test('DisconnectCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		connections: ById.fromItems([
 			{ id: 'connection2', inputPath: { nodeId: 'node2', inputKey: 'input2' } },
 		] as ConnectionData[]),
@@ -16,11 +16,11 @@ test('DisconnectCommand', () => {
 		mockCommandData({ inputPath: { nodeId: 'node2', inputKey: 'input2' } }),
 	);
 
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.connections.containsId('connection2')).toEqual(false);
+	expect(graphRegistry.connections.containsId('connection2')).toEqual(false);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.connections.containsId('connection2')).toEqual(true);
+	expect(graphRegistry.connections.containsId('connection2')).toEqual(true);
 });

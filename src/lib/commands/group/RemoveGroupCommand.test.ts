@@ -5,19 +5,19 @@ import { mockCommandData } from '../test/mockNodeData';
 import { RemoveGroupCommand } from './RemoveGroupCommand';
 
 test('RemoveGroupCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		groups: ById.fromItems([{ id: 'group1' }, { id: 'group2' }, { id: 'group3' }]),
 	} as GraphRegistry;
 
 	const commandDetails = { groupId: 'group2' };
 	const command = new RemoveGroupCommand(mockCommandData(commandDetails));
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.groups).toEqual(ById.fromItems([{ id: 'group1' }, { id: 'group3' }]));
+	expect(graphRegistry.groups).toEqual(ById.fromItems([{ id: 'group1' }, { id: 'group3' }]));
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.groups).toEqual(
+	expect(graphRegistry.groups).toEqual(
 		ById.fromItems([{ id: 'group1' }, { id: 'group2' }, { id: 'group3' }]),
 	);
 });

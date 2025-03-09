@@ -9,9 +9,9 @@ export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
 
 	previousTargetGroupId!: string;
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { targetGroupId, groupNodeId } = this.details;
-		const node = graphData.nodes.get(groupNodeId);
+		const node = graphRegistry.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}
@@ -19,9 +19,9 @@ export class SetGroupNodeTargetGroupIdCommand extends EditorCommand<{
 		node.extras.targetGroupId = targetGroupId;
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		const { groupNodeId } = this.details;
-		const node = graphData.nodes.get(groupNodeId);
+		const node = graphRegistry.nodes.get(groupNodeId);
 		if (node.type !== 'GroupNode' && node.type !== 'GroupVoicesNode') {
 			throw new Error("Can't change the groupId of a non group node");
 		}

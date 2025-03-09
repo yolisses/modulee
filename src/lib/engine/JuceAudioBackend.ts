@@ -6,7 +6,7 @@ export class JuceAudioBackend implements AudioBackend {
 
 	setGraph(graphEngineData: GraphEngineData) {
 		window.__JUCE__?.backend.emitEvent('setGraph', {
-			graphData: JSON.stringify(graphEngineData),
+			graphRegistry: JSON.stringify(graphEngineData),
 		});
 	}
 

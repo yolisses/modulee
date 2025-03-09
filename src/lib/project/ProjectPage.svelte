@@ -8,13 +8,13 @@
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
-	import { setGraphDataContext } from '$lib/graph/graphDataContext';
+	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { setGroupIdContext } from '$lib/group/groupIdContext';
 	import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 	import LateralBar from '$lib/lateralBar/LateralBar.svelte';
 	import { setSelectedTabContext } from '$lib/lateralBar/selectedTabContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
-	import { getProcessedGraphData } from '$lib/process/getProcessedGraphData';
+	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
 	import { createInitialGraphRegistry } from './createInitialGraphRegistry';
@@ -38,19 +38,19 @@
 	const groupContext = $state({ groupId: projectDataContext.projectData.mainGroup.id });
 	setGroupIdContext(groupContext);
 
-	const graphDataContext = $state({
-		graphData: createInitialGraphRegistry(projectDataContext.projectData),
+	const graphRegistryContext = $state({
+		graphRegistry: createInitialGraphRegistry(projectDataContext.projectData),
 	});
-	setGraphDataContext(graphDataContext);
+	setGraphRegistryContext(graphRegistryContext);
 
-	const graph = new Graph(graphDataContext.graphData);
+	const graph = new Graph(graphRegistryContext.graphRegistry);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
-	const editor = new Editor(graphDataContext.graphData);
-	editor.setGraphData = (graphData) => {
-		graphDataContext.graphData = graphData;
-		graphContext.graph = new Graph(graphDataContext.graphData);
+	const editor = new Editor(graphRegistryContext.graphRegistry);
+	editor.setGraphRegistry = (graphRegistry) => {
+		graphRegistryContext.graphRegistry = graphRegistry;
+		graphContext.graph = new Graph(graphRegistryContext.graphRegistry);
 	};
 
 	projectDataContext.projectData.commands.map((commandData) => {
@@ -68,8 +68,8 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const processedGraphData = getProcessedGraphData(graphDataContext.graphData);
-		const graphEngineData = getGraphEngineData(processedGraphData);
+		const processedGraphRegistry = getProcessedGraphRegistry(graphRegistryContext.graphRegistry);
+		const graphEngineData = getGraphEngineData(processedGraphRegistry);
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 

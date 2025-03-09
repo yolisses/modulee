@@ -71,39 +71,39 @@ function createImplicitConnection(
 export function addInputImplicitNode(
 	inputPath: InputPath,
 	nodeData: NodeData,
-	graphData: GraphRegistry,
+	graphRegistry: GraphRegistry,
 ) {
 	const implicitNodeData = createInputImplicitNode(inputPath, nodeData);
 	if (implicitNodeData) {
-		graphData.nodes.add(implicitNodeData);
+		graphRegistry.nodes.add(implicitNodeData);
 
 		const implicitConnectionData: ConnectionData = createImplicitConnection(
 			inputPath,
 			implicitNodeData,
 		);
 
-		graphData.connections.add(implicitConnectionData);
+		graphRegistry.connections.add(implicitConnectionData);
 
-		addNodeImplicitNodes(implicitNodeData, graphData);
+		addNodeImplicitNodes(implicitNodeData, graphRegistry);
 	}
 }
 
-export function addNodeImplicitNodes(nodeData: NodeData, graphData: GraphRegistry) {
+export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	if (getIsSomeGroupNode(nodeData)) return;
 
-	const inputPaths = getNodeInputPaths(nodeData, graphData);
+	const inputPaths = getNodeInputPaths(nodeData, graphRegistry);
 
 	inputPaths.forEach((inputPath) => {
-		const isInputConnected = getIsInputConnected(inputPath, graphData);
+		const isInputConnected = getIsInputConnected(inputPath, graphRegistry);
 		if (isInputConnected) return;
 
-		addInputImplicitNode(inputPath, nodeData, graphData);
+		addInputImplicitNode(inputPath, nodeData, graphRegistry);
 	});
 }
 
 // TODO consider adopting an OOP approach
-export function addImplicitNodes(graphData: GraphRegistry) {
-	graphData.nodes.values().forEach((nodeData) => {
-		addNodeImplicitNodes(nodeData, graphData);
+export function addImplicitNodes(graphRegistry: GraphRegistry) {
+	graphRegistry.nodes.values().forEach((nodeData) => {
+		addNodeImplicitNodes(nodeData, graphRegistry);
 	});
 }

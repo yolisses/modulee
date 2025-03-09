@@ -6,10 +6,10 @@ import type { NodeExtrasEngineData } from './NodeEngineData';
 
 export function getNodeExtrasEngineData(
 	nodeData: NodeData,
-	graphData: GraphRegistry,
+	graphRegistry: GraphRegistry,
 ): NodeExtrasEngineData {
 	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-		return getGroupNodeExtrasEngineData(nodeData, graphData);
+		return getGroupNodeExtrasEngineData(nodeData, graphRegistry);
 	} else {
 		return getDefaultNodeExtrasEngineData(nodeData);
 	}

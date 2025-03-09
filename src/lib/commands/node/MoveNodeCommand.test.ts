@@ -5,7 +5,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { MoveNodeCommand } from './MoveNodeCommand';
 
 test('MoveNodeCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1', position: { x: 1, y: 1 } },
 			{ id: 'node2', position: { x: 2, y: 2 } },
@@ -15,11 +15,11 @@ test('MoveNodeCommand', () => {
 
 	const commandDetails = { nodeId: 'node2', delta: { x: 4, y: 4 } };
 	const command = new MoveNodeCommand(mockCommandData(commandDetails));
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.nodes.get('node2').position).toEqual({ x: 6, y: 6 });
+	expect(graphRegistry.nodes.get('node2').position).toEqual({ x: 6, y: 6 });
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.nodes.get('node2').position).toEqual({ x: 2, y: 2 });
+	expect(graphRegistry.nodes.get('node2').position).toEqual({ x: 2, y: 2 });
 });

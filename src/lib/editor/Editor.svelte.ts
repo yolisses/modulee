@@ -1,25 +1,25 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import { cloneGraphData } from '$lib/process/cloneGraphData';
+import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';
 
 export class Editor {
 	history: EditorCommand[] = $state([])!;
 	undoneHistory: EditorCommand[] = $state([])!;
-	private graphData = $state<GraphRegistry>()!;
+	private graphRegistry = $state<GraphRegistry>()!;
 
 	onExecute?: (command: EditorCommand) => void;
-	setGraphData?: (graphData: GraphRegistry) => void;
+	setGraphRegistry?: (graphRegistry: GraphRegistry) => void;
 
-	constructor(initialGraphData: GraphRegistry) {
-		this.graphData = cloneGraphData(initialGraphData);
+	constructor(initialGraphRegistry: GraphRegistry) {
+		this.graphRegistry = cloneGraphRegistry(initialGraphRegistry);
 		this.recalculate();
 	}
 
 	recalculate() {
-		this.setGraphData?.(cloneGraphData(this.graphData));
+		this.setGraphRegistry?.(cloneGraphRegistry(this.graphRegistry));
 	}
 
 	getIsUndoOrRedo(command: EditorCommand) {
@@ -31,7 +31,7 @@ export class Editor {
 			history: this.history,
 			undoneHistory: this.undoneHistory,
 		};
-		command.execute(this.graphData, editorData);
+		command.execute(this.graphRegistry, editorData);
 
 		// TODO fix this potential data duplication
 		if (!this.getIsUndoOrRedo(command)) {

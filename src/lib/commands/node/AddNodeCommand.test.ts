@@ -6,16 +6,16 @@ import { mockCommandData } from '../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
 test('AddNodeCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([{ id: 'node1' }, { id: 'node2' }]),
 	} as GraphRegistry;
 
 	const command = new AddNodeCommand(mockCommandData({ node: { id: 'node3' } as NodeData }));
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }, { id: 'node3' }]);
+	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }, { id: 'node3' }]);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
+	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 });

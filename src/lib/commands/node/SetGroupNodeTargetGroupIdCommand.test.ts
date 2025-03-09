@@ -6,7 +6,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { SetGroupNodeTargetGroupIdCommand } from './SetGroupNodeTargetGroupIdCommand';
 
 test('SetGroupNodeTargetGroupIdCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
@@ -17,17 +17,17 @@ test('SetGroupNodeTargetGroupIdCommand', () => {
 		mockCommandData({ groupNodeId: 'node2', targetGroupId: 'group2' }),
 	);
 
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect((graphData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group2');
+	expect((graphRegistry.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group2');
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect((graphData.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group1');
+	expect((graphRegistry.nodes.get('node2') as GroupNodeData).extras.targetGroupId).toBe('group1');
 });
 
 test('SetGroupNodeTargetGroupIdCommand with wrong type', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'GroupNode', extras: { targetGroupId: 'group1' } },
@@ -39,6 +39,6 @@ test('SetGroupNodeTargetGroupIdCommand with wrong type', () => {
 	);
 
 	expect(() => {
-		command.execute(graphData);
+		command.execute(graphRegistry);
 	}).toThrow();
 });

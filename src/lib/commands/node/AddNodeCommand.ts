@@ -7,13 +7,13 @@ export class AddNodeCommand extends EditorCommand<{
 }> {
 	static name = 'AddNodeCommand';
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { node } = this.details;
-		graphData.nodes.add(node);
+		graphRegistry.nodes.add(node);
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		const { node } = this.details;
-		graphData.nodes.remove(node);
+		graphRegistry.nodes.remove(node);
 	}
 }

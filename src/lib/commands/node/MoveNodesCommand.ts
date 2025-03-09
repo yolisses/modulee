@@ -9,7 +9,7 @@ export class MoveNodesCommand extends EditorCommand<{
 }> {
 	commands!: MoveNodeCommand[];
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		this.commands = this.details.nodeIds.map((nodeId) => {
 			return new MoveNodeCommand({
 				type: 'MoveNodeCommand',
@@ -17,13 +17,13 @@ export class MoveNodesCommand extends EditorCommand<{
 			} as MoveNodeCommandData);
 		});
 		this.commands.forEach((command) => {
-			command.execute(graphData);
+			command.execute(graphRegistry);
 		});
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		this.commands.forEach((command) => {
-			command.undo(graphData);
+			command.undo(graphRegistry);
 		});
 	}
 }

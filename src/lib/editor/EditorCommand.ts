@@ -12,8 +12,8 @@ export abstract class EditorCommand<T = unknown> {
 		this.id = commandData.id;
 	}
 
-	abstract execute(graphData: GraphRegistry, editorData: EditorData): void;
-	abstract undo(graphData: GraphRegistry, editorData: EditorData): void;
+	abstract execute(graphRegistry: GraphRegistry, editorData: EditorData): void;
+	abstract undo(graphRegistry: GraphRegistry, editorData: EditorData): void;
 
 	get details() {
 		return this.commandData.details;

@@ -7,12 +7,12 @@ export class AddGroupCommand extends EditorCommand<{
 }> {
 	static name = 'AddGroupCommand';
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { group } = this.details;
-		graphData.groups.add(group);
+		graphRegistry.groups.add(group);
 	}
 
-	undo(graphData: GraphRegistry): void {
-		graphData.groups.remove(this.details.group);
+	undo(graphRegistry: GraphRegistry): void {
+		graphRegistry.groups.remove(this.details.group);
 	}
 }

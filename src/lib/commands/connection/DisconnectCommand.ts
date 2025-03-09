@@ -11,15 +11,15 @@ export class DisconnectCommand extends EditorCommand<{
 
 	connectionsData!: ConnectionData[];
 
-	execute(graphData: GraphRegistry): void {
-		this.connectionsData = graphData.connections.removeByCondition((connectionData) =>
+	execute(graphRegistry: GraphRegistry): void {
+		this.connectionsData = graphRegistry.connections.removeByCondition((connectionData) =>
 			getAreInputPathsEqual(connectionData.inputPath, this.details.inputPath),
 		);
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		this.connectionsData.forEach((connectionData) => {
-			graphData.connections.add(connectionData);
+			graphRegistry.connections.add(connectionData);
 		});
 	}
 }

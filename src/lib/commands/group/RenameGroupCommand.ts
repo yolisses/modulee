@@ -7,14 +7,14 @@ export class RenameGroupCommand extends EditorCommand<{
 }> {
 	previousName!: string;
 
-	execute(graphData: GraphRegistry): void {
-		const groupData = graphData.groups.get(this.details.groupId);
+	execute(graphRegistry: GraphRegistry): void {
+		const groupData = graphRegistry.groups.get(this.details.groupId);
 		this.previousName = groupData.name;
 		groupData.name = this.details.name;
 	}
 
-	undo(graphData: GraphRegistry): void {
-		const groupData = graphData.groups.get(this.details.groupId);
+	undo(graphRegistry: GraphRegistry): void {
+		const groupData = graphRegistry.groups.get(this.details.groupId);
 		groupData.name = this.previousName;
 	}
 }

@@ -1,5 +1,5 @@
 import { ById } from '$lib/editor/ById';
-import { cloneGraphData } from '$lib/process/cloneGraphData';
+import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
 import type { GraphRegistry } from './GraphRegistry';
@@ -15,16 +15,16 @@ export class Graph {
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
 
-	constructor(graphData: GraphRegistry) {
-		graphData = cloneGraphData(graphData);
-		this.mainGroupId = graphData.mainGroupId;
+	constructor(graphRegistry: GraphRegistry) {
+		graphRegistry = cloneGraphRegistry(graphRegistry);
+		this.mainGroupId = graphRegistry.mainGroupId;
 
-		graphData.nodes.values().forEach((nodeData) => {
+		graphRegistry.nodes.values().forEach((nodeData) => {
 			const node = instantiateNode(nodeData);
 			this.nodes.add(node);
 		});
 
-		graphData.groups.values().forEach((groupData) => {
+		graphRegistry.groups.values().forEach((groupData) => {
 			const group = new Group(groupData, this.nodes);
 			this.groups.add(group);
 		});
@@ -35,7 +35,7 @@ export class Graph {
 			}
 		});
 
-		graphData.connections.values().forEach((connectionData) => {
+		graphRegistry.connections.values().forEach((connectionData) => {
 			const connection = new Connection(connectionData);
 			this.connections.add(connection);
 		});

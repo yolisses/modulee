@@ -7,7 +7,7 @@ export class RemoveNodesCommand extends EditorCommand<{
 }> {
 	commands!: RemoveNodeCommand[];
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		this.commands = this.details.nodeIds.map((nodeId) => {
 			return new RemoveNodeCommand({
 				type: 'RemoveNodeCommand',
@@ -15,13 +15,13 @@ export class RemoveNodesCommand extends EditorCommand<{
 			} as RemoveNodeCommandData);
 		});
 		this.commands.forEach((command) => {
-			command.execute(graphData);
+			command.execute(graphRegistry);
 		});
 	}
 
-	undo(graphData: GraphRegistry): void {
+	undo(graphRegistry: GraphRegistry): void {
 		this.commands.forEach((command) => {
-			command.undo(graphData);
+			command.undo(graphRegistry);
 		});
 	}
 }

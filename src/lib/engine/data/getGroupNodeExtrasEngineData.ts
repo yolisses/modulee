@@ -5,11 +5,11 @@ import { hashToUsize } from './hashToUsize';
 
 export function getGroupNodeExtrasEngineData(
 	groupNodeData: GroupNodeData | GroupVoicesNodeData,
-	graphData: GraphRegistry,
+	graphRegistry: GraphRegistry,
 ) {
 	const inputTargetIds = new Map();
 
-	graphData.connections.values().forEach((connectionData) => {
+	graphRegistry.connections.values().forEach((connectionData) => {
 		const { inputPath } = connectionData;
 		if (inputPath.nodeId !== groupNodeData.id) {
 			return;

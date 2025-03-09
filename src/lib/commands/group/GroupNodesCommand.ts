@@ -13,28 +13,28 @@ export class GroupNodesCommand extends EditorCommand<{
 	addGroupCommand!: AddGroupCommand;
 	previousGroupIds!: Record<string, string>;
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { group, nodesId, groupNodeData } = this.details;
 
 		// TODO find better way to instantiate this command
 		this.addGroupCommand = new AddGroupCommand(mockCommandData({ group }));
-		this.addGroupCommand.execute(graphData);
+		this.addGroupCommand.execute(graphRegistry);
 
 		this.previousGroupIds = {};
-		graphData.nodes.values().forEach((nodeData) => {
+		graphRegistry.nodes.values().forEach((nodeData) => {
 			if (nodesId.includes(nodeData.id)) {
 				this.previousGroupIds[nodeData.id] = nodeData.groupId;
 				nodeData.groupId = group.id;
 			}
 		});
 
-		graphData.nodes.add(groupNodeData);
+		graphRegistry.nodes.add(groupNodeData);
 	}
 
-	undo(graphData: GraphRegistry): void {
-		this.addGroupCommand.undo(graphData);
-		graphData.nodes.remove(this.details.groupNodeData);
-		graphData.nodes.values().forEach((nodeData) => {
+	undo(graphRegistry: GraphRegistry): void {
+		this.addGroupCommand.undo(graphRegistry);
+		graphRegistry.nodes.remove(this.details.groupNodeData);
+		graphRegistry.nodes.values().forEach((nodeData) => {
 			const previousGroupId = this.previousGroupIds[nodeData.id];
 			if (previousGroupId) {
 				nodeData.groupId = previousGroupId;

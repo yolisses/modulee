@@ -5,14 +5,14 @@ import { getIsInputConnected } from './getIsInputConnected';
 import { getNodeInputPaths } from './getNodeInputPaths';
 
 // TODO consider adopting an OOP approach
-export function addFallbackNodeConnections(nodeData: NodeData, graphData: GraphRegistry) {
-	const inputPaths = getNodeInputPaths(nodeData, graphData);
+export function addFallbackNodeConnections(nodeData: NodeData, graphRegistry: GraphRegistry) {
+	const inputPaths = getNodeInputPaths(nodeData, graphRegistry);
 
 	inputPaths.forEach((inputPath) => {
-		const isInputConnected = getIsInputConnected(inputPath, graphData);
+		const isInputConnected = getIsInputConnected(inputPath, graphRegistry);
 		if (isInputConnected) return;
 
 		const inputFallbackConnection = createInputFallbackConnection(inputPath, nodeData);
-		graphData.connections.add(inputFallbackConnection);
+		graphRegistry.connections.add(inputFallbackConnection);
 	});
 }

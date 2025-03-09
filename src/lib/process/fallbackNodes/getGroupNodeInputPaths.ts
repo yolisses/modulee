@@ -6,11 +6,11 @@ import type { GroupVoicesNodeData } from '$lib/data/variants/GroupVoicesNodeData
 // TODO consider adopting an OOP approach
 export function getGroupNodeInputPaths(
 	groupNodeData: GroupNodeData | GroupVoicesNodeData,
-	graphData: GraphRegistry,
+	graphRegistry: GraphRegistry,
 ) {
 	const inputPaths: InputPath[] = [];
 	const { targetGroupId } = groupNodeData.extras;
-	graphData.nodes.values().forEach((nodeData) => {
+	graphRegistry.nodes.values().forEach((nodeData) => {
 		if (nodeData.type !== 'InputNode') return;
 		if (nodeData.groupId !== targetGroupId) return;
 		inputPaths.push({

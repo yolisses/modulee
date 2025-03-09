@@ -14,17 +14,17 @@ export class SetConnectionCommand extends EditorCommand<{
 	disconnectCommand!: DisconnectCommand;
 	remotions!: Remotion<ConnectionData>[];
 
-	execute(graphData: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry): void {
 		const { connection } = this.details;
 		this.disconnectCommand = new DisconnectCommand(
 			mockCommandData({ inputPath: connection.inputPath }),
 		);
-		this.disconnectCommand.execute(graphData);
-		graphData.connections.set(this.details.connection);
+		this.disconnectCommand.execute(graphRegistry);
+		graphRegistry.connections.set(this.details.connection);
 	}
 
-	undo(graphData: GraphRegistry): void {
-		graphData.connections.remove(this.details.connection);
-		this.disconnectCommand.undo(graphData);
+	undo(graphRegistry: GraphRegistry): void {
+		graphRegistry.connections.remove(this.details.connection);
+		this.disconnectCommand.undo(graphRegistry);
 	}
 }

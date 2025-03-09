@@ -4,9 +4,9 @@ import { getBaseNodeInputPaths } from './getBaseNodeInputPaths';
 import { getGroupNodeInputPaths } from './getGroupNodeInputPaths';
 
 // TODO consider adopting an OOP approach
-export function getNodeInputPaths(nodeData: NodeData, graphData: GraphRegistry) {
+export function getNodeInputPaths(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-		return getGroupNodeInputPaths(nodeData, graphData);
+		return getGroupNodeInputPaths(nodeData, graphRegistry);
 	} else {
 		return getBaseNodeInputPaths(nodeData);
 	}

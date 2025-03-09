@@ -5,17 +5,17 @@ import { mockCommandData } from '../test/mockNodeData';
 import { RenameGroupCommand } from './RenameGroupCommand';
 
 test('RenameGroupCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		groups: ById.fromItems([{ id: 'group1' }, { id: 'group2', name: 'name1' }, { id: 'group3' }]),
 	} as GraphRegistry;
 
 	const commandDetails = { groupId: 'group2', name: 'name2' };
 	const command = new RenameGroupCommand(mockCommandData(commandDetails));
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.groups.get('group2').name).toEqual('name2');
+	expect(graphRegistry.groups.get('group2').name).toEqual('name2');
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.groups.get('group2').name).toEqual('name1');
+	expect(graphRegistry.groups.get('group2').name).toEqual('name1');
 });

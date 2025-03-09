@@ -11,11 +11,11 @@ export class RedoCommand extends EditorCommand<{
 
 	remotion!: Remotion<EditorCommand>;
 
-	execute(graphData: GraphRegistry, editorData: EditorData): void {
+	execute(graphRegistry: GraphRegistry, editorData: EditorData): void {
 		this.remotion = removeById(editorData.undoneHistory, this.details.commandId);
 		const command = this.remotion.item;
 		editorData.history.push(command);
-		command.execute(graphData, editorData);
+		command.execute(graphRegistry, editorData);
 	}
 
 	undo(): void {

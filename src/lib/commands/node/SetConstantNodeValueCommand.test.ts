@@ -6,7 +6,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { SetConstantNodeValueCommand } from './SetConstantNodeValueCommand';
 
 test('SetConstantNodeValueCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
@@ -15,17 +15,17 @@ test('SetConstantNodeValueCommand', () => {
 	} as GraphRegistry;
 	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node2', value: 2 }));
 
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect((graphData.nodes.get('node2') as ConstantNodeData).extras.value).toBe(2);
+	expect((graphRegistry.nodes.get('node2') as ConstantNodeData).extras.value).toBe(2);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect((graphData.nodes.get('node2') as ConstantNodeData).extras.value).toBe(1);
+	expect((graphRegistry.nodes.get('node2') as ConstantNodeData).extras.value).toBe(1);
 });
 
 test('SetConstantNodeValueCommand with wrong type', () => {
-	const graphData = {
+	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{ id: 'node2', type: 'ConstantNode', extras: { value: 1 } },
@@ -35,6 +35,6 @@ test('SetConstantNodeValueCommand with wrong type', () => {
 	const command = new SetConstantNodeValueCommand(mockCommandData({ nodeId: 'node3', value: 2 }));
 
 	expect(() => {
-		command.execute(graphData);
+		command.execute(graphRegistry);
 	}).toThrow();
 });

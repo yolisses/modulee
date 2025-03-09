@@ -2,7 +2,7 @@ import { getGraphContext } from '$lib/data/graphContext';
 import { getEditorContext } from '$lib/editor/editorContext';
 import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 import { getIsMutedContext } from '$lib/engine/isMutedContexts';
-import { getGraphDataContext } from '$lib/graph/graphDataContext';
+import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 import { getGroupIdContext } from '$lib/group/groupIdContext';
 import { getIsLateralBarVisibleContext } from '$lib/lateralBar/isLateralBarVisibleContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
@@ -18,7 +18,7 @@ export class Contexts {
 	editorContext = getEditorContext();
 	groupIdContext = getGroupIdContext();
 	isMutedContext = getIsMutedContext();
-	graphDataContext = getGraphDataContext();
+	graphRegistryContext = getGraphRegistryContext();
 	projectDataContext = getProjectDataContext();
 	audioBackendContext = getAudioBackendContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();

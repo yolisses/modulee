@@ -3,8 +3,8 @@
 	import type { ConstantNode } from '$lib/data/ConstantNode.svelte';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getGraphDataContext } from '$lib/graph/graphDataContext';
-	import { cloneGraphData } from '$lib/process/cloneGraphData';
+	import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
+	import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
@@ -17,10 +17,10 @@
 	let value = $state(constantNode.extras.value);
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
-	const graphDataContext = getGraphDataContext();
+	const graphRegistryContext = getGraphRegistryContext();
 
 	$effect(() => {
-		const nodeData = graphDataContext.graphData.nodes.get(constantNode.id);
+		const nodeData = graphRegistryContext.graphRegistry.nodes.get(constantNode.id);
 		if (nodeData.type === 'ConstantNode') {
 			value = nodeData.extras.value;
 		}
@@ -31,11 +31,11 @@
 		const value = parseFloat(valueString);
 		if (Number.isNaN(value)) return;
 
-		const nodeData = graphDataContext.graphData.nodes.get(constantNode.id);
+		const nodeData = graphRegistryContext.graphRegistry.nodes.get(constantNode.id);
 		if (nodeData.type === 'ConstantNode') {
 			nodeData.extras.value = value;
 		}
-		graphDataContext.graphData = cloneGraphData(graphDataContext.graphData);
+		graphRegistryContext.graphRegistry = cloneGraphRegistry(graphRegistryContext.graphRegistry);
 	}
 
 	function handleChange(e: InputChangeEvent) {

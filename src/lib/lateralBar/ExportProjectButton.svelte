@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { getGraphDataContext } from '$lib/graph/graphDataContext';
+	import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faFileExport } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { downloadJson } from './downloadJson';
 	import { getProjectDataV2 } from './getProjectDataV2.svelte';
 
-	const graphDataContext = getGraphDataContext();
+	const graphRegistryContext = getGraphRegistryContext();
 	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
 		const projectDataV2 = getProjectDataV2(
 			projectDataContext.projectData,
-			graphDataContext.graphData,
+			graphRegistryContext.graphRegistry,
 		);
 
 		// DEBUG

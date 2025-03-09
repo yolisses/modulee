@@ -7,7 +7,7 @@ import { mockCommandData } from '../test/mockNodeData';
 import { GroupNodesCommand } from './GroupNodesCommand';
 
 test('GroupNodesCommand', () => {
-	const graphData = {
+	const graphRegistry = {
 		groups: ById.fromItems([{ id: 'group1' }]),
 		nodes: ById.fromItems([
 			{ id: 'node1', groupId: 'group1' },
@@ -28,10 +28,10 @@ test('GroupNodesCommand', () => {
 			} as GroupNodeData,
 		}),
 	);
-	command.execute(graphData);
+	command.execute(graphRegistry);
 
-	expect(graphData.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
-	expect(graphData.nodes.values()).toEqual([
+	expect(graphRegistry.groups.values()).toEqual([{ id: 'group1' }, { id: 'group2' }]);
+	expect(graphRegistry.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group2' },
 		{ id: 'node2', groupId: 'group2' },
 		{ id: 'node3', groupId: 'group1' },
@@ -43,10 +43,10 @@ test('GroupNodesCommand', () => {
 		},
 	]);
 
-	command.undo(graphData);
+	command.undo(graphRegistry);
 
-	expect(graphData.groups.values()).toEqual([{ id: 'group1' }]);
-	expect(graphData.nodes.values()).toEqual([
+	expect(graphRegistry.groups.values()).toEqual([{ id: 'group1' }]);
+	expect(graphRegistry.nodes.values()).toEqual([
 		{ id: 'node1', groupId: 'group1' },
 		{ id: 'node2', groupId: 'group1' },
 		{ id: 'node3', groupId: 'group1' },

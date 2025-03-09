@@ -4,7 +4,7 @@ import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import type { ProjectData } from './ProjectData';
 
-// This will be deprecated once the projectData contains graphData
+// This will be deprecated once the projectData contains graphRegistry
 export function createInitialGraphRegistry(projectData: ProjectData): GraphRegistry {
 	return {
 		nodes: new ById<NodeData>(),
