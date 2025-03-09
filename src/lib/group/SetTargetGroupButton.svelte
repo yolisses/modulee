@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { getRootElementContext } from 'nodes-editor';
+	import type { Snippet } from 'svelte';
 	import Portal from 'svelte-portal';
 	import SetTargetGroupMenuWrapper from './SetTargetGroupMenuWrapper.svelte';
 
 	interface Props {
 		groupNodeId: string;
+		children: Snippet;
 	}
 
-	const { groupNodeId }: Props = $props();
+	const { children, groupNodeId }: Props = $props();
 
 	let mouseEvent = $state<MouseEvent>();
 
@@ -22,13 +24,8 @@
 	const rootElementContext = getRootElementContext();
 </script>
 
-<button
-	onclick={handleClick}
-	style:padding-inline="0.25lh"
-	onpointerdown={handlePointerDown}
-	class="hover-bg overflow-and-ellipsis"
->
-	<span class="opacity-50">Set group</span>
+<button onclick={handleClick} onpointerdown={handlePointerDown} class="hover-bg">
+	{@render children()}
 </button>
 
 {#if rootElementContext.rootElement}
