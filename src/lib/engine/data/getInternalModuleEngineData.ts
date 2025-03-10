@@ -9,11 +9,11 @@ export function getInternalModuleEngineData(
 	internalModuleData: InternalModuleData,
 	graphRegistry: GraphRegistry,
 ): InternalModuleEngineData {
-	const internalModuleNodes = graphRegistry.nodes.values().filter((nodeData) => {
+	const moduleNodes = graphRegistry.nodes.values().filter((nodeData) => {
 		return nodeData.internalModuleId === internalModuleData.id;
 	});
 	return {
 		id: hashToUsize(internalModuleData.id),
-		nodes: internalModuleNodes.map((nodeData) => getNodeEngineData(nodeData, graphRegistry)),
+		nodes: moduleNodes.map((nodeData) => getNodeEngineData(nodeData, graphRegistry)),
 	};
 }

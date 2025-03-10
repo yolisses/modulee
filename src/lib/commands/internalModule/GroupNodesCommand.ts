@@ -5,16 +5,16 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddInternalModuleCommand } from './AddInternalModuleCommand';
 
-export class InternalModuleNodesCommand extends EditorCommand<{
+export class GroupNodesCommand extends EditorCommand<{
 	internalModule: InternalModuleData;
 	nodesId: string[];
-	internalModuleNodeData: NodeData;
+	moduleNodeData: NodeData;
 }> {
 	addInternalModuleCommand!: AddInternalModuleCommand;
 	previousInternalModuleIds!: Record<string, string>;
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { internalModule, nodesId, internalModuleNodeData } = this.details;
+		const { internalModule, nodesId, moduleNodeData } = this.details;
 
 		// TODO find better way to instantiate this command
 		this.addInternalModuleCommand = new AddInternalModuleCommand(
@@ -30,12 +30,12 @@ export class InternalModuleNodesCommand extends EditorCommand<{
 			}
 		});
 
-		graphRegistry.nodes.add(internalModuleNodeData);
+		graphRegistry.nodes.add(moduleNodeData);
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
 		this.addInternalModuleCommand.undo(graphRegistry);
-		graphRegistry.nodes.remove(this.details.internalModuleNodeData);
+		graphRegistry.nodes.remove(this.details.moduleNodeData);
 		graphRegistry.nodes.values().forEach((nodeData) => {
 			const previousInternalModuleId = this.previousInternalModuleIds[nodeData.id];
 			if (previousInternalModuleId) {

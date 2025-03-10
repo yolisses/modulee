@@ -32,7 +32,7 @@
 	>
 		{targetInternalModule.name}
 	</a>
-	<SetTargetInternalModuleButton internalModuleNodeId={moduleNode.id}>
+	<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
 		<Fa icon={faEdit} title="Edit internalModule" />
 	</SetTargetInternalModuleButton>
 </div>

@@ -10,11 +10,11 @@ export const editorCommandNames: Record<string, string> = {
 	MoveNodeCommand: 'Move node',
 	MoveNodesCommand: 'Move nodes',
 	DisconnectCommand: 'Disconnect node',
-	InternalModuleNodesCommand: 'InternalModule selected nodes',
+	GroupNodesCommand: 'InternalModule selected nodes',
 	RemoveNodeCommand: 'Remove node',
 	RemoveInternalModuleCommand: 'Remove internalModule',
 	RenameInternalModuleCommand: 'Rename internalModule',
 	SetConnectionCommand: 'Connect node',
 	SetConstantNodeValueCommand: 'Set constant node value',
-	SetInternalModuleNodeTargetInternalModuleIdCommand: 'Set internalModule of internalModule node',
+	SetModuleNodeTargetInternalModuleIdCommand: 'Set internalModule of internalModule node',
 };

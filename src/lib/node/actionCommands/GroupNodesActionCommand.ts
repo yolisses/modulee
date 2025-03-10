@@ -1,4 +1,4 @@
-import { InternalModuleNodesCommand } from '$lib/commands/internalModule/InternalModuleNodesCommand';
+import { GroupNodesCommand } from '$lib/commands/internalModule/GroupNodesCommand';
 import { createId } from '$lib/data/createId';
 import type { Node } from '$lib/data/Node.svelte';
 import type { NodeData } from '$lib/data/NodeData';
@@ -14,7 +14,7 @@ function getAverageNodesPosition(nodes: Node[]) {
 	return positionsSum.divideByNumber(nodes.length).round();
 }
 
-export class InternalModuleNodesActionCommand extends ActionCommand {
+export class GroupNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {
@@ -31,9 +31,9 @@ export class InternalModuleNodesActionCommand extends ActionCommand {
 		const averagePosition = getAverageNodesPosition(nodes);
 
 		const newInternalModuleId = createId();
-		const internalModuleNodesCommand = new InternalModuleNodesCommand({
+		const groupNodesCommand = new GroupNodesCommand({
 			id: newInternalModuleId,
-			type: 'InternalModuleNodesCommand',
+			type: 'GroupNodesCommand',
 			createdAt: new Date().toJSON(),
 			projectId: projectData.id,
 			details: {
@@ -42,16 +42,16 @@ export class InternalModuleNodesActionCommand extends ActionCommand {
 					id: newInternalModuleId,
 					name: 'New internalModule',
 				},
-				internalModuleNodeData: {
+				moduleNodeData: {
 					id: createId(),
-					type: 'InternalModuleNode',
+					type: 'ModuleNode',
 					internalModuleId: currentInternalModuleId,
 					position: averagePosition.getData(),
-					extras: { targetInternalModuleId: newInternalModuleId },
+					extras: { moduleReference: newInternalModuleId },
 				},
 			},
 		});
 
-		editor.execute(internalModuleNodesCommand);
+		editor.execute(groupNodesCommand);
 	}
 }

@@ -5,7 +5,7 @@ import { Node } from './Node.svelte';
 import type { NodeData } from './NodeData';
 
 export function instantiateNode(nodeData: NodeData) {
-	if (nodeData.type === 'InternalModuleNode' || nodeData.type === 'InternalModuleVoicesNode') {
+	if (nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode') {
 		return new ModuleNode(nodeData);
 	} else if (nodeData.type === 'ConstantNode') {
 		return new ConstantNode(nodeData);

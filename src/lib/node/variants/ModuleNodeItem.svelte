@@ -19,7 +19,7 @@
 				targetInternalModule={moduleNode.targetInternalModule}
 			/>
 		{:else}
-			<SetTargetInternalModuleButton internalModuleNodeId={moduleNode.id}>
+			<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
 				<div class="opacity-50" style:padding-inline="0.25lh">Set internalModule</div>
 			</SetTargetInternalModuleButton>
 		{/if}

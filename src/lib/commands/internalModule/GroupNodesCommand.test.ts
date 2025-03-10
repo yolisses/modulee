@@ -1,12 +1,12 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InternalModuleData } from '$lib/data/InternalModuleData';
-import type { InternalModuleNodeData } from '$lib/data/variants/InternalModuleNodeData';
+import type { ModuleNodeData } from '$lib/data/variants/ModuleNodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { InternalModuleNodesCommand } from './InternalModuleNodesCommand';
+import { GroupNodesCommand } from './GroupNodesCommand';
 
-test('InternalModuleNodesCommand', () => {
+test('GroupNodesCommand', () => {
 	const graphRegistry = {
 		internalModules: ById.fromItems([{ id: 'internalModule1' }]),
 		nodes: ById.fromItems([
@@ -16,16 +16,16 @@ test('InternalModuleNodesCommand', () => {
 		]),
 	} as GraphRegistry;
 
-	const command = new InternalModuleNodesCommand(
+	const command = new GroupNodesCommand(
 		mockCommandData({
 			nodesId: ['node1', 'node2'],
 			internalModule: { id: 'internalModule2' } as InternalModuleData,
-			internalModuleNodeData: {
+			moduleNodeData: {
 				id: 'node4',
 				internalModuleId: 'internalModule1',
-				type: 'InternalModuleNode',
-				extras: { targetInternalModuleId: 'internalModule2' },
-			} as InternalModuleNodeData,
+				type: 'ModuleNode',
+				extras: { moduleReference: 'internalModule2' },
+			} as ModuleNodeData,
 		}),
 	);
 	command.execute(graphRegistry);
@@ -41,7 +41,7 @@ test('InternalModuleNodesCommand', () => {
 		{
 			id: 'node4',
 			internalModuleId: 'internalModule1',
-			type: 'InternalModuleNode',
+			type: 'ModuleNode',
 			extras: { targetInternalModuleId: 'internalModule2' },
 		},
 	]);

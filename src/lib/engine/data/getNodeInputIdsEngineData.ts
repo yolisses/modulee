@@ -5,7 +5,7 @@ import { hashToUsize } from './hashToUsize';
 export function getNodeInputIdsEngineData(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const inputIds: Record<string, number> = {};
 
-	if (nodeData.type === 'InternalModuleNode' || nodeData.type === 'InternalModuleVoicesNode') {
+	if (nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode') {
 		return inputIds;
 	}
 

@@ -1,17 +1,17 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleNodeData } from '$lib/data/variants/InternalModuleNodeData';
-import type { InternalModuleVoicesNodeData } from '$lib/data/variants/InternalModuleVoicesNodeData';
+import type { ModuleNodeData } from '$lib/data/variants/ModuleNodeData';
+import type { ModuleVoicesNodeData } from '$lib/data/variants/ModuleVoicesNodeData';
 import { hashToUsize } from './hashToUsize';
 
-export function getInternalModuleNodeExtrasEngineData(
-	internalModuleNodeData: InternalModuleNodeData | InternalModuleVoicesNodeData,
+export function getModuleNodeExtrasEngineData(
+	moduleNodeData: ModuleNodeData | ModuleVoicesNodeData,
 	graphRegistry: GraphRegistry,
 ) {
 	const inputTargetIds = new Map();
 
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const { inputPath } = connectionData;
-		if (inputPath.nodeId !== internalModuleNodeData.id) {
+		if (inputPath.nodeId !== moduleNodeData.id) {
 			return;
 		}
 
@@ -20,8 +20,8 @@ export function getInternalModuleNodeExtrasEngineData(
 		inputTargetIds.set(inputIdHash, targetNodeIdHash);
 	});
 
-	const targetInternalModuleId = internalModuleNodeData.extras.targetInternalModuleId
-		? hashToUsize(internalModuleNodeData.extras.targetInternalModuleId as string)
+	const targetInternalModuleId = moduleNodeData.extras.moduleReference
+		? hashToUsize(moduleNodeData.extras.moduleReference as string)
 		: undefined;
 
 	return {

@@ -1,10 +1,6 @@
 import type { ConstantNodeData } from './variants/ConstantNodeData';
 import type { InputNodeData } from './variants/InputNodeData';
-import type { InternalModuleNodeData } from './variants/InternalModuleNodeData';
-import type { InternalModuleVoicesNodeData } from './variants/InternalModuleVoicesNodeData';
+import type { ModuleNodeData } from './variants/ModuleNodeData';
+import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 
-export type NodeData =
-	| InputNodeData
-	| InternalModuleNodeData
-	| ConstantNodeData
-	| InternalModuleVoicesNodeData;
+export type NodeData = InputNodeData | ModuleNodeData | ConstantNodeData | ModuleVoicesNodeData;

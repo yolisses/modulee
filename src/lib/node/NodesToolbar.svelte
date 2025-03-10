@@ -3,7 +3,7 @@
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import BackButton from '$lib/internalModule/BackButton.svelte';
-	import InternalModuleNodesButton from '$lib/internalModule/InternalModuleNodesButton.svelte';
+	import GroupNodesButton from '$lib/internalModule/GroupNodesButton.svelte';
 	import ToggleIsSidebarVisibleButton from '$lib/sidebar/ToggleIsSidebarVisibleButton.svelte';
 	import HomeButton from '$lib/ui/HomeButton.svelte';
 	import ZoomInButton from '$lib/zoom/ZoomInButton.svelte';
@@ -24,7 +24,7 @@
 		<RedoButton />
 		<ZoomInButton />
 		<ZoomOutButton />
-		<InternalModuleNodesButton />
+		<GroupNodesButton />
 		<BackButton />
 		<MuteButton />
 	</div>

@@ -17,8 +17,8 @@ function getImplicitNodeId(inputPath: InputPath) {
 	return 'implicit_node_for_input_path_' + getInputPathId(inputPath);
 }
 
-function getIsSomeInternalModuleNode(nodeData: NodeData) {
-	return nodeData.type === 'InternalModuleNode' || nodeData.type === 'InternalModuleVoicesNode';
+function getIsSomeModuleNode(nodeData: NodeData) {
+	return nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode';
 }
 
 export function getNodeDataFromNodeType(
@@ -89,7 +89,7 @@ export function addInputImplicitNode(
 }
 
 export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
-	if (getIsSomeInternalModuleNode(nodeData)) return;
+	if (getIsSomeModuleNode(nodeData)) return;
 
 	const inputPaths = getNodeInputPaths(nodeData, graphRegistry);
 

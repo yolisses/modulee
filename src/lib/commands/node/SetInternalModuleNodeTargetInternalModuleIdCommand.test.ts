@@ -1,53 +1,53 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleNodeData } from '$lib/data/variants/InternalModuleNodeData';
+import type { ModuleNodeData } from '$lib/data/variants/ModuleNodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { SetInternalModuleNodeTargetInternalModuleIdCommand } from './SetInternalModuleNodeTargetInternalModuleIdCommand';
+import { SetModuleNodeTargetInternalModuleIdCommand } from './SetModuleNodeTargetInternalModuleIdCommand';
 
-test('SetInternalModuleNodeTargetInternalModuleIdCommand', () => {
+test('SetModuleNodeTargetInternalModuleIdCommand', () => {
 	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{
 				id: 'node2',
-				type: 'InternalModuleNode',
+				type: 'ModuleNode',
 				extras: { targetInternalModuleId: 'internalModule1' },
 			},
 			{ id: 'node3' },
 		]),
 	} as GraphRegistry;
-	const command = new SetInternalModuleNodeTargetInternalModuleIdCommand(
-		mockCommandData({ internalModuleNodeId: 'node2', targetInternalModuleId: 'internalModule2' }),
+	const command = new SetModuleNodeTargetInternalModuleIdCommand(
+		mockCommandData({ moduleNodeId: 'node2', targetInternalModuleId: 'internalModule2' }),
 	);
 
 	command.execute(graphRegistry);
 
-	expect(
-		(graphRegistry.nodes.get('node2') as InternalModuleNodeData).extras.targetInternalModuleId,
-	).toBe('internalModule2');
+	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toBe(
+		'internalModule2',
+	);
 
 	command.undo(graphRegistry);
 
-	expect(
-		(graphRegistry.nodes.get('node2') as InternalModuleNodeData).extras.targetInternalModuleId,
-	).toBe('internalModule1');
+	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toBe(
+		'internalModule1',
+	);
 });
 
-test('SetInternalModuleNodeTargetInternalModuleIdCommand with wrong type', () => {
+test('SetModuleNodeTargetInternalModuleIdCommand with wrong type', () => {
 	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{
 				id: 'node2',
-				type: 'InternalModuleNode',
+				type: 'ModuleNode',
 				extras: { targetInternalModuleId: 'internalModule1' },
 			},
 			{ id: 'node3' },
 		]),
 	} as GraphRegistry;
-	const command = new SetInternalModuleNodeTargetInternalModuleIdCommand(
-		mockCommandData({ internalModuleNodeId: 'node3', targetInternalModuleId: 'internalModule1' }),
+	const command = new SetModuleNodeTargetInternalModuleIdCommand(
+		mockCommandData({ moduleNodeId: 'node3', targetInternalModuleId: 'internalModule1' }),
 	);
 
 	expect(() => {

@@ -15,7 +15,7 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
 	{ keys: ['Ctrl', 'P'], commandType: 'ShowProjectTabActionCommand' },
 	{ keys: ['Ctrl', 'A'], commandType: 'SelectedAllNodesActionCommand' },
-	{ keys: ['Ctrl', 'G'], commandType: 'InternalModuleNodesActionCommand' },
+	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
 	{ keys: ['Ctrl', 'Alt', 'G'], commandType: 'ShowModulesTabActionCommand' },
 	{ keys: ['Ctrl', 'L'], commandType: 'ToggleIsSidebarVisibleActionCommand' },
 ];

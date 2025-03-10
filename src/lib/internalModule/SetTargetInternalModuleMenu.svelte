@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetInternalModuleNodeTargetInternalModuleIdCommand } from '$lib/commands/node/SetInternalModuleNodeTargetInternalModuleIdCommand';
+	import { SetModuleNodeTargetInternalModuleIdCommand } from '$lib/commands/node/SetModuleNodeTargetInternalModuleIdCommand';
 	import { createId } from '$lib/data/createId.js';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
@@ -11,7 +11,7 @@
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
 
 	interface Props {
-		internalModuleNodeId: string;
+		moduleNodeId: string;
 		closeModal: () => void;
 	}
 
@@ -19,15 +19,15 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
-	const { closeModal, internalModuleNodeId }: Props = $props();
+	const { closeModal, moduleNodeId }: Props = $props();
 
 	function handleInternalModuleSelect(internalModule: InternalModule) {
-		const addNodeCommand = new SetInternalModuleNodeTargetInternalModuleIdCommand({
+		const addNodeCommand = new SetModuleNodeTargetInternalModuleIdCommand({
 			id: createId(),
-			type: 'SetInternalModuleNodeTargetInternalModuleIdCommand',
+			type: 'SetModuleNodeTargetInternalModuleIdCommand',
 			details: {
 				targetInternalModuleId: internalModule.id,
-				internalModuleNodeId: internalModuleNodeId,
+				moduleNodeId: moduleNodeId,
 			},
 			createdAt: new Date().toJSON(),
 			projectId: projectDataContext.projectData.id,

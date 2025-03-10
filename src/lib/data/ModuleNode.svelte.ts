@@ -3,22 +3,22 @@ import { Input } from './Input.svelte';
 import { InputNode } from './InputNode.svelte';
 import type { InternalModule } from './InternalModule.svelte';
 import { Node } from './Node.svelte';
-import type { InternalModuleNodeData } from './variants/InternalModuleNodeData';
-import type { InternalModuleNodeExtrasData } from './variants/InternalModuleNodeExtrasData';
-import type { InternalModuleVoicesNodeData } from './variants/InternalModuleVoicesNodeData';
+import type { ModuleNodeData } from './variants/ModuleNodeData';
+import type { ModuleNodeExtrasData } from './variants/ModuleNodeExtrasData';
+import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 
 // A internalModule node should be created with a internalModule, but a
 // internalModule should be created with node options. To solve this cyclic
-// dependency, the InternalModuleNode is created without internalModule, and the
+// dependency, the ModuleNode is created without internalModule, and the
 // have updateInternalModule called
 export class ModuleNode extends Node {
-	declare extras: InternalModuleNodeExtrasData;
+	declare extras: ModuleNodeExtrasData;
 	targetInternalModuleId: string | null = null;
 	targetInternalModule: InternalModule | null = $state(null);
 
-	constructor(nodeData: InternalModuleNodeData | InternalModuleVoicesNodeData) {
+	constructor(nodeData: ModuleNodeData | ModuleVoicesNodeData) {
 		super(nodeData);
-		const { targetInternalModuleId } = nodeData.extras;
+		const { moduleReference: targetInternalModuleId } = nodeData.extras;
 		if (
 			typeof targetInternalModuleId === 'string' ||
 			typeof targetInternalModuleId === 'undefined'

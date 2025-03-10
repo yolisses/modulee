@@ -4,7 +4,7 @@ import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
 import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
-import { InternalModuleNodesCommand } from './internalModule/InternalModuleNodesCommand';
+import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
 import { RenameInternalModuleCommand } from './internalModule/RenameInternalModuleCommand';
 import { AddNodeCommand } from './node/AddNodeCommand';
@@ -13,7 +13,7 @@ import { MoveNodesCommand } from './node/MoveNodesCommand';
 import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { RemoveNodesCommand } from './node/RemoveNodesCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
-import { SetInternalModuleNodeTargetInternalModuleIdCommand } from './node/SetInternalModuleNodeTargetInternalModuleIdCommand';
+import { SetModuleNodeTargetInternalModuleIdCommand } from './node/SetModuleNodeTargetInternalModuleIdCommand';
 
 export const editorCommandClasses = [
 	RedoCommand,
@@ -23,12 +23,12 @@ export const editorCommandClasses = [
 	MoveNodeCommand,
 	MoveNodesCommand,
 	DisconnectCommand,
-	InternalModuleNodesCommand,
+	GroupNodesCommand,
 	RemoveNodeCommand,
 	RemoveInternalModuleCommand,
 	RemoveNodesCommand,
 	RenameInternalModuleCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
-	SetInternalModuleNodeTargetInternalModuleIdCommand,
+	SetModuleNodeTargetInternalModuleIdCommand,
 ] as EditorCommandClass[];

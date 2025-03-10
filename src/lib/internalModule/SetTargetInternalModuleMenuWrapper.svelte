@@ -4,11 +4,11 @@
 	import SetTargetInternalModuleMenu from './SetTargetInternalModuleMenu.svelte';
 
 	interface Props {
-		internalModuleNodeId: string;
+		moduleNodeId: string;
 		mouseEvent?: MouseEvent;
 	}
 
-	let { internalModuleNodeId, mouseEvent = $bindable() }: Props = $props();
+	let { moduleNodeId, mouseEvent = $bindable() }: Props = $props();
 
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
@@ -47,6 +47,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<SetTargetInternalModuleMenu {closeModal} {internalModuleNodeId} />
+		<SetTargetInternalModuleMenu {closeModal} {moduleNodeId} />
 	</div>
 {/if}

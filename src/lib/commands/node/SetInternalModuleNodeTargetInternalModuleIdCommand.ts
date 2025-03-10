@@ -1,30 +1,30 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class SetInternalModuleNodeTargetInternalModuleIdCommand extends EditorCommand<{
+export class SetModuleNodeTargetInternalModuleIdCommand extends EditorCommand<{
 	targetInternalModuleId: string;
-	internalModuleNodeId: string;
+	moduleNodeId: string;
 }> {
-	static name = 'SetInternalModuleNodeTargetInternalModuleIdCommand';
+	static name = 'SetModuleNodeTargetInternalModuleIdCommand';
 
 	previousTargetInternalModuleId!: string;
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { targetInternalModuleId, internalModuleNodeId } = this.details;
-		const node = graphRegistry.nodes.get(internalModuleNodeId);
-		if (node.type !== 'InternalModuleNode' && node.type !== 'InternalModuleVoicesNode') {
+		const { targetInternalModuleId, moduleNodeId } = this.details;
+		const node = graphRegistry.nodes.get(moduleNodeId);
+		if (node.type !== 'ModuleNode' && node.type !== 'ModuleVoicesNode') {
 			throw new Error("Can't change the internalModuleId of a non internalModule node");
 		}
-		this.previousTargetInternalModuleId = node.extras.targetInternalModuleId;
-		node.extras.targetInternalModuleId = targetInternalModuleId;
+		this.previousTargetInternalModuleId = node.extras.moduleReference;
+		node.extras.moduleReference = targetInternalModuleId;
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		const { internalModuleNodeId } = this.details;
-		const node = graphRegistry.nodes.get(internalModuleNodeId);
-		if (node.type !== 'InternalModuleNode' && node.type !== 'InternalModuleVoicesNode') {
+		const { moduleNodeId } = this.details;
+		const node = graphRegistry.nodes.get(moduleNodeId);
+		if (node.type !== 'ModuleNode' && node.type !== 'ModuleVoicesNode') {
 			throw new Error("Can't change the internalModuleId of a non internalModule node");
 		}
-		node.extras.targetInternalModuleId = this.previousTargetInternalModuleId;
+		node.extras.moduleReference = this.previousTargetInternalModuleId;
 	}
 }

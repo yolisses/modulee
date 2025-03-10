@@ -5,11 +5,11 @@
 	import SetTargetInternalModuleMenuWrapper from './SetTargetInternalModuleMenuWrapper.svelte';
 
 	interface Props {
-		internalModuleNodeId: string;
+		moduleNodeId: string;
 		children: Snippet;
 	}
 
-	const { children, internalModuleNodeId }: Props = $props();
+	const { children, moduleNodeId }: Props = $props();
 
 	let mouseEvent = $state<MouseEvent>();
 
@@ -30,6 +30,6 @@
 
 {#if rootElementContext.rootElement}
 	<Portal target={rootElementContext.rootElement as HTMLElement}>
-		<SetTargetInternalModuleMenuWrapper {mouseEvent} {internalModuleNodeId} />
+		<SetTargetInternalModuleMenuWrapper {mouseEvent} {moduleNodeId} />
 	</Portal>
 {/if}
