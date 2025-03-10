@@ -1,10 +1,13 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 
 export function cloneGraphRegistry(graphRegistry: GraphRegistry): GraphRegistry {
+	const { mainInternalModuleId, connections, externalModuleReferences, internalModules, nodes } =
+		graphRegistry;
 	return {
-		mainInternalModuleId: graphRegistry.mainInternalModuleId,
-		nodes: graphRegistry.nodes.clone(),
-		internalModules: graphRegistry.internalModules.clone(),
-		connections: graphRegistry.connections.clone(),
+		nodes: nodes.clone(),
+		connections: connections.clone(),
+		internalModules: internalModules.clone(),
+		mainInternalModuleId: mainInternalModuleId,
+		externalModuleReferences: externalModuleReferences.clone(),
 	};
 }

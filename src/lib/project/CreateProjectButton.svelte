@@ -17,8 +17,9 @@
 			name: 'New project',
 			graphData: {
 				nodes: [],
-				mainInternalModuleId,
 				connections: [],
+				mainInternalModuleId,
+				externalModuleReferences: [],
 				internalModules: [{ id: mainInternalModuleId, name: 'Main internalModule' }],
 			},
 		};

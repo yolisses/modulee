@@ -1,17 +1,17 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import type { InternalModuleNode } from '$lib/data/InternalModuleNode.svelte';
+	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import SetTargetInternalModuleButton from '$lib/internalModule/SetTargetInternalModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
 	interface Props {
+		moduleNode: ModuleNode;
 		targetInternalModule: InternalModule;
-		internalModuleNode: InternalModuleNode;
 	}
 
-	const { internalModuleNode, targetInternalModule }: Props = $props();
+	const { moduleNode, targetInternalModule }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	const href = $derived(
 		`/projects/${projectDataContext.projectData.id}/internalModules/${targetInternalModule.id}`,
@@ -32,7 +32,7 @@
 	>
 		{targetInternalModule.name}
 	</a>
-	<SetTargetInternalModuleButton internalModuleNodeId={internalModuleNode.id}>
+	<SetTargetInternalModuleButton internalModuleNodeId={moduleNode.id}>
 		<Fa icon={faEdit} title="Edit internalModule" />
 	</SetTargetInternalModuleButton>
 </div>

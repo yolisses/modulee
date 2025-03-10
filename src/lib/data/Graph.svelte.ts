@@ -5,7 +5,7 @@ import type { Connector } from './Connector';
 import type { GraphRegistry } from './GraphRegistry';
 import { instantiateNode } from './instantiateNode';
 import { InternalModule } from './InternalModule.svelte';
-import { InternalModuleNode } from './InternalModuleNode.svelte';
+import { ModuleNode } from './ModuleNode.svelte';
 import { Node } from './Node.svelte';
 
 export class Graph {
@@ -30,7 +30,7 @@ export class Graph {
 		});
 
 		this.nodes.values().forEach((node) => {
-			if (node instanceof InternalModuleNode) {
+			if (node instanceof ModuleNode) {
 				node.updateInternalModule(this.internalModules);
 			}
 		});
