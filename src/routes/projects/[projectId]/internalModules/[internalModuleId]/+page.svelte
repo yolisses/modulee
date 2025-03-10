@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getInternalModuleIdContext$lib/group/internalModuleIdContextule/internalmoduleIdContext';
+	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
 	import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
-	import type { PageData } from './$types';
+	import type { PageData } from '../$types';
 
 	interface Props {
 		data: PageData;
 	}
 
 	const { data }: Props = $props();
-	const internalmoduleIdContext = getInternalModuleIdContext();
+	const internalModuleIdContext = getInternalModuleIdContext();
 
 	$effect(() => {
-		internalmoduleIdContext.internalmoduleId = data.internalmoduleId;
+		internalModuleIdContext.internalModuleId = data.internalModuleId;
 	});
 
 	const selectedTabContext = getSelectedTabContext();
 	$effect(() => {
-		page.params; // Force the effect to run on change [...internalmoduleId]
-		selectedTabContext.selectedTab = 'internalmodule';
+		page.params; // Force the effect to run on change [...internalModuleId]
+		selectedTabContext.selectedTab = 'internalModule';
 	});
 </script>
