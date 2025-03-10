@@ -1,9 +1,9 @@
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 
-export class ShowInternalModulesTabActionCommand extends ActionCommand {
+export class ShowModulesTabActionCommand extends ActionCommand {
 	execute(contexts: Contexts): void {
-		contexts.selectedTabContext.selectedTab = 'internalModules';
+		contexts.selectedTabContext.selectedTab = 'modules';
 		contexts.isSidebarVisibleContext.isSidebarVisible = true;
 	}
 }

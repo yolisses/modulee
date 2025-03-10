@@ -18,10 +18,10 @@
 	function handleDelete(internalModule: InternalModule) {
 		const command = new RemoveInternalModuleCommand({
 			id: createId(),
-			type: 'RemoveInternalModuleCommand',
 			createdAt: new Date().toJSON(),
-			details: { internalModuleId: internalModule.id },
+			type: 'RemoveInternalModuleCommand',
 			projectId: projectDataContext.projectData.id,
+			details: { internalModuleId: internalModule.id },
 		});
 		editorContext.editor.execute(command);
 	}

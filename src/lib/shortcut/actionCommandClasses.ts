@@ -4,7 +4,7 @@ import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesAc
 import { SelectedAllNodesActionCommand } from '$lib/node/actionCommands/SelectedAllNodesActionCommand';
 import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
 import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
-import { ShowInternalModulesTabActionCommand } from '$lib/sidebar/actionCommands/ShowInternalModulesTabActionCommand';
+import { ShowModulesTabActionCommand } from '$lib/sidebar/actionCommands/ShowModulesTabActionCommand';
 import { ShowProjectTabActionCommand } from '$lib/sidebar/actionCommands/ShowProjectTabActionCommand';
 import { ToggleIsSidebarVisibleActionCommand } from '$lib/sidebar/actionCommands/ToggleIsSidebarVisibleActionCommand';
 import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
@@ -20,11 +20,11 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	ResetZoomCommand,
 	UndoActionCommand,
 	RedoActionCommand,
-	InternalModuleNodesActionCommand,
 	RemoveNodesActionCommand,
 	ToggleIsMuteActionCommand,
-	ShowInternalModulesTabActionCommand,
+	ShowModulesTabActionCommand,
 	ShowProjectTabActionCommand,
 	SelectedAllNodesActionCommand,
+	InternalModuleNodesActionCommand,
 	ToggleIsSidebarVisibleActionCommand,
 ];
