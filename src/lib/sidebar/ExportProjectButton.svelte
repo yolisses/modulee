@@ -15,5 +15,5 @@
 
 <button class="common-button" onclick={handleClick}>
 	<Fa icon={faFileExport} />
-	Export internalModule
+	Export project
 </button>
