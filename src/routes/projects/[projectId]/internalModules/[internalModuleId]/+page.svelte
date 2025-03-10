@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
 	import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
-	import type { PageData } from '../$types';
+	import type { PageData } from './$types';
 
 	interface Props {
 		data: PageData;
