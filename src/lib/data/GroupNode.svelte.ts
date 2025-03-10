@@ -11,9 +11,9 @@ import type { GroupVoicesNodeData } from './variants/GroupVoicesNodeData';
 // with node options. To solve this cyclic dependency, the GroupNode is created
 // without group, and the have updateGroup called
 export class GroupNode extends Node {
-	targetGroupId?: string;
-	targetGroup?: Group = $state()!;
 	declare extras: GroupNodeExtrasData;
+	targetGroupId: string | null = null;
+	targetGroup: Group | null = $state(null);
 
 	constructor(nodeData: GroupNodeData | GroupVoicesNodeData) {
 		super(nodeData);
@@ -27,9 +27,9 @@ export class GroupNode extends Node {
 
 	updateGroup(groups: ById<Group>) {
 		if (this.targetGroupId) {
-			this.targetGroup = groups.get(this.targetGroupId);
+			this.targetGroup = groups.getOrNull(this.targetGroupId);
 		} else {
-			this.targetGroup = undefined;
+			this.targetGroup = null;
 		}
 		this.updateInputs();
 	}
