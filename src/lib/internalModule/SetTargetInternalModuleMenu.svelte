@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetModuleNodeTargetInternalModuleIdCommand } from '$lib/commands/node/SetModuleNodeTargetInternalModuleIdCommand';
+	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/SetModuleNodeModuleReferenceCommand';
 	import { createId } from '$lib/data/createId.js';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
@@ -22,9 +22,9 @@
 	const { closeModal, moduleNodeId }: Props = $props();
 
 	function handleInternalModuleSelect(internalModule: InternalModule) {
-		const addNodeCommand = new SetModuleNodeTargetInternalModuleIdCommand({
+		const addNodeCommand = new SetModuleNodeModuleReferenceCommand({
 			id: createId(),
-			type: 'SetModuleNodeTargetInternalModuleIdCommand',
+			type: 'SetModuleNodeModuleReferenceCommand',
 			details: {
 				targetInternalModuleId: internalModule.id,
 				moduleNodeId: moduleNodeId,

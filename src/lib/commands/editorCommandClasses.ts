@@ -13,7 +13,7 @@ import { MoveNodesCommand } from './node/MoveNodesCommand';
 import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { RemoveNodesCommand } from './node/RemoveNodesCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
-import { SetModuleNodeTargetInternalModuleIdCommand } from './node/SetModuleNodeTargetInternalModuleIdCommand';
+import { SetModuleNodeModuleReferenceCommand } from './node/SetModuleNodeModuleReferenceCommand';
 
 export const editorCommandClasses = [
 	RedoCommand,
@@ -30,5 +30,5 @@ export const editorCommandClasses = [
 	RenameInternalModuleCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
-	SetModuleNodeTargetInternalModuleIdCommand,
+	SetModuleNodeModuleReferenceCommand,
 ] as EditorCommandClass[];

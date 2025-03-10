@@ -1,11 +1,11 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class SetModuleNodeTargetInternalModuleIdCommand extends EditorCommand<{
+export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 	targetInternalModuleId: string;
 	moduleNodeId: string;
 }> {
-	static name = 'SetModuleNodeTargetInternalModuleIdCommand';
+	static name = 'SetModuleNodeModuleReferenceCommand';
 
 	previousTargetInternalModuleId!: string;
 

@@ -16,5 +16,5 @@ export const editorCommandNames: Record<string, string> = {
 	RenameInternalModuleCommand: 'Rename internalModule',
 	SetConnectionCommand: 'Connect node',
 	SetConstantNodeValueCommand: 'Set constant node value',
-	SetModuleNodeTargetInternalModuleIdCommand: 'Set internalModule of internalModule node',
+	SetModuleNodeModuleReferenceCommand: 'Set internalModule of internalModule node',
 };
