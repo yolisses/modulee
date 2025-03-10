@@ -3,7 +3,7 @@ import { getEditorContext } from '$lib/editor/editorContext';
 import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-import { getGroupIdContext } from '$lib/group/groupIdContext';
+import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
@@ -16,7 +16,7 @@ export class Contexts {
 	zoomContext = getZoomContext();
 	graphContext = getGraphContext();
 	editorContext = getEditorContext();
-	groupIdContext = getGroupIdContext();
+	internalModuleIdContext = getInternalModuleIdContext();
 	isMutedContext = getIsMutedContext();
 	projectDataContext = getProjectDataContext();
 	selectedTabContext = getSelectedTabContext();

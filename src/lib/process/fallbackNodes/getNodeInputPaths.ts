@@ -1,12 +1,12 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { getBaseNodeInputPaths } from './getBaseNodeInputPaths';
-import { getGroupNodeInputPaths } from './getGroupNodeInputPaths';
+import { getInternalModuleNodeInputPaths } from './getInternalModuleNodeInputPaths';
 
 // TODO consider adopting an OOP approach
 export function getNodeInputPaths(nodeData: NodeData, graphRegistry: GraphRegistry) {
-	if (nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode') {
-		return getGroupNodeInputPaths(nodeData, graphRegistry);
+	if (nodeData.type === 'InternalModuleNode' || nodeData.type === 'InternalModuleVoicesNode') {
+		return getInternalModuleNodeInputPaths(nodeData, graphRegistry);
 	} else {
 		return getBaseNodeInputPaths(nodeData);
 	}

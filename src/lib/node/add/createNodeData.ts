@@ -5,12 +5,12 @@ import type { NodeType } from './NodeType';
 
 export function createNodeData(
 	nodeType: NodeType,
-	groupId: string,
+	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
 	// TODO find a more secure way to type this result
 	return {
-		groupId,
+		internalModuleId,
 		position,
 		id: createId(),
 		type: nodeType.name,

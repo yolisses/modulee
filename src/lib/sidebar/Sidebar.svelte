@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GroupTab from './GroupTab.svelte';
-	import GroupsTab from './GroupsTab.svelte';
+	import InternalModuleTab from './InternalModuleTab.svelte';
+	import InternalModulesTab from './InternalModulesTab.svelte';
 	import ProjectTab from './ProjectTab.svelte';
 	import SidebarTabs from './SidebarTabs.svelte';
 	import { getSelectedTabContext } from './selectedTabContext';
@@ -10,10 +10,10 @@
 
 <div class="w-full max-w-xs border-l border-black">
 	<SidebarTabs />
-	{#if selectedTabContext.selectedTab === 'group'}
-		<GroupTab />
-	{:else if selectedTabContext.selectedTab === 'groups'}
-		<GroupsTab />
+	{#if selectedTabContext.selectedTab === 'internalModule'}
+		<InternalModuleTab />
+	{:else if selectedTabContext.selectedTab === 'internalModules'}
+		<InternalModulesTab />
 	{:else if selectedTabContext.selectedTab === 'project'}
 		<ProjectTab />
 	{/if}

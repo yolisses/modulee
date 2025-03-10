@@ -11,15 +11,15 @@
 
 	async function handleClick() {
 		isLoading = true;
-		const mainGroupId = createId();
+		const mainInternalModuleId = createId();
 		const projectData: ProjectData = {
 			id: createId(),
 			name: 'New project',
 			graphData: {
 				nodes: [],
-				mainGroupId,
+				mainInternalModuleId,
 				connections: [],
-				groups: [{ id: mainGroupId, name: 'Main group' }],
+				internalModules: [{ id: mainInternalModuleId, name: 'Main internalModule' }],
 			},
 		};
 		await projectsRepository.createProject(projectData);

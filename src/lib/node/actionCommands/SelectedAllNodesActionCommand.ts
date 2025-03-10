@@ -7,13 +7,13 @@ export class SelectedAllNodesActionCommand extends ActionCommand {
 
 	execute(contexts: Contexts): void {
 		const { graph } = contexts.graphContext;
-		const { groupId } = contexts.groupIdContext;
+		const { internalModuleId } = contexts.internalModuleIdContext;
 		const { selectedNodeIds } = contexts.selectedNodeIdsContext;
 
 		selectedNodeIds.clear();
 		// TODO consider creating a context for visible nodes
 		graph.nodes.values().forEach((nodeData) => {
-			if (nodeData.groupId === groupId) {
+			if (nodeData.internalModuleId === internalModuleId) {
 				selectedNodeIds.add(nodeData.id);
 			}
 		});

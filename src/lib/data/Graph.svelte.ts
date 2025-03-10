@@ -3,35 +3,35 @@ import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
 import type { GraphRegistry } from './GraphRegistry';
-import { Group } from './Group.svelte';
-import { GroupNode } from './GroupNode.svelte';
 import { instantiateNode } from './instantiateNode';
+import { InternalModule } from './InternalModule.svelte';
+import { InternalModuleNode } from './InternalModuleNode.svelte';
 import { Node } from './Node.svelte';
 
 export class Graph {
-	mainGroupId: string;
+	mainInternalModuleId: string;
 	nodes = new ById<Node>();
-	groups = new ById<Group>();
+	internalModules = new ById<InternalModule>();
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
 
 	constructor(graphRegistry: GraphRegistry) {
 		graphRegistry = cloneGraphRegistry(graphRegistry);
-		this.mainGroupId = graphRegistry.mainGroupId;
+		this.mainInternalModuleId = graphRegistry.mainInternalModuleId;
 
 		graphRegistry.nodes.values().forEach((nodeData) => {
 			const node = instantiateNode(nodeData);
 			this.nodes.add(node);
 		});
 
-		graphRegistry.groups.values().forEach((groupData) => {
-			const group = new Group(groupData, this.nodes);
-			this.groups.add(group);
+		graphRegistry.internalModules.values().forEach((internalModuleData) => {
+			const internalModule = new InternalModule(internalModuleData, this.nodes);
+			this.internalModules.add(internalModule);
 		});
 
 		this.nodes.values().forEach((node) => {
-			if (node instanceof GroupNode) {
-				node.updateGroup(this.groups);
+			if (node instanceof InternalModuleNode) {
+				node.updateInternalModule(this.internalModules);
 			}
 		});
 

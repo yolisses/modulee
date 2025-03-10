@@ -1,11 +1,11 @@
 import type { ById } from '$lib/editor/ById';
 import type { ConnectionData } from './ConnectionData';
-import type { GroupData } from './GroupData';
+import type { InternalModuleData } from './InternalModuleData';
 import type { NodeData } from './NodeData';
 
 export type GraphRegistry = {
-	mainGroupId: string;
+	mainInternalModuleId: string;
 	nodes: ById<NodeData>;
-	groups: ById<GroupData>;
+	internalModules: ById<InternalModuleData>;
 	connections: ById<ConnectionData>;
 };

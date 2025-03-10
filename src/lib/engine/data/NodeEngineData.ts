@@ -1,9 +1,9 @@
-type GroupNodeExtrasEngineData = {
-	target_group_id?: number;
+type InternalModuleNodeExtrasEngineData = {
+	target_internalModule_id?: number;
 	input_target_ids: Map<number, number>;
 };
 type CommonNodeExtrasEngineData = Record<string, number>;
-export type NodeExtrasEngineData = CommonNodeExtrasEngineData | GroupNodeExtrasEngineData;
+export type NodeExtrasEngineData = CommonNodeExtrasEngineData | InternalModuleNodeExtrasEngineData;
 
 export type NodeEngineData = {
 	id: number;

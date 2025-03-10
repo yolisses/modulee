@@ -2,7 +2,7 @@
 	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getGroupIdContext } from '$lib/group/groupIdContext.js';
+	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import BasicList from '$lib/ui/BasicList.svelte';
@@ -20,7 +20,7 @@
 
 	const spaceContext = getSpaceContext();
 	const editorContext = getEditorContext();
-	const groupIdContext = getGroupIdContext();
+	const internalModuleIdContext = getInternalModuleIdContext();
 	const projectDataContext = getProjectDataContext();
 
 	let searchText = $state('');
@@ -29,7 +29,11 @@
 
 	function handleTypeSelect(nodeType: NodeType) {
 		const dataPosition = spaceContext.space.getDataPosition(screenPosition).round();
-		const nodeData = createNodeData(nodeType, groupIdContext.groupId, dataPosition);
+		const nodeData = createNodeData(
+			nodeType,
+			internalModuleIdContext.internalModuleId,
+			dataPosition,
+		);
 		const addNodeCommand = new AddNodeCommand({
 			id: createId(),
 			type: 'AddNodeCommand',

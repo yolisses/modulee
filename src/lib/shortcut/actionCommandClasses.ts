@@ -1,10 +1,10 @@
-import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
+import { InternalModuleNodesActionCommand } from '$lib/node/actionCommands/InternalModuleNodesActionCommand';
 import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
 import { SelectedAllNodesActionCommand } from '$lib/node/actionCommands/SelectedAllNodesActionCommand';
 import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
 import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
-import { ShowGroupsTabActionCommand } from '$lib/sidebar/actionCommands/ShowGroupsTabActionCommand';
+import { ShowInternalModulesTabActionCommand } from '$lib/sidebar/actionCommands/ShowInternalModulesTabActionCommand';
 import { ShowProjectTabActionCommand } from '$lib/sidebar/actionCommands/ShowProjectTabActionCommand';
 import { ToggleIsSidebarVisibleActionCommand } from '$lib/sidebar/actionCommands/ToggleIsSidebarVisibleActionCommand';
 import { ResetZoomCommand } from '../space/zoom/ResetZoomCommand';
@@ -20,10 +20,10 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	ResetZoomCommand,
 	UndoActionCommand,
 	RedoActionCommand,
-	GroupNodesActionCommand,
+	InternalModuleNodesActionCommand,
 	RemoveNodesActionCommand,
 	ToggleIsMuteActionCommand,
-	ShowGroupsTabActionCommand,
+	ShowInternalModulesTabActionCommand,
 	ShowProjectTabActionCommand,
 	SelectedAllNodesActionCommand,
 	ToggleIsSidebarVisibleActionCommand,

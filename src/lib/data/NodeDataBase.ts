@@ -5,6 +5,6 @@ export type NodeDataBase<T extends string, E> = {
 	type: T;
 	extras: E;
 	id: string;
-	groupId: string;
+	internalModuleId: string;
 	position: VectorData;
 };

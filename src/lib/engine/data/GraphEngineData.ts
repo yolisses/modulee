@@ -1,7 +1,7 @@
-import type { GroupEngineData } from './GroupEngineData';
+import type { InternalModuleEngineData } from './InternalModuleEngineData';
 
-// TODO add mainGroupId
+// TODO add mainInternalModuleId
 export type GraphEngineData = {
-	main_group_id?: number;
-	groups: GroupEngineData[];
+	main_internalModule_id?: number;
+	internalModules: InternalModuleEngineData[];
 };

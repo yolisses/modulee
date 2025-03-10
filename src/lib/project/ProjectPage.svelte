@@ -8,7 +8,7 @@
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-	import { setGroupIdContext } from '$lib/group/groupIdContext';
+	import { setInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/sidebar/getGraphData';
@@ -35,8 +35,10 @@
 
 	const projectDataContext = getProjectDataContext();
 
-	const groupContext = $state({ groupId: projectDataContext.projectData.graphData.mainGroupId });
-	setGroupIdContext(groupContext);
+	const internalModuleContext = $state({
+		internalModuleId: projectDataContext.projectData.graphData.mainInternalModuleId,
+	});
+	setInternalModuleIdContext(internalModuleContext);
 
 	const graphRegistryContext = $state({
 		graphRegistry: getGraphRegistry(projectDataContext.projectData.graphData),

@@ -17,19 +17,19 @@ function getImplicitNodeId(inputPath: InputPath) {
 	return 'implicit_node_for_input_path_' + getInputPathId(inputPath);
 }
 
-function getIsSomeGroupNode(nodeData: NodeData) {
-	return nodeData.type === 'GroupNode' || nodeData.type === 'GroupVoicesNode';
+function getIsSomeInternalModuleNode(nodeData: NodeData) {
+	return nodeData.type === 'InternalModuleNode' || nodeData.type === 'InternalModuleVoicesNode';
 }
 
 export function getNodeDataFromNodeType(
 	nodeId: string,
 	nodeType: NodeType,
-	groupId: string,
+	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
 	// TODO find a more secure way to type this result
 	return {
-		groupId,
+		internalModuleId,
 		position,
 		id: nodeId,
 		type: nodeType.name,
@@ -51,7 +51,7 @@ export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData
 	const implicitNodeData: NodeData = getNodeDataFromNodeType(
 		implicitNodeId,
 		nodeType,
-		nodeData.groupId,
+		nodeData.internalModuleId,
 		positionData,
 	);
 	return implicitNodeData;
@@ -89,7 +89,7 @@ export function addInputImplicitNode(
 }
 
 export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
-	if (getIsSomeGroupNode(nodeData)) return;
+	if (getIsSomeInternalModuleNode(nodeData)) return;
 
 	const inputPaths = getNodeInputPaths(nodeData, graphRegistry);
 

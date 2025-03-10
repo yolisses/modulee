@@ -3,32 +3,32 @@ import { DisconnectCommand } from './connection/DisconnectCommand';
 import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
-import { AddGroupCommand } from './group/AddGroupCommand';
-import { GroupNodesCommand } from './group/GroupNodesCommand';
-import { RemoveGroupCommand } from './group/RemoveGroupCommand';
-import { RenameGroupCommand } from './group/RenameGroupCommand';
+import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
+import { InternalModuleNodesCommand } from './internalModule/InternalModuleNodesCommand';
+import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
+import { RenameInternalModuleCommand } from './internalModule/RenameInternalModuleCommand';
 import { AddNodeCommand } from './node/AddNodeCommand';
 import { MoveNodeCommand } from './node/MoveNodeCommand';
 import { MoveNodesCommand } from './node/MoveNodesCommand';
 import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { RemoveNodesCommand } from './node/RemoveNodesCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
-import { SetGroupNodeTargetGroupIdCommand } from './node/SetGroupNodeTargetGroupIdCommand';
+import { SetInternalModuleNodeTargetInternalModuleIdCommand } from './node/SetInternalModuleNodeTargetInternalModuleIdCommand';
 
 export const editorCommandClasses = [
 	RedoCommand,
 	UndoCommand,
 	AddNodeCommand,
-	AddGroupCommand,
+	AddInternalModuleCommand,
 	MoveNodeCommand,
 	MoveNodesCommand,
 	DisconnectCommand,
-	GroupNodesCommand,
+	InternalModuleNodesCommand,
 	RemoveNodeCommand,
-	RemoveGroupCommand,
+	RemoveInternalModuleCommand,
 	RemoveNodesCommand,
-	RenameGroupCommand,
+	RenameInternalModuleCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
-	SetGroupNodeTargetGroupIdCommand,
+	SetInternalModuleNodeTargetInternalModuleIdCommand,
 ] as EditorCommandClass[];

@@ -11,16 +11,16 @@ export class Node<T extends NodeData = NodeData> {
 	output: Output;
 	inputs: Input[];
 	type: T['type'];
-	groupId: string;
+	internalModuleId: string;
 	extras: T['extras'];
 	position: Vector = $state()!;
 
 	constructor(nodeData: NodeData) {
-		const { id, type, extras, position, groupId } = nodeData;
+		const { id, type, extras, position, internalModuleId } = nodeData;
 		this.id = id;
 		this.type = type;
 		this.extras = extras;
-		this.groupId = groupId;
+		this.internalModuleId = internalModuleId;
 		this.output = new Output(this);
 		this.inputs = this.getInputs();
 		this.position = Vector.fromData(position);

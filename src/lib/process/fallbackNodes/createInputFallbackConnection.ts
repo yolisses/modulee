@@ -2,7 +2,7 @@ import type { ConnectionData } from '$lib/data/ConnectionData';
 import { createId } from '$lib/data/createId';
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
-import { getGroupFallbackNodeId } from './getGroupFallbackNodeId';
+import { getInternalModuleFallbackNodeId } from './getInternalModuleFallbackNodeId';
 
 export function createInputFallbackConnection(
 	inputPath: InputPath,
@@ -11,6 +11,6 @@ export function createInputFallbackConnection(
 	return {
 		inputPath,
 		id: createId(),
-		targetNodeId: getGroupFallbackNodeId(nodeData.groupId),
+		targetNodeId: getInternalModuleFallbackNodeId(nodeData.internalModuleId),
 	};
 }

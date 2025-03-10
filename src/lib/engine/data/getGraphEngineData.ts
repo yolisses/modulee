@@ -1,13 +1,15 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import { getGroupEngineData } from './getGroupEngineData';
+import { getInternalModuleEngineData } from './getInternalModuleEngineData';
 import type { GraphEngineData } from './GraphEngineData';
 import { hashToUsize } from './hashToUsize';
 
 export function getGraphEngineData(graphRegistry: GraphRegistry): GraphEngineData {
 	return {
-		main_group_id: graphRegistry ? hashToUsize(graphRegistry.mainGroupId) : undefined,
-		groups: graphRegistry.groups
+		main_internalModule_id: graphRegistry
+			? hashToUsize(graphRegistry.mainInternalModuleId)
+			: undefined,
+		internalModules: graphRegistry.internalModules
 			.values()
-			.map((groupData) => getGroupEngineData(groupData, graphRegistry)),
+			.map((internalModuleData) => getInternalModuleEngineData(internalModuleData, graphRegistry)),
 	};
 }

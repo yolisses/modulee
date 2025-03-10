@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
-	import { getGroupIdContext } from '$lib/group/groupIdContext';
+	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
 	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
@@ -16,7 +16,7 @@
 	import NodesToolbar from './NodesToolbar.svelte';
 
 	const graphContext = getGraphContext();
-	const groupIdContext = getGroupIdContext();
+	const internalModuleIdContext = getInternalModuleIdContext();
 
 	const spaceContext = $state({ space: new Space() });
 	setSpaceContext(spaceContext);
@@ -33,7 +33,7 @@
 
 	const visibleNodes = $derived(
 		graphContext.graph.nodes.values().filter((node) => {
-			return node.groupId === groupIdContext.groupId;
+			return node.internalModuleId === internalModuleIdContext.internalModuleId;
 		}),
 	);
 

@@ -1,12 +1,12 @@
 import type { NodeData } from '$lib/data/NodeData';
-import { getGroupFallbackNodeId } from './getGroupFallbackNodeId';
+import { getInternalModuleFallbackNodeId } from './getInternalModuleFallbackNodeId';
 
-export function createFallbackNode(groupId: string): NodeData {
+export function createFallbackNode(internalModuleId: string): NodeData {
 	return {
-		groupId,
+		internalModuleId,
 		type: 'ConstantNode',
 		extras: { value: 0 },
 		position: { x: 0, y: 0 },
-		id: getGroupFallbackNodeId(groupId),
+		id: getInternalModuleFallbackNodeId(internalModuleId),
 	};
 }

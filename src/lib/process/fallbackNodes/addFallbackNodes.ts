@@ -3,8 +3,8 @@ import { addFallbackNodeConnections } from './addNodeConnections';
 import { createFallbackNode } from './createFallbackNode';
 
 export function addFallbackNodes(graphRegistry: GraphRegistry) {
-	graphRegistry.groups.values().forEach((groupData) => {
-		const fallbackNodeData = createFallbackNode(groupData.id);
+	graphRegistry.internalModules.values().forEach((internalModuleData) => {
+		const fallbackNodeData = createFallbackNode(internalModuleData.id);
 		graphRegistry.nodes.add(fallbackNodeData);
 	});
 	graphRegistry.nodes
