@@ -2,7 +2,7 @@
 	import { getRootElementContext } from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import Portal from 'svelte-portal';
-	import SetTargetInternalModuleMenuWrapper from './SetTargetInternalModuleMenuWrapper.svelte';
+	import SetModuleReferenceMenuWrapper from './SetModuleReferenceMenuWrapper.svelte';
 
 	interface Props {
 		moduleNodeId: string;
@@ -30,6 +30,6 @@
 
 {#if rootElementContext.rootElement}
 	<Portal target={rootElementContext.rootElement as HTMLElement}>
-		<SetTargetInternalModuleMenuWrapper {mouseEvent} {moduleNodeId} />
+		<SetModuleReferenceMenuWrapper {mouseEvent} {moduleNodeId} />
 	</Portal>
 {/if}

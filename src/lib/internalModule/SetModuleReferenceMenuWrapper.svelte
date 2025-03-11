@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
-	import SetTargetInternalModuleMenu from './SetTargetInternalModuleMenu.svelte';
+	import SetModuleReferenceMenu from './SetModuleReferenceMenu.svelte';
 
 	interface Props {
 		moduleNodeId: string;
@@ -47,6 +47,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<SetTargetInternalModuleMenu {closeModal} {moduleNodeId} />
+		<SetModuleReferenceMenu {closeModal} {moduleNodeId} />
 	</div>
 {/if}

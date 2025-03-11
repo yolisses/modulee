@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte.js';
-	import SetTargetInternalModuleButton from '../../internalModule/SetTargetInternalModuleButton.svelte';
+	import SetModuleReferenceButton from '$lib/internalModule/SetModuleReferenceButton.svelte';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
-	import TargetInternalModuleButton from '../TargetInternalModuleButton.svelte';
+	import ModuleReferenceButton from '../ModuleReferenceButton.svelte';
 
 	interface Props {
 		moduleNode: ModuleNode;
@@ -14,14 +14,11 @@
 <BaseNodeItem node={moduleNode}>
 	{#snippet preInputsChildren()}
 		{#if moduleNode.targetInternalModule}
-			<TargetInternalModuleButton
-				{moduleNode}
-				targetInternalModule={moduleNode.targetInternalModule}
-			/>
+			<ModuleReferenceButton {moduleNode} targetInternalModule={moduleNode.targetInternalModule} />
 		{:else}
-			<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
+			<SetModuleReferenceButton moduleNodeId={moduleNode.id}>
 				<div class="opacity-50" style:padding-inline="0.25lh">Set internalModule</div>
-			</SetTargetInternalModuleButton>
+			</SetModuleReferenceButton>
 		{/if}
 	{/snippet}
 </BaseNodeItem>
