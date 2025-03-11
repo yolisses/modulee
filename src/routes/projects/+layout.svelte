@@ -12,8 +12,11 @@
 	const projectsRepository = getProjectsRepository();
 </script>
 
+<!-- TODO check if it makes sense doing this initialization here -->
 {#await projectsRepository.initialize()}
-	<Spinner />
+	<div class="flex h-screen flex-col items-center justify-center">
+		<Spinner />
+	</div>
 {:then value}
 	{@render children?.()}
 {/await}
