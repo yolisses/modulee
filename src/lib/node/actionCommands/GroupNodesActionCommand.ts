@@ -34,8 +34,8 @@ export class GroupNodesActionCommand extends ActionCommand {
 		const groupNodesCommand = new GroupNodesCommand({
 			id: newInternalModuleId,
 			type: 'GroupNodesCommand',
-			createdAt: new Date().toJSON(),
 			projectId: projectData.id,
+			createdAt: new Date().toJSON(),
 			details: {
 				nodesId,
 				internalModule: {
@@ -45,9 +45,9 @@ export class GroupNodesActionCommand extends ActionCommand {
 				moduleNodeData: {
 					id: createId(),
 					type: 'ModuleNode',
-					internalModuleId: currentInternalModuleId,
 					position: averagePosition.getData(),
-					extras: { moduleReference: newInternalModuleId },
+					internalModuleId: currentInternalModuleId,
+					extras: { moduleReference: { type: 'internal', id: newInternalModuleId } },
 				},
 			},
 		});
