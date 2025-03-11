@@ -39,7 +39,7 @@ export class Graph {
 
 		this.nodes.values().forEach((node) => {
 			if (node instanceof ModuleNode) {
-				node.updateInternalModule(this.internalModules);
+				node.fillModule(this.internalModules, this.externalModules);
 			}
 		});
 

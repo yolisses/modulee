@@ -13,8 +13,8 @@
 
 <BaseNodeItem node={moduleNode}>
 	{#snippet preInputsChildren()}
-		{#if moduleNode.targetInternalModule}
-			<ModuleReferenceButton {moduleNode} targetInternalModule={moduleNode.targetInternalModule} />
+		{#if moduleNode.module}
+			<ModuleReferenceButton {moduleNode} module={moduleNode.module} />
 		{:else}
 			<SetModuleReferenceButton moduleNodeId={moduleNode.id}>
 				<div class="opacity-50" style:padding-inline="0.25lh">Set module</div>

@@ -1,10 +1,11 @@
 import type { ById } from '$lib/editor/ById';
 import type { InternalModuleData } from './InternalModuleData';
+import type { Module } from './Module';
 import type { Node } from './Node.svelte';
 
 // TODO check if it makes sense to keep data as a froze object instead of
 // copying its values
-export class InternalModule {
+export class InternalModule implements Module {
 	id: string;
 	name: string;
 	nodes!: Node[];

@@ -11,13 +11,13 @@ export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 	previousModuleReference!: ModuleReference;
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { moduleReference: targetInternalModuleId, moduleNodeId } = this.details;
+		const { moduleReference, moduleNodeId } = this.details;
 		const node = graphRegistry.nodes.get(moduleNodeId);
 		if (node.type !== 'ModuleNode' && node.type !== 'ModuleVoicesNode') {
 			throw new Error("Can't change the internalModuleId of a non internalModule node");
 		}
 		this.previousModuleReference = node.extras.moduleReference;
-		node.extras.moduleReference = targetInternalModuleId;
+		node.extras.moduleReference = moduleReference;
 	}
 
 	undo(graphRegistry: GraphRegistry): void {

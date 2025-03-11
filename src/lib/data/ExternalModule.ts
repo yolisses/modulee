@@ -2,10 +2,13 @@ import { getVersionString } from '$lib/import/getVersionString';
 import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
 import type { Version } from '$lib/module/Version';
 import type { ExternalModuleReference } from './ExternalModuleReference';
+import type { Module } from './Module';
+import type { Node } from './Node.svelte';
 
-export class ExternalModule {
+export class ExternalModule implements Module {
 	public id: string;
 	public name: string;
+	public nodes: Node[];
 	public version: Version;
 
 	constructor(

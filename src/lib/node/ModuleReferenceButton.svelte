@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import type { Module } from '$lib/data/Module';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import SetTargetInternalModuleButton from '$lib/internalModule/SetModuleReferenceButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
@@ -7,14 +7,14 @@
 	import Fa from 'svelte-fa';
 
 	interface Props {
+		module: Module;
 		moduleNode: ModuleNode;
-		targetInternalModule: InternalModule;
 	}
 
-	const { moduleNode, targetInternalModule }: Props = $props();
+	const { moduleNode, module }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	const href = $derived(
-		`/projects/${projectDataContext.projectData.id}/internalModules/${targetInternalModule.id}`,
+		`/projects/${projectDataContext.projectData.id}/internalModules/${module.id}`,
 	);
 
 	function handlePointerDown(e: PointerEvent) {
@@ -30,7 +30,7 @@
 		onpointerdown={handlePointerDown}
 		class="overflow-hidden text-ellipsis text-nowrap text-blue-300"
 	>
-		{targetInternalModule.name}
+		{module.name}
 	</a>
 	<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
 		<Fa icon={faEdit} title="Edit internalModule" />
