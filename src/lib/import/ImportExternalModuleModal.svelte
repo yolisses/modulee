@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
+	import { createId } from '$lib/data/createId';
+	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getModulesRepository } from '$lib/module/getModulesRepository';
+	import type { ModuleData } from '$lib/module/ModuleData';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
@@ -7,7 +12,9 @@
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { getVersionString } from './getVersionString';
 
+	const editorContext = getEditorContext();
 	const modulesRepository = getModulesRepository();
+	const projectDataContext = getProjectDataContext();
 
 	let modulesDataPromise = $state(modulesRepository.getModules());
 
@@ -17,8 +24,21 @@
 
 	const { closeModal }: Props = $props();
 
-	function handleModuleSelect() {
-		// TODO
+	function handleModuleSelect(moduleData: ModuleData) {
+		const command = new AddExternalModuleReferenceCommand({
+			id: createId(),
+			createdAt: new Date().toJSON(),
+			type: 'AddExternalModuleReferenceCommand',
+			projectId: projectDataContext.projectData.id,
+			details: {
+				externalModuleReference: {
+					type: 'external',
+					id: moduleData.id,
+					version: moduleData.version,
+				},
+			},
+		});
+		editorContext.editor.execute(command);
 		closeModal();
 	}
 </script>
