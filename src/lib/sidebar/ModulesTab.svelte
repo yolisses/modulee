@@ -4,7 +4,7 @@
 	import { getGraphContext } from '$lib/data/graphContext';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import ImportModuleButton from '$lib/import/ImportModuleButton.svelte';
+	import ImportExternalModuleButton from '$lib/import/ImportExternalModuleButton.svelte';
 	import CreateInternalModuleButton from '$lib/internalModule/CreateInternalModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
@@ -35,7 +35,7 @@
 <div class="flex flex-col">
 	<div class="flex flex-row gap-2 p-2">
 		<CreateInternalModuleButton class="primary-button" />
-		<ImportModuleButton />
+		<ImportExternalModuleButton />
 	</div>
 	<BasicList {getId} {getName} {getHref} values={graphContext.graph.internalModules.values()}>
 		{#snippet buttons(internalModule)}
