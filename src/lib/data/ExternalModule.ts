@@ -1,5 +1,5 @@
 import { getVersionString } from '$lib/import/getVersionString';
-import type { ModuleData } from '$lib/module/ModuleData';
+import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
 import type { Version } from '$lib/module/Version';
 import type { ExternalModuleReference } from './ExternalModuleReference';
 
@@ -10,11 +10,11 @@ export class ExternalModule {
 
 	constructor(
 		externalModuleReference: ExternalModuleReference,
-		externalModuleOptions: ModuleData[],
+		externalModuleDataOptions: ExternalModuleData[],
 	) {
 		const { id, version } = externalModuleReference;
-		const externalModule = externalModuleOptions.find((moduleData) => {
-			return moduleData.id === id && moduleData.version === version;
+		const externalModule = externalModuleDataOptions.find((externalModuleData) => {
+			return externalModuleData.id === id && externalModuleData.version === version;
 		});
 		if (!externalModule) {
 			throw new Error(`External module not found for id ${id} and version ${version}`);

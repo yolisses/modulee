@@ -1,8 +1,8 @@
-import { IndexedDbModulesRepository } from './IndexedDbModulesRepository';
-import type { ModulesRepository } from './ModulesRepository';
+import type { ExternalModulesRepository } from './ExternalModulesRepository';
+import { IndexedDbExternalModulesRepository } from './IndexedDbExternalModulesRepository';
 
 type ModulesRepositoryWrapper = {
-	modulesRepository?: ModulesRepository;
+	modulesRepository?: ExternalModulesRepository;
 };
 
 const modulesRepositoryWrapper: ModulesRepositoryWrapper = {};
@@ -12,9 +12,9 @@ const modulesRepositoryWrapper: ModulesRepositoryWrapper = {};
 // like the getContext in +page.svelte files is evaluated before the condition
 // for showing the page in the +layout.svelte, making it hard to wait for the
 // modulesRepository
-export function getModulesRepository(): ModulesRepository {
+export function getExternalModulesRepository(): ExternalModulesRepository {
 	if (!modulesRepositoryWrapper.modulesRepository) {
-		modulesRepositoryWrapper.modulesRepository = new IndexedDbModulesRepository();
+		modulesRepositoryWrapper.modulesRepository = new IndexedDbExternalModulesRepository();
 	}
 
 	return modulesRepositoryWrapper.modulesRepository;

@@ -2,8 +2,8 @@
 	import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
 	import { createId } from '$lib/data/createId';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getModulesRepository } from '$lib/module/getModulesRepository';
-	import type { ModuleData } from '$lib/module/ModuleData';
+	import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+	import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
@@ -13,10 +13,10 @@
 	import { getVersionString } from './getVersionString';
 
 	const editorContext = getEditorContext();
-	const modulesRepository = getModulesRepository();
 	const projectDataContext = getProjectDataContext();
+	const externalModulesRepository = getExternalModulesRepository();
 
-	let modulesDataPromise = $state(modulesRepository.getModules());
+	let externalModulesDataPromise = $state(externalModulesRepository.getExternalModules());
 
 	interface Props {
 		closeModal: () => void;
@@ -24,7 +24,7 @@
 
 	const { closeModal }: Props = $props();
 
-	function handleModuleSelect(moduleData: ModuleData) {
+	function handleModuleSelect(externalModuleData: ExternalModuleData) {
 		const command = new AddExternalModuleReferenceCommand({
 			id: createId(),
 			createdAt: new Date().toJSON(),
@@ -33,8 +33,8 @@
 			details: {
 				externalModuleReference: {
 					type: 'external',
-					id: moduleData.id,
-					version: moduleData.version,
+					id: externalModuleData.id,
+					version: externalModuleData.version,
 				},
 			},
 		});
@@ -53,15 +53,15 @@
 					<h1 class="pl-2 text-xl font-medium">Import external module</h1>
 				</div>
 				<div>
-					{#await modulesDataPromise}
+					{#await externalModulesDataPromise}
 						<div class="flex h-full flex-1 flex-col items-center p-8">
 							<Spinner />
 						</div>
-					{:then modulesData}
-						<BasicList {getId} values={modulesData} {getName} onClick={handleModuleSelect}>
-							{#snippet buttons(moduleData)}
+					{:then externalModulesData}
+						<BasicList {getId} values={externalModulesData} {getName} onClick={handleModuleSelect}>
+							{#snippet buttons(externalModuleData)}
 								<div class="p-2">
-									{getVersionString(moduleData.version)}
+									{getVersionString(externalModuleData.version)}
 								</div>
 							{/snippet}
 						</BasicList>

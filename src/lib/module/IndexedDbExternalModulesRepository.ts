@@ -1,8 +1,8 @@
 import { openDB, type IDBPDatabase } from 'idb';
-import type { ModuleData } from './ModuleData';
-import type { ModulesRepository } from './ModulesRepository';
+import type { ExternalModuleData } from './ExternalModuleData';
+import type { ExternalModulesRepository } from './ExternalModulesRepository';
 
-export class IndexedDbModulesRepository implements ModulesRepository {
+export class IndexedDbExternalModulesRepository implements ExternalModulesRepository {
 	storeName = 'modules';
 	private _database?: IDBPDatabase;
 
@@ -24,12 +24,12 @@ export class IndexedDbModulesRepository implements ModulesRepository {
 		});
 	}
 
-	async getModules(): Promise<ModuleData[]> {
+	async getExternalModules(): Promise<ExternalModuleData[]> {
 		return this.database.getAll(this.storeName);
 	}
 
-	async addModule(moduleData: ModuleData): Promise<void> {
+	async addExternalModule(externalModuleData: ExternalModuleData): Promise<void> {
 		const transaction = this.database.transaction(this.storeName, 'readwrite');
-		await Promise.all([transaction.store.add(moduleData), transaction.done]);
+		await Promise.all([transaction.store.add(externalModuleData), transaction.done]);
 	}
 }
