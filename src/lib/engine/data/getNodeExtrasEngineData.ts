@@ -1,7 +1,7 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { getDefaultNodeExtrasEngineData } from './getDefaultNodeExtrasEngineData';
-import { getModuleNodeExtrasEngineData } from './getModuleNodeExtrasEngineData';
+import { getModuleNodeExtrasEngineData } from './getInternalModuleNodeExtrasEngineData';
 import type { NodeExtrasEngineData } from './NodeEngineData';
 
 export function getNodeExtrasEngineData(
