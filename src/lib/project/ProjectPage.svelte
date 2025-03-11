@@ -9,6 +9,7 @@
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { setInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
+	import { getExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/sidebar/getGraphData';
@@ -45,7 +46,12 @@
 	});
 	setGraphRegistryContext(graphRegistryContext);
 
-	const graph = new Graph(graphRegistryContext.graphRegistry);
+	const externalModulesDataContext = getExternalModulesDataContext();
+
+	const graph = new Graph(
+		graphRegistryContext.graphRegistry,
+		externalModulesDataContext.externalModulesData,
+	);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
@@ -53,7 +59,10 @@
 
 	editor.onExecute = (command, graphRegistry) => {
 		graphRegistryContext.graphRegistry = graphRegistry;
-		graphContext.graph = new Graph(graphRegistryContext.graphRegistry);
+		graphContext.graph = new Graph(
+			graphRegistryContext.graphRegistry,
+			externalModulesDataContext.externalModulesData,
+		);
 
 		const graphData = getGraphData(graphRegistry);
 

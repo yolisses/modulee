@@ -1,8 +1,9 @@
 import { ById } from '$lib/editor/ById';
+import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
 import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
-import type { ExternalModule } from './ExternalModule';
+import { ExternalModule } from './ExternalModule';
 import type { GraphRegistry } from './GraphRegistry';
 import { instantiateNode } from './instantiateNode';
 import { InternalModule } from './InternalModule.svelte';
@@ -17,7 +18,7 @@ export class Graph {
 	internalModules = new ById<InternalModule>();
 	externalModules = new ById<ExternalModule>();
 
-	constructor(graphRegistry: GraphRegistry) {
+	constructor(graphRegistry: GraphRegistry, externalModulesData: ExternalModuleData[]) {
 		graphRegistry = cloneGraphRegistry(graphRegistry);
 		this.mainInternalModuleId = graphRegistry.mainInternalModuleId;
 
@@ -29,6 +30,11 @@ export class Graph {
 		graphRegistry.internalModules.values().forEach((internalModuleData) => {
 			const internalModule = new InternalModule(internalModuleData, this.nodes);
 			this.internalModules.add(internalModule);
+		});
+
+		graphRegistry.externalModuleReferences.values().forEach((externalModuleReference) => {
+			const externalModule = new ExternalModule(externalModuleReference, externalModulesData);
+			this.externalModules.add(externalModule);
 		});
 
 		this.nodes.values().forEach((node) => {

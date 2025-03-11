@@ -1,3 +1,4 @@
+import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
 import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
@@ -12,5 +13,9 @@ export const load: LayoutLoad = async ({ params }) => {
 		error(404, { message: 'Project not found' });
 	}
 
-	return { projectData };
+	const externalModulesRepository = getExternalModulesRepository();
+	externalModulesRepository.initialize();
+	const externalModulesData = externalModulesRepository.getExternalModules();
+
+	return { projectData, externalModulesData };
 };

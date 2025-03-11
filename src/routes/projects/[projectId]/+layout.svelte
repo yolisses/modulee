@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
 	import { setProjectDataContext } from '$lib/project/projectDataContext';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
 	import { type Snippet } from 'svelte';
@@ -10,9 +11,10 @@
 	}
 
 	const { data, children }: Props = $props();
-	const { projectData } = data;
+	const { projectData, externalModulesData } = data;
 
 	setProjectDataContext({ projectData });
+	setExternalModulesDataContext({ externalModulesData });
 </script>
 
 <ProjectPage>
