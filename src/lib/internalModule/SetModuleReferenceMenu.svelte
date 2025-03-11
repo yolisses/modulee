@@ -3,14 +3,13 @@
 	import { createId } from '$lib/data/createId.js';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import type { InternalModuleData } from '$lib/data/InternalModuleData';
-	import type { InternalModuleReference } from '$lib/data/InternalModuleReference';
 	import type { ModuleReference } from '$lib/data/ModuleReference';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
+	import { getInternalModuleReference } from './getInternalModuleReference';
 
 	interface Props {
 		moduleNodeId: string;
@@ -34,13 +33,6 @@
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();
 	}
-
-	function getInternalModuleReference(
-		internalModuleData: InternalModuleData,
-	): InternalModuleReference {
-		return { id: internalModuleData.id, type: 'internal' };
-	}
-
 	const moduleReferences: ModuleReference[] = $derived(
 		graphContext.graph.internalModules.values().map(getInternalModuleReference),
 	);
