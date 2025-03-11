@@ -17,7 +17,7 @@
 			<ModuleReferenceButton {moduleNode} targetInternalModule={moduleNode.targetInternalModule} />
 		{:else}
 			<SetModuleReferenceButton moduleNodeId={moduleNode.id}>
-				<div class="opacity-50" style:padding-inline="0.25lh">Set internalModule</div>
+				<div class="opacity-50" style:padding-inline="0.25lh">Set module</div>
 			</SetModuleReferenceButton>
 		{/if}
 	{/snippet}
