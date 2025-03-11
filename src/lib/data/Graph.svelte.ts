@@ -2,6 +2,7 @@ import { ById } from '$lib/editor/ById';
 import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
+import type { ExternalModule } from './ExternalModule';
 import type { GraphRegistry } from './GraphRegistry';
 import { instantiateNode } from './instantiateNode';
 import { InternalModule } from './InternalModule.svelte';
@@ -11,9 +12,10 @@ import { Node } from './Node.svelte';
 export class Graph {
 	mainInternalModuleId: string;
 	nodes = new ById<Node>();
-	internalModules = new ById<InternalModule>();
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
+	internalModules = new ById<InternalModule>();
+	externalModules = new ById<ExternalModule>();
 
 	constructor(graphRegistry: GraphRegistry) {
 		graphRegistry = cloneGraphRegistry(graphRegistry);

@@ -33,9 +33,10 @@
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();
 	}
-	const moduleReferences: ModuleReference[] = $derived(
-		graphContext.graph.internalModules.values().map(getInternalModuleReference),
-	);
+	const moduleReferences: ModuleReference[] = $derived.by(() => {
+		const { internalModules } = graphContext.graph;
+		return internalModules.values().map(getInternalModuleReference);
+	});
 
 	function getName(moduleReference: ModuleReference) {
 		return graphContext.graph.internalModules.get(moduleReference.id).name;
