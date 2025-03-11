@@ -22,9 +22,9 @@ test('GroupNodesCommand', () => {
 			internalModule: { id: 'internalModule2' } as InternalModuleData,
 			moduleNodeData: {
 				id: 'node4',
-				internalModuleId: 'internalModule1',
 				type: 'ModuleNode',
-				extras: { moduleReference: 'internalModule2' },
+				internalModuleId: 'internalModule1',
+				extras: { moduleReference: { type: 'internal', id: 'internalModule2' } },
 			} as ModuleNodeData,
 		}),
 	);
@@ -40,9 +40,9 @@ test('GroupNodesCommand', () => {
 		{ id: 'node3', internalModuleId: 'internalModule1' },
 		{
 			id: 'node4',
-			internalModuleId: 'internalModule1',
 			type: 'ModuleNode',
-			extras: { targetInternalModuleId: 'internalModule2' },
+			internalModuleId: 'internalModule1',
+			extras: { moduleReference: { type: 'internal', id: 'internalModule2' } },
 		},
 	]);
 

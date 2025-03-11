@@ -26,8 +26,8 @@
 			id: createId(),
 			type: 'SetModuleNodeModuleReferenceCommand',
 			details: {
-				targetInternalModuleId: internalModule.id,
 				moduleNodeId: moduleNodeId,
+				moduleReference: internalModule.id,
 			},
 			createdAt: new Date().toJSON(),
 			projectId: projectDataContext.projectData.id,

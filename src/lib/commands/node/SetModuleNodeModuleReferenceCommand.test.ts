@@ -12,26 +12,31 @@ test('SetModuleNodeModuleReferenceCommand', () => {
 			{
 				id: 'node2',
 				type: 'ModuleNode',
-				extras: { targetInternalModuleId: 'internalModule1' },
+				extras: { moduleReference: { type: 'internal', id: 'internalModule1' } },
 			},
 			{ id: 'node3' },
 		]),
 	} as GraphRegistry;
 	const command = new SetModuleNodeModuleReferenceCommand(
-		mockCommandData({ moduleNodeId: 'node2', targetInternalModuleId: 'internalModule2' }),
+		mockCommandData({
+			moduleNodeId: 'node2',
+			moduleReference: { type: 'internal', id: 'internalModule2' },
+		}),
 	);
 
 	command.execute(graphRegistry);
 
-	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toBe(
-		'internalModule2',
-	);
+	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toEqual({
+		type: 'internal',
+		id: 'internalModule2',
+	});
 
 	command.undo(graphRegistry);
 
-	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toBe(
-		'internalModule1',
-	);
+	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toEqual({
+		type: 'internal',
+		id: 'internalModule1',
+	});
 });
 
 test('SetModuleNodeModuleReferenceCommand with wrong type', () => {
@@ -41,13 +46,16 @@ test('SetModuleNodeModuleReferenceCommand with wrong type', () => {
 			{
 				id: 'node2',
 				type: 'ModuleNode',
-				extras: { targetInternalModuleId: 'internalModule1' },
+				extras: { moduleReference: { type: 'internal', id: 'internalModule1' } },
 			},
 			{ id: 'node3' },
 		]),
 	} as GraphRegistry;
 	const command = new SetModuleNodeModuleReferenceCommand(
-		mockCommandData({ moduleNodeId: 'node3', targetInternalModuleId: 'internalModule1' }),
+		mockCommandData({
+			moduleNodeId: 'node3',
+			moduleReference: { type: 'internal', id: 'internalModule2' },
+		}),
 	);
 
 	expect(() => {
