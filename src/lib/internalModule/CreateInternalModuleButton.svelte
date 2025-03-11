@@ -29,7 +29,7 @@
 			details: {
 				internalModule: {
 					id: internalModuleId,
-					name: 'New internalModule',
+					name: 'New internal module',
 				},
 			},
 		});
@@ -44,5 +44,5 @@
 
 <button class={classString} onclick={handleCreateClick}>
 	<Fa icon={faPlus} />
-	Create internalModule
+	Create internal module
 </button>

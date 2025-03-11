@@ -20,7 +20,7 @@
 				connections: [],
 				mainInternalModuleId,
 				externalModuleReferences: [],
-				internalModules: [{ id: mainInternalModuleId, name: 'Main internalModule' }],
+				internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
 			},
 		};
 		await projectsRepository.createProject(projectData);
