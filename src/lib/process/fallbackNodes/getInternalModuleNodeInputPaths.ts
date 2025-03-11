@@ -9,10 +9,13 @@ export function getModuleNodeInputPaths(
 	graphRegistry: GraphRegistry,
 ) {
 	const inputPaths: InputPath[] = [];
-	const { moduleReference: targetInternalModuleId } = moduleNodeData.extras;
+	const { moduleReference } = moduleNodeData.extras;
+
+	// TODO handle ExternalModuleReference
+
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		if (nodeData.type !== 'InputNode') return;
-		if (nodeData.internalModuleId !== targetInternalModuleId) return;
+		if (nodeData.internalModuleId !== moduleReference.id) return;
 		inputPaths.push({
 			inputKey: nodeData.id,
 			nodeId: moduleNodeData.id,

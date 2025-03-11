@@ -21,7 +21,7 @@ export function getModuleNodeExtrasEngineData(
 	});
 
 	const targetInternalModuleId = moduleNodeData.extras.moduleReference
-		? hashToUsize(moduleNodeData.extras.moduleReference as string)
+		? hashToUsize(moduleNodeData.extras.moduleReference.id as string)
 		: undefined;
 
 	return {
