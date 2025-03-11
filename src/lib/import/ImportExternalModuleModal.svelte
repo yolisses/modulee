@@ -30,12 +30,12 @@
 		<div class="flex flex-col items-center">
 			<div class="flex w-full max-w-xl flex-col gap-4">
 				<div class="flex flex-row items-center justify-between gap-2">
-					<h1 class="pl-2 text-xl font-medium">Import module</h1>
+					<h1 class="pl-2 text-xl font-medium">Import external module</h1>
 				</div>
 				<div>
 					{#await modulesDataPromise}
 						<div class="flex h-full flex-1 flex-col items-center p-8">
-							<Spinner></Spinner>
+							<Spinner />
 						</div>
 					{:then modulesData}
 						<BasicList {getId} values={modulesData} {getName} onClick={handleModuleSelect}>
