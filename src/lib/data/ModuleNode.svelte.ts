@@ -1,9 +1,6 @@
 import type { ById } from '$lib/editor/ById';
-import { getVersionString } from '$lib/import/getVersionString';
-import type { ExternalModule } from './ExternalModule';
 import { Input } from './Input.svelte';
 import { InputNode } from './InputNode.svelte';
-import type { InternalModule } from './InternalModule.svelte';
 import type { Module } from './Module';
 import type { ModuleReference } from './ModuleReference';
 import { Node } from './Node.svelte';
@@ -26,15 +23,9 @@ export class ModuleNode extends Node {
 		this.moduleReference = moduleReference;
 	}
 
-	fillModule(internalModules: ById<InternalModule>, externalModules: ById<ExternalModule>) {
+	fillModule(modules: ById<Module>) {
 		if (this.moduleReference) {
-			if (this.moduleReference.type === 'internal') {
-				this.module = internalModules.getOrNull(this.moduleReference.id);
-			} else {
-				this.module = externalModules.getOrNull(
-					this.moduleReference.id + getVersionString(this.moduleReference.version),
-				);
-			}
+			this.module = modules.get(this.moduleReference.id);
 		} else {
 			this.module = null;
 		}

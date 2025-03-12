@@ -37,7 +37,7 @@
 		<CreateInternalModuleButton class="primary-button" />
 		<ImportExternalModuleButton />
 	</div>
-	<BasicList {getId} {getName} {getHref} values={graphContext.graph.internalModules.values()}>
+	<BasicList {getId} {getName} {getHref} values={graphContext.graph.modules.values()}>
 		{#snippet buttons(internalModule)}
 			<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
 		{/snippet}

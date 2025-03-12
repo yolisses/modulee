@@ -1,5 +1,6 @@
 import type { ById } from '$lib/editor/ById';
 import type { InternalModuleData } from './InternalModuleData';
+import type { InternalModuleReference } from './InternalModuleReference';
 import type { Module } from './Module';
 import type { Node } from './Node.svelte';
 
@@ -16,5 +17,9 @@ export class InternalModule implements Module {
 		this.name = name;
 
 		this.nodes = nodeOptions.values().filter((node) => node.internalModuleId === this.id);
+	}
+
+	getReference(): InternalModuleReference {
+		return { id: this.id, type: 'internal' };
 	}
 }

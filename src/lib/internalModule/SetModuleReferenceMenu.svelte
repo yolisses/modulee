@@ -2,14 +2,12 @@
 	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/SetModuleNodeModuleReferenceCommand';
 	import { createId } from '$lib/data/createId.js';
 	import { getGraphContext } from '$lib/data/graphContext';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import type { ModuleReference } from '$lib/data/ModuleReference';
+	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
-	import { getInternalModuleReference } from './getInternalModuleReference';
 
 	interface Props {
 		moduleNodeId: string;
@@ -22,7 +20,8 @@
 
 	const { closeModal, moduleNodeId }: Props = $props();
 
-	function handleSelectModule(moduleReference: ModuleReference) {
+	function handleSelectModule(module: Module) {
+		const moduleReference = module.getReference();
 		const addNodeCommand = new SetModuleNodeModuleReferenceCommand({
 			id: createId(),
 			createdAt: new Date().toJSON(),
@@ -33,18 +32,13 @@
 		editorContext.editor.execute(addNodeCommand);
 		closeModal();
 	}
-	const moduleReferences: ModuleReference[] = $derived.by(() => {
-		const { internalModules } = graphContext.graph;
-		return internalModules.values().map(getInternalModuleReference);
-	});
 
-	function getName(moduleReference: ModuleReference) {
-		return graphContext.graph.internalModules.get(moduleReference.id).name;
+	function getName(module: Module) {
+		return module.name;
 	}
 
-	function handleInternalModuleCreated(internalModule: InternalModule) {
-		const internalModuleReference = getInternalModuleReference(internalModule);
-		handleSelectModule(internalModuleReference);
+	function handleInternalModuleCreated(module: Module) {
+		handleSelectModule(module);
 	}
 </script>
 
@@ -52,7 +46,12 @@
 	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline outline-1 outline-zinc-800"
 >
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
-		<BasicList {getId} {getName} values={moduleReferences} onClick={handleSelectModule} />
+		<BasicList
+			{getId}
+			{getName}
+			onClick={handleSelectModule}
+			values={graphContext.graph.modules.values()}
+		/>
 		<CreateInternalModuleButton
 			class="common-button"
 			onInternalModuleCreated={handleInternalModuleCreated}

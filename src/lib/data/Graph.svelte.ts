@@ -7,12 +7,14 @@ import { ExternalModule } from './ExternalModule';
 import type { GraphRegistry } from './GraphRegistry';
 import { instantiateNode } from './instantiateNode';
 import { InternalModule } from './InternalModule.svelte';
+import type { Module } from './Module';
 import { ModuleNode } from './ModuleNode.svelte';
 import { Node } from './Node.svelte';
 
 export class Graph {
 	mainInternalModuleId: string;
 	nodes = new ById<Node>();
+	modules = new ById<Module>();
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
 	internalModules = new ById<InternalModule>();
@@ -30,16 +32,18 @@ export class Graph {
 		graphRegistry.internalModules.values().forEach((internalModuleData) => {
 			const internalModule = new InternalModule(internalModuleData, this.nodes);
 			this.internalModules.add(internalModule);
+			this.modules.add(internalModule);
 		});
 
 		graphRegistry.externalModuleReferences.values().forEach((externalModuleReference) => {
 			const externalModule = new ExternalModule(externalModuleReference, externalModulesData);
 			this.externalModules.add(externalModule);
+			this.modules.add(externalModule);
 		});
 
 		this.nodes.values().forEach((node) => {
 			if (node instanceof ModuleNode) {
-				node.fillModule(this.internalModules, this.externalModules);
+				node.fillModule(this.modules);
 			}
 		});
 
