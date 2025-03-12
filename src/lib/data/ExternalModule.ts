@@ -2,6 +2,7 @@ import { getVersionString } from '$lib/import/getVersionString';
 import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
 import type { Version } from '$lib/module/Version';
 import type { ExternalModuleReference } from './ExternalModuleReference';
+import { getAreVersionsEquals } from './getAreVersionsEquals';
 import type { Module } from './Module';
 import type { Node } from './Node.svelte';
 
@@ -17,10 +18,15 @@ export class ExternalModule implements Module {
 	) {
 		const { id, version } = externalModuleReference;
 		const externalModule = externalModuleDataOptions.find((externalModuleData) => {
-			return externalModuleData.id === id && externalModuleData.version === version;
+			return (
+				externalModuleData.id === id && getAreVersionsEquals(externalModuleData.version, version)
+			);
 		});
+
 		if (!externalModule) {
-			throw new Error(`External module not found for id ${id} and version ${version}`);
+			throw new Error(
+				`External module not found for id ${id} and version ${getVersionString(version)}`,
+			);
 		}
 
 		this.name = externalModule.name;
