@@ -26,6 +26,7 @@
 	<a
 		{href}
 		draggable="false"
+		title={module.name}
 		style:padding-inline="0.25lh"
 		onpointerdown={handlePointerDown}
 		class="grow overflow-hidden text-ellipsis text-nowrap text-blue-300"
