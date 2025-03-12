@@ -2,7 +2,8 @@
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import { InternalModule } from '$lib/data/InternalModule.svelte';
+	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import ImportExternalModuleButton from '$lib/import/ImportExternalModuleButton.svelte';
 	import CreateInternalModuleButton from '$lib/internalModule/CreateInternalModuleButton.svelte';
@@ -15,20 +16,25 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
-	function handleDelete(internalModule: InternalModule) {
-		const command = new RemoveInternalModuleCommand({
-			id: createId(),
-			createdAt: new Date().toJSON(),
-			type: 'RemoveInternalModuleCommand',
-			projectId: projectDataContext.projectData.id,
-			details: { internalModuleId: internalModule.id },
-		});
-		editorContext.editor.execute(command);
+	function handleDelete(module: Module) {
+		if (module instanceof InternalModule) {
+			const command = new RemoveInternalModuleCommand({
+				id: createId(),
+				createdAt: new Date().toJSON(),
+				type: 'RemoveInternalModuleCommand',
+				details: { internalModuleId: module.id },
+				projectId: projectDataContext.projectData.id,
+			});
+			editorContext.editor.execute(command);
+		} else {
+			throw new Error('Not implemented for external module');
+		}
 	}
 
-	function getHref(internalModule: InternalModule) {
+	function getHref(module: Module) {
+		// TODO implement for external modules
 		const { projectData } = projectDataContext;
-		return `/projects/${projectData.id}/internalModules/${internalModule.id}`;
+		return `/projects/${projectData.id}/internalModules/${module.id}`;
 	}
 </script>
 
