@@ -1,6 +1,6 @@
 import type { NodeEngineData } from './NodeEngineData';
 
-export type InternalModuleEngineData = {
+export type ModuleEngineData = {
 	id: number;
 	nodes: NodeEngineData[];
 };

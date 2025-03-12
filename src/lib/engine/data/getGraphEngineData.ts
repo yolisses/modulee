@@ -8,7 +8,7 @@ export function getGraphEngineData(graphRegistry: GraphRegistry): GraphEngineDat
 		main_internalModule_id: graphRegistry
 			? hashToUsize(graphRegistry.mainInternalModuleId)
 			: undefined,
-		internalModules: graphRegistry.internalModules
+		modules: graphRegistry.internalModules
 			.values()
 			.map((internalModuleData) => getInternalModuleEngineData(internalModuleData, graphRegistry)),
 	};
