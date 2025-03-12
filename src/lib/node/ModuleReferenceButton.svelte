@@ -28,11 +28,11 @@
 		draggable="false"
 		style:padding-inline="0.25lh"
 		onpointerdown={handlePointerDown}
-		class="overflow-hidden text-ellipsis text-nowrap text-blue-300"
+		class="grow overflow-hidden text-ellipsis text-nowrap text-blue-300"
 	>
 		{module.name}
 	</a>
 	<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
-		<Fa icon={faEdit} title="Edit internalModule" />
+		<Fa icon={faEdit} title="Edit internalModule" style="padding-inline: 0.25lh;" />
 	</SetTargetInternalModuleButton>
 </div>
