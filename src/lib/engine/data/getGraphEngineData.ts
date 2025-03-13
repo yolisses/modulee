@@ -5,7 +5,7 @@ import { hashToUsize } from './hashToUsize';
 
 export function getGraphEngineData(graphRegistry: GraphRegistry): GraphEngineData {
 	return {
-		main_module_id: graphRegistry ? hashToUsize(graphRegistry.mainInternalModuleId) : undefined,
+		main_module_id: hashToUsize(graphRegistry.mainInternalModuleId),
 		modules: graphRegistry.internalModules
 			.values()
 			.map((internalModuleData) => getInternalModuleEngineData(internalModuleData, graphRegistry)),

@@ -25,7 +25,7 @@ export function getModuleNodeExtrasEngineData(
 		: undefined;
 
 	return {
-		target_internalModule_id: targetInternalModuleId,
+		target_module_id: targetInternalModuleId,
 		input_target_ids: Object.fromEntries(inputTargetIds.entries()),
 	};
 }

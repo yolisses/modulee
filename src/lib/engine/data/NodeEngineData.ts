@@ -1,5 +1,5 @@
 type ModuleNodeExtrasEngineData = {
-	target_internalModule_id?: number;
+	target_module_id?: number;
 	input_target_ids: Map<number, number>;
 };
 type CommonNodeExtrasEngineData = Record<string, number>;

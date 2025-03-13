@@ -79,6 +79,7 @@
 	$effect(() => {
 		const processedGraphRegistry = getProcessedGraphRegistry(graphRegistryContext.graphRegistry);
 		const graphEngineData = getGraphEngineData(processedGraphRegistry);
+		console.log(graphEngineData);
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);
 	});
 
