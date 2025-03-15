@@ -4,10 +4,9 @@ import { getNodeEngineData } from './getNodeEngineData';
 import { hashToUsize } from './hashToUsize';
 import type { ModuleEngineData } from './ModuleEngineData';
 
-// TODO use just InternalModuleData instead of internalModule
 export function getInternalModuleEngineData(
-	internalModuleData: InternalModuleData,
 	graphRegistry: GraphRegistry,
+	internalModuleData: InternalModuleData,
 ): ModuleEngineData {
 	const moduleNodes = graphRegistry.nodes.values().filter((nodeData) => {
 		return nodeData.internalModuleId === internalModuleData.id;
