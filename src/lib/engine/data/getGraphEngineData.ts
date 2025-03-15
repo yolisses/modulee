@@ -1,6 +1,6 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
-import { getExternalModuleEngineData } from './getExternalModuleData';
+import { getExternalModuleEngineData } from './getExternalModuleEngineData';
 import { getInternalModuleEngineData } from './getInternalModuleEngineData';
 import type { GraphEngineData } from './GraphEngineData';
 import { hashToUsize } from './hashToUsize';
