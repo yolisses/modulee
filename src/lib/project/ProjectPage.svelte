@@ -77,8 +77,8 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const { externalModulesData } = externalModulesDataContext;
 		const { graphRegistry } = graphRegistryContext;
+		const { externalModulesData } = externalModulesDataContext;
 		const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry);
 		const graphEngineData = getGraphEngineData(processedGraphRegistry, externalModulesData);
 		console.log(graphEngineData);
