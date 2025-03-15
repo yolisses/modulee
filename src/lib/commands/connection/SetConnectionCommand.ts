@@ -5,7 +5,6 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { DisconnectCommand } from './DisconnectCommand';
 
-// TODO add Command suffix
 export class SetConnectionCommand extends EditorCommand<{
 	connection: ConnectionData;
 }> {

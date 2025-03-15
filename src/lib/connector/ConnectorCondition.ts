@@ -3,7 +3,6 @@ import { Input } from '$lib/data/Input.svelte';
 import { Output } from '$lib/data/Output.svelte';
 import type { ConnectionCondition } from 'nodes-editor';
 
-// TODO Find a better name for this
 export class ConnectorCondition {
 	graphContext = getGraphContext();
 
