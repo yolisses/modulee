@@ -27,14 +27,13 @@ export function getNodeDataFromNodeType(
 	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
-	// TODO find a more secure way to type this result
 	return {
-		internalModuleId,
 		position,
 		id: nodeId,
+		internalModuleId,
 		type: nodeType.name,
 		extras: structuredClone(nodeType.defaultExtras),
-	} as unknown as NodeData;
+	} as NodeData;
 }
 
 function getNodeTypeName(inputKey: string) {

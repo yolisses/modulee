@@ -13,8 +13,6 @@
 	}
 </script>
 
-<!-- TODO consider renaming this component to ProjectPage -->
-
 <div class="flex flex-col items-stretch gap-2 p-2">
 	<label class="flex flex-col">
 		Name

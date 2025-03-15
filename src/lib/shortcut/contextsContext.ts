@@ -12,8 +12,6 @@ export function setContextsContext(contextsContext: ContextsContext) {
 	setContext(contextsContextKey, contextsContext);
 }
 
-// TODO check if that's a terrible idea that will cause all the components to
-// update on every context update
 export function getContextsContext() {
 	return getContextOrThrow<ContextsContext>(contextsContextKey);
 }

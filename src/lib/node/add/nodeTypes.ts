@@ -1,6 +1,5 @@
 import type { NodeType } from './NodeType';
 
-// TODO generate this data in the engine build
 export const nodeTypes: NodeType[] = [
 	{ name: 'GateNode', defaultExtras: {}, inputNames: [] },
 	{ name: 'TimeNode', defaultExtras: {}, inputNames: [] },
