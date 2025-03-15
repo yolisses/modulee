@@ -16,6 +16,9 @@ export class ExternalModule implements Module {
 		externalModuleReference: ExternalModuleReference,
 		externalModuleDataOptions: ExternalModuleData[],
 	) {
+		// TODO remove version checking since id uniquely identifies an external
+		// module. The version checking was created to allow updating the
+		// external module, which looks like a completely separated feature.
 		const { id, version } = externalModuleReference;
 		const externalModule = externalModuleDataOptions.find((externalModuleData) => {
 			return (
@@ -29,9 +32,9 @@ export class ExternalModule implements Module {
 			);
 		}
 
+		this.id = externalModule.id;
 		this.name = externalModule.name;
 		this.version = externalModule.version;
-		this.id = externalModule.id + getVersionString(externalModule.version);
 
 		this.nodes = externalModule.graph.nodes.map((nodeData) => {
 			return new Node(nodeData);
