@@ -23,4 +23,4 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}> Create module </button>
+<button class="common-button" onclick={handleClick}> Create external module </button>
