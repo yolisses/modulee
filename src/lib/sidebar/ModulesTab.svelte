@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { RemoveExternalModuleReferenceCommand } from '$lib/commands/externalModule/RemoveExternalModuleReferenceCommand';
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
@@ -16,6 +17,10 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
+	// TODO consider creating a commandFactoryContext to remove the need for manually getting id, createdAt, type and projectId. It could work like:
+	// const commandFactoryContext = getCommandContext();
+	// const { commandFactory } = commandFactoryContext;
+	// const command = commandFactory.create(SomeCommandClass, { someData: 'someValue' })
 	function handleDelete(module: Module) {
 		if (module instanceof InternalModule) {
 			const command = new RemoveInternalModuleCommand({
@@ -27,7 +32,14 @@
 			});
 			editorContext.editor.execute(command);
 		} else {
-			throw new Error('Not implemented for external module');
+			const command = new RemoveExternalModuleReferenceCommand({
+				id: createId(),
+				createdAt: new Date().toJSON(),
+				type: 'RemoveExternalModuleReferenceCommand',
+				projectId: projectDataContext.projectData.id,
+				details: { externalModuleReferenceId: module.id },
+			});
+			editorContext.editor.execute(command);
 		}
 	}
 
