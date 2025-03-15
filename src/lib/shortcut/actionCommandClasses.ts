@@ -20,11 +20,11 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	ResetZoomCommand,
 	UndoActionCommand,
 	RedoActionCommand,
+	GroupNodesActionCommand,
 	RemoveNodesActionCommand,
 	ToggleIsMuteActionCommand,
 	ShowModulesTabActionCommand,
 	ShowProjectTabActionCommand,
 	SelectedAllNodesActionCommand,
-	GroupNodesActionCommand,
 	ToggleIsSidebarVisibleActionCommand,
 ];
