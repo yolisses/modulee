@@ -1,14 +1,14 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import { getGraphRegistry } from '$lib/project/getGraphRegistry';
 import { getInternalModuleEngineData } from './getInternalModuleEngineData';
 import type { ModuleEngineData } from './ModuleEngineData';
 
 export function getExternalModuleEngineData(
-	graphRegistry: GraphRegistry,
 	externalModuleData: ExternalModuleData,
 ): ModuleEngineData[] {
-	console.log(externalModuleData);
-	return externalModuleData.graph.internalModules.map((internalModuleData) => {
+	const graphData = externalModuleData.graph;
+	const graphRegistry = getGraphRegistry(graphData);
+	return graphData.internalModules.map((internalModuleData) => {
 		return getInternalModuleEngineData(graphRegistry, internalModuleData);
 	});
 }

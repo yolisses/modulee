@@ -15,7 +15,7 @@ export function getGraphEngineData(
 		.map((internalModuleData) => getInternalModuleEngineData(graphRegistry, internalModuleData));
 
 	externalModulesData.forEach((externalModuleData) => {
-		const modulesEngineData = getExternalModuleEngineData(graphRegistry, externalModuleData);
+		const modulesEngineData = getExternalModuleEngineData(externalModuleData);
 		modules.push(...modulesEngineData);
 	});
 
