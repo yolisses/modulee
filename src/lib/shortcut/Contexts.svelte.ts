@@ -16,12 +16,12 @@ export class Contexts {
 	zoomContext = getZoomContext();
 	graphContext = getGraphContext();
 	editorContext = getEditorContext();
-	internalModuleIdContext = getInternalModuleIdContext();
 	isMutedContext = getIsMutedContext();
 	projectDataContext = getProjectDataContext();
 	selectedTabContext = getSelectedTabContext();
 	audioBackendContext = getAudioBackendContext();
 	graphRegistryContext = getGraphRegistryContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
+	internalModuleIdContext = getInternalModuleIdContext();
 	isSidebarVisibleContext = getIsSidebarVisibleContext();
 }
