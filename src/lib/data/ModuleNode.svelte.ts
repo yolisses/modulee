@@ -13,9 +13,9 @@ import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 // dependency, the ModuleNode is created without module, and then have
 // fillModule called
 export class ModuleNode extends Node {
-	declare extras: ModuleNodeExtrasData;
+	moduleReference?: ModuleReference;
 	module: Module | null = $state(null);
-	moduleReference: ModuleReference | null = null;
+	declare extras: ModuleNodeExtrasData;
 
 	constructor(nodeData: ModuleNodeData | ModuleVoicesNodeData) {
 		super(nodeData);

@@ -10,6 +10,7 @@ export function getModuleNodeInputPaths(
 ) {
 	const inputPaths: InputPath[] = [];
 	const { moduleReference } = moduleNodeData.extras;
+	if (!moduleReference) return inputPaths;
 
 	// TODO handle ExternalModuleReference
 

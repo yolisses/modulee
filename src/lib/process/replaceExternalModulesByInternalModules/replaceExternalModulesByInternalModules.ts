@@ -17,7 +17,11 @@ export function replaceExternalModulesByInternalModules(
 	});
 
 	graphRegistry.nodes.values().forEach((nodeData) => {
-		if (nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode') {
+		console.log(nodeData);
+		const isSomeModuleNode = nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode';
+		if (!isSomeModuleNode) return;
+
+		if (nodeData.extras.moduleReference?.type === 'external') {
 			const { moduleReference: internalModuleReference } = nodeData.extras;
 			const referencedExternalModuleData = findById(
 				externalModulesData,

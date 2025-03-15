@@ -8,7 +8,7 @@ export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 }> {
 	static name = 'SetModuleNodeModuleReferenceCommand';
 
-	previousModuleReference!: ModuleReference;
+	previousModuleReference?: ModuleReference;
 
 	execute(graphRegistry: GraphRegistry): void {
 		const { moduleReference, moduleNodeId } = this.details;
