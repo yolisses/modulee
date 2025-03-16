@@ -18,8 +18,8 @@
 		<div class="flex flex-row items-center justify-between gap-2">
 			<h1 class="h-10 pl-2 text-xl font-medium">Projects</h1>
 			<div class="flex-1"></div>
-			<CreateProjectButton />
 			<ImportProjectButton />
+			<CreateProjectButton />
 		</div>
 		<div>
 			{#await projectsDataPromise}
