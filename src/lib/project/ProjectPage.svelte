@@ -80,6 +80,7 @@
 		const { graphRegistry } = graphRegistryContext;
 		const { externalModulesData } = externalModulesDataContext;
 		const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry, externalModulesData);
+		console.log(processedGraphRegistry);
 		const graphEngineData = getGraphEngineData(processedGraphRegistry);
 		console.log(graphEngineData);
 		audioBackendContext.audioBackend?.setGraph(graphEngineData);

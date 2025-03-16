@@ -3,7 +3,7 @@ import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addFallbackNodes } from './fallbackNodes/addFallbackNodes';
 import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
-import { replaceExternalModulesByInternalModules } from './replaceExternalModulesByInternalModules/replaceExternalModulesByInternalModules';
+import { internalizeModules } from './internalizeModules/internalizeModules';
 
 export function getProcessedGraphRegistry(
 	graphRegistry: GraphRegistry,
@@ -13,7 +13,7 @@ export function getProcessedGraphRegistry(
 	const graphRegistryClone = cloneGraphRegistry(graphRegistry);
 	const externalModulesDataClone = structuredClone(externalModulesData);
 
-	replaceExternalModulesByInternalModules(graphRegistryClone, externalModulesDataClone);
+	internalizeModules(graphRegistryClone, externalModulesDataClone);
 	addImplicitNodes(graphRegistryClone);
 	addFallbackNodes(graphRegistryClone);
 	return graphRegistryClone;
