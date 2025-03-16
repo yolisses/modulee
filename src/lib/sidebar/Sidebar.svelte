@@ -8,7 +8,7 @@
 	const selectedTabContext = getSelectedTabContext();
 </script>
 
-<div class="w-full max-w-xs border-l border-black">
+<div class="w-full max-w-xs border-l-2 border-black/50">
 	<SidebarTabs />
 	{#if selectedTabContext.selectedTab === 'internalModule'}
 		<InternalModuleTab />

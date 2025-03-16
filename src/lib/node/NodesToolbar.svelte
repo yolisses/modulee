@@ -17,7 +17,7 @@
 	let { topBarChildren }: Props = $props();
 </script>
 
-<div class="flex flex-row items-start border-b border-black">
+<div class="flex flex-row items-start border-b-2 border-black/50">
 	<div class="flex flex-1 flex-row overflow-auto">
 		<HomeButton />
 		<UndoButton />
