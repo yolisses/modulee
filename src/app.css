@@ -2,69 +2,78 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-html {
-	font-family: 'Lato', serif;
+@layer base {
+	html {
+		font-family: 'Lato', serif;
+	}
+
+	html {
+		@apply cursor-default bg-white text-black dark:bg-zinc-900 dark:text-white;
+	}
+
+	button:disabled {
+		@apply disabled;
+	}
+
+	button {
+		@apply button;
+	}
+
+	/* Scrollbar */
+	/* width */
+	::-webkit-scrollbar {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	::-webkit-scrollbar-corner {
+		background: rgba(255, 255, 255, 0);
+	}
 }
 
-html {
-	@apply cursor-default bg-white text-black dark:bg-zinc-900 dark:text-white;
+@layer utilities {
+	.disabled {
+		@apply opacity-50;
+	}
+
+	.hover-bg {
+		@apply hover:bg-white/10;
+	}
+
+	.button {
+		@apply flex flex-row items-center;
+	}
+
+	.overflow-and-ellipsis {
+		@apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
+	}
 }
 
-.disabled {
-	@apply opacity-50;
-}
+@layer components {
+	.common-button {
+		@apply button hover-bg gap-1 rounded p-2;
+	}
 
-button:disabled {
-	@apply disabled;
-}
+	.primary-button {
+		@apply gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600;
+	}
 
-button,
-.button {
-	@apply flex flex-row items-center;
-}
-
-.hover-bg {
-	@apply hover:bg-white/10;
-}
-
-.common-button {
-	@apply button hover-bg gap-1 rounded p-2;
-}
-
-.primary-button {
-	@apply gap-1 rounded bg-blue-500 p-2 hover:bg-blue-600;
-}
-
-.common-input {
-	@apply rounded border border-white/20 bg-transparent p-2;
-}
-
-.overflow-and-ellipsis {
-	@apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
-}
-
-/* Scrollbar */
-/* width */
-::-webkit-scrollbar {
-	width: 0.75rem;
-	height: 0.75rem;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-::-webkit-scrollbar-corner {
-	background: rgba(255, 255, 255, 0);
+	.common-input {
+		@apply rounded border border-white/20 bg-transparent p-2;
+	}
 }

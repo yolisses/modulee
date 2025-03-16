@@ -4,6 +4,7 @@
 	import { getName } from '$lib/ui/getName';
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
+	import DotsMenuButton from './DotsMenuButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import RenameProjectButton from './RenameProjectButton.svelte';
 
@@ -20,8 +21,10 @@
 
 <BasicList values={projectsData} {getId} {getName} {getHref}>
 	{#snippet buttons(value)}
-		<RenameProjectButton projectData={value} />
-		<DeleteProjectButton projectId={value.id} />
-		<CreateExternalModuleButton projectData={value} />
+		<DotsMenuButton>
+			<RenameProjectButton projectData={value} />
+			<DeleteProjectButton projectId={value.id} />
+			<CreateExternalModuleButton projectData={value} />
+		</DotsMenuButton>
 	{/snippet}
 </BasicList>
