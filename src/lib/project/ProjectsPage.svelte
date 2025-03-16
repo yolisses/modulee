@@ -16,7 +16,7 @@
 <div class="flex flex-col items-center">
 	<div class="flex w-full max-w-xl flex-col gap-4 p-4">
 		<div class="flex flex-row items-center justify-between gap-2">
-			<h1 class="pl-2 text-xl font-medium">Projects</h1>
+			<h1 class="h-10 pl-2 text-xl font-medium">Projects</h1>
 			<div class="flex-1"></div>
 			<CreateProjectButton />
 			<ImportProjectButton />
