@@ -41,4 +41,8 @@ export class IndexedDbExternalModulesRepository implements ExternalModulesReposi
 		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		await Promise.all([transaction.store.add(externalModuleData), transaction.done]);
 	}
+
+	async deleteExternalModule(id: string) {
+		await this.database.delete(this.storeName, id);
+	}
 }
