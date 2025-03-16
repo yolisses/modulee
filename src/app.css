@@ -18,7 +18,8 @@ button:disabled {
 	@apply disabled;
 }
 
-button {
+button,
+.button {
 	@apply flex flex-row items-center;
 }
 
@@ -27,7 +28,7 @@ button {
 }
 
 .common-button {
-	@apply hover-bg gap-1 rounded p-2;
+	@apply button hover-bg gap-1 rounded p-2;
 }
 
 .primary-button {
