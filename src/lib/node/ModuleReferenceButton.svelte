@@ -34,6 +34,6 @@
 		{module.name}
 	</a>
 	<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
-		<Fa icon={faEdit} title="Edit internalModule" style="padding-inline: 0.25lh;" />
+		<Fa icon={faEdit} title="Replace module" style="padding-inline: 0.25lh;" />
 	</SetTargetInternalModuleButton>
 </div>
