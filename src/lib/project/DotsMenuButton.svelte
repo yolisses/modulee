@@ -1,13 +1,14 @@
 <script lang="ts">
-	import Modal from '$lib/ui/Modal.svelte';
-	import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+	import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 	import type { Snippet } from 'svelte';
 	import Fa from 'svelte-fa';
+	import Menu from './Menu.svelte';
 
 	interface Props {
 		children: Snippet;
 	}
 
+	let button: HTMLElement;
 	let isModalActive = $state(false);
 	const { children }: Props = $props();
 
@@ -20,14 +21,18 @@
 	}
 </script>
 
-<button class="common-button self-stretch bg-red-500 p-10" onclick={handleClick} title="More">
-	<Fa icon={faEllipsisH} />
+<!-- This px-2.5 is a hacky solution to use in home pages -->
+<button
+	title="More"
+	bind:this={button}
+	onclick={handleClick}
+	class="common-button self-stretch px-2.5"
+>
+	<Fa fw icon={faEllipsisV} />
 </button>
 
 {#if isModalActive}
-	<Modal {closeModal}>
-		<div class="flex flex-col rounded bg-zinc-800">
-			{@render children()}
-		</div>
-	</Modal>
+	<Menu {closeModal} referenceElement={button}>
+		{@render children()}
+	</Menu>
 {/if}
