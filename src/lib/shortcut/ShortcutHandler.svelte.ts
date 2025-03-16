@@ -3,12 +3,15 @@ import { getContextsContext } from './contextsContext';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
 import { getEventKeys } from './getEventKeys';
+import { getIsTargetInput } from './getIsTargetInput';
 
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
 	contextsContext = getContextsContext();
 
 	handleKeyDown = (e: KeyboardEvent) => {
+		if (getIsTargetInput(e)) return;
+
 		const eventKeys = getEventKeys(e);
 		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
 
