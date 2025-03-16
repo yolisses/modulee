@@ -1,5 +1,5 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addFallbackNodes } from './fallbackNodes/addFallbackNodes';
 import { addImplicitNodes } from './implicitNodes/addImplicitNodes';

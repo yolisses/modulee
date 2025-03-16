@@ -1,4 +1,4 @@
-import type { Version } from '$lib/module/Version';
+import type { Version } from '$lib/module/externalModule/Version';
 
 // TODO rename id to moduleId to make clear it's just a reference, not the
 // reference own id

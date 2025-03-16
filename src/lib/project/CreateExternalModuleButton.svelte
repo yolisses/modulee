@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createId } from '$lib/data/createId';
-	import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
-	import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
+	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+	import { getExternalModulesRepository } from '$lib/module/externalModule/getExternalModulesRepository';
 	import type { ProjectData } from './ProjectData';
 
 	interface Props {

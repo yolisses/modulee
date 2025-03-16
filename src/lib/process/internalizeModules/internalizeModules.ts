@@ -1,5 +1,5 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { internalizeGraphParts } from './internalizeGraphParts';
 import { internalizeModuleNodeModuleReferences } from './internalizeModuleNodeModuleReferences';
 

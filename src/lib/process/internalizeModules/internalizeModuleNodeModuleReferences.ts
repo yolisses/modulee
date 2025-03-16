@@ -1,6 +1,6 @@
 import { findById } from '$lib/array/findById';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 
 export function internalizeModuleNodeModuleReferences(
 	graphRegistry: GraphRegistry,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
-	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
 	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';

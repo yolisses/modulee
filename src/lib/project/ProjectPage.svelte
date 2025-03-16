@@ -8,8 +8,8 @@
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-	import { setInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
-	import { getExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
+	import { getExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
+	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import NodesPage from '$lib/node/NodesPage.svelte';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/sidebar/getGraphData';

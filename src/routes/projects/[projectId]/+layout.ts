@@ -1,4 +1,4 @@
-import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
+import { getExternalModulesRepository } from '$lib/module/externalModule/getExternalModulesRepository';
 import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';

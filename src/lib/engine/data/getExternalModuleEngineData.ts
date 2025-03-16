@@ -1,4 +1,4 @@
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { getGraphRegistry } from '$lib/project/getGraphRegistry';
 import { getInternalModuleEngineData } from './getInternalModuleEngineData';
 import type { ModuleEngineData } from './ModuleEngineData';

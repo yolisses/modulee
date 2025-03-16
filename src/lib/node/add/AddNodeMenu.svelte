@@ -2,7 +2,7 @@
 	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand.js';
 	import { createId } from '$lib/data/createId.js';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext.js';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext.js';
 	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import BasicList from '$lib/ui/BasicList.svelte';

@@ -2,9 +2,9 @@
 	import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
 	import { createId } from '$lib/data/createId';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
-	import { getExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
-	import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
+	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+	import { getExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
+	import { getExternalModulesRepository } from '$lib/module/externalModule/getExternalModulesRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';

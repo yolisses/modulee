@@ -1,6 +1,6 @@
 import { getVersionString } from '$lib/import/getVersionString';
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
-import type { Version } from '$lib/module/Version';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import type { Version } from '$lib/module/externalModule/Version';
 import type { ExternalModuleReference } from './ExternalModuleReference';
 import { getAreVersionsEquals } from './getAreVersionsEquals';
 import type { Module } from './Module';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Module } from '$lib/data/Module';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
-	import SetTargetInternalModuleButton from '$lib/internalModule/SetModuleReferenceButton.svelte';
+	import SetTargetInternalModuleButton from '$lib/module/internalModule/SetModuleReferenceButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

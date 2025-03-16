@@ -7,7 +7,7 @@
 	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import ImportExternalModuleButton from '$lib/import/ImportExternalModuleButton.svelte';
-	import CreateInternalModuleButton from '$lib/internalModule/CreateInternalModuleButton.svelte';
+	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';

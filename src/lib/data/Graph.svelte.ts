@@ -1,5 +1,5 @@
 import { ById } from '$lib/editor/ById';
-import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';

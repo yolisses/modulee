@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte.js';
-	import SetModuleReferenceButton from '$lib/internalModule/SetModuleReferenceButton.svelte';
+	import SetModuleReferenceButton from '$lib/module/internalModule/SetModuleReferenceButton.svelte';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 	import ModuleReferenceButton from '../ModuleReferenceButton.svelte';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 	import type { PageData } from './$types';
 

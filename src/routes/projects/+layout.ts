@@ -1,4 +1,4 @@
-import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
+import { getExternalModulesRepository } from '$lib/module/externalModule/getExternalModulesRepository';
 import type { LayoutLoad } from './$types';
 
 export const ssr = false;

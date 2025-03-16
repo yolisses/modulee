@@ -3,7 +3,7 @@
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getInternalModuleIdContext } from '$lib/internalModule/internalModuleIdContext';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 

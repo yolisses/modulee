@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
+	import { setExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
 	import { setProjectDataContext } from '$lib/project/projectDataContext';
 	import ProjectPage from '$lib/project/ProjectPage.svelte';
 	import { type Snippet } from 'svelte';
