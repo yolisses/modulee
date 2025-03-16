@@ -9,4 +9,8 @@ export function internalizeGraphParts(graphRegistry: GraphRegistry, externalGrap
 	externalGraphData.nodes.forEach((nodeData) => {
 		graphRegistry.nodes.add(nodeData);
 	});
+
+	externalGraphData.connections.forEach((connectionData) => {
+		graphRegistry.connections.add(connectionData);
+	});
 }
