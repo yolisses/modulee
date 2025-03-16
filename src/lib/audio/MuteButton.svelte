@@ -23,5 +23,5 @@
 	class:text-red-500={isMutedContext.isMuted}
 	title={(isMutedContext.isMuted ? 'Unmute' : 'Mute') + ' ' + shortcutString}
 >
-	<Fa icon={isMutedContext.isMuted ? faVolumeMute : faVolumeUp} />
+	<Fa fw icon={isMutedContext.isMuted ? faVolumeMute : faVolumeUp} />
 </button>
