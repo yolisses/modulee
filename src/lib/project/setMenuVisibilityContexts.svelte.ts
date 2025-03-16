@@ -1,7 +1,7 @@
 import {
 	type IsCommandPaletteActiveContext,
 	setIsCommandPaletteActiveContext,
-} from '$lib/CommandPalette/isCommandPaletteActiveContext';
+} from '$lib/editor/isCommandPaletteActiveContext';
 import { setIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 
 export function setMenuVisibilityContexts() {

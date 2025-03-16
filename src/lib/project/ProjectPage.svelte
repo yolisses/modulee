@@ -1,10 +1,10 @@
 <script lang="ts">
-	import ActionCommandsPalette from '$lib/CommandPalette/ActionCommandsPalette.svelte';
-	import { getIsCommandPaletteActiveContext } from '$lib/CommandPalette/isCommandPaletteActiveContext';
 	import { Graph } from '$lib/data/Graph.svelte';
 	import { setGraphContext } from '$lib/data/graphContext';
+	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
+	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
