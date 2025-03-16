@@ -28,6 +28,15 @@ export class IndexedDbExternalModulesRepository implements ExternalModulesReposi
 		return this.database.getAll(this.storeName);
 	}
 
+	async getExternalModulesById(ids: string[]): Promise<ExternalModuleData[]> {
+		return Promise.all(
+			ids.map((id) => {
+				const query = IDBKeyRange.only(id);
+				return this.database.get(this.storeName, query);
+			}),
+		);
+	}
+
 	async addExternalModule(externalModuleData: ExternalModuleData): Promise<void> {
 		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		await Promise.all([transaction.store.add(externalModuleData), transaction.done]);

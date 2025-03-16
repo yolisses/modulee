@@ -15,7 +15,12 @@ export const load: LayoutLoad = async ({ params }) => {
 
 	const externalModulesRepository = getExternalModulesRepository();
 	await externalModulesRepository.initialize();
-	const externalModulesData = await externalModulesRepository.getExternalModules();
+
+	const externalModuleIds = projectData.graphData.externalModuleReferences.map(
+		(externalModuleReference) => externalModuleReference.id,
+	);
+	const externalModulesData =
+		await externalModulesRepository.getExternalModulesById(externalModuleIds);
 
 	return { projectData, externalModulesData };
 };

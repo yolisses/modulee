@@ -3,6 +3,7 @@
 	import { createId } from '$lib/data/createId';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import type { ExternalModuleData } from '$lib/module/ExternalModuleData';
+	import { getExternalModulesDataContext } from '$lib/module/externalModulesDataContext';
 	import { getExternalModulesRepository } from '$lib/module/getExternalModulesRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
@@ -15,6 +16,7 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 	const externalModulesRepository = getExternalModulesRepository();
+	const externalModulesDataContext = getExternalModulesDataContext();
 
 	let externalModulesDataPromise = $state(externalModulesRepository.getExternalModules());
 
@@ -25,6 +27,10 @@
 	const { closeModal }: Props = $props();
 
 	function handleModuleSelect(externalModuleData: ExternalModuleData) {
+		// Avoid missing external module, since they're load just once the page
+		// loads
+		externalModulesDataContext.externalModulesData.push(externalModuleData);
+
 		const command = new AddExternalModuleReferenceCommand({
 			id: createId(),
 			createdAt: new Date().toJSON(),
