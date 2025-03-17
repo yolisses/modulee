@@ -35,8 +35,8 @@ export class Graph {
 			this.modules.add(internalModule);
 		});
 
-		graphRegistry.externalModuleReferences.values().forEach((externalModuleReference) => {
-			const externalModule = new ExternalModule(externalModuleReference, externalModulesData);
+		externalModulesData.forEach((externalModuleData) => {
+			const externalModule = new ExternalModule(externalModuleData);
 			this.externalModules.add(externalModule);
 			this.modules.add(externalModule);
 		});
