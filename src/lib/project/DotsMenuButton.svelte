@@ -8,8 +8,8 @@
 		children: Snippet;
 	}
 
-	let button: HTMLElement;
 	let isModalActive = $state(false);
+	let button = $state<HTMLElement>();
 	const { children }: Props = $props();
 
 	function handleClick() {
