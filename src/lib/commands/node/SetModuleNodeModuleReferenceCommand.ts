@@ -10,22 +10,24 @@ export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 
 	previousModuleReference?: ModuleReference;
 
-	execute(graphRegistry: GraphRegistry): void {
-		const { moduleReference, moduleNodeId } = this.details;
+	getNode(graphRegistry: GraphRegistry, moduleNodeId: string) {
 		const node = graphRegistry.nodes.get(moduleNodeId);
 		if (node.type !== 'ModuleNode' && node.type !== 'ModuleVoicesNode') {
 			throw new Error("Can't change the internalModuleId of a non internalModule node");
 		}
+		return node;
+	}
+
+	execute(graphRegistry: GraphRegistry): void {
+		const { moduleReference, moduleNodeId } = this.details;
+		const node = this.getNode(graphRegistry, moduleNodeId);
 		this.previousModuleReference = node.extras.moduleReference;
 		node.extras.moduleReference = moduleReference;
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
 		const { moduleNodeId } = this.details;
-		const node = graphRegistry.nodes.get(moduleNodeId);
-		if (node.type !== 'ModuleNode' && node.type !== 'ModuleVoicesNode') {
-			throw new Error("Can't change the internalModuleId of a non internalModule node");
-		}
+		const node = this.getNode(graphRegistry, moduleNodeId);
 		node.extras.moduleReference = this.previousModuleReference;
 	}
 }
