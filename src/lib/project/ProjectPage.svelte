@@ -77,11 +77,17 @@
 
 	const audioBackendContext = getAudioBackendContext();
 	$effect(() => {
-		const { graphRegistry } = graphRegistryContext;
-		const { externalModulesData } = externalModulesDataContext;
-		const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry, externalModulesData);
-		const graphEngineData = getGraphEngineData(processedGraphRegistry);
-		audioBackendContext.audioBackend?.setGraph(graphEngineData);
+		// An error on updating the audio graph should not stop the full
+		// application
+		try {
+			const { graphRegistry } = graphRegistryContext;
+			const { externalModulesData } = externalModulesDataContext;
+			const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry, externalModulesData);
+			const graphEngineData = getGraphEngineData(processedGraphRegistry);
+			audioBackendContext.audioBackend?.setGraph(graphEngineData);
+		} catch (e) {
+			console.error(e);
+		}
 	});
 
 	setMenuVisibilityContexts();
