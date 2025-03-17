@@ -1,22 +1,19 @@
 import type { ById } from '$lib/editor/ById';
 import type { InternalModuleData } from './InternalModuleData';
 import type { InternalModuleReference } from './InternalModuleReference';
-import type { Module } from './Module';
+import { Module } from './Module';
 import type { Node } from './Node.svelte';
 
-// TODO check if it makes sense to keep data as a froze object instead of
-// copying its values
-export class InternalModule implements Module {
-	id: string;
-	name: string;
-	nodes!: Node[];
-
+export class InternalModule extends Module<InternalModuleData> {
 	constructor(internalModuleData: InternalModuleData, nodeOptions: ById<Node>) {
-		const { id, name } = internalModuleData;
-		this.id = id;
-		this.name = name;
+		super(internalModuleData);
 
 		this.nodes = nodeOptions.values().filter((node) => node.internalModuleId === this.id);
+	}
+
+	// This value is overridden in the constructor
+	getNodes(): Node[] {
+		return [];
 	}
 
 	getReference(): InternalModuleReference {
