@@ -83,7 +83,7 @@ export class ById<T extends HasId> {
 		});
 	}
 
-	clone() {
-		return ById.fromItems(this.values());
+	structuredClone() {
+		return new ById(structuredClone(this.content));
 	}
 }

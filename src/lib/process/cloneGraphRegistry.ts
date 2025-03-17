@@ -4,10 +4,10 @@ export function cloneGraphRegistry(graphRegistry: GraphRegistry): GraphRegistry 
 	const { mainInternalModuleId, connections, externalModuleReferences, internalModules, nodes } =
 		graphRegistry;
 	return {
-		nodes: nodes.clone(),
-		connections: connections.clone(),
-		internalModules: internalModules.clone(),
+		nodes: nodes.structuredClone(),
+		connections: connections.structuredClone(),
 		mainInternalModuleId: mainInternalModuleId,
-		externalModuleReferences: externalModuleReferences.clone(),
+		internalModules: internalModules.structuredClone(),
+		externalModuleReferences: externalModuleReferences.structuredClone(),
 	};
 }
