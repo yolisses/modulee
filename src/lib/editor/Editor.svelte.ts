@@ -33,7 +33,9 @@ export class Editor {
 			this.undoneHistory = [];
 		}
 
-		this.onExecute?.(command, this.graphRegistry);
+		// Uses a clone to prevent hard to debug errors
+		const graphRegistry = cloneGraphRegistry(this.graphRegistry);
+		this.onExecute?.(command, graphRegistry);
 	}
 
 	getCanUndo() {
