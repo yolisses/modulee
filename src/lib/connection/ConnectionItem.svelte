@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Connection } from '$lib/data/Connection';
-	import { ConnectionItem, getSelectedNodeIdsContext, Vector } from 'nodes-editor';
+	import { ConnectionItem, getSelectedNodeIdsContext } from 'nodes-editor';
 	import Wire from './Wire.svelte';
 	import { getInputPathId } from './getInputPathId';
 
@@ -27,13 +27,7 @@
 		endConnectorId: getInputPathId(connection.inputPath),
 	}}
 >
-	{#snippet children({
-		endPosition,
-		startPosition,
-	}: {
-		endPosition: Vector;
-		startPosition: Vector;
-	})}
+	{#snippet children({ endPosition, startPosition })}
 		<Wire {startPosition} {endPosition} {isSelected} />
 	{/snippet}
 </ConnectionItem>
