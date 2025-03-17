@@ -1,4 +1,4 @@
-import { findById } from '$lib/array/findById';
+import { findOrNullById } from '$lib/array/findOrNullById';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 
@@ -12,10 +12,11 @@ export function internalizeModuleNodeModuleReferences(
 
 		if (nodeData.extras.moduleReference?.type === 'external') {
 			const { moduleReference: internalModuleReference } = nodeData.extras;
-			const referencedExternalModuleData = findById(
+			const referencedExternalModuleData = findOrNullById(
 				externalModulesData,
 				internalModuleReference.id,
 			);
+			if (!referencedExternalModuleData) return;
 			const { mainInternalModuleId } = referencedExternalModuleData.graph;
 			nodeData.extras.moduleReference = { type: 'internal', id: mainInternalModuleId };
 		}
