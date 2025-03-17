@@ -4,7 +4,7 @@ import type { Node } from '$lib/data/Node.svelte';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
-import { Vector } from '../../../../../nodes-editor/dist/space/Vector';
+import { Vector } from 'nodes-editor';
 
 function getAverageNodesPosition(nodes: Node[]) {
 	let positionsSum = Vector.zero();

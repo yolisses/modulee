@@ -8,7 +8,7 @@ import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
-import { getSelectedNodeIdsContext } from '../../../../nodes-editor/dist/selection/selectedNodeIdsContext';
+import { getSelectedNodeIdsContext } from 'nodes-editor';
 import { defaultShortcuts } from './defaultShortcuts';
 
 export class Contexts {
