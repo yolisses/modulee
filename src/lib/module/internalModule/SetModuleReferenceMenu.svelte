@@ -22,14 +22,14 @@
 
 	function handleSelectModule(module: Module) {
 		const moduleReference = module.getReference();
-		const addNodeCommand = new SetModuleNodeModuleReferenceCommand({
+		const command = new SetModuleNodeModuleReferenceCommand({
 			id: createId(),
 			createdAt: new Date().toJSON(),
 			details: { moduleNodeId, moduleReference },
 			type: 'SetModuleNodeModuleReferenceCommand',
 			projectId: projectDataContext.projectData.id,
 		});
-		editorContext.editor.execute(addNodeCommand);
+		editorContext.editor.execute(command);
 		closeModal();
 	}
 
