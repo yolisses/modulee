@@ -1,40 +1,44 @@
 import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
 import { Input } from './Input.svelte';
-import type { NodeData } from './NodeData';
+import type { NodeDataBase } from './NodeDataBase';
 import { Output } from './Output.svelte';
 
-// TODO check if it makes sense to keep data as a froze object instead of
-// copying its values
-export class Node<T extends NodeData = NodeData> {
-	id: string;
+export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
 	inputs: Input[];
-	type: T['type'];
-	internalModuleId: string;
-	extras: T['extras'];
 	position: Vector = $state()!;
+	protected nodeData: T;
 
-	constructor(nodeData: NodeData) {
-		const { id, type, extras, position, internalModuleId } = nodeData;
-		this.id = id;
-		this.type = type;
-		this.extras = extras;
-		this.internalModuleId = internalModuleId;
+	constructor(nodeData: T) {
+		this.nodeData = structuredClone(nodeData);
+		Object.freeze(this.nodeData);
+
 		this.output = new Output(this);
 		this.inputs = this.getInputs();
-		this.position = Vector.fromData(position);
+		this.position = Vector.fromData(this.nodeData.position);
 	}
 
 	getInputs() {
-		const inputs: Input[] = [];
-
 		const nodeType = nodeTypesByName[this.type];
-		nodeType.inputNames.forEach((inputName) => {
-			const input = new Input(inputName, inputName, this);
-			inputs.push(input);
+		return nodeType.inputNames.map((inputName) => {
+			return new Input(inputName, inputName, this);
 		});
+	}
 
-		return inputs;
+	get id() {
+		return this.nodeData.id;
+	}
+
+	get type(): T['type'] {
+		return this.nodeData.type;
+	}
+
+	get extras(): T['extras'] {
+		return this.nodeData.extras;
+	}
+
+	get internalModuleId() {
+		return this.nodeData.internalModuleId;
 	}
 }

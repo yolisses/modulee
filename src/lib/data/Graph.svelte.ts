@@ -40,6 +40,7 @@ export class Graph {
 			this.externalModules.add(externalModule);
 			this.modules.add(externalModule);
 		});
+		console.log(this.modules.values());
 
 		this.nodes.values().forEach((node) => {
 			if (node instanceof ModuleNode) {
