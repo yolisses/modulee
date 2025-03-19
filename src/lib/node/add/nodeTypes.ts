@@ -15,6 +15,7 @@ export const nodeTypes: NodeType[] = [
 	{ name: 'SawtoothWaveNode', defaultExtras: {}, inputNames: ['phase'] },
 	{ name: 'TriangleWaveNode', defaultExtras: {}, inputNames: ['phase'] },
 	{ name: 'AddNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
+	{ name: 'RandomFromValueNode', defaultExtras: {}, inputNames: ['value'] },
 	{ name: 'InputNode', defaultExtras: { name: 'new input' }, inputNames: [] },
 	{ name: 'DivideNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },
 	{ name: 'SubtractNode', defaultExtras: {}, inputNames: ['input1', 'input2'] },

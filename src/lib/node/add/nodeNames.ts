@@ -23,4 +23,5 @@ export const nodesName: Record<string, string> = {
 	TriangleWaveNode: 'Triangle wave',
 	SawtoothWaveNode: 'Sawtooth wave',
 	ModuleVoicesNode: 'Module voices',
+	RandomFromValueNode: 'Random from value',
 };
