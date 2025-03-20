@@ -28,7 +28,7 @@
 	const { closeModal, screenPosition }: Props = $props();
 
 	function handleTypeSelect(nodeType: NodeType) {
-		const dataPosition = spaceContext.space.getDataPosition(screenPosition).round();
+		const dataPosition = spaceContext.space.getDataPosition(screenPosition).floor();
 		const nodeData = createNodeData(
 			nodeType,
 			internalModuleIdContext.internalModuleId,
