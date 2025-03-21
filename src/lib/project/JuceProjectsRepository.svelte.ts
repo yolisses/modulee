@@ -50,6 +50,6 @@ export class JuceProjectsRepository implements ProjectsRepository {
 
 	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
 		const updateProjectGraphData = this.juceLibrary.getNativeFunction('updateProjectGraphData');
-		await updateProjectGraphData(id, graphData);
+		await updateProjectGraphData(id, JSON.stringify(graphData));
 	}
 }
