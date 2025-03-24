@@ -35,8 +35,12 @@
 			const audioBackend = new JuceAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			virtualPianoMidiBackend.initialize();
+
 			return () => {
 				audioBackend.destroy();
+				virtualPianoMidiBackend.destroy();
 			};
 		}
 	});
