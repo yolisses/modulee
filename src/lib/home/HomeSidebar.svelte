@@ -29,6 +29,6 @@
 		class="common-button rounded-none border-white/25"
 		class:border-l-4={route.startsWith('/(home)/externalModules')}
 	>
-		<Fa fw icon={faPuzzlePiece} /> External modules
+		<Fa fw icon={faPuzzlePiece} /> Modules
 	</a>
 </div>
