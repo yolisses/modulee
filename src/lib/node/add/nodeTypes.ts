@@ -23,6 +23,7 @@ export const nodeTypes: NodeType[] = [
 	{ name: 'AllPassNode', defaultExtras: {}, inputNames: ['input', 'frequency', 'resonance'] },
 	{ name: 'LowPassNode', defaultExtras: {}, inputNames: ['input', 'frequency', 'resonance'] },
 	{ name: 'HighPassNode', defaultExtras: {}, inputNames: ['input', 'frequency', 'resonance'] },
+	{ name: 'PeakNode', defaultExtras: {}, inputNames: ['input', 'frequency', 'resonance', 'gain'] },
 	{
 		name: 'EnvelopeNode',
 		defaultExtras: {},
