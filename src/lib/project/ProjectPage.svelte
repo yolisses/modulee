@@ -5,8 +5,17 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
-	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
+	import {
+		type AudioBackendContext,
+		setAudioBackendContext,
+	} from '$lib/engine/audioBackendContext';
 	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
+	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
+	import { type IsMutedContext, setIsMutedContext } from '$lib/engine/isMutedContexts';
+	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
+	import { VirtualPianoMidiBackend } from '$lib/engine/VirtualPianoMidiBackend';
+	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
+	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { getExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
@@ -17,7 +26,7 @@
 	import { setSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 	import Sidebar from '$lib/sidebar/Sidebar.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
-	import { type Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
 	import { getProjectsRepository } from './getProjectsRepository';
 	import { getProjectDataContext } from './projectDataContext';
@@ -75,7 +84,52 @@
 	const editorContext = $state({ editor });
 	setEditorContext(editorContext);
 
-	const audioBackendContext = getAudioBackendContext();
+	const audioBackendContext: AudioBackendContext = $state({});
+	setAudioBackendContext(audioBackendContext);
+
+	const isMutedContext: IsMutedContext = $state({ isMuted: false });
+	setIsMutedContext(isMutedContext);
+
+	$effect(() => {
+		const { isMuted } = isMutedContext;
+		const { audioBackend } = audioBackendContext;
+		audioBackend?.setIsMuted(isMuted);
+	});
+
+	onMount(() => {
+		if (getHaveJuceSupport()) {
+			const audioBackend = new JuceAudioBackend();
+			audioBackendContext.audioBackend = audioBackend;
+
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			virtualPianoMidiBackend.initialize();
+
+			return () => {
+				audioBackend.destroy();
+				virtualPianoMidiBackend.destroy();
+			};
+		}
+	});
+
+	onMount(() => {
+		if (!getHaveJuceSupport()) {
+			const audioBackend = new WasmAudioBackend();
+			audioBackendContext.audioBackend = audioBackend;
+
+			const webMidiBackend = new WebMidiBackend(audioBackend);
+			webMidiBackend.initialize();
+
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			virtualPianoMidiBackend.initialize();
+
+			return () => {
+				audioBackend.destroy();
+				webMidiBackend.destroy();
+				virtualPianoMidiBackend.destroy();
+			};
+		}
+	});
+
 	$effect(() => {
 		// An error on updating the audio graph should not stop the full
 		// application
