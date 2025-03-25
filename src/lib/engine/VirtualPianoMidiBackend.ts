@@ -1,3 +1,4 @@
+import { getIsTargetInput } from '$lib/shortcut/getIsTargetInput';
 import type { AudioBackend } from './AudioBackend';
 import { virtualPianoKeyOffsets } from './virtualPianoKeyOffsets';
 
@@ -25,6 +26,8 @@ export class VirtualPianoMidiBackend {
 	}
 
 	handleKeyDown = (e: KeyboardEvent) => {
+		if (getIsTargetInput(e)) return;
+
 		const key = e.key.toUpperCase();
 		if (this.pressedKeys[key]) return;
 		this.pressedKeys[key] = true;
