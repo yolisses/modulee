@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { faProjectDiagram, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
+	import { faProjectDiagram, faPuzzlePiece, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
 	const route = $derived(page.route.id || '');
@@ -30,5 +30,13 @@
 		class:border-l-4={route.startsWith('/(home)/externalModules')}
 	>
 		<Fa fw icon={faPuzzlePiece} /> Modules
+	</a>
+	<div class="flex-1" />
+	<a
+		href="/account"
+		class="common-button rounded-none border-white/25"
+		class:border-l-4={route.startsWith('/(home)/account')}
+	>
+		<Fa fw icon={faUser} /> Account
 	</a>
 </div>
