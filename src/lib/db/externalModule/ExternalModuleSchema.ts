@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 export const ExternalModuleSchema = new Schema(
-	{ name: String },
+	{ name: { required: true, type: 'String' } },
 	{
 		id: true,
 		toObject: {
