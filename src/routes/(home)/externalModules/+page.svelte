@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
-	import type { PageData } from './$types';
+	import type { PageProps } from './$types';
 
-	const data: PageData = $props();
+	const { data }: PageProps = $props();
 </script>
 
 <ExternalModulesPage externalModulesData={data.externalModulesData} />
