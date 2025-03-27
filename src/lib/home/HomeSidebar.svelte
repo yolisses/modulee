@@ -30,7 +30,7 @@
 	>
 		<Fa fw icon={faPuzzlePiece} /> Modules
 	</a>
-	<div class="flex-1" />
+	<div class="flex-1"></div>
 	<a
 		href="/account"
 		class="common-button rounded-none border-white/25"

@@ -1,7 +1,13 @@
 <script lang="ts">
-	import Spinner from '$lib/ui/Spinner.svelte';
+	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleList from './ExternalModuleList.svelte';
 	import { getExternalModulesRepository } from './getExternalModulesRepository';
+
+	interface Props {
+		externalModulesData: ExternalModuleData[];
+	}
+
+	const { externalModulesData }: Props = $props();
 
 	const externalModulesRepository = getExternalModulesRepository();
 
@@ -14,7 +20,8 @@
 			<h1 class="pl-2 text-xl font-medium">Modules</h1>
 		</div>
 		<div>
-			{#await externalModulesDataPromise}
+			<ExternalModuleList {externalModulesData} />
+			<!-- {#await externalModulesDataPromise}
 				<div class="flex h-full flex-1 flex-col items-center p-8">
 					<Spinner></Spinner>
 				</div>
@@ -25,7 +32,7 @@
 					<div>It was not possible to load the external modules</div>
 					<div>{error}</div>
 				</div>
-			{/await}
+			{/await} -->
 		</div>
 	</div>
 </div>

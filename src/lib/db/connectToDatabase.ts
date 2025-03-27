@@ -1,5 +1,6 @@
+import { MONGO_DB_URL } from '$env/static/private';
 import { connect } from 'mongoose';
 
 export async function connectToDatabase() {
-	await connect('mongodb://127.0.0.1:27017/test');
+	await connect(MONGO_DB_URL);
 }
