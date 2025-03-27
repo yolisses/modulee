@@ -4,7 +4,6 @@
 	import Fa from 'svelte-fa';
 
 	const route = $derived(page.route.id || '');
-	$inspect(page);
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
