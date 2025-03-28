@@ -1,34 +1,24 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { createId } from '$lib/data/createId';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getProjectsRepository } from './getProjectsRepository';
-	import type { ProjectData } from './ProjectData';
+	import CreateProjectModal from './CreateProjectModal.svelte';
 
-	let isLoading = $state(false);
-	const projectsRepository = getProjectsRepository();
+	let isModalActive = $state(false);
 
-	async function handleClick() {
-		isLoading = true;
-		const mainInternalModuleId = createId();
-		const projectData: ProjectData = {
-			id: createId(),
-			name: 'New project',
-			graphData: {
-				nodes: [],
-				connections: [],
-				mainInternalModuleId,
-				externalModuleReferences: [],
-				internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
-			},
-		};
-		await projectsRepository.createProject(projectData);
-		goto('/projects/' + projectData.id);
+	function handleClick() {
+		isModalActive = true;
+	}
+
+	function closeModal() {
+		isModalActive = false;
 	}
 </script>
 
-<button disabled={isLoading} onclick={handleClick} class="primary-button">
+<button onclick={handleClick} class="primary-button">
 	<Fa icon={faPlus} />
 	Create project
 </button>
+
+{#if isModalActive}
+	<CreateProjectModal {closeModal} />
+{/if}
