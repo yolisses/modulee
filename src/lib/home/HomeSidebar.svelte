@@ -32,10 +32,10 @@
 	</a>
 	<div class="flex-1"></div>
 	<a
-		href="/account"
+		href="/signIn"
 		class="common-button rounded-none border-white/25"
-		class:border-l-4={route.startsWith('/(home)/account')}
+		class:border-l-4={route.startsWith('/(home)/signIn')}
 	>
-		<Fa fw icon={faUser} /> Account
+		<Fa fw icon={faUser} /> Sign in
 	</a>
 </div>
