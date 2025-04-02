@@ -1,5 +1,12 @@
-<script>
+<script lang="ts">
+	import Spinner from '$lib/ui/Spinner.svelte';
 	import GoogleSignInButton from './GoogleSignInButton.svelte';
+
+	let loading = $state(false);
+
+	function onGoogleSignIn(e: { credential: string }) {
+		loading = true;
+	}
 </script>
 
 <div class="flex min-h-[100dvh] flex-col items-center">
@@ -8,9 +15,13 @@
 			<h1 class="pl-2 text-xl font-medium">Accounts</h1>
 		</div>
 		<div class="flex flex-1 items-center justify-center">
-			<div class="w-full max-w-xs">
-				<GoogleSignInButton />
-			</div>
+			{#if loading}
+				<Spinner size={36} />
+			{:else}
+				<div class="w-full max-w-xs">
+					<GoogleSignInButton {onGoogleSignIn} />
+				</div>
+			{/if}
 		</div>
 		<div class="h-10"></div>
 	</div>

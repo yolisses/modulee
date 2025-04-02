@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	interface Props {
+		onGoogleSignIn: (e: { credential: string }) => void;
+	}
+
+	const { onGoogleSignIn }: Props = $props();
+
 	onMount(() => {
-		window.onGoogleSignIn = (e: { credential: string }) => {
-			console.log(e);
-		};
+		window.onGoogleSignIn = onGoogleSignIn;
 	});
 </script>
 
