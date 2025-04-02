@@ -3,7 +3,7 @@ import { encodeHexLowerCase } from '@oslojs/encoding';
 import { createClient } from 'redis';
 import type { Session } from './Session.js';
 
-export async function createSession(token: string, userId: number): Promise<Session> {
+export async function createSession(token: string, userId: string): Promise<Session> {
 	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
 	const session: Session = {
 		id: sessionId,

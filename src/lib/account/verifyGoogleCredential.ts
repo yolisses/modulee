@@ -8,5 +8,7 @@ export async function verifyGoogleCredential(credential: string) {
 		idToken: credential,
 		audience: AUTH_GOOGLE_ID,
 	});
-	return ticket.getPayload();
+	const payload = ticket.getPayload();
+	if (!payload) throw new Error('Missing payload');
+	return payload;
 }
