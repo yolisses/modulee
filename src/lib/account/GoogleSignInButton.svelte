@@ -1,3 +1,13 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		window.onGoogleSignIn = (e: { credential: string }) => {
+			console.log(e);
+		};
+	});
+</script>
+
 <svelte:head>
 	<script src="https://accounts.google.com/gsi/client" async></script>
 </svelte:head>
