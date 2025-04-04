@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { setUserDataContext } from '$lib/account/userDataContext';
 	import GlobalLayout from '$lib/project/GlobalLayout.svelte';
+	import { setUserDataContext } from '$lib/user/userDataContext';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import type { LayoutServerData } from './$types';

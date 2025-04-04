@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UserPage from '$lib/account/UserPage.svelte';
+	import UserPage from '$lib/user/UserPage.svelte';
 	import type { PageData } from './$types';
 
 	interface Props {

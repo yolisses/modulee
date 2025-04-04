@@ -1,4 +1,4 @@
-import { UserModel } from '$lib/account/UserModel';
+import { UserModel } from '$lib/user/UserModel';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

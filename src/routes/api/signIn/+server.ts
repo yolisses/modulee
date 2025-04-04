@@ -1,8 +1,8 @@
-import { UserModel } from '$lib/account/UserModel';
-import { verifyGoogleCredential } from '$lib/account/verifyGoogleCredential';
 import { createSession } from '$lib/session/createSession';
 import { generateSessionToken } from '$lib/session/generateSessionToken';
 import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
+import { UserModel } from '$lib/user/UserModel';
+import { verifyGoogleCredential } from '$lib/user/verifyGoogleCredential';
 import { type RequestHandler, json } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async (event) => {

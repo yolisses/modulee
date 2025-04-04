@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getUserDataContext } from '$lib/account/userDataContext';
+	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
