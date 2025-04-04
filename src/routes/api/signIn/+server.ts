@@ -19,13 +19,15 @@ export const POST: RequestHandler = async (event) => {
 	}
 
 	const userDocument = await UserModel.findOne({ email }).exec();
-	const user = userDocument ? userDocument.toObject() : null;
-	if (user) {
+	if (userDocument) {
+		const userData = userDocument.toObject();
+
 		const token = generateSessionToken();
-		const session = await createSession(token, user.id);
+		const session = await createSession(token, userData.id);
+
 		setSessionTokenCookie(event, token, session.expiresAt);
-		return json({ user });
+		return json(userData);
 	}
-	// TODO create user if not exists
-	return json({ user });
+
+	return json({});
 };

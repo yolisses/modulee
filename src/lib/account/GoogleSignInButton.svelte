@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { getUserDataContext } from './userDataContext';
 
 	interface Props {
 		loading: boolean;
 	}
 
+	const userDataContext = getUserDataContext();
 	let { loading = $bindable() }: Props = $props();
 
 	async function onGoogleSignIn({ credential }: { credential: string }) {
@@ -15,9 +18,9 @@
 				body: JSON.stringify({ credential }),
 				headers: { 'content-type': 'application/json' },
 			});
-
-			const data = await response.json();
-			console.log(data);
+			const userData = await response.json();
+			userDataContext.userData = userData;
+			goto('/users/' + userData.id);
 		} catch (e) {}
 		loading = false;
 	}
