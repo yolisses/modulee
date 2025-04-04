@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getUserDataContext } from '$lib/account/userDataContext';
+	import HomePageLayout from '$lib/ui/HomePageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
@@ -12,31 +12,25 @@
 	projectsRepository.onProjectsChange = () => {
 		projectsDataPromise = projectsRepository.getProjects();
 	};
-
-	const userDataContext = getUserDataContext();
 </script>
 
-<div class="flex flex-col items-center">
-	<div class="flex w-full max-w-xl flex-col gap-4 p-4">
-		<div class="flex h-10 flex-row items-center justify-between gap-2">
-			<h1 class="pl-2 text-xl font-medium">Projects</h1>
-			<div class="flex-1"></div>
-			<ImportProjectButton />
-			<CreateProjectButton />
-		</div>
-		<div>
-			{#await projectsDataPromise}
-				<div class="flex h-full flex-1 flex-col items-center p-8">
-					<Spinner></Spinner>
-				</div>
-			{:then projectsData}
-				<ProjectList {projectsData} />
-			{:catch error}
-				<div class="text-red-500">
-					<div>It was not possible to load the projects</div>
-					<div>{error}</div>
-				</div>
-			{/await}
-		</div>
-	</div>
-</div>
+<HomePageLayout title="Projects">
+	{#snippet topChildren()}
+		<ImportProjectButton />
+		<CreateProjectButton />
+	{/snippet}
+	{#snippet children()}
+		{#await projectsDataPromise}
+			<div class="flex h-full flex-1 flex-col items-center p-8">
+				<Spinner></Spinner>
+			</div>
+		{:then projectsData}
+			<ProjectList {projectsData} />
+		{:catch error}
+			<div class="text-red-500">
+				<div>It was not possible to load the projects</div>
+				<div>{error}</div>
+			</div>
+		{/await}
+	{/snippet}
+</HomePageLayout>
