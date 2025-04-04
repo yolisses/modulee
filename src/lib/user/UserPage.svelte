@@ -20,5 +20,5 @@
 			<EditUserButton />
 		{/if}
 	{/snippet}
-	<div class="p-2">{userData.bio}</div>
+	<p>{userData.bio}</p>
 </HomePageLayout>

@@ -1,5 +1,7 @@
 <script lang="ts">
-	import LogoutButton from './LogoutButton.svelte';
+	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import { faSave } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import type { UserData } from './UserData';
 
 	interface Props {
@@ -9,13 +11,21 @@
 	const { userData }: Props = $props();
 </script>
 
-<h1 class="pl-2 text-xl font-medium">Account</h1>
-<label>
-	<div>Name</div>
-	<input type="text" class="common-input" value={userData.name} />
-</label>
-<label>
-	<div>Bio</div>
-	<textarea class="common-input" value={userData.bio}></textarea>
-</label>
-<LogoutButton />
+<HomePageLayout title="Profile">
+	<div class="flex flex-col gap-2">
+		<label>
+			<div>Name</div>
+			<input type="text" class="common-input w-full" value={userData.name} />
+		</label>
+		<label>
+			<div>Bio</div>
+			<textarea class="common-input w-full" rows={4} value={userData.bio}></textarea>
+		</label>
+		<div>
+			<button class="primary-button">
+				<Fa icon={faSave} />
+				Save profile
+			</button>
+		</div>
+	</div>
+</HomePageLayout>
