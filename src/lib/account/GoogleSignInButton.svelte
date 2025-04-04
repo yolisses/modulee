@@ -2,10 +2,25 @@
 	import { onMount } from 'svelte';
 
 	interface Props {
-		onGoogleSignIn: (e: { credential: string }) => void;
+		loading: boolean;
 	}
 
-	const { onGoogleSignIn }: Props = $props();
+	let { loading = $bindable() }: Props = $props();
+
+	async function onGoogleSignIn({ credential }: { credential: string }) {
+		loading = true;
+		try {
+			const response = await fetch('/api/signIn', {
+				method: 'POST',
+				body: JSON.stringify({ credential }),
+				headers: { 'content-type': 'application/json' },
+			});
+
+			const data = await response.json();
+			console.log(data);
+		} catch (e) {}
+		loading = false;
+	}
 
 	onMount(() => {
 		window.onGoogleSignIn = onGoogleSignIn;

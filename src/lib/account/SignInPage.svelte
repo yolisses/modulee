@@ -3,21 +3,6 @@
 	import GoogleSignInButton from './GoogleSignInButton.svelte';
 
 	let loading = $state(false);
-
-	async function onGoogleSignIn({ credential }: { credential: string }) {
-		loading = true;
-		try {
-			const response = await fetch('/api/signIn', {
-				method: 'POST',
-				body: JSON.stringify({ credential }),
-				headers: { 'content-type': 'application/json' },
-			});
-
-			const data = await response.json();
-			console.log(data);
-		} catch (e) {}
-		loading = false;
-	}
 </script>
 
 <div class="flex min-h-[100dvh] flex-col items-center">
@@ -29,7 +14,7 @@
 			{#if loading}
 				<Spinner size={36} />
 			{:else}
-				<GoogleSignInButton {onGoogleSignIn} />
+				<GoogleSignInButton bind:loading />
 			{/if}
 		</div>
 		<div class="h-10"></div>
