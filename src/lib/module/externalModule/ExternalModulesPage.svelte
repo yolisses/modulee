@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/ui/HomePageLayout.svelte';
+	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleList from './ExternalModuleList.svelte';
 	import { getExternalModulesRepository } from './getExternalModulesRepository';

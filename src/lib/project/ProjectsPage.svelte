@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/ui/HomePageLayout.svelte';
+	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
