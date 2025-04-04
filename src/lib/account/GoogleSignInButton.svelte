@@ -26,12 +26,14 @@
 	data-itp_support="true"
 ></div>
 
-<div
-	class="g_id_signin"
-	data-type="standard"
-	data-shape="rectangular"
-	data-theme="filled_blue"
-	data-text="signin_with"
-	data-size="large"
-	data-logo_alignment="left"
-></div>
+<div class="flex h-10">
+	<div
+		class="g_id_signin"
+		data-type="standard"
+		data-shape="rectangular"
+		data-theme="filled_blue"
+		data-text="signin_with"
+		data-size="large"
+		data-logo_alignment="left"
+	></div>
+</div>
