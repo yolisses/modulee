@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getUserDataContext } from '$lib/account/userDataContext';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
@@ -11,6 +12,8 @@
 	projectsRepository.onProjectsChange = () => {
 		projectsDataPromise = projectsRepository.getProjects();
 	};
+
+	const userDataContext = getUserDataContext();
 </script>
 
 <div class="flex flex-col items-center">
