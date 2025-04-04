@@ -3,7 +3,9 @@
 	import Fa from 'svelte-fa';
 </script>
 
-<button class="common-button">
-	<Fa icon={faDoorOpen} />
-	Log out
-</button>
+<form action="/logOut" method="POST">
+	<button class="common-button">
+		<Fa icon={faDoorOpen} />
+		Log out
+	</button>
+</form>

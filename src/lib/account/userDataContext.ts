@@ -3,7 +3,7 @@ import { setContext } from 'svelte';
 import type { UserData } from './UserData';
 
 export type UserDataContext = {
-	userData: UserData;
+	userData?: UserData;
 };
 
 const userDataContextKey = Symbol('userDataContextKey');
