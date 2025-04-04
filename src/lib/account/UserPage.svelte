@@ -1,14 +1,22 @@
 <script lang="ts">
 	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import LogoutButton from './LogoutButton.svelte';
 	import type { UserData } from './UserData';
+	import { getUserDataContext } from './userDataContext';
 
 	interface Props {
 		userData: UserData;
 	}
 
 	const { userData }: Props = $props();
+	const userDataContext = getUserDataContext();
 </script>
 
 <HomePageLayout title={userData.name}>
+	{#snippet topChildren()}
+		{#if userData.id === userDataContext.userData?.id}
+			<LogoutButton />
+		{/if}
+	{/snippet}
 	<div class="p-2">{userData.bio}</div>
 </HomePageLayout>
