@@ -12,14 +12,14 @@
 </script>
 
 <HomePageLayout title="Profile">
-	<div class="flex flex-col gap-2">
+	<form class="flex flex-col gap-2" method="POST">
 		<label>
 			<div>Name</div>
-			<input type="text" class="common-input w-full" value={userData.name} />
+			<input name="name" type="text" class="common-input w-full" value={userData.name} />
 		</label>
 		<label>
 			<div>Bio</div>
-			<textarea class="common-input w-full" rows={4} value={userData.bio}></textarea>
+			<textarea name="bio" class="common-input w-full" rows={4} value={userData.bio}></textarea>
 		</label>
 		<div>
 			<button class="primary-button">
@@ -27,5 +27,5 @@
 				Save profile
 			</button>
 		</div>
-	</div>
+	</form>
 </HomePageLayout>
