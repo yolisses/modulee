@@ -9,4 +9,6 @@
 	const { userData }: Props = $props();
 </script>
 
-<HomePageLayout title={userData.name}></HomePageLayout>
+<HomePageLayout title={userData.name}>
+	<div class="p-2">{userData.bio}</div>
+</HomePageLayout>

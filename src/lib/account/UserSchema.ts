@@ -1,12 +1,11 @@
-import { required } from '$lib/db/required';
 import { Schema } from 'mongoose';
 import type { UserData } from './UserData';
 
 export const UserSchema = new Schema<UserData>(
 	{
-		name: required(String),
-		bio: { type: String, required: false },
-		email: { type: String, select: false, required: true, unique: true },
+		name: { type: String, required: true, maxlength: 30 },
+		bio: { type: String, required: false, maxlength: 150 },
+		email: { type: String, required: true, maxlength: 320, unique: true, select: false },
 	},
 	{
 		id: true,
