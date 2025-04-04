@@ -9,3 +9,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+  redis_db:
+    image: redis
+    restart: unless-stopped
+    container_name: modulee_redis_db
+    ports:
+      - 6379:6379
