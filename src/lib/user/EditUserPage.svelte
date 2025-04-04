@@ -1,15 +1,12 @@
 <script lang="ts">
 	import LogoutButton from './LogoutButton.svelte';
 	import type { UserData } from './UserData';
-	import { getUserDataContext } from './userDataContext';
 
 	interface Props {
 		userData: UserData;
 	}
 
 	const { userData }: Props = $props();
-
-	const userDataContext = getUserDataContext();
 </script>
 
 <h1 class="pl-2 text-xl font-medium">Account</h1>
