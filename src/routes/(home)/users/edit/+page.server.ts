@@ -1,5 +1,5 @@
 import { UserModel } from '$lib/user/UserModel';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -21,18 +21,21 @@ export const actions = {
 		if (!session) {
 			error(401, 'User not logged in');
 		}
+		const { userId } = session;
 
 		const formData = await request.formData();
 		// TODO find a cleaner way to prevent other fields from being updated
 		const { name, bio } = Object.fromEntries(formData);
 		const userData = { name, bio };
 
-		const user = await UserModel.findByIdAndUpdate(session.userId, userData, {
+		const user = await UserModel.findByIdAndUpdate(userId, userData, {
 			runValidators: true,
 		});
 
 		if (!user) {
 			error(404, 'User not found');
 		}
+
+		redirect(302, '/users/' + userId);
 	},
 } satisfies Actions;
