@@ -119,14 +119,14 @@
 </script>
 
 <PointerEventDispatcher
+	class="flex grow flex-col"
 	{pointerStrategy}
-	style="display: contents"
 	oncontextmenu={handleContextMenu}
 >
 	<div
 		style:min-width={minSize.x + 'px'}
 		style:min-height={minSize.y + 'px'}
-		class="bg-dots relative shrink-0 select-none"
+		class="bg-dots relative grow select-none"
 		bind:this={rootElementContext.rootElement}
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}

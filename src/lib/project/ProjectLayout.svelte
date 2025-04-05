@@ -27,7 +27,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-row overflow-hidden">
-	<div class="flex-1">
+	<div class="flex flex-1 flex-col overflow-hidden">
 		{@render children?.()}
 	</div>
 	{#if isSidebarVisibleContext.isSidebarVisible}
