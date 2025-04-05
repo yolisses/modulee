@@ -9,6 +9,7 @@ export const UserSchema = new Schema<UserData>(
 	},
 	{
 		id: true,
+		timestamps: true,
 		toObject: {
 			virtuals: true,
 			flattenMaps: true,
