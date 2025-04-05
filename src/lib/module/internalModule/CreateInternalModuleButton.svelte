@@ -9,7 +9,7 @@
 	import Fa from 'svelte-fa';
 
 	interface Props {
-		class: string;
+		class?: string;
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;
 	}
 
