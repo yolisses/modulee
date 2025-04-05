@@ -9,11 +9,10 @@
 	import Fa from 'svelte-fa';
 
 	interface Props {
-		class?: string;
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;
 	}
 
-	const { onInternalModuleCreated, class: classString }: Props = $props();
+	const { onInternalModuleCreated }: Props = $props();
 
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
@@ -42,7 +41,7 @@
 	}
 </script>
 
-<button class={classString} onclick={handleCreateClick}>
+<button class="common-button" onclick={handleCreateClick}>
 	<Fa icon={faPlus} />
 	Create internal module
 </button>
