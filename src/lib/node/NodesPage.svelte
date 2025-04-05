@@ -49,9 +49,9 @@
 	});
 </script>
 
-<div class="flex h-screen w-screen flex-col overflow-hidden">
+<div class="overflow-hidden">
 	<NodesToolbar />
-	<div class="flex flex-1 flex-col overflow-auto">
+	<div class="flex-1">
 		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 	</div>
 </div>

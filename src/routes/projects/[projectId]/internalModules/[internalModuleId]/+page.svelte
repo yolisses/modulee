@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import InternalModulePage from '$lib/project/InternalModulePage.svelte';
 	import { getSelectedTabContext } from '$lib/sidebar/selectedTabContext';
 	import type { PageData } from './$types';
 
@@ -9,11 +10,11 @@
 	}
 
 	const { data }: Props = $props();
-	const internalModuleIdContext = getInternalModuleIdContext();
 
-	$effect(() => {
-		internalModuleIdContext.internalModuleId = data.internalModuleId;
+	const internalModuleContext = $state({
+		internalModuleId: data.internalModuleId,
 	});
+	setInternalModuleIdContext(internalModuleContext);
 
 	const selectedTabContext = getSelectedTabContext();
 	$effect(() => {
@@ -21,3 +22,5 @@
 		selectedTabContext.selectedTab = 'internalModule';
 	});
 </script>
+
+<InternalModulePage />

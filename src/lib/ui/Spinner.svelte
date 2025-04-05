@@ -3,7 +3,7 @@
 		size?: number;
 	}
 
-	const { size = 24 }: Props = $props();
+	const { size = 32 }: Props = $props();
 </script>
 
 <svg width={size} height={size} stroke="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
