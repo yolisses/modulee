@@ -1,6 +1,10 @@
 import { Schema } from 'mongoose';
-import { required } from './required';
 
-export const ProjectSchema = new Schema({
-	name: required(String),
-});
+export const ProjectSchema = new Schema(
+	{
+		name: { type: String, required: true, maxlength: 255 },
+	},
+	{
+		timestamps: true,
+	},
+);
