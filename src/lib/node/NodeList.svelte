@@ -98,23 +98,28 @@
 	);
 
 	let minSize = $state(Vector.zero());
+	$inspect(minSize);
 
 	$effect(() => {
 		const nodeRects = Object.values(nodeRectsContext.nodeRects);
-		if (nodeRects.length === 0) return;
 
-		const step = 200;
-		const boundingRect = getRectsBoundingRect(nodeRects);
+		let boundingRectSize;
+		if (nodeRects.length === 0) {
+			boundingRectSize = Vector.zero();
+		} else {
+			const boundingRect = getRectsBoundingRect(nodeRects);
+			boundingRectSize = boundingRect.position.add(boundingRect.size);
+		}
 
-		const currentMinSize = boundingRect.size
-			.add(boundingRect.position)
+		const step = 100;
+		const currentMinSize = boundingRectSize
 			.divideByNumber(step)
 			.ceil()
 			.multiplyByNumber(step)
 			.addByNumber(step);
 
-		if (minSize.x < currentMinSize.x || minSize.y < currentMinSize.y) {
-			minSize = currentMinSize;
+		if (currentMinSize.x > minSize.x || currentMinSize.y > minSize.y) {
+			minSize = minSize.max(currentMinSize);
 		}
 	});
 </script>
