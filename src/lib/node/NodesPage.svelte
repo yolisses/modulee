@@ -51,7 +51,7 @@
 
 <div class="flex flex-1 flex-col overflow-hidden">
 	<NodesToolbar />
-	<div class="flex flex-1 flex-col overflow-scroll">
+	<div class="flex-1 overflow-scroll">
 		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 	</div>
 </div>

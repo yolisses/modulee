@@ -110,7 +110,8 @@
 			.add(boundingRect.position)
 			.divideByNumber(step)
 			.ceil()
-			.multiplyByNumber(step);
+			.multiplyByNumber(step)
+			.addByNumber(step);
 
 		if (minSize.x < currentMinSize.x || minSize.y < currentMinSize.y) {
 			minSize = currentMinSize;
@@ -118,15 +119,11 @@
 	});
 </script>
 
-<PointerEventDispatcher
-	class="flex grow flex-col"
-	{pointerStrategy}
-	oncontextmenu={handleContextMenu}
->
+<PointerEventDispatcher {pointerStrategy} oncontextmenu={handleContextMenu}>
 	<div
-		style:min-width={minSize.x + 'px'}
-		style:min-height={minSize.y + 'px'}
-		class="bg-dots relative grow select-none"
+		style:width={minSize.x + 'px'}
+		style:height={minSize.y + 'px'}
+		class="bg-dots relative select-none"
 		bind:this={rootElementContext.rootElement}
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
