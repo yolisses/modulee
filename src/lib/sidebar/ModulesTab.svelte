@@ -52,7 +52,7 @@
 
 <div class="flex flex-col">
 	<div class="flex flex-row gap-2 p-2">
-		<CreateInternalModuleButton class="primary-button" />
+		<CreateInternalModuleButton />
 		<ImportExternalModuleButton />
 	</div>
 	<BasicList {getId} {getName} {getHref} values={graphContext.graph.modules.values()}>
