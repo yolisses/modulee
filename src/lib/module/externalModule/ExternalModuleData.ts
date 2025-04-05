@@ -7,4 +7,5 @@ export type ExternalModuleData = {
 	graph: GraphData;
 	version: Version;
 	projectId: string;
+	description?: string;
 };
