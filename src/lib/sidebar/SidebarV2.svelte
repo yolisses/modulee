@@ -21,12 +21,20 @@
 		Nodes
 	</a>
 	<a
-		href="{baseUrl}/modules"
+		href="{baseUrl}/internalModules"
 		class="common-button rounded-none border-white/25"
-		class:border-l-4={route.startsWith('/projects/[projectId]/modules')}
+		class:border-l-4={route === '/projects/[projectId]/internalModules'}
 	>
 		<Fa icon={faPuzzlePiece} />
-		Modules
+		Internal modules
+	</a>
+	<a
+		href="{baseUrl}/externalModules"
+		class="common-button rounded-none border-white/25"
+		class:border-l-4={route === '/projects/[projectId]/externalModules'}
+	>
+		<Fa icon={faPuzzlePiece} />
+		External modules
 	</a>
 	<a
 		href={baseUrl}

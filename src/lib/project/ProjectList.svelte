@@ -15,7 +15,12 @@
 	const { projectsData }: Props = $props();
 
 	function getHref(projectData: ProjectData) {
-		return '/projects/' + projectData.id;
+		return (
+			'/projects/' +
+			projectData.id +
+			'/internalModules/' +
+			projectData.graphData.mainInternalModuleId
+		);
 	}
 </script>
 
