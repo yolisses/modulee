@@ -2,7 +2,7 @@
 	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import ExportInternalModuleButton from '../sidebar/ExportProjectButton.svelte';
+	import ExportInternalModuleButton from './ExportProjectButton.svelte';
 
 	const projectDataContext = getProjectDataContext();
 	const projectsRepository = getProjectsRepository();
