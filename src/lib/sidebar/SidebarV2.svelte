@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faFileAlt, faProjectDiagram, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
+	const route = $derived(page.route.id || '');
 	const projectDataContext = getProjectDataContext();
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 	const internalModuleIdContext = getInternalModuleIdContext();
@@ -11,22 +13,31 @@
 
 <div class="flex flex-col border-r-2 border-black/50">
 	<a
-		class="common-button"
+		class="common-button rounded-none border-white/25"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}"
+		class:border-l-4={route.startsWith('/projects/[projectId]/internalModules/[internalModuleId]')}
 	>
 		<Fa icon={faProjectDiagram} flip="horizontal" />
 		Nodes
 	</a>
-	<a class="common-button" href="{baseUrl}/modules">
+	<a
+		href="{baseUrl}/modules"
+		class="common-button rounded-none border-white/25"
+		class:border-l-4={route.startsWith('/projects/[projectId]/modules')}
+	>
 		<Fa icon={faPuzzlePiece} />
 		Modules
 	</a>
-	<a class="common-button" href={baseUrl}>
+	<a
+		href={baseUrl}
+		class="common-button rounded-none border-white/25"
+		class:border-l-4={route === '/projects/[projectId]'}
+	>
 		<Fa icon={faFileAlt} />
 		Project
 	</a>
 	<div class="flex-1"></div>
-	<a class="common-button" href="/" aria-label="Home">
+	<a class="common-button rounded-none border-white/25" href="/" aria-label="Home">
 		<img
 			height="16"
 			class="my-1"
