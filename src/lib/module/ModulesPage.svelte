@@ -55,8 +55,7 @@
 		<div class="flex w-full max-w-xl flex-col gap-4 p-4">
 			<div class="flex h-10 flex-row items-center justify-between gap-2">
 				<h1 class="py-2 text-xl font-medium">Modules</h1>
-			</div>
-			<div class="flex flex-row gap-2 p-2">
+				<div class="flex-1"></div>
 				<CreateInternalModuleButton />
 				<ImportExternalModuleButton />
 			</div>
