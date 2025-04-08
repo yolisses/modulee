@@ -15,6 +15,9 @@
 	let externalModulesDataPromise = $state(externalModulesRepository.getExternalModules());
 </script>
 
+<svelte:head>
+	<title>External modules - Modulee</title>
+</svelte:head>
 <HomePageLayout title="Modules">
 	{#snippet children()}
 		<ExternalModuleList {externalModulesData} />
