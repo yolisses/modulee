@@ -24,7 +24,7 @@
 	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
-	import { getGraphData } from '$lib/sidebar/getGraphData';
+	import { getGraphData } from '$lib/project/getGraphData';
 	import SidebarV2 from '$lib/sidebar/SidebarV2.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
