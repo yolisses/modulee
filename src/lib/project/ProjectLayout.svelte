@@ -151,6 +151,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{projectDataContext.projectData.name} - Modulee</title>
+</svelte:head>
 <div class="flex h-screen w-screen flex-row overflow-hidden">
 	<ProjectSidebar />
 	<div class="flex flex-1 flex-col overflow-hidden">

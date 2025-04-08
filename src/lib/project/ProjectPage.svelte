@@ -17,9 +17,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{projectDataContext.projectData.name} - Modulee</title>
-</svelte:head>
 <HomePageLayout title="Project">
 	<div class="flex flex-col items-stretch gap-2">
 		<label class="flex flex-col">
