@@ -25,7 +25,7 @@
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/project/getGraphData';
-	import SidebarV2 from '$lib/sidebar/SidebarV2.svelte';
+	import ProjectSidebar from '$lib/project/ProjectSidebar.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
@@ -152,7 +152,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-row overflow-hidden">
-	<SidebarV2 />
+	<ProjectSidebar />
 	<div class="flex flex-1 flex-col overflow-hidden">
 		{@render children?.()}
 	</div>
