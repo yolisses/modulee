@@ -50,14 +50,21 @@
 	}
 </script>
 
-<div class="flex flex-col">
-	<div class="flex flex-col gap-2 p-2">
-		<CreateInternalModuleButton />
-		<ImportExternalModuleButton />
+<div class="flex-1 overflow-hidden">
+	<div class="flex h-[100dvh] flex-col items-center overflow-auto">
+		<div class="flex w-full max-w-xl flex-col gap-4 p-4">
+			<div class="flex h-10 flex-row items-center justify-between gap-2">
+				<h1 class="py-2 text-xl font-medium">Modules</h1>
+			</div>
+			<div class="flex flex-row gap-2 p-2">
+				<CreateInternalModuleButton />
+				<ImportExternalModuleButton />
+			</div>
+			<BasicList {getId} {getName} {getHref} values={graphContext.graph.modules.values()}>
+				{#snippet buttons(internalModule)}
+					<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
+				{/snippet}
+			</BasicList>
+		</div>
 	</div>
-	<BasicList {getId} {getName} {getHref} values={graphContext.graph.modules.values()}>
-		{#snippet buttons(internalModule)}
-			<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
-		{/snippet}
-	</BasicList>
 </div>
