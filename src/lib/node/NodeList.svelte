@@ -98,7 +98,6 @@
 	);
 
 	let minSize = $state(Vector.zero());
-	$inspect(minSize);
 
 	$effect(() => {
 		const nodeRects = Object.values(nodeRectsContext.nodeRects);
