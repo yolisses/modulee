@@ -25,7 +25,6 @@
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/sidebar/getGraphData';
-	import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 	import SidebarV2 from '$lib/sidebar/SidebarV2.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
@@ -53,7 +52,6 @@
 	setInternalModuleIdContext(internalModuleIdContext);
 
 	const projectDataContext = getProjectDataContext();
-	const isSidebarVisibleContext = getIsSidebarVisibleContext();
 	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 
 	const graphRegistryContext = $state({
