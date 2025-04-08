@@ -52,10 +52,7 @@
 			onClick={handleSelectModule}
 			values={graphContext.graph.modules.values()}
 		/>
-		<CreateInternalModuleButton
-			class="common-button"
-			onInternalModuleCreated={handleInternalModuleCreated}
-		/>
+		<CreateInternalModuleButton onInternalModuleCreated={handleInternalModuleCreated} />
 	</div>
 </div>
 
