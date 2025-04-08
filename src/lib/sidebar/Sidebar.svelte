@@ -1,6 +1,6 @@
 <script lang="ts">
+	import ModulesTab from '../module/ModulesPage.svelte';
 	import InternalModuleTab from './InternalModuleTab.svelte';
-	import ModulesTab from './ModulesTab.svelte';
 	import ProjectTab from './ProjectTab.svelte';
 	import SidebarTabs from './SidebarTabs.svelte';
 	import { getSelectedTabContext } from './selectedTabContext';

@@ -27,6 +27,7 @@
 	import { getGraphData } from '$lib/sidebar/getGraphData';
 	import { getIsSidebarVisibleContext } from '$lib/sidebar/isSidebarVisibleContext';
 	import Sidebar from '$lib/sidebar/Sidebar.svelte';
+	import SidebarV2 from '$lib/sidebar/SidebarV2.svelte';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
@@ -154,6 +155,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-row overflow-hidden">
+	<SidebarV2 />
 	<div class="flex flex-1 flex-col overflow-hidden">
 		{@render children?.()}
 	</div>
