@@ -31,10 +31,11 @@
 
 	interface Props {
 		nodes: Node[];
+		containerSize: Vector;
 		connections: Connection[];
 	}
 
-	const { nodes, connections }: Props = $props();
+	const { nodes, containerSize, connections }: Props = $props();
 	let mouseEvent = $state<MouseEvent>();
 
 	const graphContext = getGraphContext();
@@ -115,7 +116,8 @@
 			.divideByNumber(step)
 			.ceil()
 			.multiplyByNumber(step)
-			.addByNumber(step);
+			.addByNumber(step)
+			.add(containerSize);
 
 		if (currentMinSize.x > minSize.x || currentMinSize.y > minSize.y) {
 			minSize = minSize.max(currentMinSize);

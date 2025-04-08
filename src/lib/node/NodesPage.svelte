@@ -47,11 +47,29 @@
 		shortcutHandler.initialize();
 		return () => shortcutHandler.destroy();
 	});
+
+	let container: HTMLElement;
+	let containerSize = $state(Vector.zero());
+	$effect(() => {
+		const resizeObserver = new ResizeObserver((entries) => {
+			const entry = entries[0];
+			containerSize = new Vector(entry.contentRect.width, entry.contentRect.height);
+		});
+		resizeObserver.observe(container);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	});
 </script>
 
 <div class="flex flex-1 flex-col overflow-hidden">
 	<NodesToolbar />
-	<div class="flex-1 overflow-scroll">
-		<NodeList nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
+	<div class="flex-1 overflow-scroll" bind:this={container}>
+		<NodeList
+			{containerSize}
+			nodes={visibleNodes}
+			connections={graphContext.graph.connections.values()}
+		/>
 	</div>
 </div>
