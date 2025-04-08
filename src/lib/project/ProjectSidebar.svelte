@@ -18,7 +18,7 @@
 		class:border-l-4={route.startsWith('/projects/[projectId]/internalModules/[internalModuleId]')}
 	>
 		<Fa icon={faProjectDiagram} flip="horizontal" />
-		Nodes
+		Graph
 	</a>
 	<a
 		href="{baseUrl}/internalModules"
