@@ -1,5 +1,5 @@
 <script lang="ts">
-	import InternalModulePage from '$lib/project/InternalModulePage.svelte';
+	import InternalModulePage from '$lib/module/internalModule/InternalModulePage.svelte';
 </script>
 
 <InternalModulePage />
