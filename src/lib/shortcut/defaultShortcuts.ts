@@ -11,11 +11,8 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'Z'], commandType: 'UndoActionCommand' },
 	{ keys: ['Ctrl', 'Y'], commandType: 'RedoActionCommand' },
 	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
+	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
 	{ keys: ['Ctrl', 'M'], commandType: 'ToggleIsMuteActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
-	{ keys: ['Ctrl', 'P'], commandType: 'ShowProjectTabActionCommand' },
 	{ keys: ['Ctrl', 'A'], commandType: 'SelectedAllNodesActionCommand' },
-	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
-	{ keys: ['Ctrl', 'Alt', 'G'], commandType: 'ShowModulesTabActionCommand' },
-	{ keys: ['Ctrl', 'L'], commandType: 'ToggleIsSidebarVisibleActionCommand' },
 ];
