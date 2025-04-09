@@ -14,7 +14,7 @@
 <div class="flex flex-col border-r-2 border-black/50">
 	<a
 		class="common-button rounded-none border-white/25"
-		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}"
+		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/nodes"
 		class:border-l-4={route.startsWith('/projects/[projectId]/internalModules/[internalModuleId]')}
 	>
 		<Fa icon={faProjectDiagram} flip="horizontal" />
