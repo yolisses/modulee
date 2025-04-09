@@ -5,6 +5,7 @@
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext';
+	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
@@ -36,19 +37,13 @@
 	}
 </script>
 
-<div class="flex-1 overflow-hidden">
-	<div class="flex h-[100dvh] flex-col items-center overflow-auto">
-		<div class="flex w-full max-w-xl flex-col gap-4 p-4">
-			<div class="flex h-10 flex-row items-center justify-between gap-2">
-				<h1 class="py-2 text-xl font-medium">Internal modules</h1>
-				<div class="flex-1"></div>
-				<CreateInternalModuleButton />
-			</div>
-			<BasicList {getId} {getName} {getHref} values={graphContext.graph.internalModules.values()}>
-				{#snippet buttons(internalModule)}
-					<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
-				{/snippet}
-			</BasicList>
-		</div>
-	</div>
-</div>
+<HomePageLayout title="Internal modules">
+	{#snippet topChildren()}
+		<CreateInternalModuleButton />
+	{/snippet}
+	<BasicList {getId} {getName} {getHref} values={graphContext.graph.internalModules.values()}>
+		{#snippet buttons(internalModule)}
+			<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
+		{/snippet}
+	</BasicList>
+</HomePageLayout>
