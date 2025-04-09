@@ -19,7 +19,8 @@
 			'/projects/' +
 			projectData.id +
 			'/internalModules/' +
-			projectData.graphData.mainInternalModuleId
+			projectData.graphData.mainInternalModuleId +
+			'/nodes'
 		);
 	}
 </script>
