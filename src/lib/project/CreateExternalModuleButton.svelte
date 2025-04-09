@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { createId } from '$lib/data/createId';
-	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-	import { getExternalModulesRepository } from '$lib/module/externalModule/getExternalModulesRepository';
 	import type { ProjectData } from './ProjectData';
 
 	interface Props {
@@ -9,18 +6,11 @@
 	}
 
 	const { projectData }: Props = $props();
-
-	function handleClick() {
-		const externalModuleData: ExternalModuleData = {
-			id: createId(),
-			name: projectData.name,
-			projectId: projectData.id,
-			version: { major: 0, minor: 1, patch: 0 },
-			graph: structuredClone(projectData.graphData),
-		};
-		const externalModulesRepository = getExternalModulesRepository();
-		externalModulesRepository.addExternalModule(externalModuleData);
-	}
 </script>
 
-<button class="common-button" onclick={handleClick}> Create external module </button>
+<form action="/externalModules/create" method="post">
+	<input type="hidden" name="name" value={projectData.name} />
+	<input type="hidden" name="projectId" value={projectData.id} />
+	<input type="hidden" name="graph" value={JSON.stringify(projectData.graphData)} />
+	<button class="common-button"> Create external module </button>
+</form>
