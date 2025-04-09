@@ -13,9 +13,6 @@
 	const userDataContext = getUserDataContext();
 </script>
 
-<svelte:head>
-	<title>{userData.name} - Modulee</title>
-</svelte:head>
 <HomePageLayout title={userData.name}>
 	{#snippet topChildren()}
 		{#if userData.id === userDataContext.userData?.id}

@@ -10,6 +10,9 @@
 	const { title, children, topChildren }: Props = $props();
 </script>
 
+<svelte:head>
+	<title>{title} - Modulee</title>
+</svelte:head>
 <div class="flex-1 overflow-hidden">
 	<div class="flex h-[100dvh] flex-col items-center overflow-auto">
 		<div class="flex w-full max-w-xl flex-col gap-4 p-4">

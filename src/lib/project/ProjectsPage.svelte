@@ -14,9 +14,6 @@
 	};
 </script>
 
-<svelte:head>
-	<title>Projects - Modulee</title>
-</svelte:head>
 <HomePageLayout title="Projects">
 	{#snippet topChildren()}
 		<ImportProjectButton />
