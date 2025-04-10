@@ -20,6 +20,12 @@
 			<EditUserButton />
 		{/if}
 	{/snippet}
+	<div>
+		<div>Username</div>
+		<div>
+			{userData.username}
+		</div>
+	</div>
 	{#if userData.bio}
 		<div>
 			<div>Bio</div>
