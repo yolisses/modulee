@@ -8,7 +8,7 @@ export const ExternalModuleSchema = new Schema<ExternalModuleData>(
 		version: VersionSchema,
 		projectId: { type: String, required: true },
 		graph: { type: GraphSchema, required: true },
-		name: { type: String, required: true, maxlength: 255 },
+		name: { type: String, required: true, maxlength: 100 },
 		description: { type: String, required: false, maxlength: 1000 },
 	},
 	{
