@@ -1,5 +1,7 @@
 import type { UserData } from './UserData';
 import { UserModel } from './UserModel';
+import { generateUniqueUsername } from './username/generateUniqueUsername';
+import { getIsUsernameAvailableFromMongoose } from './username/getIsUsernameAvailableFromMongoose';
 import { verifyGoogleCredential } from './verifyGoogleCredential';
 
 export async function signIn(credential: string) {
@@ -18,7 +20,15 @@ export async function signIn(credential: string) {
 	if (existingUser) {
 		userData = existingUser.toObject();
 	} else {
-		const newUser = new UserModel({ name, email });
+		const username = await generateUniqueUsername(
+			name,
+			{
+				maxAttempts: 100,
+				random: () => Math.random(),
+			},
+			getIsUsernameAvailableFromMongoose,
+		);
+		const newUser = new UserModel({ name, email, username });
 		await newUser.save();
 		userData = newUser.toObject();
 	}
