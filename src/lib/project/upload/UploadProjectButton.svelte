@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { faFileImport } from '@fortawesome/free-solid-svg-icons';
+	import { faUpload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import ImportProjectModal from './ImportProjectModal.svelte';
+	import UploadProjectModal from './UploadProjectModal.svelte';
 
 	let isModalActive = $state(false);
 
@@ -15,10 +15,10 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa icon={faFileImport} />
-	Import project
+	<Fa icon={faUpload} />
+	Upload project
 </button>
 
 {#if isModalActive}
-	<ImportProjectModal {closeModal} />
+	<UploadProjectModal {closeModal} />
 {/if}

@@ -1,6 +1,7 @@
+import type { GraphData } from '$lib/data/GraphData';
 import type { ExternalModuleData } from './ExternalModuleData';
 
-export const debugExternalModulesData: ExternalModuleData[] = [
+export const debugExternalModulesData = [
 	{
 		id: 'debug1',
 		projectId: 'debugProject1',
@@ -13,7 +14,7 @@ export const debugExternalModulesData: ExternalModuleData[] = [
 			internalModules: [],
 			externalModuleReferences: [],
 			mainInternalModuleId: 'debugInternalModule1',
-		},
+		} as GraphData,
 	},
 	{
 		id: 'debug2',
@@ -56,4 +57,4 @@ Whether you're drenching vocals in ethereal ambience, giving guitars a spacious 
 			mainInternalModuleId: 'debugInternalModule1',
 		},
 	},
-];
+] as ExternalModuleData[];

@@ -3,8 +3,8 @@
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
-	import ImportProjectButton from './ImportProjectButton.svelte';
 	import ProjectList from './ProjectList.svelte';
+	import ImportProjectButton from './upload/UploadProjectButton.svelte';
 
 	const projectsRepository = getProjectsRepository();
 
