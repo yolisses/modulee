@@ -10,18 +10,16 @@
 </script>
 
 <HomePageLayout title="External modules">
-	{#snippet children()}
-		{#await externalModulesDataPromise}
-			<div class="flex h-full flex-1 flex-col items-center p-8">
-				<Spinner />
-			</div>
-		{:then externalModulesData}
-			<ExternalModuleList {externalModulesData} />
-		{:catch error}
-			<div class="text-red-500">
-				<div>It was not possible to load the external modules</div>
-				<div>{error}</div>
-			</div>
-		{/await}
-	{/snippet}
+	{#await externalModulesDataPromise}
+		<div class="flex h-full flex-1 flex-col items-center p-8">
+			<Spinner />
+		</div>
+	{:then externalModulesData}
+		<ExternalModuleList {externalModulesData} />
+	{:catch error}
+		<div class="text-red-500">
+			<div>It was not possible to load the external modules</div>
+			<div>{error}</div>
+		</div>
+	{/await}
 </HomePageLayout>

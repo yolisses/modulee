@@ -1,8 +1,5 @@
 <script lang="ts">
-	import BasicList from '$lib/ui/BasicList.svelte';
-	import { getId } from '$lib/ui/getId';
-	import { getName } from '$lib/ui/getName';
-	import DeleteExternalModuleButton from './DeleteExternalModuleButton.svelte';
+	import { debugExternalModulesData } from './debugExternalModulesData';
 	import type { ExternalModuleData } from './ExternalModuleData';
 
 	interface Props {
@@ -16,8 +13,13 @@
 	}
 </script>
 
-<BasicList values={externalModulesData} {getId} {getName} {getHref}>
-	{#snippet buttons(value)}
-		<DeleteExternalModuleButton externalModuleId={value.id} />
-	{/snippet}
-</BasicList>
+{#each debugExternalModulesData as externalModulesData}
+	<div class="rounded-md p-2">
+		<div class="block overflow-hidden text-ellipsis whitespace-nowrap">
+			{externalModulesData.name}
+		</div>
+		<div class="block max-h-10 overflow-hidden text-ellipsis text-sm text-white/75">
+			{externalModulesData.description}
+		</div>
+	</div>
+{/each}
