@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { faTrash } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import DeleteProjectModal from './DeleteProjectModal.svelte';
 
 	interface Props {
@@ -17,7 +19,10 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}> Delete </button>
+<button class="common-button" onclick={handleClick}>
+	<Fa icon={faTrash} />
+	Delete project
+</button>
 
 {#if isModalActive}
 	<DeleteProjectModal {projectId} {closeModal} />

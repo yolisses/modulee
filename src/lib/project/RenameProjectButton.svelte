@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { faEdit } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import type { ProjectData } from './ProjectData';
 	import RenameProjectModal from './RenameProjectModal.svelte';
 
@@ -18,7 +20,10 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}> Rename </button>
+<button class="common-button" onclick={handleClick}>
+	<Fa icon={faEdit} />
+	Rename project
+</button>
 
 {#if isModalActive}
 	<RenameProjectModal {projectData} {closeModal} />

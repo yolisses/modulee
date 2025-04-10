@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import type { ProjectData } from '../ProjectData';
 	import { downloadJson } from './downloadJson';
 
-	const projectDataContext = getProjectDataContext();
+	interface Props {
+		projectData: ProjectData;
+	}
+
+	const { projectData }: Props = $props();
 
 	function handleClick() {
-		const { projectData } = projectDataContext;
 		const fileName = projectData.name + '.modulee';
 		downloadJson(projectData, fileName);
 	}

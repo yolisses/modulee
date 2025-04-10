@@ -5,6 +5,7 @@
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
 	import DotsMenuButton from './DotsMenuButton.svelte';
+	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import RenameProjectButton from './RenameProjectButton.svelte';
 
@@ -30,6 +31,7 @@
 		<DotsMenuButton>
 			<RenameProjectButton projectData={value} />
 			<DeleteProjectButton projectId={value.id} />
+			<DownloadProjectButton projectData={value} />
 			<CreateExternalModuleButton projectData={value} />
 		</DotsMenuButton>
 	{/snippet}
