@@ -1,6 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { Schema } from 'mongoose';
-import { GraphSchema } from './GraphSchema';
+import { GraphSchema } from '../graph/GraphSchema';
 import { VersionSchema } from './VersionSchema';
 
 export const ExternalModuleSchema = new Schema<ExternalModuleData>(

@@ -1,9 +1,9 @@
 import type { GraphData } from '$lib/data/GraphData';
 import { Schema } from 'mongoose';
 import { ConnectionSchema } from './ConnectionSchema';
+import { ExternalModuleReferenceSchema } from './ExternalModuleReferenceSchema';
 import { InternalModuleSchema } from './InternalModuleSchema';
 import { NodeSchema } from './NodeSchema';
-import { ExternalModuleReferenceSchema } from './ExternalModuleReferenceSchema';
 
 export const GraphSchema = new Schema<GraphData>({
 	nodes: { type: [NodeSchema], required: true },
