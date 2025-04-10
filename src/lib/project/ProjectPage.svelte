@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
+	import type { ProjectData } from './ProjectData';
 
-	const projectDataContext = getProjectDataContext();
+	interface Props {
+		projectData: ProjectData;
+	}
+
+	const { projectData }: Props = $props();
+
 	const projectsRepository = getProjectsRepository();
 
 	function handleBlur(
@@ -13,7 +18,7 @@
 		},
 	) {
 		const value = e.currentTarget.value;
-		projectsRepository.renameProject(projectDataContext.projectData.id, value);
+		projectsRepository.renameProject(projectData.id, value);
 	}
 </script>
 
@@ -24,7 +29,7 @@
 			<input
 				type="text"
 				onblur={handleBlur}
-				value={projectDataContext.projectData?.name}
+				value={projectData.name}
 				class="rounded border border-white/10 bg-transparent p-2"
 			/>
 		</label>
@@ -32,10 +37,10 @@
 			Description
 			<textarea
 				onblur={(e) => e}
-				value={projectDataContext.projectData?.description}
+				value={projectData.description}
 				class="rounded border border-white/10 bg-transparent p-2"
 			></textarea>
 		</label>
-		<DownloadProjectButton />
+		<DownloadProjectButton {projectData} />
 	</div>
 </ListPageLayout>
