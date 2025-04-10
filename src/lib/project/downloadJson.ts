@@ -1,6 +1,6 @@
 export function downloadJson(data: unknown, fileName: string) {
 	// Convert the JSON object to a string
-	const jsonString = JSON.stringify(data);
+	const jsonString = JSON.stringify(data, undefined, 2);
 
 	// Create a Blob with the JSON data
 	const blob = new Blob([jsonString], { type: 'application/json' });
