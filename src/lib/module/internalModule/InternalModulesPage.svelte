@@ -5,12 +5,12 @@
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
@@ -37,7 +37,7 @@
 	}
 </script>
 
-<HomePageLayout title="Internal modules">
+<ListPageLayout title="Internal modules">
 	{#snippet topChildren()}
 		<CreateInternalModuleButton />
 	{/snippet}
@@ -46,4 +46,4 @@
 			<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
 		{/snippet}
 	</BasicList>
-</HomePageLayout>
+</ListPageLayout>

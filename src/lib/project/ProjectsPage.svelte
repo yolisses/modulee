@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import CreateProjectButton from './CreateProjectButton.svelte';
 	import { getProjectsRepository } from './getProjectsRepository';
@@ -14,7 +14,7 @@
 	};
 </script>
 
-<HomePageLayout title="Projects">
+<ListPageLayout title="Projects">
 	{#snippet topChildren()}
 		<ImportProjectButton />
 		<CreateProjectButton />
@@ -33,4 +33,4 @@
 			</div>
 		{/await}
 	{/snippet}
-</HomePageLayout>
+</ListPageLayout>

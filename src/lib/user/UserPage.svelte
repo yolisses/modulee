@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import EditUserButton from './EditUserButton.svelte';
 	import LogoutButton from './LogoutButton.svelte';
 	import type { UserData } from './UserData';
@@ -13,7 +13,7 @@
 	const userDataContext = getUserDataContext();
 </script>
 
-<HomePageLayout title={userData.name}>
+<ListPageLayout title={userData.name}>
 	{#snippet topChildren()}
 		{#if userData.id === userDataContext.userData?.id}
 			<LogoutButton />
@@ -32,4 +32,4 @@
 			<p>{userData.bio}</p>
 		</div>
 	{/if}
-</HomePageLayout>
+</ListPageLayout>

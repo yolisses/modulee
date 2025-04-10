@@ -3,9 +3,9 @@
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 
 	const graphContext = getGraphContext();
@@ -32,7 +32,7 @@
 	}
 </script>
 
-<HomePageLayout title="Internal Module">
+<ListPageLayout title="Internal Module">
 	<div class="flex flex-col items-stretch gap-2 p-2">
 		<label class="flex flex-col">
 			Name
@@ -44,4 +44,4 @@
 			/>
 		</label>
 	</div>
-</HomePageLayout>
+</ListPageLayout>

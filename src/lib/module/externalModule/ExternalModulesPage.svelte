@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import ExternalModuleList from './ExternalModuleList.svelte';
 	import { getExternalModulesRepository } from './getExternalModulesRepository';
@@ -9,7 +9,7 @@
 	let externalModulesDataPromise = $state(externalModulesRepository.getExternalModules());
 </script>
 
-<HomePageLayout title="External modules">
+<ListPageLayout title="External modules">
 	{#await externalModulesDataPromise}
 		<div class="flex h-full flex-1 flex-col items-center p-8">
 			<Spinner />
@@ -22,4 +22,4 @@
 			<div>{error}</div>
 		</div>
 	{/await}
-</HomePageLayout>
+</ListPageLayout>

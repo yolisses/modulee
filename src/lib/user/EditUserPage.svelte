@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faSave } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { UserData } from './UserData';
@@ -11,7 +11,7 @@
 	const { userData }: Props = $props();
 </script>
 
-<HomePageLayout title="Profile">
+<ListPageLayout title="Profile">
 	<form class="flex flex-col gap-2" method="POST">
 		<label>
 			<div>Name</div>
@@ -28,4 +28,4 @@
 			</button>
 		</div>
 	</form>
-</HomePageLayout>
+</ListPageLayout>

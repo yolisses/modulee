@@ -1,8 +1,8 @@
 <script lang="ts">
-	import HomePageLayout from '$lib/home/HomePageLayout.svelte';
 	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import ExportInternalModuleButton from './download/DownloadProjectButton.svelte';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
+	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
 
 	const projectDataContext = getProjectDataContext();
 	const projectsRepository = getProjectsRepository();
@@ -17,7 +17,7 @@
 	}
 </script>
 
-<HomePageLayout title="Project">
+<ListPageLayout title="Project">
 	<div class="flex flex-col items-stretch gap-2">
 		<label class="flex flex-col">
 			Name
@@ -36,6 +36,6 @@
 				class="rounded border border-white/10 bg-transparent p-2"
 			></textarea>
 		</label>
-		<ExportInternalModuleButton />
+		<DownloadProjectButton />
 	</div>
-</HomePageLayout>
+</ListPageLayout>
