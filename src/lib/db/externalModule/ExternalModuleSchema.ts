@@ -10,6 +10,7 @@ export const ExternalModuleSchema = new Schema<ExternalModuleData>(
 		graph: { type: GraphSchema, required: true },
 		name: { type: String, required: true, maxlength: 100 },
 		description: { type: String, required: false, maxlength: 1000 },
+		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 	},
 	{
 		id: true,
