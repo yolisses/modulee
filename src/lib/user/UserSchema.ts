@@ -5,6 +5,7 @@ export const UserSchema = new Schema<UserData>(
 	{
 		name: { type: String, required: true, maxlength: 30 },
 		bio: { type: String, required: false, maxlength: 150 },
+		username: { type: String, required: true, maxlength: 30, unique: true },
 		email: { type: String, required: true, maxlength: 320, unique: true, select: false },
 	},
 	{
