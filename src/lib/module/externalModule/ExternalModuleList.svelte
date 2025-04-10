@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { debugExternalModulesData } from './debugExternalModulesData';
 	import type { ExternalModuleData } from './ExternalModuleData';
 
 	interface Props {
@@ -13,7 +12,7 @@
 	}
 </script>
 
-{#each debugExternalModulesData as externalModulesData}
+{#each externalModulesData as externalModulesData}
 	<div class="rounded-md p-2">
 		<div class="block overflow-hidden text-ellipsis whitespace-nowrap">
 			{externalModulesData.name}
