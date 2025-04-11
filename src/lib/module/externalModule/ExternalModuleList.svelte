@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { faDownload, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
+	import { faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
 
@@ -19,25 +19,25 @@
 		<div class="block overflow-hidden text-ellipsis whitespace-nowrap">
 			{externalModulesData.name}
 		</div>
-		<div class="flex flex-row gap-2 text-sm">
-			<a
-				href="/users/{externalModulesData.userId}"
-				class="flex flex-row items-center gap-1 hover:underline"
-			>
-				<Fa icon={faUser} />
-				{externalModulesData.user.username}
-			</a>
-			<div class="hover-bg flex flex-row items-center gap-1 p-1">
-				<Fa icon={faDownload} />
-				{externalModulesData.usageCount}
-			</div>
-			<div class="hover-bg flex flex-row items-center gap-1 p-1">
-				<Fa icon={faHeart} />
-				{externalModulesData.likeCount}
-			</div>
-		</div>
 		<div class="block max-h-10 overflow-hidden text-ellipsis text-sm text-white/75">
 			{externalModulesData.description}
+		</div>
+		<div class="text-sm opacity-50">
+			<a href="/users/{externalModulesData.userId}" class="hover:underline">
+				By
+				{externalModulesData.user.username}
+			</a>
+			• Used {externalModulesData.usageCount} times • Liked {externalModulesData.likeCount} times
+		</div>
+		<div class="flex flex-row gap-2">
+			<button class="common-button">
+				<Fa icon={faDownload} />
+				Use
+			</button>
+			<button class="common-button">
+				<Fa icon={faHeart} />
+				Like
+			</button>
 		</div>
 	</div>
 {/each}
