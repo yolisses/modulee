@@ -10,5 +10,7 @@ export type ExternalModuleData = {
 	graph: GraphData;
 	version: Version;
 	projectId: string;
+	likeCount: number;
+	usageCount: number;
 	description?: string;
 };
