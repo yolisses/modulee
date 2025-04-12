@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
-	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
+	import LikeButton from './LikeButton.svelte';
+	import UseButton from './UseButton.svelte';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
@@ -25,13 +25,7 @@
 		• Used {externalModuleData.usageCount} times • Liked {externalModuleData.likeCount} times
 	</div>
 	<div class="flex flex-row gap-2">
-		<button class="common-button">
-			<Fa icon={faDownload} />
-			Use
-		</button>
-		<button class="common-button">
-			<Fa icon={faHeart} />
-			Like
-		</button>
+		<UseButton />
+		<LikeButton />
 	</div>
 </div>
