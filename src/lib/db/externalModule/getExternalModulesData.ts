@@ -1,13 +1,17 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { error } from '@sveltejs/kit';
 import type { RootFilterQuery } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
+import type { PaginationResult } from './PaginationResult';
 
 type Params = {
 	text?: string;
-	sort?: 'likes' | 'createdAtDesc' | 'downloadsInAllTime' | 'downloadsInLastMonth';
+	sort?: string;
 };
 
-export async function getExternalModulesData(params: Params): Promise<ExternalModuleData[]> {
+export async function getExternalModulesData(
+	params: Params,
+): Promise<PaginationResult<ExternalModuleData>> {
 	const { text, sort } = params;
 
 	const filter: RootFilterQuery<ExternalModuleData> = {};
@@ -17,13 +21,24 @@ export async function getExternalModulesData(params: Params): Promise<ExternalMo
 
 	const query = ExternalModuleModel.find(filter);
 
-	if (sort === 'likes') {
+	// TODO add remaining sort options
+	// TODO refactor this
+	// 'likes' | 'createdAtDesc' | 'downloadsInAllTime' | 'downloadsInLastMonth'
+	if (!sort) {
+		if (text) {
+			query.sort({ score: { $meta: 'textScore' } });
+		}
+	} else if (sort === 'likes') {
 		query.sort({ likesCount: 'desc' });
 	} else if (sort === 'createdAtDesc') {
 		query.sort({ createAt: 'desc' });
-	} else if (text) {
-		query.sort({ score: { $meta: 'textScore' } });
+	} else {
+		error(400, 'Invalid sort option');
 	}
 
-	return (await query.populate('user')).map((r) => r.toObject());
+	const limit = 3;
+	query.limit(limit);
+
+	const items = (await query.populate('user')).map((r) => r.toObject());
+	return { items, nextCursor: 'debugNextCursor' };
 }

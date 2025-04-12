@@ -33,7 +33,7 @@
 		if (!externalModulesData) {
 			externalModulesData = [];
 		}
-		externalModulesData?.push(...data);
+		externalModulesData?.push(...data.items);
 	}
 
 	$effect(() => {
