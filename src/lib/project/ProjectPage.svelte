@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
+	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 
@@ -41,6 +42,9 @@
 				class="rounded border border-white/10 bg-transparent p-2"
 			></textarea>
 		</label>
-		<DownloadProjectButton {projectData} />
+		<div class="flex flex-col">
+			<DownloadProjectButton {projectData} />
+			<CreateExternalModuleButton {projectData} />
+		</div>
 	</div>
 </ListPageLayout>
