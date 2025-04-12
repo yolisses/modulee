@@ -10,13 +10,16 @@
 	const { externalModuleData }: Props = $props();
 </script>
 
-<div class="rounded-md p-2">
-	<a
-		href="/externalModules/{externalModuleData.id}"
-		class="block overflow-hidden text-ellipsis whitespace-nowrap hover:underline"
-	>
-		{externalModuleData.name}
-	</a>
+<div class="border-b border-white/10 p-2 pb-6 last:border-none">
+	<div class="flex flex-row items-center">
+		<div class="flex-1">
+			<a href="/externalModules/{externalModuleData.id}" class="hover:underline">
+				{externalModuleData.name}
+			</a>
+		</div>
+		<UseButton />
+		<LikeButton />
+	</div>
 	<div class="block max-h-10 overflow-hidden text-ellipsis text-sm text-white/75">
 		{externalModuleData.description}
 	</div>
@@ -26,9 +29,5 @@
 			{externalModuleData.user.username}
 		</a>
 		• Used {externalModuleData.usageCount} times • Liked {externalModuleData.likeCount} times
-	</div>
-	<div class="flex flex-row gap-2">
-		<UseButton />
-		<LikeButton />
 	</div>
 </div>
