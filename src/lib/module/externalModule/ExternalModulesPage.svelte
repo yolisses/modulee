@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { faEraser, faRefresh, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -8,19 +7,22 @@
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 
-	let debugCounter = 0;
 	const debugMaxCounter = 10;
 
 	let listEnd: HTMLElement;
 
+	let text = $state('');
+	let sort = $state('');
+
+	let gotError = $state(false);
 	let isLoading = $state(false);
 	let isFinished = $state(false);
 	let isIntersecting = $state(false);
-	let gotError = $state(false);
-	const externalModulesData = $state<ExternalModuleData[]>([]);
+	let externalModulesData = $state<ExternalModuleData[]>();
 
 	async function load() {
-		const res = await fetch('/api/externalModules', { method: 'GET' });
+		const path = `/api/externalModules?text=${text}&sort=${sort}`;
+		const res = await fetch(path, { method: 'GET' });
 
 		if (!res.ok) {
 			gotError = true;
@@ -28,20 +30,15 @@
 		}
 
 		const data = await res.json();
-		console.log(data);
-		externalModulesData.push(...data);
+		if (!externalModulesData) {
+			externalModulesData = [];
+		}
+		externalModulesData?.push(...data);
 	}
 
 	$effect(() => {
 		if (isIntersecting && !gotError && !isLoading && !isFinished) {
 			isLoading = true;
-			if (debugCounter > debugMaxCounter) {
-				isLoading = false;
-				isFinished = true;
-				return;
-			}
-
-			debugCounter++;
 			load().then(() => {
 				isLoading = false;
 			});
@@ -62,23 +59,46 @@
 		);
 		observer.observe(listEnd);
 	});
+
+	function resetState() {
+		gotError = false;
+		isLoading = false;
+		isFinished = false;
+		isIntersecting = false;
+		externalModulesData = undefined;
+	}
+
+	function handleSubmit(e: Event) {
+		e.preventDefault();
+		resetState();
+	}
+
+	function handleReset(e: Event) {
+		resetState();
+	}
 </script>
 
 <ListPageLayout title="External modules">
-	<form action="" method="get" class="flex flex-col gap-2" use:enhance>
+	<form
+		action=""
+		method="get"
+		onreset={handleReset}
+		onsubmit={handleSubmit}
+		class="flex flex-col gap-2"
+	>
 		<div class="flex flex-row items-end gap-2">
 			<label class="flex flex-1 flex-col">
 				Text
-				<input type="text" class="common-input" name="text" />
+				<input bind:value={text} type="text" class="common-input" name="text" />
 			</label>
 			<label class="flex flex-col">
 				Sort by
-				<select class="common-input" name="sort">
+				<select bind:value={sort} class="common-input" name="sort">
 					<option class="bg-zinc-800"></option>
 					<option class="bg-zinc-800" value="likes">Likes</option>
 					<option class="bg-zinc-800" value="createdAtDesc">Creation date</option>
-					<option class="bg-zinc-800" value="downloads_all_time">Downloads in all time</option>
-					<option class="bg-zinc-800" value="downloads_this_month">Downloads in 30 days</option>
+					<option class="bg-zinc-800" value="downloadsInAllTime">Downloads in all time</option>
+					<option class="bg-zinc-800" value="downloadsInLastMonth">Downloads in last month</option>
 				</select>
 			</label>
 		</div>
@@ -94,19 +114,24 @@
 		</div>
 	</form>
 
-	{#if !isLoading && externalModulesData.length === 0}
-		<div class="text-center">No external modules found</div>
-	{:else}
+	{#if externalModulesData?.length}
 		<div>
 			{#each externalModulesData as externalModuleData}
 				<ExternalModuleItem {externalModuleData} />
 			{/each}
 		</div>
 	{/if}
+
+	{#if !isLoading && externalModulesData?.length === 0}
+		<div class="text-center">No external modules found</div>
+	{:else if isFinished}
+		<div>End of the list</div>
+	{/if}
+
 	{#if gotError}
-		<div>
-			<div>Error loading</div>
-			<button>
+		<div class="flex flex-col items-center">
+			<div class="text-red-500">Error loading</div>
+			<button class="common-button">
 				<Fa icon={faRefresh} />
 				Try again
 			</button>
@@ -117,5 +142,6 @@
 			<Spinner />
 		</div>
 	{/if}
+
 	<div bind:this={listEnd}></div>
 </ListPageLayout>

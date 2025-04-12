@@ -3,8 +3,13 @@ import { getExternalModulesData } from '$lib/db/externalModule/getExternalModule
 import { getSession } from '$lib/user/getSession';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
-export const GET: RequestHandler = async () => {
-	const externalModulesData = await getExternalModulesData();
+export const GET: RequestHandler = async ({ url }) => {
+	const text = await url.searchParams.get('text');
+	const sort = await url.searchParams.get('sort');
+	const externalModulesData = await getExternalModulesData({
+		text: text ?? undefined,
+		sort: sort ?? undefined,
+	});
 	return json(externalModulesData);
 };
 
@@ -12,7 +17,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const { userId } = getSession(locals);
 	const { project } = await request.json();
 	const { name, graph, description, id: projectId } = project;
-	console.log(name);
 
 	const externalModuleDocument = new ExternalModuleModel({
 		name,
