@@ -4,7 +4,10 @@ import type { ExternalModuleData } from './ExternalModuleData';
 export const debugExternalModulesData = [
 	{
 		id: 'debug1',
+		likeCount: 432,
+		usageCount: 784,
 		projectId: 'debugProject1',
+		user: { username: 'debug_user_1' },
 		version: { major: 1, minor: 0, patch: 0 },
 		description: 'This is a debug module for testing purposes.',
 		name: 'Debug Module 1',
@@ -18,7 +21,10 @@ export const debugExternalModulesData = [
 	},
 	{
 		id: 'debug2',
+		likeCount: 9999999,
+		usageCount: 9999999,
 		projectId: 'debugProject2',
+		user: { username: 'debug_user_2' },
 		version: { major: 99, minor: 99, patch: 99 },
 		name: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui ad, iste quis incidunt alias ipsam qui',
 		graph: {
@@ -36,7 +42,10 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet asperiores vol
 	},
 	{
 		id: 'debug3',
+		likeCount: 447,
+		usageCount: 57,
 		projectId: 'debugProject3',
+		user: { username: 'debug_user_3' },
 		version: { major: 1, minor: 0, patch: 0 },
 		description: `The Luscious, Velvety Ambience You've Been Craving
 Step into a world of rich, dreamy reverberation with Sweet Reverb, the ultimate plugin for adding warmth, depth, and a touch of magic to your tracks. Designed for producers, mixers, and sound designers who crave smooth, natural decays with a hint of vintage sweetness, this reverb delivers an irresistibly lush soundscape.

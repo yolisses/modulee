@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { createId } from '$lib/data/createId';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { onMount } from 'svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
-	import ExternalModuleList from './ExternalModuleList.svelte';
+	import ExternalModuleItem from './ExternalModuleItem.svelte';
+	import { debugExternalModulesData } from './debugExternalModulesData';
 
 	let debugCounter = 0;
 	const debugMaxCounter = 10;
@@ -19,17 +19,7 @@
 	async function load() {
 		// Simulate a network request
 		await new Promise((resolve) => setTimeout(resolve, 1000));
-
-		externalModulesData.push({
-			id: createId(),
-			name: 'Debug module' + debugCounter,
-			userId: '67f8128ac4214545e204df94',
-			usageCount: Math.floor(1000 * Math.random()),
-			likeCount: Math.floor(1000 * Math.random()),
-			user: { username: 'debug_user' },
-			description:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe excepturi enim voluptatibus adipisci reiciendis fuga earum veniam omnis, magnam nobis possimus, voluptatem vero, dolorum aliquam esse est laboriosam doloribus officia!',
-		});
+		externalModulesData.push(...debugExternalModulesData);
 	}
 
 	$effect(() => {
@@ -73,7 +63,9 @@
 	{#if !isLoading && externalModulesData.length === 0}
 		<div class="text-center">No external modules found</div>
 	{:else}
-		<ExternalModuleList {externalModulesData} />
+		{#each externalModulesData as externalModuleData}
+			<ExternalModuleItem {externalModuleData} />
+		{/each}
 	{/if}
 	{#if isLoading}
 		<div class="flex flex-col items-center">
