@@ -1,10 +1,11 @@
 <script lang="ts">
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
+	import { faRefresh } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
+	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
-	import { debugExternalModulesData } from './debugExternalModulesData';
 
 	let debugCounter = 0;
 	const debugMaxCounter = 10;
@@ -14,16 +15,24 @@
 	let isLoading = $state(false);
 	let isFinished = $state(false);
 	let isIntersecting = $state(false);
+	let gotError = $state(false);
 	const externalModulesData = $state<ExternalModuleData[]>([]);
 
 	async function load() {
-		// Simulate a network request
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		externalModulesData.push(...debugExternalModulesData);
+		const res = await fetch('/api/externalModules', { method: 'GET' });
+
+		if (!res.ok) {
+			gotError = true;
+			return;
+		}
+
+		const data = await res.json();
+		console.log(data);
+		externalModulesData.push(...data);
 	}
 
 	$effect(() => {
-		if (isIntersecting && !isLoading && !isFinished) {
+		if (isIntersecting && !gotError && !isLoading && !isFinished) {
 			isLoading = true;
 			if (debugCounter > debugMaxCounter) {
 				isLoading = false;
@@ -63,9 +72,20 @@
 	{#if !isLoading && externalModulesData.length === 0}
 		<div class="text-center">No external modules found</div>
 	{:else}
-		{#each externalModulesData as externalModuleData}
-			<ExternalModuleItem {externalModuleData} />
-		{/each}
+		<div>
+			{#each externalModulesData as externalModuleData}
+				<ExternalModuleItem {externalModuleData} />
+			{/each}
+		</div>
+	{/if}
+	{#if gotError}
+		<div>
+			<div>Error loading</div>
+			<button>
+				<Fa icon={faRefresh} />
+				Try again
+			</button>
+		</div>
 	{/if}
 	{#if isLoading}
 		<div class="flex flex-col items-center">
