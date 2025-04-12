@@ -1,11 +1,13 @@
-import { connectToDatabase } from '$lib/db/connectToDatabase';
+import { MONGO_DB_URL } from '$env/static/private';
 import { deleteSessionTokenCookie } from '$lib/session/deleteSessionTokenCookie';
 import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
 import { validateSessionToken } from '$lib/session/validateSessionToken';
 import type { Handle } from '@sveltejs/kit';
+import { connect } from 'mongoose';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	await connectToDatabase();
+	await connect(MONGO_DB_URL);
+
 	const token = event.cookies.get('session') ?? null;
 	if (token === null) {
 		event.locals.session = null;
