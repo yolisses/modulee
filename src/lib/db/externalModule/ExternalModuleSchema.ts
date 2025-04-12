@@ -10,8 +10,8 @@ export const ExternalModuleSchema = new Schema<ExternalModuleData>(
 		likeCount: { type: Number, required: true },
 		graph: { type: GraphSchema, required: true },
 		usageCount: { type: Number, required: true },
-		user: { type: Schema.Types.ObjectId, ref: 'User' },
 		name: { type: String, required: true, maxlength: 100 },
+		userId: { type: Schema.Types.ObjectId, required: true },
 		description: { type: String, required: false, maxlength: 1000 },
 	},
 	{
@@ -24,3 +24,11 @@ export const ExternalModuleSchema = new Schema<ExternalModuleData>(
 		},
 	},
 );
+
+// Add virtual for user
+ExternalModuleSchema.virtual('user', {
+	ref: 'User',
+	justOne: true,
+	foreignField: '_id',
+	localField: 'userId',
+});
