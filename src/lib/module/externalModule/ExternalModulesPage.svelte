@@ -136,9 +136,7 @@
 	{#if !isLoading && externalModulesData?.length === 0}
 		<div class="text-center">No external modules found</div>
 	{:else if finished}
-		<div class="flex flex-col items-center">
-			<div class="opacity-50">End of the list</div>
-		</div>
+		<div class="text-center opacity-50">End of the list</div>
 	{/if}
 
 	{#if gotError}
