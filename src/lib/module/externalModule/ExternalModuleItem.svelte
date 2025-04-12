@@ -11,9 +11,12 @@
 </script>
 
 <div class="rounded-md p-2">
-	<div class="block overflow-hidden text-ellipsis whitespace-nowrap">
+	<a
+		href="/externalModules/{externalModuleData.id}"
+		class="block overflow-hidden text-ellipsis whitespace-nowrap hover:underline"
+	>
 		{externalModuleData.name}
-	</div>
+	</a>
 	<div class="block max-h-10 overflow-hidden text-ellipsis text-sm text-white/75">
 		{externalModuleData.description}
 	</div>
