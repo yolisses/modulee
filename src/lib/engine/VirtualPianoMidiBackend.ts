@@ -27,6 +27,8 @@ export class VirtualPianoMidiBackend {
 
 	handleKeyDown = (e: KeyboardEvent) => {
 		if (getIsTargetInput(e)) return;
+		// Autofill edge condition
+		if (!e.key) return;
 
 		const key = e.key.toUpperCase();
 		if (this.pressedKeys[key]) return;
@@ -39,6 +41,9 @@ export class VirtualPianoMidiBackend {
 	};
 
 	handleKeyUp = (e: KeyboardEvent) => {
+		// Autofill edge condition
+		if (!e.key) return;
+
 		const key = e.key.toUpperCase();
 		delete this.pressedKeys[key];
 
