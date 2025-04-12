@@ -11,7 +11,7 @@ export async function generateUniqueUsername(
 	config: UsernameGeneratorConfig,
 	getIsAvailable: (username: string) => Promise<boolean>,
 ): Promise<string> {
-	const { random, maxAttempts = 100 } = config;
+	const { getRandomValue, maxAttempts = 100 } = config;
 	const baseUsername = cleanName(name);
 
 	// Check if base username is available
@@ -21,12 +21,12 @@ export async function generateUniqueUsername(
 
 	// Try variations
 	for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-		const variation = generateVariation(baseUsername, attempt, random);
+		const variation = generateVariation(baseUsername, attempt, getRandomValue);
 		if (await getIsAvailable(variation)) {
 			return variation;
 		}
 	}
 
 	// Fallback to random username
-	return generateRandomUsername(random);
+	return generateRandomUsername(getRandomValue);
 }

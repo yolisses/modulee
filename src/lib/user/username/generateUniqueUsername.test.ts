@@ -14,7 +14,7 @@ describe('generateUniqueUsername', () => {
 		mockIsAvailable.mockResolvedValue(true);
 		const username = await generateUniqueUsername(
 			'John Doe',
-			{ random: mockRandom },
+			{ getRandomValue: mockRandom },
 			mockIsAvailable,
 		);
 		expect(username).toBe('john_doe');
@@ -30,7 +30,7 @@ describe('generateUniqueUsername', () => {
 
 		const username = await generateUniqueUsername(
 			'John Doe',
-			{ random: mockRandom },
+			{ getRandomValue: mockRandom },
 			mockIsAvailable,
 		);
 		expect(username).toBe('john_doe_2');
@@ -47,7 +47,7 @@ describe('generateUniqueUsername', () => {
 
 		const username = await generateUniqueUsername(
 			'John Doe',
-			{ random: mockRandom, maxAttempts: 2 },
+			{ getRandomValue: mockRandom, maxAttempts: 2 },
 			mockIsAvailable,
 		);
 		expect(username).toBe('sunny_dolphin_500');

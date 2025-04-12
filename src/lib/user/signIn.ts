@@ -24,7 +24,7 @@ export async function signIn(credential: string) {
 			name,
 			{
 				maxAttempts: 100,
-				random: () => Math.random(),
+				getRandomValue: () => Math.random(),
 			},
 			getIsUsernameAvailableFromMongoose,
 		);
