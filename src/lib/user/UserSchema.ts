@@ -5,7 +5,7 @@ import type { UserData } from './UserData';
 export const UserSchema = new Schema<Seedable<UserData>>(
 	{
 		isSeeded: { type: Boolean, required: false },
-		name: { type: String, required: true, maxlength: 30 },
+		name: { type: String, required: true, maxlength: 70 },
 		bio: { type: String, required: false, maxlength: 150 },
 		username: { type: String, required: true, maxlength: 30, unique: true },
 		email: { type: String, required: true, maxlength: 320, unique: true, select: false },

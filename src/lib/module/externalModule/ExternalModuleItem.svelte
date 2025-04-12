@@ -26,7 +26,7 @@
 	<div class="text-sm opacity-50">
 		By
 		<a href="/users/{externalModuleData.userId}" class="hover:underline">
-			{externalModuleData.user.username}
+			{externalModuleData.user?.username}
 		</a>
 		• Used {externalModuleData.usageCount} times • Liked {externalModuleData.likeCount} times
 	</div>
