@@ -26,13 +26,17 @@
 	}
 </script>
 
-<BasicList values={projectsData} {getId} {getName} {getHref}>
-	{#snippet buttons(value)}
-		<DotsMenuButton>
-			<RenameProjectButton projectData={value} />
-			<DeleteProjectButton projectId={value.id} />
-			<DownloadProjectButton projectData={value} />
-			<CreateExternalModuleButton projectData={value} />
-		</DotsMenuButton>
-	{/snippet}
-</BasicList>
+{#if projectsData.length === 0}
+	<div class="opacity-50">No project yet</div>
+{:else}
+	<BasicList values={projectsData} {getId} {getName} {getHref}>
+		{#snippet buttons(value)}
+			<DotsMenuButton>
+				<RenameProjectButton projectData={value} />
+				<DeleteProjectButton projectId={value.id} />
+				<DownloadProjectButton projectData={value} />
+				<CreateExternalModuleButton projectData={value} />
+			</DotsMenuButton>
+		{/snippet}
+	</BasicList>
+{/if}
