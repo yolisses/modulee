@@ -22,7 +22,7 @@
 		const projectData: ProjectData = {
 			name,
 			id: createId(),
-			graphData: {
+			graph: {
 				nodes: [],
 				connections: [],
 				mainInternalModuleId,

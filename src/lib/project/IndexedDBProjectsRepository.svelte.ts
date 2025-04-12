@@ -60,10 +60,10 @@ export class IndexedDBProjectsRepository implements ProjectsRepository {
 		this.onProjectsChange?.();
 	}
 
-	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
+	async updateProjectGraph(id: string, graphData: GraphData): Promise<void> {
 		const transaction = this.database.transaction(this.storeName, 'readwrite');
 		const projectData: ProjectData = await transaction.store.get(id);
-		projectData.graphData = graphData;
+		projectData.graph = graphData;
 		await Promise.all([transaction.store.put(projectData), transaction.done]);
 		this.onProjectsChange?.();
 	}

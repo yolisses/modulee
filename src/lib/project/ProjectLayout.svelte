@@ -47,7 +47,7 @@
 	setExternalModulesDataContext({ externalModulesData });
 
 	const internalModuleIdContext = $state({
-		internalModuleId: projectData.graphData.mainInternalModuleId,
+		internalModuleId: projectData.graph.mainInternalModuleId,
 	});
 	setInternalModuleIdContext(internalModuleIdContext);
 
@@ -55,7 +55,7 @@
 	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 
 	const graphRegistryContext = $state({
-		graphRegistry: getGraphRegistry(projectDataContext.projectData.graphData),
+		graphRegistry: getGraphRegistry(projectDataContext.projectData.graph),
 	});
 	setGraphRegistryContext(graphRegistryContext);
 
@@ -81,10 +81,10 @@
 
 		const graphData = getGraphData(graphRegistry);
 
-		projectDataContext.projectData.graphData = graphData;
+		projectDataContext.projectData.graph = graphData;
 
 		const projectsRepository = getProjectsRepository();
-		projectsRepository.updateProjectGraphData(projectDataContext.projectData.id, graphData);
+		projectsRepository.updateProjectGraph(projectDataContext.projectData.id, graphData);
 	};
 
 	const editorContext = $state({ editor });

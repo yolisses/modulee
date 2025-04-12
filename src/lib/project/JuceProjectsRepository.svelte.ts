@@ -48,8 +48,8 @@ export class JuceProjectsRepository implements ProjectsRepository {
 		this.onProjectsChange?.();
 	}
 
-	async updateProjectGraphData(id: string, graphData: GraphData): Promise<void> {
-		const updateProjectGraphData = this.juceLibrary.getNativeFunction('updateProjectGraphData');
+	async updateProjectGraph(id: string, graphData: GraphData): Promise<void> {
+		const updateProjectGraphData = this.juceLibrary.getNativeFunction('updateProjectGraph');
 		await updateProjectGraphData(id, JSON.stringify(graphData));
 	}
 }

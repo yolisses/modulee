@@ -11,5 +11,5 @@ export interface ProjectsRepository {
 	// TODO consider renaming createProject to addProject since it doesn't create a new id
 	createProject(projectData: ProjectData): Promise<void>;
 	renameProject(id: string, name: string): Promise<void>;
-	updateProjectGraphData(id: string, graphData: GraphData): Promise<void>;
+	updateProjectGraph(id: string, graphData: GraphData): Promise<void>;
 }
