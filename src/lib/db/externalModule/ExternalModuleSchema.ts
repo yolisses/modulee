@@ -33,3 +33,5 @@ ExternalModuleSchema.virtual('user', {
 	foreignField: '_id',
 	localField: 'userId',
 });
+
+ExternalModuleSchema.index({ name: 'text', description: 'text' });
