@@ -10,7 +10,6 @@
 	}
 
 	const { projectData }: Props = $props();
-
 	const projectsRepository = getProjectsRepository();
 
 	function handleBlur(

@@ -10,9 +10,9 @@ export const ExternalModuleSchema = new Schema<ExternalModuleData>(
 		likeCount: { type: Number, required: true },
 		graph: { type: GraphSchema, required: true },
 		usageCount: { type: Number, required: true },
+		user: { type: Schema.Types.ObjectId, ref: 'User' },
 		name: { type: String, required: true, maxlength: 100 },
 		description: { type: String, required: false, maxlength: 1000 },
-		user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 	},
 	{
 		id: true,

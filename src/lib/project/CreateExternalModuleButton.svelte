@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Spinner from '$lib/ui/Spinner.svelte';
 	import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ProjectData } from './ProjectData';
@@ -7,15 +8,28 @@
 		projectData: ProjectData;
 	}
 
+	let isLoading = $state(false);
 	const { projectData }: Props = $props();
+
+	async function onClick() {
+		isLoading = true;
+		try {
+			const res = await fetch('/api/externalModules', {
+				method: 'POST',
+				body: JSON.stringify({ project: projectData }),
+				headers: { 'content-type': 'application/json' },
+			});
+			console.log(await res.json());
+		} catch (e) {}
+		isLoading = false;
+	}
 </script>
 
-<form action="/externalModules/create" method="post" class="contents">
-	<input type="hidden" name="name" value={projectData.name} />
-	<input type="hidden" name="projectId" value={projectData.id} />
-	<input type="hidden" name="graph" value={JSON.stringify(projectData.graphData)} />
-	<button class="common-button">
-		<Fa icon={faPuzzlePiece} />
-		Create external module
-	</button>
-</form>
+<button class="common-button" onclick={onClick}>
+	{#if isLoading}
+		<Spinner size={20} />
+	{:else}
+		<Fa icon={faPuzzlePiece} fw />
+	{/if}
+	Create external module
+</button>
