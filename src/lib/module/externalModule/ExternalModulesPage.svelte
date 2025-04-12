@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import Spinner from '$lib/ui/Spinner.svelte';
-	import { faRefresh } from '@fortawesome/free-solid-svg-icons';
+	import { faEraser, faRefresh, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -63,12 +64,36 @@
 	});
 </script>
 
-<!-- <div class="float top-0 bg-zinc-800">
-	<div>isLoading: {isLoading}</div>
-	<div>isFinished: {isFinished}</div>
-	<div>isIntersecting: {isIntersecting}</div>
-</div> -->
 <ListPageLayout title="External modules">
+	<form action="" method="get" class="flex flex-col gap-2" use:enhance>
+		<div class="flex flex-row items-end gap-2">
+			<label class="flex flex-1 flex-col">
+				Text
+				<input type="text" class="common-input" name="text" />
+			</label>
+			<label class="flex flex-col">
+				Sort by
+				<select class="common-input" name="sort">
+					<option class="bg-zinc-800"></option>
+					<option class="bg-zinc-800" value="likes">Likes</option>
+					<option class="bg-zinc-800" value="createdAtDesc">Creation date</option>
+					<option class="bg-zinc-800" value="downloads_all_time">Downloads in all time</option>
+					<option class="bg-zinc-800" value="downloads_this_month">Downloads in 30 days</option>
+				</select>
+			</label>
+		</div>
+		<div class="flex flex-row gap-2">
+			<button type="submit" class="primary-button">
+				<Fa icon={faSearch} />
+				Search
+			</button>
+			<button type="reset" class="common-button">
+				<Fa icon={faEraser} />
+				Clear
+			</button>
+		</div>
+	</form>
+
 	{#if !isLoading && externalModulesData.length === 0}
 		<div class="text-center">No external modules found</div>
 	{:else}
