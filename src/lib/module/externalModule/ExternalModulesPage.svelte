@@ -7,21 +7,24 @@
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 
-	const debugMaxCounter = 10;
-
-	let listEnd: HTMLElement;
-
 	let text = $state('');
 	let sort = $state('');
-
-	let gotError = $state(false);
-	let isLoading = $state(false);
-	let isFinished = $state(false);
-	let isIntersecting = $state(false);
+	let cursor = $state<string | null>();
 	let externalModulesData = $state<ExternalModuleData[]>();
 
+	let listEnd: HTMLElement;
+	let gotError = $state(false);
+	let isLoading = $state(false);
+	let finished = $state(false);
+	let isIntersecting = $state(false);
+
 	async function load() {
-		const path = `/api/externalModules?text=${text}&sort=${sort}`;
+		const queryParams = new URLSearchParams();
+		queryParams.append('text', text);
+		queryParams.append('sort', sort);
+		if (cursor) queryParams.append('cursor', cursor);
+
+		const path = `/api/externalModules?${queryParams.toString()}`;
 		const res = await fetch(path, { method: 'GET' });
 
 		if (!res.ok) {
@@ -30,6 +33,13 @@
 		}
 
 		const data = await res.json();
+		console.log(data);
+		cursor = data.nextCursor;
+
+		if (cursor === null) {
+			finished = true;
+		}
+
 		if (!externalModulesData) {
 			externalModulesData = [];
 		}
@@ -37,7 +47,7 @@
 	}
 
 	$effect(() => {
-		if (isIntersecting && !gotError && !isLoading && !isFinished) {
+		if (isIntersecting && !gotError && !isLoading && !finished) {
 			isLoading = true;
 			load().then(() => {
 				isLoading = false;
@@ -62,8 +72,9 @@
 
 	function resetState() {
 		gotError = false;
+		finished = false;
 		isLoading = false;
-		isFinished = false;
+		cursor = undefined;
 		isIntersecting = false;
 		externalModulesData = undefined;
 	}
@@ -124,8 +135,10 @@
 
 	{#if !isLoading && externalModulesData?.length === 0}
 		<div class="text-center">No external modules found</div>
-	{:else if isFinished}
-		<div>End of the list</div>
+	{:else if finished}
+		<div class="flex flex-col items-center">
+			<div class="opacity-50">End of the list</div>
+		</div>
 	{/if}
 
 	{#if gotError}
