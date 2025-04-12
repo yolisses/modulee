@@ -19,7 +19,6 @@
 				body: JSON.stringify({ project: projectData }),
 				headers: { 'content-type': 'application/json' },
 			});
-			console.log(await res.json());
 		} catch (e) {}
 		isLoading = false;
 	}

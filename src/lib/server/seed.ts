@@ -71,8 +71,6 @@ declare const process: {
 };
 await connect(process.env.MONGO_DB_URL);
 await unseed();
-console.log(usersData);
-console.log(externalModulesData);
 await UserModel.insertMany(usersData);
 await ExternalModuleModel.insertMany(externalModulesData);
 await disconnect();
