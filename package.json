@@ -50,6 +50,7 @@
 		"@oslojs/encoding": "^1.1.0",
 		"google-auth-library": "^9.15.1",
 		"idb": "^8.0.1",
+		"mongo-cursor-pagination": "^9.0.1",
 		"mongoose": "^8.13.0",
 		"nanoid": "^5.0.9",
 		"nodes-editor": "^0.0.16",
