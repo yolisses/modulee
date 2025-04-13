@@ -107,9 +107,8 @@
 				<select bind:value={sort} class="common-input" name="sort">
 					<option class="bg-zinc-800" value="">Default</option>
 					<option class="bg-zinc-800" value="likeCount">Likes</option>
+					<option class="bg-zinc-800" value="usageCount">Usage</option>
 					<option class="bg-zinc-800" value="updatedAt">Last update</option>
-					<option class="bg-zinc-800" value="downloadsInAllTime">Downloads in all time</option>
-					<option class="bg-zinc-800" value="downloadsInLastMonth">Downloads in last month</option>
 				</select>
 			</label>
 		</div>
