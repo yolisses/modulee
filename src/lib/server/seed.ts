@@ -44,6 +44,10 @@ for (let i = 0; i < userCount; i++) {
 
 const externalModulesData: ExternalModuleData[] = [];
 
+function range(length: number) {
+	return [...Array(length).keys()];
+}
+
 for (let i = 0; i < externalModuleCount; i++) {
 	const userData = faker.helpers.arrayElement(usersData);
 	const externalModuleData: Seedable<ExternalModuleData> = {
@@ -56,7 +60,11 @@ for (let i = 0; i < externalModuleCount; i++) {
 		likeCount: faker.number.int(100000),
 		usageCount: faker.number.int(100000),
 		updatedAt: faker.date.past().toISOString(),
-		description: faker.commerce.productDescription() + faker.lorem.paragraphs(),
+		description: range(10)
+			.map(() => {
+				return faker.commerce.productDescription();
+			})
+			.join('\n'),
 		version: {
 			major: faker.number.int(10),
 			minor: faker.number.int(20),
