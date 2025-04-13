@@ -16,7 +16,7 @@
 	let gotError = $state(false);
 	let isLoading = $state(false);
 	let finished = $state(false);
-	let isIntersecting = $state(false);
+	let isIntersecting = $state(true);
 
 	async function load() {
 		const queryParams = new URLSearchParams();
@@ -33,6 +33,7 @@
 		}
 
 		const data = await res.json();
+		console.log(data);
 		cursor = data.nextCursor;
 
 		if (cursor === null) {
@@ -74,7 +75,7 @@
 		finished = false;
 		isLoading = false;
 		cursor = undefined;
-		isIntersecting = false;
+		isIntersecting = true;
 		externalModulesData = undefined;
 	}
 
