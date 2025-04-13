@@ -30,4 +30,5 @@
 		</a>
 		• Used {externalModuleData.usageCount} times • Liked {externalModuleData.likeCount} times
 	</div>
+	{externalModuleData.updatedAt}
 </div>

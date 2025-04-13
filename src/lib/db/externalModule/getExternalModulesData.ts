@@ -16,61 +16,65 @@ export async function getExternalModulesData(
 	const pageLimit = 3;
 	const limit = pageLimit + 1;
 
-	const query = ExternalModuleModel.find();
-	query.limit(limit);
+	let filter = {};
+	let sortOptions = {};
 
-	// TODO use Strategy pattern
-	if (!sort) {
-		query.sort([['_id', 'desc']]);
-		if (cursor) {
-			const cursorData = JSON.parse(cursor);
-			query.where({
-				$or: [{ _id: { $lte: cursorData._id } }],
-			});
-		}
-	} else if (sort === 'likeCount') {
-		// The order matters
-		query.sort([
-			['likeCount', 'desc'],
-			['_id', 'desc'],
-		]);
-		if (cursor) {
-			const cursorData = JSON.parse(cursor);
-			query.where({
+	if (cursor) {
+		const cursorData = JSON.parse(cursor);
+
+		if (!sort) {
+			sortOptions = { _id: -1 };
+			filter = { _id: { $lte: cursorData._id } };
+		} else if (sort === 'likeCount') {
+			sortOptions = { likeCount: -1, _id: -1 };
+			filter = {
 				$or: [
 					{ likeCount: { $lt: cursorData.likeCount } },
-					{ likeCount: cursorData.likeCount, _id: { $lte: cursorData._id } },
+					{
+						likeCount: cursorData.likeCount,
+						_id: { $lte: cursorData._id },
+					},
 				],
-			});
-		}
-	} else if (sort === 'updatedAt') {
-		// The order matters
-		query.sort([
-			['updatedAt', 'desc'],
-			['_id', 'desc'],
-		]);
-		if (cursor) {
-			const cursorData = JSON.parse(cursor);
-			query.where({
+			};
+		} else if (sort === 'updatedAt') {
+			sortOptions = { updatedAt: -1, _id: -1 };
+			filter = {
 				$or: [
 					{ updatedAt: { $lt: cursorData.updatedAt } },
-					{ updatedAt: cursorData.updatedAt, _id: { $lte: cursorData._id } },
+					{
+						updatedAt: cursorData.updatedAt,
+						_id: { $lte: cursorData._id },
+					},
 				],
-			});
+			};
+		} else {
+			throw new Error('Invalid sorting option:' + sort);
 		}
 	} else {
-		throw new Error('Invalid sorting option:' + sort);
+		// Default sorting when no cursor
+		if (!sort) {
+			sortOptions = { _id: -1 };
+		} else if (sort === 'likeCount') {
+			sortOptions = { likeCount: -1, _id: -1 };
+		} else if (sort === 'updatedAt') {
+			sortOptions = { updatedAt: -1, _id: -1 };
+		} else {
+			throw new Error('Invalid sorting option:' + sort);
+		}
 	}
 
-	query.populate('user');
-	const documents = await query;
+	const documents = await ExternalModuleModel.find(filter)
+		.sort(sortOptions)
+		.limit(limit)
+		.populate('user')
+		.exec();
+
 	const items = documents.map((d) => d.toObject());
 
 	let nextCursor: null | string = null;
 	const hasNext = items.length === limit;
 	if (hasNext) {
 		const lastItem = items.at(-1)!;
-		// TODO use Strategy pattern
 		if (!sort) {
 			nextCursor = JSON.stringify({
 				_id: lastItem._id,
