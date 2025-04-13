@@ -19,6 +19,7 @@ export async function getExternalModulesData(
 	const query = ExternalModuleModel.find();
 	query.limit(limit);
 
+	// TODO use Strategy pattern
 	if (!sort) {
 		query.sort({ _id: 'desc' });
 		if (cursor) {
@@ -29,6 +30,23 @@ export async function getExternalModulesData(
 		if (cursor) {
 			query.where({ likeCount: { $lte: cursor } });
 		}
+	} else if (sort === 'updatedAt') {
+		// The order matters
+		query.sort([
+			['updatedAt', 'desc'],
+			['_id', 'desc'],
+		]);
+		if (cursor) {
+			const cursorData = JSON.parse(cursor);
+			query.where({
+				$or: [
+					{ updatedAt: { $lt: cursorData.updatedAt } },
+					{ updatedAt: cursorData.updatedAt, _id: { $lte: cursorData._id } },
+				],
+			});
+		}
+	} else {
+		throw new Error('Invalid sorting option:' + sort);
 	}
 
 	const documents = await query;
@@ -38,10 +56,18 @@ export async function getExternalModulesData(
 	const hasNext = items.length === limit;
 	if (hasNext) {
 		const lastItem = items.at(-1)!;
+		// TODO use Strategy pattern
 		if (!sort) {
 			nextCursor = lastItem._id.toString();
 		} else if (sort === 'likeCount') {
 			nextCursor = lastItem.likeCount.toString();
+		} else if (sort === 'updatedAt') {
+			nextCursor = JSON.stringify({
+				_id: lastItem._id,
+				updatedAt: lastItem.updatedAt,
+			});
+		} else {
+			throw new Error('Invalid sorting option: ' + sort);
 		}
 	}
 

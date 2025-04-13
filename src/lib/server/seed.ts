@@ -55,6 +55,7 @@ for (let i = 0; i < externalModuleCount; i++) {
 		name: faker.commerce.productName(),
 		likeCount: faker.number.int(100000),
 		usageCount: faker.number.int(100000),
+		updatedAt: faker.date.past().toISOString(),
 		description: faker.commerce.productDescription() + faker.lorem.paragraphs(),
 		version: {
 			major: faker.number.int(10),
