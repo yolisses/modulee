@@ -62,6 +62,7 @@ export async function getExternalModulesData(
 		throw new Error('Invalid sorting option:' + sort);
 	}
 
+	query.populate('user');
 	const documents = await query;
 	const items = documents.map((d) => d.toObject());
 
