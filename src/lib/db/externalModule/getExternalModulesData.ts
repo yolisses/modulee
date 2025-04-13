@@ -1,5 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { set } from 'mongoose';
+import { set, Types } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
@@ -27,15 +27,28 @@ export async function getExternalModulesData(
 	const projection = strategy.getProjection();
 
 	set('debug', true);
-	const documents = await ExternalModuleModel.find(filter)
-		.select(projection)
-		.sort(strategy.getSort())
-		.limit(limit)
-		.populate('user')
-		.exec();
+	const documents = await ExternalModuleModel.aggregate([
+		{ $match: { $text: { $search: text } } },
+		{ $addFields: { score: { $meta: 'textScore' } } },
+		...(cursorData
+			? [
+					{
+						$match: {
+							$or: [
+								{ score: { $lt: cursorData.score } },
+								{ score: cursorData.score, _id: { $lte: new Types.ObjectId(cursorData._id) } },
+							],
+						},
+					},
+				]
+			: []),
+		{ $sort: { score: -1 } },
+		{ $limit: 4 },
+	]);
 	set('debug', false);
 
-	const items = documents.map((d) => d.toObject());
+	const items = documents;
+	// const items = documents.map((d) => d.toObject());
 	console.log(items.map((item) => item.name));
 
 	let nextCursor: null | string = null;
