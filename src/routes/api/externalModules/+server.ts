@@ -4,9 +4,17 @@ import { getSession } from '$lib/user/getSession';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ url }) => {
-	const text = url.searchParams.get('text');
-	const sort = url.searchParams.get('sort');
+	let text = url.searchParams.get('text');
+	let sort = url.searchParams.get('sort');
 	const cursor = url.searchParams.get('cursor');
+
+	if (text === '') {
+		text = null;
+	}
+	if (sort === '') {
+		sort = null;
+	}
+
 	const externalModulesData = await getExternalModulesData({
 		text: text ?? undefined,
 		sort: sort ?? undefined,
