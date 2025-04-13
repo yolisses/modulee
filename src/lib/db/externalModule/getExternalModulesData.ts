@@ -11,17 +11,24 @@ type Params = {
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor } = params;
+	const { cursor, sort } = params;
 
 	const pageLimit = 3;
 	const limit = pageLimit + 1;
 
 	const query = ExternalModuleModel.find();
 	query.limit(limit);
-	query.sort({ _id: 'desc' });
 
-	if (cursor) {
-		query.where({ _id: { $lte: cursor } });
+	if (!sort) {
+		query.sort({ _id: 'desc' });
+		if (cursor) {
+			query.where({ _id: { $lte: cursor } });
+		}
+	} else if (sort === 'likeCount') {
+		query.sort({ likeCount: 'desc' });
+		if (cursor) {
+			query.where({ likeCount: { $lte: cursor } });
+		}
 	}
 
 	const documents = await query;
@@ -30,7 +37,12 @@ export async function getExternalModulesData(
 	let nextCursor: null | string = null;
 	const hasNext = items.length === limit;
 	if (hasNext) {
-		nextCursor = items.at(-1)!._id.toString();
+		const lastItem = items.at(-1)!;
+		if (!sort) {
+			nextCursor = lastItem._id.toString();
+		} else if (sort === 'likeCount') {
+			nextCursor = lastItem.likeCount.toString();
+		}
 	}
 
 	return {

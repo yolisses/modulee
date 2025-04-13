@@ -106,8 +106,8 @@
 				Sort by
 				<select bind:value={sort} class="common-input" name="sort">
 					<option class="bg-zinc-800"></option>
-					<option class="bg-zinc-800" value="likes">Likes</option>
-					<option class="bg-zinc-800" value="createdAtDesc">Creation date</option>
+					<option class="bg-zinc-800" value="likeCount">Likes</option>
+					<option class="bg-zinc-800" value="createdAt">Creation date</option>
 					<option class="bg-zinc-800" value="downloadsInAllTime">Downloads in all time</option>
 					<option class="bg-zinc-800" value="downloadsInLastMonth">Downloads in last month</option>
 				</select>
