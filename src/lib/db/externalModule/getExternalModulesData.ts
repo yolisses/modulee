@@ -1,4 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { set } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
@@ -12,21 +13,30 @@ type Params = {
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor, sort } = params;
+	const { cursor, sort, text } = params;
 
-	const strategy = getStrategy(sort);
+	const strategy = getStrategy(sort, text);
 	const cursorData = cursor ? JSON.parse(cursor) : null;
 
 	const pageLimit = 3;
 	const limit = pageLimit + 1;
 
-	const documents = await ExternalModuleModel.find(strategy.getFilter(cursorData))
-		.sort(strategy.getSortOptions())
+	const filter = strategy.getFilter(cursorData);
+
+	console.log(strategy, filter);
+	const projection = strategy.getProjection();
+
+	set('debug', true);
+	const documents = await ExternalModuleModel.find(filter)
+		.select(projection)
+		.sort(strategy.getSort())
 		.limit(limit)
 		.populate('user')
 		.exec();
+	set('debug', false);
 
 	const items = documents.map((d) => d.toObject());
+	console.log(items.map((item) => item.name));
 
 	let nextCursor: null | string = null;
 	const hasNext = items.length === limit;

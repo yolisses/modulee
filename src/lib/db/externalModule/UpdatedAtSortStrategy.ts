@@ -4,7 +4,7 @@ import { PaginationStrategy } from './PaginationStrategy';
 type CursorData = { _id: string; updatedAt: string };
 
 export class UpdatedAtSortStrategy extends PaginationStrategy {
-	getSortOptions() {
+	getSort() {
 		return { updatedAt: -1, _id: -1 } as const;
 	}
 

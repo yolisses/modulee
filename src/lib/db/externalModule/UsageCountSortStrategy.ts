@@ -4,7 +4,7 @@ import { PaginationStrategy } from './PaginationStrategy';
 type CursorData = { _id: string; usageCount: number };
 
 export class UsageCountSortStrategy extends PaginationStrategy {
-	getSortOptions() {
+	getSort() {
 		return { usageCount: -1, _id: -1 } as const;
 	}
 
