@@ -8,7 +8,7 @@
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 
 	let text = $state('');
-	let sort = $state('updatedAt');
+	let sort = $state('');
 	let cursor = $state<string | null>();
 	let externalModulesData = $state<ExternalModuleData[]>();
 
@@ -33,7 +33,6 @@
 		}
 
 		const data = await res.json();
-		console.log(data);
 		cursor = data.nextCursor;
 
 		if (cursor === null) {
@@ -105,7 +104,7 @@
 			<label class="flex flex-col">
 				Sort by
 				<select bind:value={sort} class="common-input" name="sort">
-					<option class="bg-zinc-800"></option>
+					<option class="bg-zinc-800" value="">Default</option>
 					<option class="bg-zinc-800" value="likeCount">Likes</option>
 					<option class="bg-zinc-800" value="updatedAt">Last update</option>
 					<option class="bg-zinc-800" value="downloadsInAllTime">Downloads in all time</option>

@@ -21,14 +21,27 @@ export async function getExternalModulesData(
 
 	// TODO use Strategy pattern
 	if (!sort) {
-		query.sort({ _id: 'desc' });
+		query.sort([['_id', 'desc']]);
 		if (cursor) {
-			query.where({ _id: { $lte: cursor } });
+			const cursorData = JSON.parse(cursor);
+			query.where({
+				$or: [{ _id: { $lte: cursorData._id } }],
+			});
 		}
 	} else if (sort === 'likeCount') {
-		query.sort({ likeCount: 'desc' });
+		// The order matters
+		query.sort([
+			['likeCount', 'desc'],
+			['_id', 'desc'],
+		]);
 		if (cursor) {
-			query.where({ likeCount: { $lte: cursor } });
+			const cursorData = JSON.parse(cursor);
+			query.where({
+				$or: [
+					{ likeCount: { $lt: cursorData.likeCount } },
+					{ likeCount: cursorData.likeCount, _id: { $lte: cursorData._id } },
+				],
+			});
 		}
 	} else if (sort === 'updatedAt') {
 		// The order matters
@@ -58,9 +71,14 @@ export async function getExternalModulesData(
 		const lastItem = items.at(-1)!;
 		// TODO use Strategy pattern
 		if (!sort) {
-			nextCursor = lastItem._id.toString();
+			nextCursor = JSON.stringify({
+				_id: lastItem._id,
+			});
 		} else if (sort === 'likeCount') {
-			nextCursor = lastItem.likeCount.toString();
+			nextCursor = JSON.stringify({
+				_id: lastItem._id,
+				likeCount: lastItem.likeCount,
+			});
 		} else if (sort === 'updatedAt') {
 			nextCursor = JSON.stringify({
 				_id: lastItem._id,
