@@ -1,6 +1,4 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { error } from '@sveltejs/kit';
-import type { RootFilterQuery } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import type { PaginationResult } from './PaginationResult';
 
@@ -13,41 +11,30 @@ type Params = {
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { text, sort, cursor } = params;
-
-	const filter: RootFilterQuery<ExternalModuleData> = {};
-	if (text) {
-		filter.$text = { $search: text };
-	}
-
-	let query = ExternalModuleModel.find(filter);
-
-	// TODO add remaining sort options
-	// TODO refactor this
-	// 'likes' | 'createdAtDesc' | 'downloadsInAllTime' | 'downloadsInLastMonth'
-	if (!sort) {
-		if (text) {
-			query.sort({ score: { $meta: 'textScore' } });
-		} else {
-			query.sort('_id');
-		}
-	} else if (sort === 'likes') {
-		query.sort({ likesCount: 'desc' });
-	} else if (sort === 'createdAtDesc') {
-		query.sort({ createAt: 'desc' });
-	} else {
-		error(400, 'Invalid sort option');
-	}
+	const { cursor } = params;
 
 	const pageLimit = 3;
-	query.limit(pageLimit + 1);
+	const limit = pageLimit + 1;
+
+	const query = ExternalModuleModel.find();
+	query.limit(limit);
+	query.sort({ _id: 'desc' });
 
 	if (cursor) {
-		query = query.where('_id').gte(cursor);
+		query.where({ _id: { $lte: cursor } });
 	}
 
-	const items = (await query.populate('user')).map((r) => r.toObject());
-	const nextCursor = items.length < pageLimit + 1 ? null : items.at(-1)!._id.toString();
-	items.pop();
-	return { items, nextCursor };
+	const documents = await query;
+	const items = documents.map((d) => d.toObject());
+
+	let nextCursor: null | string = null;
+	const hasNext = items.length === limit;
+	if (hasNext) {
+		nextCursor = items.at(-1)!._id.toString();
+	}
+
+	return {
+		nextCursor,
+		items: items.slice(0, pageLimit),
+	};
 }
