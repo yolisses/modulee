@@ -11,7 +11,7 @@ type Params = {
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor, sort, text } = params;
+	const { cursor, sort } = params;
 
 	const pageLimit = 3;
 	const limit = pageLimit + 1;
@@ -19,22 +19,14 @@ export async function getExternalModulesData(
 	const query = ExternalModuleModel.find();
 	query.limit(limit);
 
-	if (text) {
-		query.where({ $text: { $search: text } });
-	}
-
 	// TODO use Strategy pattern
 	if (!sort) {
-		if (text) {
-			//
-		} else {
-			query.sort([['_id', 'desc']]);
-			if (cursor) {
-				const cursorData = JSON.parse(cursor);
-				query.where({
-					$or: [{ _id: { $lte: cursorData._id } }],
-				});
-			}
+		query.sort([['_id', 'desc']]);
+		if (cursor) {
+			const cursorData = JSON.parse(cursor);
+			query.where({
+				$or: [{ _id: { $lte: cursorData._id } }],
+			});
 		}
 	} else if (sort === 'likeCount') {
 		// The order matters
