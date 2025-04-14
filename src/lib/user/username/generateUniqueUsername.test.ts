@@ -50,6 +50,6 @@ describe('generateUniqueUsername', () => {
 			{ getRandomValue: mockRandom, maxAttempts: 2 },
 			mockIsAvailable,
 		);
-		expect(username).toBe('sunny_dolphin_500');
+		expect(username).toBe('harmonic_rune_500');
 	});
 });

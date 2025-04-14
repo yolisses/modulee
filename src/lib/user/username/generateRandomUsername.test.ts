@@ -11,6 +11,6 @@ describe('generateRandomUsername', () => {
 			.mockReturnValueOnce(0.5); // number 500
 
 		const username = generateRandomUsername(mockRandom);
-		expect(username).toBe('sunny_dolphin_500');
+		expect(username).toBe('harmonic_rune_500');
 	});
 });
