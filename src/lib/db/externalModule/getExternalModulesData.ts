@@ -1,5 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { set, Types } from 'mongoose';
+import { set, Types, type PipelineStage } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
@@ -18,37 +18,38 @@ export async function getExternalModulesData(
 	const strategy = getStrategy(sort, text);
 	const cursorData = cursor ? JSON.parse(cursor) : null;
 
+	const pipelineStages: PipelineStage[] = [];
+
+	if (text) {
+		pipelineStages.push(
+			{ $match: { $text: { $search: text } } },
+			{ $addFields: { score: { $meta: 'textScore' } } },
+		);
+	}
+
+	if (cursorData) {
+		pipelineStages.push({
+			$match: {
+				$or: [
+					{ score: { $lt: cursorData.score } },
+					{ score: cursorData.score, _id: { $lte: new Types.ObjectId(cursorData._id) } },
+				],
+			},
+		});
+	}
+
+	pipelineStages.push({ $sort: { score: -1 } });
+
 	const pageLimit = 3;
 	const limit = pageLimit + 1;
 
-	const filter = strategy.getFilter(cursorData);
-
-	console.log(strategy, filter);
-	const projection = strategy.getProjection();
+	pipelineStages.push({ $limit: limit });
 
 	set('debug', true);
-	const documents = await ExternalModuleModel.aggregate([
-		{ $match: { $text: { $search: text } } },
-		{ $addFields: { score: { $meta: 'textScore' } } },
-		...(cursorData
-			? [
-					{
-						$match: {
-							$or: [
-								{ score: { $lt: cursorData.score } },
-								{ score: cursorData.score, _id: { $lte: new Types.ObjectId(cursorData._id) } },
-							],
-						},
-					},
-				]
-			: []),
-		{ $sort: { score: -1 } },
-		{ $limit: 4 },
-	]);
+	const documents = await ExternalModuleModel.aggregate(pipelineStages);
 	set('debug', false);
 
 	const items = documents;
-	// const items = documents.map((d) => d.toObject());
 	console.log(items.map((item) => item.name));
 
 	let nextCursor: null | string = null;
