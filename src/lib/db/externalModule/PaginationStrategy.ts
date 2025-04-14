@@ -1,14 +1,13 @@
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import type { PipelineStage } from 'mongoose';
+
 // Strategy Interface
 export abstract class PaginationStrategy<T = unknown> {
-	abstract getNextCursor(lastItem: any): T;
-	abstract getSort(): Record<string, 1 | -1>;
-	abstract getFilter(cursorData: T): Record<string, any>;
+	abstract getSortStage(): PipelineStage;
+	abstract getFilterStage(cursorData: T): PipelineStage;
+	abstract getNextCursor(lastItem: ExternalModuleData): T;
 
-	getProjection() {
-		return {};
-	}
-
-	getNextCursorString(lastItem: any): string {
+	getNextCursorString(lastItem: ExternalModuleData): string {
 		return JSON.stringify(this.getNextCursor(lastItem));
 	}
 }

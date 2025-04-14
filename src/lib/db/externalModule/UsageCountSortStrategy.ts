@@ -4,11 +4,11 @@ import { PaginationStrategy } from './PaginationStrategy';
 type CursorData = { _id: string; usageCount: number };
 
 export class UsageCountSortStrategy extends PaginationStrategy {
-	getSort() {
+	getSortStage() {
 		return { usageCount: -1, _id: -1 } as const;
 	}
 
-	getFilter(cursorData: CursorData) {
+	getFilterStage(cursorData: CursorData) {
 		if (!cursorData) return {};
 		return {
 			$or: [

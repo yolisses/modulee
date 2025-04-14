@@ -1,5 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { set, Types, type PipelineStage } from 'mongoose';
+import { set, type PipelineStage } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
@@ -28,17 +28,12 @@ export async function getExternalModulesData(
 	}
 
 	if (cursorData) {
-		pipelineStages.push({
-			$match: {
-				$or: [
-					{ score: { $lt: cursorData.score } },
-					{ score: cursorData.score, _id: { $lte: new Types.ObjectId(cursorData._id) } },
-				],
-			},
-		});
+		const filterStage = strategy.getFilterStage(cursorData);
+		pipelineStages.push(filterStage);
 	}
 
-	pipelineStages.push({ $sort: { score: -1 } });
+	const sortStage = strategy.getSortStage();
+	pipelineStages.push(sortStage);
 
 	const pageLimit = 3;
 	const limit = pageLimit + 1;

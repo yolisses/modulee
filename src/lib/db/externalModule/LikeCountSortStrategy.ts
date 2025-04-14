@@ -1,20 +1,22 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { Types } from 'mongoose';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string; likeCount: number };
 
 export class LikeCountSortStrategy extends PaginationStrategy {
-	getSort() {
-		return { likeCount: -1, _id: -1 } as const;
+	getSortStage() {
+		return { $sort: { likeCount: -1, _id: -1 } } as const;
 	}
 
-	getFilter(cursorData: CursorData) {
-		if (!cursorData) return {};
+	getFilterStage(cursorData: CursorData) {
 		return {
-			$or: [
-				{ likeCount: { $lt: cursorData.likeCount } },
-				{ likeCount: cursorData.likeCount, _id: { $lte: cursorData._id } },
-			],
+			$match: {
+				$or: [
+					{ likeCount: { $lt: cursorData.likeCount } },
+					{ likeCount: cursorData.likeCount, _id: { $lte: new Types.ObjectId(cursorData._id) } },
+				],
+			},
 		};
 	}
 

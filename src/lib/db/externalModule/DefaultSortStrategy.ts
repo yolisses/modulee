@@ -4,12 +4,12 @@ import { PaginationStrategy } from './PaginationStrategy';
 type CursorData = { _id: string };
 
 export class DefaultSortStrategy extends PaginationStrategy {
-	getSort() {
+	getSortStage() {
 		return { _id: -1 } as const;
 	}
 
-	getFilter(cursorData: CursorData) {
-		return cursorData ? { _id: { $lte: cursorData._id } } : {};
+	getFilterStage(cursorData: CursorData) {
+		return { _id: { $lte: cursorData._id } };
 	}
 
 	getNextCursor(lastItem: ExternalModuleData): CursorData {

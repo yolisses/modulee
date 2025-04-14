@@ -1,4 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { Types } from 'mongoose';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string; score: number };
@@ -12,20 +13,18 @@ export class TextScoreSortStrategy extends PaginationStrategy {
 		return { score: { $meta: 'textScore' } } as const;
 	}
 
-	getSort() {
-		return { score: { $meta: 'textScore' }, _id: -1 } as const;
+	getSortStage() {
+		return { $sort: { score: -1, _id: -1 } } as const;
 	}
 
-	getFilter(cursorData: CursorData) {
-		if (!cursorData) {
-			return { $text: { $search: this.text } };
-		}
+	getFilterStage(cursorData: CursorData) {
 		return {
-			$text: { $search: this.text },
-			$or: [
-				{ score: { $lt: cursorData.score } },
-				{ score: cursorData.score, _id: { $lte: cursorData._id } },
-			],
+			$match: {
+				$or: [
+					{ score: { $lt: cursorData.score } },
+					{ score: cursorData.score, _id: { $lte: new Types.ObjectId(cursorData._id) } },
+				],
+			},
 		};
 	}
 
