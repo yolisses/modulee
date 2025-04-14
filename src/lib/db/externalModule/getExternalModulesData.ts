@@ -11,6 +11,8 @@ type Params = {
 	cursor?: string;
 };
 
+const PAGE_LIMIT = 20;
+
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
@@ -36,20 +38,19 @@ export async function getExternalModulesData(
 	const sortStage = strategy.getSortStage();
 	pipelineStages.push(sortStage);
 
-	const pageLimit = 3;
-	const limit = pageLimit + 1;
+	const LIMIT = PAGE_LIMIT + 1;
 
-	pipelineStages.push({ $limit: limit });
+	pipelineStages.push({ $limit: LIMIT });
 	pipelineStages.push(...getBasicUserDataStages());
 
 	const items = await ExternalModuleModel.aggregate(pipelineStages);
 
 	let nextCursor: null | string = null;
-	const hasNext = items.length === limit;
+	const hasNext = items.length === LIMIT;
 	if (hasNext) {
 		const lastItem = items.at(-1)!;
 		nextCursor = strategy.getNextCursorString(lastItem);
 	}
 
-	return { nextCursor, items: items.slice(0, pageLimit) };
+	return { nextCursor, items: items.slice(0, PAGE_LIMIT) };
 }
