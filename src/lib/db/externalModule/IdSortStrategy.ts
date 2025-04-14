@@ -1,15 +1,16 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { Types } from 'mongoose';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string };
 
-export class DefaultSortStrategy extends PaginationStrategy {
+export class IdSortStrategy extends PaginationStrategy {
 	getSortStage() {
-		return { _id: -1 } as const;
+		return { $sort: { score: -1, _id: -1 } } as const;
 	}
 
 	getFilterStage(cursorData: CursorData) {
-		return { _id: { $lte: cursorData._id } };
+		return { $match: { _id: { $lte: new Types.ObjectId(cursorData._id) } } };
 	}
 
 	getNextCursor(lastItem: ExternalModuleData): CursorData {
