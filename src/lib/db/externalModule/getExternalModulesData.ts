@@ -1,6 +1,7 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { type PipelineStage } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
+import { getBasicUserDataStages } from './getBasicUserDataStages';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
 
@@ -39,6 +40,7 @@ export async function getExternalModulesData(
 	const limit = pageLimit + 1;
 
 	pipelineStages.push({ $limit: limit });
+	pipelineStages.push(...getBasicUserDataStages());
 
 	const items = await ExternalModuleModel.aggregate(pipelineStages);
 
