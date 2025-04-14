@@ -9,6 +9,7 @@ import { faker } from '@faker-js/faker';
 import { config } from 'dotenv';
 import { connect, disconnect, Types } from 'mongoose';
 import { fakeGraphData } from './fakeGraphData';
+import { range } from './range';
 import { unseed } from './unseed';
 
 // TODO find a more secure way to run seed.ts as a server only file.
@@ -19,46 +20,39 @@ config();
 const userCount = 10;
 const externalModuleCount = 10;
 
-const usersData: UserData[] = [];
-
-function getRandomValue() {
-	return Math.random();
-}
-
 async function getIsAvailable() {
 	return true;
 }
 
+type UserSeedData = Seedable<Partial<UserData> & { _id: Types.ObjectId }>;
+const usersData: UserSeedData[] = [];
 for (let i = 0; i < userCount; i++) {
 	const name = faker.person.fullName();
-	const userData: Seedable<UserData> = {
+	const userData: UserSeedData = {
 		name,
 		isSeeded: true,
 		bio: faker.person.bio(),
 		email: faker.internet.email(),
 		_id: new Types.ObjectId(),
-		username: await generateUniqueUsername(name, { getRandomValue }, getIsAvailable),
+		username: await generateUniqueUsername(name, { getRandomValue: Math.random }, getIsAvailable),
 	};
 	usersData.push(userData);
 }
 
-const externalModulesData: ExternalModuleData[] = [];
-
-function range(length: number) {
-	return [...Array(length).keys()];
-}
+type ExternalModuleSeedData = Seedable<Partial<ExternalModuleData>>;
+const externalModulesData: ExternalModuleSeedData[] = [];
 
 for (let i = 0; i < externalModuleCount; i++) {
 	const userData = faker.helpers.arrayElement(usersData);
-	const externalModuleData: Seedable<ExternalModuleData> = {
+	const externalModuleData: ExternalModuleSeedData = {
 		id: createId(),
 		isSeeded: true,
-		userId: userData._id,
 		projectId: createId(),
 		graph: fakeGraphData(),
 		name: faker.commerce.productName(),
 		likeCount: faker.number.int(100000),
 		usageCount: faker.number.int(100000),
+		userId: userData._id as unknown as string,
 		updatedAt: faker.date.past().toISOString(),
 		description: range(10)
 			.map(() => {
@@ -78,6 +72,7 @@ for (let i = 0; i < externalModuleCount; i++) {
 declare const process: {
 	env: Record<string, string>;
 };
+
 await connect(process.env.MONGO_DB_URL);
 await unseed();
 await UserModel.insertMany(usersData);
