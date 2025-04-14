@@ -1,5 +1,5 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { set, type PipelineStage } from 'mongoose';
+import { type PipelineStage } from 'mongoose';
 import { ExternalModuleModel } from './ExternalModuleModel';
 import { getStrategy } from './getStrategy';
 import type { PaginationResult } from './PaginationResult';
@@ -40,12 +40,7 @@ export async function getExternalModulesData(
 
 	pipelineStages.push({ $limit: limit });
 
-	set('debug', true);
-	const documents = await ExternalModuleModel.aggregate(pipelineStages);
-	set('debug', false);
-
-	const items = documents;
-	console.log(items.map((item) => item.name));
+	const items = await ExternalModuleModel.aggregate(pipelineStages);
 
 	let nextCursor: null | string = null;
 	const hasNext = items.length === limit;
