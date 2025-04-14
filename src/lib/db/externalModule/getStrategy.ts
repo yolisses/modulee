@@ -1,4 +1,3 @@
-import { IdSortStrategy } from './IdSortStrategy';
 import { LikeCountSortStrategy } from './LikeCountSortStrategy';
 import type { PaginationStrategy } from './PaginationStrategy';
 import { TextScoreSortStrategy } from './TextScoreSortStrategy';
@@ -12,7 +11,7 @@ export function getStrategy(sortOption?: string, text?: string): PaginationStrat
 			if (text) {
 				return new TextScoreSortStrategy(text);
 			} else {
-				return new IdSortStrategy();
+				return new LikeCountSortStrategy();
 			}
 		case 'likeCount':
 			return new LikeCountSortStrategy();
