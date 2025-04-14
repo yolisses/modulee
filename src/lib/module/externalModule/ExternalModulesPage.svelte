@@ -7,7 +7,7 @@
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 
-	let text = $state('pets');
+	let text = $state('');
 	let sort = $state('');
 	let cursor = $state<string | null>();
 	let externalModulesData = $state<ExternalModuleData[]>();
