@@ -1,20 +1,25 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { Types } from 'mongoose';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string; updatedAt: string };
 
 export class UpdatedAtSortStrategy extends PaginationStrategy {
 	getSortStage() {
-		return { updatedAt: -1, _id: -1 } as const;
+		return { $sort: { updatedAt: -1, _id: -1 } } as const;
 	}
 
 	getFilterStage(cursorData: CursorData) {
-		if (!cursorData) return {};
 		return {
-			$or: [
-				{ updatedAt: { $lt: cursorData.updatedAt } },
-				{ updatedAt: cursorData.updatedAt, _id: { $lte: cursorData._id } },
-			],
+			$match: {
+				$or: [
+					{ updatedAt: { $lt: new Date(cursorData.updatedAt) } },
+					{
+						updatedAt: new Date(cursorData.updatedAt),
+						_id: { $lte: new Types.ObjectId(cursorData._id) },
+					},
+				],
+			},
 		};
 	}
 

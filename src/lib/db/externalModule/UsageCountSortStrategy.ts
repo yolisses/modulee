@@ -9,7 +9,6 @@ export class UsageCountSortStrategy extends PaginationStrategy {
 	}
 
 	getFilterStage(cursorData: CursorData) {
-		if (!cursorData) return {};
 		return {
 			$or: [
 				{ usageCount: { $lt: cursorData.usageCount } },
