@@ -34,4 +34,6 @@ ExternalModuleSchema.virtual('user', {
 	localField: 'userId',
 });
 
+ExternalModuleSchema.index({ likeCount: -1 });
+ExternalModuleSchema.index({ usageCount: -1 });
 ExternalModuleSchema.index({ name: 'text', description: 'text' });
