@@ -1,6 +1,20 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+
+@utility disabled {
+	@apply opacity-50;
+}
+
+@utility hover-bg {
+	@apply hover:bg-white/10;
+}
+
+@utility button {
+	@apply flex flex-row items-center;
+}
+
+@utility overflow-and-ellipsis {
+	@apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
+}
 
 @layer base {
 	html {
@@ -13,6 +27,10 @@
 
 	button:disabled {
 		@apply disabled;
+	}
+
+	button:not(:disabled) {
+		@apply cursor-pointer;
 	}
 
 	button {
@@ -43,24 +61,6 @@
 
 	::-webkit-scrollbar-corner {
 		background: rgba(255, 255, 255, 0);
-	}
-}
-
-@layer utilities {
-	.disabled {
-		@apply opacity-50;
-	}
-
-	.hover-bg {
-		@apply hover:bg-white/10;
-	}
-
-	.button {
-		@apply flex flex-row items-center;
-	}
-
-	.overflow-and-ellipsis {
-		@apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
 	}
 }
 
