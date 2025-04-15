@@ -1,10 +1,10 @@
 import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeHexLowerCase } from '@oslojs/encoding';
-import { createClient } from 'redis';
 import type { Session } from './Session.js';
+import { getRedisClient } from './getRedisClient.js';
 
 export async function validateSessionToken(token: string): Promise<Session | null> {
-	const redis = await createClient().connect();
+	const redis = await getRedisClient();
 	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
 	const item = await redis.get(`session:${sessionId}`);
 	if (item === null) {

@@ -1,7 +1,7 @@
-import { createClient } from 'redis';
+import { getRedisClient } from './getRedisClient';
 
 export async function invalidateAllSessions(userId: number): Promise<void> {
-	const redis = await createClient().connect();
+	const redis = await getRedisClient();
 	const sessionIds: string[] = await redis.sMembers(`user_sessions:${userId}`);
 	if (sessionIds.length < 1) {
 		return;
