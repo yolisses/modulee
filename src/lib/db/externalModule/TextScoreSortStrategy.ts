@@ -1,6 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { Types } from 'mongoose';
-import type { HasId } from './HasId';
+import type { Has_Id } from './Has_Id';
 import type { HasScore } from './HasScore';
 import { PaginationStrategy } from './PaginationStrategy';
 
@@ -30,7 +30,7 @@ export class TextScoreSortStrategy extends PaginationStrategy {
 		};
 	}
 
-	getNextCursor(lastItem: ExternalModuleData & HasId & HasScore): CursorData {
+	getNextCursor(lastItem: ExternalModuleData & Has_Id & HasScore): CursorData {
 		return {
 			_id: lastItem._id.toString(),
 			score: lastItem.score,

@@ -1,5 +1,5 @@
 import type { Types } from 'mongoose';
 
-export interface HasId {
+export interface Has_Id {
 	_id: Types.ObjectId;
 }

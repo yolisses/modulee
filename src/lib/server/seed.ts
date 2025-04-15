@@ -1,8 +1,7 @@
 import { createId } from '$lib/data/createId';
 import type { ExternalModuleDocument } from '$lib/db/externalModule/ExternalModuleDocument';
 import { ExternalModuleModel } from '$lib/db/externalModule/ExternalModuleModel';
-import type { Seedable } from '$lib/db/externalModule/Seedable';
-import type { UserData } from '$lib/user/UserData';
+import type { UserDocument } from '$lib/user/UserDocument';
 import { UserModel } from '$lib/user/UserModel';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
@@ -24,7 +23,7 @@ async function getIsAvailable() {
 	return true;
 }
 
-type UserSeedData = Seedable<Partial<UserData> & { _id: Types.ObjectId }>;
+type UserSeedData = Partial<UserDocument>;
 const usersData: UserSeedData[] = [];
 for (let i = 0; i < userCount; i++) {
 	const name = faker.person.fullName();

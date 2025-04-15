@@ -1,6 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { Types } from 'mongoose';
-import type { HasId } from './HasId';
+import type { Has_Id } from './Has_Id';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string; updatedAt: string };
@@ -24,7 +24,7 @@ export class UpdatedAtSortStrategy extends PaginationStrategy {
 		};
 	}
 
-	getNextCursor(lastItem: ExternalModuleData & HasId): CursorData {
+	getNextCursor(lastItem: ExternalModuleData & Has_Id): CursorData {
 		return {
 			_id: lastItem._id.toString(),
 			updatedAt: lastItem.updatedAt,

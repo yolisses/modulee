@@ -1,8 +1,7 @@
-import type { Seedable } from '$lib/db/externalModule/Seedable';
 import { Schema } from 'mongoose';
-import type { UserData } from './UserData';
+import type { UserDocument } from './UserDocument';
 
-export const UserSchema = new Schema<Seedable<UserData>>(
+export const UserSchema = new Schema<UserDocument>(
 	{
 		isSeeded: { type: Boolean, required: false },
 		name: { type: String, required: true, maxlength: 70 },
