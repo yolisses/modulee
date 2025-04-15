@@ -1,5 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { Types } from 'mongoose';
+import type { HasId } from './HasId';
 import { PaginationStrategy } from './PaginationStrategy';
 
 type CursorData = { _id: string; likeCount: number };
@@ -20,9 +21,9 @@ export class LikeCountSortStrategy extends PaginationStrategy {
 		};
 	}
 
-	getNextCursor(lastItem: ExternalModuleData): CursorData {
+	getNextCursor(lastItem: HasId & ExternalModuleData): CursorData {
 		return {
-			_id: lastItem._id,
+			_id: lastItem._id.toString(),
 			likeCount: lastItem.likeCount,
 		};
 	}
