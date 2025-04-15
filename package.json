@@ -1,19 +1,20 @@
 {
-	"name": "modulee",
-	"private": true,
-	"version": "0.0.1",
-	"type": "module",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright test"
+	"dependencies": {
+		"@floating-ui/dom": "^1.6.13",
+		"@fortawesome/free-solid-svg-icons": "^6.7.2",
+		"@oslojs/crypto": "^1.0.1",
+		"@oslojs/encoding": "^1.1.0",
+		"google-auth-library": "^9.15.1",
+		"idb": "^8.0.1",
+		"mongoose": "^8.13.0",
+		"nanoid": "^5.0.9",
+		"nodes-editor": "^0.0.16",
+		"redis": "^4.7.0",
+		"svelte-fa": "^4.0.3",
+		"svelte-portal": "^2.2.1",
+		"vite-plugin-top-level-await": "^1.4.4",
+		"vite-plugin-wasm": "^3.4.1",
+		"webmidi": "^3.1.12"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
@@ -42,21 +43,22 @@
 		"vite": "^5.4.11",
 		"vitest": "^2.1.8"
 	},
-	"dependencies": {
-		"@floating-ui/dom": "^1.6.13",
-		"@fortawesome/free-solid-svg-icons": "^6.7.2",
-		"@oslojs/crypto": "^1.0.1",
-		"@oslojs/encoding": "^1.1.0",
-		"google-auth-library": "^9.15.1",
-		"idb": "^8.0.1",
-		"mongoose": "^8.13.0",
-		"nanoid": "^5.0.9",
-		"nodes-editor": "^0.0.16",
-		"redis": "^4.7.0",
-		"svelte-fa": "^4.0.3",
-		"svelte-portal": "^2.2.1",
-		"vite-plugin-top-level-await": "^1.4.4",
-		"vite-plugin-wasm": "^3.4.1",
-		"webmidi": "^3.1.12"
-	}
+	"name": "modulee",
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"preview": "vite preview",
+		"seed": "vite-node src/lib/server/seed.ts",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright test",
+		"test:unit": "vitest",
+		"unseed": "vite-node src/lib/server/unseed.ts"
+	},
+	"type": "module",
+	"version": "0.0.1"
 }

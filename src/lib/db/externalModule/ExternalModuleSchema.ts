@@ -1,10 +1,9 @@
-import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { Schema } from 'mongoose';
 import { GraphSchema } from '../graph/GraphSchema';
-import type { Seedable } from './Seedable';
+import type { ExternalModuleDocument } from './ExternalModuleDocument';
 import { VersionSchema } from './VersionSchema';
 
-export const ExternalModuleSchema = new Schema<Seedable<ExternalModuleData>>(
+export const ExternalModuleSchema = new Schema<ExternalModuleDocument>(
 	{
 		version: VersionSchema,
 		projectId: { type: String, required: true },

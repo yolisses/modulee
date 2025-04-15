@@ -1,7 +1,7 @@
 import { createId } from '$lib/data/createId';
+import type { ExternalModuleDocument } from '$lib/db/externalModule/ExternalModuleDocument';
 import { ExternalModuleModel } from '$lib/db/externalModule/ExternalModuleModel';
 import type { Seedable } from '$lib/db/externalModule/Seedable';
-import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import type { UserData } from '$lib/user/UserData';
 import { UserModel } from '$lib/user/UserModel';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
@@ -39,7 +39,7 @@ for (let i = 0; i < userCount; i++) {
 	usersData.push(userData);
 }
 
-type ExternalModuleSeedData = Seedable<Partial<ExternalModuleData>>;
+type ExternalModuleSeedData = Partial<ExternalModuleDocument>;
 const externalModulesData: ExternalModuleSeedData[] = [];
 
 for (let i = 0; i < externalModuleCount; i++) {
@@ -47,12 +47,12 @@ for (let i = 0; i < externalModuleCount; i++) {
 	const externalModuleData: ExternalModuleSeedData = {
 		id: createId(),
 		isSeeded: true,
+		userId: userData._id,
 		projectId: createId(),
 		graph: fakeGraphData(),
 		name: faker.commerce.productName(),
 		likeCount: faker.number.int(100000),
 		usageCount: faker.number.int(100000),
-		userId: userData._id as unknown as string,
 		updatedAt: faker.date.past().toISOString(),
 		description: range(10)
 			.map(() => {
