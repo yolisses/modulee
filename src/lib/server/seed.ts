@@ -72,7 +72,7 @@ declare const process: {
 	env: Record<string, string>;
 };
 
-await connect(process.env.MONGO_DB_URL);
+await connect(process.env.MONGODB_URI);
 await unseed();
 await UserModel.insertMany(usersData);
 await ExternalModuleModel.insertMany(externalModulesData);
