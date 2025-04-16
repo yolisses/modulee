@@ -1,6 +1,13 @@
 import { REDISDB_URI } from '$env/static/private';
 import { createClient } from 'redis';
 
+let redisClient: ReturnType<typeof createClient> | null = null;
+
 export async function getRedisClient() {
-	return await createClient({ url: REDISDB_URI }).connect();
+	if (!redisClient) {
+		redisClient = createClient({ url: REDISDB_URI });
+		await redisClient.connect();
+	}
+
+	return redisClient;
 }
