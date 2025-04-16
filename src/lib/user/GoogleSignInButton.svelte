@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { getUserDataContext } from './userDataContext';
 
@@ -36,7 +37,7 @@
 
 <div
 	id="g_id_onload"
-	data-client_id="725523345294-l7ljv04v2maac7k6ugu6ifmuut88gbjk.apps.googleusercontent.com"
+	data-client_id={PUBLIC_AUTH_GOOGLE_ID}
 	data-context="signin"
 	data-ux_mode="popup"
 	data-callback="onGoogleSignIn"
