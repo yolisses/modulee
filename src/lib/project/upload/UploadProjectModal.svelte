@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createId } from '$lib/data/createId';
+	import type { ModuleeResource } from '$lib/types/ModuleeResource';
 	import Modal from '$lib/ui/Modal.svelte';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import { getProjectsRepository } from '../getProjectsRepository';
@@ -14,7 +15,17 @@
 
 	function getProjectData(content: string) {
 		try {
-			const projectData: ProjectData = JSON.parse(content);
+			const resourceData: ModuleeResource<ProjectData, 'project'> = JSON.parse(content);
+
+			if (!resourceData.isModuleeResource) {
+				throw new Error('The file is not a Modulee resource');
+			}
+
+			if (resourceData.type !== 'project') {
+				throw new Error('The resource type is not project');
+			}
+
+			const projectData = resourceData.data;
 			projectData.id = createId();
 			return projectData;
 		} catch (error) {
@@ -50,7 +61,7 @@
 <Modal {closeModal}>
 	<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 		<p>Upload project</p>
-		<input type="file" class="common-input" onchange={handleChange} accept=".modulee" />
+		<input type="file" class="common-input" onchange={handleChange} accept=".modulee.json" />
 		<div class="text-red-500">{errorText}</div>
 	</div>
 </Modal>
