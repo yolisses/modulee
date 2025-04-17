@@ -48,7 +48,7 @@
 					type="radio"
 					name="moduleType"
 					id="effect"
-					value={projectData.moduleType === 'effect'}
+					checked={projectData.moduleType === 'effect'}
 				/>
 				Effect
 			</label>
@@ -57,7 +57,7 @@
 					type="radio"
 					name="moduleType"
 					id="instrument"
-					value={projectData.moduleType === 'instrument'}
+					checked={projectData.moduleType === 'instrument'}
 				/>
 				Instrument
 			</label>
@@ -66,7 +66,7 @@
 					type="radio"
 					name="moduleType"
 					id="utility"
-					value={projectData.moduleType === 'utility'}
+					checked={projectData.moduleType === 'utility'}
 				/>
 				Utility
 			</label>
