@@ -42,6 +42,26 @@
 			></textarea>
 		</label>
 		<div class="flex flex-col">
+			Type
+			<label>
+				<input type="radio" name="moduleType" id="effect" value={projectData.name === 'effect'} />
+				Effect
+			</label>
+			<label>
+				<input
+					type="radio"
+					name="moduleType"
+					id="instrument"
+					value={projectData.name === 'instrument'}
+				/>
+				Instrument
+			</label>
+			<label>
+				<input type="radio" name="moduleType" id="utility" value={projectData.name === 'utility'} />
+				Utility
+			</label>
+		</div>
+		<div class="flex flex-col">
 			<DownloadProjectButton {projectData} />
 			<CreateExternalModuleButton {projectData} />
 		</div>
