@@ -22,6 +22,7 @@
 		const projectData: ProjectData = {
 			name,
 			id: createId(),
+			moduleType: 'utility',
 			graph: {
 				nodes: [],
 				connections: [],
