@@ -33,7 +33,6 @@
 		}
 
 		const data = await res.json();
-		console.log(data);
 		cursor = data.nextCursor;
 
 		if (cursor === null) {
