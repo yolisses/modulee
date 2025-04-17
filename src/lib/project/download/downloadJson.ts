@@ -1,6 +1,11 @@
+import sortJson from 'sort-json';
+
 export function downloadJson(data: unknown, fileName: string) {
+	// Sort JSON to make people who use Git happy
+	const sortedData = sortJson(data);
+
 	// Convert the JSON object to a string
-	const jsonString = JSON.stringify(data, undefined, 2);
+	const jsonString = JSON.stringify(sortedData, undefined, 2);
 
 	// Create a Blob with the JSON data
 	const blob = new Blob([jsonString], { type: 'application/json' });
