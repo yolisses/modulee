@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
-	<a class="common-button" href="/" aria-label="Home">
+	<a class="common-button rounded-none" href="/" aria-label="Home">
 		<img
 			height="16"
 			class="my-1"
