@@ -44,7 +44,12 @@
 		<div class="flex flex-col">
 			Type
 			<label>
-				<input type="radio" name="moduleType" id="effect" value={projectData.name === 'effect'} />
+				<input
+					type="radio"
+					name="moduleType"
+					id="effect"
+					value={projectData.moduleType === 'effect'}
+				/>
 				Effect
 			</label>
 			<label>
@@ -52,12 +57,17 @@
 					type="radio"
 					name="moduleType"
 					id="instrument"
-					value={projectData.name === 'instrument'}
+					value={projectData.moduleType === 'instrument'}
 				/>
 				Instrument
 			</label>
 			<label>
-				<input type="radio" name="moduleType" id="utility" value={projectData.name === 'utility'} />
+				<input
+					type="radio"
+					name="moduleType"
+					id="utility"
+					value={projectData.moduleType === 'utility'}
+				/>
 				Utility
 			</label>
 		</div>
