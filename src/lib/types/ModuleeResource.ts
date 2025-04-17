@@ -1,6 +1,6 @@
-export type ModuleeResource<T> = {
+export type ModuleeResource<T, S> = {
 	data: T;
-	type: 'project';
+	type: S;
 	createdAt: string;
 	updatedAt: string;
 	isModuleeResource: true;

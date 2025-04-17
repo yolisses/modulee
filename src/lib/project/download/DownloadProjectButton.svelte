@@ -13,7 +13,7 @@
 
 	function handleClick() {
 		const fileName = projectData.name + '.modulee.json';
-		const resourceWithMetadata: ModuleeResource<ProjectData> = {
+		const resourceWithMetadata: ModuleeResource<ProjectData, 'project'> = {
 			type: 'project',
 			data: projectData,
 			isModuleeResource: true,

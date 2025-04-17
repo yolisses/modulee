@@ -23,6 +23,8 @@
 			name,
 			id: createId(),
 			moduleType: 'utility',
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString(),
 			graph: {
 				nodes: [],
 				connections: [],
