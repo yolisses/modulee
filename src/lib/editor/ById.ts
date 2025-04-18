@@ -56,6 +56,12 @@ export class ById<T extends HasId> {
 		this.set(item);
 	}
 
+	addMany(items: T[]) {
+		items.forEach((item) => {
+			this.add(item);
+		});
+	}
+
 	removeById(id: string) {
 		const value = this.content[id];
 		delete this.content[id];
@@ -64,6 +70,12 @@ export class ById<T extends HasId> {
 
 	remove(item: T) {
 		return this.removeById(item.id);
+	}
+
+	removeMany(items: T[]) {
+		items.forEach((item) => {
+			this.remove(item);
+		});
 	}
 
 	removeByCondition(condition: (item: T) => boolean) {
