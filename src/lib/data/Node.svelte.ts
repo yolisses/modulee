@@ -7,6 +7,7 @@ import { Output } from './Output.svelte';
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
 	inputs: Input[];
+	// TODO check if it makes sense to use state for position
 	position: Vector = $state()!;
 	protected nodeData: T;
 
