@@ -6,6 +6,10 @@ export class CopyNodesActionCommand extends ActionCommand {
 		const { projectData } = contexts.projectDataContext;
 		const { selectedNodeIds } = contexts.selectedNodeIdsContext;
 
+		if (selectedNodeIds.size === 0) {
+			return;
+		}
+
 		const selectedNodesData = structuredClone(
 			projectData.graph.nodes.filter((nodeData) => {
 				return selectedNodeIds.has(nodeData.id);
@@ -22,9 +26,11 @@ export class CopyNodesActionCommand extends ActionCommand {
 			}),
 		);
 
-		contexts.copyDataContext.copyData = {
+		const { copyDataContext } = contexts;
+		copyDataContext.copyData = {
 			nodes: selectedNodesData,
 			connections: selectedConnectionsData,
 		};
+		copyDataContext.offset = 0;
 	}
 }

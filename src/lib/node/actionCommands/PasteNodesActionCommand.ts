@@ -3,26 +3,32 @@ import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
+import { Vector } from 'nodes-editor';
+import { SvelteSet } from 'svelte/reactivity';
 
 export class PasteNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {
+		const { copyDataContext } = contexts;
 		const { editor } = contexts.editorContext;
-		const { copyData: originalCopyData } = contexts.copyDataContext;
 		const { projectData } = contexts.projectDataContext;
 
-		if (!originalCopyData) return;
+		if (!copyDataContext.copyData) return;
+
+		const copyData = structuredClone(copyDataContext.copyData);
+		const { nodes, connections } = copyData;
 
 		const idMap = new Map<string, string>();
-		console.log(originalCopyData);
-		const copyData = structuredClone(originalCopyData);
-		const { nodes, connections } = copyData;
+
+		copyDataContext.offset += 4;
 
 		nodes.forEach((node) => {
 			const newId = createId();
 			idMap.set(node.id, newId);
 			node.id = newId;
+
+			node.position = Vector.fromData(node.position).addByNumber(copyDataContext.offset).getData();
 		});
 
 		connections.forEach((connection) => {
@@ -47,5 +53,11 @@ export class PasteNodesActionCommand extends ActionCommand {
 		});
 
 		editor.execute(undoCommand);
+
+		contexts.selectedNodeIdsContext.selectedNodeIds = new SvelteSet(
+			nodes.map((nodeData) => {
+				return nodeData.id;
+			}),
+		);
 	}
 }

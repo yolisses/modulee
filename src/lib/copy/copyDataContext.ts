@@ -3,6 +3,7 @@ import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type CopyDataContext = {
+	offset: number;
 	copyData?: CopyData;
 };
 

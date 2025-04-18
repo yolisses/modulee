@@ -16,7 +16,7 @@
 	});
 
 	// TODO check if it makes sense to not have a state here
-	setCopyDataContext({});
+	setCopyDataContext({ offset: 0 });
 </script>
 
 {@render children()}
