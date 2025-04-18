@@ -134,12 +134,12 @@
 		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 	>
-		{#each nodes as node (node.id)}
-			<NodeItem {node} />
-		{/each}
-
 		{#each connections as connection (connection.id)}
 			<ConnectionItem {connection} />
+		{/each}
+
+		{#each nodes as node (node.id)}
+			<NodeItem {node} />
 		{/each}
 
 		<PreviewConnectionWire />

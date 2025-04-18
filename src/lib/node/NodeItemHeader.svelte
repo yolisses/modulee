@@ -104,7 +104,7 @@
 	});
 </script>
 
-<div class="hover-bg flex w-full flex-row items-center">
+<div class="hover-bg relative flex w-full flex-row items-center">
 	<PointerEventDispatcher
 		class="flex flex-row items-center"
 		{pointerStrategy}
@@ -124,5 +124,7 @@
 		</div>
 	</PointerEventDispatcher>
 	{@render children?.()}
-	<ConnectorJoint connector={node.output} />
+	<div class="absolute" style:right="-0.2lh">
+		<ConnectorJoint connector={node.output} />
+	</div>
 </div>
