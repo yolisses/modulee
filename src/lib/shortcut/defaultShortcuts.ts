@@ -11,6 +11,7 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'Z'], commandType: 'UndoActionCommand' },
 	{ keys: ['Ctrl', 'Y'], commandType: 'RedoActionCommand' },
 	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
+	{ keys: ['Ctrl', 'C'], commandType: 'CopyNodesActionCommand' },
 	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
 	{ keys: ['Ctrl', 'M'], commandType: 'ToggleIsMuteActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
