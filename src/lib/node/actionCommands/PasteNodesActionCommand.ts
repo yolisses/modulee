@@ -13,6 +13,7 @@ export class PasteNodesActionCommand extends ActionCommand {
 		const { copyDataContext } = contexts;
 		const { editor } = contexts.editorContext;
 		const { projectData } = contexts.projectDataContext;
+		const { internalModuleId } = contexts.internalModuleIdContext;
 
 		if (!copyDataContext.copyData) return;
 
@@ -27,6 +28,8 @@ export class PasteNodesActionCommand extends ActionCommand {
 			const newId = createId();
 			idMap.set(node.id, newId);
 			node.id = newId;
+
+			node.internalModuleId = internalModuleId;
 
 			node.position = Vector.fromData(node.position).addByNumber(copyDataContext.offset).getData();
 		});
