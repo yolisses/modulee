@@ -1,7 +1,8 @@
 import type { Shortcut } from './Shortcut';
 
 // TODO consider creating a KeySomething type to replace keys, using control,
-// shift and alt attributes instead of play strings.
+// shift and alt attributes instead of plain strings. E.g: {key: 'A', control:
+// true, shift:false}
 export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', '+'], commandType: 'ZoomInCommand' },
 	{ keys: ['Ctrl', '='], commandType: 'ZoomInCommand' },
@@ -12,6 +13,7 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'Y'], commandType: 'RedoActionCommand' },
 	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
 	{ keys: ['Ctrl', 'C'], commandType: 'CopyNodesActionCommand' },
+	{ keys: ['Ctrl', 'V'], commandType: 'PasteNodesActionCommand' },
 	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
 	{ keys: ['Ctrl', 'M'], commandType: 'ToggleIsMuteActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },

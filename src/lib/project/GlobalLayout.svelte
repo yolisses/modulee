@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { setCopyDataContext, type CopyDataContext } from '$lib/copy/copyDataContext';
+	import { setCopyDataContext } from '$lib/copy/copyDataContext';
 	import { type Snippet } from 'svelte';
 
 	interface Props {
@@ -15,8 +15,8 @@
 		window.__JUCE__?.backend.emitEvent('setPath', { path });
 	});
 
-	const copyDataContext = $state<CopyDataContext>({});
-	setCopyDataContext(copyDataContext);
+	// TODO check if it makes sense to not have a state here
+	setCopyDataContext({});
 </script>
 
 {@render children()}

@@ -1,5 +1,6 @@
 import { CopyNodesActionCommand } from '$lib/node/actionCommands/CopyNodesActionCommand';
 import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
+import { PasteNodesActionCommand } from '$lib/node/actionCommands/PasteNodesActionCommand';
 import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
 import { SelectedAllNodesActionCommand } from '$lib/node/actionCommands/SelectedAllNodesActionCommand';
@@ -20,6 +21,7 @@ export const actionCommandClasses: ActionCommandClass[] = [
 	RedoActionCommand,
 	CopyNodesActionCommand,
 	GroupNodesActionCommand,
+	PasteNodesActionCommand,
 	RemoveNodesActionCommand,
 	ToggleIsMuteActionCommand,
 	SelectedAllNodesActionCommand,
