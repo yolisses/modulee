@@ -6,10 +6,13 @@ import type { EditorData } from './EditorData';
 // TODO find a better name
 export abstract class EditorCommand<T = unknown> {
 	id: string;
+	commandData: EditorCommandData<T>;
 	createCommandCallback!: CreateEditorCommandCallback;
 
-	constructor(public commandData: EditorCommandData<T>) {
+	constructor(commandData: EditorCommandData<T>) {
 		this.id = commandData.id;
+		// Uses a clone to prevent hard to find errors
+		this.commandData = structuredClone(commandData);
 	}
 
 	abstract execute(graphRegistry: GraphRegistry, editorData: EditorData): void;

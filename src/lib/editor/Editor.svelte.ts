@@ -33,7 +33,7 @@ export class Editor {
 			this.undoneHistory = [];
 		}
 
-		// Uses a clone to prevent hard to debug errors
+		// Uses a clone to prevent hard to find errors
 		const graphRegistry = cloneGraphRegistry(this.graphRegistry);
 		this.onExecute?.(command, graphRegistry);
 	}
