@@ -61,7 +61,7 @@
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
 			style:width="5lh"
-			style:outline-width="0.075lh"
+			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-800={!isSelected}
