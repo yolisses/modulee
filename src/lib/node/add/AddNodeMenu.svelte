@@ -66,7 +66,7 @@
 
 <!-- TODO consider adding a descriptive text like "Add node" -->
 <div
-	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline outline-1 outline-zinc-800"
+	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800"
 >
 	<!-- svelte-ignore a11y_autofocus -->
 	<input
@@ -77,7 +77,7 @@
 		bind:value={searchText}
 		onkeydown={handleKeyDown}
 	/>
-	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
+	<div class="scroll-small flex flex-col overflow-auto overscroll-contain whitespace-nowrap">
 		<BasicList
 			getId={getName}
 			values={options}
