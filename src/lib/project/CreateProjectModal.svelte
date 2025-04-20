@@ -34,7 +34,13 @@
 			},
 		};
 		await projectsRepository.createProject(projectData);
-		goto('/projects/' + projectData.id);
+		goto(
+			'/projects/' +
+				projectData.id +
+				'/internalModules/' +
+				projectData.graph.mainInternalModuleId +
+				'/nodes',
+		);
 	}
 
 	onMount(() => {
