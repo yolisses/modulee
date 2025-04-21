@@ -12,8 +12,8 @@
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { Vector } from 'nodes-editor';
 	import { onMount } from 'svelte';
+	import GraphToolbar from './GraphToolbar.svelte';
 	import NodeList from './NodeList.svelte';
-	import NodesToolbar from './NodesToolbar.svelte';
 
 	const graphContext = getGraphContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
@@ -66,7 +66,7 @@
 <!-- TODO replace "Nodes" by "Graph" in this page and its components since it
 sounds better on singular and contains things like connections too. -->
 <div class="flex flex-1 flex-col overflow-hidden">
-	<NodesToolbar />
+	<GraphToolbar />
 	<div class="flex-1 overflow-scroll" bind:this={container}>
 		<NodeList
 			{containerSize}

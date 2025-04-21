@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NodesPage from '$lib/node/NodesPage.svelte';
+	import GraphPage from '$lib/node/GraphPage.svelte';
 </script>
 
-<NodesPage />
+<GraphPage />
