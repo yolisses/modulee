@@ -15,7 +15,9 @@
 	<a
 		class="common-button rounded-none border-white/25"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		class:border-l-4={route.startsWith('/projects/[projectId]/internalModules/[internalModuleId]')}
+		class:border-l-4={route.startsWith(
+			'/projects/[projectId]/internalModules/[internalModuleId]/graph',
+		)}
 	>
 		<Fa icon={faProjectDiagram} flip="horizontal" />
 		Graph
