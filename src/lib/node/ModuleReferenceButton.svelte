@@ -1,17 +1,15 @@
 <script lang="ts">
 	import type { Module } from '$lib/data/Module';
-	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 
 	interface Props {
 		module: Module;
-		moduleNode: ModuleNode;
 	}
 
-	const { moduleNode, module }: Props = $props();
+	const { module }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	const href = $derived(
-		`/projects/${projectDataContext.projectData.id}/internalModules/${module.id}`,
+		`/projects/${projectDataContext.projectData.id}/internalModules/${module.id}/graph`,
 	);
 
 	function handlePointerDown(e: PointerEvent) {
