@@ -78,12 +78,16 @@
 		onkeydown={handleKeyDown}
 	/>
 	<div class="scroll-small flex flex-col overflow-auto overscroll-contain whitespace-nowrap">
-		<BasicList
-			getId={getName}
-			values={options}
-			getName={getNodeTypeName}
-			onClick={handleTypeSelect}
-		/>
+		{#if options.length === 0}
+			<div class="p-2 text-white/50">No options found for the search text</div>
+		{:else}
+			<BasicList
+				getId={getName}
+				values={options}
+				getName={getNodeTypeName}
+				onClick={handleTypeSelect}
+			/>
+		{/if}
 	</div>
 </div>
 
