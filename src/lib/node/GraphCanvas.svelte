@@ -31,11 +31,10 @@
 
 	interface Props {
 		nodes: Node[];
-		containerSize: Vector;
 		connections: Connection[];
 	}
 
-	const { nodes, containerSize, connections }: Props = $props();
+	const { nodes, connections }: Props = $props();
 	let mouseEvent = $state<MouseEvent>();
 
 	const graphContext = getGraphContext();
@@ -123,30 +122,51 @@
 			minSize = minSize.max(currentMinSize);
 		}
 	});
+
+	let container: HTMLElement;
+	let containerSize = $state(Vector.zero());
+	$effect(() => {
+		const resizeObserver = new ResizeObserver((entries) => {
+			const entry = entries[0];
+			containerSize = new Vector(entry.contentRect.width, entry.contentRect.height);
+		});
+		resizeObserver.observe(container);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	});
 </script>
 
-<PointerEventDispatcher {pointerStrategy} oncontextmenu={handleContextMenu}>
-	<div
-		style:width={minSize.x + 'px'}
-		style:height={minSize.y + 'px'}
-		class="bg-dots relative select-none"
-		bind:this={rootElementContext.rootElement}
-		style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
-		style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
-	>
-		{#each connections as connection (connection.id)}
-			<ConnectionItem {connection} />
-		{/each}
-
-		{#each nodes as node (node.id)}
-			<NodeItem {node} />
-		{/each}
-
-		<PreviewConnectionWire />
-		<AddNodeMenuWrapper {mouseEvent} />
-		<SelectionBox />
+{#if nodes.length === 0}
+	<div class="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
+		<div class="rounde text-white/50">Use right click to create nodes</div>
 	</div>
-</PointerEventDispatcher>
+{/if}
+<div class="flex-1 overflow-scroll" bind:this={container}>
+	<PointerEventDispatcher {pointerStrategy} oncontextmenu={handleContextMenu}>
+		<div
+			style:width={minSize.x + 'px'}
+			style:height={minSize.y + 'px'}
+			class="bg-dots relative select-none"
+			bind:this={rootElementContext.rootElement}
+			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
+			style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
+		>
+			{#each connections as connection (connection.id)}
+				<ConnectionItem {connection} />
+			{/each}
+
+			{#each nodes as node (node.id)}
+				<NodeItem {node} />
+			{/each}
+
+			<PreviewConnectionWire />
+			<AddNodeMenuWrapper {mouseEvent} />
+			<SelectionBox />
+		</div>
+	</PointerEventDispatcher>
+</div>
 
 <style lang="postcss">
 	.bg-dots {

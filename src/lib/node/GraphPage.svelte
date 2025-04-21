@@ -47,31 +47,11 @@
 		shortcutHandler.initialize();
 		return () => shortcutHandler.destroy();
 	});
-
-	let container: HTMLElement;
-	let containerSize = $state(Vector.zero());
-	$effect(() => {
-		const resizeObserver = new ResizeObserver((entries) => {
-			const entry = entries[0];
-			containerSize = new Vector(entry.contentRect.width, entry.contentRect.height);
-		});
-		resizeObserver.observe(container);
-
-		return () => {
-			resizeObserver.disconnect();
-		};
-	});
 </script>
 
 <!-- TODO replace "Nodes" by "Graph" in this page and its components since it
 sounds better on singular and contains things like connections too. -->
-<div class="flex flex-1 flex-col overflow-hidden">
+<div class="relative flex flex-1 flex-col overflow-hidden">
 	<GraphToolbar />
-	<div class="flex-1 overflow-scroll" bind:this={container}>
-		<GraphCanvas
-			{containerSize}
-			nodes={visibleNodes}
-			connections={graphContext.graph.connections.values()}
-		/>
-	</div>
+	<GraphCanvas nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 </div>
