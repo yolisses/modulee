@@ -26,7 +26,7 @@
 </script>
 
 {#if projectsData.length === 0}
-	<div class="opacity-50">Use the create project button to start something amazing</div>
+	<div class="opacity-50">Use the create project button to make something</div>
 {:else}
 	<BasicList values={projectsData} {getId} {getName} {getHref}>
 		{#snippet buttons(value)}
