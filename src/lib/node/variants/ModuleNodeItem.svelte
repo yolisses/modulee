@@ -1,6 +1,11 @@
 <script lang="ts">
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte.js';
-	import SetModuleReferenceButton from '$lib/module/internalModule/SetModuleReferenceButton.svelte';
+	import {
+		default as SetModuleReferenceButton,
+		default as SetTargetInternalModuleButton,
+	} from '$lib/module/internalModule/SetModuleReferenceButton.svelte';
+	import { faEdit } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import BaseNodeItem from '../BaseNodeItem.svelte';
 	import ModuleReferenceButton from '../ModuleReferenceButton.svelte';
 
@@ -14,7 +19,12 @@
 <BaseNodeItem node={moduleNode}>
 	{#snippet preInputsChildren()}
 		{#if moduleNode.module}
-			<ModuleReferenceButton {moduleNode} module={moduleNode.module} />
+			<div class="hover-bg flex w-full flex-row">
+				<ModuleReferenceButton {moduleNode} module={moduleNode.module} />
+				<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
+					<Fa icon={faEdit} title="Replace module" style="padding-inline: 0.25lh;" />
+				</SetTargetInternalModuleButton>
+			</div>
 		{:else}
 			<SetModuleReferenceButton moduleNodeId={moduleNode.id}>
 				<div class="opacity-50" style:padding-inline="0.25lh">Set module</div>
