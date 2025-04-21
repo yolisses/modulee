@@ -37,7 +37,7 @@
 				middleware: [flip(), shift()],
 			}).then(({ x, y }) => {
 				if (!menu) return;
-				Object.assign(menu!.style, { top: `${y}px`, left: `${x}px` });
+				Object.assign(menu.style, { top: `${y}px`, left: `${x}px` });
 			});
 		}
 
