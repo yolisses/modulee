@@ -20,7 +20,7 @@
 			projectData.id +
 			'/internalModules/' +
 			projectData?.graph?.mainInternalModuleId +
-			'/nodes'
+			'/graph'
 		);
 	}
 </script>

@@ -33,7 +33,7 @@
 
 	function getHref(module: Module) {
 		const { projectData } = projectDataContext;
-		return `/projects/${projectData.id}/internalModules/${module.id}/nodes`;
+		return `/projects/${projectData.id}/internalModules/${module.id}/graph`;
 	}
 </script>
 
