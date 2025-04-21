@@ -12,8 +12,8 @@
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { Vector } from 'nodes-editor';
 	import { onMount } from 'svelte';
+	import GraphCanvas from './GraphCanvas.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
-	import NodeList from './NodeList.svelte';
 
 	const graphContext = getGraphContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
@@ -68,7 +68,7 @@ sounds better on singular and contains things like connections too. -->
 <div class="flex flex-1 flex-col overflow-hidden">
 	<GraphToolbar />
 	<div class="flex-1 overflow-scroll" bind:this={container}>
-		<NodeList
+		<GraphCanvas
 			{containerSize}
 			nodes={visibleNodes}
 			connections={graphContext.graph.connections.values()}
