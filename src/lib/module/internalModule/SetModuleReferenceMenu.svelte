@@ -8,6 +8,7 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
+	import SearchExternalModuleButton from './SearchExternalModuleButton.svelte';
 
 	interface Props {
 		moduleNodeId: string;
@@ -53,6 +54,7 @@
 			values={graphContext.graph.modules.values()}
 		/>
 		<CreateInternalModuleButton onInternalModuleCreated={handleInternalModuleCreated} />
+		<SearchExternalModuleButton />
 	</div>
 </div>
 
