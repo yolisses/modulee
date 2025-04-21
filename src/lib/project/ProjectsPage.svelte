@@ -25,9 +25,7 @@
 				<Spinner></Spinner>
 			</div>
 		{:then projectsData}
-			<div>
-				<ProjectList {projectsData} />
-			</div>
+			<ProjectList {projectsData} />
 		{:catch error}
 			<div class="text-red-500">
 				<div>It was not possible to load the projects</div>

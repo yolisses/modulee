@@ -19,6 +19,8 @@
 	);
 </script>
 
-{#each sortedValues as value (getId(value))}
-	<BasicItem {value} {onClick} text={getName(value)} {buttons} href={getHref?.(value)} />
-{/each}
+<div>
+	{#each sortedValues as value (getId(value))}
+		<BasicItem {value} {onClick} text={getName(value)} {buttons} href={getHref?.(value)} />
+	{/each}
+</div>
