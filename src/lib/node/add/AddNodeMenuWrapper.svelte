@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
-	import { computePosition, flip, shift } from '@floating-ui/dom';
+	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
 	import AddNodeMenu from './AddNodeMenu.svelte';
 
@@ -27,14 +27,21 @@
 	$effect(() => {
 		if (!menu) return;
 		if (!positioner) return;
-		menuPosition;
-		computePosition(positioner!, menu!, {
-			placement: 'right',
-			middleware: [flip(), shift()],
-		}).then(({ x, y }) => {
+		menuPosition; // Forces dependency
+
+		function updatePosition() {
 			if (!menu) return;
-			Object.assign(menu!.style, { top: `${y}px`, left: `${x}px` });
-		});
+			if (!positioner) return;
+			computePosition(positioner, menu, {
+				placement: 'right',
+				middleware: [flip(), shift()],
+			}).then(({ x, y }) => {
+				if (!menu) return;
+				Object.assign(menu!.style, { top: `${y}px`, left: `${x}px` });
+			});
+		}
+
+		return autoUpdate(positioner, menu, updatePosition);
 	});
 
 	function handleWindowClick(e: InputMouseEvent) {
