@@ -34,6 +34,7 @@
 	}
 
 	button:not(:disabled),
+	input[type='range']:not(:disabled),
 	select:not(:disabled) {
 		@apply cursor-pointer;
 	}
