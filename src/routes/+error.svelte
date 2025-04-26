@@ -5,12 +5,16 @@
 	let href = '/';
 
 	onMount(() => {
-		// Send the user to last page in the app or to home page.
-		const url = new URL(document.referrer);
-		if (url.origin === location.origin) {
-			href = document.referrer;
-		} else {
-			href = '/';
+		try {
+			// Send the user to last page in the app or to home page.
+			const url = new URL(document.referrer);
+			if (url.origin === location.origin) {
+				href = document.referrer;
+			} else {
+				href = '/';
+			}
+		} catch (e) {
+			console.error(e);
 		}
 	});
 </script>
