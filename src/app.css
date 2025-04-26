@@ -26,7 +26,7 @@
 	}
 
 	html {
-		@apply cursor-default bg-zinc-900 text-white;
+		@apply cursor-default bg-zinc-900 text-white accent-blue-500;
 	}
 
 	button:disabled {
