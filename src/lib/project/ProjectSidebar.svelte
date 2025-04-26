@@ -23,7 +23,7 @@
 		href="{baseUrl}/rack"
 		class:vertical-tab-selected={route === baseRoute + '/rack'}
 	>
-		<Fa icon={faSlidersH} />
+		<Fa fw icon={faSlidersH} />
 		Rack
 	</a>
 	<a
@@ -33,7 +33,7 @@
 			baseRoute + '/internalModules/[internalModuleId]/graph',
 		)}
 	>
-		<Fa icon={faProjectDiagram} flip="horizontal" />
+		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		Graph
 	</a>
 	<a
@@ -41,7 +41,7 @@
 		href="{baseUrl}/internalModules"
 		class:vertical-tab-selected={route === baseRoute + '/internalModules'}
 	>
-		<Fa icon={faPuzzlePiece} />
+		<Fa fw icon={faPuzzlePiece} />
 		Internal modules
 	</a>
 	<a
@@ -49,11 +49,11 @@
 		href="{baseUrl}/externalModules"
 		class:vertical-tab-selected={route === baseRoute + '/externalModules'}
 	>
-		<Fa icon={faPuzzlePiece} />
+		<Fa fw icon={faPuzzlePiece} />
 		External modules
 	</a>
 	<a href={baseUrl} class="vertical-tab" class:vertical-tab-selected={route === baseRoute}>
-		<Fa icon={faFileAlt} />
+		<Fa fw icon={faFileAlt} />
 		Project
 	</a>
 	<div class="flex-1"></div>
