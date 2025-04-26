@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
-	<a class="common-button rounded-none" href="/" aria-label="Home">
+	<a class="vertical-tab" href="/" aria-label="Home">
 		<img
 			height="16"
 			class="my-1"
@@ -19,8 +19,8 @@
 	</a>
 	<a
 		href="/projects"
-		class="common-button rounded-none border-white/25"
-		class:border-l-4={route.startsWith('/(home)/projects')}
+		class="vertical-tab"
+		class:vertical-tab-selected={route.startsWith('/(home)/projects')}
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" /> Projects
 	</a>

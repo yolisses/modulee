@@ -9,12 +9,15 @@
 
 	const { route }: Props = $props();
 	const userDataContext = getUserDataContext();
+	const isSelected = $derived(
+		route.startsWith('/(home)/account') || route.startsWith('/(home)/users'),
+	);
 </script>
 
 <a
-	class="common-button rounded-none border-white/25"
+	class="vertical-tab"
+	class:vertical-tab-selected={isSelected}
 	href={userDataContext.userData ? '/users/' + userDataContext.userData.id : '/signIn'}
-	class:border-l-4={route.startsWith('/(home)/account') || route.startsWith('/(home)/users')}
 >
 	<Fa fw icon={faUser} />
 	{userDataContext.userData ? userDataContext.userData.name : 'Account'}

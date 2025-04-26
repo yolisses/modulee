@@ -13,9 +13,9 @@
 
 <div class="flex flex-col border-r-2 border-black/50">
 	<a
-		class="common-button rounded-none border-white/25"
+		class="vertical-tab"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		class:border-l-4={route.startsWith(
+		class:vertical-tab-selected={route.startsWith(
 			'/projects/[projectId]/internalModules/[internalModuleId]/graph',
 		)}
 	>
@@ -23,31 +23,31 @@
 		Graph
 	</a>
 	<a
+		class="vertical-tab"
 		href="{baseUrl}/internalModules"
-		class="common-button rounded-none border-white/25"
-		class:border-l-4={route === '/projects/[projectId]/internalModules'}
+		class:vertical-tab-selected={route === '/projects/[projectId]/internalModules'}
 	>
 		<Fa icon={faPuzzlePiece} />
 		Internal modules
 	</a>
 	<a
+		class="vertical-tab"
 		href="{baseUrl}/externalModules"
-		class="common-button rounded-none border-white/25"
-		class:border-l-4={route === '/projects/[projectId]/externalModules'}
+		class:vertical-tab-selected={route === '/projects/[projectId]/externalModules'}
 	>
 		<Fa icon={faPuzzlePiece} />
 		External modules
 	</a>
 	<a
 		href={baseUrl}
-		class="common-button rounded-none border-white/25"
-		class:border-l-4={route === '/projects/[projectId]'}
+		class="vertical-tab"
+		class:vertical-tab-selected={route === '/projects/[projectId]'}
 	>
 		<Fa icon={faFileAlt} />
 		Project
 	</a>
 	<div class="flex-1"></div>
-	<a class="common-button rounded-none border-white/25" href="/" aria-label="Home">
+	<a class="vertical-tab" href="/" aria-label="Home">
 		<img
 			height="16"
 			class="my-1"
