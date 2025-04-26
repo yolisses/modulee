@@ -2,6 +2,7 @@
 	import { createId } from '$lib/data/createId';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import RackPanel from './RackPanel.svelte';
 
 	const debugModules = [
 		{ id: createId(), name: 'Module 1' },
@@ -25,25 +26,8 @@
 		</button>
 	</div>
 	<div class="flex flex-row flex-wrap justify-center gap-1">
-		{#each modules as module}
-			<div class="rounded border-1 border-white/10 p-2">
-				{module.name}
-				<div>
-					{#each inputs as input}
-						<label class="panel-grid grid gap-1">
-							<div>{input}</div>
-							<input type="range" />
-							<input type="text" value={0.2} class="text-center" />
-						</label>
-					{/each}
-				</div>
-			</div>
+		{#each modules as module (module.id)}
+			<RackPanel {module} />
 		{/each}
 	</div>
 </div>
-
-<style>
-	.panel-grid {
-		grid-template-columns: auto 8rem 2rem;
-	}
-</style>
