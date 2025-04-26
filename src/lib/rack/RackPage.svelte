@@ -24,9 +24,9 @@
 			Add effect
 		</button>
 	</div>
-	<div class="flex flex-row flex-wrap justify-center">
+	<div class="flex flex-row flex-wrap justify-center gap-1">
 		{#each modules as module}
-			<div class="border-1 border-white/10 p-2">
+			<div class="rounded border-1 border-white/10 p-2">
 				{module.name}
 				<div>
 					{#each inputs as input}
