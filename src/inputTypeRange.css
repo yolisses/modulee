@@ -1,0 +1,52 @@
+@reference 'tailwindcss';
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type='range'] {
+	-webkit-appearance: none;
+}
+
+/*Range Reset*/
+input[type='range'] {
+	@apply appearance-none bg-transparent active:cursor-grabbing;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type='range']::-webkit-slider-runnable-track {
+	@apply h-2 rounded-full bg-white/10;
+}
+
+/* slider thumb */
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+}
+
+/* slider thumb */
+input[type='range']::-webkit-slider-thumb {
+	@apply -mt-0.5 h-3 w-3 appearance-none rounded-full bg-blue-500;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type='range']::-moz-range-track {
+	@apply h-2 rounded-full bg-white/10;
+}
+
+input[type='range']::-moz-range-progress {
+	@apply h-2 rounded-full bg-blue-500;
+}
+
+input[type='range']::-webkit-slider-progress-track {
+	@apply h-2 rounded-full bg-blue-500;
+}
+
+/* slider thumb */
+input[type='range']::-moz-range-thumb {
+	border: none; /*Removes extra border that Firefox applies*/
+}
+
+/* slider thumb */
+input[type='range']::-moz-range-thumb {
+	@apply -mt-0.5 h-3 w-3 appearance-none rounded-full bg-blue-500;
+}

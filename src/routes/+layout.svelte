@@ -3,6 +3,7 @@
 	import { setUserDataContext } from '$lib/user/userDataContext';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
+	import '../inputTypeRange.css';
 	import type { LayoutServerData } from './$types';
 
 	interface Props {
