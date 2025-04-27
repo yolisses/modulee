@@ -7,6 +7,7 @@
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getNewItemName } from './getNewItemName';
 
 	interface Props {
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;
@@ -20,6 +21,10 @@
 
 	function handleCreateClick() {
 		const internalModuleId = createId();
+		const internalModuleName = getNewItemName(
+			graphContext.graph.internalModules.values(),
+			'Internal module',
+		);
 		const command = new AddInternalModuleCommand({
 			id: createId(),
 			type: 'AddInternalModuleCommand',
@@ -28,7 +33,7 @@
 			details: {
 				internalModule: {
 					id: internalModuleId,
-					name: 'New internal module',
+					name: internalModuleName,
 				},
 			},
 		});
