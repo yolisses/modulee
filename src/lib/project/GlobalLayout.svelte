@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { setCopyDataContext } from '$lib/copy/copyDataContext';
+	import { setModalRootContext, type ModalRootContext } from '$lib/ui/modalRootContext';
 	import { type Snippet } from 'svelte';
 
 	interface Props {
@@ -17,6 +18,11 @@
 
 	// TODO check if it makes sense to not have a state here
 	setCopyDataContext({ offset: 0 });
+
+	const modalRootContext = $state({} as ModalRootContext);
+	setModalRootContext(modalRootContext);
 </script>
 
-{@render children()}
+<div class="contents" bind:this={modalRootContext.modalRoot}>
+	{@render children()}
+</div>
