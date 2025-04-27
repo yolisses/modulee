@@ -16,5 +16,5 @@
 </script>
 
 <button class="common-button" onclick={handleClick} title="Zoom in {shortcutString}">
-	<Fa icon={faMagnifyingGlassPlus} />
+	<Fa fw icon={faMagnifyingGlassPlus} />
 </button>

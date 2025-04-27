@@ -15,7 +15,7 @@
 </script>
 
 <button onclick={handleClick} class="primary-button">
-	<Fa icon={faPlus} />
+	<Fa fw icon={faPlus} />
 	Create project
 </button>
 

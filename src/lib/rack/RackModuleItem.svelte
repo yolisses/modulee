@@ -20,12 +20,12 @@
 <details bind:open class="flex flex-col items-center" class:mb-2={open}>
 	<summary class="flex w-full max-w-xl flex-row gap-2 self-center border-t border-white/10">
 		<button class="common-button" onclick={handleClick}>
-			<Fa icon={open ? faChevronDown : faChevronRight} fw />
+			<Fa fw icon={open ? faChevronDown : faChevronRight} />
 		</button>
 		<h2 class="py-2 text-lg">{internalModule.name}</h2>
 		<div class="flex-1"></div>
 		<button class="common-button">
-			<Fa icon={faPlus} />
+			<Fa fw icon={faPlus} />
 			Add effect
 		</button>
 	</summary>

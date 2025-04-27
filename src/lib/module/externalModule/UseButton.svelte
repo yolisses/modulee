@@ -4,6 +4,6 @@
 </script>
 
 <button class="common-button">
-	<Fa icon={faDownload} />
+	<Fa fw icon={faDownload} />
 	Use
 </button>

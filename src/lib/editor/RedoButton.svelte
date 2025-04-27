@@ -23,5 +23,5 @@
 	title="Redo {shortcutString}"
 	disabled={!editorContext.editor.getCanRedo()}
 >
-	<Fa icon={faRedo} />
+	<Fa fw icon={faRedo} />
 </button>

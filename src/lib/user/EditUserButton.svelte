@@ -4,6 +4,6 @@
 </script>
 
 <a href="/users/edit" class="common-button">
-	<Fa icon={faEdit} />
+	<Fa fw icon={faEdit} />
 	Edit profile
 </a>

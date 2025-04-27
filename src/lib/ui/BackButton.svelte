@@ -8,5 +8,5 @@
 </script>
 
 <button class="common-button" onclick={handleClick} title="Previous page (Alt+←)">
-	<Fa icon={faArrowLeft} />
+	<Fa fw icon={faArrowLeft} />
 </button>

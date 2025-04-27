@@ -4,6 +4,6 @@
 </script>
 
 <button class="common-button">
-	<Fa icon={faHeart} />
+	<Fa fw icon={faHeart} />
 	Like
 </button>

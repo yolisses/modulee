@@ -113,11 +113,11 @@
 		</div>
 		<div class="flex flex-row gap-2">
 			<button type="submit" class="primary-button">
-				<Fa icon={faSearch} />
+				<Fa fw icon={faSearch} />
 				Search
 			</button>
 			<button type="reset" class="common-button">
-				<Fa icon={faEraser} />
+				<Fa fw icon={faEraser} />
 				Clear
 			</button>
 		</div>
@@ -141,7 +141,7 @@
 		<div class="flex flex-col items-center">
 			<div class="text-red-500">Error loading</div>
 			<button class="common-button">
-				<Fa icon={faRefresh} />
+				<Fa fw icon={faRefresh} />
 				Try again
 			</button>
 		</div>

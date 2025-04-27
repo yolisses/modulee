@@ -5,7 +5,7 @@
 
 <form action="/api/logOut" method="POST">
 	<button class="common-button">
-		<Fa icon={faDoorOpen} />
+		<Fa fw icon={faDoorOpen} />
 		Log out
 	</button>
 </form>

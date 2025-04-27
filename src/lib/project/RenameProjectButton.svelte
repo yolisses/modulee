@@ -21,7 +21,7 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa icon={faEdit} />
+	<Fa fw icon={faEdit} />
 	Rename project
 </button>
 

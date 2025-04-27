@@ -19,6 +19,6 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa icon={faDownload} />
+	<Fa fw icon={faDownload} />
 	Download project
 </button>

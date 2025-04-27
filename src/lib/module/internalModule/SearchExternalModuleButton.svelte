@@ -7,6 +7,6 @@
 </script>
 
 <a href="/projects/{projectDataContext.projectData.id}/externalModules" class="common-button">
-	<Fa icon={faSearch} />
+	<Fa fw icon={faSearch} />
 	Search for external module
 </a>

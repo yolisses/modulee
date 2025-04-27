@@ -4,5 +4,5 @@
 </script>
 
 <a class="common-button" href="/" title="Go to projects page">
-	<Fa icon={faHome} />
+	<Fa fw icon={faHome} />
 </a>

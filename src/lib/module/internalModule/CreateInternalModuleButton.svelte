@@ -42,6 +42,6 @@
 </script>
 
 <button class="common-button" onclick={handleCreateClick}>
-	<Fa icon={faPlus} />
+	<Fa fw icon={faPlus} />
 	Create internal module
 </button>

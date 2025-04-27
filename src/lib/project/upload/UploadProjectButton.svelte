@@ -15,7 +15,7 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa icon={faUpload} />
+	<Fa fw icon={faUpload} />
 	Upload project
 </button>
 

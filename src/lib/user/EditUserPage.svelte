@@ -23,7 +23,7 @@
 		</label>
 		<div>
 			<button class="primary-button">
-				<Fa icon={faSave} />
+				<Fa fw icon={faSave} />
 				Save profile
 			</button>
 		</div>

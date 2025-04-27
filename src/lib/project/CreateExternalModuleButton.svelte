@@ -28,7 +28,7 @@
 	{#if isLoading}
 		<Spinner size={20} />
 	{:else}
-		<Fa icon={faPuzzlePiece} fw />
+		<Fa fw icon={faPuzzlePiece} />
 	{/if}
 	Create external module
 </button>

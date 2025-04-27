@@ -23,5 +23,5 @@
 	title="Group nodes {shortcutString}"
 	disabled={!selectedNodeIdsContext.selectedNodeIds.size}
 >
-	<Fa icon={faObjectGroup} />
+	<Fa fw icon={faObjectGroup} />
 </button>

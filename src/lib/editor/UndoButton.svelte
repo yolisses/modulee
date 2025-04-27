@@ -23,5 +23,5 @@
 	title="Undo {shortcutString}"
 	disabled={!editorContext.editor.getCanUndo()}
 >
-	<Fa icon={faUndo} />
+	<Fa fw icon={faUndo} />
 </button>

@@ -20,7 +20,7 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa icon={faTrash} />
+	<Fa fw icon={faTrash} />
 	Delete project
 </button>
 

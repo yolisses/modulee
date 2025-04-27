@@ -7,6 +7,6 @@
 </script>
 
 <a class="common-button" href="/projects/{projectDataContext.projectData.id}/externalModules">
-	<Fa icon={faArrowCircleDown} />
+	<Fa fw icon={faArrowCircleDown} />
 	Import external module
 </a>
