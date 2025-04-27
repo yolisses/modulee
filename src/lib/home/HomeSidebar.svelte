@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
-	<a class="vertical-tab" href="/" aria-label="Home">
+	<a class="vertical-tab" href="/" aria-label="Home" title="Go to projects page">
 		<img
 			height="16"
 			class="my-1"
