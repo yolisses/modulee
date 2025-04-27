@@ -7,7 +7,7 @@
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getNewItemName } from './getNewItemName';
+	import { getNewItemName } from '../../ui/getNewItemName';
 
 	interface Props {
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;
