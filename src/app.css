@@ -86,4 +86,12 @@
 	.vertical-tab-selected {
 		@apply border-l-4 pl-1;
 	}
+
+	.horizontal-tab {
+		@apply common-button rounded-none border-white/25;
+	}
+
+	.horizontal-tab-selected {
+		@apply border-b-4 pb-1;
+	}
 }
