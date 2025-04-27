@@ -73,7 +73,7 @@
 
 			{@render preInputsChildren?.()}
 
-			{#each node.inputs as input (input.name)}
+			{#each node.inputs as input (input.id)}
 				<InputItem {input} />
 			{/each}
 
