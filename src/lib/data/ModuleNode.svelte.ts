@@ -11,20 +11,20 @@ import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 // dependency, the ModuleNode is created without module, and then have
 // fillModule called
 export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
-	module: Module | null = $state(null);
+	targetModule: Module | null = $state(null);
 
 	fillModule(modules: ById<Module>) {
 		if (this.moduleReference) {
-			this.module = modules.getOrNull(this.moduleReference.id);
+			this.targetModule = modules.getOrNull(this.moduleReference.id);
 		} else {
-			this.module = null;
+			this.targetModule = null;
 		}
 		this.updateInputs();
 	}
 
 	getInputNodes() {
-		if (!this.module) return [];
-		return this.module.nodes.filter((node) => {
+		if (!this.targetModule) return [];
+		return this.targetModule.nodes.filter((node) => {
 			return node instanceof InputNode;
 		});
 	}

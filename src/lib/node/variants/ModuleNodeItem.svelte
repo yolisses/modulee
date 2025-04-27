@@ -18,9 +18,9 @@
 
 <BaseNodeItem node={moduleNode}>
 	{#snippet preInputsChildren()}
-		{#if moduleNode.module}
+		{#if moduleNode.targetModule}
 			<div class="hover-bg flex w-full flex-row">
-				<ModuleReferenceButton module={moduleNode.module} />
+				<ModuleReferenceButton module={moduleNode.targetModule} />
 				<SetTargetInternalModuleButton moduleNodeId={moduleNode.id}>
 					<Fa icon={faEdit} title="Replace module" style="padding-inline: 0.25lh;" />
 				</SetTargetInternalModuleButton>
