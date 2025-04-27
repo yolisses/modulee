@@ -15,6 +15,7 @@
 	<div class="flex flex-row overflow-auto border-b-2 border-black/50">
 		{#each graphContext.graph.internalModules.values() as internalModule (internalModule.id)}
 			<a
+				title={internalModule.name}
 				href="/projects/{projectId}/internalModules/{internalModule.id}/graph"
 				class="horizontal-tab block max-w-[10rem] overflow-hidden text-ellipsis whitespace-nowrap"
 				class:horizontal-tab-selected={internalModuleIdContext.internalModuleId ===
