@@ -14,6 +14,7 @@
 	import { onMount } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
+	import InternalModulesNavbar from './InternalModulesNavbar.svelte';
 
 	const graphContext = getGraphContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
@@ -53,5 +54,6 @@
 sounds better on singular and contains things like connections too. -->
 <div class="relative flex flex-1 flex-col overflow-hidden">
 	<GraphToolbar />
+	<InternalModulesNavbar />
 	<GraphCanvas nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
 </div>
