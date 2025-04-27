@@ -2,7 +2,6 @@
 	import type { InputNode } from '$lib/data/InputNode.svelte';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { getModalRootContext } from '$lib/ui/modalRootContext';
-	import { onMount } from 'svelte';
 	import Portal from 'svelte-portal';
 
 	interface Props {
@@ -11,13 +10,7 @@
 	}
 
 	const { closeModal, inputNode }: Props = $props();
-	let name = $state(inputNode.name);
-	let textInput: HTMLInputElement;
 	const modalRootContext = getModalRootContext();
-
-	onMount(() => {
-		textInput.focus();
-	});
 </script>
 
 <Portal target={modalRootContext.modalRoot}>
@@ -26,7 +19,7 @@
 			<p>Edit input node</p>
 			<label>
 				<div>Name</div>
-				<input type="text" bind:value={name} class="common-input" bind:this={textInput} />
+				<input type="text" class="common-input" />
 			</label>
 			<label>
 				<div>Min</div>
