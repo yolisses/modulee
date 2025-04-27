@@ -3,7 +3,7 @@
 	import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
-	import RackPanel from './RackPanel.svelte';
+	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
 
 	interface Props {
 		internalModule: InternalModule;
@@ -26,7 +26,7 @@
 	</div>
 	<div class="flex flex-row flex-wrap justify-center gap-1">
 		{#each internalModule.nodes.filter(getIsSomeModuleNode) as moduleNode}
-			<RackPanel {moduleNode} />
+			<RackModuleNodeItem {moduleNode} />
 		{/each}
 	</div>
 </div>
