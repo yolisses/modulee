@@ -5,7 +5,7 @@
 	const graphContext = getGraphContext();
 </script>
 
-<div class="flex flex-col gap-4 p-4">
+<div class="flex flex-col p-4">
 	{#each graphContext.graph.internalModules.values() as internalModule (internalModule.id)}
 		<RackModuleItem {internalModule} />
 	{/each}
