@@ -4,7 +4,6 @@
 	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import HomeButton from '$lib/home/HomeButton.svelte';
 	import GroupNodesButton from '$lib/module/internalModule/GroupNodesButton.svelte';
-	import BackButton from '$lib/ui/BackButton.svelte';
 	import ZoomInButton from '$lib/zoom/ZoomInButton.svelte';
 	import ZoomOutButton from '$lib/zoom/ZoomOutButton.svelte';
 </script>
@@ -16,6 +15,5 @@
 	<ZoomInButton />
 	<ZoomOutButton />
 	<GroupNodesButton />
-	<BackButton />
 	<MuteButton />
 </div>
