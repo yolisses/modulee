@@ -14,10 +14,13 @@
 <BaseNodeItem node={inputNode}>
 	{#snippet preInputsChildren()}
 		<button class="hover-bg flex flex-row items-center" title="Edit input node">
-			<div class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+			<div
+				style:padding-inline="0.25lh"
+				class="flex-1 overflow-hidden text-start text-ellipsis whitespace-nowrap"
+			>
 				{inputNode.name}
 			</div>
-			<Fa icon={faEdit} title="Replace module" style="padding-inline: 0.25lh;" />
+			<Fa icon={faEdit} style="padding-inline: 0.25lh;" />
 		</button>
 	{/snippet}
 </BaseNodeItem>
