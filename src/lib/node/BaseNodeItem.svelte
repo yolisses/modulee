@@ -60,12 +60,12 @@
 >
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
-			style:width="5lh"
+			style:width="6lh"
 			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-800={!isSelected}
-			class="flex flex-col bg-zinc-700 outline"
+			class="node-item flex flex-col bg-zinc-700 outline"
 		>
 			<NodeItemHeader {node}>
 				{@render headerChildren?.()}
@@ -74,7 +74,7 @@
 			{@render preInputsChildren?.()}
 
 			{#each node.inputs as input (input.id)}
-				<InputItem {input} />
+				<InputItem {input} isLast={input === node.inputs.at(-1)} />
 			{/each}
 
 			{@render postInputsChildren?.()}
