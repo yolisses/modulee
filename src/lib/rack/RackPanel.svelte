@@ -1,14 +1,16 @@
 <script lang="ts">
+	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
+
 	interface Props {
-		module: { name: string };
+		moduleNode: ModuleNode;
 	}
 
-	const { module }: Props = $props();
+	const { moduleNode }: Props = $props();
 	const inputs = ['attack', 'decay', 'sustain', 'release'];
 </script>
 
 <div class="rounded border-1 border-white/10 p-2">
-	{module.name}
+	{moduleNode.targetModule?.name}
 	<div>
 		{#each inputs as input}
 			<label class="panel-grid grid gap-1">
