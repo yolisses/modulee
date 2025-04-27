@@ -36,3 +36,9 @@
 		{/each}
 	</div>
 </details>
+
+<style lang="postcss">
+	details:first-child summary {
+		@apply border-none;
+	}
+</style>
