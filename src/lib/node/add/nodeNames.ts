@@ -2,9 +2,14 @@
 // interpreted as important to the logic of the application
 // TODO implement real internationalization.
 export const nodesName: Record<string, string> = {
+	IfNode: 'If',
+	OrNode: 'Or',
+	NotNode: 'Not',
+	AndNode: 'And',
 	AddNode: 'Add',
 	GateNode: 'Gate',
 	TimeNode: 'Time',
+	HoldNode: 'Hold',
 	InputNode: 'Input',
 	NoiseNode: 'Noise',
 	PhaseNode: 'Phase',
@@ -12,6 +17,8 @@ export const nodesName: Record<string, string> = {
 	DivideNode: 'Divide',
 	OutputNode: 'Output',
 	ModuleNode: 'Module',
+	ModuloNode: 'Modulo',
+	GreaterNode: 'Greater',
 	PeakNode: 'Peak filter',
 	EnvelopeNode: 'Envelope',
 	ConstantNode: 'Constant',
@@ -19,6 +26,7 @@ export const nodesName: Record<string, string> = {
 	MultiplyNode: 'Multiply',
 	SineWaveNode: 'Sine wave',
 	FrequencyNode: 'Frequency',
+	PulseWaveNode: 'Pulse wave',
 	AllPassNode: 'All-pass filter',
 	LowPassNode: 'Low-pass filter',
 	HighPassNode: 'High-pass filter',
