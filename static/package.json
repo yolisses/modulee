@@ -11,6 +11,6 @@
 	"type": "commonjs",
 	"description": "The content that should be shared over network without the usual bundler due to WASM restrictions",
 	"dependencies": {
-		"modulee-engine-wasm": "^0.1.1"
+		"modulee-engine-wasm": "^0.2.0"
 	}
 }
