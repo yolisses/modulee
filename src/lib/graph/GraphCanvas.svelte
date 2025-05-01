@@ -13,7 +13,9 @@
 	import { onMount } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
+	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
+	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
 	interface Props {
@@ -43,7 +45,6 @@
 
 	/* Add node menu position */
 	const floatingMenuManager = new FloatingMenuManager();
-	const menuPosition = $derived(floatingMenuManager.getMenuPosition());
 	$effect(() => {
 		// Forces update on menu position change
 		floatingMenuManager.getMenuPosition();
@@ -51,12 +52,7 @@
 	});
 </script>
 
-{#if nodes.length === 0}
-	<div class="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
-		<div class="rounde text-white/50">Use right click to create nodes</div>
-	</div>
-{/if}
-
+<HowToAddNodesHint {nodes} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="flex-1"
@@ -88,13 +84,13 @@
 	</PointerEventDispatcher>
 </div>
 
-{#if menuPosition}
-	<div bind:this={floatingMenuManager.menu} class="absolute">
+<!-- The floating menu is outside the scrollable area to prevent the container
+from scrolling when the menu is created -->
+<FloatingMenuWrapper {floatingMenuManager}>
+	{#snippet children({ menuPosition })}
 		<AddNodeMenu closeModal={floatingMenuManager.closeModal} screenPosition={menuPosition} />
-	</div>
-{/if}
-
-<svelte:window onpointerdown={floatingMenuManager.handleWindowClick} />
+	{/snippet}
+</FloatingMenuWrapper>
 
 <style lang="postcss">
 	.bg-dots {
