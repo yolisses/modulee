@@ -2,7 +2,6 @@
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
-	import AddNodeMenu from './AddNodeMenu.svelte';
 
 	interface Props {
 		mouseEvent?: MouseEvent;
@@ -51,17 +50,3 @@
 		}
 	}
 </script>
-
-{#if menuPosition}
-	<div
-		class="absolute"
-		bind:this={positioner}
-		style:top={menuPosition.y + 'px'}
-		style:left={menuPosition.x + 'px'}
-	></div>
-	<div bind:this={menu} class="absolute">
-		<AddNodeMenu {closeModal} screenPosition={menuPosition}></AddNodeMenu>
-	</div>
-{/if}
-
-<svelte:window onpointerdown={handleWindowClick} />

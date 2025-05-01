@@ -3,13 +3,20 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
 	import type { Node } from '$lib/data/Node.svelte';
-	import AddNodeMenuWrapper from '$lib/node/add/AddNodeMenuWrapper.svelte';
+	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/node/getScreenLineHeight';
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
-	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
+	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
+	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
+	import {
+		getMouseRelativePosition,
+		getNodeRectsContext,
+		getRootElementContext,
+		PointerEventDispatcher,
+	} from 'nodes-editor';
 	import { onMount } from 'svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
@@ -25,11 +32,6 @@
 	const spaceContext = getSpaceContext();
 	const rootElementContext = getRootElementContext();
 
-	function handleContextMenu(e: MouseEvent) {
-		e.preventDefault();
-		mouseEvent = e;
-	}
-
 	/* Pointer events handling */
 	const graphCanvasPointerStrategyFactory = new GraphCanvasPointerStrategyFactory();
 
@@ -44,6 +46,52 @@
 	$effect(() => {
 		graphCanvasResizeHandler.handleRectsChange(nodeRectsContext.nodeRects);
 	});
+
+	/* Add node menu position */
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
+		mouseEvent = e;
+	}
+
+	let menu = $state<HTMLElement>();
+	let positioner = $state<HTMLElement>();
+
+	const menuPosition = $derived.by(() => {
+		if (!mouseEvent) return;
+		if (!rootElementContext.rootElement) return;
+		return getMouseRelativePosition(mouseEvent, rootElementContext.rootElement);
+	});
+
+	function closeModal() {
+		mouseEvent = undefined;
+	}
+
+	$effect(() => {
+		if (!menu) return;
+		if (!positioner) return;
+		menuPosition; // Forces dependency
+
+		function updatePosition() {
+			if (!menu) return;
+			if (!positioner) return;
+			computePosition(positioner, menu, {
+				placement: 'right',
+				middleware: [flip(), shift()],
+			}).then(({ x, y }) => {
+				if (!menu) return;
+				Object.assign(menu.style, { top: `${y}px`, left: `${x}px` });
+			});
+		}
+
+		return autoUpdate(positioner, menu, updatePosition);
+	});
+
+	function handleWindowClick(e: InputMouseEvent) {
+		const clickedInside = menu?.contains(e.target as Node);
+		if (!clickedInside) {
+			closeModal();
+		}
+	}
 </script>
 
 {#if nodes.length === 0}
@@ -56,6 +104,7 @@
 <div class="flex-1 overflow-scroll" bind:this={container}>
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
+			oncontextmenu={handleContextMenu}
 			class="bg-dots relative select-none"
 			bind:this={rootElementContext.rootElement}
 			style:width={graphCanvasResizeHandler.minSize.x + 'px'}
@@ -73,10 +122,25 @@
 
 			<PreviewConnectionWire />
 			<SelectionBox />
+			{#if menuPosition}
+				<div
+					class="absolute"
+					bind:this={positioner}
+					style:top={menuPosition.y + 'px'}
+					style:left={menuPosition.x + 'px'}
+				></div>
+			{/if}
 		</div>
 	</PointerEventDispatcher>
 </div>
-<AddNodeMenuWrapper {mouseEvent} />
+
+{#if menuPosition}
+	<div bind:this={menu} class="absolute">
+		<AddNodeMenu {closeModal} screenPosition={menuPosition}></AddNodeMenu>
+	</div>
+{/if}
+
+<svelte:window onpointerdown={handleWindowClick} />
 
 <style lang="postcss">
 	.bg-dots {
