@@ -12,6 +12,7 @@
 	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
 	import { onMount } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
+	import FloatingMenuReference from './FloatingMenuReference.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
@@ -82,14 +83,7 @@
 
 			<PreviewConnectionWire />
 			<SelectionBox />
-			{#if menuPosition}
-				<div
-					class="absolute"
-					style:top={menuPosition.y + 'px'}
-					style:left={menuPosition.x + 'px'}
-					bind:this={floatingMenuManager.positioner}
-				></div>
-			{/if}
+			<FloatingMenuReference {floatingMenuManager} />
 		</div>
 	</PointerEventDispatcher>
 </div>
