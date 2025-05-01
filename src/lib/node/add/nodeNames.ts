@@ -1,5 +1,6 @@
 // This object is someway similar to internationalization. It should not be
 // interpreted as important to the logic of the application
+//
 // TODO implement real internationalization.
 export const nodesName: Record<string, string> = {
 	IfNode: 'If',
