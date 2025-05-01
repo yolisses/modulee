@@ -54,11 +54,7 @@
 
 <HowToAddNodesHint {nodes} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div
-	class="flex-1"
-	bind:this={container}
-	style:overflow={floatingMenuManager.getIsActive() ? 'hidden' : 'scroll'}
->
+<div class="flex-1 overflow-scroll" bind:this={container} onscroll={floatingMenuManager.closeModal}>
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			class="bg-dots relative select-none"
