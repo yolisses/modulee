@@ -23,7 +23,6 @@
 	let mouseEvent = $state<MouseEvent>();
 
 	const spaceContext = getSpaceContext();
-	const nodeRectsContext = getNodeRectsContext();
 	const rootElementContext = getRootElementContext();
 
 	function handleContextMenu(e: MouseEvent) {
@@ -36,6 +35,7 @@
 
 	/* Resizing */
 	let container: HTMLElement;
+	const nodeRectsContext = getNodeRectsContext();
 	const graphCanvasResizeHandler = new ResizeGraphCanvasHandler();
 	onMount(() => {
 		// Returns destructor
