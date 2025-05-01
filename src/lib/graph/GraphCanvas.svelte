@@ -3,15 +3,15 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
 	import type { Node } from '$lib/data/Node.svelte';
+	import AddNodeMenuWrapper from '$lib/node/add/AddNodeMenuWrapper.svelte';
+	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
+	import { getScreenLineHeight } from '$lib/node/getScreenLineHeight';
+	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
 	import { onMount } from 'svelte';
-	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
-	import { getScreenFontSize } from './getScreenFontSize';
-	import { getScreenLineHeight } from './getScreenLineHeight';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
-	import NodeItem from './NodeItem.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
 	interface Props {
@@ -51,11 +51,10 @@
 		<div class="rounde text-white/50">Use right click to create nodes</div>
 	</div>
 {/if}
+
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="flex-1 overflow-scroll" bind:this={container}>
-	<PointerEventDispatcher
-		oncontextmenu={handleContextMenu}
-		pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}
-	>
+	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			class="bg-dots relative select-none"
 			bind:this={rootElementContext.rootElement}
@@ -73,11 +72,11 @@
 			{/each}
 
 			<PreviewConnectionWire />
-			<AddNodeMenuWrapper {mouseEvent} />
 			<SelectionBox />
 		</div>
 	</PointerEventDispatcher>
 </div>
+<AddNodeMenuWrapper {mouseEvent} />
 
 <style lang="postcss">
 	.bg-dots {

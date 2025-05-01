@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import InternalModulesNavbar from '$lib/node/InternalModulesNavbar.svelte';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
 	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
@@ -14,7 +15,6 @@
 	import { onMount } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
-	import InternalModulesNavbar from './InternalModulesNavbar.svelte';
 
 	const graphContext = getGraphContext();
 	const internalModuleIdContext = getInternalModuleIdContext();

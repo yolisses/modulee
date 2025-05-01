@@ -4,14 +4,14 @@ import { createId } from '$lib/data/createId';
 import { getGraphContext } from '$lib/data/graphContext';
 import type { InputPath } from '$lib/data/InputPath';
 import { getEditorContext } from '$lib/editor/editorContext';
+import { getInputAndOutput } from '$lib/node/getInputAndOutput';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import {
-	type EndPreviewConnectionEvent,
+	getPreviewConnectionContext,
 	PreviewConnectionPointerStrategy,
 	SelectionBoxPointerStrategy,
-	getPreviewConnectionContext,
+	type EndPreviewConnectionEvent,
 } from 'nodes-editor';
-import { getInputAndOutput } from './getInputAndOutput';
 
 export class GraphCanvasPointerStrategyFactory {
 	graphContext = getGraphContext();
