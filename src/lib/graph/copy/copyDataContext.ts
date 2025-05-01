@@ -1,4 +1,4 @@
-import type { CopyData } from '$lib/copy/CopyData';
+import type { CopyData } from '$lib/graph/copy/CopyData';
 import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 

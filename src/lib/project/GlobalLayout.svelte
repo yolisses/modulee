@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { setCopyDataContext } from '$lib/copy/copyDataContext';
+	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setModalRootContext, type ModalRootContext } from '$lib/ui/modalRootContext';
 	import { type Snippet } from 'svelte';
 

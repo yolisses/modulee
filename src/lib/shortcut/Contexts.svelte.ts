@@ -1,8 +1,8 @@
-import { getCopyDataContext } from '$lib/copy/copyDataContext';
 import { getGraphContext } from '$lib/data/graphContext';
 import { getEditorContext } from '$lib/editor/editorContext';
 import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 import { getIsMutedContext } from '$lib/engine/isMutedContexts';
+import { getCopyDataContext } from '$lib/graph/copy/copyDataContext';
 import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 import { getProjectDataContext } from '$lib/project/projectDataContext';
