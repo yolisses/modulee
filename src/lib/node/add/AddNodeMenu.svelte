@@ -23,7 +23,7 @@
 		{#if addNodeMenuLogic.searchText}
 			<AddNodeSearchNodeItems {addNodeMenuLogic} />
 		{:else}
-			<AddNodeCategoryItems />
+			<AddNodeCategoryItems {addNodeMenuLogic} />
 		{/if}
 	</div>
 </div>

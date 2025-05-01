@@ -1,19 +1,59 @@
 <script lang="ts">
+	import BasicList from '$lib/ui/BasicList.svelte';
+	import { getName } from '$lib/ui/getName';
+	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import { getNodeTypeName } from './getNodeTypeName';
 	import { nodeCategoryNames } from './nodeCategoryNames';
 	import type { NodeTypeCategory } from './NodeTypeCategory';
 
 	interface Props {
 		nodeTypeCategory: NodeTypeCategory;
+		addNodeMenuLogic: AddNodeMenuLogic;
 	}
 
-	const { nodeTypeCategory }: Props = $props();
+	let floating = $state<HTMLElement>();
+	let reference = $state<HTMLElement>();
+	const { nodeTypeCategory, addNodeMenuLogic }: Props = $props();
+
+	function updatePosition() {
+		if (!floating) return;
+		if (!reference) return;
+		computePosition(reference, floating, {
+			strategy: 'fixed',
+			placement: 'right',
+			middleware: [flip(), shift()],
+		}).then(({ x, y }) => {
+			if (!floating) return;
+			Object.assign(floating.style, { left: `${x}px`, top: `${y}px` });
+		});
+	}
+
+	$effect(() => {
+		if (!floating) return;
+		if (!reference) return;
+		return autoUpdate(reference, floating, updatePosition);
+	});
 </script>
 
-<button class="common-button">
-	<div class="flex-1 text-start">
-		{nodeCategoryNames[nodeTypeCategory.name]}
+<div class="group relative flex flex-col items-stretch">
+	<button class="common-button group-hover:bg-white/10" bind:this={reference}>
+		<div class="flex-1 text-start">
+			{nodeCategoryNames[nodeTypeCategory.name]}
+		</div>
+		<Fa icon={faChevronRight} class="opacity-50" size="xs" />
+	</button>
+	<div
+		bind:this={floating}
+		class="fixed z-10 hidden max-h-[75vh] w-max rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800 group-hover:flex"
+	>
+		<BasicList
+			getId={getName}
+			getName={getNodeTypeName}
+			values={nodeTypeCategory.nodeTypes}
+			onClick={addNodeMenuLogic.handleNodeTypeSelect}
+		/>
 	</div>
-	<Fa icon={faChevronRight} class="opacity-50" size="xs" />
-</button>
+</div>
