@@ -9,15 +9,8 @@
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
-	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
-	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
-	import {
-		getMouseRelativePosition,
-		getNodeRectsContext,
-		getRootElementContext,
-		PointerEventDispatcher,
-	} from 'nodes-editor';
-	import { onMount } from 'svelte';
+	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
+	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
@@ -27,7 +20,6 @@
 	}
 
 	const { nodes, connections }: Props = $props();
-	let mouseEvent = $state<MouseEvent>();
 
 	const spaceContext = getSpaceContext();
 	const rootElementContext = getRootElementContext();
@@ -39,7 +31,7 @@
 	let container: HTMLElement;
 	const nodeRectsContext = getNodeRectsContext();
 	const graphCanvasResizeHandler = new ResizeGraphCanvasHandler();
-	onMount(() => {
+	$effect(() => {
 		// Returns destructor
 		return graphCanvasResizeHandler.initialize(container);
 	});
@@ -48,50 +40,13 @@
 	});
 
 	/* Add node menu position */
-	function handleContextMenu(e: MouseEvent) {
-		e.preventDefault();
-		mouseEvent = e;
-	}
-
-	let menu = $state<HTMLElement>();
-	let positioner = $state<HTMLElement>();
-
-	const menuPosition = $derived.by(() => {
-		if (!mouseEvent) return;
-		if (!rootElementContext.rootElement) return;
-		return getMouseRelativePosition(mouseEvent, rootElementContext.rootElement);
-	});
-
-	function closeModal() {
-		mouseEvent = undefined;
-	}
-
+	const floatingMenuManager = new FloatingMenuManager();
+	const menuPosition = $derived(floatingMenuManager.getMenuPosition());
 	$effect(() => {
-		if (!menu) return;
-		if (!positioner) return;
-		menuPosition; // Forces dependency
-
-		function updatePosition() {
-			if (!menu) return;
-			if (!positioner) return;
-			computePosition(positioner, menu, {
-				placement: 'right',
-				middleware: [flip(), shift()],
-			}).then(({ x, y }) => {
-				if (!menu) return;
-				Object.assign(menu.style, { top: `${y}px`, left: `${x}px` });
-			});
-		}
-
-		return autoUpdate(positioner, menu, updatePosition);
+		// Forces update on menu position change
+		floatingMenuManager.getMenuPosition();
+		return floatingMenuManager.configureMenuPosition();
 	});
-
-	function handleWindowClick(e: InputMouseEvent) {
-		const clickedInside = menu?.contains(e.target as Node);
-		if (!clickedInside) {
-			closeModal();
-		}
-	}
 </script>
 
 {#if nodes.length === 0}
@@ -101,12 +56,16 @@
 {/if}
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="flex-1 overflow-scroll" bind:this={container}>
+<div
+	class="flex-1 overflow-scroll"
+	bind:this={container}
+	style:overflow={floatingMenuManager.getIsActive() ? 'hidden' : 'scroll'}
+>
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
-			oncontextmenu={handleContextMenu}
 			class="bg-dots relative select-none"
 			bind:this={rootElementContext.rootElement}
+			oncontextmenu={floatingMenuManager.handleContextMenu}
 			style:width={graphCanvasResizeHandler.minSize.x + 'px'}
 			style:height={graphCanvasResizeHandler.minSize.y + 'px'}
 			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
@@ -125,9 +84,9 @@
 			{#if menuPosition}
 				<div
 					class="absolute"
-					bind:this={positioner}
 					style:top={menuPosition.y + 'px'}
 					style:left={menuPosition.x + 'px'}
+					bind:this={floatingMenuManager.positioner}
 				></div>
 			{/if}
 		</div>
@@ -135,12 +94,12 @@
 </div>
 
 {#if menuPosition}
-	<div bind:this={menu} class="absolute">
-		<AddNodeMenu {closeModal} screenPosition={menuPosition}></AddNodeMenu>
+	<div bind:this={floatingMenuManager.menu} class="absolute">
+		<AddNodeMenu closeModal={floatingMenuManager.closeModal} screenPosition={menuPosition} />
 	</div>
 {/if}
 
-<svelte:window onpointerdown={handleWindowClick} />
+<svelte:window onpointerdown={floatingMenuManager.handleWindowClick} />
 
 <style lang="postcss">
 	.bg-dots {
