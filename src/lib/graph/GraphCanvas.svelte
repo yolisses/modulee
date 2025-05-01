@@ -10,6 +10,7 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
+	import { onMount } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
@@ -31,7 +32,7 @@
 	let container: HTMLElement;
 	const nodeRectsContext = getNodeRectsContext();
 	const graphCanvasResizeHandler = new ResizeGraphCanvasHandler();
-	$effect(() => {
+	onMount(() => {
 		// Returns destructor
 		return graphCanvasResizeHandler.initialize(container);
 	});
@@ -57,7 +58,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="flex-1 overflow-scroll"
+	class="flex-1"
 	bind:this={container}
 	style:overflow={floatingMenuManager.getIsActive() ? 'hidden' : 'scroll'}
 >
