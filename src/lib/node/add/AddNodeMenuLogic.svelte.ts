@@ -12,6 +12,10 @@ import { nodeTypes } from './nodeTypes';
 
 export class AddNodeMenuLogic {
 	searchText = $state('');
+	spaceContext = getSpaceContext();
+	editorContext = getEditorContext();
+	projectDataContext = getProjectDataContext();
+	internalModuleIdContext = getInternalModuleIdContext();
 
 	constructor(
 		public closeModal: () => void,
@@ -23,19 +27,6 @@ export class AddNodeMenuLogic {
 			return getNodeTypeName(nodeType).toLowerCase().includes(this.searchText.toLowerCase());
 		});
 	}
-
-	handleKeyDown = (e: KeyboardEvent) => {
-		if (e.key !== 'Enter') return;
-		if (this.searchText.length === 0) return;
-		const option = this.getOptions()[0];
-		if (!option) return;
-		this.handleNodeTypeSelect(option);
-	};
-
-	spaceContext = getSpaceContext();
-	editorContext = getEditorContext();
-	projectDataContext = getProjectDataContext();
-	internalModuleIdContext = getInternalModuleIdContext();
 
 	handleNodeTypeSelect = (nodeType: NodeType) => {
 		const dataPosition = this.spaceContext.space.getDataPosition(this.screenPosition).floor();

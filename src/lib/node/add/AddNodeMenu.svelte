@@ -12,6 +12,14 @@
 	const { closeModal, screenPosition }: Props = $props();
 
 	const addNodeMenuLogic = new AddNodeMenuLogic(closeModal, screenPosition);
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key !== 'Enter') return;
+		if (addNodeMenuLogic.searchText.length === 0) return;
+		const option = addNodeMenuLogic.getOptions()[0];
+		if (!option) return;
+		addNodeMenuLogic.handleNodeTypeSelect(option);
+	}
 </script>
 
 <!-- TODO consider adding a descriptive text like "Add node" -->
@@ -24,8 +32,8 @@
 		type="search"
 		placeholder="Search"
 		class="common-input"
+		onkeydown={handleKeyDown}
 		bind:value={addNodeMenuLogic.searchText}
-		onkeydown={addNodeMenuLogic.handleKeyDown}
 	/>
 	<div class="scroll-small flex flex-col overflow-auto overscroll-contain whitespace-nowrap">
 		{#if addNodeMenuLogic.searchText}
