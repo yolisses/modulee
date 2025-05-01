@@ -15,19 +15,19 @@
 	import {
 		getNodeRectsContext,
 		getPreviewConnectionContext,
-		getRectsBoundingRect,
 		getRootElementContext,
 		PointerEventDispatcher,
 		PreviewConnectionPointerStrategy,
 		SelectionBoxPointerStrategy,
-		Vector,
 		type EndPreviewConnectionEvent,
 	} from 'nodes-editor';
+	import { onMount } from 'svelte';
 	import AddNodeMenuWrapper from './add/AddNodeMenuWrapper.svelte';
 	import { getInputAndOutput } from './getInputAndOutput';
 	import { getScreenFontSize } from './getScreenFontSize';
 	import { getScreenLineHeight } from './getScreenLineHeight';
 	import NodeItem from './NodeItem.svelte';
+	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
 	interface Props {
 		nodes: Node[];
@@ -97,44 +97,15 @@
 			: selectionBoxPointerStrategy,
 	);
 
-	let minSize = $state(Vector.zero());
-
-	$effect(() => {
-		const nodeRects = Object.values(nodeRectsContext.nodeRects);
-
-		let boundingRectSize;
-		if (nodeRects.length === 0) {
-			boundingRectSize = Vector.zero();
-		} else {
-			const boundingRect = getRectsBoundingRect(nodeRects);
-			boundingRectSize = boundingRect.position.add(boundingRect.size);
-		}
-
-		const step = 100;
-		const currentMinSize = boundingRectSize
-			.divideByNumber(step)
-			.ceil()
-			.multiplyByNumber(step)
-			.addByNumber(step)
-			.add(containerSize);
-
-		if (currentMinSize.x > minSize.x || currentMinSize.y > minSize.y) {
-			minSize = minSize.max(currentMinSize);
-		}
-	});
-
 	let container: HTMLElement;
-	let containerSize = $state(Vector.zero());
-	$effect(() => {
-		const resizeObserver = new ResizeObserver((entries) => {
-			const entry = entries[0];
-			containerSize = new Vector(entry.contentRect.width, entry.contentRect.height);
-		});
-		resizeObserver.observe(container);
+	const graphCanvasResizeHandler = new ResizeGraphCanvasHandler();
 
-		return () => {
-			resizeObserver.disconnect();
-		};
+	onMount(() => {
+		// Returns destructor
+		return graphCanvasResizeHandler.initialize(container);
+	});
+	$effect(() => {
+		graphCanvasResizeHandler.handleRectsChange(nodeRectsContext.nodeRects);
 	});
 </script>
 
@@ -146,10 +117,10 @@
 <div class="flex-1 overflow-scroll" bind:this={container}>
 	<PointerEventDispatcher {pointerStrategy} oncontextmenu={handleContextMenu}>
 		<div
-			style:width={minSize.x + 'px'}
-			style:height={minSize.y + 'px'}
 			class="bg-dots relative select-none"
 			bind:this={rootElementContext.rootElement}
+			style:width={graphCanvasResizeHandler.minSize.x + 'px'}
+			style:height={graphCanvasResizeHandler.minSize.y + 'px'}
 			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 			style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 		>
