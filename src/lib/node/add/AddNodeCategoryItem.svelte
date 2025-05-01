@@ -47,7 +47,7 @@
 	</button>
 	<div
 		bind:this={floating}
-		class="fixed z-10 hidden max-h-[75vh] w-max rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800 group-hover:flex"
+		class="menu-container fixed z-10 hidden w-max min-w-32 group-hover:flex"
 	>
 		<BasicList
 			getId={getName}
