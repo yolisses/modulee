@@ -56,7 +56,10 @@ export class GraphCanvasPointerStrategyFactory {
 	};
 
 	getPointerStrategy() {
-		const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy();
+		const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy((e) => {
+			// Ignore mouse right button
+			return e.button !== 2;
+		});
 		const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(
 			this.handleEndPreviewConnection,
 		);

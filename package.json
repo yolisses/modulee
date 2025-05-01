@@ -8,7 +8,7 @@
 		"idb": "^8.0.2",
 		"mongoose": "^8.13.2",
 		"nanoid": "^5.1.5",
-		"nodes-editor": "^0.0.20",
+		"nodes-editor": "^0.0.21",
 		"redis": "^4.7.0",
 		"sort-json": "^2.0.1",
 		"svelte-fa": "^4.0.3",
