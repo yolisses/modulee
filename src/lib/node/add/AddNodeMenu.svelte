@@ -8,6 +8,7 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getName } from '$lib/ui/getName.js';
 	import type { Vector } from 'nodes-editor';
+	import AddNodeCategoryItems from './AddNodeCategoryItems.svelte';
 	import { createNodeData } from './createNodeData.js';
 	import { nodesName } from './nodeNames.js';
 	import type { NodeType } from './NodeType.js';
@@ -78,6 +79,7 @@
 		onkeydown={handleKeyDown}
 	/>
 	<div class="scroll-small flex flex-col overflow-auto overscroll-contain whitespace-nowrap">
+		<AddNodeCategoryItems />
 		{#if options.length === 0}
 			<div class="p-2 text-white/50">No options found for the search text</div>
 		{:else}
