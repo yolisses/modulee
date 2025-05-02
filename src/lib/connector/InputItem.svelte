@@ -46,7 +46,7 @@
 				{input.name}
 			</div>
 			{#if !input.targetNode}
-				<div>{formatNumber(value)}</div>
+				<div class="opacity-50">{formatNumber(value)}</div>
 			{/if}
 		</div>
 	</div>
