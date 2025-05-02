@@ -7,6 +7,7 @@ export function createFallbackNode(internalModuleId: string): NodeData {
 		type: 'ConstantNode',
 		extras: { value: 0 },
 		position: { x: 0, y: 0 },
+		unconnectedInputValues: {},
 		id: getInternalModuleFallbackNodeId(internalModuleId),
 	};
 }

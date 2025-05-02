@@ -45,6 +45,7 @@ export class GroupNodesActionCommand extends ActionCommand {
 				moduleNodeData: {
 					id: createId(),
 					type: 'ModuleNode',
+					unconnectedInputValues: {},
 					position: averagePosition.getData(),
 					internalModuleId: currentInternalModuleId,
 					extras: { moduleReference: { type: 'internal', id: newInternalModuleId } },
