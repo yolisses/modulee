@@ -8,9 +8,10 @@
 		href?: string;
 		onClick?: (value: T) => void;
 		buttons?: Snippet<[value: T]>;
+		content?: Snippet<[{ value: T; text: string }]>;
 	};
 
-	const { text, value, onClick, buttons, href }: Props = $props();
+	const { text, value, onClick, buttons, href, content }: Props = $props();
 
 	function handleClick() {
 		onClick?.(value);
@@ -19,7 +20,11 @@
 
 <div class="hover-bg flex flex-row items-center rounded">
 	<ButtonOrLink {href} onclick={handleClick} class="flex-1 p-2">
-		{text}
+		{#if content}
+			{@render content({ value, text })}
+		{:else}
+			{text}
+		{/if}
 	</ButtonOrLink>
 	{@render buttons?.(value)}
 </div>
