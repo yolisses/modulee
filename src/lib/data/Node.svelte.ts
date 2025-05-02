@@ -19,7 +19,7 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 		this.position = Vector.fromData(this.nodeData.position);
 	}
 
-	getInputs() {
+	private getInputs() {
 		const nodeType = nodeTypesByName[this.type];
 		return nodeType.inputNames.map((inputName) => {
 			return new Input(inputName, inputName, this);

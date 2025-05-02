@@ -5,6 +5,7 @@ import type { Node } from './Node.svelte';
 
 export class Input implements Connector {
 	id: string;
+	targetNode?: Node;
 	inputPath: InputPath;
 
 	constructor(

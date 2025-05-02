@@ -34,7 +34,9 @@
 		style:border-radius={isLast ? '0 0 0.4lh 0.4lh' : undefined}
 	>
 		<!-- TODO hide the input bar if there's a connection to the input -->
-		<div style:width={percentage + '%'} class="absolute left-0 h-full bg-green-500/25"></div>
+		{#if !input.targetNode}
+			<div style:width={percentage + '%'} class="absolute left-0 h-full bg-green-500/25"></div>
+		{/if}
 		<div class="relative flex flex-1 flex-row items-center overflow-hidden">
 			<div
 				title={input.name}
@@ -43,7 +45,9 @@
 			>
 				{input.name}
 			</div>
-			<div class="opacity-50">{formatNumber(value)}</div>
+			{#if !input.targetNode}
+				<div>{formatNumber(value)}</div>
+			{/if}
 		</div>
 	</div>
 </PointerEventDispatcher>

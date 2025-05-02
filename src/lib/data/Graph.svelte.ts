@@ -4,6 +4,7 @@ import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import { Connection } from './Connection';
 import type { Connector } from './Connector';
 import { ExternalModule } from './ExternalModule';
+import { getAreInputPathsEqual } from './getAreInputPathsEqual';
 import type { GraphRegistry } from './GraphRegistry';
 import { instantiateNode } from './instantiateNode';
 import { InternalModule } from './InternalModule.svelte';
@@ -56,6 +57,16 @@ export class Graph {
 			this.connectors.add(node.output);
 			node.inputs.forEach((input) => {
 				this.connectors.add(input);
+
+				const targetNodeId = graphRegistry.connections.values().find((connection) => {
+					return getAreInputPathsEqual(connection.inputPath, {
+						nodeId: input.node.id,
+						inputKey: input.key,
+					});
+				})?.targetNodeId;
+				if (targetNodeId) {
+					input.targetNode = this.nodes.get(targetNodeId);
+				}
 			});
 		});
 	}
