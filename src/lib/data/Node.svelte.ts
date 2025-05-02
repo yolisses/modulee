@@ -21,8 +21,8 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 
 	private getInputs() {
 		const nodeType = nodeTypesByName[this.type];
-		return nodeType.inputNames.map((inputName) => {
-			return new Input(inputName, inputName, this);
+		return nodeType.inputs.map((input) => {
+			return new Input(input.key, input.key, this);
 		});
 	}
 

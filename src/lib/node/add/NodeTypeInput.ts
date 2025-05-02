@@ -1,7 +1,7 @@
 export type NodeTypeInput = {
 	min: number;
 	max: number;
-	name: string;
+	key: string;
 	isBoolean: boolean;
 	defaultValue: number;
 };
