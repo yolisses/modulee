@@ -51,7 +51,7 @@
 			{getId}
 			{getName}
 			onClick={handleSelectModule}
-			values={graphContext.graph.modules.values()}
+			items={graphContext.graph.modules.values()}
 		/>
 		<CreateInternalModuleButton onInternalModuleCreated={handleInternalModuleCreated} />
 		<SearchExternalModuleButton />

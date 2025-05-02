@@ -52,7 +52,7 @@
 		<BasicList
 			getId={getName}
 			getName={getNodeTypeName}
-			values={nodeTypeCategory.nodeTypes}
+			items={nodeTypeCategory.nodeTypes}
 			onClick={addNodeMenuLogic.handleNodeTypeSelect}
 		/>
 	</div>

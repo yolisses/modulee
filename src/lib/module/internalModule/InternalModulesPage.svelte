@@ -41,9 +41,9 @@
 	{#snippet topChildren()}
 		<CreateInternalModuleButton />
 	{/snippet}
-	<BasicList {getId} {getName} {getHref} values={graphContext.graph.internalModules.values()}>
-		{#snippet buttons(internalModule)}
-			<button class="common-button" onclick={() => handleDelete(internalModule)}>Delete</button>
+	<BasicList {getId} {getName} {getHref} items={graphContext.graph.internalModules.values()}>
+		{#snippet buttons({ item })}
+			<button class="common-button" onclick={() => handleDelete(item)}>Delete</button>
 		{/snippet}
 	</BasicList>
 </ListPageLayout>

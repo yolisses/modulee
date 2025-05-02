@@ -28,12 +28,12 @@
 {#if projectsData.length === 0}
 	<div class="opacity-50">Use the create project button to make something</div>
 {:else}
-	<BasicList values={projectsData} {getId} {getName} {getHref}>
-		{#snippet buttons(value)}
+	<BasicList items={projectsData} {getId} {getName} {getHref}>
+		{#snippet buttons({ item })}
 			<DotsMenuButton>
-				<RenameProjectButton projectData={value} />
-				<DeleteProjectButton projectId={value.id} />
-				<DownloadProjectButton projectData={value} />
+				<RenameProjectButton projectData={item} />
+				<DeleteProjectButton projectId={item.id} />
+				<DownloadProjectButton projectData={item} />
 			</DotsMenuButton>
 		{/snippet}
 	</BasicList>

@@ -83,7 +83,7 @@
 		{:else}
 			<BasicList
 				getId={getName}
-				values={options}
+				items={options}
 				getName={getNodeTypeName}
 				onClick={handleTypeSelect}
 			/>

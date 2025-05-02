@@ -26,12 +26,12 @@
 {:else}
 	<BasicList
 		getId={getName}
-		values={options}
+		items={options}
 		getName={getNodeTypeName}
 		compare={compareByCategoryAndName}
 		onClick={addNodeMenuLogic.handleNodeTypeSelect}
 	>
-		{#snippet content({ value: nodeType })}
+		{#snippet content({ item: nodeType })}
 			<div class="mr-1 text-white/50">
 				{nodeCategoryNames[nodeType.category]}
 			</div>

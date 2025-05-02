@@ -3,14 +3,14 @@
 	import BasicItem from './BasicItem.svelte';
 
 	type Props = {
-		values: T[];
-		getId: (value: T) => any;
-		onClick?: (value: T) => void;
-		getName: (value: T) => string;
-		buttons?: Snippet<[value: T]>;
-		getHref?: (value: T) => string;
-		content?: Snippet<[{ value: T; text: string }]>;
+		items: T[];
+		getId: (item: T) => any;
+		onClick?: (item: T) => void;
+		getName: (item: T) => string;
+		getHref?: (item: T) => string;
+		buttons?: Snippet<[{ item: T }]>;
 		compare?: (a: T, b: T) => number;
+		content?: Snippet<[{ item: T; text: string }]>;
 	};
 
 	function compareByName(a: T, b: T) {
@@ -19,7 +19,7 @@
 
 	const {
 		getId,
-		values,
+		items,
 		onClick,
 		getName,
 		buttons,
@@ -28,22 +28,15 @@
 		compare = compareByName,
 	}: Props = $props();
 
-	const sortedValues = $derived(
-		values.toSorted((a, b) => {
+	const sortedItems = $derived(
+		items.toSorted((a, b) => {
 			return (compare ?? compareByName)(a, b);
 		}),
 	);
 </script>
 
 <div>
-	{#each sortedValues as value (getId(value))}
-		<BasicItem
-			{value}
-			{onClick}
-			{buttons}
-			{content}
-			text={getName(value)}
-			href={getHref?.(value)}
-		/>
+	{#each sortedItems as item (getId(item))}
+		<BasicItem {item} {onClick} {buttons} {content} text={getName(item)} href={getHref?.(item)} />
 	{/each}
 </div>
