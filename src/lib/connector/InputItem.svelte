@@ -25,7 +25,7 @@
 		<ConnectorJoint connector={input} />
 	</div>
 	<div
-		class="relative flex flex-row items-center overflow-hidden hover:bg-white/10"
+		class="relative flex flex-row items-center overflow-hidden"
 		style:border-radius={isLast ? '0 0 0.4lh 0.4lh' : undefined}
 	>
 		{#if input.targetNode}

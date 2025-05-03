@@ -18,10 +18,12 @@
 <div class="relative flex flex-1 flex-row items-center overflow-hidden">
 	<div
 		title={input.name}
-		style:margin-left="0.3lh"
-		class="overflow-and-ellipsis flex-1 overflow-hidden"
+		style:padding-left="0.3lh"
+		class="overflow-and-ellipsis flex-1 overflow-hidden hover:bg-white/10"
 	>
 		{input.name}
 	</div>
-	<div class="opacity-50">{formatNumber(value)}</div>
+	<div class="flex-1 cursor-ns-resize text-end opacity-50 hover:bg-white/10">
+		{formatNumber(value)}
+	</div>
 </div>

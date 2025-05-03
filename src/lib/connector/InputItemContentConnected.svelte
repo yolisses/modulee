@@ -10,8 +10,8 @@
 
 <div
 	title={input.name}
-	style:margin-left="0.3lh"
-	class="overflow-and-ellipsis flex-1 overflow-hidden"
+	style:padding-left="0.3lh"
+	class="overflow-and-ellipsis flex-1 overflow-hidden hover:bg-white/10"
 >
 	{input.name}
 </div>
