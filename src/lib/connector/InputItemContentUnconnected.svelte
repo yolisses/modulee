@@ -8,9 +8,8 @@
 
 	const { input }: Props = $props();
 
-	const min = 0;
-	const max = 1;
-	const value = Math.random();
+	const { min, max } = input.inputDefinition;
+	const value = input.inputDefinition.defaultValue;
 	const ratio = (value - min) / (max - min);
 	const percentage = 100 * ratio;
 </script>
