@@ -4,10 +4,10 @@
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getNodeTypeName } from '../definitions/getNodeTypeName';
+	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
+	import type { NodeTypeCategory } from '../definitions/NodeTypeCategory';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
-	import { getNodeTypeName } from './getNodeTypeName';
-	import { nodeCategoryNames } from './nodeCategoryNames';
-	import type { NodeTypeCategory } from './NodeTypeCategory';
 
 	interface Props {
 		nodeTypeCategory: NodeTypeCategory;

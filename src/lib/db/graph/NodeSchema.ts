@@ -1,6 +1,6 @@
 import { ID_LENGTH } from '$lib/data/ID_LENGTH';
 import type { NodeData } from '$lib/data/NodeData';
-import { nodeTypeMaxLength } from '$lib/node/add/nodeTypeMaxLength';
+import { nodeTypeMaxLength } from '$lib/node/definitions/nodeTypeMaxLength';
 import { Schema } from 'mongoose';
 import { VectorSchema } from './VectorSchema';
 

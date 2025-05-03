@@ -4,8 +4,8 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
-import type { NodeType } from '$lib/node/add/NodeType';
-import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
+import type { NodeType } from '$lib/node/definitions/NodeType';
+import { nodeTypesByName } from '$lib/node/definitions/nodeTypesById';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
 

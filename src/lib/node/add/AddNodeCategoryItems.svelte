@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
+	import { nodeTypeCategories } from '../definitions/nodeTypeCategories';
+	import type { NodeTypeCategory } from '../definitions/NodeTypeCategory';
 	import AddNodeCategoryItem from './AddNodeCategoryItem.svelte';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
-	import { nodeCategoryNames } from './nodeCategoryNames';
-	import { nodeTypeCategories } from './nodeTypeCategories';
-	import type { NodeTypeCategory } from './NodeTypeCategory';
 
 	interface Props {
 		addNodeMenuLogic: AddNodeMenuLogic;

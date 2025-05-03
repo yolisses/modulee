@@ -1,8 +1,8 @@
-import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
 import { Vector } from 'nodes-editor';
 import { Input } from './Input.svelte';
 import type { NodeDataBase } from './NodeDataBase';
 import { Output } from './Output.svelte';
+import { nodeTypesByName } from '$lib/node/definitions/nodeTypesById';
 
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;

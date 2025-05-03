@@ -1,6 +1,6 @@
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
-import { nodeTypesByName } from '$lib/node/add/nodeTypesById';
+import { nodeTypesByName } from '$lib/node/definitions/nodeTypesById';
 
 // TODO consider adopting an OOP approach
 export function getBaseNodeInputPaths(nodeData: NodeData): InputPath[] {

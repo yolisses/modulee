@@ -5,10 +5,10 @@ import { getInternalModuleIdContext } from '$lib/module/internalModule/internalM
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getSpaceContext } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
+import { getNodeTypeName } from '../definitions/getNodeTypeName';
+import { nodeTypes } from '../definitions/nodeTypes';
 import { createNodeData } from './createNodeData';
-import { getNodeTypeName } from './getNodeTypeName';
-import type { NodeType } from './NodeType';
-import { nodeTypes } from './nodeTypes';
+import type { NodeType } from '../definitions/NodeType';
 
 export class AddNodeMenuLogic {
 	searchText = $state('');

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getName } from '$lib/ui/getName';
+	import { getNodeTypeName } from '../definitions/getNodeTypeName';
+	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
+	import { nodesName } from '../definitions/nodeNames';
+	import type { NodeType } from '../definitions/NodeType';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
-	import { getNodeTypeName } from './getNodeTypeName';
-	import { nodeCategoryNames } from './nodeCategoryNames';
-	import { nodesName } from './nodeNames';
-	import type { NodeType } from './NodeType';
 
 	interface Props {
 		addNodeMenuLogic: AddNodeMenuLogic;

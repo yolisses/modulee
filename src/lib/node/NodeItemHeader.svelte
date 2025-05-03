@@ -18,7 +18,7 @@
 	} from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
-	import { nodesName } from './add/nodeNames.js';
+	import { nodesName } from './definitions/nodeNames.js';
 
 	interface Props {
 		node: Node;

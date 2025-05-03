@@ -8,10 +8,10 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getName } from '$lib/ui/getName.js';
 	import type { Vector } from 'nodes-editor';
+	import { nodesName } from '../definitions/nodeNames.js';
+	import type { NodeType } from '../definitions/NodeType.js';
+	import { nodeTypes } from '../definitions/nodeTypes.js';
 	import { createNodeData } from './createNodeData.js';
-	import { nodesName } from './nodeNames.js';
-	import type { NodeType } from './NodeType.js';
-	import { nodeTypes } from './nodeTypes.js';
 
 	interface Props {
 		closeModal: () => void;

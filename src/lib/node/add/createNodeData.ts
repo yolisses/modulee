@@ -1,7 +1,7 @@
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
-import type { NodeType } from './NodeType';
+import type { NodeType } from '../definitions/NodeType';
 
 export function createNodeData(
 	nodeType: NodeType,
