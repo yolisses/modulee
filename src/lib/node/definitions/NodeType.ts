@@ -1,8 +1,8 @@
-import type { NodeTypeInput } from './NodeTypeInput';
+import type { InputDefinition } from './InputDefinition';
 
 export type NodeType = {
 	name: string;
 	category: string;
-	inputs: NodeTypeInput[];
+	inputs: InputDefinition[];
 	defaultExtras: Record<string, number | string>;
 };

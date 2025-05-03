@@ -1,4 +1,4 @@
-export type NodeTypeInput = {
+export type InputDefinition = {
 	min: number;
 	max: number;
 	key: string;
