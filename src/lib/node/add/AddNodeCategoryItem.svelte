@@ -4,19 +4,19 @@
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getNodeTypeName } from '../definitions/getNodeTypeName';
+	import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
-	import type { NodeTypeCategory } from '../definitions/NodeTypeCategory';
+	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
 
 	interface Props {
-		nodeTypeCategory: NodeTypeCategory;
+		nodeDefinitionCategory: NodeDefinitionCategory;
 		addNodeMenuLogic: AddNodeMenuLogic;
 	}
 
 	let floating = $state<HTMLElement>();
 	let reference = $state<HTMLElement>();
-	const { nodeTypeCategory, addNodeMenuLogic }: Props = $props();
+	const { nodeDefinitionCategory, addNodeMenuLogic }: Props = $props();
 
 	function updatePosition() {
 		if (!floating) return;
@@ -41,7 +41,7 @@
 <div class="group relative flex flex-col items-stretch">
 	<button class="common-button group-hover:bg-white/10" bind:this={reference}>
 		<div class="flex-1 text-start">
-			{nodeCategoryNames[nodeTypeCategory.name]}
+			{nodeCategoryNames[nodeDefinitionCategory.name]}
 		</div>
 		<Fa icon={faChevronRight} class="opacity-50" size="xs" />
 	</button>
@@ -51,9 +51,9 @@
 	>
 		<BasicList
 			getId={getName}
-			getName={getNodeTypeName}
-			items={nodeTypeCategory.nodeTypes}
-			onClick={addNodeMenuLogic.handleNodeTypeSelect}
+			getName={getNodeDefinitionName}
+			items={nodeDefinitionCategory.nodeDefinitions}
+			onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
 		/>
 	</div>
 </div>

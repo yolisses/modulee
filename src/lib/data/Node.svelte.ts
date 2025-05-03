@@ -2,7 +2,7 @@ import { Vector } from 'nodes-editor';
 import { Input } from './Input.svelte';
 import type { NodeDataBase } from './NodeDataBase';
 import { Output } from './Output.svelte';
-import { nodeTypesByName } from '$lib/node/definitions/nodeTypesById';
+import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
@@ -20,8 +20,8 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 	}
 
 	private getInputs() {
-		const nodeType = nodeTypesByName[this.type];
-		return nodeType.inputs.map((input) => {
+		const nodeDefinition = nodeDefinitionsByName[this.type];
+		return nodeDefinition.inputs.map((input) => {
 			return new Input(input.key, input.key, this);
 		});
 	}

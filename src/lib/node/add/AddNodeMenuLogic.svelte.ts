@@ -5,10 +5,10 @@ import { getInternalModuleIdContext } from '$lib/module/internalModule/internalM
 import { getProjectDataContext } from '$lib/project/projectDataContext';
 import { getSpaceContext } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
-import { getNodeTypeName } from '../definitions/getNodeTypeName';
-import { nodeTypes } from '../definitions/nodeTypes';
+import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
+import type { NodeDefinition } from '../definitions/NodeDefinition';
+import { nodeDefinitions } from '../definitions/nodeDefinitions';
 import { createNodeData } from './createNodeData';
-import type { NodeType } from '../definitions/NodeType';
 
 export class AddNodeMenuLogic {
 	searchText = $state('');
@@ -23,15 +23,17 @@ export class AddNodeMenuLogic {
 	) {}
 
 	getOptions() {
-		return nodeTypes.filter((nodeType) => {
-			return getNodeTypeName(nodeType).toLowerCase().includes(this.searchText.toLowerCase());
+		return nodeDefinitions.filter((nodeDefinition) => {
+			return getNodeDefinitionName(nodeDefinition)
+				.toLowerCase()
+				.includes(this.searchText.toLowerCase());
 		});
 	}
 
-	handleNodeTypeSelect = (nodeType: NodeType) => {
+	handleNodeDefinitionSelect = (nodeDefinition: NodeDefinition) => {
 		const dataPosition = this.spaceContext.space.getDataPosition(this.screenPosition).floor();
 		const nodeData = createNodeData(
-			nodeType,
+			nodeDefinition,
 			this.internalModuleIdContext.internalModuleId,
 			dataPosition,
 		);

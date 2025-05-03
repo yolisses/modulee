@@ -8,9 +8,9 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getName } from '$lib/ui/getName.js';
 	import type { Vector } from 'nodes-editor';
-	import { nodesName } from '../definitions/nodeNames.js';
-	import type { NodeType } from '../definitions/NodeType.js';
-	import { nodeTypes } from '../definitions/nodeTypes.js';
+	import type { NodeDefinition } from '../definitions/NodeDefinition.js';
+	import { nodeDefinitions } from '../definitions/nodeDefinitions.js';
+	import { nodesName } from '../definitions/nodesName.js';
 	import { createNodeData } from './createNodeData.js';
 
 	interface Props {
@@ -27,10 +27,10 @@
 
 	const { closeModal, screenPosition }: Props = $props();
 
-	function handleTypeSelect(nodeType: NodeType) {
+	function handleTypeSelect(nodeDefinition: NodeDefinition) {
 		const dataPosition = spaceContext.space.getDataPosition(screenPosition).floor();
 		const nodeData = createNodeData(
-			nodeType,
+			nodeDefinition,
 			internalModuleIdContext.internalModuleId,
 			dataPosition,
 		);
@@ -45,8 +45,8 @@
 		closeModal();
 	}
 
-	function getNodeTypeName(nodeType: NodeType) {
-		return nodesName[nodeType.name];
+	function getNodeDefinitionName(nodeDefinition: NodeDefinition) {
+		return nodesName[nodeDefinition.name];
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -58,8 +58,8 @@
 	}
 
 	const options = $derived(
-		nodeTypes.filter((nodeType) => {
-			return getNodeTypeName(nodeType).toLowerCase().includes(searchText.toLowerCase());
+		nodeDefinitions.filter((nodeDefinition) => {
+			return getNodeDefinitionName(nodeDefinition).toLowerCase().includes(searchText.toLowerCase());
 		}),
 	);
 </script>
@@ -84,7 +84,7 @@
 			<BasicList
 				getId={getName}
 				items={options}
-				getName={getNodeTypeName}
+				getName={getNodeDefinitionName}
 				onClick={handleTypeSelect}
 			/>
 		{/if}

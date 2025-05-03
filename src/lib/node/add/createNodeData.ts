@@ -1,10 +1,10 @@
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
-import type { NodeType } from '../definitions/NodeType';
+import type { NodeDefinition } from '../definitions/NodeDefinition';
 
 export function createNodeData(
-	nodeType: NodeType,
+	nodeDefinition: NodeDefinition,
 	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
@@ -13,7 +13,7 @@ export function createNodeData(
 		internalModuleId,
 		position,
 		id: createId(),
-		type: nodeType.name,
-		extras: structuredClone(nodeType.defaultExtras),
+		type: nodeDefinition.name,
+		extras: structuredClone(nodeDefinition.defaultExtras),
 	} as unknown as NodeData;
 }

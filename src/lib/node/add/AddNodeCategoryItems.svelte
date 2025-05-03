@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
-	import { nodeTypeCategories } from '../definitions/nodeTypeCategories';
-	import type { NodeTypeCategory } from '../definitions/NodeTypeCategory';
+	import { nodeDefinitionCategories } from '../definitions/nodeDefinitionCategories';
+	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
 	import AddNodeCategoryItem from './AddNodeCategoryItem.svelte';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
 
@@ -11,17 +11,17 @@
 
 	const { addNodeMenuLogic }: Props = $props();
 
-	function getNodeTypeCategoryText(nodeTypeCategory: NodeTypeCategory) {
-		return nodeCategoryNames[nodeTypeCategory.name];
+	function getNodeDefinitionCategoryText(nodeDefinitionCategory: NodeDefinitionCategory) {
+		return nodeCategoryNames[nodeDefinitionCategory.name];
 	}
 
-	const sortedNodeTypeCategories = $derived(
-		nodeTypeCategories.sort((a, b) =>
-			getNodeTypeCategoryText(a).localeCompare(getNodeTypeCategoryText(b)),
+	const sortedNodeDefinitionCategories = $derived(
+		nodeDefinitionCategories.sort((a, b) =>
+			getNodeDefinitionCategoryText(a).localeCompare(getNodeDefinitionCategoryText(b)),
 		),
 	);
 </script>
 
-{#each sortedNodeTypeCategories as nodeTypeCategory}
-	<AddNodeCategoryItem {addNodeMenuLogic} {nodeTypeCategory} />
+{#each sortedNodeDefinitionCategories as nodeDefinitionCategory}
+	<AddNodeCategoryItem {addNodeMenuLogic} {nodeDefinitionCategory} />
 {/each}

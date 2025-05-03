@@ -12,7 +12,7 @@
 		if (addNodeMenuLogic.searchText.length === 0) return;
 		const option = addNodeMenuLogic.getOptions()[0];
 		if (!option) return;
-		addNodeMenuLogic.handleNodeTypeSelect(option);
+		addNodeMenuLogic.handleNodeDefinitionSelect(option);
 	}
 </script>
 

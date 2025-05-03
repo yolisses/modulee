@@ -1,6 +1,6 @@
 import type { InputDefinition } from './InputDefinition';
 
-export type NodeType = {
+export type NodeDefinition = {
 	name: string;
 	category: string;
 	inputs: InputDefinition[];

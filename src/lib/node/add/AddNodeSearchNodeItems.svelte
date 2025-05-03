@@ -1,10 +1,10 @@
 <script lang="ts">
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getName } from '$lib/ui/getName';
-	import { getNodeTypeName } from '../definitions/getNodeTypeName';
+	import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
-	import { nodesName } from '../definitions/nodeNames';
-	import type { NodeType } from '../definitions/NodeType';
+	import type { NodeDefinition } from '../definitions/NodeDefinition';
+	import { nodesName } from '../definitions/nodesName';
 	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
 
 	interface Props {
@@ -14,7 +14,7 @@
 	const { addNodeMenuLogic }: Props = $props();
 	const options = $derived(addNodeMenuLogic.getOptions());
 
-	function compareByCategoryAndName(a: NodeType, b: NodeType) {
+	function compareByCategoryAndName(a: NodeDefinition, b: NodeDefinition) {
 		const aFullText = nodeCategoryNames[a.category] + ' ' + nodesName[a.name];
 		const bFullText = nodeCategoryNames[b.category] + ' ' + nodesName[b.name];
 		return aFullText.localeCompare(bFullText);
@@ -27,15 +27,15 @@
 	<BasicList
 		getId={getName}
 		items={options}
-		getName={getNodeTypeName}
+		getName={getNodeDefinitionName}
 		compare={compareByCategoryAndName}
-		onClick={addNodeMenuLogic.handleNodeTypeSelect}
+		onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
 	>
-		{#snippet content({ item: nodeType })}
+		{#snippet content({ item: nodeDefinition })}
 			<div class="mr-1 text-white/50">
-				{nodeCategoryNames[nodeType.category]}
+				{nodeCategoryNames[nodeDefinition.category]}
 			</div>
-			{getNodeTypeName(nodeType)}
+			{getNodeDefinitionName(nodeDefinition)}
 		{/snippet}
 	</BasicList>
 {/if}

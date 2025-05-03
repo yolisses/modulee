@@ -4,8 +4,8 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
-import type { NodeType } from '$lib/node/definitions/NodeType';
-import { nodeTypesByName } from '$lib/node/definitions/nodeTypesById';
+import type { NodeDefinition } from '$lib/node/definitions/NodeDefinition';
+import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
 
@@ -21,9 +21,9 @@ function getIsSomeModuleNode(nodeData: NodeData) {
 	return nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode';
 }
 
-export function getNodeDataFromNodeType(
+export function getNodeDataFromNodeDefinition(
 	nodeId: string,
-	nodeType: NodeType,
+	nodeDefinition: NodeDefinition,
 	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
@@ -31,25 +31,25 @@ export function getNodeDataFromNodeType(
 		position,
 		id: nodeId,
 		internalModuleId,
-		type: nodeType.name,
-		extras: structuredClone(nodeType.defaultExtras),
+		type: nodeDefinition.name,
+		extras: structuredClone(nodeDefinition.defaultExtras),
 	} as NodeData;
 }
 
-function getNodeTypeName(inputKey: string) {
+function getNodeDefinitionName(inputKey: string) {
 	return inputKey[0].toUpperCase() + inputKey.slice(1) + 'Node';
 }
 
 export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData) {
-	const nodeTypeName = getNodeTypeName(inputPath.inputKey);
-	const nodeType = nodeTypesByName[nodeTypeName];
-	if (!nodeType) return;
+	const nodeDefinitionName = getNodeDefinitionName(inputPath.inputKey);
+	const nodeDefinition = nodeDefinitionsByName[nodeDefinitionName];
+	if (!nodeDefinition) return;
 
 	const implicitNodeId = getImplicitNodeId(inputPath);
 	const positionData: VectorData = { x: 0, y: 0 };
-	const implicitNodeData: NodeData = getNodeDataFromNodeType(
+	const implicitNodeData: NodeData = getNodeDataFromNodeDefinition(
 		implicitNodeId,
-		nodeType,
+		nodeDefinition,
 		nodeData.internalModuleId,
 		positionData,
 	);

@@ -1,12 +1,12 @@
-import type { NodeTypeCategory } from './NodeTypeCategory';
+import type { NodeDefinitionCategory } from './NodeDefinitionCategory';
 
 // TODO consider normalizing it
 //
 // TODO consider creating a type for node type input
-export const nodeTypeCategories: NodeTypeCategory[] = [
+export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 	{
 		name: 'math',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'math',
 				defaultExtras: {},
@@ -137,7 +137,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'basic',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'basic',
 				defaultExtras: {},
@@ -252,7 +252,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'filter',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'filter',
 				defaultExtras: {},
@@ -369,7 +369,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'random',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'random',
 				defaultExtras: {},
@@ -394,7 +394,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'module',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'module',
 				defaultExtras: {},
@@ -433,7 +433,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'wave',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'wave',
 				defaultExtras: {},
@@ -501,7 +501,7 @@ export const nodeTypeCategories: NodeTypeCategory[] = [
 	},
 	{
 		name: 'logic',
-		nodeTypes: [
+		nodeDefinitions: [
 			{
 				category: 'logic',
 				defaultExtras: {},
