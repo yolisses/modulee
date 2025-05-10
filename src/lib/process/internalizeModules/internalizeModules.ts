@@ -3,7 +3,9 @@ import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModu
 import { internalizeGraphParts } from './internalizeGraphParts';
 import { internalizeModuleNodeModuleReferences } from './internalizeModuleNodeModuleReferences';
 
-// TODO add connections
+/**
+ * Replace external modules by equivalent internal modules
+ */
 export function internalizeModules(
 	graphRegistry: GraphRegistry,
 	externalModulesData: ExternalModuleData[],
