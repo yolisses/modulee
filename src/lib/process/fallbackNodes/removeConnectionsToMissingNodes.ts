@@ -1,6 +1,9 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 
-export function removeMissingNodeReferences(graphRegistry: GraphRegistry) {
+/**
+ * Removes the connections to nodes that are not present, e.g.: deleted nodes.
+ */
+export function removeConnectionsToMissingNodes(graphRegistry: GraphRegistry) {
 	const { nodes } = graphRegistry;
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const { targetNodeId } = connectionData;

@@ -1,9 +1,9 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
-import { removeMissingNodeReferences } from './removeMissingNodeReferences';
+import { removeConnectionsToMissingNodes } from './removeConnectionsToMissingNodes';
 
-test('removeMissingNodeReferences', () => {
+test('removeConnectionsToMissingNodes', () => {
 	const graphRegistry = {
 		nodes: ById.fromItems([{ id: 'node1' }, { id: 'node3' }]),
 		connections: ById.fromItems([
@@ -13,7 +13,7 @@ test('removeMissingNodeReferences', () => {
 		]),
 	} as GraphRegistry;
 
-	removeMissingNodeReferences(graphRegistry);
+	removeConnectionsToMissingNodes(graphRegistry);
 
 	expect(graphRegistry.connections.values()).toEqual([
 		{ id: 'connection1', targetNodeId: 'node1' },
