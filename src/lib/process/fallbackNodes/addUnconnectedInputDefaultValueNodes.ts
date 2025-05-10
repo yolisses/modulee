@@ -25,7 +25,6 @@ export function addUnconnectedInputDefaultValueNodes(graphRegistry: GraphRegistr
 			const { key } = inputDefinition;
 			if (isInputConnected[inputDefinition.key]) return;
 
-			console.log(nodeData.unconnectedInputValues);
 			const defaultValue = nodeData.unconnectedInputValues[key];
 			const constantNodeData: ConstantNodeData = {
 				id: createId(),
