@@ -10,7 +10,9 @@
 	}
 
 	const { internalModule }: Props = $props();
-	let open = $state(true);
+	const moduleNodes = $derived(internalModule.nodes.filter(getIsSomeModuleNode));
+	// svelte-ignore state_referenced_locally
+	let open = $state(moduleNodes.length > 0);
 
 	function handleClick() {
 		open = !open;
@@ -30,9 +32,13 @@
 		</button>
 	</summary>
 	<div class="flex flex-row flex-wrap gap-1 pt-1">
-		{#each internalModule.nodes.filter(getIsSomeModuleNode) as moduleNode}
-			<RackModuleNodeItem {moduleNode} />
-		{/each}
+		{#if moduleNodes.length > 0}
+			{#each moduleNodes as moduleNode}
+				<RackModuleNodeItem {moduleNode} />
+			{/each}
+		{:else}
+			<div class="opacity-50">No module nodes to adjust</div>
+		{/if}
 	</div>
 </details>
 
