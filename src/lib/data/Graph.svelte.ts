@@ -65,7 +65,7 @@ export class Graph {
 					});
 				})?.targetNodeId;
 				if (targetNodeId) {
-					input.targetNode = this.nodes.get(targetNodeId);
+					input.targetNode = this.nodes.getOrNull(targetNodeId) ?? undefined;
 				}
 			});
 		});
