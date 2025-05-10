@@ -2,6 +2,7 @@ import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
 import type { NodeDefinition } from '../definitions/NodeDefinition';
+import { createUnconnectedInputValues } from './createUnconnectedInputValues';
 
 export function createNodeData(
 	nodeDefinition: NodeDefinition,
@@ -15,5 +16,6 @@ export function createNodeData(
 		id: createId(),
 		type: nodeDefinition.name,
 		extras: structuredClone(nodeDefinition.defaultExtras),
-	} as unknown as NodeData;
+		unconnectedInputValues: createUnconnectedInputValues(nodeDefinition),
+	} as NodeData;
 }
