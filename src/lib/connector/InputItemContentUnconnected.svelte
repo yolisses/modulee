@@ -23,7 +23,7 @@
 	>
 		{input.name}
 	</div>
-	<div class="flex-1 cursor-ns-resize text-end opacity-50 hover:bg-white/10">
+	<div class="flex-1 cursor-ew-resize text-end opacity-50 hover:bg-white/10">
 		{formatNumber(value)}
 	</div>
 </div>
