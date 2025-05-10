@@ -7,8 +7,8 @@
 		input: Input;
 	}
 
-	let initialValue: number;
 	let element: HTMLElement;
+	let initialValue: number;
 	let initialClientX: number;
 	let sizeElement: HTMLElement;
 	let pointerId = $state<number>();
@@ -21,9 +21,9 @@
 
 	function handlePointerDown(e: PointerEvent) {
 		e.stopPropagation();
-		initialValue = value;
 		pointerId = e.pointerId;
 		initialClientX = e.clientX;
+		initialValue = value;
 		element.setPointerCapture(e.pointerId);
 	}
 
@@ -36,11 +36,11 @@
 
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
-		const range = max - min;
 		const { width } = sizeElement.getBoundingClientRect();
-		let delta = e.movementX / width;
-		delta /= range;
-		value = clamp(value + delta, min, max);
+		const mouseDelta = e.clientX - initialClientX; // Total movement since click
+		const fractionDelta = mouseDelta / width; // Normalize to [0, 1] per slider width
+		const valueDelta = fractionDelta * (max - min); // Scale to value range
+		value = clamp(initialValue + valueDelta, min, max); // Apply to initial value
 	}
 </script>
 
