@@ -101,6 +101,10 @@ export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphReg
 }
 
 // TODO consider adopting an OOP approach
+/**
+ * Add automatic nodes based in the node type name and the input key, e.g.:
+ * create a `PitchNode` for a input which key is `"pitch"`
+ */
 export function addImplicitNodes(graphRegistry: GraphRegistry) {
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		addNodeImplicitNodes(nodeData, graphRegistry);
