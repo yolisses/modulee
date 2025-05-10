@@ -20,6 +20,12 @@
 	@apply button hover-bg gap-1 rounded p-2;
 }
 
+/* Scrollbar */
+/* width */
+.scroll-small::-webkit-scrollbar {
+	@apply h-1 w-1;
+}
+
 @layer base {
 	html {
 		font-family: 'Lato', 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;

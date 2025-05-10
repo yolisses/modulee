@@ -27,12 +27,3 @@
 		{/if}
 	</div>
 </div>
-
-<style>
-	/* Scrollbar */
-	/* width */
-	.scroll-small::-webkit-scrollbar {
-		width: 0.25rem;
-		height: 0.25rem;
-	}
-</style>
