@@ -43,11 +43,14 @@
 		if (nodes.length === 0) {
 			minPosition = undefined;
 		} else {
-			const newMinPosition = getNewOffset(nodes);
+			let newMinPosition = getNewOffset(nodes);
 			if (!minPosition) {
 				minPosition = newMinPosition;
-			} else if (minPosition.notEquals(newMinPosition)) {
-				minPosition = minPosition.min(newMinPosition);
+			} else {
+				newMinPosition = minPosition.min(newMinPosition);
+				if (minPosition.notEquals(newMinPosition)) {
+					minPosition = newMinPosition;
+				}
 			}
 		}
 	});
