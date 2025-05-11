@@ -3,8 +3,6 @@ import { getProjectsRepository } from '$lib/project/getProjectsRepository';
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
 
-export const ssr = false;
-
 export const load: LayoutLoad = async ({ params }) => {
 	const { projectId } = params;
 	const projectsRepository = getProjectsRepository();
@@ -16,9 +14,6 @@ export const load: LayoutLoad = async ({ params }) => {
 	}
 
 	// TODO load external modules data from remote repository
-	const externalModuleIds = projectData.graph.externalModuleReferences.map(
-		(externalModuleReference) => externalModuleReference.id,
-	);
 	const externalModulesData: ExternalModuleData[] = [];
 
 	return { projectData, externalModulesData };
