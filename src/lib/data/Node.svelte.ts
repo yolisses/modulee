@@ -1,8 +1,8 @@
+import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { Vector } from 'nodes-editor';
 import { Input } from './Input.svelte';
 import type { NodeDataBase } from './NodeDataBase';
 import { Output } from './Output.svelte';
-import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
@@ -40,5 +40,9 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 
 	get internalModuleId() {
 		return this.nodeData.internalModuleId;
+	}
+
+	get unconnectedInputValues(): T['unconnectedInputValues'] {
+		return this.nodeData.unconnectedInputValues;
 	}
 }
