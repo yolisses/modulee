@@ -2,11 +2,11 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class SetUnconnectedDefaultValueCommand extends EditorCommand<{
+export class SetUnconnectedInputValueCommand extends EditorCommand<{
 	value: number;
 	inputPath: InputPath;
 }> {
-	static name = 'SetUnconnectedDefaultValueCommand';
+	static name = 'SetUnconnectedInputValueCommand';
 
 	previousValue!: number;
 

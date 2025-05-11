@@ -3,9 +3,9 @@ import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { SetUnconnectedDefaultValueCommand } from './SetUnconnectedDefaultValueCommand';
+import { SetUnconnectedInputValueCommand } from './SetUnconnectedInputValueCommand';
 
-test('SetUnconnectedDefaultValueCommand', () => {
+test('SetUnconnectedInputValueCommand', () => {
 	const graphRegistry = {
 		nodes: ById.fromItems([
 			{ id: 'node1' },
@@ -13,7 +13,7 @@ test('SetUnconnectedDefaultValueCommand', () => {
 			{ id: 'node3' },
 		]),
 	} as GraphRegistry;
-	const command = new SetUnconnectedDefaultValueCommand(
+	const command = new SetUnconnectedInputValueCommand(
 		mockCommandData({ inputPath: { nodeId: 'node2', inputKey: 'key1' }, value: 2 }),
 	);
 
