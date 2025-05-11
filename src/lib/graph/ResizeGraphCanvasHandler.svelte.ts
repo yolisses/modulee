@@ -1,9 +1,10 @@
-import { getNodeRectsContext, getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
+import { getGraphContext } from '$lib/data/graphContext';
+import { getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
 import { graphCanvasPositioningStep } from './graphCanvasPositioningStep';
 
 export class ResizeGraphCanvasHandler {
+	graphContext = getGraphContext();
 	containerSize = $state(Vector.zero());
-	nodeRectsContext = getNodeRectsContext();
 	minSize = $state(new Vector(graphCanvasPositioningStep, graphCanvasPositioningStep));
 
 	initialize = (container: HTMLElement) => {
