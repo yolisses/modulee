@@ -362,6 +362,13 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 						min: 0,
 						key: 'resonance',
 					},
+					{
+						defaultValue: 1,
+						isBoolean: false,
+						max: 20,
+						min: -20,
+						key: 'gain',
+					},
 				],
 				name: 'PeakNode',
 			},
