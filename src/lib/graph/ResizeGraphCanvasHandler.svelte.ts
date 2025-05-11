@@ -1,10 +1,10 @@
 import { getNodeRectsContext, getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
+import { graphCanvasPositioningStep } from './graphCanvasPositioningStep';
 
 export class ResizeGraphCanvasHandler {
-	step = 100;
 	containerSize = $state(Vector.zero());
 	nodeRectsContext = getNodeRectsContext();
-	minSize = $state(new Vector(this.step, this.step));
+	minSize = $state(new Vector(graphCanvasPositioningStep, graphCanvasPositioningStep));
 
 	initialize = (container: HTMLElement) => {
 		const resizeObserver = new ResizeObserver((entries) => {
@@ -30,10 +30,10 @@ export class ResizeGraphCanvasHandler {
 		}
 
 		const currentMinSize = boundingRectSize
-			.divideByNumber(this.step)
+			.divideByNumber(graphCanvasPositioningStep)
 			.ceil()
-			.multiplyByNumber(this.step)
-			.addByNumber(this.step)
+			.multiplyByNumber(graphCanvasPositioningStep)
+			.addByNumber(graphCanvasPositioningStep)
 			.add(this.containerSize);
 
 		if (currentMinSize.x > this.minSize.x || currentMinSize.y > this.minSize.y) {

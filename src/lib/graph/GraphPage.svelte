@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
+	import type { Node } from '$lib/data/Node.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/node/InternalModulesNavbar.svelte';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
@@ -13,6 +14,7 @@
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
 	import { Vector } from 'nodes-editor';
 	import { onMount } from 'svelte';
+	import { getNodesMinPosition } from './getNodesMinPosition';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
 
@@ -25,9 +27,35 @@
 	const zoomContext = $state({ zoom: 20 });
 	setZoomContext(zoomContext);
 
+	let minPosition = $state<Vector>();
+	const graphCanvasPositioningStep = 10;
+	function getNewOffset(nodes: Node[]) {
+		return getNodesMinPosition(nodes)
+			.divideByNumber(graphCanvasPositioningStep)
+			.floor()
+			.multiplyByNumber(graphCanvasPositioningStep)
+			.subtractByNumber(graphCanvasPositioningStep);
+	}
+
+	$effect(() => {
+		const nodes = graphContext.graph.nodes.values();
+
+		if (nodes.length === 0) {
+			minPosition = undefined;
+		} else {
+			const newMinPosition = getNewOffset(nodes);
+			if (!minPosition) {
+				minPosition = newMinPosition;
+			} else if (minPosition.notEquals(newMinPosition)) {
+				minPosition = minPosition.min(newMinPosition);
+			}
+		}
+	});
+	$inspect(minPosition);
+
 	$effect(() => {
 		spaceContext.space = new Space([
-			new OffsetConverter(new Vector(3, 2)),
+			new OffsetConverter(minPosition?.negate() ?? Vector.zero()),
 			new ZoomConverter(zoomContext.zoom),
 		]);
 	});

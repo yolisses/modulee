@@ -71,6 +71,8 @@
 				{@render headerChildren?.()}
 			</NodeItemHeader>
 
+			{node.position.toString()}
+
 			{@render preInputsChildren?.()}
 
 			{#each node.inputs as input (input.id)}
