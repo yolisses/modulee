@@ -37,7 +37,7 @@
 				<RackModuleNodeItem {moduleNode} />
 			{/each}
 		{:else}
-			<div class="opacity-50">No module nodes to adjust</div>
+			<div class="opacity-50">No effects to adjust</div>
 		{/if}
 	</div>
 </details>
