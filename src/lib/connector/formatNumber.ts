@@ -1,4 +1,6 @@
 export function formatNumber(num: number): string {
+	if (isNaN(num)) return 'NaN';
+
 	const abs = Math.abs(num);
 	const sign = num < 0 ? '-' : '';
 
