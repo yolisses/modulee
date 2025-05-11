@@ -15,7 +15,7 @@
 	const { input }: Props = $props();
 
 	let value = $state(input.inputDefinition.defaultValue);
-	const { min, max } = input.inputDefinition;
+	const { min, max, isBoolean } = input.inputDefinition;
 	const ratio = $derived((value - min) / (max - min));
 	const percentage = $derived(100 * ratio);
 
@@ -32,15 +32,32 @@
 		e.stopPropagation();
 		element.releasePointerCapture(pointerId);
 		pointerId = undefined;
+		value = getNewValue(e);
+
+		if (value === initialValue) return;
 	}
 
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
+		value = getNewValue(e);
+	}
+
+	function getNewValue(e: PointerEvent) {
 		const { width } = sizeElement.getBoundingClientRect();
 		const mouseDelta = e.clientX - initialClientX; // Total movement since click
-		const fractionDelta = mouseDelta / width; // Normalize to [0, 1] per slider width
-		const valueDelta = fractionDelta * (max - min); // Scale to value range
-		value = clamp(initialValue + valueDelta, min, max); // Apply to initial value
+
+		if (isBoolean) {
+			if (mouseDelta === 0) {
+				return Math.round(value);
+			}
+			return mouseDelta > 0 ? 1 : 0;
+		} else {
+			const fractionDelta = mouseDelta / width; // Normalize to [0, 1] per slider width
+			const valueDelta = fractionDelta * (max - min); // Scale to value range
+			let newValue = clamp(initialValue + valueDelta, min, max); // Apply to initial value
+
+			return newValue;
+		}
 	}
 </script>
 
