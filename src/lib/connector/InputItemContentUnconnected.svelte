@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedDefaultValueCommand';
 	import { clamp } from '$lib/connection/clamp';
+	import { createId } from '$lib/data/createId';
 	import type { Input } from '$lib/data/Input.svelte';
+	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { formatNumber } from './formatNumber';
 
 	interface Props {
@@ -13,6 +17,8 @@
 	let sizeElement: HTMLElement;
 	let pointerId = $state<number>();
 	const { input }: Props = $props();
+	const editorContext = getEditorContext();
+	const projectDataContext = getProjectDataContext();
 
 	let value = $state(input.inputDefinition.defaultValue);
 	const { min, max, isBoolean } = input.inputDefinition;
@@ -35,6 +41,15 @@
 		value = getNewValue(e);
 
 		if (value === initialValue) return;
+
+		const command = new SetUnconnectedInputValueCommand({
+			id: createId(),
+			createdAt: new Date().toJSON(),
+			type: 'SetUnconnectedInputValueCommand',
+			projectId: projectDataContext.projectData.id,
+			details: { value, inputPath: structuredClone(input.inputPath) },
+		});
+		editorContext.editor.execute(command);
 	}
 
 	function handlePointerMove(e: PointerEvent) {
