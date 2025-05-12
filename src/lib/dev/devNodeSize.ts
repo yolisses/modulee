@@ -1,1 +1,1 @@
-export const nodeSize = 50;
+export const nodeSize = 40;

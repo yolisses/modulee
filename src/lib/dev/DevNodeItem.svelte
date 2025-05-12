@@ -31,8 +31,14 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
+		const step = 10;
 		const mousePosition = new Vector(e.clientX, e.clientY);
-		node.position = mousePosition.subtract(initialMousePosition).add(initialNodePosition);
+		node.position = mousePosition
+			.subtract(initialMousePosition)
+			.add(initialNodePosition)
+			.divideByNumber(step)
+			.floor()
+			.multiplyByNumber(step);
 	}
 </script>
 
