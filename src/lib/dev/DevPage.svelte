@@ -17,7 +17,7 @@
 </script>
 
 <div class="overflow-hidden">
-	<div class="overflow-scroll" style:width="500px" style:height="500px" bind:this={element}>
+	<div class="resize overflow-scroll" bind:this={element}>
 		{#if graphCanvasSizeHandler}
 			<div
 				class="bg-dots relative bg-gray-800"
