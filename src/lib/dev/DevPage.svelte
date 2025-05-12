@@ -16,20 +16,18 @@
 	});
 </script>
 
-<div class="overflow-hidden">
-	<div class="resize overflow-scroll" bind:this={scrollArea}>
-		{#if graphCanvasSizeHandler}
-			<div
-				class="bg-dots relative bg-gray-800"
-				style:width={graphCanvasSizeHandler.size.x + 'px'}
-				style:height={graphCanvasSizeHandler.size.y + 'px'}
-			>
-				{#each nodes as node}
-					<DevNodeItem {node} offset={graphCanvasSizeHandler.offset} />
-				{/each}
-			</div>
-		{/if}
-	</div>
+<div class="resize overflow-scroll" bind:this={scrollArea}>
+	{#if graphCanvasSizeHandler}
+		<div
+			class="bg-dots relative shrink-0 bg-gray-800"
+			style:width={graphCanvasSizeHandler.size.x + 'px'}
+			style:height={graphCanvasSizeHandler.size.y + 'px'}
+		>
+			{#each nodes as node}
+				<DevNodeItem {node} offset={graphCanvasSizeHandler.offset} />
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">
