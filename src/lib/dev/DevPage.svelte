@@ -14,6 +14,10 @@
 	$effect(() => {
 		graphCanvasSizeHandler?.handleNodesChange();
 	});
+
+	$effect(() => {
+		return () => graphCanvasSizeHandler?.initializeObserver();
+	});
 </script>
 
 <div class="resize overflow-scroll" bind:this={scrollArea}>

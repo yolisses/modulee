@@ -5,7 +5,6 @@ import { Node } from './DevNode.svelte';
 
 export class GraphCanvasSizeHandler {
 	step = 100;
-	padding = 200;
 	size = $state(Vector.zero());
 	maxPosition = $state<Vector>();
 	minPosition = $state<Vector>();
@@ -17,18 +16,28 @@ export class GraphCanvasSizeHandler {
 		public nodes: Node[],
 	) {}
 
+	initializeObserver = () => {
+		const resizeObserver = new ResizeObserver(() => {
+			this.handleNodesChange();
+		});
+		resizeObserver.observe(this.scrollArea);
+		return () => resizeObserver.disconnect();
+	};
+
 	handleNodesChange() {
+		const padding = 200;
+
 		let newMinNodePosition = getNodesMinPosition(this.nodes)
 			.divideByNumber(this.step)
 			.floor()
 			.multiplyByNumber(this.step)
-			.subtractByNumber(this.padding);
+			.subtractByNumber(padding);
 
 		let newMaxNodePosition = getNodesMaxPosition(this.nodes)
 			.divideByNumber(this.step)
 			.ceil()
 			.multiplyByNumber(this.step)
-			.addByNumber(this.padding);
+			.addByNumber(padding);
 
 		if (!this.previousMinPosition || this.previousMinPosition.notEquals(newMinNodePosition)) {
 			this.previousMinPosition = newMinNodePosition;
