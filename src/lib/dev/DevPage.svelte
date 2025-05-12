@@ -19,7 +19,7 @@
 		const step = 100;
 		const padding = 200;
 
-		const newMinNodePosition = getNodesMinPosition(nodes)
+		let newMinNodePosition = getNodesMinPosition(nodes)
 			.divideByNumber(step)
 			.floor()
 			.multiplyByNumber(step)
@@ -33,8 +33,9 @@
 
 		if (!previousMinPosition || previousMinPosition.notEquals(newMinNodePosition)) {
 			previousMinPosition = newMinNodePosition;
+			newMinNodePosition = newMinNodePosition.min(minPosition);
 			difference = newMinNodePosition.subtract(minPosition);
-			minPosition = minPosition.min(newMinNodePosition);
+			minPosition = newMinNodePosition;
 		}
 
 		if (!previousMaxPosition || previousMaxPosition.notEquals(newMaxNodePosition)) {
