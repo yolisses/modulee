@@ -2,6 +2,7 @@ import { getNodesMaxPosition } from '$lib/graph/getNodesMaxPosition';
 import { getNodesMinPosition } from '$lib/graph/getNodesMinPosition';
 import { Vector } from 'nodes-editor';
 import { Node } from './DevNode.svelte';
+import { getElementSize } from './getElementSize';
 
 export class GraphCanvasSizeHandler {
 	step = 100;
@@ -17,27 +18,26 @@ export class GraphCanvasSizeHandler {
 	) {}
 
 	initializeObserver = () => {
-		const resizeObserver = new ResizeObserver(() => {
-			this.handleNodesChange();
-		});
+		const resizeObserver = new ResizeObserver(this.handleNodesChange);
 		resizeObserver.observe(this.scrollArea);
 		return () => resizeObserver.disconnect();
 	};
 
-	handleNodesChange() {
-		const padding = 200;
+	handleNodesChange = () => {
+		const scrollAreaSize = getElementSize(this.scrollArea);
+		const padding = scrollAreaSize.divideByNumber(2);
 
 		let newMinNodePosition = getNodesMinPosition(this.nodes)
 			.divideByNumber(this.step)
 			.floor()
 			.multiplyByNumber(this.step)
-			.subtractByNumber(padding);
+			.subtract(padding);
 
 		let newMaxNodePosition = getNodesMaxPosition(this.nodes)
 			.divideByNumber(this.step)
 			.ceil()
 			.multiplyByNumber(this.step)
-			.addByNumber(padding);
+			.add(padding);
 
 		if (!this.previousMinPosition || this.previousMinPosition.notEquals(newMinNodePosition)) {
 			this.previousMinPosition = newMinNodePosition;
@@ -67,7 +67,7 @@ export class GraphCanvasSizeHandler {
 		if (this.maxPosition && this.minPosition) {
 			this.size = this.maxPosition.subtract(this.minPosition);
 		}
-	}
+	};
 
 	get offset() {
 		if (this.minPosition) {

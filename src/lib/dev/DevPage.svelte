@@ -13,14 +13,11 @@
 
 	$effect(() => {
 		graphCanvasSizeHandler?.handleNodesChange();
-	});
-
-	$effect(() => {
 		return () => graphCanvasSizeHandler?.initializeObserver();
 	});
 </script>
 
-<div class="resize overflow-scroll" bind:this={scrollArea}>
+<div class="resize overflow-scroll" style="width: 500px; height: 500px;" bind:this={scrollArea}>
 	{#if graphCanvasSizeHandler}
 		<div
 			class="bg-dots relative shrink-0 bg-gray-800"
