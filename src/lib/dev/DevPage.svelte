@@ -1,75 +1,36 @@
 <script lang="ts">
-	import { nodeSize } from '$lib/dev/devNodeSize';
-	import { getNodesMaxPosition } from '$lib/graph/getNodesMaxPosition';
-	import { getNodesMinPosition } from '$lib/graph/getNodesMinPosition';
 	import { Vector } from 'nodes-editor';
 	import { Node } from './DevNode.svelte';
 	import DevNodeItem from './DevNodeItem.svelte';
+	import { GraphCanvasSizeHandler } from './GraphCanvasSizeHandler.svelte';
 
 	let element = $state<HTMLElement>();
-	let size = $state(new Vector(500, 500));
-	let previousMinPosition = $state<Vector>();
-	let previousMaxPosition = $state<Vector>();
 	let nodes = $state([new Node(new Vector(20, 30)), new Node(new Vector(80, 80))]);
-	let minPosition = $state(nodes[0].position);
-	let maxPosition = $state(nodes[0].position.addByNumber(nodeSize));
-	let difference = $state<Vector>();
+
+	const graphCanvasSizeHandler = $derived(
+		element ? new GraphCanvasSizeHandler(element) : undefined,
+	);
 
 	$effect(() => {
-		const step = 100;
-		const padding = 200;
-
-		let newMinNodePosition = getNodesMinPosition(nodes)
-			.divideByNumber(step)
-			.floor()
-			.multiplyByNumber(step)
-			.subtractByNumber(padding);
-
-		const newMaxNodePosition = getNodesMaxPosition(nodes)
-			.divideByNumber(step)
-			.ceil()
-			.multiplyByNumber(step)
-			.addByNumber(padding);
-
-		if (!previousMinPosition || previousMinPosition.notEquals(newMinNodePosition)) {
-			previousMinPosition = newMinNodePosition;
-			newMinNodePosition = newMinNodePosition.min(minPosition);
-			difference = newMinNodePosition.subtract(minPosition);
-			minPosition = newMinNodePosition;
-		}
-
-		if (!previousMaxPosition || previousMaxPosition.notEquals(newMaxNodePosition)) {
-			previousMaxPosition = newMaxNodePosition;
-			maxPosition = maxPosition.max(newMaxNodePosition);
-		}
-
-		size = maxPosition.subtract(minPosition);
-	});
-
-	$effect(() => {
-		if (difference) {
-			element?.scrollBy({
-				top: -difference.y,
-				left: -difference.x,
-			});
-		}
+		graphCanvasSizeHandler?.handleNodesChange(nodes);
 	});
 </script>
 
 <div class="overflow-hidden">
 	<div class="overflow-scroll" style:width="500px" style:height="500px" bind:this={element}>
-		<div
-			class="bg-dots relative bg-gray-800"
-			style:width={size.x + 'px'}
-			style:height={size.y + 'px'}
-		>
-			{#each nodes as node}
-				<DevNodeItem {node} {minPosition} />
-			{/each}
-		</div>
+		{#if graphCanvasSizeHandler}
+			<div
+				class="bg-dots relative bg-gray-800"
+				style:width={graphCanvasSizeHandler.size.x + 'px'}
+				style:height={graphCanvasSizeHandler.size.y + 'px'}
+			>
+				{#each nodes as node}
+					<DevNodeItem {node} minPosition={graphCanvasSizeHandler.minPosition ?? Vector.zero()} />
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
-{minPosition.toString()}
 
 <style lang="postcss">
 	.bg-dots {
