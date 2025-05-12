@@ -1,68 +1,46 @@
 <script lang="ts">
-	import { createId } from '$lib/data/createId';
-	import { onMount } from 'svelte';
+	import { nodeSize } from '$lib/dev/devNodeSize';
+	import { getNodesMaxPosition } from '$lib/graph/getNodesMaxPosition';
+	import { getNodesMinPosition } from '$lib/graph/getNodesMinPosition';
+	import { Vector } from 'nodes-editor';
+	import { Node } from './DevNode.svelte';
+	import DevNodeItem from './DevNodeItem.svelte';
 
-	type Item = {
-		id: string;
-	};
-
-	let listEnd: HTMLElement;
-	let isLoading = $state(false);
-	let isFinished = $state(false);
-	const items = $state<Item[]>([]);
-	let isIntersecting = $state(false);
-
-	async function load() {
-		// Simulate a network request
-		await new Promise((resolve) => setTimeout(resolve, 100));
-
-		items.push({
-			id: createId(),
-		});
-	}
-
-	let counter = 0;
+	let element = $state<HTMLElement>();
+	let size = $state(new Vector(500, 500));
+	let nodes = $state([new Node(new Vector(20, 30)), new Node(new Vector(80, 80))]);
+	let minPosition = $state(nodes[0].position);
+	let maxPosition = $state(nodes[0].position.addByNumber(nodeSize));
 
 	$effect(() => {
-		if (isIntersecting && !isLoading && !isFinished) {
-			isLoading = true;
-			if (counter > 5) {
-				isLoading = false;
-				isFinished = true;
-				return;
-			}
+		const newMinNodePosition = minPosition.min(getNodesMinPosition(nodes));
+		const newMaxNodePosition = maxPosition.max(getNodesMaxPosition(nodes));
 
-			counter++;
-			load().then(() => {
-				isLoading = false;
-			});
+		if (minPosition.notEquals(newMinNodePosition)) {
+			minPosition = newMinNodePosition;
 		}
+		if (maxPosition.notEquals(newMaxNodePosition)) {
+			maxPosition = newMaxNodePosition;
+		}
+
+		size = maxPosition.subtract(minPosition).max(new Vector(500, 500));
 	});
 
-	onMount(() => {
-		const observer = new IntersectionObserver((entries) => {
-			isIntersecting = false;
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					isIntersecting = true;
-				}
-			});
-		}, {});
-		observer.observe(listEnd);
+	$effect(() => {
+		element?.scrollTo({
+			top: minPosition.y,
+			left: minPosition.x,
+		});
 	});
 </script>
 
-<div class="sticky top-0 bg-zinc-800">
-	<div>isLoading: {isLoading}</div>
-	<div>isFinished: {isFinished}</div>
-	<div>isIntersecting: {isIntersecting}</div>
-</div>
-
-<div>
-	{#each items as item (item.id)}
-		<div>
-			{item.id}
+<div class="overflow-hidden">
+	<div class="overflow-scroll" style:width="500px" style:height="500px" bind:this={element}>
+		<div class="relative bg-gray-800" style:width={size.x + 'px'} style:height={size.y + 'px'}>
+			{#each nodes as node}
+				<DevNodeItem {node} {minPosition} />
+			{/each}
 		</div>
-	{/each}
-	<div class="bg-red-500 p-2" bind:this={listEnd}></div>
+	</div>
 </div>
+{minPosition.toString()}
