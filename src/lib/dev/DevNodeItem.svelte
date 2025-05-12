@@ -5,16 +5,16 @@
 
 	interface Props {
 		node: Node;
-		minPosition: Vector;
+		offset: Vector;
 	}
 
-	const { node, minPosition }: Props = $props();
+	const { node, offset }: Props = $props();
 
-	let initialNodePosition: Vector;
-	let initialMousePosition: Vector;
-	let isMoving = $state(false);
 	let pointerId: number;
 	let element: HTMLElement;
+	let isMoving = $state(false);
+	let initialNodePosition: Vector;
+	let initialMousePosition: Vector;
 
 	function handlePointerDown(e: PointerEvent) {
 		pointerId = e.pointerId;
@@ -46,8 +46,8 @@
 	onpointerdown={handlePointerDown}
 	onpointerup={isMoving ? handlePointerUp : undefined}
 	onpointermove={isMoving ? handlePointerMove : undefined}
-	style:top={node.position.y - minPosition.y + 'px'}
-	style:left={node.position.x - minPosition.x + 'px'}
+	style:top={node.position.y + offset.y + 'px'}
+	style:left={node.position.x + offset.x + 'px'}
 	style:width={nodeSize + 'px'}
 	style:height={nodeSize + 'px'}
 	class="absolute bg-amber-500 select-none"

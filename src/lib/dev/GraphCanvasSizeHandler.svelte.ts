@@ -56,4 +56,12 @@ export class GraphCanvasSizeHandler {
 			this.size = this.maxPosition.subtract(this.minPosition);
 		}
 	}
+
+	get offset() {
+		if (this.minPosition) {
+			return this.minPosition.negate();
+		} else {
+			return Vector.zero();
+		}
+	}
 }

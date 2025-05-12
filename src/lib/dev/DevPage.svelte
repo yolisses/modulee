@@ -25,7 +25,7 @@
 				style:height={graphCanvasSizeHandler.size.y + 'px'}
 			>
 				{#each nodes as node}
-					<DevNodeItem {node} minPosition={graphCanvasSizeHandler.minPosition ?? Vector.zero()} />
+					<DevNodeItem {node} offset={graphCanvasSizeHandler.offset} />
 				{/each}
 			</div>
 		{/if}
