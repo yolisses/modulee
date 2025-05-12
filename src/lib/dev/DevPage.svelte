@@ -4,11 +4,11 @@
 	import DevNodeItem from './DevNodeItem.svelte';
 	import { GraphCanvasSizeHandler } from './GraphCanvasSizeHandler.svelte';
 
-	let element = $state<HTMLElement>();
+	let scrollArea = $state<HTMLElement>();
 	let nodes = $state([new Node(new Vector(20, 30)), new Node(new Vector(80, 80))]);
 
 	const graphCanvasSizeHandler = $derived(
-		element ? new GraphCanvasSizeHandler(element) : undefined,
+		scrollArea ? new GraphCanvasSizeHandler(scrollArea) : undefined,
 	);
 
 	$effect(() => {
@@ -17,7 +17,7 @@
 </script>
 
 <div class="overflow-hidden">
-	<div class="resize overflow-scroll" bind:this={element}>
+	<div class="resize overflow-scroll" bind:this={scrollArea}>
 		{#if graphCanvasSizeHandler}
 			<div
 				class="bg-dots relative bg-gray-800"

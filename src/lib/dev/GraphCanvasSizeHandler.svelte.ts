@@ -12,7 +12,7 @@ export class GraphCanvasSizeHandler {
 	previousMinPosition = $state<Vector>();
 	previousMaxPosition = $state<Vector>();
 
-	constructor(public element: HTMLElement) {}
+	constructor(public scrollArea: HTMLElement) {}
 
 	handleNodesChange(nodes: Node[]) {
 		let newMinNodePosition = getNodesMinPosition(nodes)
@@ -33,7 +33,7 @@ export class GraphCanvasSizeHandler {
 			if (this.minPosition) {
 				newMinNodePosition = newMinNodePosition.min(this.minPosition);
 				const difference = newMinNodePosition.subtract(this.minPosition);
-				this.element.scrollBy({
+				this.scrollArea.scrollBy({
 					top: -difference.y,
 					left: -difference.x,
 				});
