@@ -8,11 +8,11 @@
 	let nodes = $state([new Node(new Vector(20, 30)), new Node(new Vector(80, 80))]);
 
 	const graphCanvasSizeHandler = $derived(
-		scrollArea ? new GraphCanvasSizeHandler(scrollArea) : undefined,
+		scrollArea ? new GraphCanvasSizeHandler(scrollArea, nodes) : undefined,
 	);
 
 	$effect(() => {
-		graphCanvasSizeHandler?.handleNodesChange(nodes);
+		graphCanvasSizeHandler?.handleNodesChange();
 	});
 </script>
 

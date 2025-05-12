@@ -12,16 +12,19 @@ export class GraphCanvasSizeHandler {
 	previousMinPosition = $state<Vector>();
 	previousMaxPosition = $state<Vector>();
 
-	constructor(public scrollArea: HTMLElement) {}
+	constructor(
+		public scrollArea: HTMLElement,
+		public nodes: Node[],
+	) {}
 
-	handleNodesChange(nodes: Node[]) {
-		let newMinNodePosition = getNodesMinPosition(nodes)
+	handleNodesChange() {
+		let newMinNodePosition = getNodesMinPosition(this.nodes)
 			.divideByNumber(this.step)
 			.floor()
 			.multiplyByNumber(this.step)
 			.subtractByNumber(this.padding);
 
-		let newMaxNodePosition = getNodesMaxPosition(nodes)
+		let newMaxNodePosition = getNodesMaxPosition(this.nodes)
 			.divideByNumber(this.step)
 			.ceil()
 			.multiplyByNumber(this.step)
