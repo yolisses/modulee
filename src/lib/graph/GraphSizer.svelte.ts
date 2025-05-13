@@ -8,12 +8,20 @@ export class GraphSizer {
 	maxPosition = $state<Vector>();
 
 	handleNodesUpdate(nodes: Node[]) {
-		const minNodePosition = getNodesMinPosition(nodes);
-		const maxNodePosition = getNodesMaxPosition(nodes);
+		if (nodes.length === 0) {
+			this.minPosition = undefined;
+			this.maxPosition = undefined;
+			return;
+		} else {
+			const minNodePosition = getNodesMinPosition(nodes);
+			const maxNodePosition = getNodesMaxPosition(nodes);
 
-		const padding = Vector.fromNumber(10);
-		this.minPosition = minNodePosition.subtract(padding);
-		this.maxPosition = maxNodePosition.add(padding);
+			console.log(minNodePosition, maxNodePosition);
+
+			const padding = Vector.fromNumber(4);
+			this.minPosition = minNodePosition.subtract(padding);
+			this.maxPosition = maxNodePosition.add(padding);
+		}
 	}
 
 	getOffset() {

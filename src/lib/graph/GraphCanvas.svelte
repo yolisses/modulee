@@ -51,16 +51,23 @@
 
 <HowToAddNodesHint {nodes} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="flex-1 overflow-scroll" bind:this={container} onscroll={floatingMenuManager.closeModal}>
-	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
+<div
+	class="flex-1 overflow-scroll"
+	bind:this={container}
+	onscroll={floatingMenuManager.closeModal}
+	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
+	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
+>
+	<PointerEventDispatcher
+		style="display: contents;"
+		pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}
+	>
 		<div
 			style:width={size.x + 'lh'}
 			style:height={size.y + 'lh'}
-			class="bg-dots relative select-none"
+			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
 			bind:this={rootElementContext.rootElement}
 			oncontextmenu={floatingMenuManager.handleContextMenu}
-			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
-			style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 		>
 			{#each connections as connection (connection.id)}
 				<ConnectionItem {connection} />

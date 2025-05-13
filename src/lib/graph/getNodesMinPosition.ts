@@ -1,6 +1,6 @@
-import type { Vector } from 'nodes-editor';
+import type { Node } from '$lib/data/Node.svelte';
 
-export function getNodesMinPosition(nodes: { position: Vector }[]) {
+export function getNodesMinPosition(nodes: Node[]) {
 	let nodesMinPosition = nodes[0].position;
 	nodes.forEach((node) => {
 		nodesMinPosition = nodesMinPosition.min(node.position);
