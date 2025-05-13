@@ -1,5 +1,6 @@
 import type { Node } from '$lib/data/Node.svelte';
 import { Vector } from 'nodes-editor';
+import { getNodeSize } from './getNodeSize';
 
 export function getNodesAveragePosition(nodes: Node[]) {
 	if (!nodes.length) {
@@ -8,7 +9,7 @@ export function getNodesAveragePosition(nodes: Node[]) {
 
 	let sum = Vector.zero();
 	nodes.forEach((node) => {
-		sum = sum.add(node.position);
+		sum = sum.add(node.position.add(getNodeSize(node).divideByNumber(2)));
 	});
 	return sum.divideByNumber(nodes.length);
 }
