@@ -13,7 +13,7 @@
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import { getZoomContext } from '$lib/space/zoom/zoomContext';
 	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
-	import { untrack } from 'svelte';
+	import { tick, untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
 	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
@@ -65,7 +65,6 @@
 			.subtract(minPosition)
 			.multiplyByNumber(zoomContext.zoom)
 			.subtract(scrollAreaSize.divideByNumber(2));
-		console.log(scrollAreaSize);
 		scrollArea?.scrollTo({
 			top: scrollPosition.y,
 			left: scrollPosition.x,
@@ -73,11 +72,13 @@
 	}
 
 	$effect(() => {
-		// Executed only when internalModuleId changes
+		// Only runs when internalModuleId changes
 		internalModuleIdContext.internalModuleId;
-		debugValue;
 		untrack(() => {
-			autoScroll();
+			// Wait for DOM updates
+			tick().then(() => {
+				autoScroll();
+			});
 		});
 	});
 
@@ -121,13 +122,6 @@
 		</div>
 	</PointerEventDispatcher>
 </div>
-
-<button
-	onclick={() => {
-		debugValue++;
-		internalModuleIdContext.internalModuleId = internalModuleIdContext.internalModuleId;
-	}}>click me</button
->
 
 <!-- The floating menu is outside the scrollable area to prevent the container
 from scrolling when the menu is created -->
