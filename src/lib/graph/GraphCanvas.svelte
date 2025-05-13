@@ -9,21 +9,21 @@
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
-	import { getNodeRectsContext, getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
-	import { onMount } from 'svelte';
+	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
 	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
+	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
-	import { ResizeGraphCanvasHandler } from './ResizeGraphCanvasHandler.svelte';
 
 	interface Props {
 		nodes: Node[];
+		graphSizer: GraphSizer;
 		connections: Connection[];
 	}
 
-	const { nodes, connections }: Props = $props();
+	const { nodes, graphSizer, connections }: Props = $props();
 
 	const spaceContext = getSpaceContext();
 	const rootElementContext = getRootElementContext();
@@ -33,15 +33,6 @@
 
 	/* Resizing */
 	let container: HTMLElement;
-	const nodeRectsContext = getNodeRectsContext();
-	const graphCanvasResizeHandler = new ResizeGraphCanvasHandler();
-	onMount(() => {
-		// Returns destructor
-		return graphCanvasResizeHandler.initialize(container);
-	});
-	$effect(() => {
-		graphCanvasResizeHandler.handleRectsChange(nodeRectsContext.nodeRects);
-	});
 
 	/* Add node menu position */
 	const floatingMenuManager = new FloatingMenuManager();
@@ -58,10 +49,10 @@
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			class="bg-dots relative select-none"
+			style:width={graphSizer.size.x + 'px'}
+			style:height={graphSizer.size.y + 'px'}
 			bind:this={rootElementContext.rootElement}
 			oncontextmenu={floatingMenuManager.handleContextMenu}
-			style:width={graphCanvasResizeHandler.minSize.x + 'px'}
-			style:height={graphCanvasResizeHandler.minSize.y + 'px'}
 			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 			style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 		>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/data/graphContext';
-	import type { Node } from '$lib/data/Node.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/node/InternalModulesNavbar.svelte';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
@@ -12,10 +11,9 @@
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { Vector } from 'nodes-editor';
 	import { onMount } from 'svelte';
-	import { getNodesMinPosition } from './getNodesMinPosition';
 	import GraphCanvas from './GraphCanvas.svelte';
+	import { GraphSizer } from './GraphSizer.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
 
 	const graphContext = getGraphContext();
@@ -27,38 +25,11 @@
 	const zoomContext = $state({ zoom: 20 });
 	setZoomContext(zoomContext);
 
-	let minPosition = $state<Vector>();
-	const graphCanvasPositioningStep = 10;
-	function getNewOffset(nodes: Node[]) {
-		return getNodesMinPosition(nodes)
-			.divideByNumber(graphCanvasPositioningStep)
-			.floor()
-			.multiplyByNumber(graphCanvasPositioningStep)
-			.subtractByNumber(graphCanvasPositioningStep);
-	}
-
-	$effect(() => {
-		const nodes = graphContext.graph.nodes.values();
-
-		if (nodes.length === 0) {
-			minPosition = undefined;
-		} else {
-			let newMinPosition = getNewOffset(nodes);
-			if (!minPosition) {
-				minPosition = newMinPosition;
-			} else {
-				newMinPosition = minPosition.min(newMinPosition);
-				if (minPosition.notEquals(newMinPosition)) {
-					minPosition = newMinPosition;
-				}
-			}
-		}
-	});
-	$inspect(minPosition);
+	const graphSizer = new GraphSizer();
 
 	$effect(() => {
 		spaceContext.space = new Space([
-			new OffsetConverter(minPosition?.negate() ?? Vector.zero()),
+			new OffsetConverter(graphSizer.offset),
 			new ZoomConverter(zoomContext.zoom),
 		]);
 	});
@@ -86,5 +57,9 @@ sounds better on singular and contains things like connections too. -->
 <div class="relative flex flex-1 flex-col overflow-hidden">
 	<InternalModulesNavbar />
 	<GraphToolbar />
-	<GraphCanvas nodes={visibleNodes} connections={graphContext.graph.connections.values()} />
+	<GraphCanvas
+		{graphSizer}
+		nodes={visibleNodes}
+		connections={graphContext.graph.connections.values()}
+	/>
 </div>
