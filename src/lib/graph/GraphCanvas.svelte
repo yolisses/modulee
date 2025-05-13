@@ -2,8 +2,8 @@
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
-	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Node } from '$lib/data/Node.svelte';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/node/getScreenLineHeight';
@@ -14,6 +14,7 @@
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
 	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
+	import { getNodesAveragePosition } from './getNodesAveragePosition';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
@@ -34,16 +35,28 @@
 
 	/* Resizing */
 	let scrollArea = $state<HTMLElement>();
-	const graphContext = getGraphContext();
 
 	$effect(() => {
 		graphSizer.scrollArea = scrollArea;
 	});
 
 	$effect(() => {
-		graphSizer.handleNodesUpdate(graphContext.graph.nodes.values());
+		graphSizer.handleNodesUpdate(nodes);
 	});
 	const size = $derived(graphSizer.getSize());
+
+	/* Centering on navigation */
+	const internalModuleIdContext = getInternalModuleIdContext();
+
+	$effect(() => {
+		internalModuleIdContext.internalModuleId; // Observes this variable
+		if (nodes.length === 0) return;
+		const averagePosition = getNodesAveragePosition(nodes);
+		scrollArea?.scrollTo({
+			top: averagePosition.y * getScreenLineHeight(spaceContext.space),
+			left: averagePosition.x * getScreenLineHeight(spaceContext.space),
+		});
+	});
 
 	/* Add node menu position */
 	const floatingMenuManager = new FloatingMenuManager();
