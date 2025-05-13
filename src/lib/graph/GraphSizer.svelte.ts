@@ -1,4 +1,5 @@
 import type { Node } from '$lib/data/Node.svelte';
+import { getElementSize } from '$lib/dev/getElementSize';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
@@ -10,6 +11,15 @@ export class GraphSizer {
 	maxPosition = $state<Vector>();
 	zoomContext = getZoomContext();
 
+	getPadding() {
+		if (!this.scrollArea) return Vector.zero();
+
+		return getElementSize(this.scrollArea)
+			.divideByNumber(2)
+			.divideByNumber(this.zoomContext.zoom)
+			.addByNumber(1);
+	}
+
 	handleNodesUpdate(nodes: Node[]) {
 		if (nodes.length === 0) {
 			this.minPosition = undefined;
@@ -19,10 +29,8 @@ export class GraphSizer {
 			const minNodePosition = getNodesMinPosition(nodes);
 			const maxNodePosition = getNodesMaxPosition(nodes);
 
-			console.log(minNodePosition, maxNodePosition);
-
-			const padding = Vector.fromNumber(8);
 			const step = 10;
+			const padding = this.getPadding();
 			let newMinPosition = minNodePosition
 				.divideByNumber(step)
 				.floor()
