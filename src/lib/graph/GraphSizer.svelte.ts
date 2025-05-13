@@ -6,10 +6,10 @@ import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
 
 export class GraphSizer {
-	scrollArea?: HTMLElement;
 	minPosition = $state<Vector>();
 	maxPosition = $state<Vector>();
 	zoomContext = getZoomContext();
+	scrollArea = $state<HTMLElement>();
 
 	getPadding() {
 		if (!this.scrollArea) return Vector.zero();
@@ -81,8 +81,7 @@ export class GraphSizer {
 		if (this.minPosition && this.maxPosition) {
 			return this.maxPosition.subtract(this.minPosition);
 		} else {
-			// DEBUG
-			return Vector.fromNumber(4);
+			return this.getPadding().multiplyByNumber(2);
 		}
 	}
 }
