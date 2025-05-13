@@ -71,6 +71,7 @@
 				{@render headerChildren?.()}
 			</NodeItemHeader>
 
+			<!-- DEBUG -->
 			{node.position.toString()}
 
 			{@render preInputsChildren?.()}
