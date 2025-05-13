@@ -15,6 +15,7 @@
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
+	import { nodeItemWidth } from './nodeItemWidth.js';
 
 	interface Props {
 		node: Node;
@@ -60,9 +61,9 @@
 >
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
-			style:width="6lh"
 			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
+			style:width="{nodeItemWidth}lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-800={!isSelected}
 			class="node-item flex flex-col bg-zinc-700 outline"
@@ -70,9 +71,6 @@
 			<NodeItemHeader {node}>
 				{@render headerChildren?.()}
 			</NodeItemHeader>
-
-			<!-- DEBUG -->
-			{node.position.toString()}
 
 			{@render preInputsChildren?.()}
 
@@ -82,5 +80,7 @@
 
 			{@render postInputsChildren?.()}
 		</div>
+		<!-- DEBUG -->
+		{node.position.toString()}
 	</BaseNodeItem>
 </PointerEventDispatcher>
