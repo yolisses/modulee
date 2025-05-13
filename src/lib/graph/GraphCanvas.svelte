@@ -11,6 +11,7 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
+	import { untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
 	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
@@ -46,12 +47,13 @@
 	/* Centering on navigation */
 	const internalModuleIdContext = getInternalModuleIdContext();
 	$effect(() => {
-		internalModuleIdContext.internalModuleId; // Observes this variable
-		if (nodes.length === 0) return;
-		const averagePosition = getNodesAveragePosition(nodes);
-		scrollArea?.scrollTo({
-			top: averagePosition.y * getScreenLineHeight(spaceContext.space),
-			left: averagePosition.x * getScreenLineHeight(spaceContext.space),
+		// Executed only when internalModuleId changes
+		internalModuleIdContext.internalModuleId;
+		untrack(() => {
+			if (nodes.length === 0) return;
+			const averagePosition = getNodesAveragePosition(nodes);
+			const scrollPosition = spaceContext.space.getScreenPosition(averagePosition);
+			scrollArea?.scrollTo({ top: scrollPosition.y, left: scrollPosition.x });
 		});
 	});
 
