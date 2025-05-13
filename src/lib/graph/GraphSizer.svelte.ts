@@ -15,15 +15,15 @@ export class GraphSizer {
 			return;
 		}
 
-		let minNodePosition = getNodesMinPosition(nodes);
-		let maxNodePosition = getNodesMaxPosition(nodes);
+		const minNodePosition = getNodesMinPosition(nodes);
+		const maxNodePosition = getNodesMaxPosition(nodes);
 
 		const padding = Vector.fromNumber(10);
 
-		minNodePosition = minNodePosition.subtract(padding);
-		maxNodePosition = maxNodePosition.add(padding);
+		const minPosition = minNodePosition.subtract(padding);
+		const maxPosition = maxNodePosition.add(padding);
 
-		this.offset = minNodePosition.negate();
-		this.size = maxNodePosition.subtract(minNodePosition);
+		this.offset = minPosition.negate();
+		this.size = maxPosition.subtract(minPosition);
 	}
 }
