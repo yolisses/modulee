@@ -2,6 +2,7 @@
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import type { Node } from '$lib/data/Node.svelte';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
@@ -33,6 +34,10 @@
 
 	/* Resizing */
 	let container: HTMLElement;
+	const graphContext = getGraphContext();
+	$effect(() => {
+		graphSizer.handleNodesUpdate(graphContext.graph.nodes.values());
+	});
 
 	/* Add node menu position */
 	const floatingMenuManager = new FloatingMenuManager();
@@ -49,8 +54,8 @@
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			class="bg-dots relative select-none"
-			style:width={graphSizer.size.x + 'px'}
-			style:height={graphSizer.size.y + 'px'}
+			style:width={graphSizer.size.x + 'lh'}
+			style:height={graphSizer.size.y + 'lh'}
 			bind:this={rootElementContext.rootElement}
 			oncontextmenu={floatingMenuManager.handleContextMenu}
 			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
