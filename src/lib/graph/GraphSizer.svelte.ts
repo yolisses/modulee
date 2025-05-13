@@ -1,11 +1,14 @@
 import type { Node } from '$lib/data/Node.svelte';
+import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
 
 export class GraphSizer {
+	scrollArea?: HTMLElement;
 	minPosition = $state<Vector>();
 	maxPosition = $state<Vector>();
+	zoomContext = getZoomContext();
 
 	handleNodesUpdate(nodes: Node[]) {
 		if (nodes.length === 0) {
@@ -30,6 +33,17 @@ export class GraphSizer {
 			}
 
 			if (!this.minPosition || this.minPosition.notEquals(newMinPosition)) {
+				if (this.minPosition && this.scrollArea) {
+					const difference = newMinPosition
+						.subtract(this.minPosition)
+						.multiplyByNumber(this.zoomContext.zoom)
+						.negate();
+					this.scrollArea.scrollBy({
+						top: difference.y,
+						left: difference.x,
+						behavior: 'instant',
+					});
+				}
 				this.minPosition = newMinPosition;
 			}
 			if (!this.maxPosition || this.maxPosition.notEquals(newMaxPosition)) {

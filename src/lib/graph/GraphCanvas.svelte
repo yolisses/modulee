@@ -33,8 +33,13 @@
 	const graphCanvasPointerStrategyFactory = new GraphCanvasPointerStrategyFactory();
 
 	/* Resizing */
-	let container: HTMLElement;
+	let scrollArea = $state<HTMLElement>();
 	const graphContext = getGraphContext();
+
+	$effect(() => {
+		graphSizer.scrollArea = scrollArea;
+	});
+
 	$effect(() => {
 		graphSizer.handleNodesUpdate(graphContext.graph.nodes.values());
 	});
@@ -52,22 +57,19 @@
 <HowToAddNodesHint {nodes} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
+	bind:this={scrollArea}
 	class="flex-1 overflow-scroll"
-	bind:this={container}
 	onscroll={floatingMenuManager.closeModal}
 	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 >
-	<PointerEventDispatcher
-		style="display: contents;"
-		pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}
-	>
+	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			style:width={size.x + 'lh'}
 			style:height={size.y + 'lh'}
-			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
 			bind:this={rootElementContext.rootElement}
 			oncontextmenu={floatingMenuManager.handleContextMenu}
+			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
 		>
 			{#each connections as connection (connection.id)}
 				<ConnectionItem {connection} />
