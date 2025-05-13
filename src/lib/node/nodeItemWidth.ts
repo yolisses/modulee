@@ -1,1 +1,1 @@
-export const nodeItemWidth = 5;
+export const nodeItemWidth = 6;
