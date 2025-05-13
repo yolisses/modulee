@@ -38,6 +38,7 @@
 	$effect(() => {
 		graphSizer.handleNodesUpdate(graphContext.graph.nodes.values());
 	});
+	const size = $derived(graphSizer.getSize());
 
 	/* Add node menu position */
 	const floatingMenuManager = new FloatingMenuManager();
@@ -53,9 +54,9 @@
 <div class="flex-1 overflow-scroll" bind:this={container} onscroll={floatingMenuManager.closeModal}>
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
+			style:width={size.x + 'lh'}
+			style:height={size.y + 'lh'}
 			class="bg-dots relative select-none"
-			style:width={graphSizer.size.x + 'lh'}
-			style:height={graphSizer.size.y + 'lh'}
 			bind:this={rootElementContext.rootElement}
 			oncontextmenu={floatingMenuManager.handleContextMenu}
 			style:font-size={getScreenFontSize(spaceContext.space) + 'px'}

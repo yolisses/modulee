@@ -4,26 +4,32 @@ import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
 
 export class GraphSizer {
-	size = $state(Vector.zero());
-	offset = $state(Vector.zero());
+	minPosition = $state<Vector>();
+	maxPosition = $state<Vector>();
 
 	handleNodesUpdate(nodes: Node[]) {
-		if (nodes.length === 0) {
-			this.offset = Vector.zero();
-			// this.size = Vector.zero();
-			this.size = Vector.fromNumber(10);
-			return;
-		}
-
 		const minNodePosition = getNodesMinPosition(nodes);
 		const maxNodePosition = getNodesMaxPosition(nodes);
 
 		const padding = Vector.fromNumber(10);
+		this.minPosition = minNodePosition.subtract(padding);
+		this.maxPosition = maxNodePosition.add(padding);
+	}
 
-		const minPosition = minNodePosition.subtract(padding);
-		const maxPosition = maxNodePosition.add(padding);
+	getOffset() {
+		if (this.minPosition) {
+			return this.minPosition.negate();
+		} else {
+			return Vector.zero();
+		}
+	}
 
-		this.offset = minPosition.negate();
-		this.size = maxPosition.subtract(minPosition);
+	getSize() {
+		if (this.minPosition && this.maxPosition) {
+			return this.maxPosition.subtract(this.minPosition);
+		} else {
+			// DEBUG
+			return Vector.fromNumber(4);
+		}
 	}
 }

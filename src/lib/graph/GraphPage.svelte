@@ -29,7 +29,7 @@
 
 	$effect(() => {
 		spaceContext.space = new Space([
-			new OffsetConverter(graphSizer.offset),
+			new OffsetConverter(graphSizer.getOffset()),
 			new ZoomConverter(zoomContext.zoom),
 		]);
 	});
