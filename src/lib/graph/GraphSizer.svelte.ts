@@ -17,7 +17,8 @@ export class GraphSizer {
 		return getElementSize(this.scrollArea)
 			.divideByNumber(2)
 			.divideByNumber(this.zoomContext.zoom)
-			.addByNumber(1);
+			.addByNumber(1)
+			.ceil();
 	}
 
 	handleNodesUpdate(nodes: Node[]) {
