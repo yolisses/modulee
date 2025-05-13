@@ -80,7 +80,5 @@
 
 			{@render postInputsChildren?.()}
 		</div>
-		<!-- DEBUG -->
-		{node.position.toString()}
 	</BaseNodeItem>
 </PointerEventDispatcher>
