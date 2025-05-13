@@ -35,11 +35,9 @@
 
 	/* Resizing */
 	let scrollArea = $state<HTMLElement>();
-
 	$effect(() => {
 		graphSizer.scrollArea = scrollArea;
 	});
-
 	$effect(() => {
 		graphSizer.handleNodesUpdate(nodes);
 	});
@@ -47,7 +45,6 @@
 
 	/* Centering on navigation */
 	const internalModuleIdContext = getInternalModuleIdContext();
-
 	$effect(() => {
 		internalModuleIdContext.internalModuleId; // Observes this variable
 		if (nodes.length === 0) return;
