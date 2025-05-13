@@ -22,8 +22,17 @@ export class GraphSizer {
 			console.log(minNodePosition, maxNodePosition);
 
 			const padding = Vector.fromNumber(8);
-			let newMinPosition = minNodePosition.subtract(padding);
-			let newMaxPosition = maxNodePosition.add(padding);
+			const step = 10;
+			let newMinPosition = minNodePosition
+				.divideByNumber(step)
+				.floor()
+				.multiplyByNumber(step)
+				.subtract(padding);
+			let newMaxPosition = maxNodePosition
+				.divideByNumber(step)
+				.ceil()
+				.multiplyByNumber(step)
+				.add(padding);
 
 			if (this.minPosition) {
 				newMinPosition = this.minPosition.min(newMinPosition);
