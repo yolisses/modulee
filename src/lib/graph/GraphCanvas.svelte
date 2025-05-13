@@ -3,6 +3,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
 	import type { Node } from '$lib/data/Node.svelte';
+	import { getElementSize } from '$lib/dev/getElementSize';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
@@ -10,6 +11,7 @@
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getSpaceContext } from '$lib/space/spaceContext';
+	import { getZoomContext } from '$lib/space/zoom/zoomContext';
 	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
 	import { untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
@@ -46,14 +48,31 @@
 
 	/* Centering on navigation */
 	const internalModuleIdContext = getInternalModuleIdContext();
+
+	let debugValue = $state(1);
+	const zoomContext = getZoomContext();
 	$effect(() => {
 		// Executed only when internalModuleId changes
 		internalModuleIdContext.internalModuleId;
+		debugValue;
+		scrollArea;
 		untrack(() => {
+			if (!scrollArea) return;
 			if (nodes.length === 0) return;
+
+			const { minPosition } = graphSizer;
+			if (!minPosition) return;
+
+			const scrollAreaSize = getElementSize(scrollArea);
 			const averagePosition = getNodesAveragePosition(nodes);
-			const scrollPosition = spaceContext.space.getScreenPosition(averagePosition);
-			scrollArea?.scrollTo({ top: scrollPosition.y, left: scrollPosition.x });
+			const scrollPosition = averagePosition
+				.subtract(minPosition)
+				.multiplyByNumber(zoomContext.zoom)
+				.subtract(scrollAreaSize.divideByNumber(2));
+			scrollArea?.scrollTo({
+				top: scrollPosition.y,
+				left: scrollPosition.x,
+			});
 		});
 	});
 
@@ -97,6 +116,13 @@
 		</div>
 	</PointerEventDispatcher>
 </div>
+
+<button
+	onclick={() => {
+		debugValue++;
+		internalModuleIdContext.internalModuleId = internalModuleIdContext.internalModuleId;
+	}}>click me</button
+>
 
 <!-- The floating menu is outside the scrollable area to prevent the container
 from scrolling when the menu is created -->
