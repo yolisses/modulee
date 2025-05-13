@@ -51,28 +51,33 @@
 
 	let debugValue = $state(1);
 	const zoomContext = getZoomContext();
+
+	function autoScroll() {
+		if (!scrollArea) return;
+		if (nodes.length === 0) return;
+
+		const { minPosition } = graphSizer;
+		if (!minPosition) return;
+
+		const scrollAreaSize = getElementSize(scrollArea);
+		const averagePosition = getNodesAveragePosition(nodes);
+		const scrollPosition = averagePosition
+			.subtract(minPosition)
+			.multiplyByNumber(zoomContext.zoom)
+			.subtract(scrollAreaSize.divideByNumber(2));
+		console.log(scrollAreaSize);
+		scrollArea?.scrollTo({
+			top: scrollPosition.y,
+			left: scrollPosition.x,
+		});
+	}
+
 	$effect(() => {
 		// Executed only when internalModuleId changes
 		internalModuleIdContext.internalModuleId;
 		debugValue;
-		scrollArea;
 		untrack(() => {
-			if (!scrollArea) return;
-			if (nodes.length === 0) return;
-
-			const { minPosition } = graphSizer;
-			if (!minPosition) return;
-
-			const scrollAreaSize = getElementSize(scrollArea);
-			const averagePosition = getNodesAveragePosition(nodes);
-			const scrollPosition = averagePosition
-				.subtract(minPosition)
-				.multiplyByNumber(zoomContext.zoom)
-				.subtract(scrollAreaSize.divideByNumber(2));
-			scrollArea?.scrollTo({
-				top: scrollPosition.y,
-				left: scrollPosition.x,
-			});
+			autoScroll();
 		});
 	});
 
