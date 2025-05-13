@@ -18,9 +18,23 @@ export class GraphSizer {
 
 			console.log(minNodePosition, maxNodePosition);
 
-			const padding = Vector.fromNumber(4);
-			this.minPosition = minNodePosition.subtract(padding);
-			this.maxPosition = maxNodePosition.add(padding);
+			const padding = Vector.fromNumber(8);
+			let newMinPosition = minNodePosition.subtract(padding);
+			let newMaxPosition = maxNodePosition.add(padding);
+
+			if (this.minPosition) {
+				newMinPosition = this.minPosition.min(newMinPosition);
+			}
+			if (this.maxPosition) {
+				newMaxPosition = this.maxPosition.max(newMaxPosition);
+			}
+
+			if (!this.minPosition || this.minPosition.notEquals(newMinPosition)) {
+				this.minPosition = newMinPosition;
+			}
+			if (!this.maxPosition || this.maxPosition.notEquals(newMaxPosition)) {
+				this.maxPosition = newMaxPosition;
+			}
 		}
 	}
 
