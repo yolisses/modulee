@@ -19,6 +19,7 @@ export const nodesName: Record<string, string> = {
 	OutputNode: 'Output',
 	ModuleNode: 'Module',
 	ModuloNode: 'Modulo',
+	ControlNode: 'Control',
 	GreaterNode: 'Greater',
 	PeakNode: 'Peak filter',
 	EnvelopeNode: 'Envelope',

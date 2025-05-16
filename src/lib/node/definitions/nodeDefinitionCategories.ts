@@ -194,6 +194,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 			},
 			{
 				category: 'basic',
+				defaultExtras: {
+					value: 0,
+				},
+				inputs: [],
+				name: 'ControlNode',
+			},
+			{
+				category: 'basic',
 				defaultExtras: {},
 				inputs: [
 					{
