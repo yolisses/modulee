@@ -24,6 +24,10 @@ export class Input implements Connector {
 		this.unconnectedValue = this.getUnconnectedValue();
 	}
 
+	getControlNodeId() {
+		return this.id + '.control';
+	}
+
 	private getUnconnectedValue() {
 		return this.node.unconnectedInputValues?.[this.inputPath.inputKey];
 	}

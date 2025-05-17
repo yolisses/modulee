@@ -4,6 +4,7 @@
 	import { createId } from '$lib/data/createId';
 	import type { Input } from '$lib/data/Input.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { formatNumber } from './formatNumber';
 
@@ -52,9 +53,11 @@
 		editorContext.editor.execute(command);
 	}
 
+	const audioBackendContext = getAudioBackendContext();
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
 		value = getNewValue(e);
+		audioBackendContext.audioBackend?.updateControl();
 	}
 
 	function getNewValue(e: PointerEvent) {
