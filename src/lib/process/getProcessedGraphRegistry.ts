@@ -3,7 +3,6 @@ import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModu
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { addFallbackNodes } from './fallbackNodes/addFallbackNodes';
-import { addUnconnectedInputDefaultValueNodes } from './fallbackNodes/addUnconnectedInputDefaultValueNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
 import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
@@ -19,7 +18,6 @@ export function getProcessedGraphRegistry(
 	internalizeModules(graphRegistry, externalModulesData);
 	removeConnectionsToMissingNodes(graphRegistry);
 	addImplicitNodes(graphRegistry);
-	addUnconnectedInputDefaultValueNodes(graphRegistry);
 	addControlNodes(graphRegistry);
 	addFallbackNodes(graphRegistry);
 	return graphRegistry;
