@@ -21,4 +21,9 @@ export class JuceAudioBackend implements AudioBackend {
 	setIsMuted(isMuted: boolean): void {
 		window.__JUCE__?.backend.emitEvent('setIsMuted', { isMuted });
 	}
+
+	updateControl(id: number, value: number): void {
+		window.__JUCE__?.backend.emitEvent('updateControl', { id, value });
+		throw new Error('not implemented');
+	}
 }
