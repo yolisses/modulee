@@ -79,7 +79,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 	// TODO check if all these warns are really needed
 	setGraph = ({ graphEngineData }) => {
-		const graphJson = JSON.stringify(graphEngineData);
+		const graphJson = JSON.stringify(graphEngineData, null, 2);
 		this.graph.set_graph(graphJson);
 	};
 
