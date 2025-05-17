@@ -5,6 +5,7 @@
 	import type { Input } from '$lib/data/Input.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
+	import { hashToUsize } from '$lib/engine/data/hashToUsize';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { formatNumber } from './formatNumber';
 
@@ -57,7 +58,8 @@
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
 		value = getNewValue(e);
-		audioBackendContext.audioBackend?.updateControl();
+		const id = hashToUsize(input.getControlNodeId());
+		audioBackendContext.audioBackend?.updateControl(id, value);
 	}
 
 	function getNewValue(e: PointerEvent) {
