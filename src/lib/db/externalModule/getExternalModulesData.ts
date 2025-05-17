@@ -52,5 +52,11 @@ export async function getExternalModulesData(
 		nextCursor = strategy.getNextCursorString(lastItem);
 	}
 
-	return { nextCursor, items: items.slice(0, PAGE_LIMIT) };
+	// Add id equals to _id for each item
+	const mappedItems = items.slice(0, PAGE_LIMIT).map((item) => ({
+		...item,
+		id: item._id,
+	}));
+
+	return { nextCursor, items: mappedItems };
 }
