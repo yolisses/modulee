@@ -8,6 +8,7 @@
 	}
 
 	const { externalModuleData }: Props = $props();
+	console.log(externalModuleData);
 </script>
 
 <div class="border-b border-white/10 p-2 pb-6 last:border-none">
@@ -18,9 +19,9 @@
 			</a>
 		</div>
 		<UseButton />
-		<LikeButton />
+		<LikeButton externalModuleId={externalModuleData.id} />
 	</div>
-	<div class="block max-h-10 overflow-hidden text-ellipsis text-sm text-white/75">
+	<div class="block max-h-10 overflow-hidden text-sm text-ellipsis text-white/75">
 		{externalModuleData.description}
 	</div>
 	<div class="text-sm opacity-50">
