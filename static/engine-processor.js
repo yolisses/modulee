@@ -69,6 +69,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 			setNoteOn: this.setNoteOn,
 			setNoteOff: this.setNoteOff,
 			setIsMuted: this.setIsMuted,
+			updateControl: this.updateControl,
 		};
 
 		// The command data have it's own `data` and `type`
