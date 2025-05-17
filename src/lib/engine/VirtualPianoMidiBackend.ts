@@ -1,4 +1,4 @@
-import { getIsTargetInput } from '$lib/shortcut/getIsTargetInput';
+import { getIsTextEdit } from '$lib/shortcut/getIsTextEdit';
 import type { AudioBackend } from './AudioBackend';
 import { virtualPianoKeyOffsets } from './virtualPianoKeyOffsets';
 
@@ -26,7 +26,7 @@ export class VirtualPianoMidiBackend {
 	}
 
 	handleKeyDown = (e: KeyboardEvent) => {
-		if (getIsTargetInput(e)) return;
+		if (getIsTextEdit(e)) return;
 		// Autofill edge condition
 		if (!e.key) return;
 
