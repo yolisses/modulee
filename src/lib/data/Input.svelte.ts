@@ -10,8 +10,6 @@ export class Input implements Connector {
 	id: string;
 	targetNode?: Node;
 	inputPath: InputPath;
-	unconnectedValue: number;
-	inputDefinition: InputDefinition;
 
 	constructor(
 		public key: string,
@@ -20,19 +18,17 @@ export class Input implements Connector {
 	) {
 		this.inputPath = { inputKey: key, nodeId: node.id };
 		this.id = getInputPathId(this.inputPath);
-		this.inputDefinition = this.getInputDefinition();
-		this.unconnectedValue = this.getUnconnectedValue();
 	}
 
 	getControlNodeId() {
 		return this.id + '.control';
 	}
 
-	private getUnconnectedValue() {
+	public getUnconnectedValue() {
 		return this.node.unconnectedInputValues?.[this.inputPath.inputKey];
 	}
 
-	private getInputDefinition() {
+	public getInputDefinition(): InputDefinition {
 		const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {
 			return this.node.type === nodeDefinition.name;
 		});

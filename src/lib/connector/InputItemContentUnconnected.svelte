@@ -22,8 +22,8 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
-	let value = $state(input.unconnectedValue);
-	const { min, max, isBoolean } = input.inputDefinition;
+	let value = $state(input.getUnconnectedValue());
+	const { min, max, isBoolean } = input.getInputDefinition();
 	const ratio = $derived((value - min) / (max - min));
 	const percentage = $derived(100 * ratio);
 

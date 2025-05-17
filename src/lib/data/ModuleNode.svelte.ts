@@ -1,7 +1,7 @@
 import type { ById } from '$lib/editor/ById';
-import { Input } from './Input.svelte';
 import { InputNode } from './InputNode.svelte';
 import type { Module } from './Module';
+import { ModuleNodeInput } from './ModuleNodeInput';
 import { Node } from './Node.svelte';
 import type { ModuleNodeData } from './variants/ModuleNodeData';
 import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
@@ -34,7 +34,7 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 		this.inputs = [];
 		const inputNodes = this.getInputNodes();
 		inputNodes.forEach((inputNode) => {
-			const input = new Input(inputNode.id, inputNode.extras.name, this);
+			const input = new ModuleNodeInput(this, inputNode);
 			this.inputs.push(input);
 		});
 	}
