@@ -12,10 +12,7 @@
 
 	async function handleCLick() {
 		liked = !liked;
-		console.log(externalModuleId);
-		const res = await fetch(`/api/externalModules/${externalModuleId}/like`, { method: 'POST' });
-		const item = await res.json();
-		console.log(item);
+		await fetch(`/api/externalModules/${externalModuleId}/like`, { method: 'POST' });
 	}
 </script>
 

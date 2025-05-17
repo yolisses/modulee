@@ -8,7 +8,6 @@
 	}
 
 	const { externalModuleData }: Props = $props();
-	console.log(externalModuleData);
 </script>
 
 <div class="border-b border-white/10 p-2 pb-6 last:border-none">
