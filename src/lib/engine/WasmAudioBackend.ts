@@ -86,4 +86,11 @@ export class WasmAudioBackend implements AudioBackend {
 			data: { isMuted },
 		});
 	}
+
+	updateControl(id: number, value: number): void {
+		this.postOrSaveMessage({
+			type: 'updateControl',
+			data: { id, value },
+		});
+	}
 }

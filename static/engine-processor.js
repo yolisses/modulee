@@ -93,6 +93,10 @@ class EngineProcessor extends AudioWorkletProcessor {
 	setIsMuted = ({ isMuted }) => {
 		this.isMuted = isMuted;
 	};
+
+	updateControl = ({ id, value }) => {
+		this.graph.update_control(id, value);
+	};
 }
 
 registerProcessor('engine-processor', EngineProcessor);

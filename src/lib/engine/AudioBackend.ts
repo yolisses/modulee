@@ -6,5 +6,6 @@ export interface AudioBackend {
 	setNoteOn(pitch: number): void;
 	setNoteOff(pitch: number): void;
 	setIsMuted(isMuted: boolean): void;
+	updateControl(id: number, value: number): void;
 	setGraph(graphEngineData: GraphEngineData): void;
 }
