@@ -1,5 +1,5 @@
 import type { Node } from '$lib/data/Node.svelte';
-import { getElementSize } from '$lib/dev/getElementSize';
+import { getElementSize } from '$lib/graph/getElementSize';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
