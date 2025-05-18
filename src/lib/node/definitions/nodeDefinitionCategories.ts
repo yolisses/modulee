@@ -12,14 +12,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1,
+						default: 1,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,
@@ -33,14 +33,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 2,
+						default: 2,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,
@@ -54,14 +54,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 2,
+						default: 2,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,
@@ -75,14 +75,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,
@@ -96,14 +96,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1,
+						default: 1,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,
@@ -117,14 +117,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 2,
 						min: 0,
 					},
 					{
-						defaultValue: 2,
+						default: 2,
 						isBoolean: false,
 						key: 'input2',
 						max: 2,
@@ -161,7 +161,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 261.625565,
+						default: 261.625565,
 						isBoolean: false,
 						key: 'frequency',
 						max: 22000,
@@ -175,7 +175,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 60,
+						default: 60,
 						isBoolean: false,
 						key: 'pitch',
 						max: 127,
@@ -205,14 +205,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'trigger',
 						max: 1,
@@ -226,28 +226,28 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0.01,
+						default: 0.01,
 						isBoolean: false,
 						key: 'attack',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0.1,
+						default: 0.1,
 						isBoolean: false,
 						key: 'decay',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0.7,
+						default: 0.7,
 						isBoolean: false,
 						key: 'sustain',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0.2,
+						default: 0.2,
 						isBoolean: false,
 						key: 'release',
 						max: 1,
@@ -266,21 +266,21 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1000,
+						default: 1000,
 						isBoolean: false,
 						key: 'frequency',
 						max: 22000,
 						min: 0,
 					},
 					{
-						defaultValue: 0.7071067811865476,
+						default: 0.7071067811865476,
 						isBoolean: false,
 						key: 'resonance',
 						max: 1,
@@ -294,21 +294,21 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1000,
+						default: 1000,
 						isBoolean: false,
 						key: 'frequency',
 						max: 22000,
 						min: 0,
 					},
 					{
-						defaultValue: 0.7071067811865476,
+						default: 0.7071067811865476,
 						isBoolean: false,
 						key: 'resonance',
 						max: 1,
@@ -322,21 +322,21 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1000,
+						default: 1000,
 						isBoolean: false,
 						key: 'frequency',
 						max: 22000,
 						min: 0,
 					},
 					{
-						defaultValue: 0.7071067811865476,
+						default: 0.7071067811865476,
 						isBoolean: false,
 						key: 'resonance',
 						max: 1,
@@ -350,28 +350,28 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 1000,
+						default: 1000,
 						isBoolean: false,
 						key: 'frequency',
 						max: 22000,
 						min: 0,
 					},
 					{
-						defaultValue: 0.7071067811865476,
+						default: 0.7071067811865476,
 						isBoolean: false,
 						key: 'resonance',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 1,
+						default: 1,
 						isBoolean: false,
 						key: 'gain',
 						max: 20,
@@ -396,7 +396,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'value',
 						max: 4,
@@ -427,7 +427,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input',
 						max: 4,
@@ -457,7 +457,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'phase',
 						max: 1,
@@ -471,7 +471,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'phase',
 						max: 1,
@@ -485,7 +485,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'phase',
 						max: 1,
@@ -499,14 +499,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'phase',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'duty_cycle',
 						max: 1,
@@ -525,7 +525,7 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'input',
 						max: 1,
@@ -539,14 +539,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'input1',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'input2',
 						max: 1,
@@ -560,14 +560,14 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'input1',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'input2',
 						max: 1,
@@ -581,21 +581,21 @@ export const nodeDefinitionCategories: NodeDefinitionCategory[] = [
 				defaultExtras: {},
 				inputs: [
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: true,
 						key: 'condition',
 						max: 1,
 						min: 0,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input1',
 						max: 4,
 						min: -4,
 					},
 					{
-						defaultValue: 0,
+						default: 0,
 						isBoolean: false,
 						key: 'input2',
 						max: 4,

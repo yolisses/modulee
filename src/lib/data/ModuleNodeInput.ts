@@ -12,11 +12,11 @@ export class ModuleNodeInput extends Input {
 	}
 
 	public getUnconnectedValue() {
-		return super.getUnconnectedValue() || this.inputNode.extras.defaultValue;
+		return super.getUnconnectedValue() || this.inputNode.extras.default;
 	}
 
 	public getInputDefinition(): InputDefinition {
-		const { min, max, defaultValue: defaultValue } = this.inputNode.extras;
-		return { min, max, defaultValue, isBoolean: false, key: this.inputNode.id };
+		const { min, max, default: defaultValue } = this.inputNode.extras;
+		return { min, max, default: defaultValue, isBoolean: false, key: this.inputNode.id };
 	}
 }
