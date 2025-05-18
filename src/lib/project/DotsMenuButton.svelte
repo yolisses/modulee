@@ -23,7 +23,7 @@
 
 <!-- This px-2.5 is a hacky solution to use in home pages -->
 <button
-	title="More"
+	title="Options"
 	bind:this={button}
 	onclick={handleClick}
 	class="common-button self-stretch px-2.5"
