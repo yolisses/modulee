@@ -1,8 +1,8 @@
 import { createId } from '$lib/data/createId';
-import { range } from '$lib/server/range';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from './generated/prisma';
+import { range } from './range';
 
 const prisma = new PrismaClient();
 
