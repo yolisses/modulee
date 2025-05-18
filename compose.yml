@@ -9,6 +9,16 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+  postgres_db:
+    image: postgres
+    restart: unless-stopped
+    container_name: modulee_postgres_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: modulee
+      POSTGRES_PASSWORD: example
   redis_db:
     image: redis
     restart: unless-stopped
