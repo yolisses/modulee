@@ -8,6 +8,7 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
+	import { getInternalModuleIdContext } from './internalModuleIdContext';
 	import SearchExternalModuleButton from './SearchExternalModuleButton.svelte';
 
 	interface Props {
@@ -18,6 +19,7 @@
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
+	const internalModuleIdContext = getInternalModuleIdContext();
 
 	const { closeModal, moduleNodeId }: Props = $props();
 
@@ -44,14 +46,16 @@
 </script>
 
 <div
-	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline outline-1 outline-zinc-800"
+	class="flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800"
 >
 	<div class="scroll-small flex flex-col overflow-auto whitespace-nowrap">
 		<BasicList
 			{getId}
 			{getName}
 			onClick={handleSelectModule}
-			items={graphContext.graph.modules.values()}
+			items={graphContext.graph.modules
+				.values()
+				.filter((module) => module.id !== internalModuleIdContext.internalModuleId)}
 		/>
 		<CreateInternalModuleButton onInternalModuleCreated={handleInternalModuleCreated} />
 		<SearchExternalModuleButton />
