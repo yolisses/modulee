@@ -23,7 +23,7 @@
 	const projectDataContext = getProjectDataContext();
 
 	let value = $state(input.getUnconnectedValue());
-	const { min, max, isBoolean } = input.getInputDefinition();
+	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 	const ratio = $derived((value - min) / (max - min));
 	const percentage = $derived(100 * ratio);
 
