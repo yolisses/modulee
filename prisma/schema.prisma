@@ -34,4 +34,6 @@ model ExternalModule {
   userId      String
   description String?  @db.VarChar(1000)
   isSeeded    Boolean?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
