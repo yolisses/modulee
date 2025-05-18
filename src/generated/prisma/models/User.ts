@@ -28,6 +28,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   username: string | null
   name: string | null
+  bio: string | null
   isSeeded: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -38,6 +39,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   username: string | null
   name: string | null
+  bio: string | null
   isSeeded: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -48,6 +50,7 @@ export type UserCountAggregateOutputType = {
   email: number
   username: number
   name: number
+  bio: number
   isSeeded: number
   createdAt: number
   updatedAt: number
@@ -60,6 +63,7 @@ export type UserMinAggregateInputType = {
   email?: true
   username?: true
   name?: true
+  bio?: true
   isSeeded?: true
   createdAt?: true
   updatedAt?: true
@@ -70,6 +74,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   username?: true
   name?: true
+  bio?: true
   isSeeded?: true
   createdAt?: true
   updatedAt?: true
@@ -80,6 +85,7 @@ export type UserCountAggregateInputType = {
   email?: true
   username?: true
   name?: true
+  bio?: true
   isSeeded?: true
   createdAt?: true
   updatedAt?: true
@@ -163,6 +169,7 @@ export type UserGroupByOutputType = {
   email: string
   username: string
   name: string
+  bio: string | null
   isSeeded: boolean | null
   createdAt: Date
   updatedAt: Date
@@ -194,6 +201,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
   isSeeded?: Prisma.BoolNullableFilter<"User"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -204,6 +212,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isSeeded?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -217,6 +226,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
   isSeeded?: Prisma.BoolNullableFilter<"User"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -227,6 +237,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isSeeded?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -243,6 +254,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isSeeded?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -253,6 +265,7 @@ export type UserCreateInput = {
   email: string
   username: string
   name: string
+  bio?: string | null
   isSeeded?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -263,6 +276,7 @@ export type UserUncheckedCreateInput = {
   email: string
   username: string
   name: string
+  bio?: string | null
   isSeeded?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -273,6 +287,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSeeded?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -283,6 +298,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSeeded?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -293,6 +309,7 @@ export type UserCreateManyInput = {
   email: string
   username: string
   name: string
+  bio?: string | null
   isSeeded?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -303,6 +320,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSeeded?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,6 +331,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSeeded?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,6 +342,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isSeeded?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -333,6 +353,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isSeeded?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -343,6 +364,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isSeeded?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -350,6 +372,10 @@ export type UserMinOrderByAggregateInput = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type NullableBoolFieldUpdateOperationsInput = {
@@ -367,6 +393,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   username?: boolean
   name?: boolean
+  bio?: boolean
   isSeeded?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -377,6 +404,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   name?: boolean
+  bio?: boolean
   isSeeded?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -387,6 +415,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   name?: boolean
+  bio?: boolean
   isSeeded?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -397,12 +426,13 @@ export type UserSelectScalar = {
   email?: boolean
   username?: boolean
   name?: boolean
+  bio?: boolean
   isSeeded?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "name" | "isSeeded" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "name" | "bio" | "isSeeded" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -412,6 +442,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     username: string
     name: string
+    bio: string | null
     isSeeded: boolean | null
     createdAt: Date
     updatedAt: Date
@@ -842,6 +873,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly isSeeded: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>

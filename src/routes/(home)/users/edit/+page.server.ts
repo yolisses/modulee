@@ -1,4 +1,4 @@
-import { UserModel } from '$lib/user/UserModel';
+import prisma from '$lib/prisma';
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		error(401, 'User not logged in');
 	}
 
-	const userData = (await UserModel.findById(session.userId))?.toObject();
+	const userData = await prisma.user.findUnique({ where: { id: session.userId } });
 	if (!userData) {
 		error(404, 'User not found');
 	}
@@ -25,11 +25,12 @@ export const actions = {
 
 		const formData = await request.formData();
 		// TODO find a cleaner way to prevent other fields from being updated
-		const { name, bio } = Object.fromEntries(formData);
-		const userData = { name, bio };
-
-		const user = await UserModel.findByIdAndUpdate(userId, userData, {
-			runValidators: true,
+		const user = await prisma.user.update({
+			where: { id: userId },
+			data: {
+				bio: 'test1',
+				name: 'test1',
+			},
 		});
 
 		if (!user) {

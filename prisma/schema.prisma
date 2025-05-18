@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "src/generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -19,6 +19,7 @@ model User {
   email     String   @unique @db.VarChar(320)
   username  String   @unique @db.VarChar(30)
   name      String   @db.VarChar(70)
+  bio       String?  @db.VarChar(150)
   isSeeded  Boolean?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
