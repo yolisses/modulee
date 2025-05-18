@@ -12,7 +12,9 @@
 
 	async function handleCLick() {
 		liked = !liked;
-		await fetch(`/api/externalModules/${externalModuleId}/like`, { method: 'POST' });
+		await fetch(`/api/externalModules/${externalModuleId}/like`, {
+			method: liked ? 'POST' : 'DELETE',
+		});
 	}
 </script>
 
