@@ -37,6 +37,7 @@
 			<label>
 				<div>Name</div>
 				<input
+					required
 					type="text"
 					class="common-input"
 					bind:value={inputNode.extras.name}
@@ -49,6 +50,7 @@
 			<label>
 				<div>Min</div>
 				<input
+					required
 					type="number"
 					class="common-input"
 					bind:value={inputNode.extras.min}
@@ -61,6 +63,7 @@
 			<label>
 				<div>Max</div>
 				<input
+					required
 					type="number"
 					class="common-input"
 					bind:value={inputNode.extras.max}
@@ -73,6 +76,7 @@
 			<label>
 				<div>Default</div>
 				<input
+					required
 					type="number"
 					class="common-input"
 					bind:value={inputNode.extras.default}
