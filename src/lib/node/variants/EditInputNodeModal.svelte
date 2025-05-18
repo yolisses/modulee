@@ -11,6 +11,7 @@
 
 	const { closeModal, inputNode }: Props = $props();
 	const modalRootContext = getModalRootContext();
+	const { extras } = inputNode;
 </script>
 
 <Portal target={modalRootContext.modalRoot}>
@@ -19,19 +20,19 @@
 			<p>Edit input node</p>
 			<label>
 				<div>Name</div>
-				<input type="text" class="common-input" />
+				<input bind:value={extras.name} type="text" class="common-input" />
 			</label>
 			<label>
 				<div>Min</div>
-				<input type="number" class="common-input" />
+				<input bind:value={extras.min} type="number" class="common-input" />
 			</label>
 			<label>
 				<div>Max</div>
-				<input type="number" class="common-input" />
+				<input bind:value={extras.max} type="number" class="common-input" />
 			</label>
 			<label>
 				<div>Default</div>
-				<input type="number" class="common-input" />
+				<input bind:value={extras.default} type="number" class="common-input" />
 			</label>
 		</div>
 	</Modal>
