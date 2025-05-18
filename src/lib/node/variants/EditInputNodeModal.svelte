@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
+	import { createId } from '$lib/data/createId';
 	import type { InputNode } from '$lib/data/InputNode.svelte';
+	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { getModalRootContext } from '$lib/ui/modalRootContext';
 	import Portal from 'svelte-portal';
@@ -9,9 +13,21 @@
 		closeModal: () => void;
 	}
 
-	const { closeModal, inputNode }: Props = $props();
+	const editorContext = getEditorContext();
 	const modalRootContext = getModalRootContext();
-	const { extras } = inputNode;
+	const { closeModal, inputNode }: Props = $props();
+	const projectDataContext = getProjectDataContext();
+
+	function handleBlur(key: string, value: string | number) {
+		const command = new UpdateInputNodeExtrasCommand({
+			id: createId(),
+			createdAt: new Date().toJSON(),
+			type: 'UpdateInputNodeExtrasCommand',
+			projectId: projectDataContext.projectData.id,
+			details: { extras: { [key]: value }, nodeId: inputNode.id },
+		});
+		editorContext.editor.execute(command);
+	}
 </script>
 
 <Portal target={modalRootContext.modalRoot}>
@@ -20,19 +36,51 @@
 			<p>Edit input node</p>
 			<label>
 				<div>Name</div>
-				<input bind:value={extras.name} type="text" class="common-input" />
+				<input
+					type="text"
+					class="common-input"
+					bind:value={inputNode.extras.name}
+					onblur={(e) => {
+						const { value } = e.currentTarget;
+						handleBlur('name', value);
+					}}
+				/>
 			</label>
 			<label>
 				<div>Min</div>
-				<input bind:value={extras.min} type="number" class="common-input" />
+				<input
+					type="number"
+					class="common-input"
+					bind:value={inputNode.extras.min}
+					onblur={(e) => {
+						const value = Number.parseFloat(e.currentTarget.value);
+						handleBlur('min', value);
+					}}
+				/>
 			</label>
 			<label>
 				<div>Max</div>
-				<input bind:value={extras.max} type="number" class="common-input" />
+				<input
+					type="number"
+					class="common-input"
+					bind:value={inputNode.extras.max}
+					onblur={(e) => {
+						const value = Number.parseFloat(e.currentTarget.value);
+						handleBlur('max', value);
+					}}
+				/>
 			</label>
 			<label>
 				<div>Default</div>
-				<input bind:value={extras.default} type="number" class="common-input" />
+				<input
+					type="number"
+					class="common-input"
+					bind:value={inputNode.extras.default}
+					onblur={(e) => {
+						const value = Number.parseFloat(e.currentTarget.value);
+						handleBlur('default', value);
+					}}
+				/>
 			</label>
 		</div>
 	</Modal>

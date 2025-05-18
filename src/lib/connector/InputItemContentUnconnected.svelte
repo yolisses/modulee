@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedDefaultValueCommand';
+	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
 	import { createId } from '$lib/data/createId';
 	import type { Input } from '$lib/data/Input.svelte';

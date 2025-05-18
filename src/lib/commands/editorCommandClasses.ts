@@ -17,7 +17,7 @@ import { RemoveNodeCommand } from './node/RemoveNodeCommand';
 import { RemoveNodesCommand } from './node/RemoveNodesCommand';
 import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
 import { SetModuleNodeModuleReferenceCommand } from './node/SetModuleNodeModuleReferenceCommand';
-import { SetUnconnectedInputValueCommand } from './node/SetUnconnectedDefaultValueCommand';
+import { SetUnconnectedInputValueCommand } from './node/SetUnconnectedInputValueCommand';
 import { UpdateInputNodeExtrasCommand } from './node/UpdateInputNodeExtrasCommand';
 
 export const editorCommandClasses = [
