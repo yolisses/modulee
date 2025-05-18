@@ -16,24 +16,36 @@ datasource db {
 
 model User {
   id              String           @id @default(uuid())
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   email           String           @unique @db.VarChar(320)
   username        String           @unique @db.VarChar(30)
   name            String           @db.VarChar(70)
   bio             String?          @db.VarChar(150)
   isSeeded        Boolean?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
   externalModules ExternalModule[]
+  likes           Like[]
 }
 
 model ExternalModule {
   id          String   @id @default(uuid())
-  name        String   @db.VarChar(100)
-  user        User     @relation(fields: [userId], references: [id])
-  projectId   String   @db.VarChar(22)
-  userId      String
-  description String?  @db.VarChar(1000)
-  isSeeded    Boolean?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  name        String   @db.VarChar(100)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  projectId   String   @db.VarChar(22)
+  description String?  @db.VarChar(1000)
+  isSeeded    Boolean?
+  likes       Like[]
+}
+
+model Like {
+  id               String         @id @default(uuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  userId           String
+  user             User           @relation(fields: [userId], references: [id])
+  externalModuleId String
+  externalModule   ExternalModule @relation(fields: [externalModuleId], references: [id])
 }
