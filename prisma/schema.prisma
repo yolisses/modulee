@@ -32,11 +32,12 @@ model ExternalModule {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String   @db.VarChar(100)
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
   projectId   String   @db.VarChar(22)
   description String?  @db.VarChar(1000)
   isSeeded    Boolean?
+  graph       Json
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
   likes       Like[]
 }
 
