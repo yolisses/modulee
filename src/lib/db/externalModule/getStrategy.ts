@@ -1,8 +1,13 @@
-import { LikeCountSortStrategy } from './LikeCountSortStrategy';
-import type { PaginationStrategy } from './PaginationStrategy';
-import { TextScoreSortStrategy } from './TextScoreSortStrategy';
-import { UpdatedAtSortStrategy } from './UpdatedAtSortStrategy';
-import { UsageCountSortStrategy } from './UsageCountSortStrategy';
+// TODO
+abstract class PaginationStrategy {}
+class TextScoreSortStrategy extends PaginationStrategy {
+	constructor(public text: string) {
+		super();
+	}
+}
+class LikeCountSortStrategy extends PaginationStrategy {}
+class UpdatedAtSortStrategy extends PaginationStrategy {}
+class UsageCountSortStrategy extends PaginationStrategy {}
 
 // Strategy Factory
 export function getStrategy(sortOption?: string, text?: string): PaginationStrategy {
