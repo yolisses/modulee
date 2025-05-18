@@ -28,8 +28,8 @@ export const actions = {
 		const user = await prisma.user.update({
 			where: { id: userId },
 			data: {
-				bio: 'test1',
-				name: 'test1',
+				bio: formData.get('bio') as string,
+				name: formData.get('name') as string,
 			},
 		});
 
