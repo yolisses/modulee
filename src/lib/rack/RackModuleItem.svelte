@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { faChevronDown, faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
@@ -10,7 +11,11 @@
 	}
 
 	const { internalModule }: Props = $props();
-	const moduleNodes = $derived(internalModule.nodes.filter(getIsSomeModuleNode));
+	const moduleNodes: ModuleNode[] = $derived(
+		internalModule.nodes.filter(function (node): node is ModuleNode {
+			return getIsSomeModuleNode(node) && !!node.targetModule;
+		}),
+	);
 	// svelte-ignore state_referenced_locally
 	let open = $state(moduleNodes.length > 0);
 
