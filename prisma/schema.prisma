@@ -48,4 +48,6 @@ model Like {
   user             User           @relation(fields: [userId], references: [id])
   externalModuleId String
   externalModule   ExternalModule @relation(fields: [externalModuleId], references: [id])
+
+  @@unique([userId, externalModuleId])
 }
