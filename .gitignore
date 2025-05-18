@@ -25,3 +25,6 @@ vite.config.ts.timestamp-*
 
 sketch
 coverage
+
+# Prisma
+src/generated
