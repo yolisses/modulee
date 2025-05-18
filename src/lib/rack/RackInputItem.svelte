@@ -9,7 +9,7 @@
 
 	const { input }: Props = $props();
 	let value = $state(input.getUnconnectedValue());
-	const { min, max, isBoolean } = input.getInputDefinition();
+	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 
 	const audioBackendContext = getAudioBackendContext();
 
