@@ -7,7 +7,6 @@
 		"@prisma/client": "^6.8.2",
 		"google-auth-library": "^9.15.1",
 		"idb": "^8.0.2",
-		"mongoose": "^8.13.2",
 		"nanoid": "^5.1.5",
 		"nodes-editor": "^0.0.21",
 		"redis": "^4.7.0",
