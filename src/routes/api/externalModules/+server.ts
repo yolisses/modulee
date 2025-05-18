@@ -29,14 +29,16 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const { name, graph, description, id: projectId } = project;
 
 	const externalModuleDocument = await prisma.externalModule.create({
-		name,
-		graph,
-		userId,
-		projectId,
-		description,
-		likeCount: 0,
-		usageCount: 0,
-		version: { major: 0, minor: 1, patch: 0 },
+		data: {
+			name,
+			// graph,
+			userId,
+			projectId,
+			description,
+			// likeCount: 0,
+			// usageCount: 0,
+			// version: { major: 0, minor: 1, patch: 0 },
+		},
 	});
 	return json({ externalModuleData: externalModuleDocument });
 };

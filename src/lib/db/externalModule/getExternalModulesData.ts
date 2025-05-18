@@ -14,8 +14,9 @@ export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
 	console.warn('Not implemented');
-	const modules = await prisma.externalModule.findMany({
+	const data = await prisma.externalModule.findMany({
 		include: { user: true },
 	});
-	return { items: modules, nextCursor: null };
+	const externalModuleData = data as unknown as ExternalModuleData[];
+	return { items: externalModuleData, nextCursor: null };
 }
