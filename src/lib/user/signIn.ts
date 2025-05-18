@@ -1,6 +1,6 @@
 import prisma from '$lib/prisma';
 import { generateUniqueUsername } from './username/generateUniqueUsername';
-import { getIsUsernameAvailableFromMongoose } from './username/getIsUsernameAvailableFromMongoose';
+import { getIsUsernameAvailableFromDatabase } from './username/getIsUsernameAvailableFromDatabase';
 import { verifyGoogleCredential } from './verifyGoogleCredential';
 
 export async function signIn(credential: string) {
@@ -21,7 +21,7 @@ export async function signIn(credential: string) {
 	const username = await generateUniqueUsername(
 		name,
 		{ maxAttempts: 100, getRandomValue: () => Math.random() },
-		getIsUsernameAvailableFromMongoose,
+		getIsUsernameAvailableFromDatabase,
 	);
 	return await prisma.user.create({ data: { name, email, username } });
 }
