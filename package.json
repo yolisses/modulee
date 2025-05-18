@@ -50,7 +50,7 @@
 	},
 	"name": "modulee",
 	"prisma": {
-		"seed": "tsx prisma/seed.ts"
+		"seed": "tsx src/seed.ts"
 	},
 	"private": true,
 	"scripts": {
