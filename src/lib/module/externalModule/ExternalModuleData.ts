@@ -12,6 +12,7 @@ export type ExternalModuleData = {
 	projectId: string;
 	likeCount: number;
 	updatedAt: string;
+	createdAt: string;
 	usageCount: number;
 	description?: string;
 };
