@@ -1,17 +1,26 @@
 <script lang="ts">
 	import { faHeart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getLikedExternalModulesContext } from './likedExternalModulesContext';
 
 	interface Props {
 		externalModuleId: string;
 	}
 
 	const { externalModuleId }: Props = $props();
+	const likedExternalModulesContext = getLikedExternalModulesContext();
 
-	let liked = $state(false);
+	let liked = $state(likedExternalModulesContext.likedExternalModules.has(externalModuleId));
 
 	async function handleCLick() {
 		liked = !liked;
+
+		if (liked) {
+			likedExternalModulesContext.likedExternalModules.add(externalModuleId);
+		} else {
+			likedExternalModulesContext.likedExternalModules.delete(externalModuleId);
+		}
+
 		await fetch(`/api/externalModules/${externalModuleId}/like`, {
 			method: liked ? 'POST' : 'DELETE',
 		});
