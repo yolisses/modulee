@@ -3,7 +3,7 @@ import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { SetUnconnectedInputValueCommand } from './SetUnconnectedDefaultValueCommand';
+import { SetUnconnectedInputValueCommand } from './SetUnconnectedInputValueCommand';
 
 test('SetUnconnectedInputValueCommand', () => {
 	const graphRegistry = {
