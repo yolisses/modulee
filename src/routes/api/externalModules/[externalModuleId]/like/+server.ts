@@ -1,58 +1,19 @@
-import { ExternalModuleModel } from '$lib/db/externalModule/ExternalModuleModel';
-import { LikeModel } from '$lib/db/externalModule/LikeModel';
+import prisma from '$lib/prisma';
 import { getSession } from '$lib/user/getSession';
-import { type RequestHandler, json } from '@sveltejs/kit';
-import mongoose from 'mongoose';
+import { error, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ locals, params }) => {
 	const { userId } = getSession(locals);
 	const { externalModuleId } = params;
 
 	if (!userId) {
-		return json({ error: 'Unauthorized' }, { status: 401 });
+		error(401, 'Unauthorized');
 	}
 
 	if (!externalModuleId) {
-		return json({ error: 'Missing externalModuleId' }, { status: 400 });
+		error(400, 'Missing externalModuleId');
 	}
 
-	const session = await mongoose.startSession();
-	session.startTransaction();
-
-	try {
-		const userObjectId = new mongoose.Types.ObjectId(userId);
-		const externalModuleObjectId = new mongoose.Types.ObjectId(externalModuleId);
-
-		// Check if already liked
-		const existing = await LikeModel.findOne({
-			userId: userObjectId,
-			externalModuleId: externalModuleObjectId,
-		}).session(session);
-		if (existing) {
-			await session.abortTransaction();
-			session.endSession();
-			return json({ error: 'Already liked' }, { status: 409 });
-		}
-
-		// Create like
-		await LikeModel.create([{ userId: userObjectId, externalModuleId: externalModuleObjectId }], {
-			session,
-		});
-
-		// Increment likeCount on module
-		await ExternalModuleModel.updateOne(
-			{ _id: externalModuleObjectId },
-			{ $inc: { likeCount: 1 } },
-			{ session },
-		);
-
-		await session.commitTransaction();
-		session.endSession();
-
-		return json({ success: true });
-	} catch (err) {
-		await session.abortTransaction();
-		session.endSession();
-		throw err;
-	}
+	const like = await prisma.like.create({ data: { userId, externalModuleId } });
+	return new Response(JSON.stringify(like), { status: 201 });
 };
