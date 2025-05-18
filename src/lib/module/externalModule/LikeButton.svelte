@@ -28,6 +28,6 @@
 </script>
 
 <button class="common-button" onclick={handleCLick}>
-	<Fa fw icon={faHeart} color={liked ? 'oklch(63.7% 0.237 25.331)' : undefined} />
+	<Fa fw icon={faHeart} color={liked ? 'oklch(64.5% .246 16.439)' : undefined} />
 	{liked ? 'Liked' : 'Like'}
 </button>
