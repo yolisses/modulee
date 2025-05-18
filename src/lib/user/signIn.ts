@@ -1,5 +1,4 @@
-import type { UserData } from './UserData';
-import { UserModel } from './UserModel';
+import prisma from '$lib/prisma';
 import { generateUniqueUsername } from './username/generateUniqueUsername';
 import { getIsUsernameAvailableFromMongoose } from './username/getIsUsernameAvailableFromMongoose';
 import { verifyGoogleCredential } from './verifyGoogleCredential';
@@ -14,24 +13,15 @@ export async function signIn(credential: string) {
 		throw new Error('Missing name');
 	}
 
-	let userData: UserData;
-
-	const existingUser = await UserModel.findOne({ email }).exec();
+	const existingUser = await prisma.user.findUnique({ where: { email } });
 	if (existingUser) {
-		userData = existingUser.toObject();
-	} else {
-		const username = await generateUniqueUsername(
-			name,
-			{
-				maxAttempts: 100,
-				getRandomValue: () => Math.random(),
-			},
-			getIsUsernameAvailableFromMongoose,
-		);
-		const newUser = new UserModel({ name, email, username });
-		await newUser.save();
-		userData = newUser.toObject();
+		return existingUser;
 	}
 
-	return userData;
+	const username = await generateUniqueUsername(
+		name,
+		{ maxAttempts: 100, getRandomValue: () => Math.random() },
+		getIsUsernameAvailableFromMongoose,
+	);
+	return await prisma.user.create({ data: { name, email, username } });
 }
