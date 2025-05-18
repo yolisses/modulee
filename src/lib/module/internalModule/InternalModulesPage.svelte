@@ -16,10 +16,12 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 
-	// TODO consider creating a commandFactoryContext to remove the need for manually getting id, createdAt, type and projectId. It could work like:
+	// TODO consider creating a commandFactoryContext to remove the need for
+	// manually getting id, createdAt, type and projectId. It could work like:
 	// const commandFactoryContext = getCommandContext();
 	// const { commandFactory } = commandFactoryContext;
-	// const command = commandFactory.create(SomeCommandClass, { someData: 'someValue' })
+	// const command = commandFactory.create(SomeCommandClass, { someData:
+	// 'someValue' })
 	function handleDelete(internalModule: InternalModule) {
 		const command = new RemoveInternalModuleCommand({
 			id: createId(),
