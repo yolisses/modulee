@@ -40,9 +40,11 @@
 					required
 					type="text"
 					class="common-input"
-					bind:value={inputNode.extras.name}
+					value={inputNode.extras.name}
 					onblur={(e) => {
-						const { value } = e.currentTarget;
+						let { value } = e.currentTarget;
+						value = value.trim();
+						if (value.length === 0) return;
 						handleBlur('name', value);
 					}}
 				/>
@@ -53,9 +55,10 @@
 					required
 					type="number"
 					class="common-input"
-					bind:value={inputNode.extras.min}
+					value={inputNode.extras.min}
 					onblur={(e) => {
 						const value = Number.parseFloat(e.currentTarget.value);
+						if (Number.isNaN(value)) return;
 						handleBlur('min', value);
 					}}
 				/>
@@ -66,9 +69,10 @@
 					required
 					type="number"
 					class="common-input"
-					bind:value={inputNode.extras.max}
+					value={inputNode.extras.max}
 					onblur={(e) => {
 						const value = Number.parseFloat(e.currentTarget.value);
+						if (Number.isNaN(value)) return;
 						handleBlur('max', value);
 					}}
 				/>
@@ -79,9 +83,10 @@
 					required
 					type="number"
 					class="common-input"
-					bind:value={inputNode.extras.default}
+					value={inputNode.extras.default}
 					onblur={(e) => {
 						const value = Number.parseFloat(e.currentTarget.value);
+						if (Number.isNaN(value)) return;
 						handleBlur('default', value);
 					}}
 				/>
