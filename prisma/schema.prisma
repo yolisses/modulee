@@ -15,12 +15,23 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique @db.VarChar(320)
-  username  String   @unique @db.VarChar(30)
-  name      String   @db.VarChar(70)
-  bio       String?  @db.VarChar(150)
-  isSeeded  Boolean?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String           @id @default(uuid())
+  email          String           @unique @db.VarChar(320)
+  username       String           @unique @db.VarChar(30)
+  name           String           @db.VarChar(70)
+  bio            String?          @db.VarChar(150)
+  isSeeded       Boolean?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  ExternalModule ExternalModule[]
+}
+
+model ExternalModule {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(100)
+  user        User     @relation(fields: [userId], references: [id])
+  projectId   String   @db.VarChar(22)
+  userId      String
+  description String?  @db.VarChar(1000)
+  isSeeded    Boolean?
 }

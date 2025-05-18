@@ -1,5 +1,5 @@
-import { ExternalModuleModel } from '$lib/db/externalModule/ExternalModuleModel';
 import { getExternalModulesData } from '$lib/db/externalModule/getExternalModulesData';
+import prisma from '$lib/prisma';
 import { getSession } from '$lib/user/getSession';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
@@ -28,7 +28,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const { project } = await request.json();
 	const { name, graph, description, id: projectId } = project;
 
-	const externalModuleDocument = new ExternalModuleModel({
+	const externalModuleDocument = await prisma.externalModule.create({
 		name,
 		graph,
 		userId,
@@ -38,6 +38,5 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		usageCount: 0,
 		version: { major: 0, minor: 1, patch: 0 },
 	});
-	await externalModuleDocument.save();
 	return json({ externalModuleData: externalModuleDocument });
 };
