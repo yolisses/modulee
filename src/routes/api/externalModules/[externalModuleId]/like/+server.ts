@@ -1,6 +1,7 @@
-import prisma from '$lib/prisma';
+import { addLike } from '$lib/module/externalModule/addLike';
+import { removeLike } from '$lib/module/externalModule/removeLike';
 import { getSession } from '$lib/user/getSession';
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ locals, params }) => {
 	const { userId } = getSession(locals);
@@ -14,8 +15,8 @@ export const POST: RequestHandler = async ({ locals, params }) => {
 		error(400, 'Missing externalModuleId');
 	}
 
-	const like = await prisma.like.create({ data: { userId, externalModuleId } });
-	return json(like, { status: 201 });
+	await addLike(userId, externalModuleId);
+	return new Response(null, { status: 201 });
 };
 
 export const DELETE: RequestHandler = async ({ locals, params }) => {
@@ -30,9 +31,6 @@ export const DELETE: RequestHandler = async ({ locals, params }) => {
 		throw error(400, 'Missing externalModuleId');
 	}
 
-	const deleted = await prisma.like.deleteMany({
-		where: { userId, externalModuleId },
-	});
-
-	return json({ deleted: deleted.count }, { status: 200 });
+	await removeLike(userId, externalModuleId);
+	return new Response(null, { status: 204 });
 };

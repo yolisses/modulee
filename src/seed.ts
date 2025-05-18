@@ -1,4 +1,5 @@
 import { createId } from '$lib/data/createId';
+import type { GraphData } from '$lib/data/GraphData';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from './generated/prisma';
@@ -37,8 +38,20 @@ async function createExternalModule(userIds: string[]) {
 			userId: getRandomItem(userIds),
 			description: createDescription(),
 			name: faker.commerce.productName(),
+			graph: createGraph(),
 		},
 	});
+}
+
+function createGraph(): GraphData {
+	const mainInternalModuleId = createId();
+	return {
+		nodes: [],
+		connections: [],
+		mainInternalModuleId,
+		externalModuleReferences: [],
+		internalModules: [{ name: 'Main module', id: mainInternalModuleId }],
+	};
 }
 
 function createDescription() {
