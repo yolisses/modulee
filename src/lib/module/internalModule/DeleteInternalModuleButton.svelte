@@ -33,7 +33,9 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}>
-	<Fa fw icon={faTrash} />
-	Delete
-</button>
+{#if internalModule.id !== projectDataContext.projectData.graph.mainInternalModuleId}
+	<button class="common-button" onclick={handleClick}>
+		<Fa fw icon={faTrash} />
+		Delete
+	</button>
+{/if}
