@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Placement } from '@floating-ui/dom';
 	import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 	import type { Snippet } from 'svelte';
 	import Fa from 'svelte-fa';
@@ -6,11 +7,12 @@
 
 	interface Props {
 		children: Snippet;
+		placement?: Placement;
 	}
 
 	let isModalActive = $state(false);
 	let button = $state<HTMLElement>();
-	const { children }: Props = $props();
+	const { children, placement }: Props = $props();
 
 	function handleClick() {
 		isModalActive = true;
@@ -32,7 +34,7 @@
 </button>
 
 {#if isModalActive}
-	<Menu {closeModal} referenceElement={button}>
+	<Menu {closeModal} referenceElement={button} {placement}>
 		{@render children()}
 	</Menu>
 {/if}

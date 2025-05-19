@@ -1,16 +1,17 @@
 <script lang="ts">
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
-	import { computePosition, flip, shift } from '@floating-ui/dom';
+	import { computePosition, flip, shift, type Placement } from '@floating-ui/dom';
 	import { type Snippet } from 'svelte';
 
 	interface Props {
 		children: Snippet;
+		placement?: Placement;
 		closeModal: () => void;
 		referenceElement: HTMLElement;
 	}
 
 	let menu = $state<HTMLElement>();
-	const { children, closeModal, referenceElement }: Props = $props();
+	const { children, closeModal, placement = 'bottom', referenceElement }: Props = $props();
 
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = menu?.contains(e.target as Node);
@@ -29,8 +30,8 @@
 		if (!menu) return;
 
 		computePosition(referenceElement, menu, {
+			placement,
 			middleware: [flip(), shift()],
-			placement: 'right',
 		}).then((position) => {
 			if (!menu) return;
 			const { x, y } = position;
@@ -40,7 +41,7 @@
 </script>
 
 <div
-	class="absolute left-0 top-0 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"
+	class="absolute top-0 left-0 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"
 	bind:this={menu}
 >
 	{@render children?.()}
