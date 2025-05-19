@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
 	import { createId } from '$lib/data/createId';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
@@ -7,13 +8,15 @@
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
+	// TODO find a better way to decide the redirect
 	interface Props {
 		internalModule: InternalModule;
+		redirectsTo?: 'mainInternalModuleGraph';
 	}
 
 	const editorContext = getEditorContext();
-	const { internalModule }: Props = $props();
 	const projectDataContext = getProjectDataContext();
+	const { internalModule, redirectsTo }: Props = $props();
 
 	// TODO consider creating a commandFactoryContext to remove the need for
 	// manually getting id, createdAt, type and projectId. It could work like:
@@ -30,6 +33,14 @@
 			details: { internalModuleId: internalModule.id },
 		});
 		editorContext.editor.execute(command);
+		const {
+			id: projectId,
+			graph: { mainInternalModuleId },
+		} = projectDataContext.projectData;
+
+		if (redirectsTo === 'mainInternalModuleGraph') {
+			goto(`/projects/${projectId}/internalModules/${mainInternalModuleId}/graph`);
+		}
 	}
 </script>
 

@@ -29,8 +29,8 @@
 	</a>
 	{#if internalModuleIdContext.internalModuleId === internalModule.id}
 		<DotsMenuButton>
-			<DeleteInternalModuleButton {internalModule} />
 			<RenameInternalModuleButton {internalModule} />
+			<DeleteInternalModuleButton {internalModule} redirectsTo="mainInternalModuleGraph" />
 		</DotsMenuButton>
 	{/if}
 </div>
