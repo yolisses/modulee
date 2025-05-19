@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import DeleteInternalModuleButton from '$lib/module/internalModule/DeleteInternalModuleButton.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import DotsMenuButton from '$lib/project/DotsMenuButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
@@ -27,10 +28,8 @@
 	</a>
 	{#if internalModuleIdContext.internalModuleId === internalModule.id}
 		<DotsMenuButton>
-			<div>DEBUG</div>
-			<!-- <RenameProjectButton projectData={item} />
-						<DeleteProjectButton projectId={item.id} />
-						<DownloadProjectButton projectData={item} /> -->
+			<DeleteInternalModuleButton {internalModule} />
+			<!-- <RenameProjectButton projectData={item} /> -->
 		</DotsMenuButton>
 	{/if}
 </div>
