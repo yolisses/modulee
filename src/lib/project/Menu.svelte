@@ -41,7 +41,7 @@
 </script>
 
 <div
-	class="absolute top-0 left-0 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"
+	class="absolute top-0 left-0 z-10 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"
 	bind:this={menu}
 >
 	{@render children?.()}
