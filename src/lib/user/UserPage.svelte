@@ -21,15 +21,16 @@
 		{/if}
 	{/snippet}
 	<div>
-		<div>Username</div>
+		<div class="opacity-50">Username</div>
 		<div>
 			{userData.username}
 		</div>
 	</div>
 	{#if userData.bio}
 		<div>
-			<div>Bio</div>
+			<div class="opacity-50">Bio</div>
 			<p>{userData.bio}</p>
 		</div>
 	{/if}
+  <div> Liked external modules </div>
 </ListPageLayout>
