@@ -4,6 +4,7 @@
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import DotsMenuButton from '$lib/project/DotsMenuButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import RenameInternalModuleButton from './RenameInternalModuleButton.svelte';
 
 	interface Props {
 		internalModule: InternalModule;
@@ -29,7 +30,7 @@
 	{#if internalModuleIdContext.internalModuleId === internalModule.id}
 		<DotsMenuButton>
 			<DeleteInternalModuleButton {internalModule} />
-			<!-- <RenameProjectButton projectData={item} /> -->
+			<RenameInternalModuleButton {internalModule} />
 		</DotsMenuButton>
 	{/if}
 </div>
