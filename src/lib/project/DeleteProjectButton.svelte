@@ -21,7 +21,7 @@
 
 <button class="common-button" onclick={handleClick}>
 	<Fa fw icon={faTrash} />
-	Delete project
+	Delete
 </button>
 
 {#if isModalActive}

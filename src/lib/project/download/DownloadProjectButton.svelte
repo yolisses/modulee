@@ -20,5 +20,5 @@
 
 <button class="common-button" onclick={handleClick}>
 	<Fa fw icon={faDownload} />
-	Download project
+	Download
 </button>

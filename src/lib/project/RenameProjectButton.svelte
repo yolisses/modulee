@@ -22,7 +22,7 @@
 
 <button class="common-button" onclick={handleClick}>
 	<Fa fw icon={faEdit} />
-	Rename project
+	Rename
 </button>
 
 {#if isModalActive}
