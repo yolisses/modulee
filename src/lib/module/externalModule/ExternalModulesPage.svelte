@@ -1,11 +1,11 @@
 <script lang="ts">
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import Spinner from '$lib/ui/Spinner.svelte';
-	import { faEraser, faRefresh, faSearch } from '@fortawesome/free-solid-svg-icons';
+	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
+	import InfiniteList from './InfiniteList.svelte';
 	import { Loader } from './Loader.svelte';
 
 	let text = $state('');
@@ -61,35 +61,9 @@
 			</button>
 		</div>
 	</form>
-
-	{#if loader.items?.length}
-		<div>
-			{#each loader.items as externalModuleData}
-				<ExternalModuleItem {externalModuleData} />
-			{/each}
-		</div>
-	{/if}
-
-	{#if !loader.isLoading && loader.items?.length === 0}
-		<div class="text-center">No external modules found</div>
-	{:else if loader.finished}
-		<div class="text-center opacity-50">End of the list</div>
-	{/if}
-
-	{#if loader.gotError}
-		<div class="flex flex-col items-center">
-			<div class="text-red-500">Error loading</div>
-			<button class="common-button">
-				<Fa fw icon={faRefresh} />
-				Try again
-			</button>
-		</div>
-	{/if}
-	{#if loader.isLoading}
-		<div class="flex flex-col items-center">
-			<Spinner />
-		</div>
-	{/if}
-
-	<div bind:this={loader.listEnd}></div>
+	<InfiniteList {getPath}>
+		{#snippet children(externalModuleData: ExternalModuleData)}
+			<ExternalModuleItem {externalModuleData} />
+		{/snippet}
+	</InfiniteList>
 </ListPageLayout>
