@@ -1,5 +1,8 @@
 <script lang="ts">
-	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
+	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+	import ExternalModuleItem from '$lib/module/externalModule/ExternalModuleItem.svelte';
+	import InfiniteList from '$lib/module/externalModule/InfiniteList.svelte';
+	import { Loader } from '$lib/module/externalModule/Loader.svelte';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import EditUserButton from './EditUserButton.svelte';
 	import LogoutButton from './LogoutButton.svelte';
@@ -12,6 +15,16 @@
 
 	const { userData }: Props = $props();
 	const userDataContext = getUserDataContext();
+
+	function getPath(loader: Loader<ExternalModuleData>) {
+		const queryParams = new URLSearchParams();
+		queryParams.append('userId', userData.id);
+		queryParams.append('sort', 'createdAt');
+		if (loader.cursor) queryParams.append('cursor', loader.cursor);
+		const path = `/api/externalModules?${queryParams.toString()}`;
+		return path;
+	}
+	const loader = new Loader(getPath);
 </script>
 
 <ListPageLayout title={userData.name}>
@@ -35,6 +48,10 @@
 	{/if}
 	<div>
 		<div class="opacity-50">External modules</div>
-		<ExternalModulesPage />
+		<InfiniteList {loader}>
+			{#snippet children(externalModuleData: ExternalModuleData)}
+				<ExternalModuleItem {externalModuleData} />
+			{/snippet}
+		</InfiniteList>
 	</div>
 </ListPageLayout>

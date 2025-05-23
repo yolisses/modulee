@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
-	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
@@ -19,13 +18,7 @@
 		const path = `/api/externalModules?${queryParams.toString()}`;
 		return path;
 	}
-
 	const loader = new Loader(getPath);
-
-	onMount(loader.initialize);
-	$effect(() => {
-		loader.onChange();
-	});
 </script>
 
 <ListPageLayout title="External modules">
@@ -62,7 +55,7 @@
 			</button>
 		</div>
 	</form>
-	<InfiniteList {loader} {getPath}>
+	<InfiniteList {loader}>
 		{#snippet children(externalModuleData: ExternalModuleData)}
 			<ExternalModuleItem {externalModuleData} />
 		{/snippet}
