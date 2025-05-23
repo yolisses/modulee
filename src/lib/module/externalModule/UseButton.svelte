@@ -18,7 +18,6 @@
 	const projectDataContext = getProjectDataContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
 
-	// TODO improve this function after usability tests
 	function handleClick() {
 		addEffectExternalModule(
 			graphContext.graph,

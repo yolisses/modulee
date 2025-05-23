@@ -1,3 +1,4 @@
+import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
 import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
 import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { createId } from '$lib/data/createId';
@@ -5,6 +6,8 @@ import type { Graph } from '$lib/data/Graph.svelte';
 import type { Editor } from '$lib/editor/Editor.svelte';
 import type { ExternalModuleData } from './ExternalModuleData';
 
+// TODO improve this function after usability tests
+// TODO consider linting the graph
 export function addEffectExternalModule(
 	graph: Graph,
 	editor: Editor,
@@ -12,9 +15,6 @@ export function addEffectExternalModule(
 	internalModuleId: string,
 	externalModuleData: ExternalModuleData,
 ) {
-	const outputNode = graph.nodes.values().find((node) => node.type === 'OutputNode');
-	const input = outputNode?.inputs.filter((input) => input.key === 'input');
-
 	const addExternalModuleReferenceCommand = new AddExternalModuleReferenceCommand({
 		projectId,
 		id: createId(),
@@ -30,9 +30,12 @@ export function addEffectExternalModule(
 	});
 	editor.execute(addExternalModuleReferenceCommand);
 
+	const outputNode = graph.nodes.values().find((node) => node.type === 'OutputNode');
+
+	const moduleNodeId = createId();
 	const addNodeCommand = new AddNodeCommand({
 		projectId,
-		id: createId(),
+		id: moduleNodeId,
 		type: 'AddNodeCommand',
 		createdAt: new Date().toJSON(),
 		details: {
@@ -53,4 +56,20 @@ export function addEffectExternalModule(
 		},
 	});
 	editor.execute(addNodeCommand);
+
+	if (!outputNode) return;
+	const setConnectionCommand = new SetConnectionCommand({
+		projectId,
+		id: createId(),
+		type: 'SetConnectionCommand',
+		createdAt: new Date().toJSON(),
+		details: {
+			connection: {
+				id: createId(),
+				targetNodeId: moduleNodeId,
+				inputPath: { inputKey: 'input', nodeId: outputNode?.id },
+			},
+		},
+	});
+	editor.execute(setConnectionCommand);
 }
