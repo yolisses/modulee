@@ -1,5 +1,6 @@
 import type { GraphData } from '$lib/data/GraphData';
 import type { UserData } from '$lib/user/UserData';
+import type { ModuleType } from '../../../generated/prisma';
 import type { Version } from './Version';
 
 export type ExternalModuleData = {
@@ -15,4 +16,5 @@ export type ExternalModuleData = {
 	createdAt: string;
 	usageCount: number;
 	description?: string;
+	moduleType: ModuleType;
 };
