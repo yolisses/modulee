@@ -62,7 +62,7 @@ export class ById<T extends HasId> {
 		});
 	}
 
-	removeById(id: string) {
+	removeById(id: string): T | undefined {
 		const value = this.content[id];
 		delete this.content[id];
 		return value;
