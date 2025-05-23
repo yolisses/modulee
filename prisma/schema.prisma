@@ -29,18 +29,25 @@ model User {
 }
 
 model ExternalModule {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  name        String   @db.VarChar(100)
-  projectId   String   @db.VarChar(22)
-  description String?  @db.VarChar(1000)
+  id          String     @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   isSeeded    Boolean?
-  likeCount   Int      @default(0)
+  name        String     @db.VarChar(100)
   graph       Json
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  likeCount   Int        @default(0)
+  projectId   String     @db.VarChar(22)
+  description String?    @db.VarChar(1000)
+  moduleType  ModuleType
+  user        User       @relation(fields: [userId], references: [id])
   likes       Like[]
+}
+
+enum ModuleType {
+  effect
+  utility
+  instrument
 }
 
 model Like {
