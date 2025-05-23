@@ -6,95 +6,34 @@
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
+	import { Loader } from './Loader.svelte';
 
 	let text = $state('');
 	let sort = $state('');
-	let cursor = $state<string | null>();
-	let externalModulesData = $state<ExternalModuleData[]>();
 
-	let listEnd: HTMLElement;
-	let gotError = $state(false);
-	let isLoading = $state(false);
-	let finished = $state(false);
-	let isIntersecting = $state(true);
-
-	async function load() {
+	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
 		queryParams.append('text', text);
 		queryParams.append('sort', sort);
-		if (cursor) queryParams.append('cursor', cursor);
-
+		if (loader.cursor) queryParams.append('cursor', loader.cursor);
 		const path = `/api/externalModules?${queryParams.toString()}`;
-		const res = await fetch(path, { method: 'GET' });
-
-		if (!res.ok) {
-			gotError = true;
-			return;
-		}
-
-		const data = await res.json();
-		cursor = data.nextCursor;
-
-		if (cursor === null) {
-			finished = true;
-		}
-
-		if (!externalModulesData) {
-			externalModulesData = [];
-		}
-		externalModulesData?.push(...data.items);
+		return path;
 	}
+	const loader = new Loader(getPath);
 
+	onMount(loader.initialize);
 	$effect(() => {
-		if (isIntersecting && !gotError && !isLoading && !finished) {
-			isLoading = true;
-			load().then(() => {
-				isLoading = false;
-			});
-		}
+		loader.onChange();
 	});
-
-	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				isIntersecting = false;
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						isIntersecting = true;
-					}
-				});
-			},
-			{ rootMargin: '0px 0px 100px 0px' },
-		);
-		observer.observe(listEnd);
-	});
-
-	function resetState() {
-		gotError = false;
-		finished = false;
-		isLoading = false;
-		cursor = undefined;
-		isIntersecting = true;
-		externalModulesData = undefined;
-	}
-
-	function handleSubmit(e: Event) {
-		e.preventDefault();
-		resetState();
-	}
-
-	function handleReset(e: Event) {
-		resetState();
-	}
 </script>
 
 <ListPageLayout title="External modules">
 	<form
 		action=""
 		method="get"
-		onreset={handleReset}
-		onsubmit={handleSubmit}
 		class="flex flex-col gap-2"
+		onreset={loader.handleReset}
+		onsubmit={loader.handleSubmit}
 	>
 		<div class="flex flex-row items-end gap-2">
 			<label class="flex flex-1 flex-col">
@@ -123,21 +62,21 @@
 		</div>
 	</form>
 
-	{#if externalModulesData?.length}
+	{#if loader.items?.length}
 		<div>
-			{#each externalModulesData as externalModuleData}
+			{#each loader.items as externalModuleData}
 				<ExternalModuleItem {externalModuleData} />
 			{/each}
 		</div>
 	{/if}
 
-	{#if !isLoading && externalModulesData?.length === 0}
+	{#if !loader.isLoading && loader.items?.length === 0}
 		<div class="text-center">No external modules found</div>
-	{:else if finished}
+	{:else if loader.finished}
 		<div class="text-center opacity-50">End of the list</div>
 	{/if}
 
-	{#if gotError}
+	{#if loader.gotError}
 		<div class="flex flex-col items-center">
 			<div class="text-red-500">Error loading</div>
 			<button class="common-button">
@@ -146,11 +85,11 @@
 			</button>
 		</div>
 	{/if}
-	{#if isLoading}
+	{#if loader.isLoading}
 		<div class="flex flex-col items-center">
 			<Spinner />
 		</div>
 	{/if}
 
-	<div bind:this={listEnd}></div>
+	<div bind:this={loader.listEnd}></div>
 </ListPageLayout>

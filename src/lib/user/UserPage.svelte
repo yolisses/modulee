@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import EditUserButton from './EditUserButton.svelte';
 	import LogoutButton from './LogoutButton.svelte';
@@ -32,5 +33,8 @@
 			<p>{userData.bio}</p>
 		</div>
 	{/if}
-  <div> Liked external modules </div>
+	<div>
+		<div class="opacity-50">External modules</div>
+		<ExternalModulesPage />
+	</div>
 </ListPageLayout>
