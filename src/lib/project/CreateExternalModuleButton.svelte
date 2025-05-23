@@ -14,7 +14,7 @@
 	async function onClick() {
 		isLoading = true;
 		try {
-			const res = await fetch('/api/externalModules', {
+			await fetch('/api/externalModules', {
 				method: 'POST',
 				body: JSON.stringify({ project: projectData }),
 				headers: { 'content-type': 'application/json' },
