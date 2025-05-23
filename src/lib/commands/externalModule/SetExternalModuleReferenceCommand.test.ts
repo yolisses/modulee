@@ -28,3 +28,31 @@ test('SetExternalModuleReferenceCommand', () => {
 		{ id: 'externalModuleReference1' },
 	]);
 });
+
+test('SetExternalModuleReferenceCommand already present', () => {
+	const graphRegistry = {
+		externalModuleReferences: ById.fromItems([
+			{ id: 'externalModuleReference1' },
+			{ id: 'externalModuleReference2' },
+		]),
+	} as GraphRegistry;
+
+	const command = new SetExternalModuleReferenceCommand(
+		mockCommandData({
+			externalModuleReference: { id: 'externalModuleReference2' } as ExternalModuleReference,
+		}),
+	);
+	command.execute(graphRegistry);
+
+	expect(graphRegistry.externalModuleReferences.values()).toEqual([
+		{ id: 'externalModuleReference1' },
+		{ id: 'externalModuleReference2' },
+	]);
+
+	command.undo(graphRegistry);
+
+	expect(graphRegistry.externalModuleReferences.values()).toEqual([
+		{ id: 'externalModuleReference1' },
+		{ id: 'externalModuleReference2' },
+	]);
+});
