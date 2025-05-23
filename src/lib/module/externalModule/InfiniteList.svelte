@@ -1,23 +1,17 @@
 <script lang="ts" generics="T">
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { faRefresh } from '@fortawesome/free-solid-svg-icons';
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { Loader } from './Loader.svelte';
 
 	interface Props {
+		loader: Loader<T>;
 		children: Snippet<[T]>;
 		getPath: (loader: Loader<T>) => string;
 	}
 
-	const { getPath, children }: Props = $props();
-	const loader = new Loader(getPath);
-
-	onMount(loader.initialize);
-
-	$effect(() => {
-		loader.onChange();
-	});
+	const { loader, getPath, children }: Props = $props();
 </script>
 
 <div>

@@ -19,6 +19,7 @@
 		const path = `/api/externalModules?${queryParams.toString()}`;
 		return path;
 	}
+
 	const loader = new Loader(getPath);
 
 	onMount(loader.initialize);
@@ -61,7 +62,7 @@
 			</button>
 		</div>
 	</form>
-	<InfiniteList {getPath}>
+	<InfiniteList {loader} {getPath}>
 		{#snippet children(externalModuleData: ExternalModuleData)}
 			<ExternalModuleItem {externalModuleData} />
 		{/snippet}
