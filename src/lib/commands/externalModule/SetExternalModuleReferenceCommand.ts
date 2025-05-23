@@ -2,10 +2,10 @@ import type { ExternalModuleReference } from '$lib/data/ExternalModuleReference'
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
-export class AddExternalModuleReferenceCommand extends EditorCommand<{
+export class SetExternalModuleReferenceCommand extends EditorCommand<{
 	externalModuleReference: ExternalModuleReference;
 }> {
-	static name = 'AddExternalModuleReferenceCommand';
+	static name = 'SetExternalModuleReferenceCommand';
 
 	execute(graphRegistry: GraphRegistry): void {
 		const { externalModuleReference } = this.details;

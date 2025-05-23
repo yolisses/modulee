@@ -3,8 +3,8 @@ import { DisconnectCommand } from './connection/DisconnectCommand';
 import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
-import { AddExternalModuleReferenceCommand } from './externalModule/AddExternalModuleReferenceCommand';
 import { RemoveExternalModuleReferenceCommand } from './externalModule/RemoveExternalModuleReferenceCommand';
+import { SetExternalModuleReferenceCommand } from './externalModule/SetExternalModuleReferenceCommand';
 import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
@@ -38,7 +38,7 @@ export const editorCommandClasses = [
 	SetConstantNodeValueCommand,
 	UpdateInputNodeExtrasCommand,
 	SetUnconnectedInputValueCommand,
-	AddExternalModuleReferenceCommand,
+	SetExternalModuleReferenceCommand,
 	SetModuleNodeModuleReferenceCommand,
 	RemoveExternalModuleReferenceCommand,
 ] as EditorCommandClass[];

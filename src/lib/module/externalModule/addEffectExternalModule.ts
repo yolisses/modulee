@@ -1,5 +1,5 @@
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
-import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
+import { SetExternalModuleReferenceCommand } from '$lib/commands/externalModule/SetExternalModuleReferenceCommand';
 import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { createId } from '$lib/data/createId';
 import type { Graph } from '$lib/data/Graph.svelte';
@@ -15,11 +15,11 @@ export function addEffectExternalModule(
 	internalModuleId: string,
 	externalModuleData: ExternalModuleData,
 ) {
-	const addExternalModuleReferenceCommand = new AddExternalModuleReferenceCommand({
+	const setExternalModuleReferenceCommand = new SetExternalModuleReferenceCommand({
 		projectId,
 		id: createId(),
 		createdAt: new Date().toJSON(),
-		type: 'AddExternalModuleReferenceCommand',
+		type: 'SetExternalModuleReferenceCommand',
 		details: {
 			externalModuleReference: {
 				type: 'external',
@@ -28,7 +28,7 @@ export function addEffectExternalModule(
 			},
 		},
 	});
-	editor.execute(addExternalModuleReferenceCommand);
+	editor.execute(setExternalModuleReferenceCommand);
 
 	const outputNode = graph.nodes.values().find((node) => node.type === 'OutputNode');
 

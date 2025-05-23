@@ -3,14 +3,14 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { AddExternalModuleReferenceCommand } from './AddExternalModuleReferenceCommand';
+import { SetExternalModuleReferenceCommand } from './SetExternalModuleReferenceCommand';
 
-test('AddExternalModuleReferenceCommand', () => {
+test('SetExternalModuleReferenceCommand', () => {
 	const graphRegistry = {
 		externalModuleReferences: ById.fromItems([{ id: 'externalModuleReference1' }]),
 	} as GraphRegistry;
 
-	const command = new AddExternalModuleReferenceCommand(
+	const command = new SetExternalModuleReferenceCommand(
 		mockCommandData({
 			externalModuleReference: { id: 'externalModuleReference2' } as ExternalModuleReference,
 		}),
