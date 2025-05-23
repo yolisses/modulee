@@ -1,35 +1,32 @@
 <script lang="ts">
-	import { AddExternalModuleReferenceCommand } from '$lib/commands/externalModule/AddExternalModuleReferenceCommand';
-	import { createId } from '$lib/data/createId';
+	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getInternalModuleIdContext } from '../internalModule/internalModuleIdContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
+	import { addEffectExternalModule } from './addEffectExternalModule';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
 	}
 
+	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
 	const { externalModuleData }: Props = $props();
 	const projectDataContext = getProjectDataContext();
+	const internalModuleIdContext = getInternalModuleIdContext();
 
+	// TODO improve this function after usability tests
 	function handleClick() {
-		const command = new AddExternalModuleReferenceCommand({
-			createdAt: new Date().toJSON(),
-			id: createId(),
-			type: 'AddExternalModuleReferenceCommand',
-			projectId: projectDataContext.projectData.id,
-			details: {
-				externalModuleReference: {
-					type: 'external',
-					id: externalModuleData.id,
-					version: externalModuleData.version,
-				},
-			},
-		});
-		editorContext.editor.execute(command);
+		addEffectExternalModule(
+			graphContext.graph,
+			editorContext.editor,
+			projectDataContext.projectData.id,
+			internalModuleIdContext.internalModuleId,
+			externalModuleData,
+		);
 	}
 </script>
 
