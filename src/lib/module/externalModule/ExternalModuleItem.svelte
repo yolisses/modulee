@@ -18,7 +18,7 @@
 			</a>
 		</div>
 		<LikeButton externalModuleId={externalModuleData.id} />
-		<UseButton />
+		<UseButton {externalModuleData} />
 	</div>
 	<div class="block max-h-10 overflow-hidden text-sm text-ellipsis text-white/75">
 		{externalModuleData.description}
