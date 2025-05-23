@@ -20,6 +20,7 @@ export async function getExternalModulesData(
 		skip: cursor ? 1 : 0,
 		orderBy: { createdAt: 'asc' },
 		cursor: cursor ? { id: cursor } : undefined,
+		include: { user: { select: { username: true } } },
 	});
 
 	const hasNextPage = results.length > PAGE_LIMIT;
