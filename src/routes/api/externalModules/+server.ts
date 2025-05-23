@@ -7,6 +7,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	let text = url.searchParams.get('text');
 	let sort = url.searchParams.get('sort');
 	const cursor = url.searchParams.get('cursor');
+	const userId = url.searchParams.get('userId');
 
 	if (text === '') {
 		text = null;
@@ -19,6 +20,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		text: text ?? undefined,
 		sort: sort ?? undefined,
 		cursor: cursor ?? undefined,
+		userId: userId ?? undefined,
 	});
 	return json(externalModulesData);
 };
