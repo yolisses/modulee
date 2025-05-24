@@ -10,7 +10,9 @@
 	const { route }: Props = $props();
 	const userDataContext = getUserDataContext();
 	const isSelected = $derived(
-		route.startsWith('/(home)/account') || route.startsWith('/(home)/users'),
+		route.startsWith('/(home)/account') ||
+			route.startsWith('/(home)/users') ||
+			route.startsWith('/(home)/signIn'),
 	);
 </script>
 
