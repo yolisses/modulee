@@ -1,10 +1,11 @@
 import prisma from '$lib/prisma';
 import { generateUniqueUsername } from './username/generateUniqueUsername';
 import { getIsUsernameAvailableFromDatabase } from './username/getIsUsernameAvailableFromDatabase';
-import { verifyGoogleCredential } from './verifyGoogleCredential';
+import { verifyGoogleCode } from './verifyGoogleCode';
 
 export async function signIn(credential: string) {
-	const payload = await verifyGoogleCredential(credential);
+	// DEBUG create a separate route for signInWithCode
+	const payload = await verifyGoogleCode(credential);
 	const { name, email } = payload;
 	if (!email) {
 		throw new Error('Missing email');

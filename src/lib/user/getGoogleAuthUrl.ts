@@ -1,6 +1,6 @@
 import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
+import { GOOGLE_REDIRECT_URI } from './GOOGLE_REDIRECT_URI';
 
-const GOOGLE_REDIRECT_URI = 'http://localhost:39057/signIn';
 const GOOGLE_SCOPE = [
 	'https://www.googleapis.com/auth/userinfo.profile',
 	'https://www.googleapis.com/auth/userinfo.email',
