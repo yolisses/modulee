@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
-	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
 	import { onMount } from 'svelte';
 	import { getUserDataContext } from './userDataContext';
 
@@ -30,10 +29,6 @@
 	onMount(() => {
 		window.onGoogleSignIn = onGoogleSignIn;
 	});
-
-	const haveJuceSupport = getHaveJuceSupport();
-	const loginUri = haveJuceSupport ? window.location.origin + '/signIn/response' : undefined;
-	console.log(loginUri);
 </script>
 
 <svelte:head>
@@ -42,14 +37,12 @@
 
 <div
 	id="g_id_onload"
+	data-ux_mode="popup"
 	data-context="signin"
 	data-itp_support="true"
-	data-login_uri={loginUri}
 	data-callback="onGoogleSignIn"
 	data-close_on_tap_outside="false"
 	data-client_id={PUBLIC_AUTH_GOOGLE_ID}
-	data-ux_mode={haveJuceSupport ? 'redirect' : 'popup'}
-	data-auto_prompt={haveJuceSupport ? 'false' : undefined}
 ></div>
 
 <div class="flex h-10">
