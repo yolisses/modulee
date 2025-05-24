@@ -1,10 +1,10 @@
 <script lang="ts">
-	import HomeSidebar from '$lib/home/HomeSidebar.svelte';
+	import HomeNavbar from '$lib/home/HomeNavbar.svelte';
 	let { children } = $props();
 </script>
 
 <div class="flex min-h-screen flex-row">
-	<HomeSidebar />
+	<HomeNavbar />
 	<div class="flex-1">
 		{@render children()}
 	</div>
