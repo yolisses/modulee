@@ -36,11 +36,11 @@
 
 	const userDataContext = getUserDataContext();
 	onMount(() => {
-		window.__JUCE__?.backend.addEventListener('signInResponse', async (credential) => {
+		window.__JUCE__?.backend.addEventListener('signInResponse', async (code) => {
 			try {
 				const response = await fetch('/api/signIn', {
 					method: 'POST',
-					body: JSON.stringify({ credential }),
+					body: JSON.stringify({ code }),
 					headers: { 'content-type': 'application/json' },
 				});
 				const userData = await response.json();
