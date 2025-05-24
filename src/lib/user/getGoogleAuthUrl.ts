@@ -1,16 +1,19 @@
-export function getGoogleAuthUrl() {
-	const clientId = '725523345294-l7ljv04v2maac7k6ugu6ifmuut88gbjk.apps.googleusercontent.com';
-	const redirectUri = 'http://localhost:5173/signIn/response';
-	const scope =
-		'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
-	const authUrl =
-		'https://accounts.google.com/o/oauth2/v2/auth?client_id=' +
-		clientId +
-		'&redirect_uri=' +
-		redirectUri +
-		'&response_type=code&scope=' +
-		scope +
-		'&access_type=offline';
+import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
 
-	return authUrl;
+const GOOGLE_REDIRECT_URI = 'http://localhost:5173/signIn/response';
+const GOOGLE_SCOPE = [
+	'https://www.googleapis.com/auth/userinfo.profile',
+	'https://www.googleapis.com/auth/userinfo.email',
+].join(' ');
+
+export function getGoogleAuthUrl(): string {
+	const params = new URLSearchParams({
+		client_id: PUBLIC_AUTH_GOOGLE_ID,
+		redirect_uri: GOOGLE_REDIRECT_URI,
+		response_type: 'code',
+		scope: GOOGLE_SCOPE,
+		access_type: 'offline',
+	});
+
+	return `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
 }
