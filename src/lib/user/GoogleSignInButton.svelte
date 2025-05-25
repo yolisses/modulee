@@ -20,12 +20,13 @@
 				body: JSON.stringify({ credential }),
 				headers: { 'content-type': 'application/json' },
 			});
-			const userData = await response.json();
-			if (!userData) {
-				throw new Error('Missing userData');
+			const data = await response.json();
+			if (response.ok) {
+				userDataContext.userData = data;
+				goto('/users/' + data.id);
+			} else {
+				throw new Error(data);
 			}
-			userDataContext.userData = userData;
-			goto('/users/' + userData.id);
 		} catch (e) {}
 		loading = false;
 	}

@@ -35,19 +35,24 @@
 	});
 
 	const userDataContext = getUserDataContext();
-	onMount(() => {
-		window.__JUCE__?.backend.addEventListener('signInResponse', async (code) => {
-			try {
-				const response = await fetch('/api/signIn', {
-					method: 'POST',
-					body: JSON.stringify({ code }),
-					headers: { 'content-type': 'application/json' },
-				});
-				const userData = await response.json();
-				userDataContext.userData = userData;
-				goto('/users/' + userData.id);
-			} catch (e) {}
+
+	async function handleSignInResponse(code: string) {
+		const response = await fetch('/api/signIn', {
+			method: 'POST',
+			body: JSON.stringify({ code }),
+			headers: { 'content-type': 'application/json' },
 		});
+		const data = await response.json();
+		if (response.ok) {
+			userDataContext.userData = data;
+			goto('/users/' + data.id);
+		} else {
+			throw new Error(data);
+		}
+	}
+
+	onMount(() => {
+		window.__JUCE__?.backend.addEventListener('signInResponse', handleSignInResponse);
 	});
 </script>
 

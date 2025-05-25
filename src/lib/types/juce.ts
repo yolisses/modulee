@@ -5,7 +5,7 @@ declare global {
 		__JUCE__?: {
 			backend: {
 				emitEvent(eventId: string, eventData: object): void;
-				addEventListener(eventId: string, callback: (value: unknown) => void): void;
+				addEventListener(eventId: string, callback: (value: any) => void): void;
 			};
 			postMessage: () => void;
 			initialisationData: {
