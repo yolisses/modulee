@@ -1,6 +1,6 @@
 import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
-import type { Actions, PageServerLoad } from './$types';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { userId } = getSession(locals);
@@ -8,5 +8,3 @@ export const load: PageServerLoad = async ({ locals }) => {
 	const projects = await getProjects(userId);
 	return { projects };
 };
-
-export const actions: Actions = {};
