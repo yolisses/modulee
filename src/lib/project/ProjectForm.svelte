@@ -35,7 +35,7 @@
 	<div>
 		Type
 		<div class="flex flex-row gap-2" onblur={handleBlur}>
-			<label>
+			<label class="common-button">
 				<input
 					id="effect"
 					type="radio"
@@ -44,7 +44,7 @@
 				/>
 				Effect
 			</label>
-			<label>
+			<label class="common-button">
 				<input
 					type="radio"
 					id="instrument"
@@ -53,7 +53,7 @@
 				/>
 				Instrument
 			</label>
-			<label>
+			<label class="common-button">
 				<input
 					type="radio"
 					id="utility"

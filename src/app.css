@@ -39,9 +39,10 @@
 		@apply disabled;
 	}
 
+	label,
 	button:not(:disabled),
-	input[type='range']:not(:disabled),
-	select:not(:disabled) {
+	select:not(:disabled),
+	input[type='range']:not(:disabled) {
 		@apply cursor-pointer;
 	}
 
