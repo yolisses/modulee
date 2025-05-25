@@ -82,8 +82,10 @@
 
 		projectDataContext.projectData.graph = graphData;
 
-		const projectsRepository = getProjectsRepository();
-		projectsRepository.updateProjectGraph(projectDataContext.projectData.id, graphData);
+		fetch(`/api/projects/${projectData.id}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ graph: graphData }),
+		});
 	};
 
 	const editorContext = $state({ editor });
