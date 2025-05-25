@@ -21,6 +21,9 @@
 				headers: { 'content-type': 'application/json' },
 			});
 			const userData = await response.json();
+			if (!userData) {
+				throw new Error('Missing userData');
+			}
 			userDataContext.userData = userData;
 			goto('/users/' + userData.id);
 		} catch (e) {}
