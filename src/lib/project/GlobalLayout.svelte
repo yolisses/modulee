@@ -30,8 +30,10 @@
 
 	onMount(async () => {
 		const res = await fetch(`/api/likes`);
-		const data = await res.json();
-		likedExternalModulesContext.likedExternalModules = new Set(data ?? []);
+		if (res.ok) {
+			const data = await res.json();
+			likedExternalModulesContext.likedExternalModules = new Set(data);
+		}
 	});
 
 	const userDataContext = getUserDataContext();
