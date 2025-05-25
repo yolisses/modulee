@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 
@@ -16,7 +17,7 @@
 </script>
 
 <Modal {closeModal}>
-	<form action="?/delete" method="post">
+	<form action="?/delete" method="post" use:enhance>
 		<input type="hidden" name="projectId" value={projectId} />
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Delete project?</p>
