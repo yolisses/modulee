@@ -21,14 +21,7 @@
 			<p>Create project</p>
 			<label>
 				<div>Name</div>
-				<input
-					required
-					name="name"
-					type="text"
-					value="New project"
-					class="common-input"
-					bind:this={textInput}
-				/>
+				<input required name="name" type="text" class="common-input" bind:this={textInput} />
 			</label>
 			<div class="flex flex-row justify-end gap-2">
 				<button type="button" class="common-button" onclick={closeModal}> Cancel </button>
