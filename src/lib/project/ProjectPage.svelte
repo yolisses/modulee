@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getProjectsRepository } from '$lib/project/getProjectsRepository';
+	import { enhance } from '$app/forms';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
@@ -9,68 +9,67 @@
 		projectData: ProjectData;
 	}
 
+	let form: HTMLFormElement;
 	const { projectData }: Props = $props();
-	const projectsRepository = getProjectsRepository();
 
-	function handleBlur(
-		e: FocusEvent & {
-			currentTarget: EventTarget & (HTMLTextAreaElement | HTMLInputElement);
-		},
-	) {
-		const value = e.currentTarget.value;
-		projectsRepository.renameProject(projectData.id, value);
+	function handleBlur() {
+		form.submit();
 	}
 </script>
 
 <ListPageLayout title="Project">
 	<div class="flex flex-col items-stretch gap-2">
-		<label class="flex flex-col">
-			Name
-			<input
-				type="text"
-				onblur={handleBlur}
-				value={projectData.name}
-				class="rounded border border-white/10 bg-transparent p-2"
-			/>
-		</label>
-		<label class="flex flex-col">
-			Description
-			<textarea
-				onblur={(e) => e}
-				value={projectData.description}
-				class="rounded border border-white/10 bg-transparent p-2"
-			></textarea>
-		</label>
-		<div class="flex flex-col">
-			Type
-			<label>
+		<form class="contents" method="post" use:enhance bind:this={form}>
+			<label class="flex flex-col">
+				Name
 				<input
-					type="radio"
-					name="moduleType"
-					id="effect"
-					checked={projectData.moduleType === 'effect'}
+					type="text"
+					onblur={handleBlur}
+					value={projectData.name}
+					class="rounded border border-white/10 bg-transparent p-2"
 				/>
-				Effect
 			</label>
-			<label>
-				<input
-					type="radio"
-					name="moduleType"
-					id="instrument"
-					checked={projectData.moduleType === 'instrument'}
-				/>
-				Instrument
+			<label class="flex flex-col">
+				Description
+				<textarea
+					onblur={handleBlur}
+					value={projectData.description}
+					class="rounded border border-white/10 bg-transparent p-2"
+				></textarea>
 			</label>
-			<label>
-				<input
-					type="radio"
-					name="moduleType"
-					id="utility"
-					checked={projectData.moduleType === 'utility'}
-				/>
-				Utility
-			</label>
-		</div>
+			<div>
+				Type
+				<div class="flex flex-row gap-2" onblur={handleBlur}>
+					<label>
+						<input
+							id="effect"
+							type="radio"
+							name="moduleType"
+							checked={projectData.moduleType === 'effect'}
+						/>
+						Effect
+					</label>
+					<label>
+						<input
+							type="radio"
+							id="instrument"
+							name="moduleType"
+							checked={projectData.moduleType === 'instrument'}
+						/>
+						Instrument
+					</label>
+					<label>
+						<input
+							type="radio"
+							id="utility"
+							name="moduleType"
+							checked={projectData.moduleType === 'utility'}
+						/>
+						Utility
+					</label>
+				</div>
+			</div>
+		</form>
 		<div class="flex flex-col">
 			<DownloadProjectButton {projectData} />
 			<CreateExternalModuleButton {projectData} />
