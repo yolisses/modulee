@@ -36,7 +36,7 @@
 	</label>
 	<div>
 		Type
-		<div class="flex flex-row gap-2" onblur={handleBlur}>
+		<div class="flex flex-row gap-2" onchange={handleBlur}>
 			<label class="common-button">
 				<input
 					id="effect"
