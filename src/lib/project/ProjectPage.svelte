@@ -14,8 +14,7 @@
 <ListPageLayout title="Project">
 	<div class="flex flex-col items-stretch gap-2">
 		<ProjectForm {projectData} />
-		<h2 class="mt-8 text-lg opacity-50">Export</h2>
-		<hr class="opacity-10" />
+		<hr class="mt-8 opacity-10" />
 		<CreateExternalModuleButton {projectData} />
 	</div>
 </ListPageLayout>
