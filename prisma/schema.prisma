@@ -26,6 +26,19 @@ model User {
   isSeeded        Boolean?
   externalModules ExternalModule[]
   likes           Like[]
+  Project         Project[]
+}
+
+model Project {
+  id          String     @id @default(uuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  name        String     @db.VarChar(100)
+  graph       Json
+  description String?    @db.VarChar(1000)
+  moduleType  ModuleType
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
 }
 
 model ExternalModule {
@@ -35,11 +48,11 @@ model ExternalModule {
   isSeeded    Boolean?
   name        String     @db.VarChar(100)
   graph       Json
-  userId      String
   likeCount   Int        @default(0)
   projectId   String     @db.VarChar(22)
   description String?    @db.VarChar(1000)
   moduleType  ModuleType
+  userId      String
   user        User       @relation(fields: [userId], references: [id])
   likes       Like[]
 }
