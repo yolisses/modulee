@@ -4,6 +4,7 @@ import type { ModuleType } from './ModuleType';
 export type ProjectData = {
 	id: string;
 	name: string;
+	userId: string;
 	graph: GraphData;
 	createdAt: string;
 	updatedAt: string;
