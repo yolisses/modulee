@@ -29,7 +29,6 @@
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
-	import { getProjectsRepository } from './getProjectsRepository';
 	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
 	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
