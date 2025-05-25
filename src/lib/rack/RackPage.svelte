@@ -5,6 +5,10 @@
 	const graphContext = getGraphContext();
 </script>
 
+<svelte:head>
+	<title>Rack - Modulee</title>
+</svelte:head>
+
 {#each graphContext.graph.internalModules.values() as internalModule (internalModule.id)}
 	<RackModuleItem {internalModule} />
 {/each}
