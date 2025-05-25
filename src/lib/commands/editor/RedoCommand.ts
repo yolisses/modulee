@@ -3,6 +3,7 @@ import { removeById } from '$lib/array/removeById';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
+import { NotImplementedError } from '$lib/NotImplementedError';
 
 export class RedoCommand extends EditorCommand<{
 	commandId: string;
@@ -19,6 +20,6 @@ export class RedoCommand extends EditorCommand<{
 	}
 
 	undo(): void {
-		throw new Error('Method not implemented');
+		throw new NotImplementedError();
 	}
 }

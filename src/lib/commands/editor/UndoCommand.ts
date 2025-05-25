@@ -3,6 +3,7 @@ import { removeById } from '$lib/array/removeById';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
+import { NotImplementedError } from '$lib/NotImplementedError';
 
 export class UndoCommand extends EditorCommand<{
 	commandId: string;
@@ -23,6 +24,6 @@ export class UndoCommand extends EditorCommand<{
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	undo(graphRegistry: GraphRegistry, editorData: EditorData): void {
-		throw new Error('Method not implemented');
+		throw new NotImplementedError();
 	}
 }

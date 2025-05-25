@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { createId } from '$lib/data/createId';
+	import { NotImplementedError } from '$lib/NotImplementedError';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 	import type { ProjectData } from './ProjectData';
-	import { getProjectsRepository } from './getProjectsRepository';
 
 	interface Props {
 		closeModal: () => void;
@@ -14,7 +14,6 @@
 	let textInput: HTMLInputElement;
 	let name = $state('New project');
 	const { closeModal }: Props = $props();
-	const projectsRepository = getProjectsRepository();
 
 	async function handleSubmit(e: Event) {
 		e.preventDefault();
@@ -34,7 +33,9 @@
 				internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
 			},
 		};
-		await projectsRepository.createProject(projectData);
+
+		throw new NotImplementedError();
+
 		goto(
 			'/projects/' +
 				projectData.id +

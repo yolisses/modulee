@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { NotImplementedError } from '$lib/NotImplementedError';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
-	import { getProjectsRepository } from './getProjectsRepository';
 
 	interface Props {
 		closeModal: () => void;
@@ -10,10 +10,9 @@
 
 	let cancelButton: HTMLButtonElement;
 	const { closeModal, projectId }: Props = $props();
-	const projectsRepository = getProjectsRepository();
 
 	function handleClick() {
-		projectsRepository.deleteProject(projectId);
+		throw new NotImplementedError();
 		closeModal();
 	}
 
