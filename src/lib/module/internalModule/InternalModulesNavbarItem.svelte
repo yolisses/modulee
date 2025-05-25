@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import DeleteInternalModuleButton from '$lib/module/internalModule/DeleteInternalModuleButton.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import DotsMenuButton from '$lib/project/DotsMenuButton.svelte';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import RenameInternalModuleButton from './RenameInternalModuleButton.svelte';
+	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 
 	interface Props {
 		internalModule: InternalModule;
@@ -28,9 +26,6 @@
 		{internalModule.name}
 	</a>
 	{#if internalModuleIdContext.internalModuleId === internalModule.id}
-		<DotsMenuButton>
-			<RenameInternalModuleButton {internalModule} />
-			<DeleteInternalModuleButton {internalModule} redirectsTo="mainInternalModuleGraph" />
-		</DotsMenuButton>
+		<InternalModuleDotsMenuButton {internalModule} redirectsTo="mainInternalModuleGraph" />
 	{/if}
 </div>
