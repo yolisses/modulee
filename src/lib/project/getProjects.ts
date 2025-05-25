@@ -1,6 +1,6 @@
-import { NotImplementedError } from '$lib/NotImplementedError';
+import prisma from '$lib/prisma';
+import type { ProjectData } from './ProjectData';
 
-export async function getProjects() {
-	throw new NotImplementedError();
-	return [];
+export async function getProjects(userId: string): Promise<ProjectData[]> {
+	return prisma.project.findMany({ where: { userId } });
 }
