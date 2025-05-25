@@ -18,10 +18,21 @@
 </script>
 
 <Modal {closeModal}>
-	<form class="contents" method="post" use:enhance>
+	<form
+		method="post"
+		class="contents"
+		use:enhance={closeModal}
+		action="/projects/{projectData.id}?/patch"
+	>
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Rename project "{projectData?.name}"</p>
-			<input type="text" class="common-input" bind:this={textInput} value={projectData.name} />
+			<input
+				type="text"
+				name="name"
+				class="common-input"
+				bind:this={textInput}
+				value={projectData.name}
+			/>
 			<div class="flex flex-row justify-end gap-2">
 				<button type="button" class="common-button" onclick={closeModal}> Cancel </button>
 				<button type="submit" class="primary-button"> Rename </button>
