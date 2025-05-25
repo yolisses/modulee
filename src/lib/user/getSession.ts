@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 
 export function getSession(locals: App.Locals) {
 	if (!locals.session) {
-		error(403, 'Requires sign in');
+		error(401, 'User not logged in');
 	}
 	return locals.session;
 }

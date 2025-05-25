@@ -7,10 +7,6 @@ export const POST: RequestHandler = async ({ locals, params }) => {
 	const { userId } = getSession(locals);
 	const { externalModuleId } = params;
 
-	if (!userId) {
-		error(401, 'Unauthorized');
-	}
-
 	if (!externalModuleId) {
 		error(400, 'Missing externalModuleId');
 	}
@@ -22,10 +18,6 @@ export const POST: RequestHandler = async ({ locals, params }) => {
 export const DELETE: RequestHandler = async ({ locals, params }) => {
 	const { userId } = getSession(locals);
 	const { externalModuleId } = params;
-
-	if (!userId) {
-		throw error(401, 'Unauthorized');
-	}
 
 	if (!externalModuleId) {
 		throw error(400, 'Missing externalModuleId');

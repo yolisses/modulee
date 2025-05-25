@@ -1,14 +1,11 @@
 import prisma from '$lib/prisma';
+import { getSession } from '$lib/user/getSession';
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const { session } = locals;
-	if (!session) {
-		error(401, 'User not logged in');
-	}
-
-	const userData = await prisma.user.findUnique({ where: { id: session.userId } });
+	const { userId } = getSession(locals);
+	const userData = await prisma.user.findUnique({ where: { id: userId } });
 	if (!userData) {
 		error(404, 'User not found');
 	}
@@ -17,11 +14,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions = {
 	default: async ({ locals, request }) => {
-		const { session } = locals;
-		if (!session) {
-			error(401, 'User not logged in');
-		}
-		const { userId } = session;
+		const { userId } = getSession(locals);
 
 		const formData = await request.formData();
 		// TODO find a cleaner way to prevent other fields from being updated
