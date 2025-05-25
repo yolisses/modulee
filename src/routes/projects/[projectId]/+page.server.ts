@@ -1,6 +1,7 @@
 import { patchProject } from '$lib/project/patchProject';
 import { getSession } from '$lib/user/getSession';
 import { type Actions } from '@sveltejs/kit';
+import { getStringOrUndefined } from './getStringOrUndefined';
 
 export const actions = {
 	patch: async ({ locals, request, params }) => {
@@ -12,16 +13,10 @@ export const actions = {
 		const description = getStringOrUndefined(data, 'description');
 
 		const projectData = { name, moduleType, description };
-		console.log(projectData);
-		await patchProject({ userId, id: params.projectId, data: projectData });
+		await patchProject({
+			userId,
+			data: projectData,
+			id: params.projectId,
+		});
 	},
 } satisfies Actions;
-
-function getStringOrUndefined(data: FormData, key: string): string | undefined {
-	const value = data.get(key);
-	if (value === null) return undefined;
-
-	if (typeof value === 'string') {
-		return value;
-	}
-}
