@@ -8,7 +8,7 @@
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import DeleteInternalModuleButton from './DeleteInternalModuleButton.svelte';
+	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
@@ -26,7 +26,7 @@
 	{/snippet}
 	<BasicList {getId} {getName} {getHref} items={graphContext.graph.internalModules.values()}>
 		{#snippet buttons({ item })}
-			<DeleteInternalModuleButton internalModule={item} />
+			<InternalModuleDotsMenuButton internalModule={item} />
 		{/snippet}
 	</BasicList>
 </ListPageLayout>
