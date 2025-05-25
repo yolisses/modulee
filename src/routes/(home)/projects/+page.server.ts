@@ -42,4 +42,11 @@ export const actions = {
 
 		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
 	},
+
+	delete: async ({ locals, request }) => {
+		const data = await request.formData();
+		const projectId = data.get('projectId');
+		const { userId } = getSession(locals);
+		await prisma.project.delete({ where: { userId, id: projectId } });
+	},
 } satisfies Actions;

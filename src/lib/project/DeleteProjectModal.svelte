@@ -10,18 +10,14 @@
 	let cancelButton: HTMLButtonElement;
 	const { closeModal, projectId }: Props = $props();
 
-	async function handleClick() {
-		await fetch(`/api/projects/${projectId}`, { method: 'DELETE' });
-		closeModal();
-	}
-
 	onMount(() => {
 		cancelButton.focus();
 	});
 </script>
 
 <Modal {closeModal}>
-	<form action="?/delete">
+	<form action="?/delete" method="post">
+		<input type="hidden" name="projectId" value={projectId} />
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Delete project?</p>
 			<p>This action is <b>irreversible</b>.</p>
@@ -29,9 +25,7 @@
 				<button type="button" bind:this={cancelButton} class="common-button" onclick={closeModal}>
 					Cancel
 				</button>
-				<button type="submit" class="rounded bg-red-500 p-2 hover:bg-red-600" onclick={handleClick}>
-					Delete
-				</button>
+				<button type="submit" class="rounded bg-red-500 p-2 hover:bg-red-600"> Delete </button>
 			</div>
 		</div>
 	</form>
