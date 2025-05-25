@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { NotImplementedError } from '$lib/NotImplementedError';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
-	import { getProjectsRepository } from './getProjectsRepository';
 	import type { ProjectData } from './ProjectData';
 
 	interface Props {
@@ -14,8 +14,7 @@
 	let textInput: HTMLInputElement;
 
 	function handleSubmit() {
-		const projectsRepository = getProjectsRepository();
-		projectsRepository?.renameProject(projectData.id, name);
+		throw new NotImplementedError();
 		closeModal();
 	}
 
