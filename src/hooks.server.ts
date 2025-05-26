@@ -4,19 +4,20 @@ import { validateSessionToken } from '$lib/session/validateSessionToken';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const token = event.cookies.get('session') ?? null;
+	const { cookies, locals } = event;
+	const token = cookies.get('session') ?? null;
 	if (token === null) {
-		event.locals.session = null;
+		locals.session = null;
 		return resolve(event);
 	}
 
 	const session = await validateSessionToken(token);
 	if (session !== null) {
-		setSessionTokenCookie(event, token, session.expiresAt);
+		setSessionTokenCookie(cookies, token, session.expiresAt);
 	} else {
-		deleteSessionTokenCookie(event);
+		deleteSessionTokenCookie(cookies);
 	}
 
-	event.locals.session = session;
+	locals.session = session;
 	return resolve(event);
 };

@@ -1,10 +1,5 @@
-import type { RequestEvent } from '@sveltejs/kit';
+import type { Cookies } from '@sveltejs/kit';
 
-export function setSessionTokenCookie(event: RequestEvent, token: string, expiresAt: Date): void {
-	event.cookies.set('session', token, {
-		httpOnly: true,
-		sameSite: 'lax',
-		expires: expiresAt,
-		path: '/',
-	});
+export function setSessionTokenCookie(cookies: Cookies, token: string, expiresAt: Date): void {
+	cookies.set('session', token, { httpOnly: true, sameSite: 'lax', expires: expiresAt, path: '/' });
 }

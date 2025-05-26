@@ -4,9 +4,8 @@ import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
 import { signIn } from '$lib/user/signIn';
 import { type RequestHandler, json } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async (event) => {
+export const POST: RequestHandler = async ({ request, cookies }) => {
 	// Get credential or code
-	const { request } = event;
 	const { credential, code } = await request.json();
 	if (!code && !credential) {
 		throw new Error('Missing code or credential');
@@ -18,7 +17,7 @@ export const POST: RequestHandler = async (event) => {
 	// Set session
 	const token = generateSessionToken();
 	const session = await createSession(token, userData.id);
-	setSessionTokenCookie(event, token, session.expiresAt);
+	setSessionTokenCookie(cookies, token, session.expiresAt);
 
 	// Return user data
 	return json(userData);

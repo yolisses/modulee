@@ -30,5 +30,12 @@ export async function signIn(params: SignInParams) {
 		{ maxAttempts: 100, getRandomValue: () => Math.random() },
 		getIsUsernameAvailableFromDatabase,
 	);
-	return await prisma.user.create({ data: { name, email, username } });
+	return await prisma.user.create({
+		data: {
+			name,
+			email,
+			username,
+			isGuest: false,
+		},
+	});
 }
