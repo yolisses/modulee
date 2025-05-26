@@ -22,5 +22,6 @@
 	href={userDataContext.userData ? '/users/' + userDataContext.userData.id : '/signIn'}
 >
 	<Fa fw icon={faUser} />
-	{userDataContext.userData ? userDataContext.userData.name : 'Account'}
+	<!-- TODO check if it makes sense from a UX perspective -->
+	{userDataContext.userData.isGuest ? 'Guest' : userDataContext.userData.name}
 </a>
