@@ -30,7 +30,9 @@
 <ListPageLayout title={userData.name}>
 	{#snippet topChildren()}
 		{#if userData.id === userDataContext.userData?.id}
-			<LogoutButton />
+			{#if !userData.isGuest}
+				<LogoutButton />
+			{/if}
 			<EditUserButton />
 		{/if}
 	{/snippet}
