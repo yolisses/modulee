@@ -4,14 +4,19 @@
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { setModalRootContext, type ModalRootContext } from '$lib/ui/modalRootContext';
-	import { getUserDataContext } from '$lib/user/userDataContext';
+	import type { UserData } from '$lib/user/UserData';
+	import { setUserDataContext } from '$lib/user/userDataContext';
 	import { onMount, type Snippet } from 'svelte';
 
 	interface Props {
 		children: Snippet;
+		userData: UserData;
 	}
 
-	const { children }: Props = $props();
+	const { children, userData }: Props = $props();
+
+	const userDataContext = $state({ userData });
+	setUserDataContext(userDataContext);
 
 	$effect(() => {
 		const url = new URL(page.url);
@@ -35,8 +40,6 @@
 			likedExternalModulesContext.likedExternalModules = new Set(data);
 		}
 	});
-
-	const userDataContext = getUserDataContext();
 
 	async function handleSignInResponse(code: string) {
 		const response = await fetch('/api/signIn', {

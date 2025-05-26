@@ -1,6 +1,5 @@
 <script lang="ts">
 	import GlobalLayout from '$lib/project/GlobalLayout.svelte';
-	import { setUserDataContext } from '$lib/user/userDataContext';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import '../inputTypeRange.css';
@@ -12,10 +11,8 @@
 	}
 
 	const { data, children }: Props = $props();
-	const userDataContext = $state({ userData: data.userData });
-	setUserDataContext(userDataContext);
 </script>
 
-<GlobalLayout>
+<GlobalLayout userData={data.userData}>
 	{@render children()}
 </GlobalLayout>
