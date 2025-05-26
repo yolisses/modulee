@@ -23,6 +23,7 @@ model User {
   username        String           @unique @db.VarChar(30)
   name            String           @db.VarChar(70)
   bio             String?          @db.VarChar(150)
+  isGuest         Boolean
   isSeeded        Boolean?
   externalModules ExternalModule[]
   likes           Like[]
