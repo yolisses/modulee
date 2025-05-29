@@ -51,7 +51,7 @@ model ExternalModule {
   graph       Json
   likeCount   Int        @default(0)
   projectId   String     @db.VarChar(22)
-  description String?    @db.VarChar(1000)
+  description String?    @db.Text()
   moduleType  ModuleType
   userId      String
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
