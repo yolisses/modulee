@@ -39,7 +39,7 @@ model Project {
   description String?    @db.VarChar(1000)
   moduleType  ModuleType
   userId      String
-  user        User       @relation(fields: [userId], references: [id])
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ExternalModule {
@@ -54,7 +54,7 @@ model ExternalModule {
   description String?    @db.VarChar(1000)
   moduleType  ModuleType
   userId      String
-  user        User       @relation(fields: [userId], references: [id])
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes       Like[]
 }
 
