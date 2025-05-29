@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -10,13 +11,14 @@
 	let sort = $state('');
 	let group = $state('');
 	let form: HTMLFormElement;
+	const userDataContext = getUserDataContext();
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
 		queryParams.append('text', text);
 		queryParams.append('sort', sort);
 		if (group === 'liked') {
-			queryParams.append('liked', 'true');
+			queryParams.append('likedBy', userDataContext.userData.id);
 		}
 		if (loader.cursor) queryParams.append('cursor', loader.cursor);
 		const path = `/api/externalModules?${queryParams.toString()}`;
@@ -31,7 +33,6 @@
 	<title>{title} - Modulee</title>
 </svelte:head>
 
-{group}
 <div class="flex flex-1 flex-row overflow-hidden">
 	<div class="border-r-2 border-black/50 p-4">
 		<form

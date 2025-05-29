@@ -7,6 +7,7 @@ type Params = {
 	sort?: string;
 	cursor?: string;
 	userId?: string;
+	likedBy?: string;
 };
 
 const PAGE_LIMIT = 20;
@@ -14,10 +15,14 @@ const PAGE_LIMIT = 20;
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor, userId, sort, text } = params;
+	const { cursor, userId, sort, text, likedBy } = params;
 
 	const results = await prisma.externalModule.findMany({
-		where: { userId, ...(text && { name: { search: text }, description: { search: text } }) },
+		where: {
+			...(userId && !likedBy && { userId }),
+			...(likedBy && { likes: { some: { userId: likedBy } } }),
+			...(text && { OR: [{ name: { search: text } }, { description: { search: text } }] }),
+		},
 		take: PAGE_LIMIT + 1,
 		skip: cursor ? 1 : 0,
 		cursor: cursor ? { id: cursor } : undefined,
@@ -25,7 +30,7 @@ export async function getExternalModulesData(
 		orderBy: sort
 			? { [sort]: 'desc' }
 			: text
-				? { _relevance: { sort: 'desc', search: 'database', fields: ['name', 'description'] } }
+				? { _relevance: { sort: 'desc', search: text, fields: ['name', 'description'] } }
 				: { likeCount: 'desc' },
 	});
 

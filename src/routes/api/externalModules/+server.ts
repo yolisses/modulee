@@ -6,6 +6,7 @@ import { error, json, type RequestHandler } from '@sveltejs/kit';
 export const GET: RequestHandler = async ({ url }) => {
 	let text = url.searchParams.get('text');
 	let sort = url.searchParams.get('sort');
+	let likedBy = url.searchParams.get('likedBy');
 	const cursor = url.searchParams.get('cursor');
 	const userId = url.searchParams.get('userId');
 
@@ -14,6 +15,9 @@ export const GET: RequestHandler = async ({ url }) => {
 	}
 	if (sort === '') {
 		sort = null;
+	}
+	if (likedBy === '') {
+		likedBy = null;
 	}
 
 	const sortOptions = new Set(['createdAt', 'likeCount']);
@@ -26,6 +30,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		sort: sort ?? undefined,
 		cursor: cursor ?? undefined,
 		userId: userId ?? undefined,
+		likedBy: likedBy ?? undefined,
 	});
 	return json(externalModulesData);
 };
