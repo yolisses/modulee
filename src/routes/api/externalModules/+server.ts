@@ -48,5 +48,5 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			// version: { major: 0, minor: 1, patch: 0 },
 		},
 	});
-	return json({ externalModuleData });
+	return json(externalModuleData);
 };

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Spinner from '$lib/ui/Spinner.svelte';
 	import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -14,11 +15,13 @@
 	async function onClick() {
 		isLoading = true;
 		try {
-			await fetch('/api/externalModules', {
+			const res = await fetch('/api/externalModules', {
 				method: 'POST',
 				body: JSON.stringify({ project: projectData }),
 				headers: { 'content-type': 'application/json' },
 			});
+			const data = await res.json();
+			goto(`/projects/${projectData.id}/externalModules/${data.id}`);
 		} catch (e) {}
 		isLoading = false;
 	}
