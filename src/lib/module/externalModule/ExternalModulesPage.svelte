@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -19,18 +18,24 @@
 		return path;
 	}
 	const loader = new Loader(getPath);
+
+	const title = 'External modules';
 </script>
 
-<ListPageLayout title="External modules">
-	<form
-		action=""
-		method="get"
-		class="flex flex-col gap-2"
-		onreset={loader.handleReset}
-		onsubmit={loader.handleSubmit}
-	>
-		<div class="flex flex-row items-end gap-2">
-			<label class="flex flex-1 flex-col">
+<svelte:head>
+	<title>{title} - Modulee</title>
+</svelte:head>
+
+<div class="flex flex-1 flex-row overflow-hidden">
+	<div class="border-r-2 border-black/50 p-4">
+		<form
+			action=""
+			method="get"
+			class="flex flex-col gap-2"
+			onreset={loader.handleReset}
+			onsubmit={loader.handleSubmit}
+		>
+			<label class="flex flex-col">
 				Text
 				<input bind:value={text} type="text" class="common-input" name="text" />
 			</label>
@@ -42,21 +47,28 @@
 					<option class="bg-zinc-800" value="createdAt">Most recent</option>
 				</select>
 			</label>
+			<div class="mt-2 flex flex-row items-end justify-end gap-2">
+				<button type="reset" class="common-button">
+					<Fa fw icon={faEraser} />
+					Clear
+				</button>
+				<button type="submit" class="primary-button">
+					<Fa fw icon={faSearch} />
+					Search
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="flex-1 overflow-auto">
+		<div class="flex h-[100dvh] flex-col items-center">
+			<div class="flex w-full max-w-xl flex-col gap-4 p-4">
+				<h1 class="py-2 text-xl font-medium">{title}</h1>
+				<InfiniteList {loader}>
+					{#snippet children(externalModuleData: ExternalModuleData)}
+						<ExternalModuleItem {externalModuleData} />
+					{/snippet}
+				</InfiniteList>
+			</div>
 		</div>
-		<div class="flex flex-row gap-2">
-			<button type="submit" class="primary-button">
-				<Fa fw icon={faSearch} />
-				Search
-			</button>
-			<button type="reset" class="common-button">
-				<Fa fw icon={faEraser} />
-				Clear
-			</button>
-		</div>
-	</form>
-	<InfiniteList {loader}>
-		{#snippet children(externalModuleData: ExternalModuleData)}
-			<ExternalModuleItem {externalModuleData} />
-		{/snippet}
-	</InfiniteList>
-</ListPageLayout>
+	</div>
+</div>
