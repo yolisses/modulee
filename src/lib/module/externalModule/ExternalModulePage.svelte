@@ -20,9 +20,28 @@
 			External module
 		</a>
 	{/snippet}
-	<div>
-		<div>
-			{externalModuleData.description}
+	<div class="flex flex-col gap-4">
+		<div class="flex flex-row justify-between gap-2">
+			<div>
+				By
+				<a href="/users/{externalModuleData.userId}" class="hover:underline">
+					{externalModuleData.user?.username}
+				</a>
+			</div>
+			<div>
+				Updated at {new Date(externalModuleData.updatedAt).toLocaleDateString()}
+			</div>
+			<div>
+				Liked {externalModuleData.likeCount} times
+			</div>
+		</div>
+		<div class="flex flex-col gap-2">
+			<h2 class="opacity-50">Description</h2>
+			{#if externalModuleData.description}
+				{#each externalModuleData.description?.split('\n') as text}
+					<p>{text}</p>
+				{/each}
+			{/if}
 		</div>
 	</div>
 </ListPageLayout>
