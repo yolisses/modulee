@@ -1,5 +1,6 @@
 import { createId } from '$lib/data/createId';
 import type { GraphData } from '$lib/data/GraphData';
+import type { ModuleType } from '$lib/project/ModuleType';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from './generated/prisma';
@@ -24,6 +25,7 @@ async function createUser() {
 		data: {
 			name,
 			username,
+			isGuest: false,
 			isSeeded: true,
 			bio: faker.person.bio(),
 			email: faker.internet.email({ firstName, lastName }),
@@ -31,14 +33,20 @@ async function createUser() {
 	});
 }
 
+function createModuleType() {
+	const moduleTypes: ModuleType[] = ['utility', 'effect', 'instrument'];
+	return faker.helpers.arrayElement(moduleTypes);
+}
+
 async function createExternalModule(userIds: string[]) {
 	await prisma.externalModule.create({
 		data: {
+			graph: createGraph(),
 			projectId: createId(),
 			userId: getRandomItem(userIds),
+			moduleType: createModuleType(),
 			description: createDescription(),
 			name: faker.commerce.productName(),
-			graph: createGraph(),
 		},
 	});
 }
