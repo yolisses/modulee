@@ -14,15 +14,19 @@ const PAGE_LIMIT = 20;
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor, userId, sort } = params;
+	const { cursor, userId, sort, text } = params;
 
 	const results = await prisma.externalModule.findMany({
-		where: { userId },
+		where: { userId, ...(text && { name: { search: text }, description: { search: text } }) },
 		take: PAGE_LIMIT + 1,
 		skip: cursor ? 1 : 0,
 		cursor: cursor ? { id: cursor } : undefined,
 		include: { user: { select: { username: true } } },
-		orderBy: sort ? { [sort]: 'desc' } : { likeCount: 'desc' },
+		orderBy: sort
+			? { [sort]: 'desc' }
+			: text
+				? { _relevance: { sort: 'desc', search: 'database', fields: ['name', 'description'] } }
+				: { likeCount: 'desc' },
 	});
 
 	const hasNextPage = results.length > PAGE_LIMIT;
