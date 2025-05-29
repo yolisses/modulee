@@ -33,7 +33,7 @@
 		<a href="/users/{externalModuleData.userId}" class="hover:underline">
 			{externalModuleData.user?.username}
 		</a>
-		• Updated at {new Date(externalModuleData.updatedAt).toLocaleDateString()}
+		• Created at {new Date(externalModuleData.createdAt).toLocaleDateString()}
 		<!-- • Used {externalModuleData.usageCount} times  -->
 		• Liked {externalModuleData.likeCount} times
 	</div>

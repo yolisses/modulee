@@ -29,7 +29,7 @@
 				</a>
 			</div>
 			<div>
-				Updated at {new Date(externalModuleData.updatedAt).toLocaleDateString()}
+				Created at {new Date(externalModuleData.createdAt).toLocaleDateString()}
 			</div>
 			<div>
 				Liked {externalModuleData.likeCount} times
