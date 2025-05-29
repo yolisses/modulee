@@ -39,8 +39,7 @@
 				<select bind:value={sort} class="common-input" name="sort">
 					<option class="bg-zinc-800" value=""></option>
 					<option class="bg-zinc-800" value="likeCount">Likes</option>
-					<option class="bg-zinc-800" value="usageCount">Usage</option>
-					<option class="bg-zinc-800" value="updatedAt">Last update</option>
+					<option class="bg-zinc-800" value="createdAt">Most recent</option>
 				</select>
 			</label>
 		</div>

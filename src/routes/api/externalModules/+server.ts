@@ -1,7 +1,7 @@
 import { getExternalModulesData } from '$lib/db/externalModule/getExternalModulesData';
 import prisma from '$lib/prisma';
 import { getSession } from '$lib/user/getSession';
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ url }) => {
 	let text = url.searchParams.get('text');
@@ -14,6 +14,11 @@ export const GET: RequestHandler = async ({ url }) => {
 	}
 	if (sort === '') {
 		sort = null;
+	}
+
+	const sortOptions = new Set(['createdAt', 'likeCount']);
+	if (sort && !sortOptions.has(sort)) {
+		error(400, 'Invalid sort parameter');
 	}
 
 	const externalModulesData = await getExternalModulesData({
