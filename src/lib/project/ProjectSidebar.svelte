@@ -47,7 +47,8 @@
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/externalModules"
-		class:vertical-tab-selected={route === baseRoute + '/externalModules'}
+		class:vertical-tab-selected={route === baseRoute + '/externalModules' ||
+			route === baseRoute + '/externalModules/[externalModuleId]'}
 	>
 		<Fa fw icon={faPuzzlePiece} />
 		External modules
