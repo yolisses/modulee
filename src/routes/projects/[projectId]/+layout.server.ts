@@ -5,17 +5,26 @@ import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ params }) => {
-	const project = await prisma.project.findUnique({ where: { id: params.projectId } });
+	const project = (await prisma.project.findUnique({
+		where: { id: params.projectId },
+	})) as ProjectData | null;
 
 	if (!project) {
 		error(404, { message: 'Project not found' });
 	}
 
-	// TODO load external modules data from remote repository
-	const externalModulesData: ExternalModuleData[] = [];
+	const externalModulesData = (await prisma.externalModule.findMany({
+		where: {
+			id: {
+				in: project.graph.externalModuleReferences.map((externalModuleReference) => {
+					return externalModuleReference.id;
+				}),
+			},
+		},
+	})) as ExternalModuleData[];
 
 	return {
 		externalModulesData,
-		projectData: project as ProjectData,
+		projectData: project,
 	};
 };
