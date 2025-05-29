@@ -2,6 +2,8 @@
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
+	import LikeButton from './LikeButton.svelte';
+	import UseButton from './UseButton.svelte';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
@@ -19,6 +21,10 @@
 		>
 			External module
 		</a>
+	{/snippet}
+	{#snippet topChildren()}
+		<LikeButton externalModuleId={externalModuleData.id} />
+		<UseButton {externalModuleData} />
 	{/snippet}
 	<div class="flex flex-col gap-4">
 		<div class="flex flex-row justify-between gap-2">
