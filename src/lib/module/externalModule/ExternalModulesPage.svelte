@@ -8,11 +8,16 @@
 
 	let text = $state('');
 	let sort = $state('');
+	let group = $state('');
+	let form: HTMLFormElement;
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
 		queryParams.append('text', text);
 		queryParams.append('sort', sort);
+		if (group === 'liked') {
+			queryParams.append('liked', 'true');
+		}
 		if (loader.cursor) queryParams.append('cursor', loader.cursor);
 		const path = `/api/externalModules?${queryParams.toString()}`;
 		return path;
@@ -26,14 +31,17 @@
 	<title>{title} - Modulee</title>
 </svelte:head>
 
+{group}
 <div class="flex flex-1 flex-row overflow-hidden">
 	<div class="border-r-2 border-black/50 p-4">
 		<form
 			action=""
 			method="get"
+			bind:this={form}
 			class="flex flex-col gap-2"
 			onreset={loader.handleReset}
 			onsubmit={loader.handleSubmit}
+			onchange={loader.handleSubmit}
 		>
 			<label class="flex flex-col">
 				Text
@@ -47,6 +55,22 @@
 					<option class="bg-zinc-800" value="createdAt">Most recent</option>
 				</select>
 			</label>
+			<div>
+				<div class="flex flex-row gap-2">
+					<label class="common-button">
+						<input id="effect" type="radio" value="all" bind:group />
+						All
+					</label>
+					<label class="common-button">
+						<input type="radio" id="instrument" value="liked" bind:group />
+						Liked
+					</label>
+					<label class="common-button">
+						<input type="radio" id="utility" value="used" bind:group />
+						Used in project
+					</label>
+				</div>
+			</div>
 			<div class="mt-2 flex flex-row items-end justify-end gap-2">
 				<button type="reset" class="common-button">
 					<Fa fw icon={faEraser} />
