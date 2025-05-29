@@ -65,7 +65,11 @@ function createGraph(): GraphData {
 function createDescription() {
 	return range(10)
 		.map(() => {
-			return faker.commerce.productDescription();
+			return (
+				range(4)
+					.map(() => faker.commerce.productDescription())
+					.join('. ') + '.'
+			);
 		})
 		.join('\n');
 }
