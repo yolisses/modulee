@@ -1,9 +1,9 @@
 export class Loader<T> {
-	items = $state<T[]>();
 	listEnd?: HTMLElement;
 	gotError = $state(false);
 	finished = $state(false);
 	isLoading = $state(false);
+	items = $state.raw<T[]>();
 	isIntersecting = $state(true);
 	cursor = $state<string | null>();
 
