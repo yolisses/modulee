@@ -58,15 +58,18 @@
 			</label>
 			<div>
 				<div class="flex flex-row gap-2">
-					<label class="common-button">
+					<label class="common-button grow">
 						<input id="effect" type="radio" value="all" bind:group />
 						All
 					</label>
-					<label class="common-button">
+					<label class="common-button grow" title="Only external modules you liked">
 						<input type="radio" id="instrument" value="liked" bind:group />
 						Liked
 					</label>
-					<label class="common-button">
+					<label
+						class="common-button grow"
+						title="Only external modules used in the current project"
+					>
 						<input type="radio" id="utility" value="used" bind:group />
 						Used in project
 					</label>
