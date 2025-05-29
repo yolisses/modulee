@@ -1,7 +1,7 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import type { ExternalModuleReference } from './ExternalModuleReference';
+import { instantiateNode } from './instantiateNode';
 import { Module } from './Module';
-import { Node } from './Node.svelte';
 
 export class ExternalModule extends Module<ExternalModuleData> {
 	constructor(externalModuleData: ExternalModuleData) {
@@ -12,7 +12,7 @@ export class ExternalModule extends Module<ExternalModuleData> {
 
 	getNodes() {
 		return this.moduleData.graph.nodes.map((nodeData) => {
-			return new Node(nodeData);
+			return instantiateNode(nodeData);
 		});
 	}
 
