@@ -21,6 +21,14 @@
 	const projectDataContext = getProjectDataContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
 
+	const isUsed = $derived(
+		projectDataContext.projectData.graph.externalModuleReferences.some(
+			(externalModuleReference) => {
+				return externalModuleReference.id === externalModuleData.id;
+			},
+		),
+	);
+
 	function handleClick() {
 		const outputNode = graphContext.graph.nodes.values().find((node) => node.type === 'OutputNode');
 		if (!outputNode) {
@@ -49,6 +57,10 @@
 </script>
 
 <button class="common-button" onclick={handleClick}>
-	<Fa fw icon={faDownload} />
-	Use
+	<Fa fw icon={faDownload} color={isUsed ? 'oklch(62.3% 0.214 259.815)' : undefined} />
+	{#if isUsed}
+		Used
+	{:else}
+		Use
+	{/if}
 </button>
