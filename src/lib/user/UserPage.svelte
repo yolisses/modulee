@@ -37,19 +37,13 @@
 		{/if}
 	{/snippet}
 	<div>
-		<div class="opacity-50">Username</div>
-		<div>
-			{userData.username}
-		</div>
+		{userData.username}
 	</div>
 	{#if userData.bio}
-		<div>
-			<div class="opacity-50">Bio</div>
-			<p>{userData.bio}</p>
-		</div>
+		<p>{userData.bio}</p>
 	{/if}
 	<div>
-		<div class="opacity-50">External modules</div>
+		<h2 class="font-semibold">External modules</h2>
 		<InfiniteList {loader}>
 			{#snippet children(externalModuleData: ExternalModuleData)}
 				<ExternalModuleItem {externalModuleData} />
