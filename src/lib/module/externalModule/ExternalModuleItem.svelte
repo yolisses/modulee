@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 	import UseButton from './UseButton.svelte';
@@ -8,12 +9,16 @@
 	}
 
 	const { externalModuleData }: Props = $props();
+	const projectDataContext = getProjectDataContext();
 </script>
 
 <div class="border-b border-white/10 p-2 pb-6 last:border-none">
 	<div class="flex flex-row items-center">
 		<div class="flex-1">
-			<a href="/externalModules/{externalModuleData.id}" class="hover:underline">
+			<a
+				class="hover:underline"
+				href="/projects/{projectDataContext.projectData.id}/externalModules/{externalModuleData.id}"
+			>
 				{externalModuleData.name}
 			</a>
 		</div>
