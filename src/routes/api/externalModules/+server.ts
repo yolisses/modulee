@@ -1,5 +1,6 @@
 import { getExternalModulesData } from '$lib/db/externalModule/getExternalModulesData';
 import prisma from '$lib/prisma';
+import type { ProjectData } from '$lib/project/ProjectData';
 import { getSession } from '$lib/user/getSession';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 
@@ -9,6 +10,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	let likedBy = url.searchParams.get('likedBy');
 	const cursor = url.searchParams.get('cursor');
 	const userId = url.searchParams.get('userId');
+	const usedIn = url.searchParams.get('usedIn');
 
 	if (text === '') {
 		text = null;
@@ -20,12 +22,26 @@ export const GET: RequestHandler = async ({ url }) => {
 		likedBy = null;
 	}
 
+	let validIds: string[] | undefined = undefined;
+	if (usedIn) {
+		const project = (await prisma.project.findUnique({
+			where: { id: usedIn },
+		})) as ProjectData | null;
+		if (project) {
+			validIds = project.graph.externalModuleReferences.map((externalModuleData) => {
+				return externalModuleData.id;
+			});
+			console.log(validIds);
+		}
+	}
+
 	const sortOptions = new Set(['createdAt', 'likeCount']);
 	if (sort && !sortOptions.has(sort)) {
 		error(400, 'Invalid sort parameter');
 	}
 
 	const externalModulesData = await getExternalModulesData({
+		validIds,
 		text: text ?? undefined,
 		sort: sort ?? undefined,
 		cursor: cursor ?? undefined,

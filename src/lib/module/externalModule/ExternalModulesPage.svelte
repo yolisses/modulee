@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -12,15 +13,23 @@
 	let group = $state('');
 	let form: HTMLFormElement;
 	const userDataContext = getUserDataContext();
+	const projectDataContext = getProjectDataContext();
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
 		queryParams.append('text', text);
 		queryParams.append('sort', sort);
+
 		if (group === 'liked') {
 			queryParams.append('likedBy', userDataContext.userData.id);
 		}
+
+		if (group === 'used') {
+			queryParams.append('usedIn', projectDataContext.projectData.id);
+		}
+
 		if (loader.cursor) queryParams.append('cursor', loader.cursor);
+
 		const path = `/api/externalModules?${queryParams.toString()}`;
 		return path;
 	}

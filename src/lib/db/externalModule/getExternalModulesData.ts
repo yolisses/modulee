@@ -8,6 +8,7 @@ type Params = {
 	cursor?: string;
 	userId?: string;
 	likedBy?: string;
+	validIds?: string[];
 };
 
 const PAGE_LIMIT = 20;
@@ -15,11 +16,12 @@ const PAGE_LIMIT = 20;
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { cursor, userId, sort, text, likedBy } = params;
+	const { sort, text, cursor, userId, likedBy, validIds } = params;
 
 	const results = await prisma.externalModule.findMany({
 		where: {
-			...(userId && !likedBy && { userId }),
+			...(userId && { userId }),
+			...(validIds && { id: { in: validIds } }),
 			...(likedBy && { likes: { some: { userId: likedBy } } }),
 			...(text && { OR: [{ name: { search: text } }, { description: { search: text } }] }),
 		},
