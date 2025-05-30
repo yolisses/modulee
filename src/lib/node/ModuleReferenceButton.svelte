@@ -9,7 +9,9 @@
 	const { module }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	const href = $derived(
-		`/projects/${projectDataContext.projectData.id}/internalModules/${module.id}/graph`,
+		module.getReference().type === 'internal'
+			? `/projects/${projectDataContext.projectData.id}/internalModules/${module.id}/graph`
+			: `/projects/${projectDataContext.projectData.id}/externalModules/${module.id}`,
 	);
 
 	function handlePointerDown(e: PointerEvent) {
