@@ -14,7 +14,6 @@
 	async function onGoogleSignIn({ credential }: { credential: string }) {
 		loading = true;
 		try {
-			console.log(credential);
 			const response = await fetch('/api/signIn', {
 				method: 'POST',
 				body: JSON.stringify({ credential }),

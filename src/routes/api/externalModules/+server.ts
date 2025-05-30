@@ -31,7 +31,6 @@ export const GET: RequestHandler = async ({ url }) => {
 			validIds = project.graph.externalModuleReferences.map((externalModuleData) => {
 				return externalModuleData.id;
 			});
-			console.log(validIds);
 		}
 	}
 
