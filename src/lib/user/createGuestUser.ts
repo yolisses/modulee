@@ -1,4 +1,3 @@
-import { createShortId } from '$lib/data/createShortId';
 import prisma from '$lib/prisma';
 import { generateUniqueUsername } from './username/generateUniqueUsername';
 import { getIsUsernameAvailableFromDatabase } from './username/getIsUsernameAvailableFromDatabase';
@@ -8,7 +7,7 @@ function createGuestEmail(username: string) {
 }
 
 export async function createGuestUser() {
-	const name = 'Guest ' + createShortId();
+	const name = 'Guest';
 
 	const username = await generateUniqueUsername(
 		name,
@@ -21,7 +20,7 @@ export async function createGuestUser() {
 			name,
 			username,
 			isGuest: true,
-			email: createGuestEmail(name),
+			email: createGuestEmail(username),
 		},
 	});
 }
