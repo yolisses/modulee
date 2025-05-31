@@ -2,8 +2,8 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
+	import DotsMenuButton from '../ui/DotsMenuButton.svelte';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
-	import DotsMenuButton from './DotsMenuButton.svelte';
 	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import RenameProjectButton from './RenameProjectButton.svelte';

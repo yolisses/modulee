@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import DotsMenuButton from '$lib/project/DotsMenuButton.svelte';
+	import DotsMenuButton from '$lib/ui/DotsMenuButton.svelte';
 	import DeleteInternalModuleButton from './DeleteInternalModuleButton.svelte';
 	import RenameInternalModuleButton from './RenameInternalModuleButton.svelte';
 
