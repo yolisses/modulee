@@ -3,7 +3,7 @@
 	import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 	import type { Snippet } from 'svelte';
 	import Fa from 'svelte-fa';
-	import Menu from '../project/Menu.svelte';
+	import Menu from './Menu.svelte';
 
 	interface Props {
 		children: Snippet;
