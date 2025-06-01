@@ -9,7 +9,8 @@ declare global {
 			};
 			postMessage: () => void;
 			initialisationData: {
-				isRunningOnJucePlugin?: [boolean];
+				authToken: [string];
+				isRunningOnJucePlugin: [boolean];
 			};
 		};
 	}

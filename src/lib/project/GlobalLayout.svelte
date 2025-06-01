@@ -3,9 +3,11 @@
 	import { page } from '$app/state';
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
+	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 	import { setModalRootContext, type ModalRootContext } from '$lib/ui/modalRootContext';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
+	import cookies from 'js-cookie';
 	import { onMount, type Snippet } from 'svelte';
 
 	interface Props {
@@ -55,6 +57,13 @@
 			throw new Error(data);
 		}
 	}
+
+	onMount(() => {
+		const authToken = window.__JUCE__?.initialisationData.authToken[0];
+		if (authToken) {
+			cookies.set(SESSION_COOKIE_NAME, authToken);
+		}
+	});
 
 	onMount(() => {
 		window.__JUCE__?.backend.addEventListener('signInResponse', handleSignInResponse);
