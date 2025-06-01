@@ -5,7 +5,13 @@ import { validateSessionToken } from '$lib/session/validateSessionToken';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const { cookies, locals } = event;
+	const { cookies, locals, route } = event;
+
+	console.log('the route', route);
+	if (route.id === '/dev') {
+		return resolve(event);
+	}
+
 	const token = cookies.get(SESSION_COOKIE_NAME) ?? null;
 	if (token === null) {
 		locals.session = null;

@@ -4,7 +4,7 @@ import { generateSessionToken } from '$lib/session/generateSessionToken';
 import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
 import { createGuestUser } from '$lib/user/createGuestUser';
 import type { UserData } from '$lib/user/UserData';
-import type { LayoutServerLoad } from './$types';
+import type { LayoutServerLoad } from '../$types';
 
 export const load: LayoutServerLoad = async ({ locals, cookies }) => {
 	const { userId } = locals.session || {};

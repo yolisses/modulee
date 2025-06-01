@@ -1,18 +1,11 @@
 <script lang="ts">
-	import GlobalLayout from '$lib/global/GlobalLayout.svelte';
-	import type { Snippet } from 'svelte';
-	import '../app.css';
-	import '../inputTypeRange.css';
-	import type { LayoutServerData } from './$types';
+	import { type Snippet } from 'svelte';
 
 	interface Props {
 		children: Snippet;
-		data: LayoutServerData;
 	}
 
-	const { data, children }: Props = $props();
+	const { children }: Props = $props();
 </script>
 
-<GlobalLayout userData={data.userData}>
-	{@render children()}
-</GlobalLayout>
+{@render children()}

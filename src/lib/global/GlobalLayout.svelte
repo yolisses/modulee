@@ -3,10 +3,14 @@
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
+	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
+	import cookies from 'js-cookie';
 	import { onMount, type Snippet } from 'svelte';
+	import '../../app.css';
+	import '../../inputTypeRange.css';
 
 	interface Props {
 		children: Snippet;
@@ -42,6 +46,19 @@
 		window.__JUCE__?.backend.addEventListener('signInResponse', (code: string) =>
 			handleSignInResponse(code, userDataContext),
 		);
+	});
+
+	// this solution is suboptimal, since it may require refreshing the page
+	onMount(() => {
+		const authToken = cookies.get(SESSION_COOKIE_NAME);
+		console.log(
+			'token from global layout',
+			cookies.get(SESSION_COOKIE_NAME),
+			cookies.get('session'),
+		);
+		if (authToken) {
+			window.__JUCE__?.backend.emitEvent('setAuthToken', { authToken });
+		}
 	});
 </script>
 
