@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GlobalLayout from '$lib/project/GlobalLayout.svelte';
+	import GlobalLayout from '$lib/global/GlobalLayout.svelte';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import '../inputTypeRange.css';
