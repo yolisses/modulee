@@ -1,4 +1,4 @@
-import type { ModuleeResource } from '$lib/types/ModuleeResource';
+import type { ModuleeResource } from '$lib/global/ModuleeResource';
 import { MODULEE_VERSION } from './MODULEE_VERSION';
 
 export function createModuleeResource<D, S>(data: D, type: S): ModuleeResource<D, S> {
