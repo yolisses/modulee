@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { mockJuceInitialData } from '$lib/dev/mockJuceInitialData';
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
+	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
@@ -41,21 +41,6 @@
 		}
 	});
 
-	async function handleSignInResponse(code: string) {
-		const response = await fetch('/api/signIn', {
-			method: 'POST',
-			body: JSON.stringify({ code }),
-			headers: { 'content-type': 'application/json' },
-		});
-		const data = await response.json();
-		if (response.ok) {
-			userDataContext.userData = data;
-			goto('/users/' + data.id);
-		} else {
-			throw new Error(data);
-		}
-	}
-
 	onMount(() => {
 		mockJuceInitialData();
 	});
@@ -68,7 +53,9 @@
 	});
 
 	onMount(() => {
-		window.__JUCE__?.backend.addEventListener('signInResponse', handleSignInResponse);
+		window.__JUCE__?.backend.addEventListener('signInResponse', (code: string) =>
+			handleSignInResponse(code, userDataContext),
+		);
 	});
 </script>
 
