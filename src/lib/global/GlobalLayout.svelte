@@ -51,7 +51,6 @@
 	// this solution is suboptimal, since it may require refreshing the page
 	onMount(() => {
 		const authToken = cookies.get(SESSION_COOKIE_NAME);
-		console.log('token from global layout', cookies.get(SESSION_COOKIE_NAME));
 		if (authToken) {
 			window.__JUCE__?.backend.emitEvent('setAuthToken', { authToken });
 		}

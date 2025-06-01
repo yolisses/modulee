@@ -7,7 +7,7 @@
 
 	// this solution is suboptimal, since it may require refreshing the page
 	onMount(() => {
-		const authToken = window.__JUCE__?.initialisationData.authToken[0];
+		const authToken = window.__JUCE__?.initialisationData.authToken?.[0];
 		if (!authToken) {
 			throw new Error('Missing auth token initialization data');
 		}
@@ -18,7 +18,6 @@
 			httpOnly: false,
 			priority: 'high',
 		});
-		console.log('token from set auth token page', cookies.get(SESSION_COOKIE_NAME));
 		goto('/');
 	});
 </script>
