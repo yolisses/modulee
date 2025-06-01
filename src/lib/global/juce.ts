@@ -9,6 +9,9 @@ declare global {
 			};
 			postMessage: () => void;
 			initialisationData: {
+				lastPage: [string];
+				authToken: [string];
+				// TODO remove isRunningOnJucePlugin
 				isRunningOnJucePlugin: [boolean];
 			};
 		};

@@ -7,8 +7,7 @@ import type { Handle } from '@sveltejs/kit';
 export const handle: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, route } = event;
 
-	console.log('the route', route);
-	if (route.id === '/dev') {
+	if (route.id === '/setAuthToken') {
 		return resolve(event);
 	}
 
