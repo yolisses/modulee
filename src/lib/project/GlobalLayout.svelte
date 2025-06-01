@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { mockJuceInitialData } from '$lib/dev/mockJuceInitialData';
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
@@ -57,6 +58,10 @@
 			throw new Error(data);
 		}
 	}
+
+	onMount(() => {
+		mockJuceInitialData();
+	});
 
 	onMount(() => {
 		const authToken = window.__JUCE__?.initialisationData.authToken[0];
