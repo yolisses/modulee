@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { mockJuceInitialData } from '$lib/dev/mockJuceInitialData';
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
@@ -41,9 +40,9 @@
 		}
 	});
 
-	onMount(() => {
-		mockJuceInitialData();
-	});
+	// onMount(() => {
+	// 	mockJucePlugin();
+	// });
 
 	onMount(() => {
 		const authToken = window.__JUCE__?.initialisationData.authToken[0];
