@@ -2,6 +2,7 @@
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
+	import Spinner from '$lib/ui/Spinner.svelte';
 	import cookies from 'js-cookie';
 	import { onMount } from 'svelte';
 
@@ -22,4 +23,6 @@
 	});
 </script>
 
-<div>Loading</div>
+<div class="flex min-h-screen flex-col items-center justify-center">
+	<Spinner />
+</div>
