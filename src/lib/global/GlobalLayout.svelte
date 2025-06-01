@@ -5,7 +5,7 @@
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
-	import { setModalRootContext, type ModalRootContext } from '$lib/ui/modalRootContext';
+	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
 	import cookies from 'js-cookie';
@@ -29,9 +29,6 @@
 
 	// TODO check if it makes sense to not have a state here
 	setCopyDataContext({ offset: 0 });
-
-	const modalRootContext = $state({} as ModalRootContext);
-	setModalRootContext(modalRootContext);
 
 	let likedExternalModulesContext = $state({ likedExternalModules: new Set<string>() });
 	setLikedExternalModulesContext(likedExternalModulesContext);
@@ -75,6 +72,6 @@
 	});
 </script>
 
-<div class="contents" bind:this={modalRootContext.modalRoot}>
+<ModalRootLayout>
 	{@render children()}
-</div>
+</ModalRootLayout>
