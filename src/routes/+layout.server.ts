@@ -4,10 +4,13 @@ import { generateSessionToken } from '$lib/session/generateSessionToken';
 import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
 import { createGuestUser } from '$lib/user/createGuestUser';
 import type { UserData } from '$lib/user/UserData';
-import type { LayoutServerLoad } from '../$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ locals, cookies }) => {
+export const load: LayoutServerLoad = async ({ locals, cookies, route }) => {
 	const { userId } = locals.session || {};
+	if (route.id === '/setAuthToken') {
+		return {};
+	}
 
 	if (userId) {
 		const data = await prisma.user.findUnique({ where: { id: userId } });

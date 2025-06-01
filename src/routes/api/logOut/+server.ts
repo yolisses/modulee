@@ -4,8 +4,8 @@ import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 import { validateSessionToken } from '$lib/session/validateSessionToken';
 import { error, redirect, type RequestHandler } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async (event) => {
-	const token = event.cookies.get(SESSION_COOKIE_NAME);
+export const POST: RequestHandler = async ({ cookies }) => {
+	const token = cookies.get(SESSION_COOKIE_NAME);
 	if (!token) {
 		error(401, 'Session token not found');
 	}
@@ -16,6 +16,6 @@ export const POST: RequestHandler = async (event) => {
 	}
 
 	invalidateSession(session.id, session.userId);
-	deleteSessionTokenCookie(event);
+	deleteSessionTokenCookie(cookies);
 	redirect(302, '/signIn');
 };
