@@ -6,7 +6,6 @@ export function mockJucePlugin() {
 			addEventListener() {},
 		},
 		initialisationData: {
-			authToken: ['testAuthToken'],
 			isRunningOnJucePlugin: [true],
 		},
 	};

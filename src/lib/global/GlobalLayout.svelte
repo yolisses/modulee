@@ -3,11 +3,9 @@
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
-	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
-	import cookies from 'js-cookie';
 	import { onMount, type Snippet } from 'svelte';
 
 	interface Props {
@@ -37,17 +35,6 @@
 		if (res.ok) {
 			const data = await res.json();
 			likedExternalModulesContext.likedExternalModules = new Set(data);
-		}
-	});
-
-	// onMount(() => {
-	// 	mockJucePlugin();
-	// });
-
-	onMount(() => {
-		const authToken = window.__JUCE__?.initialisationData.authToken[0];
-		if (authToken) {
-			cookies.set(SESSION_COOKIE_NAME, authToken);
 		}
 	});
 
