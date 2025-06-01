@@ -1,8 +1,8 @@
 <script lang="ts">
 	import GlobalLayout from '$lib/global/GlobalLayout.svelte';
 	import type { Snippet } from 'svelte';
-	import '../../app.css';
-	import '../../inputTypeRange.css';
+	import '../app.css';
+	import '../inputTypeRange.css';
 	import type { LayoutServerData } from './$types';
 
 	interface Props {
