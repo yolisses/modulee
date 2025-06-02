@@ -21,7 +21,7 @@
 		});
 
 		const lastPage = window.__JUCE__?.initialisationData.lastPage[0];
-		if (lastPage && new URL(lastPage).pathname !== '/setAuthToken') {
+		if (lastPage && new URL(lastPage, window.origin).pathname !== '/setAuthToken') {
 			goto(lastPage);
 		} else {
 			goto('/');
