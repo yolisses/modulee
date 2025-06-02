@@ -19,7 +19,8 @@
 			httpOnly: false,
 			priority: 'high',
 		});
-		goto('/');
+		const lastPage = window.__JUCE__?.initialisationData.lastPage[0];
+		goto(lastPage ?? '/');
 	});
 </script>
 
