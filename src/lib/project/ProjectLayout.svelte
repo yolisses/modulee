@@ -115,11 +115,7 @@
 				audioBackend.destroy();
 				virtualPianoMidiBackend.destroy();
 			};
-		}
-	});
-
-	onMount(() => {
-		if (!getHaveJuceSupport()) {
+		} else {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
