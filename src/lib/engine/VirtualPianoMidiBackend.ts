@@ -7,11 +7,13 @@ export class VirtualPianoMidiBackend {
 	constructor(public audioBackend: AudioBackend) {}
 
 	async initialize() {
+		window.addEventListener('blur', this.handleBlur);
 		window.addEventListener('keyup', this.handleKeyUp);
 		window.addEventListener('keydown', this.handleKeyDown);
 	}
 
 	async destroy() {
+		window.removeEventListener('blur', this.handleBlur);
 		window.removeEventListener('keyup', this.handleKeyUp);
 		window.removeEventListener('keydown', this.handleKeyDown);
 	}
@@ -51,5 +53,14 @@ export class VirtualPianoMidiBackend {
 		if (pitch === undefined) return;
 
 		this.audioBackend?.setNoteOff(pitch);
+	};
+
+	handleBlur = () => {
+		Object.keys(this.pressedKeys).forEach((key) => {
+			const pitch = this.getKeyPitch(key);
+			if (pitch === undefined) return;
+			this.audioBackend.setNoteOff(pitch);
+		});
+		this.pressedKeys = {};
 	};
 }
