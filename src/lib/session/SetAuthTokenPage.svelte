@@ -19,8 +19,13 @@
 			httpOnly: false,
 			priority: 'high',
 		});
+
 		const lastPage = window.__JUCE__?.initialisationData.lastPage[0];
-		goto(lastPage ?? '/');
+		if (lastPage && new URL(lastPage).pathname !== '/setAuthToken') {
+			goto(lastPage);
+		} else {
+			goto('/');
+		}
 	});
 </script>
 
