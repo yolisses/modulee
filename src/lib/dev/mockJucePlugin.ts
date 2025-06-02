@@ -6,7 +6,7 @@ export function mockJucePlugin() {
 			addEventListener() {},
 		},
 		initialisationData: {
-			isRunningOnJucePlugin: [true],
+			lastPage: [''],
 		},
 	};
 }
