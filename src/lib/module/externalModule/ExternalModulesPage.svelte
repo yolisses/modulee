@@ -48,7 +48,10 @@
 
 		if (loader.cursor) queryParams.append('cursor', loader.cursor);
 
-		const path = `/api/externalModules?${queryParams.toString()}`;
+		let path = '/api/externalModules';
+		if (queryParams.size > 0) {
+			path += '?' + queryParams.toString();
+		}
 		return path;
 	}
 	const loader = new Loader(getPath);

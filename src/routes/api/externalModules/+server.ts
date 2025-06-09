@@ -2,6 +2,7 @@ import { getExternalModulesData } from '$lib/db/externalModule/getExternalModule
 import prisma from '$lib/prisma';
 import type { ModuleType } from '$lib/project/ModuleType';
 import type { ProjectData } from '$lib/project/ProjectData';
+import { getId } from '$lib/ui/getId';
 import { getSession } from '$lib/user/getSession';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { getIsModuleType } from './getIsModuleType';
@@ -15,7 +16,7 @@ async function getValidIds(usedIn: string | undefined): Promise<string[] | undef
 	const project = (await prisma.project.findUnique({
 		where: { id: usedIn },
 	})) as ProjectData | null;
-	return project ? project.graph.externalModuleReferences.map((em) => em.id) : undefined;
+	return project ? project.graph.externalModuleReferences.map(getId) : undefined;
 }
 
 const SORT_OPTIONS = new Set(['createdAt', 'likeCount']);
@@ -33,12 +34,14 @@ export const GET: RequestHandler = async ({ url }) => {
 		throw error(400, 'Invalid sort parameter');
 	}
 
+	// Makes TypeScript happy
 	let moduleType: ModuleType | undefined;
-	if (moduleTypeString && getIsModuleType(moduleTypeString)) {
-		// Make TypeScript happy
-		moduleType = moduleTypeString;
-	} else {
-		throw error(400, 'Invalid sort parameter');
+	if (moduleTypeString) {
+		if (getIsModuleType(moduleTypeString)) {
+			moduleType = moduleTypeString;
+		} else {
+			throw error(400, 'Invalid moduleType');
+		}
 	}
 
 	const validIds = await getValidIds(usedIn);
