@@ -12,7 +12,7 @@
 		values: { text: string; sort: string; group: string };
 	}
 
-	const { loader, values }: Props = $props();
+	const { loader, values = $bindable() }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 

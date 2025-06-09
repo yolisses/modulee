@@ -15,8 +15,8 @@
 
 	const { title, moduleType }: Props = $props();
 
-	const values = $state({ text: '', sort: '', group: '' });
 	const userDataContext = getUserDataContext();
+	let values = $state({ text: '', sort: '', group: '' });
 	const projectDataContext = getProjectDataContextOrUndefined();
 
 	function getPath(loader: Loader<ExternalModuleData>) {
@@ -60,7 +60,7 @@
 
 <div class="flex flex-1 flex-row overflow-hidden">
 	<div class="border-r-2 border-black/50 p-4">
-		<ExternalModulesFiltersForm {values} {loader} />
+		<ExternalModulesFiltersForm bind:values {loader} />
 	</div>
 	<div class="flex-1 overflow-auto">
 		<div class="flex h-[100dvh] flex-col items-center">
