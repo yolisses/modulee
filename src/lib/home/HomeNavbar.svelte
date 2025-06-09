@@ -8,7 +8,12 @@
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
-	<a class="vertical-tab" href="/" aria-label="Home" title="Go to projects page">
+	<a
+		aria-label="Home"
+		class="vertical-tab"
+		title="Go to projects page"
+		href="/externalModules/instruments"
+	>
 		<img
 			height="16"
 			class="my-1"
@@ -18,18 +23,18 @@
 		/>
 	</a>
 	<a
+		class="vertical-tab"
+		href="/externalModules/instruments"
+		class:vertical-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
+	>
+		<Fa fw icon={faGuitar} /> Instruments
+	</a>
+	<a
 		href="/projects"
 		class="vertical-tab"
 		class:vertical-tab-selected={route.startsWith('/(home)/projects')}
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" /> Projects
-	</a>
-	<a
-		href="/externalModules/instruments"
-		class="vertical-tab"
-		class:vertical-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
-	>
-		<Fa fw icon={faGuitar} /> Instruments
 	</a>
 	<div class="flex-1"></div>
 	<UserButton {route} />
