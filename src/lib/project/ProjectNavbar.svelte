@@ -38,14 +38,6 @@
 	</a>
 	<a
 		class="vertical-tab"
-		href="{baseUrl}/internalModules"
-		class:vertical-tab-selected={route === baseRoute + '/internalModules'}
-	>
-		<Fa fw icon={faPuzzlePiece} />
-		Internal modules
-	</a>
-	<a
-		class="vertical-tab"
 		href="{baseUrl}/externalModules"
 		class:vertical-tab-selected={route === baseRoute + '/externalModules' ||
 			route === baseRoute + '/externalModules/[externalModuleId]'}
