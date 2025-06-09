@@ -1,57 +1,61 @@
 import { getExternalModulesData } from '$lib/db/externalModule/getExternalModulesData';
 import prisma from '$lib/prisma';
+import type { ModuleType } from '$lib/project/ModuleType';
 import type { ProjectData } from '$lib/project/ProjectData';
 import { getSession } from '$lib/user/getSession';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 
+function normalizeParam(param: string | null): string | undefined {
+	return param && param !== '' ? param : undefined;
+}
+
+async function getValidIds(usedIn: string | undefined): Promise<string[] | undefined> {
+	if (!usedIn) return undefined;
+	const project = (await prisma.project.findUnique({
+		where: { id: usedIn },
+	})) as ProjectData | null;
+	return project ? project.graph.externalModuleReferences.map((em) => em.id) : undefined;
+}
+
+const SORT_OPTIONS = new Set(['createdAt', 'likeCount']);
+
+const MODULE_TYPE_OPTIONS = new Set<ModuleType>(['effect', 'instrument', 'utility']);
+
+function getIsModuleType(value: string): value is ModuleType {
+	return MODULE_TYPE_OPTIONS.has(value as ModuleType);
+}
+
 export const GET: RequestHandler = async ({ url }) => {
-	let text = url.searchParams.get('text');
-	let sort = url.searchParams.get('sort');
-	let likedBy = url.searchParams.get('likedBy');
-	let moduleType = url.searchParams.get('moduleType');
+	const text = normalizeParam(url.searchParams.get('text'));
+	const sort = normalizeParam(url.searchParams.get('sort'));
+	const cursor = normalizeParam(url.searchParams.get('cursor'));
+	const userId = normalizeParam(url.searchParams.get('userId'));
+	const usedIn = normalizeParam(url.searchParams.get('usedIn'));
+	const likedBy = normalizeParam(url.searchParams.get('likedBy'));
+	const moduleTypeString = normalizeParam(url.searchParams.get('moduleType'));
 
-	const cursor = url.searchParams.get('cursor');
-	const userId = url.searchParams.get('userId');
-	const usedIn = url.searchParams.get('usedIn');
-
-	if (text === '') {
-		text = null;
-	}
-	if (sort === '') {
-		sort = null;
-	}
-	if (likedBy === '') {
-		likedBy = null;
-	}
-	if (moduleType === '') {
-		moduleType = null;
+	if (sort && !SORT_OPTIONS.has(sort)) {
+		throw error(400, 'Invalid sort parameter');
 	}
 
-	let validIds: string[] | undefined = undefined;
-	if (usedIn) {
-		const project = (await prisma.project.findUnique({
-			where: { id: usedIn },
-		})) as ProjectData | null;
-		if (project) {
-			validIds = project.graph.externalModuleReferences.map((externalModuleData) => {
-				return externalModuleData.id;
-			});
-		}
+	let moduleType: ModuleType | undefined;
+	if (moduleTypeString && getIsModuleType(moduleTypeString)) {
+		// Make TypeScript happy
+		moduleType = moduleTypeString;
+	} else {
+		throw error(400, 'Invalid sort parameter');
 	}
 
-	const sortOptions = new Set(['createdAt', 'likeCount']);
-	if (sort && !sortOptions.has(sort)) {
-		error(400, 'Invalid sort parameter');
-	}
+	const validIds = await getValidIds(usedIn);
 
 	const externalModulesData = await getExternalModulesData({
+		text,
+		sort,
+		cursor,
+		userId,
+		likedBy,
 		validIds,
-		text: text ?? undefined,
-		sort: sort ?? undefined,
-		cursor: cursor ?? undefined,
-		userId: userId ?? undefined,
-		likedBy: likedBy ?? undefined,
-		moduleType: moduleType ?? undefined,
+		moduleType,
 	});
 	return json(externalModulesData);
 };
@@ -69,9 +73,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			projectId,
 			moduleType,
 			description,
-			// likeCount: 0,
-			// usageCount: 0,
-			// version: { major: 0, minor: 1, patch: 0 },
 		},
 	});
 	return json(externalModuleData);
