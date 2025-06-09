@@ -11,7 +11,7 @@
 
 	interface Props {
 		title: string;
-		moduleType: ModuleType;
+		moduleType?: ModuleType;
 	}
 
 	const { title, moduleType }: Props = $props();
