@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
+	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faChevronDown, faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
@@ -11,6 +12,7 @@
 	}
 
 	const { internalModule }: Props = $props();
+	const baseRouteContext = getBaseRouteContext();
 	const moduleNodes: ModuleNode[] = $derived(
 		internalModule.nodes.filter(function (node): node is ModuleNode {
 			return getIsSomeModuleNode(node) && !!node.targetModule;
@@ -31,10 +33,10 @@
 		</button>
 		<div class="self-center">{internalModule.name}</div>
 		<div class="flex-1"></div>
-		<button class="common-button">
+		<a href="{baseRouteContext.baseRoute}/externalModules/effects" class="common-button">
 			<Fa fw icon={faPlus} />
 			Add effect
-		</button>
+		</a>
 	</summary>
 	<div class="flex flex-row flex-wrap gap-1 pt-1">
 		{#if moduleNodes.length > 0}
