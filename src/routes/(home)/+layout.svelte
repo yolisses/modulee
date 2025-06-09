@@ -3,7 +3,7 @@
 	let { children } = $props();
 </script>
 
-<div class="flex min-h-screen flex-row">
+<div class="flex max-h-screen flex-row overflow-hidden">
 	<HomeNavbar />
 	<div class="flex-1">
 		{@render children()}
