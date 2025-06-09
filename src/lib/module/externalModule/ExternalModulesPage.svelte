@@ -8,6 +8,12 @@
 	import InfiniteList from './InfiniteList.svelte';
 	import { Loader } from './Loader.svelte';
 
+	interface Props {
+		title: string;
+	}
+
+	const { title }: Props = $props();
+
 	let text = $state('');
 	let sort = $state('');
 	let group = $state('');
@@ -34,8 +40,6 @@
 		return path;
 	}
 	const loader = new Loader(getPath);
-
-	const title = 'External modules';
 </script>
 
 <svelte:head>
