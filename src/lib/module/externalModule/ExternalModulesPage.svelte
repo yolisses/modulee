@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +11,10 @@
 
 	interface Props {
 		title: string;
+		moduleType: ModuleType;
 	}
 
-	const { title }: Props = $props();
+	const { title, moduleType }: Props = $props();
 
 	let text = $state('');
 	let sort = $state('');
@@ -23,8 +25,18 @@
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
-		queryParams.append('text', text);
-		queryParams.append('sort', sort);
+
+		if (text) {
+			queryParams.append('text', text);
+		}
+
+		if (sort) {
+			queryParams.append('sort', sort);
+		}
+
+		if (moduleType) {
+			queryParams.append('moduleType', moduleType);
+		}
 
 		if (group === 'liked') {
 			queryParams.append('likedBy', userDataContext.userData.id);

@@ -8,6 +8,8 @@ export const GET: RequestHandler = async ({ url }) => {
 	let text = url.searchParams.get('text');
 	let sort = url.searchParams.get('sort');
 	let likedBy = url.searchParams.get('likedBy');
+	let moduleType = url.searchParams.get('moduleType');
+
 	const cursor = url.searchParams.get('cursor');
 	const userId = url.searchParams.get('userId');
 	const usedIn = url.searchParams.get('usedIn');
@@ -20,6 +22,9 @@ export const GET: RequestHandler = async ({ url }) => {
 	}
 	if (likedBy === '') {
 		likedBy = null;
+	}
+	if (moduleType === '') {
+		moduleType = null;
 	}
 
 	let validIds: string[] | undefined = undefined;
@@ -46,6 +51,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		cursor: cursor ?? undefined,
 		userId: userId ?? undefined,
 		likedBy: likedBy ?? undefined,
+		moduleType: moduleType ?? undefined,
 	});
 	return json(externalModulesData);
 };

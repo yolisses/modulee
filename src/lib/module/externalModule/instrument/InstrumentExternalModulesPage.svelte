@@ -2,4 +2,4 @@
 	import ExternalModulesPage from '../ExternalModulesPage.svelte';
 </script>
 
-<ExternalModulesPage title="Instruments" />
+<ExternalModulesPage title="Instruments" moduleType="instrument" />

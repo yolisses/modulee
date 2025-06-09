@@ -1,5 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import prisma from '$lib/prisma';
+import type { ModuleType } from '$lib/project/ModuleType';
 import type { PaginationResult } from './PaginationResult';
 
 type Params = {
@@ -9,6 +10,7 @@ type Params = {
 	userId?: string;
 	likedBy?: string;
 	validIds?: string[];
+	moduleType?: ModuleType;
 };
 
 const PAGE_LIMIT = 20;
@@ -16,11 +18,12 @@ const PAGE_LIMIT = 20;
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { sort, text, cursor, userId, likedBy, validIds } = params;
+	const { sort, text, cursor, userId, likedBy, validIds, moduleType } = params;
 
 	const results = await prisma.externalModule.findMany({
 		where: {
 			...(userId && { userId }),
+			...(moduleType && { moduleType }),
 			...(validIds && { id: { in: validIds } }),
 			...(likedBy && { likes: { some: { userId: likedBy } } }),
 			...(text && { OR: [{ name: { search: text } }, { description: { search: text } }] }),
