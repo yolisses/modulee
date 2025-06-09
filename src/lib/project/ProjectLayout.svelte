@@ -32,6 +32,10 @@
 	import { getGraphRegistry } from './getGraphRegistry';
 	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
+	import {
+		type ProjectNavbarSelectionContext,
+		setProjectNavbarSelectionContext,
+	} from './projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
 
 	interface Props {
@@ -102,6 +106,11 @@
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
+
+	const projectNavbarSelectionContext: ProjectNavbarSelectionContext = $state({
+		projectNavbarSelection: '',
+	});
+	setProjectNavbarSelectionContext(projectNavbarSelectionContext);
 
 	$effect(() => {
 		const { isMuted } = isMutedContext;

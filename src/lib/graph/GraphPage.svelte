@@ -2,6 +2,7 @@
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
+	import { getProjectNavbarSelectionContext } from '$lib/project/projectNavbarSelectionContext';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
 	import { setContextsContext } from '$lib/shortcut/contextsContext';
 	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
@@ -15,6 +16,9 @@
 	import GraphCanvas from './GraphCanvas.svelte';
 	import { GraphSizer } from './GraphSizer.svelte';
 	import GraphToolbar from './GraphToolbar.svelte';
+
+	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	projectNavbarSelectionContext.projectNavbarSelection = 'graph';
 
 	const graphContext = getGraphContext();
 	const internalModuleIdContext = getInternalModuleIdContext();

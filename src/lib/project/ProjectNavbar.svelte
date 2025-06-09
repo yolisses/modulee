@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import {
@@ -9,19 +8,19 @@
 		faSlidersH,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getProjectNavbarSelectionContext } from './projectNavbarSelectionContext';
 
-	const baseRoute = '/projects/[projectId]';
-	const route = $derived(page.route.id || '');
 	const projectDataContext = getProjectDataContext();
-	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 	const internalModuleIdContext = getInternalModuleIdContext();
+	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 </script>
 
 <div class="flex flex-col border-r-2 border-black/50">
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/rack"
-		class:vertical-tab-selected={route === baseRoute + '/rack'}
+		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
 		Rack
@@ -29,9 +28,7 @@
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		class:vertical-tab-selected={route.startsWith(
-			baseRoute + '/internalModules/[internalModuleId]/graph',
-		)}
+		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		Graph
@@ -39,13 +36,17 @@
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/externalModules"
-		class:vertical-tab-selected={route === baseRoute + '/externalModules' ||
-			route === baseRoute + '/externalModules/[externalModuleId]'}
+		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection ===
+			'externalModules'}
 	>
 		<Fa fw icon={faPuzzlePiece} />
 		External modules
 	</a>
-	<a href={baseUrl} class="vertical-tab" class:vertical-tab-selected={route === baseRoute}>
+	<a
+		href={baseUrl}
+		class="vertical-tab"
+		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
+	>
 		<Fa fw icon={faFileAlt} />
 		Project
 	</a>

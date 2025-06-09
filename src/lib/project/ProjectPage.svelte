@@ -3,12 +3,16 @@
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import ProjectForm from './ProjectForm.svelte';
+	import { getProjectNavbarSelectionContext } from './projectNavbarSelectionContext';
 
 	interface Props {
 		projectData: ProjectData;
 	}
 
 	const { projectData }: Props = $props();
+
+	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	projectNavbarSelectionContext.projectNavbarSelection = 'project';
 </script>
 
 <ListPageLayout title="Project">
