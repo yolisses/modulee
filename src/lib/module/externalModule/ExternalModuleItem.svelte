@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
@@ -10,6 +11,7 @@
 
 	const baseRouteContext = getBaseRouteContext();
 	const { externalModuleData }: Props = $props();
+	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 
 <div class="border-b border-white/10 p-2 pb-6 last:border-none">
@@ -23,7 +25,9 @@
 			</a>
 		</div>
 		<LikeButton externalModuleId={externalModuleData.id} />
-		<UseButton {externalModuleData} />
+		{#if projectDataContext?.projectData}
+			<UseButton {externalModuleData} />
+		{/if}
 	</div>
 	<div class="block max-h-10 overflow-hidden text-sm text-ellipsis text-white/75">
 		{externalModuleData.description}
