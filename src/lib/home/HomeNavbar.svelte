@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
+	import { faGuitar, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import UserButton from './UserButton.svelte';
 
@@ -23,6 +23,13 @@
 		class:vertical-tab-selected={route.startsWith('/(home)/projects')}
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" /> Projects
+	</a>
+	<a
+		href="/externalModules/instruments"
+		class="vertical-tab"
+		class:vertical-tab-selected={route.startsWith('/(home)/instruments')}
+	>
+		<Fa fw icon={faGuitar} /> Instruments
 	</a>
 	<div class="flex-1"></div>
 	<UserButton {route} />

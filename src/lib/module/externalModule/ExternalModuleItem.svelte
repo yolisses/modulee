@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
+	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 	import UseButton from './UseButton.svelte';
@@ -8,8 +9,9 @@
 		externalModuleData: ExternalModuleData;
 	}
 
+	const baseRouteContext = getBaseRouteContext();
 	const { externalModuleData }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 
 <div class="border-b border-white/10 p-2 pb-6 last:border-none">
@@ -17,7 +19,7 @@
 		<div class="flex-1">
 			<a
 				class="hover:underline"
-				href="/projects/{projectDataContext.projectData.id}/externalModules/{externalModuleData.id}"
+				href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}"
 			>
 				{externalModuleData.name}
 			</a>

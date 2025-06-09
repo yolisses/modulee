@@ -26,6 +26,7 @@
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/project/getGraphData';
 	import ProjectSidebar from '$lib/project/ProjectSidebar.svelte';
+	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
@@ -40,6 +41,11 @@
 	}
 
 	const { children, projectData, externalModulesData }: Props = $props();
+
+	const baseRouteContext = getBaseRouteContext();
+	onMount(() => {
+		baseRouteContext.baseRoute = `/projects/${projectData.id}`;
+	});
 
 	setMenuVisibilityContexts();
 	setProjectDataContext({ projectData });

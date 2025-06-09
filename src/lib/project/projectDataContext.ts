@@ -1,5 +1,5 @@
 import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
-import { setContext } from 'svelte';
+import { getContext, setContext } from 'svelte';
 import type { ProjectData } from './ProjectData';
 
 export type ProjectDataContext = {
@@ -14,4 +14,8 @@ export function setProjectDataContext(projectDataContext: ProjectDataContext) {
 
 export function getProjectDataContext() {
 	return getContextOrThrow<ProjectDataContext>(projectDataContextKey);
+}
+
+export function getProjectDataContextOrUndefined() {
+	return getContext(projectDataContextKey) as ProjectDataContext | undefined;
 }

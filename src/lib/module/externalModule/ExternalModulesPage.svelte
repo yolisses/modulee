@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -13,7 +13,7 @@
 	let group = $state('');
 	let form: HTMLFormElement;
 	const userDataContext = getUserDataContext();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getProjectDataContextOrUndefined();
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
@@ -24,7 +24,7 @@
 			queryParams.append('likedBy', userDataContext.userData.id);
 		}
 
-		if (group === 'used') {
+		if (projectDataContext?.projectData && group === 'used') {
 			queryParams.append('usedIn', projectDataContext.projectData.id);
 		}
 
@@ -66,7 +66,7 @@
 				</select>
 			</label>
 			<div>
-				<div class="flex flex-row gap-2">
+				<div class="flex flex-col gap-2">
 					<label class="common-button grow">
 						<input id="effect" type="radio" value="all" bind:group />
 						All
@@ -75,13 +75,15 @@
 						<input type="radio" id="instrument" value="liked" bind:group />
 						Liked
 					</label>
-					<label
-						class="common-button grow"
-						title="Only external modules used in the current project"
-					>
-						<input type="radio" id="utility" value="used" bind:group />
-						Used in project
-					</label>
+					{#if projectDataContext?.projectData}
+						<label
+							class="common-button grow"
+							title="Only external modules used in the current project"
+						>
+							<input type="radio" id="utility" value="used" bind:group />
+							Used in project
+						</label>
+					{/if}
 				</div>
 			</div>
 			<div class="mt-2 flex flex-row items-end justify-end gap-2">

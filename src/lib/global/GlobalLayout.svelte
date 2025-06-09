@@ -4,6 +4,7 @@
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
+	import { setBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
@@ -21,6 +22,9 @@
 
 	const userDataContext = $state({ userData });
 	setUserDataContext(userDataContext);
+
+	const baseRouteContext = $state({ baseRoute: '' });
+	setBaseRouteContext(baseRouteContext);
 
 	$effect(() => {
 		const url = new URL(page.url);
