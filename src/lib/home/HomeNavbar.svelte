@@ -27,7 +27,7 @@
 	<a
 		href="/externalModules/instruments"
 		class="vertical-tab"
-		class:vertical-tab-selected={route.startsWith('/(home)/instruments')}
+		class:vertical-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
 	>
 		<Fa fw icon={faGuitar} /> Instruments
 	</a>
