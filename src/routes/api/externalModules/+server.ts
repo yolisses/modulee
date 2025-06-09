@@ -4,6 +4,7 @@ import type { ModuleType } from '$lib/project/ModuleType';
 import type { ProjectData } from '$lib/project/ProjectData';
 import { getSession } from '$lib/user/getSession';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { getIsModuleType } from './getIsModuleType';
 
 function normalizeParam(param: string | null): string | undefined {
 	return param && param !== '' ? param : undefined;
@@ -18,12 +19,6 @@ async function getValidIds(usedIn: string | undefined): Promise<string[] | undef
 }
 
 const SORT_OPTIONS = new Set(['createdAt', 'likeCount']);
-
-const MODULE_TYPE_OPTIONS = new Set<ModuleType>(['effect', 'instrument', 'utility']);
-
-function getIsModuleType(value: string): value is ModuleType {
-	return MODULE_TYPE_OPTIONS.has(value as ModuleType);
-}
 
 export const GET: RequestHandler = async ({ url }) => {
 	const text = normalizeParam(url.searchParams.get('text'));
