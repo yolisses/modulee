@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
@@ -33,7 +34,10 @@
 		</button>
 		<div class="self-center">{internalModule.name}</div>
 		<div class="flex-1"></div>
-		<a href="{baseRouteContext.baseRoute}/externalModules/effects" class="common-button">
+		<a
+			class="common-button"
+			href="{baseRouteContext.baseRoute}/externalModules/effects?closePath={page.url}"
+		>
 			<Fa fw icon={faPlus} />
 			Add effect
 		</a>
