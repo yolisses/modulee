@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
+	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
@@ -10,21 +11,21 @@
 	}
 
 	const { externalModuleData }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const baseRouteContext = getBaseRouteContext();
+	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 
 <ListPageLayout title={externalModuleData.name}>
 	{#snippet badges()}
-		<a
-			class="rounded bg-white/10 px-2 text-sm"
-			href="/projects/{projectDataContext.projectData.id}/externalModules"
-		>
+		<a class="rounded bg-white/10 px-2 text-sm" href="{baseRouteContext.baseRoute}/externalModules">
 			External module
 		</a>
 	{/snippet}
 	{#snippet topChildren()}
 		<LikeButton externalModuleId={externalModuleData.id} />
-		<UseButton {externalModuleData} />
+		{#if projectDataContext}
+			<UseButton {externalModuleData} />
+		{/if}
 	{/snippet}
 	<div class="flex flex-col gap-4">
 		<div class="flex flex-row justify-between gap-2">
