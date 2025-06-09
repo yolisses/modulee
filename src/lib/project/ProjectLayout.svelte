@@ -25,7 +25,7 @@
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/project/getGraphData';
-	import ProjectSidebar from '$lib/project/ProjectSidebar.svelte';
+	import ProjectNavbar from '$lib/project/ProjectNavbar.svelte';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
@@ -158,7 +158,7 @@
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
 <div class="flex h-screen w-screen flex-row overflow-hidden">
-	<ProjectSidebar />
+	<ProjectNavbar />
 	<div class="flex flex-1 flex-col overflow-hidden">
 		{@render children?.()}
 	</div>
