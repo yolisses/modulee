@@ -2,6 +2,7 @@ import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModu
 import prisma from '$lib/prisma';
 import type { ModuleType } from '$lib/project/ModuleType';
 import type { PaginationResult } from './PaginationResult';
+import { sanitizeTextQuery } from './sanitizeTextQuery';
 
 type Params = {
 	text?: string;
@@ -18,7 +19,11 @@ const PAGE_LIMIT = 20;
 export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { sort, text, cursor, userId, likedBy, validIds, moduleType } = params;
+	const { sort, cursor, userId, likedBy, validIds, moduleType } = params;
+
+	// Sanitize search text to avoid breaking the query (remove special characters)
+	let { text } = params;
+	text = text ? sanitizeTextQuery(text) : undefined;
 
 	const results = await prisma.externalModule.findMany({
 		where: {
@@ -26,7 +31,9 @@ export async function getExternalModulesData(
 			...(moduleType && { moduleType }),
 			...(validIds && { id: { in: validIds } }),
 			...(likedBy && { likes: { some: { userId: likedBy } } }),
-			...(text && { OR: [{ name: { search: text } }, { description: { search: text } }] }),
+			...(text && {
+				OR: [{ name: { search: text } }, { description: { search: text } }],
+			}),
 		},
 		take: PAGE_LIMIT + 1,
 		skip: cursor ? 1 : 0,
@@ -42,8 +49,15 @@ export async function getExternalModulesData(
 	const hasNextPage = results.length > PAGE_LIMIT;
 	const items = hasNextPage ? results.slice(0, PAGE_LIMIT) : results;
 
+	// Map results to ExternalModuleData, adding missing fields (set to default or fetch if available)
+	const mappedItems: ExternalModuleData[] = items.map((item) => ({
+		...item,
+		version: (item as any).version ?? '', // Set default or fetch actual value
+		usageCount: (item as any).usageCount ?? 0, // Set default or fetch actual value
+	}));
+
 	return {
-		items,
-		nextCursor: hasNextPage ? items[items.length - 1].id : null,
+		items: mappedItems,
+		nextCursor: hasNextPage ? mappedItems[mappedItems.length - 1].id : null,
 	};
 }

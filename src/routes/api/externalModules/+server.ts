@@ -31,7 +31,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	const moduleTypeString = normalizeParam(url.searchParams.get('moduleType'));
 
 	if (sort && !SORT_OPTIONS.has(sort)) {
-		throw error(400, 'Invalid sort parameter');
+		error(400, 'Invalid sort parameter');
 	}
 
 	// Makes TypeScript happy
@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		if (getIsModuleType(moduleTypeString)) {
 			moduleType = moduleTypeString;
 		} else {
-			throw error(400, 'Invalid moduleType');
+			error(400, 'Invalid moduleType');
 		}
 	}
 
