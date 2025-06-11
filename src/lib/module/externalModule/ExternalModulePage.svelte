@@ -2,7 +2,7 @@
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import UseEffectButton from '../../effect/UseEffectButton.svelte';
+	import UseEffectButton from './effect/UseEffectButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 
