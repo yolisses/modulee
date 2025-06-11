@@ -26,15 +26,6 @@ export async function getExternalModulesData(
 	text = text ? sanitizeTextQuery(text) : undefined;
 
 	const results = await prisma.externalModule.findMany({
-		where: {
-			...(userId && { userId }),
-			...(moduleType && { moduleType }),
-			...(validIds && { id: { in: validIds } }),
-			...(likedBy && { likes: { some: { userId: likedBy } } }),
-			...(text && {
-				OR: [{ name: { search: text } }, { description: { search: text } }],
-			}),
-		},
 		take: PAGE_LIMIT + 1,
 		skip: cursor ? 1 : 0,
 		cursor: cursor ? { id: cursor } : undefined,
@@ -44,6 +35,15 @@ export async function getExternalModulesData(
 			: text
 				? { _relevance: { sort: 'desc', search: text, fields: ['name', 'description'] } }
 				: { likeCount: 'desc' },
+		where: {
+			...(userId && { userId }),
+			...(moduleType && { moduleType }),
+			...(validIds && { id: { in: validIds } }),
+			...(likedBy && { likes: { some: { userId: likedBy } } }),
+			...(text && {
+				OR: [{ name: { search: text } }, { description: { search: text } }],
+			}),
+		},
 	});
 
 	const hasNextPage = results.length > PAGE_LIMIT;
