@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends ModuleType">
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -7,8 +7,8 @@
 	import type { Loader } from './Loader.svelte';
 
 	interface Props {
-		moduleType?: ModuleType;
-		loader: Loader<ExternalModuleData>;
+		moduleType?: T;
+		loader: Loader<ExternalModuleData<T>>;
 		values: { text: string; sort: string; group: string };
 	}
 

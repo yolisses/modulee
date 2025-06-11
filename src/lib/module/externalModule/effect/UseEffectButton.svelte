@@ -3,28 +3,28 @@
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
+	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { nodeItemWidth } from '$lib/node/nodeItemWidth';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
-	import type { ExternalModuleData } from '../module/externalModule/ExternalModuleData';
-	import { getInternalModuleIdContext } from '../module/internalModule/internalModuleIdContext';
+	import type { EffectData } from './EffectData';
 
 	interface Props {
-		externalModuleData: ExternalModuleData;
+		effectData: EffectData;
 	}
 
 	const graphContext = getGraphContext();
 	const editorContext = getEditorContext();
-	const { externalModuleData }: Props = $props();
+	const { effectData }: Props = $props();
 	const projectDataContext = getProjectDataContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
 
 	const isUsed = $derived(
 		projectDataContext.projectData.graph.externalModuleReferences.some(
 			(externalModuleReference) => {
-				return externalModuleReference.id === externalModuleData.id;
+				return externalModuleReference.id === effectData.id;
 			},
 		),
 	);
@@ -47,7 +47,7 @@
 				connectionId: createId(),
 				moduleNodeId: createId(),
 				outputNodeId: outputNode.id,
-				externalModule: externalModuleData,
+				externalModule: effectData,
 				internalModuleId: internalModuleIdContext.internalModuleId,
 			},
 		});

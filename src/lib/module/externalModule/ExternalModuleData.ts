@@ -3,9 +3,10 @@ import type { UserData } from '$lib/user/UserData';
 import type { ModuleType } from '../../../generated/prisma';
 import type { Version } from './Version';
 
-export type ExternalModuleData = {
+export type ExternalModuleData<T extends ModuleType> = {
 	id: string;
 	name: string;
+	moduleType: T;
 	user: UserData;
 	userId: string;
 	graph: GraphData;
@@ -16,5 +17,4 @@ export type ExternalModuleData = {
 	createdAt: string;
 	usageCount: number;
 	description?: string;
-	moduleType: ModuleType;
 };

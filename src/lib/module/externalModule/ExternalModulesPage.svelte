@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends ModuleType">
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
@@ -12,16 +12,17 @@
 
 	interface Props {
 		title: string;
-		moduleType?: ModuleType;
-		buttons: Snippet<[ExternalModuleData]>;
+		moduleType: T;
+		buttons: Snippet<[ExternalModuleData<T>]>;
 	}
 
+	const loader = new Loader(getPath);
 	const userDataContext = getUserDataContext();
 	const { title, buttons, moduleType }: Props = $props();
 	let values = $state({ text: '', sort: '', group: '' });
 	const projectDataContext = getProjectDataContextOrUndefined();
 
-	function getPath(loader: Loader<ExternalModuleData>) {
+	function getPath(loader: Loader<ExternalModuleData<T>>) {
 		const queryParams = new URLSearchParams();
 		const { text, sort, group } = values;
 
@@ -53,7 +54,6 @@
 		}
 		return path;
 	}
-	const loader = new Loader(getPath);
 </script>
 
 <svelte:head>
@@ -73,7 +73,7 @@
 		<div class="flex h-[100dvh] flex-col items-center">
 			<div class="flex w-full max-w-xl flex-col gap-4 p-2">
 				<InfiniteList {loader}>
-					{#snippet children(externalModuleData: ExternalModuleData)}
+					{#snippet children(externalModuleData: ExternalModuleData<T>)}
 						<ExternalModuleItem {externalModuleData} {buttons} />
 					{/snippet}
 				</InfiniteList>

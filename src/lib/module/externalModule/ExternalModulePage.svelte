@@ -25,7 +25,7 @@
 		<LikeButton externalModuleId={externalModuleData.id} />
 		<!-- TODO implement condition here -->
 		{#if projectDataContext}
-			<UseEffectButton {externalModuleData} />
+			<UseEffectButton effectData={externalModuleData} />
 		{/if}
 	{/snippet}
 	<div class="flex flex-col gap-4">

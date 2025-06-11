@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { ExternalModuleData } from '../ExternalModuleData';
+	import type { InstrumentData } from './InstrumentData';
 
 	interface Props {
-		externalModuleData: ExternalModuleData;
+		instrumentData: InstrumentData;
 	}
 
-	const { externalModuleData }: Props = $props();
+	const { instrumentData }: Props = $props();
 
 	function handleClick() {
 		// TODO

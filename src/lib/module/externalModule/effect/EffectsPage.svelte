@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
+	import type { EffectData } from './EffectData';
 	import UseEffectButton from './UseEffectButton.svelte';
 </script>
 
-{#snippet buttons(externalModuleData: ExternalModuleData)}
-	<UseEffectButton {externalModuleData} />
+{#snippet buttons(effectData: EffectData)}
+	<UseEffectButton {effectData} />
 {/snippet}
 
 <ExternalModulesPage title="Effects" moduleType="effect" {buttons} />
