@@ -1,8 +1,8 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import prisma from '$lib/prisma';
 import type { ModuleType } from '$lib/project/ModuleType';
+import { formatTsQuery } from './formatTsQuery';
 import type { PaginationResult } from './PaginationResult';
-import { sanitizeTextQuery } from './sanitizeTextQuery';
 
 type Params = {
 	text?: string;
@@ -20,10 +20,11 @@ export async function getExternalModulesData(
 	params: Params,
 ): Promise<PaginationResult<ExternalModuleData>> {
 	const { sort, cursor, userId, likedBy, validIds, moduleType } = params;
-
-	// Sanitize search text to avoid breaking the query (remove special characters)
 	let { text } = params;
-	text = text ? sanitizeTextQuery(text) : undefined;
+
+	if (text) {
+		text = formatTsQuery(text);
+	}
 
 	const results = await prisma.externalModule.findMany({
 		take: PAGE_LIMIT + 1,
