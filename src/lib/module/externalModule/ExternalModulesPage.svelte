@@ -2,6 +2,7 @@
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
+	import type { Snippet } from 'svelte';
 	import CloseButton from './CloseButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
@@ -12,10 +13,11 @@
 	interface Props {
 		title: string;
 		moduleType?: ModuleType;
+		buttons: Snippet<[ExternalModuleData]>;
 	}
 
 	const userDataContext = getUserDataContext();
-	const { title, moduleType }: Props = $props();
+	const { title, buttons, moduleType }: Props = $props();
 	let values = $state({ text: '', sort: '', group: '' });
 	const projectDataContext = getProjectDataContextOrUndefined();
 
@@ -72,7 +74,7 @@
 			<div class="flex w-full max-w-xl flex-col gap-4 p-2">
 				<InfiniteList {loader}>
 					{#snippet children(externalModuleData: ExternalModuleData)}
-						<ExternalModuleItem {externalModuleData} />
+						<ExternalModuleItem {externalModuleData} {buttons} />
 					{/snippet}
 				</InfiniteList>
 			</div>

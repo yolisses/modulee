@@ -4,7 +4,7 @@
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
-	import UseButton from './UseButton.svelte';
+	import UseEffectButton from './UseEffectButton.svelte';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
@@ -23,8 +23,9 @@
 	{/snippet}
 	{#snippet topChildren()}
 		<LikeButton externalModuleId={externalModuleData.id} />
+		<!-- TODO implement condition here -->
 		{#if projectDataContext}
-			<UseButton {externalModuleData} />
+			<UseEffectButton {externalModuleData} />
 		{/if}
 	{/snippet}
 	<div class="flex flex-col gap-4">
