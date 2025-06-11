@@ -8,8 +8,8 @@
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
-	import { getInternalModuleIdContext } from '../internalModule/internalModuleIdContext';
-	import type { ExternalModuleData } from './ExternalModuleData';
+	import type { ExternalModuleData } from '../module/externalModule/ExternalModuleData';
+	import { getInternalModuleIdContext } from '../module/internalModule/internalModuleIdContext';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
