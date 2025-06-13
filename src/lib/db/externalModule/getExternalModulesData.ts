@@ -30,12 +30,14 @@ async function getValidIds(usedIn: string | undefined): Promise<string[] | undef
 }
 
 export async function getExternalModulesData(
-	params: object,
+	arg: object,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const res = schema.safeParse(params);
+	const res = schema.safeParse(arg);
+
 	if (!res.success) {
-		error(400, res.error);
+		error(400, z.prettifyError(res.error));
 	}
+
 	let { text } = res.data;
 	const { sort, cursor, userId, usedIn, likedBy, moduleType } = res.data;
 

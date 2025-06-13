@@ -1,15 +1,16 @@
 import prisma from '$lib/prisma';
 import { ProjectSchema } from '$lib/schemas/ProjectSchema';
-import type { z } from 'zod/v4';
+import { error } from '@sveltejs/kit';
+import z from 'zod/v4';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const DataWithoutTimeStamps = ProjectSchema.omit({ createdAt: true, updatedAt: true });
+export async function createProject(arg: object) {
+	const res = ProjectSchema.omit({ id: true, createdAt: true, updatedAt: true }).safeParse(arg);
 
-type DTO = z.infer<typeof DataWithoutTimeStamps>;
+	if (!res.success) {
+		error(400, z.prettifyError(res.error));
+	}
 
-export async function createProject(projectData: DTO) {
-	const { id, name, userId, graph, moduleType } = projectData;
 	return prisma.project.create({
-		data: { id, name, graph, userId, moduleType },
+		data: res.data,
 	});
 }
