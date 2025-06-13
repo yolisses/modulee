@@ -1,3 +1,3 @@
-import type z from '../../../../node_modules/zod/dist/types/v4/classic/external';
+import z from 'zod';
 
 export const moduleTypeEnum = z.enum(['effect', 'utility', 'instrument']);
