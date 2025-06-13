@@ -19,12 +19,18 @@
 	const loader = new Loader(getPath);
 	const userDataContext = getUserDataContext();
 	const { title, buttons, moduleType }: Props = $props();
-	let values = $state({ text: '', sort: '', group: '' });
+	let filters = $state({ text: '', sort: '', group: '' });
 	const projectDataContext = getProjectDataContextOrUndefined();
+
+	function clearFilters() {
+		filters.text = '';
+		filters.group = '';
+		loader.resetState();
+	}
 
 	function getPath(loader: Loader<ExternalModuleData<T>>) {
 		const queryParams = new URLSearchParams();
-		const { text, sort, group } = values;
+		const { text, sort, group } = filters;
 
 		if (text) {
 			queryParams.append('text', text);
@@ -67,7 +73,7 @@
 </div>
 <div class="flex flex-1 flex-row overflow-hidden">
 	<div class="border-r-2 border-black/50 p-4">
-		<ExternalModulesFiltersForm bind:values {loader} />
+		<ExternalModulesFiltersForm bind:values={filters} {loader} />
 	</div>
 	<div class="flex-1 overflow-auto">
 		<div class="flex h-[100dvh] flex-col items-center">
@@ -75,6 +81,9 @@
 				<InfiniteList {loader}>
 					{#snippet children(externalModuleData: ExternalModuleData<T>)}
 						<ExternalModuleItem {externalModuleData} {buttons} />
+					{/snippet}
+					{#snippet emptyStateButtons()}
+						<button class="common-button" onclick={clearFilters}> Clear filters </button>
 					{/snippet}
 				</InfiniteList>
 			</div>

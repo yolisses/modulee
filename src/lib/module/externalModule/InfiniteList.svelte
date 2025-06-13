@@ -8,9 +8,10 @@
 	interface Props {
 		loader: Loader<T>;
 		children: Snippet<[T]>;
+		emptyStateButtons?: Snippet;
 	}
 
-	const { loader, children }: Props = $props();
+	const { loader, children, emptyStateButtons }: Props = $props();
 
 	onMount(loader.initialize);
 	$effect(() => {
@@ -29,10 +30,17 @@
 	{/if}
 
 	<!-- Empty -->
-	{#if !loader.isLoading && loader.items?.length === 0}
-		<div class="text-center">No external modules found</div>
-	{:else if loader.finished}
-		<div class="text-center opacity-50">End of the list</div>
+	{#if !loader.isLoading}
+		{#if loader.items?.length === 0}
+			<div class="flex flex-col items-center gap-2">
+				<div class="italic">Nothing to show</div>
+				<div>
+					{@render emptyStateButtons?.()}
+				</div>
+			</div>
+		{:else if loader.finished}
+			<div class="text-center opacity-50">End of the list</div>
+		{/if}
 	{/if}
 
 	<!-- Error -->
