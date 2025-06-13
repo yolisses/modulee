@@ -5,12 +5,12 @@ import { getId } from '$lib/ui/getId';
 import { error } from '@sveltejs/kit';
 import z from 'zod/v4';
 import { formatTsQuery } from './formatTsQuery';
+import { moduleTypeEnum } from './moduleTypeEnum';
 import type { PaginationResult } from './PaginationResult';
 
 const PAGE_LIMIT = 20;
 
 const sortEnum = z.enum(['createdAt', 'likeCount']);
-const moduleTypeEnum = z.enum(['effect', 'utility', 'instrument']);
 const schema = z.object({
 	sort: sortEnum.optional(),
 	text: z.string().optional(),
