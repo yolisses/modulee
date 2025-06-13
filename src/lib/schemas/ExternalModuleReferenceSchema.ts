@@ -1,4 +1,4 @@
-import z from 'zod';
+import z from 'zod/v4';
 import { VersionSchema } from './VersionSchema';
 
 export const ExternalModuleReferenceSchema = z.object({

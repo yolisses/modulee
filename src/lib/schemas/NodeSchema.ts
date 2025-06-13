@@ -1,4 +1,4 @@
-import type { z } from '../../../node_modules/zod/dist/types/v3/external';
+import z from 'zod/v4';
 import { ConstantNodeSchema } from './ConstantNodeSchema';
 import { ControlNodeSchema } from './ControlNodeSchema';
 import { InputNodeSchema } from './InputNodeSchema';

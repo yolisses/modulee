@@ -1,6 +1,4 @@
-import type { z } from '../../../node_modules/zod/dist/types/v3/external';
-
-// InputNodeExtras schema (define as needed, using z.unknown() as placeholder)
+import z from 'zod/v4';
 
 export const InputNodeExtrasSchema = z.object({
 	min: z.number(),

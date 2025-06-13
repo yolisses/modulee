@@ -1,3 +1,3 @@
-import type { z } from '../../../node_modules/zod/dist/types/v3/external';
+import z from 'zod/v4';
 
 export const ConstantNodeExtrasSchema = z.object({ value: z.number() });
