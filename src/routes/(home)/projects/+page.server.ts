@@ -2,9 +2,10 @@ import { createId } from '$lib/data/createId';
 import type { GraphData } from '$lib/data/GraphData';
 import prisma from '$lib/prisma';
 import { createProject } from '$lib/project/createProject';
+import { createProjectFromExternalModule } from '$lib/project/createProjectFromExternalModule';
 import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
-import { redirect, type Actions } from '@sveltejs/kit';
+import { error, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -37,6 +38,20 @@ export const actions = {
 			userId,
 			moduleType,
 		});
+		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
+	},
+
+	createFromExternalModule: async ({ locals, request }) => {
+		const data = await request.formData();
+		const externalModuleId = data.get('externalModuleId');
+
+		if (typeof externalModuleId !== 'string') {
+			error(400, 'Invalid externalModuleId');
+		}
+
+		const { userId } = getSession(locals);
+		const project = await createProjectFromExternalModule(externalModuleId, userId);
+		const { mainInternalModuleId } = project.graph as GraphData;
 		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
 	},
 
