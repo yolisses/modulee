@@ -5,8 +5,8 @@ import { getId } from '$lib/ui/getId';
 import { error } from '@sveltejs/kit';
 import z from 'zod/v4';
 import { formatTsQuery } from './formatTsQuery';
+import { ModuleTypeSchema } from './ModuleTypeSchema';
 import type { PaginationResult } from './PaginationResult';
-import { moduleTypeEnum } from './moduleTypeEnum';
 
 const PAGE_LIMIT = 20;
 
@@ -18,7 +18,7 @@ const schema = z.object({
 	userId: z.string().optional(),
 	cursor: z.string().optional(),
 	likedBy: z.string().optional(),
-	moduleType: moduleTypeEnum.optional(),
+	moduleType: ModuleTypeSchema.optional(),
 });
 
 async function getValidIds(usedIn: string | undefined): Promise<string[] | undefined> {
