@@ -8,6 +8,6 @@ export function NodeBaseSchema<T extends string, E extends z.ZodTypeAny = z.ZodU
 ) {
 	return z.object({
 		type: z.literal(type),
-		...(extras ? { extras: extras } : {}),
+		...(extras ? { extras } : { extras: z.object({}) }),
 	});
 }
