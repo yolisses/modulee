@@ -1,5 +1,6 @@
 import { createId } from '$lib/data/createId';
 import prisma from '$lib/prisma';
+import { createProject } from '$lib/project/createProject';
 import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
 import { redirect, type Actions } from '@sveltejs/kit';
@@ -16,30 +17,34 @@ export const actions = {
 	create: async ({ locals, request }) => {
 		const data = await request.formData();
 		const name = data.get('name');
+		const moduleType = data.get('moduleType');
+
 		if (typeof name !== 'string') {
 			throw new Error('Project name is required and must be a string');
+		}
+		if (typeof moduleType !== 'string') {
+			throw new Error('Project moduleType is required and must be a string');
 		}
 
 		const { userId } = getSession(locals);
 
 		const mainInternalModuleId = createId();
 
-		const project = await prisma.project.create({
-			data: {
-				name,
-				userId,
-				id: createId(),
-				moduleType: 'utility',
-				graph: {
-					nodes: [],
-					connections: [],
-					mainInternalModuleId,
-					externalModuleReferences: [],
-					internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
-				},
-			},
-		});
+		const graph = {
+			nodes: [],
+			connections: [],
+			mainInternalModuleId,
+			externalModuleReferences: [],
+			internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
+		};
 
+		const project = await createProject({
+			id,
+			name,
+			graph,
+			userId,
+			moduleType,
+		});
 		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
 	},
 

@@ -1,30 +1,49 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import prisma from '$lib/prisma';
-import type { ModuleType } from '$lib/project/ModuleType';
+import type { ProjectData } from '$lib/project/ProjectData';
+import { getId } from '$lib/ui/getId';
+import { error } from '@sveltejs/kit';
+import z from 'zod/v4';
 import { formatTsQuery } from './formatTsQuery';
 import type { PaginationResult } from './PaginationResult';
 
-type Params = {
-	text?: string;
-	sort?: string;
-	cursor?: string;
-	userId?: string;
-	likedBy?: string;
-	validIds?: string[];
-	moduleType?: ModuleType;
-};
-
 const PAGE_LIMIT = 20;
 
+const sortEnum = z.enum(['createdAt', 'likeCount']);
+const moduleTypeEnum = z.enum(['effect', 'utility', 'instrument']);
+const schema = z.object({
+	sort: sortEnum.optional(),
+	text: z.string().optional(),
+	usedIn: z.string().optional(),
+	userId: z.string().optional(),
+	cursor: z.string().optional(),
+	likedBy: z.string().optional(),
+	moduleType: moduleTypeEnum.optional(),
+});
+
+async function getValidIds(usedIn: string | undefined): Promise<string[] | undefined> {
+	if (!usedIn) return undefined;
+	const project = (await prisma.project.findUnique({
+		where: { id: usedIn },
+	})) as ProjectData | null;
+	return project ? project.graph.externalModuleReferences.map(getId) : undefined;
+}
+
 export async function getExternalModulesData(
-	params: Params,
+	params: object,
 ): Promise<PaginationResult<ExternalModuleData>> {
-	const { sort, cursor, userId, likedBy, validIds, moduleType } = params;
-	let { text } = params;
+	const res = schema.safeParse(params);
+	if (!res.success) {
+		error(400, res.error);
+	}
+	let { text } = res.data;
+	const { sort, cursor, userId, usedIn, likedBy, moduleType } = res.data;
 
 	if (text) {
 		text = formatTsQuery(text);
 	}
+
+	const validIds = await getValidIds(usedIn);
 
 	const results = await prisma.externalModule.findMany({
 		take: PAGE_LIMIT + 1,

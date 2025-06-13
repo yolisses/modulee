@@ -9,9 +9,7 @@
 
 	const { instrumentData }: Props = $props();
 
-	function handleClick() {
-		// TODO
-	}
+	function handleClick() {}
 </script>
 
 <button class="common-button" onclick={handleClick}>
