@@ -5,8 +5,8 @@ import { getId } from '$lib/ui/getId';
 import { error } from '@sveltejs/kit';
 import z from 'zod/v4';
 import { formatTsQuery } from './formatTsQuery';
-import { moduleTypeEnum } from './moduleTypeEnum';
 import type { PaginationResult } from './PaginationResult';
+import { moduleTypeEnum } from './moduleTypeEnum';
 
 const PAGE_LIMIT = 20;
 
