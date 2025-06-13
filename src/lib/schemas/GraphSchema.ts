@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import z from 'zod/v4';
 import { ConnectionSchema } from './ConnectionSchema';
 import { ExternalModuleReferenceSchema } from './ExternalModuleReferenceSchema';
 import { InternalModuleSchema } from './InternalModuleSchema';
