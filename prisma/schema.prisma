@@ -36,7 +36,7 @@ model Project {
   updatedAt   DateTime   @updatedAt
   name        String     @db.VarChar(100)
   graph       Json
-  description String?    @db.VarChar(1000)
+  description String?    @db.Text()
   moduleType  ModuleType
   userId      String
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
