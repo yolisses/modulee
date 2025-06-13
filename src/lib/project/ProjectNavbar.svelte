@@ -51,7 +51,7 @@
 		Project
 	</a>
 	<div class="flex-1"></div>
-	<a class="vertical-tab" href="/" aria-label="Home" title="Go to projects page">
+	<a class="vertical-tab" href="/projects" aria-label="Home" title="Go to projects page">
 		<img
 			height="16"
 			class="my-1"
