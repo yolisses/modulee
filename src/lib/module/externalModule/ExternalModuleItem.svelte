@@ -3,6 +3,7 @@
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
+	import UseExternalModuleButton from './UseExternalModuleButton.svelte';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
@@ -23,6 +24,7 @@
 			</a>
 		</div>
 		<LikeButton externalModuleId={externalModuleData.id} />
+		<UseExternalModuleButton {externalModuleData} />
 	</div>
 	<div class="block max-h-10 overflow-hidden text-sm text-ellipsis text-white/75">
 		{externalModuleData.description}

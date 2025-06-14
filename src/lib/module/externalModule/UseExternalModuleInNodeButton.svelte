@@ -7,6 +7,10 @@
 	}
 
 	const { useInNodeId }: Props = $props();
+
+	function handleClick(){
+		// TODO
+	}
 </script>
 
 <button class="common-button">

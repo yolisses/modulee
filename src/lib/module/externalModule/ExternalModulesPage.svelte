@@ -16,7 +16,7 @@
 
 	const loader = new Loader(getPath);
 	const userDataContext = getUserDataContext();
-	const { title, buttons, moduleType }: Props = $props();
+	const { title, moduleType }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
 	let filters = $state({ text: '', sort: '', group: '', moduleType: moduleType ?? '' });
 
@@ -79,7 +79,7 @@
 			<div class="flex w-full max-w-xl flex-col gap-4 p-2">
 				<InfiniteList {loader}>
 					{#snippet children(externalModuleData: ExternalModuleData<T>)}
-						<ExternalModuleItem {externalModuleData} {buttons} />
+						<ExternalModuleItem {externalModuleData} />
 					{/snippet}
 					{#snippet emptyStateButtons()}
 						<button class="common-button" onclick={clearFilters}> Clear filters </button>
