@@ -1,6 +1,6 @@
 <script lang="ts">
+	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faCalendarAlt, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -9,22 +9,18 @@
 	import LikeButton from './LikeButton.svelte';
 
 	interface Props {
-		externalModuleData: ExternalModuleData;
+		externalModuleData: ExternalModuleData<ModuleType>;
 	}
 
 	const { externalModuleData }: Props = $props();
-	const baseRouteContext = getBaseRouteContext();
 	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 
 <ListPageLayout title={externalModuleData.name}>
 	{#snippet badges()}
-		<a
-			class="self-center rounded bg-white/10 px-2 text-sm"
-			href="{baseRouteContext.baseRoute}/externalModules"
-		>
-			External module
-		</a>
+		<div class="self-center rounded bg-white/10 px-2 text-sm">
+			{externalModuleData.moduleType}
+		</div>
 	{/snippet}
 	{#snippet topChildren()}
 		<LikeButton externalModuleId={externalModuleData.id} />
