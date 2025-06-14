@@ -57,7 +57,7 @@
 				.values()
 				.filter((module) => module.id !== internalModuleIdContext.internalModuleId)}
 		/>
-		<SearchExternalModuleButton />
+		<SearchExternalModuleButton {moduleNodeId} />
 		<CreateInternalModuleButton onInternalModuleCreated={handleInternalModuleCreated} />
 	</div>
 </div>

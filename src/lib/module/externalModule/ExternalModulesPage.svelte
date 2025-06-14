@@ -2,7 +2,6 @@
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUserDataContext } from '$lib/user/userDataContext';
-	import type { Snippet } from 'svelte';
 	import CloseButton from './CloseButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
@@ -13,7 +12,6 @@
 	interface Props {
 		title: string;
 		moduleType?: T;
-		buttons: Snippet<[ExternalModuleData<T>]>;
 	}
 
 	const loader = new Loader(getPath);
