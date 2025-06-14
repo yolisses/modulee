@@ -1,5 +1,4 @@
-import { createId } from '$lib/data/createId';
-import type { GraphData } from '$lib/data/GraphData';
+import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
 import prisma from '$lib/prisma';
 import { createProject } from '$lib/project/createProject';
 import { createProjectFromExternalModule } from '$lib/project/createProjectFromExternalModule';
@@ -7,6 +6,7 @@ import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
 import { error, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { getGraphTemplate } from './getGraphTemplate';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { userId } = getSession(locals);
@@ -19,18 +19,12 @@ export const actions = {
 	create: async ({ locals, request }) => {
 		const data = await request.formData();
 		const name = data.get('name');
-		const moduleType = data.get('moduleType');
-
-		const mainInternalModuleId = createId();
-		const graph: GraphData = {
-			nodes: [],
-			connections: [],
-			mainInternalModuleId,
-			externalModuleReferences: [],
-			internalModules: [{ id: mainInternalModuleId, name: 'Main internal module' }],
-		};
-
 		const { userId } = getSession(locals);
+		const moduleType = ModuleTypeSchema.safeParse(data.get('moduleType'));
+		if (moduleType.error) {
+			error(400, moduleType.error);
+		}
+		const graph = getGraphTemplate(moduleType.data);
 
 		const project = await createProject({
 			name,
@@ -38,7 +32,8 @@ export const actions = {
 			userId,
 			moduleType,
 		});
-		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
+
+		redirect(303, `/projects/${project.id}/rack`);
 	},
 
 	createFromExternalModule: async ({ locals, request }) => {
@@ -51,8 +46,7 @@ export const actions = {
 
 		const { userId } = getSession(locals);
 		const project = await createProjectFromExternalModule(externalModuleId, userId);
-		const { mainInternalModuleId } = project.graph as GraphData;
-		redirect(303, `/projects/${project.id}/internalModules/${mainInternalModuleId}/graph`);
+		redirect(303, `/projects/${project.id}/rack`);
 	},
 
 	delete: async ({ locals, request }) => {
