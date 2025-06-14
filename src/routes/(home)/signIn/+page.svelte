@@ -1,5 +1,5 @@
 <script>
-	import AccountPage from '$lib/user/SignInPage.svelte';
+	import SignInPage from '$lib/user/SignInPage.svelte';
 </script>
 
-<AccountPage />
+<SignInPage />
