@@ -2,13 +2,14 @@
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import DeleteProjectModal from './DeleteProjectModal.svelte';
+	import type { ProjectData } from './ProjectData';
 
 	interface Props {
-		projectId: string;
+		projectData: ProjectData;
 	}
 
 	let isModalActive = $state(false);
-	const { projectId }: Props = $props();
+	const { projectData }: Props = $props();
 
 	function handleClick() {
 		isModalActive = true;
@@ -25,5 +26,5 @@
 </button>
 
 {#if isModalActive}
-	<DeleteProjectModal {projectId} {closeModal} />
+	<DeleteProjectModal {projectData} {closeModal} />
 {/if}
