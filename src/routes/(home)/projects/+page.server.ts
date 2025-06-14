@@ -1,8 +1,8 @@
 import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
 import prisma from '$lib/prisma';
+import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
 import { createProject } from '$lib/project/create/createProject';
 import { createProjectFromExternalModule } from '$lib/project/create/createProjectFromExternalModule';
-import { getGraphTemplate } from '$lib/project/create/getGraphTemplate';
 import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
 import { type Actions, error, redirect } from '@sveltejs/kit';
@@ -25,7 +25,7 @@ export const actions = {
 		if (moduleType.error) {
 			error(400, moduleType.error);
 		}
-		const graph = getGraphTemplate(moduleType.data);
+		const graph = createEmptyGraphData();
 
 		const project = await createProject({
 			name,
