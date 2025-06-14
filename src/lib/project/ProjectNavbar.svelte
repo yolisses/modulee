@@ -13,25 +13,25 @@
 
 <div class="flex flex-row border-r-2 border-black/50 md:order-1 md:flex-col">
 	<a
-		class="vertical-tab"
+		class="max-md:horizontal-tab md:vertical-tab"
 		href="{baseUrl}/rack"
-		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
+		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
 		<div class="hidden md:flex">Rack</div>
 	</a>
 	<a
-		class="vertical-tab"
+		class="max-md:horizontal-tab md:vertical-tab"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
+		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		<div class="hidden md:flex">Graph</div>
 	</a>
 	<a
 		href={baseUrl}
-		class="vertical-tab"
-		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
 	>
 		<Fa fw icon={faFileAlt} />
 		<div class="hidden md:flex">Project</div>

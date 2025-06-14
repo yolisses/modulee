@@ -40,21 +40,21 @@
 <div class="flex flex-row">
 	<button
 		class="horizontal-tab"
+		data-tab-selected={group === 'created'}
 		onclick={() => {
 			group = 'created';
 			loader.resetState();
 		}}
-		class:horizontal-tab-selected={group === 'created'}
 	>
 		Created
 	</button>
 	<button
 		class="horizontal-tab"
+		data-tab-selected={group === 'liked'}
 		onclick={() => {
 			group = 'liked';
 			loader.resetState();
 		}}
-		class:horizontal-tab-selected={group === 'liked'}
 	>
 		Liked
 	</button>

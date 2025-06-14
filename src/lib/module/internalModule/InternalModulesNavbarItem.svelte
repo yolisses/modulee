@@ -16,7 +16,7 @@
 
 <div
 	class="horizontal-tab group flex max-w-[10rem] flex-row p-0"
-	class:horizontal-tab-selected={internalModuleIdContext.internalModuleId === internalModule.id}
+	data-tab-selected={internalModuleIdContext.internalModuleId === internalModule.id}
 >
 	<a
 		title={internalModule.name}
