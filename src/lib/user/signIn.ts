@@ -1,8 +1,8 @@
 import prisma from '$lib/prisma';
 import { verifyGoogleCredential } from './getCredentialFromCode';
+import { getCredentialFromCode } from './google/verifyGoogleCode';
 import { generateUniqueUsername } from './username/generateUniqueUsername';
 import { getIsUsernameAvailableFromDatabase } from './username/getIsUsernameAvailableFromDatabase';
-import { getCredentialFromCode } from './verifyGoogleCode';
 
 type SignInParams =
 	| { code?: undefined; credential: string }
