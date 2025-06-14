@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUseInNodeIdContextOrUndefined } from '../internalModule/useInNodeIdContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import CreateProjectFromExternalModuleButton from './instrument/CreateProjectFromExternalModuleButton.svelte';
@@ -9,12 +10,15 @@
 	}
 
 	const { externalModuleData }: Props = $props();
+	const projectDataContext = getProjectDataContextOrUndefined();
 	const useInNodeId = $derived(getUseInNodeIdContextOrUndefined()?.useInNodeId);
 </script>
 
-{#if useInNodeId}
-	<UseExternalModuleInNodeButton {useInNodeId} />
+{#if projectDataContext?.projectData}
+	{#if useInNodeId}
+		<UseExternalModuleInNodeButton {useInNodeId} />
+	{/if}
+{:else}
+	<!-- TODO add condition -->
+	<CreateProjectFromExternalModuleButton {externalModuleData} />
 {/if}
-
-<!-- TODO add condition -->
-<CreateProjectFromExternalModuleButton {externalModuleData} />
