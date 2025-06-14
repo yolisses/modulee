@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { faGuitar, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
+	import { faGuitar, faProjectDiagram, faQuestion } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import UserButton from './UserButton.svelte';
 	import { getHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
@@ -41,5 +41,13 @@
 		<div class="max-md:hidden">Projects</div>
 	</a>
 	<div class="flex-1 max-md:hidden"></div>
+	<a
+		href="/help"
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'help'}
+	>
+		<Fa fw icon={faQuestion} />
+		<div class="max-md:hidden">Help</div>
+	</a>
 	<UserButton />
 </div>
