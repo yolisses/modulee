@@ -39,7 +39,7 @@
 				</div>
 			</div>
 		{:else if loader.finished}
-			<div class="text-center opacity-50">End of the list</div>
+			<div class="p-2 text-center opacity-50">End of the list</div>
 		{/if}
 	{/if}
 
