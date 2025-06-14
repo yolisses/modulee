@@ -1,12 +1,13 @@
 import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
 import prisma from '$lib/prisma';
-import { createProject } from '$lib/project/createProject';
-import { createProjectFromExternalModule } from '$lib/project/createProjectFromExternalModule';
+import { createProject } from '$lib/project/create/createProject';
+import { createProjectFromExternalModule } from '$lib/project/create/createProjectFromExternalModule';
+import { getGraphTemplate } from '$lib/project/create/getGraphTemplate';
 import { getProjects } from '$lib/project/getProjects';
 import { getSession } from '$lib/user/getSession';
-import { error, redirect, type Actions } from '@sveltejs/kit';
+import { type Actions, error, redirect } from '@sveltejs/kit';
+import { z } from 'zod/v4';
 import type { PageServerLoad } from './$types';
-import { getGraphTemplate } from './getGraphTemplate';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { userId } = getSession(locals);
@@ -51,7 +52,7 @@ export const actions = {
 
 	delete: async ({ locals, request }) => {
 		const data = await request.formData();
-		const projectId = data.get('projectId');
+		const projectId = z.string().parse(data.get('projectId'));
 		const { userId } = getSession(locals);
 		await prisma.project.delete({ where: { userId, id: projectId } });
 	},
