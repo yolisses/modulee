@@ -11,14 +11,14 @@
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 </script>
 
-<div class="flex flex-col border-r-2 border-black/50">
+<div class="flex flex-row border-r-2 border-black/50 md:flex-col">
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/rack"
 		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
-		Rack
+		<div class="hidden md:flex">Rack</div>
 	</a>
 	<a
 		class="vertical-tab"
@@ -26,7 +26,7 @@
 		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
-		Graph
+		<div class="hidden md:flex">Graph</div>
 	</a>
 	<a
 		href={baseUrl}
@@ -34,7 +34,7 @@
 		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
 	>
 		<Fa fw icon={faFileAlt} />
-		Project
+		<div class="hidden md:flex">Project</div>
 	</a>
 	<div class="flex-1"></div>
 	<a class="vertical-tab" href="/projects" aria-label="Home" title="Go to projects page">
