@@ -10,7 +10,9 @@
 		You risk losing access!
 	</div>
 	<div class="flex flex-row">
-		<div>This is a guest account. Sign in to keep your projects safe and unlock features.</div>
+		<div>
+			This is a guest account. Sign in for free to keep your projects safe and unlock features.
+		</div>
 		<GoogleSignInButton />
 	</div>
 </div>
