@@ -15,7 +15,7 @@
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/rack"
-		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
+		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
 		<div class="hidden md:flex">Rack</div>
@@ -23,7 +23,7 @@
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
+		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		<div class="hidden md:flex">Graph</div>
@@ -31,7 +31,7 @@
 	<a
 		href={baseUrl}
 		class="vertical-tab"
-		class:vertical-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
+		class:tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
 	>
 		<Fa fw icon={faFileAlt} />
 		<div class="hidden md:flex">Project</div>

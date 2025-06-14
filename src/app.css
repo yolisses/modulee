@@ -20,6 +20,14 @@
 	@apply button hover-bg gap-1 rounded p-2;
 }
 
+@utility vertical-tab {
+	@apply common-button flex flex-row rounded-none border-white/25 data-[tab-selected='true']:border-l-4 data-[tab-selected='true']:pl-1;
+}
+
+@utility horizontal-tab {
+	@apply common-button flex flex-col rounded-none border-white/25 data-[tab-selected='true']:border-b-4 data-[tab-selected='true']:pb-1;
+}
+
 /* Scrollbar */
 /* width */
 .scroll-small::-webkit-scrollbar {
@@ -84,22 +92,6 @@
 
 	.common-input {
 		@apply rounded border border-white/20 bg-transparent p-2;
-	}
-
-	.vertical-tab {
-		@apply common-button rounded-none border-white/25;
-	}
-
-	.vertical-tab-selected {
-		@apply border-l-4 pl-1;
-	}
-
-	.horizontal-tab {
-		@apply common-button rounded-none border-white/25;
-	}
-
-	.horizontal-tab-selected {
-		@apply border-b-4 pb-1;
 	}
 
 	.menu-container {

@@ -7,11 +7,13 @@
 	const route = $derived(page.route.id || '');
 </script>
 
-<div class="flex flex-row border-r-2 border-black/50 md:order-1 md:flex-col">
+<div
+	class="flex flex-row justify-around border-t-2 border-black/50 md:order-1 md:flex-col md:border-t-0 md:border-r-2"
+>
 	<a
 		aria-label="Home"
-		class="vertical-tab hidden md:flex"
 		title="Go to projects page"
+		class=" hidden md:flex"
 		href="/externalModules/instruments"
 	>
 		<img
@@ -23,21 +25,21 @@
 		/>
 	</a>
 	<a
-		class="vertical-tab"
 		href="/externalModules/instruments"
-		class:vertical-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
 	>
 		<Fa fw icon={faGuitar} />
-		<div class="hidden md:flex">Instruments</div>
+		<div class="max-md:hidden">Instruments</div>
 	</a>
 	<a
 		href="/projects"
-		class="vertical-tab"
-		class:vertical-tab-selected={route.startsWith('/(home)/projects')}
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={route.startsWith('/(home)/projects')}
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" />
-		<div class="hidden md:flex">Projects</div>
+		<div class="max-md:hidden">Projects</div>
 	</a>
-	<div class="flex-1"></div>
+	<div class="hidden flex-1 md:flex"></div>
 	<UserButton {route} />
 </div>

@@ -17,8 +17,8 @@
 </script>
 
 <a
-	class="vertical-tab"
-	class:vertical-tab-selected={isSelected}
+	data-tab-selected={isSelected}
+	class="max-md:horizontal-tab md:vertical-tab"
 	href={userDataContext.userData && !userDataContext.userData.isGuest
 		? '/users/' + userDataContext.userData.id
 		: '/signIn'}
