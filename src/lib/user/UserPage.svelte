@@ -5,6 +5,7 @@
 	import { Loader } from '$lib/module/externalModule/Loader.svelte';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import EditUserButton from './EditUserButton.svelte';
+	import GuestUserWarn from './GuestUserWarn.svelte';
 	import LogoutButton from './LogoutButton.svelte';
 	import type { UserData } from './UserData';
 	import { getUserDataContext } from './userDataContext';
@@ -15,6 +16,7 @@
 
 	const { userData }: Props = $props();
 	const userDataContext = getUserDataContext();
+	const isCurrentUser = $derived(userData.id === userDataContext.userData?.id);
 
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
@@ -29,7 +31,7 @@
 
 <ListPageLayout title={userData.name}>
 	{#snippet topChildren()}
-		{#if userData.id === userDataContext.userData?.id}
+		{#if isCurrentUser}
 			{#if !userData.isGuest}
 				<LogoutButton />
 			{/if}
@@ -41,6 +43,9 @@
 	</div>
 	{#if userData.bio}
 		<p>{userData.bio}</p>
+	{/if}
+	{#if isCurrentUser && userData.isGuest}
+		<GuestUserWarn />
 	{/if}
 	<div>
 		<h2 class="font-semibold">External modules</h2>
