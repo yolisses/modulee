@@ -7,9 +7,9 @@
 	baseRouteContext.baseRoute = '';
 </script>
 
-<div class="flex max-h-screen flex-col-reverse overflow-hidden md:flex-row">
-	<HomeNavbar />
-	<div class="flex-1 overflow-hidden">
+<div class="flex h-screen flex-col overflow-hidden md:flex-row">
+	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
 		{@render children()}
 	</div>
+	<HomeNavbar />
 </div>

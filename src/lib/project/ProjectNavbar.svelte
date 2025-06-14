@@ -11,7 +11,7 @@
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 </script>
 
-<div class="flex flex-row border-r-2 border-black/50 md:flex-col">
+<div class="flex flex-row border-r-2 border-black/50 md:order-1 md:flex-col">
 	<a
 		class="vertical-tab"
 		href="{baseUrl}/rack"

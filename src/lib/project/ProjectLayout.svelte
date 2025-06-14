@@ -170,11 +170,11 @@
 <svelte:head>
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
-<div class="flex h-screen w-screen flex-col-reverse overflow-hidden md:flex-row">
-	<ProjectNavbar />
-	<div class="flex flex-1 flex-col overflow-hidden">
+<div class="flex h-screen w-screen flex-col overflow-hidden md:flex-row">
+	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
 		{@render children?.()}
 	</div>
+	<ProjectNavbar />
 </div>
 
 {#if isCommandPaletteActiveContext.isCommandPaletteActive}

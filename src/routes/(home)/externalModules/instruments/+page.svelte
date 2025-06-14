@@ -1,5 +1,5 @@
 <script lang="ts">
-	import InstrumentsPage from '$lib/module/externalModule/instrument/InstrumentsPage.svelte';
+	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
 </script>
 
-<InstrumentsPage />
+<ExternalModulesPage title="Instruments" moduleType="instrument" />

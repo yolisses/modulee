@@ -7,7 +7,7 @@
 	const route = $derived(page.route.id || '');
 </script>
 
-<div class="flex flex-row border-r-2 border-black/50 md:flex-col">
+<div class="flex flex-row border-r-2 border-black/50 md:order-1 md:flex-col">
 	<a
 		aria-label="Home"
 		class="vertical-tab hidden md:flex"

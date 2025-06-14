@@ -25,17 +25,15 @@
 	<CloseButton />
 </div>
 
-<div class="flex flex-1 flex-col overflow-auto md:flex-row md:overflow-hidden">
+<div class="flex flex-1 flex-col overflow-auto md:flex-row">
 	{#if sideBar}
-		<div class="border-r-2 border-black/50 p-4">
+		<div class="border-b-2 border-black/50 p-4 md:border-r-2 md:border-b-0">
 			{@render sideBar()}
 		</div>
 	{/if}
-	<div class="flex-1 overflow-auto">
-		<div class="flex h-[100dvh] flex-col items-center">
-			<div class="flex w-full max-w-xl flex-col gap-4 p-2">
-				{@render children?.()}
-			</div>
+	<div class="flex flex-col items-center">
+		<div class="w-full max-w-sm p-2">
+			{@render children?.()}
 		</div>
 	</div>
 </div>
