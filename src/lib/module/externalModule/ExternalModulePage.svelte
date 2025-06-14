@@ -3,9 +3,9 @@
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faCalendarAlt, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import UseEffectButton from './effect/UseEffectButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
+	import UseExternalModuleButton from './UseExternalModuleButton.svelte';
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
@@ -23,10 +23,7 @@
 	{/snippet}
 	{#snippet topChildren()}
 		<LikeButton externalModuleId={externalModuleData.id} />
-		<!-- TODO implement condition here -->
-		{#if projectDataContext}
-			<UseEffectButton effectData={externalModuleData} />
-		{/if}
+		<UseExternalModuleButton {externalModuleData} />
 	{/snippet}
 	<div class="flex flex-col gap-4">
 		<div class="flex flex-row items-center gap-2">

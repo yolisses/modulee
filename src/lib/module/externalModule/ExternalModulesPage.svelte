@@ -1,6 +1,7 @@
 <script lang="ts" generics="T extends ModuleType">
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import CloseButton from './CloseButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -61,31 +62,21 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{title} - Modulee</title>
-</svelte:head>
-
-<div class="flex flex-row border-b-2 border-black/50">
-	<h1 class="px-2 py-2 text-xl font-medium">{title}</h1>
-	<div class="flex flex-1"></div>
-	<CloseButton />
-</div>
-<div class="flex flex-1 flex-row overflow-hidden">
-	<div class="border-r-2 border-black/50 p-4">
+<ListPageLayout {title}>
+	{#snippet topChildren()}
+		<CloseButton />
+	{/snippet}
+	{#snippet sideBar()}
 		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
-	</div>
-	<div class="flex-1 overflow-auto">
-		<div class="flex h-[100dvh] flex-col items-center">
-			<div class="flex w-full max-w-xl flex-col gap-4 p-2">
-				<InfiniteList {loader}>
-					{#snippet children(externalModuleData: ExternalModuleData<T>)}
-						<ExternalModuleItem {externalModuleData} />
-					{/snippet}
-					{#snippet emptyStateButtons()}
-						<button class="common-button" onclick={clearFilters}> Clear filters </button>
-					{/snippet}
-				</InfiniteList>
-			</div>
-		</div>
-	</div>
-</div>
+	{/snippet}
+	{#snippet children()}
+		<InfiniteList {loader}>
+			{#snippet children(externalModuleData: ExternalModuleData<T>)}
+				<ExternalModuleItem {externalModuleData} />
+			{/snippet}
+			{#snippet emptyStateButtons()}
+				<button class="common-button" onclick={clearFilters}> Clear filters </button>
+			{/snippet}
+		</InfiniteList>
+	{/snippet}
+</ListPageLayout>

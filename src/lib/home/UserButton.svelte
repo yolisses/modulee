@@ -24,5 +24,5 @@
 		: '/signIn'}
 >
 	<Fa fw icon={faUser} />
-	{userDataContext.userData.name}
+	<div class="hidden md:flex">{userDataContext.userData.name}</div>
 </a>

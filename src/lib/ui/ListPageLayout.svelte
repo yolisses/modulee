@@ -24,7 +24,8 @@
 	{@render topChildren?.()}
 	<CloseButton />
 </div>
-<div class="flex flex-1 flex-row overflow-hidden">
+
+<div class="flex flex-1 flex-col overflow-auto md:flex-row md:overflow-hidden">
 	{#if sideBar}
 		<div class="border-r-2 border-black/50 p-4">
 			{@render sideBar()}
