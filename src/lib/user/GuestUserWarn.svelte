@@ -9,7 +9,7 @@
 		<Fa icon={faWarning} class="inline text-yellow-500" />
 		You risk losing access!
 	</div>
-	<div class="flex flex-row">
+	<div class="flex flex-row gap-2">
 		<div>
 			This is a guest account. Sign in for free to keep your projects safe and unlock features.
 		</div>
