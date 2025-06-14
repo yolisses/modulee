@@ -7,7 +7,7 @@ import type { ModuleVoicesNodeData } from '$lib/data/variants/ModuleVoicesNodeDa
 import type { OutputNodeData } from '$lib/data/variants/OutputNodeData';
 import type { TriangleNodeData } from '$lib/data/variants/TriangleNodeData';
 import { nodeItemWidth } from '$lib/node/nodeItemWidth';
-import type { ModuleType } from '$lib/project/ModuleType';
+import type { ModuleType } from '../ModuleType';
 
 export function getGraphTemplate(moduleType: ModuleType): GraphData {
 	const nodes: NodeData[] = [];

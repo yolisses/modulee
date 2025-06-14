@@ -1,5 +1,5 @@
-import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
-import { z } from 'zod/v4';
+import z from 'zod/v4';
+import { ModuleTypeSchema } from '../db/externalModule/ModuleTypeSchema';
 import { GraphSchema } from './GraphSchema';
 
 export const ProjectSchema = z.object({
