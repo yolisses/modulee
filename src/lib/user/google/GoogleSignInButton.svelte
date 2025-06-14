@@ -13,12 +13,12 @@
 	});
 </script>
 
-{#if loading || haveJuceSuport === undefined}
-	<div class="flex w-56 shrink-0 flex-col items-center">
+<div class="flex w-56 shrink-0 flex-col items-center">
+	{#if loading || haveJuceSuport === undefined}
 		<Spinner size={36} />
-	</div>
-{:else if haveJuceSuport}
-	<JuceGoogleSignInButton bind:loading />
-{:else}
-	<WebGoogleSignInButton bind:loading />
-{/if}
+	{:else if haveJuceSuport}
+		<JuceGoogleSignInButton bind:loading />
+	{:else}
+		<WebGoogleSignInButton bind:loading />
+	{/if}
+</div>
