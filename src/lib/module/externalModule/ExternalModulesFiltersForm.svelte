@@ -9,10 +9,10 @@
 	interface Props {
 		moduleType?: T;
 		loader: Loader<ExternalModuleData<T>>;
-		values: { text: string; sort: string; group: string };
+		values: { text: string; sort: string; group: string; moduleType: string };
 	}
 
-	const { loader, values = $bindable() }: Props = $props();
+	const { loader, moduleType, values = $bindable() }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
 </script>
 
@@ -28,6 +28,17 @@
 		Text
 		<input bind:value={values.text} type="text" class="common-input" name="text" />
 	</label>
+	{#if !moduleType}
+		<label class="flex flex-col">
+			Type
+			<select bind:value={values.moduleType} class="common-input" name="moduleType">
+				<option class="bg-zinc-800" value=""></option>
+				<option class="bg-zinc-800" value="effect">Effect</option>
+				<option class="bg-zinc-800" value="utility">Utility</option>
+				<option class="bg-zinc-800" value="instrument">Instrument</option>
+			</select>
+		</label>
+	{/if}
 	<label class="flex flex-col">
 		Sort by
 		<select bind:value={values.sort} class="common-input" name="sort">

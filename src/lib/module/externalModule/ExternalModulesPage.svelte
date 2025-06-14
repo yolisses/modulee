@@ -12,25 +12,26 @@
 
 	interface Props {
 		title: string;
-		moduleType: T;
+		moduleType?: T;
 		buttons: Snippet<[ExternalModuleData<T>]>;
 	}
 
 	const loader = new Loader(getPath);
 	const userDataContext = getUserDataContext();
 	const { title, buttons, moduleType }: Props = $props();
-	let filters = $state({ text: '', sort: '', group: '' });
 	const projectDataContext = getProjectDataContextOrUndefined();
+	let filters = $state({ text: '', sort: '', group: '', moduleType: moduleType ?? '' });
 
 	function clearFilters() {
 		filters.text = '';
 		filters.group = '';
+		filters.moduleType = moduleType ?? '';
 		loader.resetState();
 	}
 
 	function getPath(loader: Loader<ExternalModuleData<T>>) {
 		const queryParams = new URLSearchParams();
-		const { text, sort, group } = filters;
+		const { text, sort, group, moduleType } = filters;
 
 		if (text) {
 			queryParams.append('text', text);
@@ -73,7 +74,7 @@
 </div>
 <div class="flex flex-1 flex-row overflow-hidden">
 	<div class="border-r-2 border-black/50 p-4">
-		<ExternalModulesFiltersForm bind:values={filters} {loader} />
+		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
 	</div>
 	<div class="flex-1 overflow-auto">
 		<div class="flex h-[100dvh] flex-col items-center">
