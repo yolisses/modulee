@@ -44,6 +44,7 @@
 	data-ux_mode="popup"
 	data-context="signin"
 	data-itp_support="true"
+	data-auto_prompt="false"
 	data-callback="onGoogleSignIn"
 	data-close_on_tap_outside="false"
 	data-client_id={PUBLIC_AUTH_GOOGLE_ID}
