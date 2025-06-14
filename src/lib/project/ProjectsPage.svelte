@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import CreateProjectButton from './CreateProjectButton.svelte';
+	import CreateProjectButton from './create/CreateProjectButton.svelte';
 	import type { ProjectData } from './ProjectData';
 	import ProjectList from './ProjectList.svelte';
 
