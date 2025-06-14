@@ -12,9 +12,9 @@
 >
 	<a
 		aria-label="Home"
-		class="max-md:hidden"
 		title="Go to projects page"
 		href="/externalModules/instruments"
+		class="md:vertical-tab max-md:hidden"
 	>
 		<img
 			height="16"
