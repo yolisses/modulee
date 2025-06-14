@@ -34,8 +34,8 @@
 	<div class="text-sm opacity-50">
 		By
 		<a
-			href="{baseRouteContext.baseRoute}/users/{externalModuleData.userId}"
 			class="hover:underline"
+			href="{baseRouteContext.baseRoute}/users/{externalModuleData.userId}?closePath={page.url}"
 		>
 			{externalModuleData.user?.username}
 		</a>
