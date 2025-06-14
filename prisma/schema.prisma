@@ -31,15 +31,17 @@ model User {
 }
 
 model Project {
-  id          String     @id @default(uuid())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  name        String     @db.VarChar(100)
+  id          String          @id @default(uuid())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  name        String          @db.VarChar(100)
   graph       Json
-  description String?    @db.Text()
+  description String?         @db.Text()
   moduleType  ModuleType
   userId      String
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  basedOnId   String?
+  basedOn     ExternalModule? @relation(fields: [basedOnId], references: [id])
 }
 
 model ExternalModule {
@@ -56,6 +58,7 @@ model ExternalModule {
   userId      String
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes       Like[]
+  Project     Project[]
 }
 
 enum ModuleType {
