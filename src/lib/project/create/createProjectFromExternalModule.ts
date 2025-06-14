@@ -22,6 +22,6 @@ export async function createProjectFromExternalModule(externalModuleId: string, 
 	}
 
 	return prisma.project.create({
-		data: { ...res.data, userId },
+		data: { ...res.data, userId, basedOnId: externalModuleId },
 	});
 }
