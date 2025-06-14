@@ -38,12 +38,15 @@
 	let likedExternalModulesContext = $state({ likedExternalModules: new Set<string>() });
 	setLikedExternalModulesContext(likedExternalModulesContext);
 
-	onMount(async () => {
-		const res = await fetch(`/api/likes`);
-		if (res.ok) {
-			const data = await res.json();
-			likedExternalModulesContext.likedExternalModules = new Set(data);
-		}
+	$effect(() => {
+		// observe user changes
+		userData;
+		fetch(`/api/likes`).then(async (res) => {
+			if (res.ok) {
+				const data = await res.json();
+				likedExternalModulesContext.likedExternalModules = new Set(data);
+			}
+		});
 	});
 
 	onMount(() => {
