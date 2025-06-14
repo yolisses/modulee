@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
 	import Spinner from '$lib/ui/Spinner.svelte';
-	import GoogleSignInButton from './GoogleSignInButton.svelte';
 	import JuceGoogleSignInButton from './JuceGoogleSignInButton.svelte';
+	import WebGoogleSignInButton from './WebGoogleSignInButton.svelte';
 
 	let loading = $state(false);
 </script>
@@ -18,7 +18,7 @@
 			{:else if getHaveJuceSupport()}
 				<JuceGoogleSignInButton bind:loading />
 			{:else}
-				<GoogleSignInButton bind:loading />
+				<WebGoogleSignInButton bind:loading />
 			{/if}
 		</div>
 		<div class="h-10"></div>
