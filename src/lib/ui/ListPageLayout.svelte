@@ -25,9 +25,9 @@
 	<CloseButton />
 </div>
 
-<div class="flex flex-1 flex-col overflow-auto md:flex-row">
+<div class="flex flex-1 overflow-auto max-md:flex-col md:flex-row">
 	{#if sideBar}
-		<div class="border-b-2 border-black/50 p-4 md:border-r-2 md:border-b-0">
+		<div class="border-black/50 p-4 max-md:border-b-2 md:border-r-2">
 			{@render sideBar()}
 		</div>
 	{/if}

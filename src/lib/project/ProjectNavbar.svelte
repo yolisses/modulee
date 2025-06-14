@@ -20,7 +20,7 @@
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
-		<div class="hidden md:flex">Rack</div>
+		<div class="max-md:hidden">Rack</div>
 	</a>
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
@@ -28,7 +28,7 @@
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
-		<div class="hidden md:flex">Graph</div>
+		<div class="max-md:hidden">Graph</div>
 	</a>
 	<a
 		href={baseUrl}
@@ -36,7 +36,7 @@
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
 	>
 		<Fa fw icon={faFileAlt} />
-		<div class="hidden md:flex">Project</div>
+		<div class="max-md:hidden">Project</div>
 	</a>
 	<div class="flex-1 max-md:hidden"></div>
 	<a
