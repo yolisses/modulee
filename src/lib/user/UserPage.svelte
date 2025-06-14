@@ -80,6 +80,7 @@
 				Liked
 			</button>
 		</div>
+		<hr class="opacity-10" />
 		<InfiniteList {loader}>
 			{#snippet children(externalModuleData: ExternalModuleData)}
 				<ExternalModuleItem {externalModuleData} />
