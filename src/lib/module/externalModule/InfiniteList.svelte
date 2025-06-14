@@ -33,7 +33,7 @@
 	{#if !loader.isLoading}
 		{#if loader.items?.length === 0}
 			<div class="flex flex-col items-center gap-2">
-				<div class="italic">Nothing to show</div>
+				<div class="p-2 italic">Nothing to show</div>
 				<div>
 					{@render emptyStateButtons?.()}
 				</div>
