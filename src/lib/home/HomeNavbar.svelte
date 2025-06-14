@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { faGuitar, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import UserButton from './UserButton.svelte';
+	import { getHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
 
-	const route = $derived(page.route.id || '');
+	const homeNavbarSelectionContext = getHomeNavbarSelectionContext();
 </script>
 
 <div
@@ -27,7 +27,7 @@
 	<a
 		href="/externalModules/instruments"
 		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={route.startsWith('/(home)/externalModules/instruments')}
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'instruments'}
 	>
 		<Fa fw icon={faGuitar} />
 		<div class="max-md:hidden">Instruments</div>
@@ -35,11 +35,11 @@
 	<a
 		href="/projects"
 		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={route.startsWith('/(home)/projects')}
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'projects'}
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" />
 		<div class="max-md:hidden">Projects</div>
 	</a>
 	<div class="flex-1 max-md:hidden"></div>
-	<UserButton {route} />
+	<UserButton />
 </div>

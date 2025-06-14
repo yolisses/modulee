@@ -2,22 +2,14 @@
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { getHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
 
-	interface Props {
-		route: string;
-	}
-
-	const { route }: Props = $props();
 	const userDataContext = getUserDataContext();
-	const isSelected = $derived(
-		route.startsWith('/(home)/account') ||
-			route.startsWith('/(home)/users') ||
-			route.startsWith('/(home)/signIn'),
-	);
+	const homeNavbarSelectionContext = getHomeNavbarSelectionContext();
 </script>
 
 <a
-	data-tab-selected={isSelected}
+	data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'user'}
 	class="max-md:horizontal-tab md:vertical-tab"
 	href={userDataContext.userData && !userDataContext.userData.isGuest
 		? '/users/' + userDataContext.userData.id
