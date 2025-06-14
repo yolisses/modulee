@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faCalendarAlt, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +8,7 @@
 	import LikeButton from './LikeButton.svelte';
 
 	interface Props {
-		externalModuleData: ExternalModuleData<ModuleType>;
+		externalModuleData: ExternalModuleData;
 	}
 
 	const { externalModuleData }: Props = $props();

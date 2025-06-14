@@ -3,7 +3,7 @@ import type { UserData } from '$lib/user/UserData';
 import type { ModuleType } from '../../../generated/prisma';
 import type { Version } from './Version';
 
-export type ExternalModuleData<T extends ModuleType> = {
+export type ExternalModuleData<T extends ModuleType = ModuleType> = {
 	id: string;
 	name: string;
 	moduleType: T;
