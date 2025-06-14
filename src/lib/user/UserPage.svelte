@@ -18,10 +18,20 @@
 	const userDataContext = getUserDataContext();
 	const isCurrentUser = $derived(userData.id === userDataContext.userData?.id);
 
+	type Group = 'created' | 'liked';
+	let group = $state<Group>('created');
+
 	function getPath(loader: Loader<ExternalModuleData>) {
 		const queryParams = new URLSearchParams();
-		queryParams.append('userId', userData.id);
-		queryParams.append('sort', 'createdAt');
+
+		if (group === 'created') {
+			queryParams.append('userId', userData.id);
+			queryParams.append('sort', 'createdAt');
+		} else if (group === 'liked') {
+			queryParams.append('likedBy', userData.id);
+			// TODO sort by likedAt if group is 'liked'
+		}
+
 		if (loader.cursor) queryParams.append('cursor', loader.cursor);
 		const path = `/api/externalModules?${queryParams.toString()}`;
 		return path;
@@ -48,7 +58,28 @@
 		<GuestUserWarn />
 	{/if}
 	<div>
-		<h2 class="font-semibold">External modules</h2>
+		<div class="flex flex-row">
+			<button
+				class="horizontal-tab"
+				onclick={() => {
+					group = 'created';
+					loader.resetState();
+				}}
+				class:horizontal-tab-selected={group === 'created'}
+			>
+				Created
+			</button>
+			<button
+				class="horizontal-tab"
+				onclick={() => {
+					group = 'liked';
+					loader.resetState();
+				}}
+				class:horizontal-tab-selected={group === 'liked'}
+			>
+				Liked
+			</button>
+		</div>
 		<InfiniteList {loader}>
 			{#snippet children(externalModuleData: ExternalModuleData)}
 				<ExternalModuleItem {externalModuleData} />
