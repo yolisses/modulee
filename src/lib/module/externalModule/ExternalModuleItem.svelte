@@ -1,4 +1,5 @@
 <script lang="ts" generics="T extends ModuleType">
+	import { page } from '$app/state';
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { Snippet } from 'svelte';
@@ -19,7 +20,7 @@
 		<div class="flex-1">
 			<a
 				class="hover:underline"
-				href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}"
+				href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}?closePath={page.url}"
 			>
 				{externalModuleData.name}
 			</a>
@@ -32,7 +33,10 @@
 	</div>
 	<div class="text-sm opacity-50">
 		By
-		<a href="/users/{externalModuleData.userId}" class="hover:underline">
+		<a
+			href="{baseRouteContext.baseRoute}/users/{externalModuleData.userId}"
+			class="hover:underline"
+		>
 			{externalModuleData.user?.username}
 		</a>
 		• Created at {new Date(externalModuleData.createdAt).toLocaleDateString()}
