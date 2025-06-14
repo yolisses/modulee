@@ -19,9 +19,9 @@
 		<CreateProjectButton />
 	{/snippet}
 	{#snippet children()}
+		<ProjectList {projectsData} />
 		{#if userDataContext.userData.isGuest}
 			<GuestUserWarn />
 		{/if}
-		<ProjectList {projectsData} />
 	{/snippet}
 </ListPageLayout>
