@@ -15,6 +15,16 @@
 </script>
 
 <form class="contents" method="post" use:enhance action="?/patch" bind:this={form}>
+	<label class="flex flex-col">
+		Name
+		<input
+			type="text"
+			name="name"
+			onblur={handleBlur}
+			value={projectData.name}
+			class="rounded border border-white/10 bg-transparent p-2"
+		/>
+	</label>
 	<div>
 		Type
 		<div class="flex flex-row gap-2" onchange={handleBlur}>
@@ -50,16 +60,6 @@
 			</label>
 		</div>
 	</div>
-	<label class="flex flex-col">
-		Name
-		<input
-			type="text"
-			name="name"
-			onblur={handleBlur}
-			value={projectData.name}
-			class="rounded border border-white/10 bg-transparent p-2"
-		/>
-	</label>
 	<label class="flex flex-col">
 		Description
 		<textarea
