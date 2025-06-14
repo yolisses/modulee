@@ -21,7 +21,7 @@
 			class="my-1"
 			alt="Modulee logo"
 			style="height: 1rem;"
-			src="/logo-with-name.svg"
+			src="/logo-with-name-beta.svg"
 		/>
 	</a>
 	<a
