@@ -1,12 +1,10 @@
 <script>
 	import { page } from '$app/state';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
 	const baseRouteContext = getBaseRouteContext();
-	const projectDataContext = getProjectDataContext();
 </script>
 
 <a class="common-button" href="{baseRouteContext.baseRoute}/externalModules?closePath={page.url}">
