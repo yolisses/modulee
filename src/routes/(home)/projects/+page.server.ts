@@ -1,4 +1,3 @@
-import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
 import prisma from '$lib/prisma';
 import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
 import { createProject } from '$lib/project/create/createProject';
@@ -20,20 +19,10 @@ export const actions = {
 	create: async ({ locals, request }) => {
 		const data = await request.formData();
 		const name = data.get('name');
-		const { userId } = getSession(locals);
-		const moduleType = ModuleTypeSchema.safeParse(data.get('moduleType'));
-		if (moduleType.error) {
-			error(400, moduleType.error);
-		}
 		const graph = createEmptyGraphData();
-
-		const project = await createProject({
-			name,
-			graph,
-			userId,
-			moduleType,
-		});
-
+		const { userId } = getSession(locals);
+		const moduleType = data.get('moduleType');
+		const project = await createProject({ name, graph, userId, moduleType });
 		redirect(303, `/projects/${project.id}/rack`);
 	},
 
