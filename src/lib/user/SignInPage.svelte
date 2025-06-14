@@ -1,10 +1,5 @@
 <script lang="ts">
-	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
-	import Spinner from '$lib/ui/Spinner.svelte';
-	import JuceGoogleSignInButton from './google/JuceGoogleSignInButton.svelte';
-	import WebGoogleSignInButton from './google/WebGoogleSignInButton.svelte';
-
-	let loading = $state(false);
+	import GoogleSignInButton from './google/GoogleSignInButton.svelte';
 </script>
 
 <div class="flex min-h-[100dvh] flex-col items-center">
@@ -13,13 +8,7 @@
 			<h1 class="pl-2 text-xl font-medium">Sign in</h1>
 		</div>
 		<div class="flex flex-1 items-center justify-center">
-			{#if loading}
-				<Spinner size={36} />
-			{:else if getHaveJuceSupport()}
-				<JuceGoogleSignInButton bind:loading />
-			{:else}
-				<WebGoogleSignInButton bind:loading />
-			{/if}
+			<GoogleSignInButton />
 		</div>
 		<div class="h-10"></div>
 	</div>
