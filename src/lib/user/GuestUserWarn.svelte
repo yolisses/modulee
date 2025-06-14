@@ -1,7 +1,7 @@
 <script>
 	import { faWarning } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import WebGoogleSignInButton from './WebGoogleSignInButton.svelte';
+	import WebGoogleSignInButton from './google/WebGoogleSignInButton.svelte';
 </script>
 
 <div class="flex flex-col gap-2 rounded border border-yellow-500 p-2">

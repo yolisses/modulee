@@ -1,5 +1,5 @@
 import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
-import { GOOGLE_REDIRECT_URI } from './GOOGLE_REDIRECT_URI';
+import { GOOGLE_REDIRECT_URI } from './google/GOOGLE_REDIRECT_URI';
 
 const GOOGLE_SCOPE = [
 	'https://www.googleapis.com/auth/userinfo.profile',

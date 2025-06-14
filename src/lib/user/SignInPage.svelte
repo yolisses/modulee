@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
 	import Spinner from '$lib/ui/Spinner.svelte';
-	import JuceGoogleSignInButton from './JuceGoogleSignInButton.svelte';
-	import WebGoogleSignInButton from './WebGoogleSignInButton.svelte';
+	import JuceGoogleSignInButton from './google/JuceGoogleSignInButton.svelte';
+	import WebGoogleSignInButton from './google/WebGoogleSignInButton.svelte';
 
 	let loading = $state(false);
 </script>

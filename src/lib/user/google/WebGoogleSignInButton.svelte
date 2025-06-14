@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
 	import { onMount } from 'svelte';
-	import { getUserDataContext } from './userDataContext';
+	import { getUserDataContext } from '../userDataContext';
 
 	interface Props {
 		loading: boolean;
