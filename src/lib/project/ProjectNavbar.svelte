@@ -11,7 +11,9 @@
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 </script>
 
-<div class="flex flex-row border-r-2 border-black/50 md:order-1 md:flex-col">
+<div
+	class="flex flex-row border-black/50 max-md:justify-around max-md:border-t-2 md:order-1 md:flex-col md:border-r-2"
+>
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
 		href="{baseUrl}/rack"
@@ -36,14 +38,17 @@
 		<Fa fw icon={faFileAlt} />
 		<div class="hidden md:flex">Project</div>
 	</a>
-	<div class="flex-1"></div>
-	<a class="vertical-tab" href="/projects" aria-label="Home" title="Go to projects page">
-		<img
-			height="16"
-			class="my-1"
-			alt="Modulee logo"
-			style="height: 1rem;"
-			src="/logo with name.svg"
-		/>
+	<div class="flex-1 max-md:hidden"></div>
+	<a
+		href="/projects"
+		aria-label="Home"
+		title="Go to projects page"
+		class="max-md:horizontal-tab md:vertical-tab"
+	>
+		<picture>
+			<source media="(max-width: 48rem)" srcset="/logo.svg" />
+			<source media="(min-width: 48.0625rem)" srcset="/logo-with-name.svg" />
+			<img height="16" alt="Modulee logo" style="height: 1rem;" src="/logo-with-name.svg" />
+		</picture>
 	</a>
 </div>
