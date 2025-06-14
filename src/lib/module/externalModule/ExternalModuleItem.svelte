@@ -1,12 +1,13 @@
-<script lang="ts">
+<script lang="ts" generics="T extends ModuleType">
+	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { Snippet } from 'svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 
 	interface Props {
-		buttons: Snippet<[ExternalModuleData]>;
-		externalModuleData: ExternalModuleData;
+		buttons: Snippet<[ExternalModuleData<T>]>;
+		externalModuleData: ExternalModuleData<T>;
 	}
 
 	const baseRouteContext = getBaseRouteContext();
@@ -24,7 +25,7 @@
 			</a>
 		</div>
 		<LikeButton externalModuleId={externalModuleData.id} />
-		{@render buttons(externalModuleData)}
+		{@render buttons?.(externalModuleData)}
 	</div>
 	<div class="block max-h-10 overflow-hidden text-sm text-ellipsis text-white/75">
 		{externalModuleData.description}
