@@ -19,7 +19,9 @@
 <a
 	class="vertical-tab"
 	class:vertical-tab-selected={isSelected}
-	href={userDataContext.userData ? '/users/' + userDataContext.userData.id : '/signIn'}
+	href={userDataContext.userData && !userDataContext.userData.isGuest
+		? '/users/' + userDataContext.userData.id
+		: '/signIn'}
 >
 	<Fa fw icon={faUser} />
 	{userDataContext.userData.name}

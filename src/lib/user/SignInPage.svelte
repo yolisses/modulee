@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GoogleSignInButton from './google/GoogleSignInButton.svelte';
+	import GuestUserWarn from './GuestUserWarn.svelte';
 </script>
 
 <div class="flex min-h-[100dvh] flex-col items-center">
@@ -8,7 +8,7 @@
 			<h1 class="pl-2 text-xl font-medium">Sign in</h1>
 		</div>
 		<div class="flex flex-1 items-center justify-center">
-			<GoogleSignInButton />
+			<GuestUserWarn />
 		</div>
 		<div class="h-10"></div>
 	</div>
