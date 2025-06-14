@@ -35,15 +35,15 @@
 					Type
 					<div class="flex flex-row gap-2">
 						<label class="common-button">
-							<input id="effect" type="radio" required value="effect" name="moduleType" />
+							<input type="radio" required name="moduleType" id="effect" value="effect" />
 							Effect
 						</label>
 						<label class="common-button">
-							<input type="radio" id="instrument" required name="moduleType" value="instrument" />
+							<input type="radio" required name="moduleType" id="instrument" value="instrument" />
 							Instrument
 						</label>
 						<label class="common-button">
-							<input type="radio" id="utility" required value="utility" name="moduleType" />
+							<input type="radio" required name="moduleType" id="utility" value="utility" />
 							Utility
 						</label>
 					</div>
