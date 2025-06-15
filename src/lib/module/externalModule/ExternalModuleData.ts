@@ -13,6 +13,5 @@ export type ExternalModuleData<T extends ModuleType = ModuleType> = {
 	likeCount: number;
 	updatedAt: string;
 	createdAt: string;
-	usageCount: number;
 	description?: string;
 };

@@ -38,7 +38,6 @@
 			{externalModuleData.user?.username}
 		</a>
 		• Created at {new Date(externalModuleData.createdAt).toLocaleDateString()}
-		<!-- • Used {externalModuleData.usageCount} times  -->
 		• Liked {externalModuleData.likeCount} times
 	</div>
 </div>

@@ -71,14 +71,5 @@ export async function getExternalModulesData(
 	const hasNextPage = results.length > PAGE_LIMIT;
 	const items = hasNextPage ? results.slice(0, PAGE_LIMIT) : results;
 
-	// Map results to ExternalModuleData, adding missing fields (set to default or fetch if available)
-	const mappedItems: ExternalModuleData[] = items.map((item) => ({
-		...item,
-		usageCount: (item as any).usageCount ?? 0, // Set default or fetch actual value
-	}));
-
-	return {
-		items: mappedItems,
-		nextCursor: hasNextPage ? mappedItems[mappedItems.length - 1].id : null,
-	};
+	return { items, nextCursor: hasNextPage ? items[items.length - 1].id : null };
 }
