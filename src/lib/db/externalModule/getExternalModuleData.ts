@@ -2,7 +2,7 @@ import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModu
 import prisma from '$lib/prisma';
 import { error } from '@sveltejs/kit';
 
-export async function getExternalModuleData(externalModuleId: string): Promise<ExternalModuleData> {
+export async function getExternalModuleData(externalModuleId: string) {
 	const data = await prisma.externalModule.findUnique({
 		include: { user: true },
 		where: { id: externalModuleId },
