@@ -3,7 +3,7 @@
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getUseInNodeIdContext } from './useInNodeIdContext';
+	import { getUseExternalModuleInContext } from './useExternalModuleInContext';
 
 	interface Props {
 		moduleNodeId: string;
@@ -12,10 +12,10 @@
 	const { moduleNodeId }: Props = $props();
 
 	const baseRouteContext = getBaseRouteContext();
-	const useInNodeIdContext = getUseInNodeIdContext();
+	const useExternalModuleInContext = getUseExternalModuleInContext();
 
 	function handleClick() {
-		useInNodeIdContext.useInNodeId = moduleNodeId;
+		useExternalModuleInContext.useExternalModuleIn = { type: 'moduleNode', moduleNodeId };
 	}
 </script>
 
