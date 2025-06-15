@@ -3,7 +3,6 @@
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { getUserDataContext } from '$lib/user/userDataContext';
-	import CloseButton from './CloseButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 	import ExternalModulesFiltersForm from './ExternalModulesFiltersForm.svelte';
@@ -63,9 +62,6 @@
 </script>
 
 <ListPageLayout {title}>
-	{#snippet topChildren()}
-		<CloseButton />
-	{/snippet}
 	{#snippet sideBar()}
 		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
 	{/snippet}
