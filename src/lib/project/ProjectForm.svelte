@@ -9,12 +9,22 @@
 	let form: HTMLFormElement;
 	const { projectData }: Props = $props();
 
-	function handleBlur() {
-		// form.requestSubmit();
+	function handleChange() {
+		form.submit();
 	}
 </script>
 
-<form class="contents" method="post" use:enhance action="?/patch" bind:this={form}>
+<form
+	method="post"
+	class="contents"
+	action="?/patch"
+	bind:this={form}
+	use:enhance={() => {
+		return async ({ update }) => {
+			update({ reset: false });
+		};
+	}}
+>
 	<label class="flex flex-col">
 		Name
 		<input
@@ -22,13 +32,14 @@
 			type="text"
 			name="name"
 			maxlength="100"
+			onchange={handleChange}
 			value={projectData.name}
 			class="rounded border border-white/10 bg-transparent p-2"
 		/>
 	</label>
 	<div>
 		Type
-		<div class="flex flex-row gap-2" onchange={handleBlur}>
+		<div class="flex flex-row gap-2" onchange={handleChange}>
 			<label class="common-button">
 				<input
 					required
@@ -68,7 +79,7 @@
 		Description
 		<textarea
 			name="description"
-			onblur={handleBlur}
+			onchange={handleChange}
 			value={projectData.description}
 			class="rounded border border-white/10 bg-transparent p-2"
 		></textarea>
