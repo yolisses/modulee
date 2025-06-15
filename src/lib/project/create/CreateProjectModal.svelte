@@ -27,8 +27,9 @@
 						required
 						name="name"
 						type="text"
-						class="common-input w-full"
+						maxlength="100"
 						bind:this={textInput}
+						class="common-input w-full"
 					/>
 				</label>
 				<div>

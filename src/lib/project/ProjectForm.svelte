@@ -20,6 +20,7 @@
 		<input
 			type="text"
 			name="name"
+			maxlength="100"
 			onblur={handleBlur}
 			value={projectData.name}
 			class="rounded border border-white/10 bg-transparent p-2"
