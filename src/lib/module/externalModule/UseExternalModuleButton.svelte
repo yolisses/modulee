@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
 	import { getUseExternalModuleInContextOrUndefined } from '../internalModule/useExternalModuleInContext';
+	import type { EffectData } from './effect/EffectData';
 	import UseEffectButton from './effect/UseEffectButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import CreateProjectFromExternalModuleButton from './instrument/CreateProjectFromExternalModuleButton.svelte';
@@ -24,7 +25,9 @@
 				useInNodeId={useExternalModuleInContext.useExternalModuleIn.moduleNodeId}
 			/>
 		{:else if useExternalModuleInContext.useExternalModuleIn.type === 'rack'}
-			<UseEffectButton effectData={externalModuleData} />
+			{#if externalModuleData.moduleType === 'effect'}
+				<UseEffectButton effectData={externalModuleData as EffectData} />
+			{/if}
 		{/if}
 	{/if}
 {:else}
