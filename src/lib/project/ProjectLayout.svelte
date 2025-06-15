@@ -23,7 +23,7 @@
 		setExternalModulesDataContext,
 	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { setUseInNodeIdContext } from '$lib/module/internalModule/useExternalModuleInContextnContext';
+	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/project/getGraphData';
 	import ProjectNavbar from '$lib/project/ProjectNavbar.svelte';
@@ -163,8 +163,8 @@
 		}
 	});
 
-	const useInNodeIdContext = $state({});
-	setUseInNodeIdContext(useInNodeIdContext);
+	const useExternalModuleInContext = $state({});
+	setUseExternalModuleInContext(useExternalModuleInContext);
 </script>
 
 <svelte:head>
