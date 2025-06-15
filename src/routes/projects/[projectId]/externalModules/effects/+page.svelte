@@ -1,5 +1,5 @@
 <script>
-	import EffectsPage from '$lib/module/externalModule/effect/EffectsPage.svelte';
+	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
 </script>
 
-<EffectsPage />
+<ExternalModulesPage title="Effects" moduleType="effect" />
