@@ -1,13 +1,17 @@
 import z from 'zod/v4';
+import { VectorSchema } from './VectorSchema';
 
-// TODO replace any by object
-
-export function NodeBaseSchema<T extends string, E extends z.ZodTypeAny = z.ZodUndefined>(
-	type: T,
-	extras?: E,
-) {
+export function NodeBaseSchema<
+	T extends string,
+	I extends string[],
+	E extends z.ZodObject = z.ZodObject,
+>(type: T, inputNames: I, extras: E) {
 	return z.object({
+		extras,
+		id: z.string(),
 		type: z.literal(type),
-		...(extras ? { extras } : { extras: z.object({}) }),
+		position: VectorSchema,
+		internalModuleId: z.string(),
+		unconnectedInputValues: z.record(z.enum(inputNames), z.number()),
 	});
 }
