@@ -17,10 +17,6 @@ export class ExternalModule extends Module<ExternalModuleData> {
 	}
 
 	getReference(): ExternalModuleReference {
-		return { id: this.id, type: 'external', version: this.version };
-	}
-
-	get version() {
-		return this.moduleData.version;
+		return { id: this.id, type: 'external' };
 	}
 }

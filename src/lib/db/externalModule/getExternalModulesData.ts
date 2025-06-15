@@ -74,7 +74,6 @@ export async function getExternalModulesData(
 	// Map results to ExternalModuleData, adding missing fields (set to default or fetch if available)
 	const mappedItems: ExternalModuleData[] = items.map((item) => ({
 		...item,
-		version: (item as any).version ?? '', // Set default or fetch actual value
 		usageCount: (item as any).usageCount ?? 0, // Set default or fetch actual value
 	}));
 

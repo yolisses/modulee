@@ -31,13 +31,7 @@ export class UseEffectExternalModule extends EditorCommand<{
 		} = this.details;
 
 		this.setExternalModuleReferenceCommand = new SetExternalModuleReferenceCommand(
-			mockCommandData({
-				externalModuleReference: {
-					type: 'external',
-					id: externalModule.id,
-					version: externalModule.version,
-				},
-			}),
+			mockCommandData({ externalModuleReference: { type: 'external', id: externalModule.id } }),
 		);
 
 		this.addNodeCommand = new AddNodeCommand(
@@ -48,13 +42,7 @@ export class UseEffectExternalModule extends EditorCommand<{
 					type: 'ModuleNode',
 					unconnectedInputValues: {},
 					position: moduleNodePosition,
-					extras: {
-						moduleReference: {
-							type: 'external',
-							id: externalModule.id,
-							version: externalModule.version,
-						},
-					},
+					extras: { moduleReference: { type: 'external', id: externalModule.id } },
 				},
 			}),
 		);
