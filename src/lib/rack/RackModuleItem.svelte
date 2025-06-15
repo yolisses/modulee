@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
-	import { faChevronDown, faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+	import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
+	import RackAddEffectButton from './RackAddEffectButton.svelte';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
 
 	interface Props {
@@ -34,13 +34,7 @@
 		</button>
 		<div class="self-center">{internalModule.name}</div>
 		<div class="flex-1"></div>
-		<a
-			class="common-button"
-			href="{baseRouteContext.baseRoute}/externalModules/effects?closePath={page.url}"
-		>
-			<Fa fw icon={faPlus} />
-			Add effect
-		</a>
+		<RackAddEffectButton internalModuleId={internalModule.id} />
 	</summary>
 	<div class="flex flex-row flex-wrap gap-1 pt-1">
 		{#if moduleNodes.length > 0}
