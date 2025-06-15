@@ -25,7 +25,8 @@ export async function createProjectFromExternalModule(
 		error(400, z.prettifyError(res.error));
 	}
 
-	return prisma.project.create({
+	const projectData = await prisma.project.create({
 		data: { ...res.data, userId, basedOnId: externalModuleId },
 	});
+	return projectData as unknown as ProjectData;
 }
