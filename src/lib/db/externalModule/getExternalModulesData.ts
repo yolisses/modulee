@@ -47,7 +47,7 @@ export async function getExternalModulesData(
 
 	const validIds = await getValidIds(usedIn);
 
-	const results = await prisma.externalModule.findMany({
+	const results = (await prisma.externalModule.findMany({
 		take: PAGE_LIMIT + 1,
 		skip: cursor ? 1 : 0,
 		cursor: cursor ? { id: cursor } : undefined,
@@ -66,7 +66,7 @@ export async function getExternalModulesData(
 				OR: [{ name: { search: text } }, { description: { search: text } }],
 			}),
 		},
-	});
+	})) as unknown as ExternalModuleData[];
 
 	const hasNextPage = results.length > PAGE_LIMIT;
 	const items = hasNextPage ? results.slice(0, PAGE_LIMIT) : results;

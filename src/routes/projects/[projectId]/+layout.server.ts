@@ -21,7 +21,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 				}),
 			},
 		},
-	})) as ExternalModuleData[];
+	})) as unknown as ExternalModuleData[];
 
 	return {
 		externalModulesData,
