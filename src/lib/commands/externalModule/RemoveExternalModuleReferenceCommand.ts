@@ -7,7 +7,7 @@ export class RemoveExternalModuleReferenceCommand extends EditorCommand<{
 }> {
 	static name = 'RemoveExternalModuleReferenceCommand';
 
-	removed!: ExternalModuleReference;
+	removed?: ExternalModuleReference;
 
 	execute(graphRegistry: GraphRegistry): void {
 		const { externalModuleReferenceId } = this.details;
@@ -15,6 +15,8 @@ export class RemoveExternalModuleReferenceCommand extends EditorCommand<{
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		graphRegistry.externalModuleReferences.add(this.removed);
+		if (this.removed) {
+			graphRegistry.externalModuleReferences.add(this.removed);
+		}
 	}
 }

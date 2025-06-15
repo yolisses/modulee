@@ -7,7 +7,7 @@ export class RemoveInternalModuleCommand extends EditorCommand<{
 }> {
 	static name = 'RemoveInternalModuleCommand';
 
-	internalModuleData!: InternalModuleData;
+	internalModuleData?: InternalModuleData;
 
 	execute(graphRegistry: GraphRegistry): void {
 		this.internalModuleData = graphRegistry.internalModules.removeById(
@@ -16,6 +16,8 @@ export class RemoveInternalModuleCommand extends EditorCommand<{
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		graphRegistry.internalModules.add(this.internalModuleData);
+		if (this.internalModuleData) {
+			graphRegistry.internalModules.add(this.internalModuleData);
+		}
 	}
 }

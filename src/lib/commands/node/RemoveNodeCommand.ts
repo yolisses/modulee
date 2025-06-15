@@ -10,13 +10,15 @@ export type RemoveNodeCommandData = EditorCommandData<RemoveNodeCommandDetails>;
 export class RemoveNodeCommand extends EditorCommand<RemoveNodeCommandDetails> {
 	static name = 'RemoveNodeCommand';
 
-	nodeData!: NodeData;
+	nodeData?: NodeData;
 
 	execute(graphRegistry: GraphRegistry): void {
 		this.nodeData = graphRegistry.nodes.removeById(this.details.nodeId);
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		graphRegistry.nodes.add(this.nodeData);
+		if (this.nodeData) {
+			graphRegistry.nodes.add(this.nodeData);
+		}
 	}
 }
