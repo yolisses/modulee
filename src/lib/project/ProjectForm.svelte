@@ -10,7 +10,7 @@
 	const { projectData }: Props = $props();
 
 	function handleChange() {
-		form.submit();
+		form.requestSubmit();
 	}
 </script>
 
