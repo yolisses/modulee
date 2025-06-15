@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Spinner from '$lib/ui/Spinner.svelte';
-	import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
+	import { faUpload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ProjectData } from './ProjectData';
 
@@ -31,7 +31,7 @@
 	{#if isLoading}
 		<Spinner size={20} />
 	{:else}
-		<Fa fw icon={faPuzzlePiece} />
+		<Fa fw icon={faUpload} />
 	{/if}
-	Create external module
+	Publish as an external module
 </button>
