@@ -10,7 +10,7 @@
 	const { projectData }: Props = $props();
 
 	function handleBlur() {
-		form.submit();
+		// form.requestSubmit();
 	}
 </script>
 
@@ -18,10 +18,10 @@
 	<label class="flex flex-col">
 		Name
 		<input
+			required
 			type="text"
 			name="name"
 			maxlength="100"
-			onblur={handleBlur}
 			value={projectData.name}
 			class="rounded border border-white/10 bg-transparent p-2"
 		/>
@@ -31,6 +31,7 @@
 		<div class="flex flex-row gap-2" onchange={handleBlur}>
 			<label class="common-button">
 				<input
+					required
 					id="effect"
 					type="radio"
 					value="effect"
@@ -41,6 +42,7 @@
 			</label>
 			<label class="common-button">
 				<input
+					required
 					type="radio"
 					id="instrument"
 					name="moduleType"
@@ -51,6 +53,7 @@
 			</label>
 			<label class="common-button">
 				<input
+					required
 					type="radio"
 					id="utility"
 					value="utility"
