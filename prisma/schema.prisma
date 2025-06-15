@@ -16,7 +16,7 @@ datasource db {
 }
 
 model User {
-  id              String           @id @default(uuid())
+  id              String           @id @default(uuid()) @db.Uuid
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   email           String           @unique @db.VarChar(320)
@@ -31,31 +31,31 @@ model User {
 }
 
 model Project {
-  id          String          @id @default(uuid())
+  id          String          @id @default(uuid()) @db.Uuid
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   name        String          @db.VarChar(100)
   graph       Json
   description String?         @db.Text()
   moduleType  ModuleType
-  userId      String
+  userId      String          @db.Uuid
   user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  basedOnId   String?
+  basedOnId   String?         @db.Uuid
   basedOn     ExternalModule? @relation(fields: [basedOnId], references: [id])
 }
 
 model ExternalModule {
-  id          String     @id @default(uuid())
+  id          String     @id @default(uuid()) @db.Uuid
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   isSeeded    Boolean?
   name        String     @db.VarChar(100)
   graph       Json
   likeCount   Int        @default(0)
-  projectId   String     @db.VarChar(22)
+  projectId   String     @db.Uuid
   description String?    @db.Text()
   moduleType  ModuleType
-  userId      String
+  userId      String     @db.Uuid
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes       Like[]
   Project     Project[]
@@ -68,12 +68,12 @@ enum ModuleType {
 }
 
 model Like {
-  id               String         @id @default(uuid())
+  id               String         @id @default(uuid()) @db.Uuid
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
-  userId           String
+  userId           String         @db.Uuid
   user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  externalModuleId String
+  externalModuleId String         @db.Uuid
   externalModule   ExternalModule @relation(fields: [externalModuleId], references: [id], onDelete: Cascade)
 
   @@unique([userId, externalModuleId])
