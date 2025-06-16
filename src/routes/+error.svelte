@@ -7,10 +7,9 @@
 	onMount(() => {
 		try {
 			// Send the user to last page in the app or to home page.
+			if (!document.referrer) return;
 			const url = new URL(document.referrer);
-			if (url.origin === location.origin) {
-				href = '/';
-			} else {
+			if (url.origin !== location.origin) {
 				href = document.referrer;
 			}
 		} catch (e) {
