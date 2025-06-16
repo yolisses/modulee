@@ -1,7 +1,7 @@
 import { createId } from '$lib/data/createId';
 import type { OutputNodeData } from '$lib/data/variants/OutputNodeData';
 import { expect, test } from 'vitest';
-import { OutputNodeSchema } from './nodes/OutputNodeSchema';
+import { NodeSchema } from './NodeSchema';
 
 test('OutputNodeSchema', () => {
 	const outputNodeData: OutputNodeData = {
@@ -12,7 +12,7 @@ test('OutputNodeSchema', () => {
 		internalModuleId: createId(),
 		unconnectedInputValues: { input: 3 },
 	};
-	OutputNodeSchema.parse(outputNodeData);
+	NodeSchema.parse(outputNodeData);
 });
 
 test('OutputNodeSchema with incorrect input', () => {
@@ -24,5 +24,5 @@ test('OutputNodeSchema with incorrect input', () => {
 		internalModuleId: createId(),
 		unconnectedInputValues: { input1: 3 },
 	};
-	expect(() => OutputNodeSchema.parse(outputNodeData)).toThrow();
+	expect(() => NodeSchema.parse(outputNodeData)).toThrow();
 });
