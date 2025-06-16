@@ -30,7 +30,6 @@
 			{/if}
 		{/if}
 	{/if}
-{:else}
-	<!-- TODO add condition -->
+{:else if externalModuleData.moduleType === 'instrument'}
 	<CreateProjectFromExternalModuleButton {externalModuleData} />
 {/if}
