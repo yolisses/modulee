@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import AddOutputNodeButton from './AddOutputNodeButton.svelte';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
 	import RackAddEffectButton from './RackAddEffectButton.svelte';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
@@ -13,7 +13,7 @@
 	}
 
 	const { internalModule }: Props = $props();
-	const baseRouteContext = getBaseRouteContext();
+	const hasOutputNode = $derived(internalModule.nodes.some((node) => node.type === 'OutputNode'));
 	const moduleNodes: ModuleNode[] = $derived(
 		internalModule.nodes.filter(function (node): node is ModuleNode {
 			return getIsSomeModuleNode(node) && !!node.targetModule;
@@ -34,7 +34,11 @@
 		</button>
 		<div class="self-center">{internalModule.name}</div>
 		<div class="flex-1"></div>
-		<RackAddEffectButton internalModuleId={internalModule.id} />
+		{#if hasOutputNode}
+			<RackAddEffectButton internalModuleId={internalModule.id} />
+		{:else}
+			<AddOutputNodeButton {internalModule} />
+		{/if}
 	</summary>
 	<div class="flex flex-row flex-wrap gap-1 pt-1">
 		{#if moduleNodes.length > 0}
