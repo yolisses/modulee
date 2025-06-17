@@ -5,12 +5,11 @@
 
 	interface Props {
 		externalModule: ExternalModule;
-		redirectsTo?: 'mainExternalModuleGraph';
 	}
 
-	const { externalModule, redirectsTo }: Props = $props();
+	const { externalModule }: Props = $props();
 </script>
 
 <DotsMenuButton>
-	<DeleteExternalModuleButton {externalModule} {redirectsTo} />
+	<DeleteExternalModuleButton {externalModule} />
 </DotsMenuButton>
