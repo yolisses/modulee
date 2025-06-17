@@ -6,7 +6,7 @@
 	import { getUseExternalModuleInContext } from './useExternalModuleInContext';
 
 	interface Props {
-		moduleNodeId: string;
+		moduleNodeId?: string;
 	}
 
 	const { moduleNodeId }: Props = $props();
@@ -15,7 +15,9 @@
 	const useExternalModuleInContext = getUseExternalModuleInContext();
 
 	function handleClick() {
-		useExternalModuleInContext.useExternalModuleIn = { type: 'moduleNode', moduleNodeId };
+		if (moduleNodeId) {
+			useExternalModuleInContext.useExternalModuleIn = { type: 'moduleNode', moduleNodeId };
+		}
 	}
 </script>
 

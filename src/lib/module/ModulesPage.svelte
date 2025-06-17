@@ -1,0 +1,60 @@
+<script lang="ts">
+	import { page } from '$app/state';
+	import type { ExternalModule } from '$lib/data/ExternalModule';
+	import { getGraphContext } from '$lib/data/graphContext';
+	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import BasicList from '$lib/ui/BasicList.svelte';
+	import { getId } from '$lib/ui/getId';
+	import { getName } from '$lib/ui/getName';
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
+	import ExternalModuleDotsMenuButton from './externalModule/ExternalModuleDotsMenuButton.svelte';
+	import InternalModuleDotsMenuButton from './internalModule/InternalModuleDotsMenuButton.svelte';
+
+	const graphContext = getGraphContext();
+	const projectDataContext = getProjectDataContext();
+
+	function getHrefInternal(internalModule: InternalModule) {
+		const { projectData } = projectDataContext;
+		return `/projects/${projectData.id}/internalModules/${internalModule.id}/graph`;
+	}
+
+	function getHrefExternal(externalModule: ExternalModule) {
+		const { projectData } = projectDataContext;
+		return `/projects/${projectData.id}/externalModules/${externalModule.id}?closePath=${page.url}`;
+	}
+</script>
+
+<ListPageLayout title="Modules">
+	<div class="flex flex-col gap-4">
+		<div>
+			<h2>Internal modules</h2>
+			<hr class="opacity-10" />
+			<BasicList
+				{getId}
+				{getName}
+				getHref={getHrefInternal}
+				items={graphContext.graph.internalModules.values()}
+			>
+				{#snippet buttons({ item })}
+					<InternalModuleDotsMenuButton internalModule={item} />
+				{/snippet}
+			</BasicList>
+		</div>
+
+		<div>
+			<h2>External modules</h2>
+			<hr class="opacity-10" />
+			<BasicList
+				{getId}
+				{getName}
+				getHref={getHrefExternal}
+				items={graphContext.graph.externalModules.values()}
+			>
+				{#snippet buttons({ item })}
+					<ExternalModuleDotsMenuButton externalModule={item} />
+				{/snippet}
+			</BasicList>
+		</div>
+	</div>
+</ListPageLayout>
