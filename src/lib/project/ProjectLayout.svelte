@@ -5,17 +5,6 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
-	import {
-		type AudioBackendContext,
-		setAudioBackendContext,
-	} from '$lib/engine/audioBackendContext';
-	import { getGraphEngineData } from '$lib/engine/data/getGraphEngineData';
-	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
-	import { type IsMutedContext, setIsMutedContext } from '$lib/engine/isMutedContexts';
-	import { JuceAudioBackend } from '$lib/engine/JuceAudioBackend';
-	import { VirtualPianoMidiBackend } from '$lib/engine/VirtualPianoMidiBackend';
-	import { WasmAudioBackend } from '$lib/engine/WasmAudioBackend';
-	import { WebMidiBackend } from '$lib/engine/WebMidiBackend';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import {
@@ -24,13 +13,13 @@
 	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 	import { getGraphData } from '$lib/project/getGraphData';
 	import ProjectNavbar from '$lib/project/ProjectNavbar.svelte';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { onMount, type Snippet } from 'svelte';
 	import { getGraphRegistry } from './getGraphRegistry';
+	import { initializeAudioFeatures } from './initializeAudioFeatures.svelte';
 	import type { ProjectData } from './ProjectData';
 	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
 	import {
@@ -102,69 +91,15 @@
 	const editorContext = $state({ editor });
 	setEditorContext(editorContext);
 
-	const audioBackendContext: AudioBackendContext = $state({});
-	setAudioBackendContext(audioBackendContext);
-
-	const isMutedContext: IsMutedContext = $state({ isMuted: false });
-	setIsMutedContext(isMutedContext);
-
 	const projectNavbarSelectionContext: ProjectNavbarSelectionContext = $state({
 		projectNavbarSelection: '',
 	});
 	setProjectNavbarSelectionContext(projectNavbarSelectionContext);
 
-	$effect(() => {
-		const { isMuted } = isMutedContext;
-		const { audioBackend } = audioBackendContext;
-		audioBackend?.setIsMuted(isMuted);
-	});
-
-	onMount(() => {
-		if (getHaveJuceSupport()) {
-			const audioBackend = new JuceAudioBackend();
-			audioBackendContext.audioBackend = audioBackend;
-
-			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
-			virtualPianoMidiBackend.initialize();
-
-			return () => {
-				audioBackend.destroy();
-				virtualPianoMidiBackend.destroy();
-			};
-		} else {
-			const audioBackend = new WasmAudioBackend();
-			audioBackendContext.audioBackend = audioBackend;
-
-			const webMidiBackend = new WebMidiBackend(audioBackend);
-			webMidiBackend.initialize();
-
-			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
-			virtualPianoMidiBackend.initialize();
-
-			return () => {
-				audioBackend.destroy();
-				webMidiBackend.destroy();
-				virtualPianoMidiBackend.destroy();
-			};
-		}
-	});
-
-	$effect(() => {
-		// An error on updating the audio graph should not stop the full
-		// application
-		try {
-			const { graphRegistry } = graphRegistryContext;
-			const { externalModulesData } = externalModulesDataContext;
-			const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry, externalModulesData);
-			const graphEngineData = getGraphEngineData(processedGraphRegistry);
-			audioBackendContext.audioBackend?.setGraph(graphEngineData);
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
 	const useExternalModuleInContext = $state({});
 	setUseExternalModuleInContext(useExternalModuleInContext);
+
+	initializeAudioFeatures();
 </script>
 
 <svelte:head>
