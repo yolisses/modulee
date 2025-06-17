@@ -9,6 +9,7 @@
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
+	import { getExternalModulesDataContext } from '../externalModulesDataContext';
 	import type { EffectData } from './EffectData';
 
 	interface Props {
@@ -16,10 +17,11 @@
 	}
 
 	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
 	const { effectData }: Props = $props();
+	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 	const internalModuleIdContext = getInternalModuleIdContext();
+	const externalModulesDataContext = getExternalModulesDataContext();
 
 	function handleClick() {
 		const outputNode = graphContext.graph.nodes.values().find((node) => node.type === 'OutputNode');
@@ -45,6 +47,8 @@
 		});
 
 		editorContext.editor.execute(useEffectExternalModule);
+
+		externalModulesDataContext.externalModulesData.push(effectData);
 	}
 </script>
 
