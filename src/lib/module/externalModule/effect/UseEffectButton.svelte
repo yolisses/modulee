@@ -4,7 +4,7 @@
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { nodeItemWidth } from '$lib/node/nodeItemWidth';
+	import { NODE_ITEM_WIDTH } from '$lib/node/NODE_ITEM_WIDTH';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
@@ -29,7 +29,9 @@
 			throw new Error('Missing output node to connect');
 		}
 
-		const moduleNodePosition = outputNode.position.subtract(new Vector(nodeItemWidth, 0)).getData();
+		const moduleNodePosition = outputNode.position
+			.subtract(new Vector(NODE_ITEM_WIDTH, 0))
+			.getData();
 
 		const useEffectExternalModule = new UseEffectExternalModule({
 			id: createId(),

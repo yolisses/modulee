@@ -14,8 +14,8 @@
 	} from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../data/Node.svelte.js';
+	import { NODE_ITEM_WIDTH } from './NODE_ITEM_WIDTH.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
-	import { nodeItemWidth } from './nodeItemWidth.js';
 
 	interface Props {
 		node: Node;
@@ -63,7 +63,7 @@
 		<div
 			style:outline-width="0.1lh"
 			style:border-radius="0.4lh"
-			style:width="{nodeItemWidth}lh"
+			style:width="{NODE_ITEM_WIDTH}lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-800={!isSelected}
 			class="node-item flex flex-col bg-zinc-700 outline"
