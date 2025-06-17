@@ -49,7 +49,6 @@
 	/* Centering on navigation */
 	const internalModuleIdContext = getInternalModuleIdContext();
 
-	let debugValue = $state(1);
 	const zoomContext = getZoomContext();
 
 	function autoScroll() {
