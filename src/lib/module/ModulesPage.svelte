@@ -40,6 +40,9 @@
 					<InternalModuleDotsMenuButton internalModule={item} />
 				{/snippet}
 			</BasicList>
+			{#if graphContext.graph.internalModules.values().length === 0}
+				<div class="p-2 italic opacity-50">Nothing to show</div>
+			{/if}
 		</div>
 
 		<div>
@@ -55,6 +58,9 @@
 					<ExternalModuleDotsMenuButton externalModule={item} />
 				{/snippet}
 			</BasicList>
+			{#if graphContext.graph.externalModules.values().length === 0}
+				<div class="p-2 italic opacity-50">Nothing to show</div>
+			{/if}
 		</div>
 	</div>
 </ListPageLayout>
