@@ -11,9 +11,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"seed": "vite-node /src/seed.ts",
-		"seed:dev": "vite-node /src/seedTest.ts",
-		"unseed:dev": "vite-node /src/unseedTest.ts",
+		"seed:fake": "vite-node /src/seedFake.ts",
+		"unseed:fake": "vite-node /src/unseedFake.ts",
 		"test:e2e": "playwright test",
 		"test": "npm run test:unit -- --run && npm run test:e2e"
 	},

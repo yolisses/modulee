@@ -1,10 +1,10 @@
 import { createId } from '$lib/data/createId';
 import type { GraphData } from '$lib/data/GraphData';
+import prisma from '$lib/prisma';
 import type { ModuleType } from '$lib/project/ModuleType';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
-import { range } from './range';
-import prisma from '$lib/prisma';
+import { range } from '../../range';
 
 async function getIsAvailable() {
 	return true;
