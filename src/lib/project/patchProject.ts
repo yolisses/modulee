@@ -10,6 +10,5 @@ export function patchProject({ id, userId, data }: { id: string; userId: string;
 		description: z.string().optional(),
 		moduleType: ModuleTypeSchema.optional(),
 	});
-	console.log(schema.parse(data));
 	return prisma.project.update({ where: { id, userId }, data: schema.parse(data) });
 }
