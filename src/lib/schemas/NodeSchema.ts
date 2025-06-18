@@ -1,4 +1,5 @@
 import z from 'zod/v4';
+import { ModuleNodeBaseSchema } from './ModuleNodeBaseSchema';
 import { NodeBaseSchema } from './NodeBaseSchema';
 import { ConstantNodeExtrasSchema } from './nodes/ConstantNodeExtrasSchema';
 import { ControlNodeExtrasSchema } from './nodes/ControlNodeExtrasSchema';
@@ -29,8 +30,8 @@ export const NodeSchema = z.union([
 	NodeBaseSchema('PeakNode', ['input', 'frequency', 'resonance', 'gain'], z.object({})),
 	NodeBaseSchema('NoiseNode', [], z.object({})),
 	NodeBaseSchema('RandomFromValueNode', ['value'], z.object({})),
-	NodeBaseSchema('ModuleNode', [], ModuleNodeExtrasSchema),
-	NodeBaseSchema('ModuleVoicesNode', [], ModuleVoicesNodeExtrasSchema),
+	ModuleNodeBaseSchema('ModuleNode', ModuleNodeExtrasSchema),
+	ModuleNodeBaseSchema('ModuleVoicesNode', ModuleVoicesNodeExtrasSchema),
 	NodeBaseSchema('OutputNode', ['input'], OutputNodeExtrasSchema),
 	NodeBaseSchema('InputNode', [], InputNodeExtrasSchema),
 	NodeBaseSchema('AudioInputNode', [], z.object({})),
