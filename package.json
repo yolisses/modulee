@@ -3,8 +3,6 @@
 	"version": "0.1.0",
 	"scripts": {
 		"test:unit": "vitest",
-		"unseed": "vite-node src/lib/server/unseed.ts",
-		"seed": "vite-node src/lib/server/seed.ts",
 		"preview": "vite preview",
 		"dev": "vite dev",
 		"build": "vite build",
@@ -13,6 +11,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"seed": "vite-node /src/seed.ts",
+		"seed:test": "vite-node /src/seedTest.ts",
+		"unseed:test": "vite-node /src/unseedTest.ts",
 		"test:e2e": "playwright test",
 		"test": "npm run test:unit -- --run && npm run test:e2e"
 	},
