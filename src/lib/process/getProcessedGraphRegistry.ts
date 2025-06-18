@@ -5,6 +5,7 @@ import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
 import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
+import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
 
 export function getProcessedGraphRegistry(
 	graphRegistry: GraphRegistry,
@@ -16,6 +17,7 @@ export function getProcessedGraphRegistry(
 
 	internalizeModules(graphRegistry, externalModulesData);
 	removeConnectionsToMissingNodes(graphRegistry);
+	replaceAudioInputNodes(graphRegistry);
 	addImplicitNodes(graphRegistry);
 	addControlNodes(graphRegistry);
 	return graphRegistry;
