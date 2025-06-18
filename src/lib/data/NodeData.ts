@@ -1,3 +1,4 @@
+import type { AudioInputNodeData } from './variants/AudioInputNodeData';
 import type { ConstantNodeData } from './variants/ConstantNodeData';
 import type { ControlNodeData } from './variants/ControlNodeData';
 import type { InputNodeData } from './variants/InputNodeData';
@@ -15,4 +16,5 @@ export type NodeData =
 	| ControlNodeData
 	| TriangleNodeData
 	| ConstantNodeData
+	| AudioInputNodeData
 	| ModuleVoicesNodeData;

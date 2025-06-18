@@ -33,6 +33,7 @@ export const NodeSchema = z.union([
 	NodeBaseSchema('ModuleVoicesNode', [], ModuleVoicesNodeExtrasSchema),
 	NodeBaseSchema('OutputNode', ['input'], OutputNodeExtrasSchema),
 	NodeBaseSchema('InputNode', [], InputNodeExtrasSchema),
+	NodeBaseSchema('AudioInputNode', [], z.object({})),
 	NodeBaseSchema('SineWaveNode', ['phase'], z.object({})),
 	NodeBaseSchema('SawtoothWaveNode', ['phase'], z.object({})),
 	NodeBaseSchema('TriangleWaveNode', ['phase'], z.object({})),

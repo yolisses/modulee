@@ -155,6 +155,12 @@ export const nodeDefinitions: NodeDefinition[] = [
 		name: 'InputNode',
 	},
 	{
+		category: 'module',
+		defaultExtras: {},
+		inputs: [],
+		name: 'AudioInputNode',
+	},
+	{
 		category: 'wave',
 		defaultExtras: {},
 		inputs: [{ default: 0, isBoolean: false, key: 'phase', max: 1, min: 0 }],
