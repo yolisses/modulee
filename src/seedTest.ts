@@ -26,7 +26,7 @@ async function createUser() {
 			name,
 			username,
 			isGuest: false,
-			isSeeded: true,
+			isForDevTesting: true,
 			bio: faker.person.bio(),
 			email: faker.internet.email({ firstName, lastName }),
 		},
@@ -80,8 +80,8 @@ function getRandomItem<T>(items: T[]) {
 }
 
 export async function main() {
-	await prisma.externalModule.deleteMany({ where: { isSeeded: true } });
-	await prisma.user.deleteMany({ where: { isSeeded: true } });
+	await prisma.externalModule.deleteMany({ where: { isForDevTesting: true } });
+	await prisma.user.deleteMany({ where: { isForDevTesting: true } });
 
 	const users = await Promise.all(range(10).map(() => createUser()));
 	const userIds = users.map((user) => user.id);
