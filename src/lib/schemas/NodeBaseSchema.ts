@@ -8,10 +8,10 @@ export function NodeBaseSchema<T extends string, I extends string[], E extends z
 ) {
 	return z.object({
 		extras,
-		id: z.uuid(),
+		id: z.uuidv4(),
 		type: z.literal(type),
 		position: VectorSchema,
-		internalModuleId: z.uuid(),
+		internalModuleId: z.uuidv4(),
 		unconnectedInputValues: z.record(z.enum(inputNames), z.number()),
 	});
 }
