@@ -3,21 +3,12 @@ import { createId } from '$lib/data/createId';
 import type { GraphData } from '$lib/data/GraphData';
 import type { InternalModuleData } from '$lib/data/InternalModuleData';
 import type { NodeData } from '$lib/data/NodeData';
-import type { VectorData } from '$lib/data/VectorData';
 import { createNodeData } from '$lib/node/add/createNodeData';
 import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
 import { faker } from '@faker-js/faker';
-import { getRandomInt } from './getRandomInt';
+import { createFakePosition } from './createFakePosition';
 import { getRandomItem } from './getRandomItem';
 import { randomRange } from './randomRange';
-
-function createFakePosition(): VectorData {
-	const value = 10;
-	return {
-		x: getRandomInt(-value, value),
-		y: getRandomInt(-value, value),
-	};
-}
 
 export function createFakeEffectGraph(): GraphData {
 	const internalModulesData: InternalModuleData[] = randomRange(1, 3).map(() => {
