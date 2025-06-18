@@ -1,13 +1,8 @@
-import { createId } from '$lib/data/createId';
 import type { GraphData } from '$lib/data/GraphData';
+import type { ModuleType } from '../../generated/prisma/enums';
+import { createFakeEffectGraph } from './createFakeEffectGraph';
 
-export function createFakeGraph(): GraphData {
-	const mainInternalModuleId = createId();
-	return {
-		nodes: [],
-		connections: [],
-		mainInternalModuleId,
-		externalModuleReferences: [],
-		internalModules: [{ name: 'Main module', id: mainInternalModuleId }],
-	};
+export function createFakeGraph(moduleType: ModuleType): GraphData {
+	// TODO create instrument and utility options
+	return createFakeEffectGraph();
 }

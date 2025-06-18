@@ -1,7 +1,7 @@
 import prisma from '$lib/prisma';
-import { range } from '../../range';
 import { createFakeExternalModule } from './createFakeExternalModule';
 import { createFakeUser } from './createFakeUser';
+import { range } from './range';
 
 export async function main() {
 	await prisma.externalModule.deleteMany({ where: { isForDevTesting: true } });
