@@ -6,7 +6,7 @@ import { NodeSchema } from './NodeSchema';
 
 export const GraphSchema = z.object({
 	nodes: z.array(NodeSchema),
-	mainInternalModuleId: z.string(),
+	mainInternalModuleId: z.uuid(),
 	connections: z.array(ConnectionSchema),
 	internalModules: z.array(InternalModuleSchema),
 	externalModuleReferences: z.array(ExternalModuleReferenceSchema),

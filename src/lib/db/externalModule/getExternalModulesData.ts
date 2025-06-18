@@ -14,8 +14,8 @@ const sortEnum = z.enum(['createdAt', 'likeCount']);
 const schema = z.object({
 	sort: sortEnum.optional(),
 	text: z.string().optional(),
+	userId: z.uuid().optional(),
 	usedIn: z.string().optional(),
-	userId: z.string().optional(),
 	cursor: z.string().optional(),
 	likedBy: z.string().optional(),
 	moduleType: ModuleTypeSchema.optional(),

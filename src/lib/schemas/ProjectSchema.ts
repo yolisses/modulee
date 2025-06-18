@@ -3,10 +3,10 @@ import { ModuleTypeSchema } from '../db/externalModule/ModuleTypeSchema';
 import { GraphSchema } from './GraphSchema';
 
 export const ProjectSchema = z.object({
-	id: z.string(),
+	id: z.uuid(),
 	name: z.string(),
 	graph: GraphSchema,
-	userId: z.string(),
+	userId: z.uuidv4(),
 	createdAt: z.string(),
 	updatedAt: z.string(),
 	moduleType: ModuleTypeSchema,

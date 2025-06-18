@@ -1,6 +1,6 @@
 import z from 'zod/v4';
 
 export const InternalModuleSchema = z.object({
-	id: z.string(),
+	id: z.uuid(),
 	name: z.string(),
 });

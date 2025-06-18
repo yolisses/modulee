@@ -1,6 +1,6 @@
 import z from 'zod/v4';
 
 export const ExternalModuleReferenceSchema = z.object({
-	id: z.string(),
+	id: z.uuid(),
 	type: z.literal('external'),
 });
