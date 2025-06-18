@@ -56,10 +56,14 @@ export class GraphSizer {
 						.subtract(this.minPosition)
 						.multiplyByNumber(this.zoomContext.zoom)
 						.negate();
-					this.scrollArea.scrollBy({
-						top: difference.y,
+
+					// Without this 1 px change, the node and connectors
+					// position is not updated correctly when the aditional
+					// space is added to the left and top. It's a quick and
+					// dirty solution. TODO find a better one
+					this.scrollArea?.scrollBy({
+						top: difference.y - 1,
 						left: difference.x,
-						behavior: 'instant',
 					});
 				}
 				this.minPosition = newMinPosition;
