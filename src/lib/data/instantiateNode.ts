@@ -1,3 +1,4 @@
+import { AudioInputNode } from './AudioInputNode.svelte';
 import { ConstantNode } from './ConstantNode.svelte';
 import { InputNode } from './InputNode.svelte';
 import { ModuleNode } from './ModuleNode.svelte';
@@ -11,6 +12,8 @@ export function instantiateNode(nodeData: NodeData) {
 		return new ConstantNode(nodeData);
 	} else if (nodeData.type === 'InputNode') {
 		return new InputNode(nodeData);
+	} else if (nodeData.type === 'AudioInputNode') {
+		return new AudioInputNode(nodeData);
 	} else {
 		return new Node(nodeData);
 	}

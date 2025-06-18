@@ -1,4 +1,5 @@
 import type { ById } from '$lib/editor/ById';
+import { AudioInputNode } from './AudioInputNode.svelte';
 import { InputNode } from './InputNode.svelte';
 import type { Module } from './Module';
 import { ModuleNodeInput } from './ModuleNodeInput';
@@ -25,7 +26,7 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 	getInputNodes() {
 		if (!this.targetModule) return [];
 		return this.targetModule.nodes.filter((node) => {
-			return node instanceof InputNode;
+			return node instanceof InputNode || node instanceof AudioInputNode;
 		});
 	}
 
@@ -33,6 +34,7 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 	updateInputs() {
 		this.inputs = [];
 		const inputNodes = this.getInputNodes();
+		console.log(inputNodes);
 		inputNodes.forEach((inputNode) => {
 			const input = new ModuleNodeInput(this, inputNode);
 			this.inputs.push(input);
