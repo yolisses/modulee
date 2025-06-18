@@ -12,8 +12,8 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"seed": "vite-node /src/seed.ts",
-		"seed:test": "vite-node /src/seedTest.ts",
-		"unseed:test": "vite-node /src/unseedTest.ts",
+		"seed:dev": "vite-node /src/seedTest.ts",
+		"unseed:dev": "vite-node /src/unseedTest.ts",
 		"test:e2e": "playwright test",
 		"test": "npm run test:unit -- --run && npm run test:e2e"
 	},
