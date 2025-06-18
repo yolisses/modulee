@@ -4,9 +4,8 @@ import { PrismaClient } from '../generated/prisma';
 const prisma = new PrismaClient({
 	datasourceUrl: DATABASE_URL,
 	omit: {
-		user: {
-			email: true,
-		},
+		externalModule: { isForDevTesting: true },
+		user: { email: true, isForDevTesting: true },
 	},
 });
 
