@@ -3,10 +3,8 @@ import type { GraphData } from '$lib/data/GraphData';
 import type { ModuleType } from '$lib/project/ModuleType';
 import { generateUniqueUsername } from '$lib/user/username/generateUniqueUsername';
 import { faker } from '@faker-js/faker';
-import { PrismaClient } from './generated/prisma';
 import { range } from './range';
-
-const prisma = new PrismaClient();
+import prisma from '$lib/prisma';
 
 async function getIsAvailable() {
 	return true;
