@@ -5,7 +5,7 @@ import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
 import { RemoveExternalModuleReferenceCommand } from './externalModule/RemoveExternalModuleReferenceCommand';
 import { SetExternalModuleReferenceCommand } from './externalModule/SetExternalModuleReferenceCommand';
-import { UseEffectExternalModule } from './externalModule/UseEffectExternalModule';
+import { UseEffect } from './externalModule/UseEffect';
 import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
@@ -33,7 +33,7 @@ export const editorCommandClasses = [
 	RemoveNodeCommand,
 	RemoveNodesCommand,
 	SetConnectionCommand,
-	UseEffectExternalModule,
+	UseEffect,
 	AddInternalModuleCommand,
 	RemoveInternalModuleCommand,
 	RenameInternalModuleCommand,

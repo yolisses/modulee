@@ -2,16 +2,14 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { UseEffectExternalModule } from './UseEffectExternalModule';
+import { UseEffect } from './UseEffect';
 
-test('UseEffectExternalModule', () => {
+test('UseEffect', () => {
 	const graphRegistry = {
 		internalModules: ById.fromItems([{ id: 'internalModule1' }]),
 	} as GraphRegistry;
 
-	const command = new UseEffectExternalModule(
-		mockCommandData({ internalModule: { id: 'internalModule2' } }),
-	);
+	const command = new UseEffect(mockCommandData({ internalModule: { id: 'internalModule2' } }));
 	command.execute(graphRegistry);
 
 	expect(graphRegistry.internalModules.values()).toEqual([

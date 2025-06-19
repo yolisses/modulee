@@ -7,7 +7,7 @@ import { AddNodeCommand } from '../node/AddNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetExternalModuleReferenceCommand } from './SetExternalModuleReferenceCommand';
 
-export class UseEffectExternalModule extends EditorCommand<{
+export class UseEffect extends EditorCommand<{
 	connectionId: string;
 	moduleNodeId: string;
 	outputNodeId: string;
@@ -15,7 +15,7 @@ export class UseEffectExternalModule extends EditorCommand<{
 	moduleNodePosition: VectorData;
 	externalModule: ExternalModuleData;
 }> {
-	static name = 'UseEffectExternalModule';
+	static name = 'UseEffect';
 	addNodeCommand!: AddNodeCommand;
 	setConnectionCommand!: SetConnectionCommand;
 	setExternalModuleReferenceCommand!: SetExternalModuleReferenceCommand;

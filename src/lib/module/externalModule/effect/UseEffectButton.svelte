@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UseEffectExternalModule } from '$lib/commands/externalModule/UseEffectExternalModule';
+	import { UseEffect } from '$lib/commands/externalModule/UseEffect';
 	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
@@ -33,10 +33,10 @@
 			.subtract(new Vector(NODE_ITEM_WIDTH, 0))
 			.getData();
 
-		const useEffectExternalModule = new UseEffectExternalModule({
+		const command = new UseEffect({
 			id: createId(),
 			createdAt: new Date().toJSON(),
-			type: 'UseEffectExternalModule',
+			type: 'UseEffect',
 			projectId: projectDataContext.projectData.id,
 			details: {
 				moduleNodePosition,
@@ -48,7 +48,7 @@
 			},
 		});
 
-		editorContext.editor.execute(useEffectExternalModule);
+		editorContext.editor.execute(command);
 
 		externalModulesDataContext.externalModulesData.push(effectData);
 	}
