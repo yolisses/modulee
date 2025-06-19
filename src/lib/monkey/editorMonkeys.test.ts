@@ -7,7 +7,7 @@ import { createMinimalGraphRegistry } from './createMinimalGraphRegistry';
 import { editorMonkeys } from './editorMonkeys';
 
 test('editorMonkeys', () => {
-	const iterations = 20;
+	const iterations = 100;
 	const graphRegistry = createMinimalGraphRegistry();
 
 	const editorData: EditorData = {
