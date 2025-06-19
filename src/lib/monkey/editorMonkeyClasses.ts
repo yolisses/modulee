@@ -11,6 +11,7 @@ import { RemoveNodeMonkey } from '$lib/commands/node/RemoveNodeMonkey';
 import { RemoveNodesMonkey } from '$lib/commands/node/RemoveNodesMonkey';
 import { SetConstantNodeValueMonkey } from '$lib/commands/node/SetConstantNodeValueMonkey';
 import { SetModuleNodeModuleReferenceMonkey } from '$lib/commands/node/SetModuleNodeModuleReferenceMonkey';
+import { SetUnconnectedInputValueMonkey } from '$lib/commands/node/SetUnconnectedInputValueMonkey';
 import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalModuleMonkey';
 import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
 
@@ -29,5 +30,6 @@ export const editorMonkeyClasses = [
 	RemoveInternalModuleMonkey,
 	RenameInternalModuleMonkey,
 	SetConstantNodeValueMonkey,
+	SetUnconnectedInputValueMonkey,
 	SetModuleNodeModuleReferenceMonkey,
 ];
