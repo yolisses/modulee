@@ -28,10 +28,11 @@ export class UseEffectCommand extends EditorCommand<{
 	externalModule: ExternalModuleData;
 }> {
 	static name = 'UseEffectCommand';
-	addNodeCommand!: AddNodeCommand;
-	moveNodeCommand!: MoveNodeCommand;
-	setConnectionCommand!: SetConnectionCommand;
-	setExternalModuleReferenceCommand!: SetExternalModuleReferenceCommand;
+
+	addExternalModuleReference!: SetExternalModuleReferenceCommand; // 1
+	moveOutputNode!: MoveNodeCommand; // 2
+	addModuleNode!: AddNodeCommand; // 3
+	connectToOutputNode!: SetConnectionCommand; // 5
 
 	execute(graphRegistry: GraphRegistry): void {
 		const {
@@ -44,7 +45,7 @@ export class UseEffectCommand extends EditorCommand<{
 		} = this.details;
 
 		// 1. Add the external module reference if not present.
-		this.setExternalModuleReferenceCommand = new SetExternalModuleReferenceCommand(
+		this.addExternalModuleReference = new SetExternalModuleReferenceCommand(
 			mockCommandData({
 				externalModuleReference: {
 					type: 'external',
@@ -52,19 +53,19 @@ export class UseEffectCommand extends EditorCommand<{
 				},
 			}),
 		);
-		this.setExternalModuleReferenceCommand.execute(graphRegistry);
+		this.addExternalModuleReference.execute(graphRegistry);
 
 		// 2. Move the output node to add space to the effect module node.
-		this.moveNodeCommand = new MoveNodeCommand(
+		this.moveOutputNode = new MoveNodeCommand(
 			mockCommandData({
 				nodeId: outputNodeId,
 				delta: { x: NODE_ITEM_WIDTH_PLUS_GAP, y: 0 },
 			}),
 		);
-		this.moveNodeCommand.execute(graphRegistry);
+		this.moveOutputNode.execute(graphRegistry);
 
 		// 3. Add the module node with the effect external module refference.
-		this.addNodeCommand = new AddNodeCommand(
+		this.addModuleNode = new AddNodeCommand(
 			mockCommandData({
 				node: {
 					id: moduleNodeId,
@@ -81,11 +82,11 @@ export class UseEffectCommand extends EditorCommand<{
 				},
 			}),
 		);
-		this.addNodeCommand.execute(graphRegistry);
+		this.addModuleNode.execute(graphRegistry);
 
 		// 4. Connect the audio input nodes from the effect module node to the
 		//    node connected to the output node input if exists.
-		this.setConnectionCommand = new SetConnectionCommand(
+		this.connectToOutputNode = new SetConnectionCommand(
 			mockCommandData({
 				connection: {
 					id: connectionId,
@@ -97,14 +98,14 @@ export class UseEffectCommand extends EditorCommand<{
 				},
 			}),
 		);
-		this.setConnectionCommand.execute(graphRegistry);
+		this.connectToOutputNode.execute(graphRegistry);
 
 		// 5. Connect the output node to the effect module node.
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		this.addNodeCommand.undo(graphRegistry);
-		this.setConnectionCommand.undo(graphRegistry);
-		this.setExternalModuleReferenceCommand.undo(graphRegistry);
+		this.addModuleNode.undo(graphRegistry);
+		this.connectToOutputNode.undo(graphRegistry);
+		this.addExternalModuleReference.undo(graphRegistry);
 	}
 }
