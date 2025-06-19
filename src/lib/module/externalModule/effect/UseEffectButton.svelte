@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { UseEffectCommand } from '$lib/commands/externalModule/UseEffectCommand';
-	import { createId } from '$lib/data/createId';
 	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { NODE_ITEM_WIDTH } from '$lib/node/NODE_ITEM_WIDTH';
+	import { NotImplementedError } from '$lib/NotImplementedError';
 	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
@@ -33,20 +32,21 @@
 			.subtract(new Vector(NODE_ITEM_WIDTH, 0))
 			.getData();
 
-		const command = new UseEffectCommand({
-			id: createId(),
-			createdAt: new Date().toJSON(),
-			type: 'UseEffectCommand',
-			projectId: projectDataContext.projectData.id,
-			details: {
-				moduleNodePosition,
-				connectionId: createId(),
-				moduleNodeId: createId(),
-				outputNodeId: outputNode.id,
-				externalModule: effectData,
-				internalModuleId: internalModuleIdContext.internalModuleId,
-			},
-		});
+		throw new NotImplementedError();
+		// const command = new UseEffectCommand({
+		// 	id: createId(),
+		// 	createdAt: new Date().toJSON(),
+		// 	type: 'UseEffectCommand',
+		// 	projectId: projectDataContext.projectData.id,
+		// 	details: {
+		// 		moduleNodePosition,
+		// 		connectionId: createId(),
+		// 		moduleNodeId: createId(),
+		// 		outputNodeId: outputNode.id,
+		// 		externalModule: effectData,
+		// 		internalModuleId: internalModuleIdContext.internalModuleId,
+		// 	},
+		// });
 
 		editorContext.editor.execute(command);
 
