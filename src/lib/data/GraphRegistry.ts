@@ -1,4 +1,5 @@
 import type { ById } from '$lib/editor/ById';
+import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import type { ConnectionData } from './ConnectionData';
 import type { ExternalModuleReference } from './ExternalModuleReference';
 import type { InternalModuleData } from './InternalModuleData';
@@ -10,5 +11,6 @@ export type GraphRegistry = {
 	mainInternalModuleId: string;
 	connections: ById<ConnectionData>;
 	internalModules: ById<InternalModuleData>;
+	externalModules: ById<ExternalModuleData>;
 	externalModuleReferences: ById<ExternalModuleReference>;
 };
