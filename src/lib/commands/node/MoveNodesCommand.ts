@@ -1,7 +1,8 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { VectorData } from '$lib/data/VectorData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
-import { MoveNodeCommand, type MoveNodeCommandData } from './MoveNodeCommand';
+import { mockCommandData } from '../test/mockNodeData';
+import { MoveNodeCommand } from './MoveNodeCommand';
 
 export class MoveNodesCommand extends EditorCommand<{
 	nodeIds: string[];
@@ -11,10 +12,12 @@ export class MoveNodesCommand extends EditorCommand<{
 
 	execute(graphRegistry: GraphRegistry): void {
 		this.commands = this.details.nodeIds.map((nodeId) => {
-			return new MoveNodeCommand({
-				type: 'MoveNodeCommand',
-				details: { nodeId, delta: this.details.delta },
-			} as MoveNodeCommandData);
+			return new MoveNodeCommand(
+				mockCommandData({
+					nodeId,
+					delta: this.details.delta,
+				}),
+			);
 		});
 		this.commands.forEach((command) => {
 			command.execute(graphRegistry);
