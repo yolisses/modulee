@@ -20,9 +20,9 @@ test('editorMonkeys', () => {
 	range(iterations).forEach(() => {
 		const MonkeyClass = getRandomItem(editorMonkeys);
 		const monkey = new MonkeyClass();
-		const canBeUsed = monkey.getCanBeUsed(graphRegistry);
+		const canBeUsed = monkey.getCanBeUsed(graphRegistry, editorData);
 		if (!canBeUsed) return;
-		const command = monkey.createCommand(graphRegistry);
+		const command = monkey.createCommand(graphRegistry, editorData);
 		command.execute(graphRegistry, editorData);
 		commands.push(command);
 		versions.push(structuredClone(graphRegistry));
