@@ -4,6 +4,9 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
+/**
+ * Removes all the connections to one input path
+ */
 export class DisconnectCommand extends EditorCommand<{
 	inputPath: InputPath;
 }> {
