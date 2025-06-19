@@ -9,7 +9,7 @@ import { RemoveNodeMonkey } from '$lib/commands/node/RemoveNodeMonkey';
 import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalModuleMonkey';
 import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
 
-export const editorMonkeys = [
+export const editorMonkeyClasses = [
 	RedoMonkey,
 	UndoMonkey,
 	AddNodeMonkey,

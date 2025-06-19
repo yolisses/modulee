@@ -4,7 +4,7 @@ import { getRandomItem } from '$lib/fake/getRandomItem';
 import { range } from '$lib/fake/range';
 import { expect, test } from 'vitest';
 import { createMinimalGraphRegistry } from './createMinimalGraphRegistry';
-import { editorMonkeys } from './editorMonkeys';
+import { editorMonkeyClasses } from './editorMonkeyClasses';
 
 test('editorMonkeys', () => {
 	const iterations = 100;
@@ -18,7 +18,7 @@ test('editorMonkeys', () => {
 	const commands: EditorCommand[] = [];
 	const versions = [structuredClone(graphRegistry)];
 	range(iterations).forEach(() => {
-		const MonkeyClass = getRandomItem(editorMonkeys);
+		const MonkeyClass = getRandomItem(editorMonkeyClasses);
 		const monkey = new MonkeyClass();
 		const canBeUsed = monkey.getCanBeUsed(graphRegistry, editorData);
 		if (!canBeUsed) return;
