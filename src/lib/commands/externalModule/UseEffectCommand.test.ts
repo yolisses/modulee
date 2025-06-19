@@ -1,10 +1,10 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { UseEffect } from './UseEffect';
+import { UseEffectCommand } from './UseEffectCommand';
 
-test('UseEffect', () => {
+test('UseEffectCommand', () => {
 	const graphRegistry = {} as GraphRegistry;
 
-	const command = mockCommandData<UseEffect>({});
+	const command = mockCommandData<UseEffectCommand>({});
 });

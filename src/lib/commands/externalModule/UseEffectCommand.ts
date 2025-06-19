@@ -17,7 +17,7 @@ import { SetExternalModuleReferenceCommand } from './SetExternalModuleReferenceC
  *    connected to the output node input if exists.
  * 5. Connect the output node to the effect module node.
  */
-export class UseEffect extends EditorCommand<{
+export class UseEffectCommand extends EditorCommand<{
 	connectionId: string;
 	moduleNodeId: string;
 	outputNodeId: string;
@@ -25,7 +25,7 @@ export class UseEffect extends EditorCommand<{
 	moduleNodePosition: VectorData;
 	externalModule: ExternalModuleData;
 }> {
-	static name = 'UseEffect';
+	static name = 'UseEffectCommand';
 	addNodeCommand!: AddNodeCommand;
 	setConnectionCommand!: SetConnectionCommand;
 	setExternalModuleReferenceCommand!: SetExternalModuleReferenceCommand;
