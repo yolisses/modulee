@@ -1,4 +1,4 @@
 import { AddNodeMonkey } from './AddNodeMonkey';
 import { RemoveNodeMonkey } from './RemoveNodeMonkey';
 
-const editorMonkeys = [AddNodeMonkey, RemoveNodeMonkey];
+export const editorMonkeys = [AddNodeMonkey, RemoveNodeMonkey];
