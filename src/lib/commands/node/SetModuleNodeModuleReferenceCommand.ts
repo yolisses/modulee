@@ -4,7 +4,7 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 
 export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 	moduleNodeId: string;
-	moduleReference: ModuleReference;
+	moduleReference?: ModuleReference;
 }> {
 	static name = 'SetModuleNodeModuleReferenceCommand';
 
