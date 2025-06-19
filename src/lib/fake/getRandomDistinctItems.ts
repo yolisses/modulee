@@ -1,6 +1,6 @@
 export function getRandomDistinctItems<T>(items: T[], count: number) {
-	if (count >= items.length) {
-		throw new Error('Count must be less than the number of items');
+	if (count > items.length) {
+		throw new Error('Count cannot be greater than the number of items.');
 	}
 
 	const result: T[] = [];

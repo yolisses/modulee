@@ -4,7 +4,7 @@ import type { NodeData } from '$lib/data/NodeData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 
 /**
- * Requires new nodes and connections data, with new ids already set
+ * Requires new node and connection data, with new IDs already set.
  */
 export class PasteNodesCommand extends EditorCommand<{
 	nodes: NodeData[];
