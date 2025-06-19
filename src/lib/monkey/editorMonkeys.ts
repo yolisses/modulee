@@ -1,3 +1,4 @@
+import { DisconnectMonkey } from '$lib/commands/connection/DisconnectMonkey';
 import { SetConnectionMonkey } from '$lib/commands/connection/SetConnectionMonkey';
 import { AddNodeMonkey } from '$lib/commands/node/AddNodeMonkey';
 import { RemoveNodeMonkey } from '$lib/commands/node/RemoveNodeMonkey';
@@ -6,6 +7,7 @@ import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInt
 
 export const editorMonkeys = [
 	AddNodeMonkey,
+	DisconnectMonkey,
 	RemoveNodeMonkey,
 	SetConnectionMonkey,
 	AddInternalModuleMonkey,
