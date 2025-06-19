@@ -5,6 +5,7 @@ import { UndoMonkey } from '$lib/commands/editor/UndoMonkey';
 import { RenameInternalModuleMonkey } from '$lib/commands/internalModule/RenameInternalModuleMonkey';
 import { AddNodeMonkey } from '$lib/commands/node/AddNodeMonkey';
 import { MoveNodeMonkey } from '$lib/commands/node/MoveNodeMonkey';
+import { MoveNodesMonkey } from '$lib/commands/node/MoveNodesMonkey';
 import { RemoveNodeMonkey } from '$lib/commands/node/RemoveNodeMonkey';
 import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalModuleMonkey';
 import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
@@ -14,6 +15,7 @@ export const editorMonkeyClasses = [
 	UndoMonkey,
 	AddNodeMonkey,
 	MoveNodeMonkey,
+	MoveNodesMonkey,
 	DisconnectMonkey,
 	RemoveNodeMonkey,
 	SetConnectionMonkey,
