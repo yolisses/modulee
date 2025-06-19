@@ -1,9 +1,9 @@
 import { AddInternalModuleCommand } from '$lib/commands/internalModule/AddInternalModuleCommand';
 import { createId } from '$lib/data/createId';
 import type { EditorCommand } from '$lib/editor/EditorCommand';
+import { EditorMonkey } from '$lib/monkey/EditorMonkey';
+import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { faker } from '@faker-js/faker';
-import { EditorMonkey } from '../../monkey/EditorMonkey';
-import { FAKE_PROJECT_ID } from '../../monkey/FAKE_PROJECT_ID';
 
 export class AddInternalModuleMonkey extends EditorMonkey {
 	getCanBeUsed(): boolean {
