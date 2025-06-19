@@ -5,6 +5,9 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { DisconnectCommand } from './DisconnectCommand';
 
+/**
+ * Disconnect an input and add a given connection
+ */
 export class SetConnectionCommand extends EditorCommand<{
 	connection: ConnectionData;
 }> {
@@ -19,7 +22,7 @@ export class SetConnectionCommand extends EditorCommand<{
 			mockCommandData({ inputPath: connection.inputPath }),
 		);
 		this.disconnectCommand.execute(graphRegistry);
-		graphRegistry.connections.set(this.details.connection);
+		graphRegistry.connections.add(this.details.connection);
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
