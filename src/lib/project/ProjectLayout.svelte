@@ -54,7 +54,7 @@
 	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
 
 	const graphRegistryContext = $state({
-		graphRegistry: getGraphRegistry(projectDataContext.projectData.graph),
+		graphRegistry: getGraphRegistry(projectDataContext.projectData.graph, externalModulesData),
 	});
 	setGraphRegistryContext(graphRegistryContext);
 

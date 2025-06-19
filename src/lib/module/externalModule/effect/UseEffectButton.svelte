@@ -48,9 +48,9 @@
 		// 	},
 		// });
 
-		editorContext.editor.execute(command);
+		// editorContext.editor.execute(command);
 
-		externalModulesDataContext.externalModulesData.push(effectData);
+		// externalModulesDataContext.externalModulesData.push(effectData);
 	}
 </script>
 
