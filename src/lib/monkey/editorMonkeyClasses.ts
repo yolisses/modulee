@@ -9,6 +9,7 @@ import { MoveNodesMonkey } from '$lib/commands/node/MoveNodesMonkey';
 import { PasteNodesMonkey } from '$lib/commands/node/PasteNodesMonkey';
 import { RemoveNodeMonkey } from '$lib/commands/node/RemoveNodeMonkey';
 import { RemoveNodesMonkey } from '$lib/commands/node/RemoveNodesMonkey';
+import { SetConstantNodeValueMonkey } from '$lib/commands/node/SetConstantNodeValueMonkey';
 import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalModuleMonkey';
 import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
 
@@ -26,4 +27,5 @@ export const editorMonkeyClasses = [
 	AddInternalModuleMonkey,
 	RemoveInternalModuleMonkey,
 	RenameInternalModuleMonkey,
+	SetConstantNodeValueMonkey,
 ];
