@@ -33,5 +33,5 @@
 	{:else}
 		<Fa fw icon={faUpload} />
 	{/if}
-	Publish as an external module
+	Publish as external module
 </button>
