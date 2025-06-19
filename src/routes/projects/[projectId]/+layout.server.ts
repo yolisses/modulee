@@ -1,3 +1,4 @@
+import { getExternalModuleIdsFromProject } from '$lib/db/externalModule/getExternalModuleIdsFromProject';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import prisma from '$lib/prisma';
 import type { ProjectData } from '$lib/project/ProjectData';
@@ -13,18 +14,10 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		error(404, { message: 'Project not found' });
 	}
 
+	// TODO get external modules from external modules recursively
 	const externalModulesData = (await prisma.externalModule.findMany({
-		where: {
-			id: {
-				in: project.graph.externalModuleReferences.map((externalModuleReference) => {
-					return externalModuleReference.id;
-				}),
-			},
-		},
+		where: { id: { in: getExternalModuleIdsFromProject(project) } },
 	})) as unknown as ExternalModuleData[];
 
-	return {
-		externalModulesData,
-		projectData: project,
-	};
+	return { externalModulesData, projectData: project };
 };
