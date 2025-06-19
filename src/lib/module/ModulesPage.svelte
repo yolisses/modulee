@@ -8,7 +8,6 @@
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import ExternalModuleDotsMenuButton from './externalModule/ExternalModuleDotsMenuButton.svelte';
 	import InternalModuleDotsMenuButton from './internalModule/InternalModuleDotsMenuButton.svelte';
 
 	const graphContext = getGraphContext();
@@ -53,11 +52,7 @@
 				{getName}
 				getHref={getHrefExternal}
 				items={graphContext.graph.externalModules.values()}
-			>
-				{#snippet buttons({ item })}
-					<ExternalModuleDotsMenuButton externalModule={item} />
-				{/snippet}
-			</BasicList>
+			></BasicList>
 			{#if graphContext.graph.externalModules.values().length === 0}
 				<div class="p-2 italic opacity-50">Nothing to show</div>
 			{/if}

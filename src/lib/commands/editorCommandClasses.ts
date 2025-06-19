@@ -3,8 +3,6 @@ import { DisconnectCommand } from './connection/DisconnectCommand';
 import { SetConnectionCommand } from './connection/SetConnectionCommand';
 import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
-import { RemoveExternalModuleReferenceCommand } from './externalModule/RemoveExternalModuleReferenceCommand';
-import { SetExternalModuleReferenceCommand } from './externalModule/SetExternalModuleReferenceCommand';
 import { UseEffectCommand } from './externalModule/UseEffectCommand';
 import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
@@ -27,20 +25,18 @@ export const editorCommandClasses = [
 	AddNodeCommand,
 	MoveNodeCommand,
 	MoveNodesCommand,
+	UseEffectCommand,
 	DisconnectCommand,
 	PasteNodesCommand,
 	GroupNodesCommand,
 	RemoveNodeCommand,
 	RemoveNodesCommand,
 	SetConnectionCommand,
-	UseEffectCommand,
 	AddInternalModuleCommand,
 	RemoveInternalModuleCommand,
 	RenameInternalModuleCommand,
 	SetConstantNodeValueCommand,
 	UpdateInputNodeExtrasCommand,
 	SetUnconnectedInputValueCommand,
-	SetExternalModuleReferenceCommand,
 	SetModuleNodeModuleReferenceCommand,
-	RemoveExternalModuleReferenceCommand,
 ] as EditorCommandClass[];
