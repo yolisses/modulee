@@ -5,8 +5,8 @@ import { getRandomInt } from '$lib/fake/getRandomInt';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { getId } from '$lib/ui/getId';
+import { setNewId } from '../../data/setNewId';
 import { PasteNodesCommand } from './PasteNodesCommand';
-import { setNewId } from './setNewId';
 
 export class PasteNodesMonkey extends EditorMonkey {
 	getCanBeUsed(graphRegistry: GraphRegistry): boolean {
