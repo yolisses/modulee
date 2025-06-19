@@ -1,11 +1,12 @@
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
 import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
-import { NotImplementedError } from '$lib/NotImplementedError';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
+import { getSomeModuleNodeDataInputKeys } from './getSomeModuleNodeDataInputKeys';
 
-export function getNodeDataInputKeys(nodeData: NodeData) {
+export function getNodeDataInputKeys(nodeData: NodeData, graphRegistry: GraphRegistry): string[] {
 	if (getIsSomeModuleNodeData(nodeData)) {
-		throw new NotImplementedError();
+		return getSomeModuleNodeDataInputKeys(nodeData, graphRegistry);
 	}
 
 	const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {

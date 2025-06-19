@@ -10,7 +10,7 @@ import { SetConnectionCommand } from './SetConnectionCommand';
 export class SetConnectionMonkey extends EditorMonkey {
 	getValidNodes(graphRegistry: GraphRegistry) {
 		return graphRegistry.nodes.values().filter((nodeData) => {
-			return getNodeDataInputKeys(nodeData).length > 0;
+			return getNodeDataInputKeys(nodeData, graphRegistry).length > 0;
 		});
 	}
 
@@ -27,7 +27,7 @@ export class SetConnectionMonkey extends EditorMonkey {
 					id: createId(),
 					inputPath: {
 						nodeId: node1.id,
-						inputKey: getRandomItem(getNodeDataInputKeys(node1)),
+						inputKey: getRandomItem(getNodeDataInputKeys(node1, graphRegistry)),
 					},
 					targetNodeId: node2.id,
 				},
