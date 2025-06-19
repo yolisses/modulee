@@ -2,8 +2,8 @@ import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/Remove
 import { createId } from '$lib/data/createId';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { getRandomItem } from '$lib/fake/getRandomItem';
-import { EditorMonkey } from './EditorMonkey';
-import { FAKE_PROJECT_ID } from './FAKE_PROJECT_ID';
+import { EditorMonkey } from '../../monkey/EditorMonkey';
+import { FAKE_PROJECT_ID } from '../../monkey/FAKE_PROJECT_ID';
 
 export class RemoveInternalModuleMonkey extends EditorMonkey {
 	getCanBeUsed(graphRegistry: GraphRegistry): boolean {

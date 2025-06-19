@@ -1,6 +1,6 @@
-import { AddInternalModuleMonkey } from './AddInternalModuleMonkey';
+import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalModuleMonkey';
+import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
 import { AddNodeMonkey } from './AddNodeMonkey';
-import { RemoveInternalModuleMonkey } from './RemoveInternalModuleMonkey';
 import { RemoveNodeMonkey } from './RemoveNodeMonkey';
 
 export const editorMonkeys = [
