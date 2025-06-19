@@ -1,10 +1,10 @@
 import type { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
+import { getRandomItem } from '$lib/fake/getRandomItem';
 import { range } from '$lib/fake/range';
 import { expect, test } from 'vitest';
 import { createMinimalGraphRegistry } from './createMinimalGraphRegistry';
 import { editorMonkeys } from './editorMonkeys';
-import { getRandomItem } from '$lib/fake/getRandomItem';
 
 test('editorMonkeys', () => {
 	const iterations = 20;
@@ -17,17 +17,13 @@ test('editorMonkeys', () => {
 
 	const commands: EditorCommand[] = [];
 	const versions = [structuredClone(graphRegistry)];
-	range(iterations).forEach((iteration) => {
-		console.info();
-		console.info('Iteration', iteration);
+	range(iterations).forEach(() => {
 		const MonkeyClass = getRandomItem(editorMonkeys);
-		console.info('MonkeyClass', MonkeyClass);
 		const monkey = new MonkeyClass();
 		const canBeUsed = monkey.getCanBeUsed(graphRegistry);
-		console.info('canBeUsed', canBeUsed);
 		if (!canBeUsed) return;
 		const command = monkey.createCommand(graphRegistry);
-		command.execute(graphRegistry);
+		command.execute(graphRegistry, editorData);
 		commands.push(command);
 		versions.push(structuredClone(graphRegistry));
 	});
