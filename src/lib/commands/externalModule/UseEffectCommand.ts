@@ -7,6 +7,7 @@ import { SetConnectionCommand } from '../connection/SetConnectionCommand';
 import { AddNodeCommand } from '../node/AddNodeCommand';
 import { MoveNodeCommand } from '../node/MoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
+import { ConnectAudioInputsCommand } from './ConnectAudioInputsCommand';
 import { SetExternalModuleReferenceCommand } from './SetExternalModuleReferenceCommand';
 
 /**
@@ -26,12 +27,14 @@ export class UseEffectCommand extends EditorCommand<{
 	internalModuleId: string;
 	moduleNodePosition: VectorData;
 	externalModule: ExternalModuleData;
+	audioInputConnectionIds: Record<string, string>;
 }> {
 	static name = 'UseEffectCommand';
 
 	addExternalModuleReference!: SetExternalModuleReferenceCommand; // 1
 	moveOutputNode!: MoveNodeCommand; // 2
 	addModuleNode!: AddNodeCommand; // 3
+	connectAudioInputs!: ConnectAudioInputsCommand; // 4
 	connectToOutputNode!: SetConnectionCommand; // 5
 
 	execute(graphRegistry: GraphRegistry): void {
@@ -42,6 +45,7 @@ export class UseEffectCommand extends EditorCommand<{
 			externalModule,
 			internalModuleId,
 			moduleNodePosition,
+			audioInputConnectionIds,
 		} = this.details;
 
 		// 1. Add the external module reference if not present.
@@ -86,6 +90,15 @@ export class UseEffectCommand extends EditorCommand<{
 
 		// 4. Connect the audio input nodes from the effect module node to the
 		//    node connected to the output node input if exists.
+		this.connectAudioInputs = new ConnectAudioInputsCommand(
+			mockCommandData({
+				moduleNodeId,
+				externalModuleData,
+				audioInputConnectionIds,
+			}),
+		);
+
+		// 5. Connect the output node to the effect module node.
 		this.connectToOutputNode = new SetConnectionCommand(
 			mockCommandData({
 				connection: {
@@ -99,8 +112,6 @@ export class UseEffectCommand extends EditorCommand<{
 			}),
 		);
 		this.connectToOutputNode.execute(graphRegistry);
-
-		// 5. Connect the output node to the effect module node.
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
