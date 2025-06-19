@@ -4,7 +4,7 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
 import type { VectorData } from '$lib/data/VectorData';
-import type { NodeDefinition } from '$lib/node/definitions/NodeDefinition';
+import { createNodeData } from '$lib/node/add/createNodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
@@ -21,21 +21,6 @@ function getIsSomeModuleNode(nodeData: NodeData) {
 	return nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode';
 }
 
-export function getNodeDataFromNodeDefinition(
-	nodeId: string,
-	nodeDefinition: NodeDefinition,
-	internalModuleId: string,
-	position: VectorData,
-): NodeData {
-	return {
-		position,
-		id: nodeId,
-		internalModuleId,
-		type: nodeDefinition.name,
-		extras: structuredClone(nodeDefinition.defaultExtras),
-	} as NodeData;
-}
-
 function getNodeDefinitionName(inputKey: string) {
 	return inputKey[0].toUpperCase() + inputKey.slice(1) + 'Node';
 }
@@ -45,14 +30,13 @@ export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData
 	const nodeDefinition = nodeDefinitionsByName[nodeDefinitionName];
 	if (!nodeDefinition) return;
 
-	const implicitNodeId = getImplicitNodeId(inputPath);
 	const positionData: VectorData = { x: 0, y: 0 };
-	const implicitNodeData: NodeData = getNodeDataFromNodeDefinition(
-		implicitNodeId,
+	const implicitNodeData: NodeData = createNodeData(
 		nodeDefinition,
 		nodeData.internalModuleId,
 		positionData,
 	);
+	implicitNodeData.id = getImplicitNodeId(inputPath);
 	return implicitNodeData;
 }
 
