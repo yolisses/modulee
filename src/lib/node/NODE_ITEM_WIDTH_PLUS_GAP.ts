@@ -1,0 +1,4 @@
+import { NODE_ITEM_GAP } from './NODE_ITEM_GAP';
+import { NODE_ITEM_WIDTH } from './NODE_ITEM_WIDTH';
+
+export const NODE_ITEM_WIDTH_PLUS_GAP = NODE_ITEM_WIDTH + NODE_ITEM_GAP;

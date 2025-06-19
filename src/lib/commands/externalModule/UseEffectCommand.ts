@@ -2,8 +2,10 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { VectorData } from '$lib/data/VectorData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
 import { SetConnectionCommand } from '../connection/SetConnectionCommand';
 import { AddNodeCommand } from '../node/AddNodeCommand';
+import { MoveNodeCommand } from '../node/MoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetExternalModuleReferenceCommand } from './SetExternalModuleReferenceCommand';
 
@@ -27,6 +29,7 @@ export class UseEffectCommand extends EditorCommand<{
 }> {
 	static name = 'UseEffectCommand';
 	addNodeCommand!: AddNodeCommand;
+	moveNodeCommand!: MoveNodeCommand;
 	setConnectionCommand!: SetConnectionCommand;
 	setExternalModuleReferenceCommand!: SetExternalModuleReferenceCommand;
 
@@ -52,6 +55,13 @@ export class UseEffectCommand extends EditorCommand<{
 		this.setExternalModuleReferenceCommand.execute(graphRegistry);
 
 		// 2. Move the output node to add space to the effect module node.
+		this.moveNodeCommand = new MoveNodeCommand(
+			mockCommandData({
+				nodeId: outputNodeId,
+				delta: { x: NODE_ITEM_WIDTH_PLUS_GAP, y: 0 },
+			}),
+		);
+		this.moveNodeCommand.execute(graphRegistry);
 
 		// 3. Add the module node with the effect external module refference.
 		this.addNodeCommand = new AddNodeCommand(
