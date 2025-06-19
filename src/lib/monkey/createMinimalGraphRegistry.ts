@@ -1,0 +1,20 @@
+import { createId } from '$lib/data/createId';
+import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { InternalModuleData } from '$lib/data/InternalModuleData';
+import { ById } from '$lib/editor/ById';
+
+export function createMinimalGraphRegistry(): GraphRegistry {
+	// By now, every graph needs a main internal module. It can be changed
+	// latter.
+	const mainInternalModule: InternalModuleData = { id: createId(), name: 'Main internal module' };
+	const internalModules = new ById<InternalModuleData>();
+	internalModules.add(mainInternalModule);
+
+	return {
+		internalModules,
+		nodes: new ById(),
+		connections: new ById(),
+		externalModuleReferences: new ById(),
+		mainInternalModuleId: mainInternalModule.id,
+	};
+}
