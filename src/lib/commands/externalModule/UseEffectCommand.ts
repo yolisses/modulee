@@ -3,6 +3,7 @@ import type { VectorData } from '$lib/data/VectorData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
+import { NotImplementedError } from '$lib/NotImplementedError';
 import { SetConnectionCommand } from '../connection/SetConnectionCommand';
 import { AddNodeCommand } from '../node/AddNodeCommand';
 import { MoveNodeCommand } from '../node/MoveNodeCommand';
@@ -90,13 +91,14 @@ export class UseEffectCommand extends EditorCommand<{
 
 		// 4. Connect the audio input nodes from the effect module node to the
 		//    node connected to the output node input if exists.
-		this.connectAudioInputs = new ConnectAudioInputsCommand(
-			mockCommandData({
-				moduleNodeId,
-				externalModuleData,
-				audioInputConnectionIds,
-			}),
-		);
+		throw new NotImplementedError();
+		// this.connectAudioInputs = new ConnectAudioInputsCommand(
+		// 	mockCommandData({
+		// 		moduleNodeId,
+		// 		externalModuleData,
+		// 		audioInputConnectionIds,
+		// 	}),
+		// );
 
 		// 5. Connect the output node to the effect module node.
 		this.connectToOutputNode = new SetConnectionCommand(

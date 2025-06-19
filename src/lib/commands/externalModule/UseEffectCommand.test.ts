@@ -1,10 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import { NotImplementedError } from '$lib/NotImplementedError';
 import { test } from 'vitest';
-import { mockCommandData } from '../test/mockNodeData';
-import { UseEffectCommand } from './UseEffectCommand';
 
 test('UseEffectCommand', () => {
-	const graphRegistry = {} as GraphRegistry;
-
-	const command = mockCommandData<UseEffectCommand>({});
+	throw new NotImplementedError();
 });
