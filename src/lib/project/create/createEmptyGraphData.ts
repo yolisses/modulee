@@ -7,7 +7,6 @@ export function createEmptyGraphData(): GraphData {
 	return {
 		nodes: [],
 		connections: [],
-		externalModuleReferences: [],
 		internalModules: [mainInternalModule],
 		mainInternalModuleId: mainInternalModule.id,
 	};

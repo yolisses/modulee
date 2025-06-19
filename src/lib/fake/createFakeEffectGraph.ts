@@ -75,7 +75,6 @@ export function createFakeEffectGraph(): GraphData {
 	return {
 		connections,
 		nodes: nodesData,
-		externalModuleReferences: [],
 		internalModules: internalModulesData,
 		mainInternalModuleId: mainInternalModule.id,
 	};

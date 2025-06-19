@@ -7,6 +7,5 @@ export function getGraphData(graphRegistry: GraphRegistry): GraphData {
 		connections: graphRegistry.connections.values(),
 		internalModules: graphRegistry.internalModules.values(),
 		mainInternalModuleId: graphRegistry.mainInternalModuleId,
-		externalModuleReferences: graphRegistry.externalModuleReferences.values(),
 	};
 }

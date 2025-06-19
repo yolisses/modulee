@@ -15,7 +15,6 @@ export function createMinimalGraphRegistry(): GraphRegistry {
 		nodes: new ById(),
 		connections: new ById(),
 		externalModules: new ById(),
-		externalModuleReferences: new ById(),
 		mainInternalModuleId: mainInternalModule.id,
 	};
 }

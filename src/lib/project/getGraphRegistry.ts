@@ -7,14 +7,12 @@ export function getGraphRegistry(
 	graphData: GraphData,
 	externalModulesData: ExternalModuleData[],
 ): GraphRegistry {
-	const { nodes, connections, internalModules, externalModuleReferences } =
-		structuredClone(graphData);
+	const { nodes, connections, internalModules } = structuredClone(graphData);
 	return {
 		nodes: ById.fromItems(nodes),
 		connections: ById.fromItems(connections),
 		internalModules: ById.fromItems(internalModules),
 		externalModules: ById.fromItems(externalModulesData),
 		mainInternalModuleId: graphData.mainInternalModuleId,
-		externalModuleReferences: ById.fromItems(externalModuleReferences),
 	};
 }
