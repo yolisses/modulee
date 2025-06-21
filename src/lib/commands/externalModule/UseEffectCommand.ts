@@ -82,7 +82,6 @@ export class UseEffectCommand extends EditorCommand<{
 			}),
 		);
 		this.connectAudioInputs.execute(graphRegistry);
-		return;
 
 		// 4. Connect the output node to the effect module node.
 		this.connectToOutputNode = new SetConnectionCommand(

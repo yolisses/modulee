@@ -4,6 +4,7 @@ import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModu
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { UseEffectCommand } from './UseEffectCommand';
+import type { ConnectionData } from '$lib/data/ConnectionData';
 
 test('UseEffectCommand', () => {
 	const graphRegistry = {
@@ -15,10 +16,10 @@ test('UseEffectCommand', () => {
 				internalModuleId: 'internalModuleId',
 			},
 		]),
-		connections: ById.fromItems([]),
+		connections: ById.fromItems<ConnectionData>([]),
 	} as GraphRegistry;
 
-	const externalModuleData: ExternalModuleData = {
+	const externalModuleData = {
 		id: 'externalModuleId',
 		graph: {
 			nodes: [
@@ -26,12 +27,13 @@ test('UseEffectCommand', () => {
 				{ id: 'audioInputNode2Id', type: 'AudioInputNode' },
 			],
 		},
-	};
+	} as ExternalModuleData;
 	const command = new UseEffectCommand(
 		mockCommandData({
 			outputNodeId: 'outputNodeId',
 			moduleNodeId: 'moduleNodeId',
 			externalModule: externalModuleData,
+			connectionId: 'outputAndModuleNodeConnectionId',
 			audioInputConnectionIds: {
 				audioInputNode1Id: 'audioInputNodeConnection1Id',
 				audioInputNode2Id: 'audioInputNodeConnection2Id',
@@ -55,6 +57,7 @@ test('UseEffectCommand', () => {
 	});
 
 	// 3. Connect the audio input nodes from the effect module node to the node
+	//    connected to the output node input if exists.
 	expect(graphRegistry.connections.get('audioInputNodeConnection1Id')).toEqual({
 		targetNodeId: 'outputNodeId',
 		id: 'audioInputNodeConnection1Id',
@@ -64,5 +67,12 @@ test('UseEffectCommand', () => {
 		targetNodeId: 'outputNodeId',
 		id: 'audioInputNodeConnection2Id',
 		inputPath: { nodeId: 'moduleNodeId', inputKey: 'audioInputNode2Id' },
+	});
+
+	// 4. Connect the output node to the effect module node.
+	expect(graphRegistry.connections.get('outputAndModuleNodeConnectionId')).toEqual({
+		targetNodeId: 'moduleNodeId',
+		id: 'outputAndModuleNodeConnectionId',
+		inputPath: { nodeId: 'outputNodeId', inputKey: 'input' },
 	});
 });
