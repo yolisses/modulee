@@ -22,15 +22,9 @@
 
 <div class="rounded border-1 border-white/10 p-2">
 	{moduleNode.targetModule?.name}
-	<div class="panel-grid grid gap-1">
+	<div>
 		{#each inputs as input}
 			<RackInputItem {input} />
 		{/each}
 	</div>
 </div>
-
-<style lang="postcss">
-	.panel-grid {
-		grid-template-columns: auto 8rem 2rem;
-	}
-</style>
