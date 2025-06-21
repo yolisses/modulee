@@ -100,7 +100,9 @@ export class UseEffectCommand extends EditorCommand<{
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		this.addModuleNode.undo(graphRegistry);
 		this.connectToOutputNode.undo(graphRegistry);
+		this.connectAudioInputs.undo(graphRegistry);
+		this.addModuleNode.undo(graphRegistry);
+		this.moveOutputNode.undo(graphRegistry);
 	}
 }

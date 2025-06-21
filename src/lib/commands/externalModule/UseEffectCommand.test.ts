@@ -1,10 +1,10 @@
+import type { ConnectionData } from '$lib/data/ConnectionData';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { UseEffectCommand } from './UseEffectCommand';
-import type { ConnectionData } from '$lib/data/ConnectionData';
 
 test('UseEffectCommand', () => {
 	const graphRegistry = {
@@ -75,4 +75,20 @@ test('UseEffectCommand', () => {
 		id: 'outputAndModuleNodeConnectionId',
 		inputPath: { nodeId: 'outputNodeId', inputKey: 'input' },
 	});
+
+	command.undo(graphRegistry);
+
+	// 1. Move the output node to add space to the effect module node.
+	expect(graphRegistry.nodes.get('outputNodeId').position).toEqual({ x: 0, y: 0 });
+
+	// 2. Add the module node with the effect external module refference.
+	expect(graphRegistry.nodes.containsId('moduleNodeId')).toBeFalsy();
+
+	// 3. Connect the audio input nodes from the effect module node to the node
+	//    connected to the output node input if exists.
+	expect(graphRegistry.connections.containsId('audioInputNodeConnection1Id')).toBeFalsy();
+	expect(graphRegistry.connections.containsId('audioInputNodeConnection2Id')).toBeFalsy();
+
+	// 4. Connect the output node to the effect module node.
+	expect(graphRegistry.connections.containsId('outputAndModuleNodeConnectionId')).toBeFalsy();
 });
