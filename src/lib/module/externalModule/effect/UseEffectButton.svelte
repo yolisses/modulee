@@ -11,6 +11,7 @@
 	import { getExternalModulesDataContext } from '../externalModulesDataContext';
 	import type { EffectData } from './EffectData';
 	import { getIsAudioInputNodeData } from './getIsAudioInputNodeData';
+	import { pushIfMissingById } from './pushIfMissingById';
 
 	interface Props {
 		effectData: EffectData;
@@ -50,7 +51,8 @@
 
 		editorContext.editor.execute(command);
 
-		externalModulesDataContext.externalModulesData.push(effectData);
+		pushIfMissingById(externalModulesDataContext.externalModulesData, effectData);
+
 		goto(baseRouteContext.baseRoute + '/rack');
 	}
 </script>
