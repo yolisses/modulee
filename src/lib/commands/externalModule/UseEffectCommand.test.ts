@@ -9,6 +9,7 @@ import { UseEffectCommand } from './UseEffectCommand';
 test('UseEffectCommand', () => {
 	const graphRegistry = {
 		nodes: ById.fromItems([
+			{ id: 'someNodeId' },
 			{
 				id: 'outputNodeId',
 				type: 'OutputNode',
@@ -16,7 +17,13 @@ test('UseEffectCommand', () => {
 				internalModuleId: 'internalModuleId',
 			},
 		]),
-		connections: ById.fromItems<ConnectionData>([]),
+		connections: ById.fromItems<ConnectionData>([
+			{
+				targetNodeId: 'someNodeId',
+				id: 'outputNodeInputConnectionId',
+				inputPath: { nodeId: 'outputNodeId', inputKey: 'input' },
+			},
+		]),
 	} as GraphRegistry;
 
 	const externalModuleData = {
@@ -59,12 +66,12 @@ test('UseEffectCommand', () => {
 	// 3. Connect the audio input nodes from the effect module node to the node
 	//    connected to the output node input if exists.
 	expect(graphRegistry.connections.get('audioInputNodeConnection1Id')).toEqual({
-		targetNodeId: 'outputNodeId',
+		targetNodeId: 'someNodeId',
 		id: 'audioInputNodeConnection1Id',
 		inputPath: { nodeId: 'moduleNodeId', inputKey: 'audioInputNode1Id' },
 	});
 	expect(graphRegistry.connections.get('audioInputNodeConnection2Id')).toEqual({
-		targetNodeId: 'outputNodeId',
+		targetNodeId: 'someNodeId',
 		id: 'audioInputNodeConnection2Id',
 		inputPath: { nodeId: 'moduleNodeId', inputKey: 'audioInputNode2Id' },
 	});

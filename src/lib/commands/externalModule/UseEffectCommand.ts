@@ -1,3 +1,4 @@
+import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
@@ -28,7 +29,7 @@ export class UseEffectCommand extends EditorCommand<{
 
 	moveOutputNode!: MoveNodeCommand; // 1
 	addModuleNode!: AddNodeCommand; // 2
-	connectAudioInputs!: ConnectAudioInputsCommand; // 3
+	connectAudioInputs?: ConnectAudioInputsCommand; // 3
 	connectToOutputNode!: SetConnectionCommand; // 4
 
 	execute(graphRegistry: GraphRegistry): void {
@@ -73,15 +74,23 @@ export class UseEffectCommand extends EditorCommand<{
 
 		// 3. Connect the audio input nodes from the effect module node to the
 		//    node connected to the output node input if exists.
-		this.connectAudioInputs = new ConnectAudioInputsCommand(
-			mockCommandData({
-				moduleNodeId,
-				externalModule,
-				audioInputConnectionIds,
-				targetNodeId: outputNodeId,
-			}),
-		);
-		this.connectAudioInputs.execute(graphRegistry);
+		const outputNodeInputConntection = graphRegistry.connections.values().find((connectionData) => {
+			return getAreInputPathsEqual(connectionData.inputPath, {
+				nodeId: outputNodeId,
+				inputKey: 'input',
+			});
+		});
+		if (outputNodeInputConntection) {
+			this.connectAudioInputs = new ConnectAudioInputsCommand(
+				mockCommandData({
+					moduleNodeId,
+					externalModule,
+					audioInputConnectionIds,
+					targetNodeId: outputNodeInputConntection.targetNodeId,
+				}),
+			);
+			this.connectAudioInputs.execute(graphRegistry);
+		}
 
 		// 4. Connect the output node to the effect module node.
 		this.connectToOutputNode = new SetConnectionCommand(
@@ -101,7 +110,7 @@ export class UseEffectCommand extends EditorCommand<{
 
 	undo(graphRegistry: GraphRegistry): void {
 		this.connectToOutputNode.undo(graphRegistry);
-		this.connectAudioInputs.undo(graphRegistry);
+		this.connectAudioInputs?.undo(graphRegistry);
 		this.addModuleNode.undo(graphRegistry);
 		this.moveOutputNode.undo(graphRegistry);
 	}
