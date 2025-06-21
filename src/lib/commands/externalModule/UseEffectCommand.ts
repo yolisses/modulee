@@ -1,9 +1,7 @@
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { VectorData } from '$lib/data/VectorData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
-import { NotImplementedError } from '$lib/NotImplementedError';
 import { SetConnectionCommand } from '../connection/SetConnectionCommand';
 import { AddNodeCommand } from '../node/AddNodeCommand';
 import { MoveNodeCommand } from '../node/MoveNodeCommand';
@@ -23,8 +21,6 @@ export class UseEffectCommand extends EditorCommand<{
 	connectionId: string;
 	moduleNodeId: string;
 	outputNodeId: string;
-	internalModuleId: string;
-	moduleNodePosition: VectorData;
 	externalModule: ExternalModuleData;
 	audioInputConnectionIds: Record<string, string>;
 }> {
@@ -36,21 +32,21 @@ export class UseEffectCommand extends EditorCommand<{
 	connectToOutputNode!: SetConnectionCommand; // 4
 
 	execute(graphRegistry: GraphRegistry): void {
-		const {
-			connectionId,
-			moduleNodeId,
-			outputNodeId,
-			externalModule,
-			internalModuleId,
-			moduleNodePosition,
-			audioInputConnectionIds,
-		} = this.details;
+		const { connectionId, moduleNodeId, outputNodeId, externalModule, audioInputConnectionIds } =
+			this.details;
+
+		const outputNodeData = graphRegistry.nodes.get(outputNodeId);
+		const moduleNodePosition = structuredClone(outputNodeData.position);
+		const { internalModuleId } = outputNodeData;
 
 		// 1. Move the output node to add space to the effect module node.
 		this.moveOutputNode = new MoveNodeCommand(
 			mockCommandData({
 				nodeId: outputNodeId,
-				delta: { x: NODE_ITEM_WIDTH_PLUS_GAP, y: 0 },
+				delta: {
+					x: NODE_ITEM_WIDTH_PLUS_GAP,
+					y: 0,
+				},
 			}),
 		);
 		this.moveOutputNode.execute(graphRegistry);
@@ -77,12 +73,16 @@ export class UseEffectCommand extends EditorCommand<{
 
 		// 3. Connect the audio input nodes from the effect module node to the
 		//    node connected to the output node input if exists.
-		throw new NotImplementedError();
-		// this.connectAudioInputs = new ConnectAudioInputsCommand(
-		//  mockCommandData({ moduleNodeId, externalModuleData,
-		//  audioInputConnectionIds,
-		//  }),
-		// );
+		this.connectAudioInputs = new ConnectAudioInputsCommand(
+			mockCommandData({
+				moduleNodeId,
+				externalModule,
+				audioInputConnectionIds,
+				targetNodeId: outputNodeId,
+			}),
+		);
+		this.connectAudioInputs.execute(graphRegistry);
+		return;
 
 		// 4. Connect the output node to the effect module node.
 		this.connectToOutputNode = new SetConnectionCommand(

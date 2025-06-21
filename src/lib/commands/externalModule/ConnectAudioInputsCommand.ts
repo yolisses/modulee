@@ -1,23 +1,23 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
+import { SetConnectionCommand } from '../connection/SetConnectionCommand';
+import { mockCommandData } from '../test/mockNodeData';
 
 export class ConnectAudioInputsCommand extends EditorCommand<{
 	targetNodeId: string;
 	moduleNodeId: string;
-	externalModuleData: ExternalModuleData;
+	externalModule: ExternalModuleData;
 	audioInputConnectionIds: Record<string, string>;
 }> {
 	static name = 'ConnectAudioInputsCommand';
 
-	removedConnections!: ConnectionData[];
+	setConntectionCommands!: SetConnectionCommand[];
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { moduleNodeId, targetNodeId, externalModuleData, audioInputConnectionIds } =
-			this.details;
-		const { nodes, mainInternalModuleId } = externalModuleData.graph;
+		const { moduleNodeId, targetNodeId, externalModule, audioInputConnectionIds } = this.details;
+		const { nodes, mainInternalModuleId } = externalModule.graph;
 
 		const audioInputNodes = nodes.filter(
 			(node) => node.internalModuleId === mainInternalModuleId && node.type === 'AudioInputNode',
@@ -30,11 +30,21 @@ export class ConnectAudioInputsCommand extends EditorCommand<{
 		}
 
 		// Remove connections previous connections to audio inputs
-		this.removedConnections = graphRegistry.connections.removeByCondition((connection) => {
-			return (
-				connection.inputPath.nodeId === moduleNodeId &&
-				audioInputIds.indexOf(connection.inputPath.inputKey) !== -1
+		this.setConntectionCommands = audioInputIds.map((audioInputId) => {
+			const command = new SetConnectionCommand(
+				mockCommandData({
+					connection: {
+						targetNodeId: targetNodeId,
+						id: audioInputConnectionIds[audioInputId],
+						inputPath: {
+							nodeId: nodeData.id,
+							inputKey: audioInputId,
+						},
+					},
+				}),
 			);
+			command.execute(graphRegistry);
+			return command;
 		});
 
 		audioInputNodes.forEach((audioInputNode) => {
