@@ -29,7 +29,6 @@ export class ConnectAudioInputsCommand extends EditorCommand<{
 			throw new Error('Invalid node type');
 		}
 
-		// Remove connections previous connections to audio inputs
 		this.setConntectionCommands = audioInputIds.map((audioInputId) => {
 			const command = new SetConnectionCommand(
 				mockCommandData({
@@ -46,26 +45,11 @@ export class ConnectAudioInputsCommand extends EditorCommand<{
 			command.execute(graphRegistry);
 			return command;
 		});
-
-		audioInputNodes.forEach((audioInputNode) => {
-			graphRegistry.connections.add({
-				targetNodeId,
-				id: audioInputConnectionIds[audioInputNode.id],
-				inputPath: {
-					nodeId: moduleNodeId,
-					inputKey: audioInputNode.id,
-				},
-			});
-		});
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		const { audioInputConnectionIds } = this.details;
-		graphRegistry.connections.removeByCondition((connection) => {
-			return !!audioInputConnectionIds[connection.id];
-		});
-		this.removedConnections.forEach((removedConnection) => {
-			graphRegistry.connections.add(removedConnection);
+		this.setConntectionCommands.map((setConnectionCommand) => {
+			setConnectionCommand.undo(graphRegistry);
 		});
 	}
 }
