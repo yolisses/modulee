@@ -27,7 +27,7 @@
 	}
 </script>
 
-<details bind:open class="flex flex-col items-center" class:mb-2={open}>
+<details bind:open class="flex flex-col" class:mb-2={open}>
 	<summary class="flex w-full flex-row gap-2 border-t border-white/10">
 		<button class="common-button" onclick={handleClick}>
 			<Fa fw icon={open ? faChevronDown : faChevronRight} />
@@ -40,7 +40,7 @@
 			<AddOutputNodeButton {internalModule} />
 		{/if}
 	</summary>
-	<div class="flex flex-row flex-wrap gap-1 pt-1">
+	<div class="flex flex-row flex-wrap justify-center gap-1 p-1">
 		{#if moduleNodes.length > 0}
 			{#each moduleNodes as moduleNode}
 				<RackModuleNodeItem {moduleNode} />

@@ -20,7 +20,7 @@
 	);
 </script>
 
-<div class="rounded border-1 border-white/10 p-2">
+<div class="max-w-xs grow rounded border-1 border-white/10 p-2">
 	{moduleNode.targetModule?.name}
 	<div>
 		{#each inputs as input}

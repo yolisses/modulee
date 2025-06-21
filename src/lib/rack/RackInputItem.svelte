@@ -47,7 +47,7 @@
 			onblur={handleInput}
 			bind:this={textInput}
 			onchange={handleInput}
-			class="w-42 px-2 text-right"
+			class="flex-1 px-2 text-right"
 		/>
 	{:else}
 		<input
@@ -55,7 +55,7 @@
 			{min}
 			bind:value
 			type="range"
-			class="w-32"
+			class="flex-1"
 			oninput={handleInput}
 			onkeypress={handleKeyPress}
 			step={isBoolean ? 1 : 'any'}
