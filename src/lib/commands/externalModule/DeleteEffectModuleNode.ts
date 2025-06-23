@@ -10,7 +10,7 @@ import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTarge
 /**
  * Deletes an effect module node following these steps:
  *
- * 1. Set connections to the module node to its audio input (if any)
+ * 1. Set connections to the module node to its audio input target (if any)
  * 2. Delete the effect module node
  */
 export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string }> {
@@ -20,7 +20,8 @@ export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 	execute(graphRegistry: GraphRegistry): void {
 		const { moduleNodeId } = this.details;
 
-		// 1. Set connections to the module node to its audio input (if any)
+		// 1. Set connections to the module node to its audio input target (if
+		//    any)
 		const moduleNode = graphRegistry.nodes.get(moduleNodeId);
 		if (!getIsSomeModuleNodeData(moduleNode)) {
 			throw new Error('Invalid type for module node');
@@ -42,11 +43,13 @@ export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 						newTargetId: audioInputConnection.targetNodeId,
 					}),
 				);
+				this.replaceConnectionsTargetNodeIdCommand.execute(graphRegistry);
 			}
 		}
 
 		// 2. Delete the effect module node
 		this.removeNodeCommand = new RemoveNodeCommand(mockCommandData({ nodeId: moduleNodeId }));
+		this.removeNodeCommand.execute(graphRegistry);
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
