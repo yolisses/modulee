@@ -39,4 +39,12 @@ test('DeleteEffectModuleNode', () => {
 
 	// 2. Delete the effect module node
 	expect(graphRegistry.nodes.containsId('moduleNode')).toBeFalsy();
+
+	command.undo(graphRegistry);
+
+	// 1. Set connections to the module node to its audio input target (if any)
+	expect(graphRegistry.connections.get('connection2').targetNodeId).toBe('moduleNode');
+
+	// 2. Delete the effect module node
+	expect(graphRegistry.nodes.containsId('moduleNode')).toBeTruthy();
 });
