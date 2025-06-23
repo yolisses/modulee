@@ -8,6 +8,8 @@
 	}
 
 	const { moduleNode }: Props = $props();
+
+	function handleClick() {}
 </script>
 
 <button class="common-button">

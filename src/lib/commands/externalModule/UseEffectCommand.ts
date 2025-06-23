@@ -7,7 +7,7 @@ import { SetConnectionCommand } from '../connection/SetConnectionCommand';
 import { AddNodeCommand } from '../node/AddNodeCommand';
 import { MoveNodeCommand } from '../node/MoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
-import { ConnectAudioInputsCommand } from './ConnectAudioInputsCommand';
+import { SetConnectionsCommand } from './ConnectAudioInputsCommand';
 
 /**
  * Uses an effect following these steps:
@@ -29,7 +29,7 @@ export class UseEffectCommand extends EditorCommand<{
 
 	moveOutputNode!: MoveNodeCommand; // 1
 	addModuleNode!: AddNodeCommand; // 2
-	connectAudioInputs?: ConnectAudioInputsCommand; // 3
+	connectAudioInputs?: SetConnectionsCommand; // 3
 	connectToOutputNode!: SetConnectionCommand; // 4
 
 	execute(graphRegistry: GraphRegistry): void {
@@ -81,7 +81,7 @@ export class UseEffectCommand extends EditorCommand<{
 			});
 		});
 		if (outputNodeInputConntection) {
-			this.connectAudioInputs = new ConnectAudioInputsCommand(
+			this.connectAudioInputs = new SetConnectionsCommand(
 				mockCommandData({
 					moduleNodeId,
 					externalModule,
