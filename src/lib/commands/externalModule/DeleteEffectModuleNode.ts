@@ -3,6 +3,8 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import { getIsAudioInputNodeData } from '$lib/module/externalModule/effect/getIsAudioInputNodeData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 import { getId } from '$lib/ui/getId';
+import { mockCommandData } from '../test/mockNodeData';
+import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 
 /**
  * Deletes an effect module node following these steps:
@@ -11,6 +13,8 @@ import { getId } from '$lib/ui/getId';
  * 2. Delete the effect module node
  */
 export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string }> {
+	replaceConnectionsTargetNodeIdCommand?: ReplaceConnectionsTargetNodeIdCommand;
+
 	execute(graphRegistry: GraphRegistry): void {
 		const { moduleNodeId } = this.details;
 
@@ -30,11 +34,12 @@ export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 				return nodeId === moduleNodeId && audioInputIds.has(inputKey);
 			});
 			if (audioInputConnection) {
-				graphRegistry.connections.values().forEach((connection) => {
-					if (connection.targetNodeId === moduleNodeId) {
-						connection.targetNodeId = audioInputConnection.targetNodeId;
-					}
-				});
+				this.replaceConnectionsTargetNodeIdCommand = new ReplaceConnectionsTargetNodeIdCommand(
+					mockCommandData({
+						previousTargetId: moduleNodeId,
+						newTargetId: audioInputConnection.targetNodeId,
+					}),
+				);
 			}
 		}
 
@@ -42,6 +47,6 @@ export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		throw new Error('Method not implemented.');
+		this.replaceConnectionsTargetNodeIdCommand?.undo();
 	}
 }
