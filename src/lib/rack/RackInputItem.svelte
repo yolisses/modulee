@@ -77,6 +77,7 @@
 
 	/* Firefox */
 	input[type='number'] {
+		appearance: none;
 		-moz-appearance: textfield;
 	}
 </style>
