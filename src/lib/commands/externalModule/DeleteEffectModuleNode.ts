@@ -3,6 +3,7 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import { getIsAudioInputNodeData } from '$lib/module/externalModule/effect/getIsAudioInputNodeData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 import { getId } from '$lib/ui/getId';
+import { RemoveNodeCommand } from '../node/RemoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 
@@ -13,6 +14,7 @@ import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTarge
  * 2. Delete the effect module node
  */
 export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string }> {
+	removeNodeCommand!: RemoveNodeCommand;
 	replaceConnectionsTargetNodeIdCommand?: ReplaceConnectionsTargetNodeIdCommand;
 
 	execute(graphRegistry: GraphRegistry): void {
@@ -44,9 +46,11 @@ export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 		}
 
 		// 2. Delete the effect module node
+		this.removeNodeCommand = new RemoveNodeCommand(mockCommandData({ nodeId: moduleNodeId }));
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
+		this.removeNodeCommand.undo(graphRegistry);
 		this.replaceConnectionsTargetNodeIdCommand?.undo();
 	}
 }
