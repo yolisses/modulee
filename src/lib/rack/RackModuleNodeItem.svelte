@@ -3,6 +3,7 @@
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { ModuleNodeInput } from '$lib/data/ModuleNodeInput';
 	import RackInputItem from './RackInputItem.svelte';
+	import RackModuleNodeItemDotsMenuButton from './RackModuleNodeItemDotsMenuButton.svelte';
 
 	interface Props {
 		moduleNode: ModuleNode;
@@ -21,7 +22,10 @@
 </script>
 
 <div class="max-w-xs grow rounded border-1 border-white/10 p-2">
-	{moduleNode.targetModule?.name}
+	<div class="flex flex-row items-center justify-between">
+		{moduleNode.targetModule?.name}
+		<RackModuleNodeItemDotsMenuButton {moduleNode} />
+	</div>
 	<div>
 		{#each inputs as input}
 			<RackInputItem {input} />
