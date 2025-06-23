@@ -34,7 +34,6 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 	updateInputs() {
 		this.inputs = [];
 		const inputNodes = this.getInputNodes();
-		console.log(inputNodes);
 		inputNodes.forEach((inputNode) => {
 			const input = new ModuleNodeInput(this, inputNode);
 			this.inputs.push(input);
