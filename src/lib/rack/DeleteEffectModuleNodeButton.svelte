@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DeleteEffectModuleNode } from '$lib/commands/externalModule/DeleteEffectModuleNode';
+	import { RemoveEffectModuleNode } from '$lib/commands/externalModule/RemoveEffectModuleNode';
 	import { createId } from '$lib/data/createId';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
@@ -16,10 +16,10 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
-		const command = new DeleteEffectModuleNode({
+		const command = new RemoveEffectModuleNode({
 			id: createId(),
 			createdAt: new Date().toJSON(),
-			type: 'DeleteEffectModuleNode',
+			type: 'RemoveEffectModuleNode',
 			details: { moduleNodeId: moduleNode.id },
 			projectId: projectDataContext.projectData.id,
 		});

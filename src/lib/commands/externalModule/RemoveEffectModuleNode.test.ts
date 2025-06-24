@@ -2,9 +2,9 @@ import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { DeleteEffectModuleNode } from './DeleteEffectModuleNode';
+import { RemoveEffectModuleNode } from './RemoveEffectModuleNode';
 
-test('DeleteEffectModuleNode', () => {
+test('RemoveEffectModuleNode', () => {
 	const graphRegistry = {
 		externalModules: ById.fromItems([
 			{ id: 'externalModule', graph: { nodes: [{ id: 'audioInput', type: 'AudioInputNode' }] } },
@@ -30,7 +30,7 @@ test('DeleteEffectModuleNode', () => {
 		]),
 	} as GraphRegistry;
 
-	const command = new DeleteEffectModuleNode(mockCommandData({ moduleNodeId: 'moduleNode' }));
+	const command = new RemoveEffectModuleNode(mockCommandData({ moduleNodeId: 'moduleNode' }));
 
 	command.execute(graphRegistry);
 

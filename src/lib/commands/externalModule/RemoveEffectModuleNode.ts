@@ -13,7 +13,7 @@ import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTarge
  * 1. Set connections to the module node to its audio input target (if any)
  * 2. Delete the effect module node
  */
-export class DeleteEffectModuleNode extends EditorCommand<{ moduleNodeId: string }> {
+export class RemoveEffectModuleNode extends EditorCommand<{ moduleNodeId: string }> {
 	removeNodeCommand!: RemoveNodeCommand;
 	replaceConnectionsTargetNodeIdCommand?: ReplaceConnectionsTargetNodeIdCommand;
 

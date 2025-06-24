@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import DotsMenuButton from '$lib/ui/DotsMenuButton.svelte';
-	import DeleteEffectModuleNodeButton from './DeleteEffectModuleNodeButton.svelte';
+	import RemoveEffectModuleNodeButton from './RemoveEffectModuleNodeButton.svelte';
 
 	interface Props {
 		moduleNode: ModuleNode;
@@ -12,5 +12,5 @@
 
 <DotsMenuButton>
 	<!-- TODO add move -->
-	<DeleteEffectModuleNodeButton {moduleNode} />
+	<RemoveEffectModuleNodeButton {moduleNode} />
 </DotsMenuButton>
