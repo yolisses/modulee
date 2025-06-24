@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { formatNumber } from '$lib/connector/formatNumber';
+	import { createId } from '$lib/data/createId';
 	import type { Input } from '$lib/data/Input.svelte';
+	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { hashToUsize } from '$lib/engine/data/hashToUsize';
+	import { getProjectDataContext } from '$lib/project/projectDataContext';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import { tick } from 'svelte';
 
@@ -12,8 +16,11 @@
 
 	let textEditing = $state(false);
 	const { input }: Props = $props();
+	const editorContext = getEditorContext();
 	let textInput = $state<HTMLInputElement>();
-	let value = $state(input.getUnconnectedValue());
+	let initialValue = input.getUnconnectedValue();
+	let value = $state(initialValue);
+	const projectDataContext = getProjectDataContext();
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 
 	const audioBackendContext = getAudioBackendContext();
@@ -27,6 +34,19 @@
 		const id = hashToUsize(input.getControlNodeId());
 		audioBackendContext.audioBackend?.updateControl(id, value);
 		textEditing = false;
+	}
+
+	function handleChange() {
+		if (value === initialValue) return;
+		initialValue = value;
+		const command = new SetUnconnectedInputValueCommand({
+			id: createId(),
+			createdAt: new Date().toJSON(),
+			type: 'SetUnconnectedInputValueCommand',
+			projectId: projectDataContext.projectData.id,
+			details: { value, inputPath: structuredClone(input.inputPath) },
+		});
+		editorContext.editor.execute(command);
 	}
 
 	function handleClick() {
@@ -57,6 +77,7 @@
 			type="range"
 			class="flex-1"
 			oninput={handleInput}
+			onchange={handleChange}
 			onkeypress={handleKeyPress}
 			step={isBoolean ? 1 : 'any'}
 		/>
