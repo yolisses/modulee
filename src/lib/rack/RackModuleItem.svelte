@@ -7,6 +7,7 @@
 	import Fa from 'svelte-fa';
 	import AddOutputNodeButton from './AddOutputNodeButton.svelte';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
+	import { hideDraggingImage } from './hideDraggingImage';
 	import RackAddEffectButton from './RackAddEffectButton.svelte';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
 
@@ -34,13 +35,9 @@
 	onMount(() => {
 		if (element) {
 			const sortable = new Sortable(element, {
+				setData: hideDraggingImage,
 				handle: '.sortable-handle',
 				ghostClass: 'sortable-ghost',
-				setData: function (dataTransfer) {
-					const invisibleElement = document.getElementById('sortable-invisible-element');
-					if (!invisibleElement) return;
-					dataTransfer.setDragImage(invisibleElement, 0, 0);
-				},
 			});
 			return () => sortable.destroy();
 		}
