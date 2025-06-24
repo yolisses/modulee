@@ -25,7 +25,11 @@
 	let value = $state(input.getUnconnectedValue());
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 	const ratio = $derived((value - min) / (max - min));
-	const percentage = $derived(100 * ratio);
+	const width = $derived(100 * ratio + '%');
+
+	$effect(() => {
+		value = input.getUnconnectedValue();
+	});
 
 	function handlePointerDown(e: PointerEvent) {
 		e.stopPropagation();
@@ -81,7 +85,7 @@
 	}
 </script>
 
-<div style:width={percentage + '%'} class="absolute left-0 h-full bg-green-500/25"></div>
+<div style:width class="absolute left-0 h-full bg-green-500/25"></div>
 <div class="relative flex flex-1 flex-row items-center overflow-hidden" bind:this={sizeElement}>
 	<div
 		title={input.name}
