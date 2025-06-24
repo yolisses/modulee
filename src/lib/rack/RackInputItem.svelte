@@ -60,7 +60,9 @@
 
 <div class="flex flex-row items-center gap-2">
 	<div>{input.name}</div>
-	{#if textEditing}
+	{#if input.targetNode}
+		<div class="flex-1 text-center opacity-50">Connected</div>
+	{:else if textEditing}
 		<input
 			{value}
 			type="number"
