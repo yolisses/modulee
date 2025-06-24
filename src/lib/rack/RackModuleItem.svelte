@@ -14,6 +14,7 @@
 		internalModule: InternalModule;
 	}
 
+	let invisibleDragImage: HTMLElement;
 	const { internalModule }: Props = $props();
 	const hasOutputNode = $derived(internalModule.nodes.some((node) => node.type === 'OutputNode'));
 	const moduleNodes: ModuleNode[] = $derived(
@@ -33,9 +34,13 @@
 	onMount(() => {
 		if (element) {
 			const sortable = new Sortable(element, {
-				animation: 150,
 				handle: '.sortable-handle',
 				ghostClass: 'sortable-ghost',
+				setData: function (dataTransfer) {
+					const invisibleElement = document.getElementById('sortable-invisible-element');
+					if (!invisibleElement) return;
+					dataTransfer.setDragImage(invisibleElement, 0, 0);
+				},
 			});
 			return () => sortable.destroy();
 		}

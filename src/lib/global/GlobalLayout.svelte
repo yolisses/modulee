@@ -67,3 +67,5 @@
 <ModalRootLayout>
 	{@render children()}
 </ModalRootLayout>
+
+<div id="sortable-invisible-element" class="hidden"></div>
