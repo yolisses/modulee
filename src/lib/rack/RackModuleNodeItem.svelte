@@ -21,9 +21,11 @@
 	);
 </script>
 
-<div class="max-w-xs grow rounded border-1 border-white/10 p-2">
+<div class="max-w-xs grow rounded border-1 border-white/10 p-2 select-none">
 	<div class="flex flex-row items-center justify-between">
-		{moduleNode.targetModule?.name}
+		<div class="sortable-handle grow">
+			{moduleNode.targetModule?.name}
+		</div>
 		<RackModuleNodeItemDotsMenuButton {moduleNode} />
 	</div>
 	<div>
@@ -32,3 +34,11 @@
 		{/each}
 	</div>
 </div>
+
+<style lang="postcss">
+	@reference "tailwindcss";
+
+	:global(.sortable-ghost) {
+		@apply border border-white/50;
+	}
+</style>

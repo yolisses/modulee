@@ -2,6 +2,8 @@
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+	import Sortable from 'sortablejs';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import AddOutputNodeButton from './AddOutputNodeButton.svelte';
 	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
@@ -25,6 +27,19 @@
 	function handleClick() {
 		open = !open;
 	}
+
+	let element = $state<HTMLElement>();
+
+	onMount(() => {
+		if (element) {
+			const sortable = new Sortable(element, {
+				animation: 150,
+				handle: '.sortable-handle',
+				ghostClass: 'sortable-ghost',
+			});
+			return () => sortable.destroy();
+		}
+	});
 </script>
 
 <details bind:open class="flex flex-col" class:mb-2={open}>
@@ -40,15 +55,17 @@
 			<AddOutputNodeButton {internalModule} />
 		{/if}
 	</summary>
-	<div class="flex flex-row flex-wrap justify-center gap-1 p-1">
-		{#if moduleNodes.length > 0}
-			{#each moduleNodes as moduleNode}
+	{#if moduleNodes.length > 0}
+		<div class="flex flex-row flex-wrap justify-center gap-1 p-1" bind:this={element}>
+			{#each moduleNodes as moduleNode (moduleNode.id)}
 				<RackModuleNodeItem {moduleNode} />
 			{/each}
-		{:else}
+		</div>
+	{:else}
+		<div class="flex flex-row justify-center p-1">
 			<div class="opacity-50">No effects to adjust</div>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </details>
 
 <style lang="postcss">
