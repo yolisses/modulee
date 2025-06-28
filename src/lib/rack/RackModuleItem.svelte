@@ -15,7 +15,6 @@
 		internalModule: InternalModule;
 	}
 
-	let invisibleDragImage: HTMLElement;
 	const { internalModule }: Props = $props();
 	const hasOutputNode = $derived(internalModule.nodes.some((node) => node.type === 'OutputNode'));
 	const moduleNodes: ModuleNode[] = $derived(
