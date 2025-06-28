@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BasicList from '$lib/ui/BasicList.svelte';
-	import { getName } from '$lib/ui/getName';
+	import { getType } from '$lib/ui/getType';
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
@@ -50,7 +50,7 @@
 		class="scroll-small menu-container fixed z-10 hidden w-max min-w-32 overflow-auto overscroll-contain group-hover:flex"
 	>
 		<BasicList
-			getId={getName}
+			getId={getType}
 			getName={getNodeDefinitionName}
 			items={nodeDefinitionCategory.nodeDefinitions}
 			onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
