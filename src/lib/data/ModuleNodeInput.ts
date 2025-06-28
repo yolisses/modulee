@@ -13,7 +13,8 @@ export class ModuleNodeInput extends Input {
 	}
 
 	public getUnconnectedValue() {
-		return super.getUnconnectedValue() || this.inputNode.defaultValue;
+		const value = super.getUnconnectedValue();
+		return value === undefined ? this.inputNode.defaultValue : value;
 	}
 
 	public getInputDefinition(): InputDefinition {
