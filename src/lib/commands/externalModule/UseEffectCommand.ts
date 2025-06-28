@@ -64,7 +64,7 @@ export class UseEffectCommand extends EditorCommand<{
 					extras: {
 						moduleReference: {
 							type: 'external',
-							id: externalModule.id,
+							moduleId: externalModule.id,
 						},
 					},
 				},

@@ -25,7 +25,7 @@ test('RemoveEffectModuleNode', () => {
 			{
 				id: 'moduleNode',
 				type: 'ModuleNode',
-				extras: { moduleReference: { type: 'external', id: 'externalModule' } },
+				extras: { moduleReference: { type: 'external', moduleId: 'externalModule' } },
 			},
 		]),
 	} as GraphRegistry;
