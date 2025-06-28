@@ -2,6 +2,7 @@ import type { ById } from '$lib/editor/ById';
 import { getIsAudioInputNode } from './getIsAudioInputNode';
 import { getIsInputNode } from './getIsInputNode';
 import type { Module } from './Module';
+import { ModuleNodeAudioInput } from './ModuleNodeAudioInput';
 import { ModuleNodeInput } from './ModuleNodeInput';
 import { Node } from './Node.svelte';
 import type { ModuleNodeData } from './variants/ModuleNodeData';
@@ -31,7 +32,7 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 		if (!targetModule) return;
 
 		if (targetModule.nodes.some(getIsAudioInputNode)) {
-			this.inputs.push(new ModuleNodeInput(this, inputNode));
+			this.inputs.push(new ModuleNodeAudioInput(this));
 		}
 
 		targetModule.nodes.filter(getIsInputNode).forEach((inputNode) => {

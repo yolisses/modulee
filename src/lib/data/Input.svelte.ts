@@ -5,7 +5,6 @@ import type { Connector } from './Connector';
 import type { InputPath } from './InputPath';
 import type { Node } from './Node.svelte';
 
-// TODO renome name and key duplication
 export class Input implements Connector {
 	id: string;
 	targetNode?: Node;

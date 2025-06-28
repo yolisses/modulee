@@ -1,5 +1,4 @@
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
-import type { AudioInputNode } from './AudioInputNode.svelte';
 import { Input } from './Input.svelte';
 import type { InputNode } from './InputNode.svelte';
 import type { ModuleNode } from './ModuleNode.svelte';
@@ -7,7 +6,7 @@ import type { ModuleNode } from './ModuleNode.svelte';
 export class ModuleNodeInput extends Input {
 	constructor(
 		public moduleNode: ModuleNode,
-		public inputNode: InputNode | AudioInputNode,
+		public inputNode: InputNode,
 	) {
 		super(inputNode.id, inputNode.name, moduleNode);
 	}
