@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { sortTopologically } from './sortTopologically';
+import { getTopologicalOrder } from './getTopologicalOrder';
 
-describe('sortTopologically', () => {
+describe('getTopologicalOrder', () => {
 	it('returns an empty array for an empty graph', () => {
 		const graph = new Map<string, string[]>();
-		expect(sortTopologically(graph)).toEqual([]);
+		expect(getTopologicalOrder(graph)).toEqual([]);
 	});
 
 	it('returns a single node for a graph with one node and no edges', () => {
 		const graph = new Map<string, string[]>([['A', []]]);
-		expect(sortTopologically(graph)).toEqual(['A']);
+		expect(getTopologicalOrder(graph)).toEqual(['A']);
 	});
 
 	it('sorts a simple linear dependency', () => {
@@ -18,7 +18,7 @@ describe('sortTopologically', () => {
 			['A', ['B']],
 			['C', []],
 		]);
-		expect(sortTopologically(graph)).toEqual(['C', 'B', 'A']);
+		expect(getTopologicalOrder(graph)).toEqual(['C', 'B', 'A']);
 	});
 
 	it('sorts a graph with branching dependencies', () => {
@@ -28,7 +28,7 @@ describe('sortTopologically', () => {
 			['D', []],
 			['C', ['D']],
 		]);
-		expect(sortTopologically(graph)).toEqual(['D', 'B', 'C', 'A']);
+		expect(getTopologicalOrder(graph)).toEqual(['D', 'B', 'C', 'A']);
 	});
 
 	it('handles disconnected graphs', () => {
@@ -38,7 +38,7 @@ describe('sortTopologically', () => {
 			['A', ['B']],
 			['D', []],
 		]);
-		expect(sortTopologically(graph)).toEqual(['B', 'D', 'C', 'A']);
+		expect(getTopologicalOrder(graph)).toEqual(['B', 'D', 'C', 'A']);
 	});
 
 	it('handles nodes with no dependencies', () => {
@@ -47,7 +47,7 @@ describe('sortTopologically', () => {
 			['B', []],
 			['C', []],
 		]);
-		expect(sortTopologically(graph)).toEqual(['A', 'B', 'C']);
+		expect(getTopologicalOrder(graph)).toEqual(['A', 'B', 'C']);
 	});
 
 	it('does not revisit nodes', () => {
@@ -56,6 +56,6 @@ describe('sortTopologically', () => {
 			['B', ['C']],
 			['C', ['A']],
 		]);
-		expect(sortTopologically(graph)).toEqual(['C', 'B', 'A']);
+		expect(getTopologicalOrder(graph)).toEqual(['C', 'B', 'A']);
 	});
 });

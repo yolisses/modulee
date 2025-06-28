@@ -1,4 +1,4 @@
-export function sortTopologically(graph: Map<string, string[]>): string[] {
+export function getTopologicalOrder(graph: Map<string, string[]>): string[] {
 	const result: string[] = [];
 	const visited = new Set<string>();
 
