@@ -48,7 +48,7 @@ export class GroupNodesActionCommand extends ActionCommand {
 					unconnectedInputValues: {},
 					position: averagePosition.getData(),
 					internalModuleId: currentInternalModuleId,
-					extras: { moduleReference: { type: 'internal', id: newInternalModuleId } },
+					extras: { moduleReference: { type: 'internal', moduleId: newInternalModuleId } },
 				},
 			},
 		});

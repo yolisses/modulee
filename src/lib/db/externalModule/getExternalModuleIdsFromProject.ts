@@ -7,7 +7,7 @@ export function getExternalModuleIdsFromProject(project: ProjectData): string[] 
 		if (!getIsSomeModuleNodeData(nodeData)) return;
 		const { moduleReference } = nodeData.extras;
 		if (moduleReference?.type !== 'external') return;
-		externalModuleIds.push(moduleReference.id);
+		externalModuleIds.push(moduleReference.moduleId);
 	});
 	return externalModuleIds;
 }

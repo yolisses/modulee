@@ -17,6 +17,6 @@ export class InternalModule extends Module<InternalModuleData> {
 	}
 
 	getReference(): InternalModuleReference {
-		return { id: this.id, type: 'internal' };
+		return { moduleId: this.id, type: 'internal' };
 	}
 }

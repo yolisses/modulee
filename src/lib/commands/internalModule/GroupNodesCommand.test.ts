@@ -24,7 +24,7 @@ test('GroupNodesCommand', () => {
 				id: 'node4',
 				type: 'ModuleNode',
 				internalModuleId: 'internalModule1',
-				extras: { moduleReference: { type: 'internal', id: 'internalModule2' } },
+				extras: { moduleReference: { type: 'internal', moduleId: 'internalModule2' } },
 			} as ModuleNodeData,
 		}),
 	);

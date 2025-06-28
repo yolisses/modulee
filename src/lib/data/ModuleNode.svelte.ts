@@ -16,7 +16,7 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 
 	fillModule(modules: ById<Module>) {
 		if (this.moduleReference) {
-			this.targetModule = modules.getOrNull(this.moduleReference.id);
+			this.targetModule = modules.getOrNull(this.moduleReference.moduleId);
 		} else {
 			this.targetModule = null;
 		}

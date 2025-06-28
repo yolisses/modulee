@@ -14,11 +14,11 @@ export function internalizeModuleNodeModuleReferences(
 			const { moduleReference: internalModuleReference } = nodeData.extras;
 			const referencedExternalModuleData = findOrNullById(
 				externalModulesData,
-				internalModuleReference.id,
+				internalModuleReference.moduleId,
 			);
 			if (!referencedExternalModuleData) return;
 			const { mainInternalModuleId } = referencedExternalModuleData.graph;
-			nodeData.extras.moduleReference = { type: 'internal', id: mainInternalModuleId };
+			nodeData.extras.moduleReference = { type: 'internal', moduleId: mainInternalModuleId };
 		}
 	});
 }

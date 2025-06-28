@@ -13,8 +13,8 @@ export function getSomeModuleNodeDataInputKeys(
 	}
 	switch (moduleReference.type) {
 		case 'internal':
-			return getInternalModuleInputKeys(moduleReference.id, graphRegistry);
+			return getInternalModuleInputKeys(moduleReference.moduleId, graphRegistry);
 		case 'external':
-			return getExternalModuleInputKeys(moduleReference.id, graphRegistry);
+			return getExternalModuleInputKeys(moduleReference.moduleId, graphRegistry);
 	}
 }

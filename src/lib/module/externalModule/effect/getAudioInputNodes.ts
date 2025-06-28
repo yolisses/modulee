@@ -14,14 +14,14 @@ export function getAudioInputNodes(
 
 	let audioInputNodes: AudioInputNodeData[];
 	if (moduleReference.type === 'internal') {
-		const internalModuleData = graphRegistry.internalModules.get(moduleReference.id);
+		const internalModuleData = graphRegistry.internalModules.get(moduleReference.moduleId);
 		audioInputNodes = getInternalModuleAudioInputNodes(internalModuleData, graphRegistry);
 	} else {
-		const externalModuleData = graphRegistry.externalModules.get(moduleReference.id);
+		const externalModuleData = graphRegistry.externalModules.get(moduleReference.moduleId);
 		audioInputNodes = getExternalModuleAudioInputNodes(externalModuleData);
 	}
 
-	const externalModuleData = graphRegistry.externalModules.get(moduleReference.id);
+	const externalModuleData = graphRegistry.externalModules.get(moduleReference.moduleId);
 	const audioInputNodeData = externalModuleData.graph.nodes.find(getIsAudioInputNodeData);
 	return audioInputNodeData;
 }

@@ -28,7 +28,7 @@ export class RemoveEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 		}
 		const { moduleReference } = moduleNode.extras;
 		if (moduleReference?.type == 'external') {
-			const externalModule = graphRegistry.externalModules.get(moduleReference.id);
+			const externalModule = graphRegistry.externalModules.get(moduleReference.moduleId);
 			const audioInputIds = new Set(
 				externalModule.graph.nodes.filter(getIsAudioInputNodeData).map(getId),
 			);

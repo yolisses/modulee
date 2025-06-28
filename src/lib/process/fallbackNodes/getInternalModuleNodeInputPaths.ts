@@ -16,7 +16,7 @@ export function getModuleNodeInputPaths(
 
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		if (nodeData.type !== 'InputNode') return;
-		if (nodeData.internalModuleId !== moduleReference.id) return;
+		if (nodeData.internalModuleId !== moduleReference.moduleId) return;
 		inputPaths.push({
 			inputKey: nodeData.id,
 			nodeId: moduleNodeData.id,
