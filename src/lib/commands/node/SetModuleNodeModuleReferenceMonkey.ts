@@ -18,12 +18,12 @@ export class SetModuleNodeModuleReferenceMonkey extends EditorMonkey {
 		const externalModuleReferences: ExternalModuleReference[] = graphRegistry.externalModules
 			.values()
 			.map((externalModuleData) => {
-				return { type: 'external', id: externalModuleData.id };
+				return { type: 'external', moduleId: externalModuleData.id };
 			});
 		const internalModuleReferences: InternalModuleReference[] = graphRegistry.internalModules
 			.values()
 			.map((internalModuleData) => {
-				return { type: 'internal', id: internalModuleData.id };
+				return { type: 'internal', moduleId: internalModuleData.id };
 			});
 		return getRandomItem([...externalModuleReferences, ...internalModuleReferences, undefined]);
 	}

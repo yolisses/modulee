@@ -12,7 +12,7 @@ test('SetModuleNodeModuleReferenceCommand', () => {
 			{
 				id: 'node2',
 				type: 'ModuleNode',
-				extras: { moduleReference: { type: 'internal', id: 'internalModule1' } },
+				extras: { moduleReference: { type: 'internal', moduleId: 'internalModule1' } },
 			},
 			{ id: 'node3' },
 		]),
@@ -20,7 +20,7 @@ test('SetModuleNodeModuleReferenceCommand', () => {
 	const command = new SetModuleNodeModuleReferenceCommand(
 		mockCommandData({
 			moduleNodeId: 'node2',
-			moduleReference: { type: 'internal', id: 'internalModule2' },
+			moduleReference: { type: 'internal', moduleId: 'internalModule2' },
 		}),
 	);
 
@@ -46,7 +46,7 @@ test('SetModuleNodeModuleReferenceCommand with wrong type', () => {
 			{
 				id: 'node2',
 				type: 'ModuleNode',
-				extras: { moduleReference: { type: 'internal', id: 'internalModule1' } },
+				extras: { moduleReference: { type: 'internal', moduleId: 'internalModule1' } },
 			},
 			{ id: 'node3' },
 		]),
@@ -54,7 +54,7 @@ test('SetModuleNodeModuleReferenceCommand with wrong type', () => {
 	const command = new SetModuleNodeModuleReferenceCommand(
 		mockCommandData({
 			moduleNodeId: 'node3',
-			moduleReference: { type: 'internal', id: 'internalModule2' },
+			moduleReference: { type: 'internal', moduleId: 'internalModule2' },
 		}),
 	);
 
