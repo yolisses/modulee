@@ -16,7 +16,7 @@ export function createNodeData(
 		internalModuleId,
 		position,
 		id: createId(),
-		type: nodeDefinition.name,
+		type: nodeDefinition.type,
 		extras: structuredClone(nodeDefinition.defaultExtras),
 		unconnectedInputValues: createUnconnectedInputValues(nodeDefinition),
 	}) as NodeData;

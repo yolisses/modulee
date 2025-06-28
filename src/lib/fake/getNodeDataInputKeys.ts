@@ -10,7 +10,7 @@ export function getNodeDataInputKeys(nodeData: NodeData, graphRegistry: GraphReg
 	}
 
 	const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {
-		return nodeDefinition.name === nodeData.type;
+		return nodeDefinition.type === nodeData.type;
 	});
 
 	if (!nodeDefinition) {

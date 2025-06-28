@@ -28,7 +28,7 @@ export function createFakeEffectGraph(): GraphData {
 
 	if (faker.datatype.boolean(0.8)) {
 		const audioInputNodeDefinition = nodeDefinitions.find(
-			(nodeDefinition) => nodeDefinition.name === 'AudioInputNode',
+			(nodeDefinition) => nodeDefinition.type === 'AudioInputNode',
 		);
 
 		if (!audioInputNodeDefinition) {
@@ -46,7 +46,7 @@ export function createFakeEffectGraph(): GraphData {
 	internalModulesData.forEach((internalModulesData) => {
 		if (faker.datatype.boolean(0.8)) {
 			const audioInputNodeDefinition = nodeDefinitions.find(
-				(nodeDefinition) => nodeDefinition.name === 'OutputNode',
+				(nodeDefinition) => nodeDefinition.type === 'OutputNode',
 			);
 
 			if (!audioInputNodeDefinition) {

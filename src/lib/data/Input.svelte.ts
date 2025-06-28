@@ -30,7 +30,7 @@ export class Input implements Connector {
 
 	public getInputDefinition(): InputDefinition {
 		const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {
-			return this.node.type === nodeDefinition.name;
+			return this.node.type === nodeDefinition.type;
 		});
 		if (!nodeDefinition) {
 			throw new Error('Node definition not found');
