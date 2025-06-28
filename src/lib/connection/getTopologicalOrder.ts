@@ -1,4 +1,6 @@
-export function getTopologicalOrder(graph: Map<string, string[]>): string[] {
+import type { TopologicalMap } from './TopologicalMap';
+
+export function getTopologicalOrder(graph: TopologicalMap): string[] {
 	const result: string[] = [];
 	const visited = new Set<string>();
 
