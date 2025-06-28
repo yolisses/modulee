@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Sortable from 'sortablejs';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import AddOutputNodeButton from './AddOutputNodeButton.svelte';
-	import { getIsSomeModuleNode } from './getIsSomeModuleNode';
+	import { getRackModuleItemModuleNodes } from './getRackModuleItemModuleNodes';
 	import { hideDraggingImage } from './hideDraggingImage';
 	import RackAddEffectButton from './RackAddEffectButton.svelte';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
@@ -17,11 +16,7 @@
 
 	const { internalModule }: Props = $props();
 	const hasOutputNode = $derived(internalModule.nodes.some((node) => node.type === 'OutputNode'));
-	const moduleNodes: ModuleNode[] = $derived(
-		internalModule.nodes.filter(function (node): node is ModuleNode {
-			return getIsSomeModuleNode(node) && !!node.targetModule;
-		}),
-	);
+	const moduleNodes = $derived(getRackModuleItemModuleNodes(internalModule));
 	// svelte-ignore state_referenced_locally
 	let open = $state(moduleNodes.length > 0);
 
