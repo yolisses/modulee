@@ -21,11 +21,11 @@
 }
 
 @utility vertical-tab {
-	@apply common-button flex flex-row rounded-none border-white/25 data-[tab-selected='true']:border-l-4 data-[tab-selected='true']:pl-1;
+	@apply common-button flex flex-row rounded-none outline-white/25 data-[tab-selected='true']:shadow-[inset_4px_0_0_0_rgba(255,255,255,0.25)];
 }
 
 @utility horizontal-tab {
-	@apply common-button flex flex-col rounded-none border-white/25 data-[tab-selected='true']:border-b-4 data-[tab-selected='true']:pb-1;
+	@apply common-button flex flex-col rounded-none outline-white/25 data-[tab-selected='true']:shadow-[inset_0_-4px_0_0_rgba(255,255,255,0.25)];
 }
 
 /* Scrollbar */
