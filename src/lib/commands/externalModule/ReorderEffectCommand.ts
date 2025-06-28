@@ -10,6 +10,8 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
  */
 export class ReorderEffectCommand extends EditorCommand<{
 	moduleNodeId: string;
+	incommingNodeId?: string;
+	outcomingNodeId?: string;
 }> {
 	execute(graphRegistry: GraphRegistry): void {}
 
