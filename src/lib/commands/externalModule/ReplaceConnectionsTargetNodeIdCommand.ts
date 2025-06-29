@@ -1,28 +1,26 @@
-import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 export class ReplaceConnectionsTargetNodeIdCommand extends EditorCommand<{
-	newTargetId: string;
-	previousTargetId: string;
+	targetId: string;
+	connectionIds: string[];
 }> {
-	connections!: ConnectionData[];
+	previousTargetIds!: string[];
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { newTargetId, previousTargetId } = this.details;
-		this.connections = [];
-		graphRegistry.connections.values().forEach((connectionData) => {
-			if (connectionData.targetNodeId === previousTargetId) {
-				this.connections.push(connectionData);
-				connectionData.targetNodeId = newTargetId;
-			}
+		const { targetId, connectionIds } = this.details;
+		this.previousTargetIds = [];
+		connectionIds.forEach((connectionId) => {
+			const connection = graphRegistry.connections.get(connectionId);
+			this.previousTargetIds.push(connection.targetNodeId);
+			connection.targetNodeId = targetId;
 		});
 	}
 
-	undo(): void {
-		const { previousTargetId } = this.details;
-		this.connections.forEach((connection) => {
-			connection.targetNodeId = previousTargetId;
+	undo(graphRegistry: GraphRegistry): void {
+		const { connectionIds } = this.details;
+		connectionIds.forEach((connectionId, index) => {
+			graphRegistry.connections.get(connectionId).targetNodeId = this.previousTargetIds[index];
 		});
 	}
 }
