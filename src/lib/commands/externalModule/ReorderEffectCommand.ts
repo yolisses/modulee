@@ -7,6 +7,12 @@ import { RemoveConnectionsCommand } from '../connection/RemoveConnectionsCommand
 import { mockCommandData } from '../test/mockNodeData';
 import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 
+function getConnectionsByTargetNodeId(graphRegistry: GraphRegistry, targetNodeId: string) {
+	return graphRegistry.connections.values().filter((connectionData) => {
+		return connectionData.targetNodeId === targetNodeId;
+	});
+}
+
 /**
  * Move an effect in the effect chain:
  *
@@ -30,12 +36,9 @@ export class ReorderEffectCommand extends EditorCommand<{
 			throw new Error('Invalid node type', { cause: nodeData });
 		}
 
-		const connectionToNodeIds = graphRegistry.connections
-			.values()
-			.filter((connectionData) => {
-				return connectionData.targetNodeId === moduleNodeId;
-			})
-			.map(getId);
+		const connectionToNodeIds = getConnectionsByTargetNodeId(graphRegistry, moduleNodeId).map(
+			getId,
+		);
 		const moduleNodeAudioTargetNodeId = getModuleNodeAudioTargetNodeId(moduleNodeId, graphRegistry);
 		if (moduleNodeAudioTargetNodeId) {
 			this.replaceConnectionsToNode = new ReplaceConnectionsTargetNodeIdCommand(
