@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends ModuleType">
 	import type { ModuleType } from '$lib/project/ModuleType';
-	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { getUserDataContext } from '$lib/user/userDataContext';
 	import type { ExternalModuleData } from './ExternalModuleData';

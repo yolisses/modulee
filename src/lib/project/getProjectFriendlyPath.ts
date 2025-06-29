@@ -1,4 +1,4 @@
-import type { ProjectData } from './ProjectData';
+import type { ProjectData } from './data/ProjectData';
 
 export function getProjectFriendlyPath(projectData: ProjectData) {
 	if (projectData.moduleType === 'instrument') {

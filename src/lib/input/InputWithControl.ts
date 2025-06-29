@@ -1,4 +1,4 @@
-import { Input } from './input/Input.sveltesvelte';
+import { Input } from './Input.svelte';
 
 export abstract class InputWithControl extends Input {
 	getControlNodeId() {

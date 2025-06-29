@@ -1,8 +1,8 @@
 import type { Connector } from '$lib/connector/Connector';
-import { Input } from '$lib/data/input/Input.sveltesvelte';
-import { Output } from '$lib/data/node/Output.sveltevelte';
 import type { ById } from '$lib/editor/ById';
+import { Input } from '$lib/input/Input.svelte';
 import type { EndPreviewConnectionEvent } from 'nodes-editor';
+import { Output } from './Output.svelte';
 
 type PossibleInputAndOutput = {
 	input?: Input;

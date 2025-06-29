@@ -1,4 +1,4 @@
-import { createId } from '$lib/data/createId';
+import { createId } from '$lib/global/createId';
 import type { GraphData } from '$lib/graph/GraphData';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 

@@ -1,7 +1,7 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import type { InputPath } from '$lib/input/InputPath';
 
 /**

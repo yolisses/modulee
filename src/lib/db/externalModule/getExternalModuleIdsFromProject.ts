@@ -1,4 +1,4 @@
-import type { ProjectData } from '$lib/project/ProjectData';
+import type { ProjectData } from '$lib/project/data/ProjectData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 
 export function getExternalModuleIdsFromProject(project: ProjectData): string[] {

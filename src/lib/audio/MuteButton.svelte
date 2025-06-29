@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { getIsMutedContext } from '$lib/audio/isMutedContexts';
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
-	import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 	import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
 	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import { faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';

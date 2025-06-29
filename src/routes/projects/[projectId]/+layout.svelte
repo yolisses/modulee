@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProjectLayout from '$lib/project/ProjectLayout.svelte';
+	import ProjectLayout from '$lib/project/ui/ProjectLayout.svelte';
 	import { type Snippet } from 'svelte';
 	import type { LayoutData } from './$types';
 

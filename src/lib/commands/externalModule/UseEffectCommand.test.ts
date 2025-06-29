@@ -1,4 +1,4 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';

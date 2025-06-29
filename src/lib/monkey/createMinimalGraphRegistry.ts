@@ -1,5 +1,5 @@
-import { createId } from '$lib/data/createId';
 import { ById } from '$lib/editor/ById';
+import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 

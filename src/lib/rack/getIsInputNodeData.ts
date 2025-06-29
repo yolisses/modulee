@@ -1,5 +1,5 @@
-import type { NodeData } from '$lib/data/NodeData';
-import type { InputNodeData } from '$lib/data/variants/InputNodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
+import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 
 export function getIsInputNodeData(nodeData: NodeData): nodeData is InputNodeData {
 	return nodeData.type === 'InputNode';

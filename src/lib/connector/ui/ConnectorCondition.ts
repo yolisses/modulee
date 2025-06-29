@@ -1,6 +1,6 @@
-import { Input } from '$lib/data/input/Input.sveltesvelte';
-import { Output } from '$lib/data/node/Output.sveltevelte';
 import { getGraphContext } from '$lib/graph/graphContext';
+import { Input } from '$lib/input/Input.svelte';
+import { Output } from '$lib/node/Output.svelte';
 import type { ConnectionCondition } from 'nodes-editor';
 
 export class ConnectorCondition {

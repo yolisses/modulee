@@ -2,7 +2,7 @@ import prisma from '$lib/prisma';
 import { ProjectSchema } from '$lib/schemas/ProjectSchema';
 import { error } from '@sveltejs/kit';
 import z from 'zod/v4';
-import type { ProjectData } from '../ProjectData';
+import type { ProjectData } from '../data/ProjectData';
 
 export async function createProjectFromExternalModule(
 	externalModuleId: string,

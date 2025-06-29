@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
-	import type { ProjectData } from './ProjectData';
+	import type { ProjectData } from '../data/ProjectData';
 
 	interface Props {
 		closeModal: () => void;

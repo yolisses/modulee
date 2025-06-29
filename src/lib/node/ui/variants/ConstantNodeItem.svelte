@@ -5,9 +5,9 @@
 	import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ConstantNode } from '$lib/node/ConstantNode.svelte';
 	import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js.js';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
-	import BaseNodeItem from '../BaseNodeItem.svelte';
+	import BaseNodeItem from './BaseNodeItem.svelte';
 
 	interface Props {
 		constantNode: ConstantNode;

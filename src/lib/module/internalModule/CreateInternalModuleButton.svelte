@@ -3,11 +3,11 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getGraphContext } from '$lib/graph/graphContext';
-	import type { InternalModule } from '$lib/module/InternalModule.svelte';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getNewItemName } from '../../ui/getNewItemName';
+	import type { InternalModule } from './InternalModule.svelte';
 
 	interface Props {
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;

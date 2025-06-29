@@ -1,6 +1,6 @@
-import type { InputNodeExtrasData } from '$lib/data/variants/InputNodeExtrasData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InputNodeExtrasData } from '$lib/node/data/variants/InputNodeExtrasData';
 
 export class UpdateInputNodeExtrasCommand extends EditorCommand<{
 	nodeId: string;

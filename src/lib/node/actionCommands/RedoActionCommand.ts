@@ -1,7 +1,7 @@
 import { createEditorCommand } from '$lib/commands/createEditorCommand';
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
-import { createId } from '$lib/data/createId';
-import type { NodeData } from '$lib/data/NodeData';
+import { createId } from '$lib/global/createId';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 

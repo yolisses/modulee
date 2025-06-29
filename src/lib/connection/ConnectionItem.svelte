@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Connection } from '$lib/data/Connection';
+	import type { Connection } from '$lib/connection/Connection';
 	import { ConnectionItem, getSelectedNodeIdsContext } from 'nodes-editor';
 	import Wire from './Wire.svelte';
 	import { getInputPathId } from './getInputPathId';

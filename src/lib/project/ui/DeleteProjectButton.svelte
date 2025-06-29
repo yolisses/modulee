@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import type { ProjectData } from '../data/ProjectData';
 	import DeleteProjectModal from './DeleteProjectModal.svelte';
-	import type { ProjectData } from './ProjectData';
 
 	interface Props {
 		projectData: ProjectData;

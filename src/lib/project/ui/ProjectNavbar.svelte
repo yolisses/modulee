@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import {
 		faFileAlt,
 		faProjectDiagram,
@@ -8,7 +8,7 @@
 		faSlidersH,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getProjectNavbarSelectionContext } from './projectNavbarSelectionContext';
+	import { getProjectNavbarSelectionContext } from '../projectNavbarSelectionContext';
 
 	const projectDataContext = getProjectDataContext();
 	const internalModuleIdContext = getInternalModuleIdContext();

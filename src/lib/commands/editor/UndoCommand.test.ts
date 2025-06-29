@@ -1,10 +1,10 @@
-import type { NodeData } from '$lib/data/NodeData';
 import { ById } from '$lib/editor/ById';
 import type { CreateEditorCommandCallback } from '$lib/editor/CreateEditorCommandCallback';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorCommandData } from '$lib/editor/EditorCommandData';
 import type { EditorData } from '$lib/editor/EditorData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { UndoCommand } from './UndoCommand';

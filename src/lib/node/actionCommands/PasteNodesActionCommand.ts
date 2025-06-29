@@ -1,6 +1,6 @@
 import { PasteNodesCommand } from '$lib/commands/node/PasteNodesCommand';
-import { createId } from '$lib/data/createId';
-import type { NodeData } from '$lib/data/NodeData';
+import { createId } from '$lib/global/createId';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 import { Vector } from 'nodes-editor';

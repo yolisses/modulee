@@ -1,12 +1,12 @@
 <script lang="ts">
 	import BasicList from '$lib/ui/BasicList.svelte';
+	import DotsMenuButton from '$lib/ui/DotsMenuButton.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
-	import DotsMenuButton from '../ui/DotsMenuButton.svelte';
+	import type { ProjectData } from '../data/ProjectData';
+	import DownloadProjectButton from '../download/DownloadProjectButton.svelte';
+	import { getProjectFriendlyPath } from '../getProjectFriendlyPath';
 	import DeleteProjectButton from './DeleteProjectButton.svelte';
-	import DownloadProjectButton from './download/DownloadProjectButton.svelte';
-	import { getProjectFriendlyPath } from './getProjectFriendlyPath';
-	import type { ProjectData } from './ProjectData';
 	import RenameProjectButton from './RenameProjectButton.svelte';
 
 	interface Props {

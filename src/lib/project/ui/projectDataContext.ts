@@ -1,6 +1,6 @@
 import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { getContext, setContext } from 'svelte';
-import type { ProjectData } from './ProjectData';
+import type { ProjectData } from '../data/ProjectData';
 
 export type ProjectDataContext = {
 	projectData: ProjectData;

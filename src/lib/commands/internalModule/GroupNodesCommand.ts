@@ -1,7 +1,7 @@
-import type { NodeData } from '$lib/data/NodeData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddInternalModuleCommand } from './AddInternalModuleCommand';
 

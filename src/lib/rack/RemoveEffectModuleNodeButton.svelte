@@ -3,7 +3,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 

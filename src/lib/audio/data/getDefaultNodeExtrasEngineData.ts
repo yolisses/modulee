@@ -1,4 +1,4 @@
-import type { NodeData } from '$lib/data/NodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { hashToUsize } from './hashToUsize';
 
 export function getDefaultNodeExtrasEngineData(nodeData: NodeData) {

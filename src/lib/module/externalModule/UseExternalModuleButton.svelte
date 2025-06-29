@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import { getUseExternalModuleInContextOrUndefined } from '../internalModule/useExternalModuleInContext';
 	import type { EffectData } from './effect/EffectData';
 	import UseEffectButton from './effect/UseEffectButton.svelte';

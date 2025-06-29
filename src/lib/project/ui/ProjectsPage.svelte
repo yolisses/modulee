@@ -2,8 +2,8 @@
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import GuestUserWarn from '$lib/user/GuestUserWarn.svelte';
 	import { getUserDataContext } from '$lib/user/userDataContext';
-	import CreateProjectButton from './create/CreateProjectButton.svelte';
-	import type { ProjectData } from './ProjectData';
+	import CreateProjectButton from '../create/CreateProjectButton.svelte';
+	import type { ProjectData } from '../data/ProjectData';
 	import ProjectList from './ProjectList.svelte';
 
 	interface Props {

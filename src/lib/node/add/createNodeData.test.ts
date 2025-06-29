@@ -1,4 +1,4 @@
-import { createId } from '$lib/data/createId';
+import { createId } from '$lib/global/createId';
 import { test } from 'vitest';
 import { nodeDefinitions } from '../definitions/nodeDefinitions';
 import { createNodeData } from './createNodeData';

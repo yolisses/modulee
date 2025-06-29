@@ -1,5 +1,5 @@
-import type { NodeData } from '$lib/data/NodeData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { getNodeExtrasEngineData } from './getNodeExtrasEngineData';
 import { getNodeInputIdsEngineData } from './getNodeInputIdsEngineData';
 import { hashToUsize } from './hashToUsize';

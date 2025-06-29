@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Input } from '$lib/data/input/Input.svelte.jslte.js';
+	import type { Input } from '$lib/input/Input.svelte';
 	import { InputWithControl } from '$lib/input/InputWithControl';
 	import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';
-	import InputItemContentConnected from '../InputItemContentConnected.svelte';
 	import InputItemContentUnconnected from '../InputItemContentUnconnected.svelte';
 	import AudioInputItemContentUnconnected from './AudioInputItemContentUnconnected.svelte';
 	import { ConnectorCondition } from './ConnectorCondition';
 	import ConnectorJoint from './ConnectorJoint.svelte';
+	import InputItemContentConnected from './InputItemContentConnected.svelte';
 
 	interface Props {
 		input: Input;

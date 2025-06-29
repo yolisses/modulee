@@ -1,7 +1,7 @@
 <script lang="ts">
+	import type { Connection } from '$lib/connection/Connection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
-	import type { Connection } from '$lib/data/Connection';
 	import { getElementSize } from '$lib/graph/getElementSize';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';

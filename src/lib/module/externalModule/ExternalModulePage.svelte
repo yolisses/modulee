@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faCalendarAlt, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

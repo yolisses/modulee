@@ -1,5 +1,5 @@
+import { VectorSchema } from '$lib/schemas/VectorSchema';
 import z from 'zod/v4';
-import { VectorSchema } from './VectorSchema';
 
 export function NodeBaseSchema<T extends string, I extends string[], E extends z.ZodTypeAny>(
 	type: T,

@@ -1,3 +1,3 @@
-import { createId } from '$lib/data/createId';
+import { createId } from '$lib/global/createId';
 
 export const FAKE_PROJECT_ID = createId();

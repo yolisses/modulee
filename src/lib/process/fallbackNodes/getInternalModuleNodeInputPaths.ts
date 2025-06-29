@@ -1,7 +1,7 @@
-import type { ModuleNodeData } from '$lib/data/variants/ModuleNodeData';
-import type { ModuleVoicesNodeData } from '$lib/data/variants/ModuleVoicesNodeData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InputPath } from '$lib/input/InputPath';
+import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
+import type { ModuleVoicesNodeData } from '$lib/node/data/variants/ModuleVoicesNodeData';
 
 // TODO consider adopting an OOP approach
 export function getModuleNodeInputPaths(

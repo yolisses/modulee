@@ -1,5 +1,5 @@
 import type { GraphData } from '$lib/graph/GraphData';
-import type { ModuleType } from './ModuleType';
+import type { ModuleType } from '../ModuleType';
 
 export type ProjectData = {
 	id: string;

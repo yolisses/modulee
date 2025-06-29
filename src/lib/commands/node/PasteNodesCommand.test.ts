@@ -1,7 +1,7 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { NodeData } from '$lib/data/NodeData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { PasteNodesCommand } from './PasteNodesCommand';

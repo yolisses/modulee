@@ -4,7 +4,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
 	import { getGraphContext } from '$lib/graph/graphContext.js';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js.js';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js';
 	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		EmptyPointerStrategy,

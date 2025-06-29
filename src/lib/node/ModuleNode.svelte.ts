@@ -1,12 +1,12 @@
 import type { ById } from '$lib/editor/ById';
+import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
+import { ModuleNodeInput } from '$lib/input/ModuleNodeInput';
+import type { Module } from '$lib/module/Module';
+import type { ModuleNodeData } from './data/variants/ModuleNodeData';
+import type { ModuleVoicesNodeData } from './data/variants/ModuleVoicesNodeData';
+import { getIsAudioInputNode } from './getIsAudioInputNode';
 import { getIsInputNode } from './getIsInputNode';
-import type { Module } from './Module';
-import { ModuleNodeAudioInput } from './ModuleNodeAudioInput';
-import { ModuleNodeInput } from './ModuleNodeInput';
 import { Node } from './Node.svelte';
-import { getIsAudioInputNode } from './node/getIsAudioInputNode';
-import type { ModuleNodeData } from './variants/ModuleNodeData';
-import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 
 // A internal module valued node should be created with a internal module, but a
 // internal module should be created with node options. To solve this cyclic

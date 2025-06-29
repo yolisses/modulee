@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Input } from '$lib/data/input/Input.sveltesvelte';
+	import type { Input } from '$lib/input/Input.svelte';
 	import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
 
 	interface Props {

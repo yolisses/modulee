@@ -1,7 +1,7 @@
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
-import { InputWithControl } from '../InputWithControl';
-import type { ModuleNode } from '../node/ModuleNode.svelte';
-import type { InputNode } from './node/InputNode.sveltevelte';
+import type { InputNode } from '$lib/node/InputNode.svelte';
+import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
+import { InputWithControl } from './InputWithControl';
 
 export class ModuleNodeInput extends InputWithControl {
 	constructor(

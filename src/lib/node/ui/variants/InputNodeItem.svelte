@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { InputNode } from '$lib/data/node/InputNode.sveltevelte';
+	import type { InputNode } from '$lib/node/InputNode.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import BaseNodeItem from '../BaseNodeItem.svelte';
+	import BaseNodeItem from './BaseNodeItem.svelte';
 	import EditInputNodeModal from './EditInputNodeModal.svelte';
 
 	interface Props {

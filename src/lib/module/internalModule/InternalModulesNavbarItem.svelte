@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { InternalModule } from '$lib/module/InternalModule.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
+	import type { InternalModule } from './InternalModule.svelte';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 
 	interface Props {

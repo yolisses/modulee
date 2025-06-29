@@ -1,4 +1,4 @@
-import type { NodeData } from '$lib/data/NodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 

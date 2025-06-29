@@ -1,4 +1,4 @@
-import { createId } from '$lib/data/createId';
+import { createId } from '$lib/global/createId';
 import prisma from '$lib/prisma';
 import { faker } from '@faker-js/faker';
 import { createFakeDescription } from './createFakeDescription';

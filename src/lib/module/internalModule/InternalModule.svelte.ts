@@ -1,8 +1,8 @@
 import type { ById } from '$lib/editor/ById';
-import { Module } from '../data/Module';
-import type { Node } from '../node/Node.svelte';
-import type { InternalModuleData } from './internalModule/InternalModuleData';
-import type { InternalModuleReference } from './internalModule/InternalModuleReference';
+import type { Node } from '$lib/node/Node.svelte';
+import { Module } from '../Module';
+import type { InternalModuleData } from './InternalModuleData';
+import type { InternalModuleReference } from './InternalModuleReference';
 
 export class InternalModule extends Module<InternalModuleData> {
 	constructor(internalModuleData: InternalModuleData, nodeOptions: ById<Node>) {

@@ -2,8 +2,8 @@
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getProjectNavbarSelectionContext } from '../projectNavbarSelectionContext';
-	import CreateExternalModuleButton from './ui/CreateExternalModuleButton.svelte';
-	import ProjectForm from './ui/ProjectForm.svelte';
+	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
+	import ProjectForm from './ProjectForm.svelte';
 
 	interface Props {
 		projectData: ProjectData;

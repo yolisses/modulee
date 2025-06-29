@@ -1,5 +1,5 @@
 import prisma from '$lib/prisma';
-import type { ProjectData } from '$lib/project/ProjectData';
+import type { ProjectData } from '$lib/project/data/ProjectData';
 import { getExternalModuleIdsFromProject } from './getExternalModuleIdsFromProject';
 
 export async function getExternalModuleIdsFromProjectId(

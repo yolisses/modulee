@@ -1,7 +1,7 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { NodeData } from '$lib/data/NodeData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { NodeData } from '$lib/node/data/NodeData';
 
 /**
  * Requires new node and connection data, with new IDs already set.

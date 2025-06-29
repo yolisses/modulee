@@ -1,4 +1,4 @@
-import type { VectorData } from './VectorData';
+import type { VectorData } from '../actionCommands/VectorData';
 
 // TODO implement single output
 export type NodeDataBase<T extends string = string, E = object> = {

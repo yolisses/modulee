@@ -1,9 +1,9 @@
-import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
-import { Vector } from 'nodes-editor';
-import { DefaultNodeInput } from '../input/DefaultNodeInput.sveltesvelte';
-import { Input } from '../input/Input.sveltesvelte';
-import { Output } from './Output.svelte;
-import type { NodeDataBase } from './NodeDataBase';
+import { DefaultNodeInput } from '$lib/input/DefaultNodeInput.svelte';
+import type { Input } from '$lib/input/Input.svelte';
+import type { Vector } from 'nodes-editor';
+import type { NodeDataBase } from './data/NodeDataBase';
+import { nodeDefinitionsByName } from './definitions/nodeDefinitionsByName';
+import { Output } from './Output.svelte';
 
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;

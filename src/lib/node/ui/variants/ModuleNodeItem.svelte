@@ -6,8 +6,8 @@
 	import type { ModuleNode } from '$lib/node/ModuleNode.svelte.js';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import BaseNodeItem from '../BaseNodeItem.svelte';
 	import ModuleReferenceButton from '../ModuleReferenceButton.svelte';
+	import BaseNodeItem from './BaseNodeItem.svelte';
 
 	interface Props {
 		moduleNode: ModuleNode;

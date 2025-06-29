@@ -1,5 +1,5 @@
-import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import type { InputPath } from '$lib/input/InputPath';
 
 export function getIsInputConnected(inputPath: InputPath, graphRegistry: GraphRegistry) {

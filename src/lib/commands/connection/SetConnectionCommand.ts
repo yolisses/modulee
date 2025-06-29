@@ -1,5 +1,5 @@
 import type { Remotion } from '$lib/array/remotion';
-import type { ConnectionData } from '$lib/data/ConnectionData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { mockCommandData } from '../test/mockNodeData';

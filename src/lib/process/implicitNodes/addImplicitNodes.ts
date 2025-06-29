@@ -1,10 +1,10 @@
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { getInputPathId } from '$lib/connection/getInputPathId';
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { NodeData } from '$lib/data/NodeData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InputPath } from '$lib/input/InputPath';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { createNodeData } from '$lib/node/add/createNodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';

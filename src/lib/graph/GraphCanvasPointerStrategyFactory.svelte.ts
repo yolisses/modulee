@@ -1,7 +1,7 @@
 import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
-import { createId } from '$lib/data/createId';
 import { getEditorContext } from '$lib/editor/editorContext';
+import { createId } from '$lib/global/createId';
 import { getGraphContext } from '$lib/graph/graphContext';
 import type { InputPath } from '$lib/input/InputPath';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';

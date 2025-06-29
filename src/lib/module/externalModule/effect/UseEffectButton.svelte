@@ -4,7 +4,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

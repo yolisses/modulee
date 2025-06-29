@@ -1,9 +1,9 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import { createId } from '$lib/data/createId';
-import type { NodeData } from '$lib/data/NodeData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
+import { createId } from '$lib/global/createId';
 import type { GraphData } from '$lib/graph/GraphData';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import { createNodeData } from '$lib/node/add/createNodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
 import { faker } from '@faker-js/faker';
 import { createFakePosition } from './createFakePosition';

@@ -1,7 +1,7 @@
 import { getExternalModuleIdsFromProject } from '$lib/db/externalModule/getExternalModuleIdsFromProject';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import prisma from '$lib/prisma';
-import type { ProjectData } from '$lib/project/ProjectData';
+import type { ProjectData } from '$lib/project/data/ProjectData';
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 

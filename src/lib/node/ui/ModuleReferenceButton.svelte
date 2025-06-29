@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Module } from '$lib/module/Module';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 
 	interface Props {
 		module: Module;

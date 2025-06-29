@@ -1,6 +1,6 @@
-import type { AudioInputNodeData } from '$lib/data/variants/AudioInputNodeData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { getIsAudioInputNodeData } from '$lib/module/externalModule/effect/getIsAudioInputNodeData';
+import type { AudioInputNodeData } from '$lib/node/data/variants/AudioInputNodeData';
 import type { SomeModuleNodeData } from '$lib/rack/SomeModuleNodeData';
 import { getExternalModuleAudioInputNodes } from './getExternalModuleAudioInputNodes';
 import { getInternalModuleAudioInputNodes } from './getInternalModuleAudioInputNodes';

@@ -1,5 +1,5 @@
+import { ConnectionSchema } from '$lib/connection/ConnectionSchema';
 import z from 'zod/v4';
-import { ConnectionSchema } from './ConnectionSchema';
 import { InternalModuleSchema } from './InternalModuleSchema';
 import { NodeSchema } from './NodeSchema';
 

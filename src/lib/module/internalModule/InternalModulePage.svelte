@@ -4,7 +4,7 @@
 	import { createId } from '$lib/global/createId';
 	import { getGraphContext } from '$lib/graph/graphContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 

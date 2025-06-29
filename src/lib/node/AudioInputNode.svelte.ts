@@ -1,5 +1,5 @@
-import { Node } from '../data/node/Node.svelte';
-import type { AudioInputNodeData } from './variants/AudioInputNodeData';
+import type { AudioInputNodeData } from './data/variants/AudioInputNodeData';
+import { Node } from './Node.svelte';
 
 export class AudioInputNode extends Node<AudioInputNodeData> {
 	get name() {

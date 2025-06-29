@@ -6,7 +6,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { InputWithControl } from '$lib/input/InputWithControl';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { formatNumber } from '../ui/formatNumber';
 
 	interface Props {

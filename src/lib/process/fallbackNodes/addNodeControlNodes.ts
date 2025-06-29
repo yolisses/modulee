@@ -1,8 +1,8 @@
-import type { ConnectionData } from '$lib/data/ConnectionData';
-import { createId } from '$lib/data/createId';
-import type { ControlNodeData } from '$lib/data/variants/ControlNodeData';
+import type { ConnectionData } from '$lib/connection/ConnectionData';
+import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { InputWithControl } from '$lib/input/InputWithControl';
+import type { ControlNodeData } from '$lib/node/data/variants/ControlNodeData';
 import type { Node } from '$lib/node/Node.svelte';
 import { Vector } from 'nodes-editor';
 

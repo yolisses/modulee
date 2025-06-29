@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
-	import type { InputNode } from '$lib/data/node/InputNode.sveltevelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import type { InputNode } from '$lib/node/InputNode.svelte';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { getModalRootContext } from '$lib/ui/modalRootContext';
 	import Portal from 'svelte-portal';

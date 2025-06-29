@@ -1,5 +1,5 @@
+import type { InputPath } from '$lib/input/InputPath';
 import type { ConnectionData } from './ConnectionData';
-import type { InputPath } from './InputPath';
 
 export class Connection {
 	id: string;

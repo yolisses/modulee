@@ -1,4 +1,4 @@
-import type { NodeData } from '$lib/data/NodeData';
+import type { NodeData } from '$lib/node/data/NodeData';
 import type { SomeModuleNodeData } from './SomeModuleNodeData';
 
 export function getIsSomeModuleNodeData(nodeData: NodeData): nodeData is SomeModuleNodeData {

@@ -3,10 +3,10 @@
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import type { InternalModule } from '$lib/module/InternalModule.svelte';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import type { InternalModule } from './InternalModule.svelte';
 
 	// TODO find a better way to decide the redirect
 	interface Props {

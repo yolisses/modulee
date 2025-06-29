@@ -1,6 +1,6 @@
-import type { InputNodeData } from '$lib/data/variants/InputNodeData';
 import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { UpdateInputNodeExtrasCommand } from './UpdateInputNodeExtrasCommand';

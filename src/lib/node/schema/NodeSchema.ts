@@ -1,5 +1,5 @@
+import { ModuleNodeBaseSchema } from '$lib/schemas/ModuleNodeBaseSchema';
 import z from 'zod/v4';
-import { ModuleNodeBaseSchema } from './ModuleNodeBaseSchema';
 import { NodeBaseSchema } from './NodeBaseSchema';
 import { ConstantNodeExtrasSchema } from './variants/ConstantNodeExtrasSchema';
 import { ControlNodeExtrasSchema } from './variants/ControlNodeExtrasSchema';

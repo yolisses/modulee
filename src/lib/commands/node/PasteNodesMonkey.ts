@@ -1,6 +1,6 @@
-import { createId } from '$lib/data/createId';
 import { getRandomDistinctItems } from '$lib/fake/getRandomDistinctItems';
 import { getRandomInt } from '$lib/fake/getRandomInt';
+import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';

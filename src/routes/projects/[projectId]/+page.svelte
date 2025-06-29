@@ -1,6 +1,6 @@
 <script>
-	import ProjectPage from '$lib/project/ProjectPage.svelte';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
+	import ProjectPage from '$lib/project/ui/ProjectPage.svelte';
 
 	const projectDataContext = getProjectDataContext();
 </script>

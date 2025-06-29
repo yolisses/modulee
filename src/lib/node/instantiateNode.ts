@@ -1,9 +1,14 @@
-import { ConstantNode } from './ConstantNode.svelte{ InputNode } from './Inp../InputNode.svelteport { ModuleNode } from './Mod../ModuleNode.svelteport { Node } from './Nod../Node.svelteport { AudioInputNode } from './nod./AudioInputNode.svelteport type { NodeData } from './NodeData';
-../InputNode.svelte
-export function instantiateN../ModuleNode.svelteata) {
-	if (nodeData.type ===../Node.svelte || nodeData.type === 'ModuleVoicesNode') {
-		return new ModuleNode(nodeData./AudioInputNode.svelte
-	} else if (nodeData.type === '../NodeDatade') {
+import { AudioInputNode } from './AudioInputNode.svelte';
+import { ConstantNode } from './ConstantNode.svelte';
+import type { NodeData } from './data/NodeData';
+import { InputNode } from './InputNode.svelte';
+import { ModuleNode } from './ModuleNode.svelte';
+import { Node } from './Node.svelte';
+
+export function instantiateNode(nodeData: NodeData) {
+	if (nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode') {
+		return new ModuleNode(nodeData);
+	} else if (nodeData.type === 'ConstantNode') {
 		return new ConstantNode(nodeData);
 	} else if (nodeData.type === 'InputNode') {
 		return new InputNode(nodeData);

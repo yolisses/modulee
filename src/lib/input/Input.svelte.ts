@@ -1,8 +1,10 @@
 import { getInputPathId } from '$lib/connection/getInputPathId';
+import type { InputPath } from '$lib/input/InputPath';
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
+import type { Node } from '$lib/node/Node.svelte';
 import type { Connector } from '../connector/Connector';
-import type { InputPath } from './InputPath';
-import type { Node } from '../node/Node.svelteexport abstract class Input implements Connector {
+
+export abstract class Input implements Connector {
 	id: string;
 	targetNode?: Node;
 	inputPath: InputPath;

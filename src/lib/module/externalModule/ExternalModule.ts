@@ -1,6 +1,6 @@
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { instantiateNode } from '../../node/instantiateNode';
-import { Module } from '../data/Module';
+import { instantiateNode } from '$lib/node/instantiateNode';
+import { Module } from '../Module';
 import type { ExternalModuleReference } from './ExternalModuleReference';
 
 export class ExternalModule extends Module<ExternalModuleData> {

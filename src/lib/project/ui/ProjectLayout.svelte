@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { setGraphContext } from '$lib/data/graphContext';
-	import ActionCommandsPalette from$lib/graph/graphContextmmandsPalette.svelte';
+	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
+	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
-	import { Graph } from '$lib/graph/Graph.svelte';
+	import { setGraphContext } from '$lib/graph/graphContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import {
@@ -13,20 +13,20 @@
 	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { getGraphData } from '$lib/project/getGraphData';
-	import ProjectNavbar from '$lib/project/ProjectNavbar.svelte';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
-	import { onMount, type Snippet } from 'svelte';
-	import { getGraphRegistry } from './getGraphRegistry';
-	import { initializeAudioFeatures } from './initializeAudioFeatures.svelte';
-	import type { ProjectData } from './ProjectData';
-	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
+	import type { Graph } from 'redis';
+	import { type Snippet, onMount } from 'svelte';
+	import type { ProjectData } from '../data/ProjectData';
+	import { getGraphData } from '../getGraphData';
+	import { getGraphRegistry } from '../getGraphRegistry';
 	import {
 		type ProjectNavbarSelectionContext,
 		setProjectNavbarSelectionContext,
-	} from './projectNavbarSelectionContext';
-	import { setMenuVisibilityContexts } from './setMenuVisibilityContexts.svelte';
+	} from '../projectNavbarSelectionContext';
+	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
+	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
+	import ProjectNavbar from './ProjectNavbar.svelte';
 
 	interface Props {
 		children: Snippet;
