@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Input } from '$lib/data/Input.svelte.js';
+	import { InputWithControl } from '$lib/data/InputWithControl';
 	import { ModuleNodeAudioInput } from '$lib/data/ModuleNodeAudioInput';
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';
 	import AudioInputItemContentUnconnected from './AudioInputItemContentUnconnected.svelte';
@@ -34,7 +35,7 @@
 			<InputItemContentConnected {input} />
 		{:else if input instanceof ModuleNodeAudioInput}
 			<AudioInputItemContentUnconnected audioInput={input} />
-		{:else}
+		{:else if input instanceof InputWithControl}
 			<InputItemContentUnconnected {input} />
 		{/if}
 	</div>

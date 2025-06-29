@@ -1,11 +1,10 @@
 import { getInputPathId } from '$lib/connection/getInputPathId';
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
-import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
 import type { Connector } from './Connector';
 import type { InputPath } from './InputPath';
 import type { Node } from './Node.svelte';
 
-export class Input implements Connector {
+export abstract class Input implements Connector {
 	id: string;
 	targetNode?: Node;
 	inputPath: InputPath;
@@ -23,25 +22,5 @@ export class Input implements Connector {
 		return this.id + '.control';
 	}
 
-	public getUnconnectedValue() {
-		return this.node.unconnectedInputValues?.[this.inputPath.inputKey];
-	}
-
-	public getInputDefinition(): InputDefinition {
-		const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {
-			return this.node.type === nodeDefinition.type;
-		});
-		if (!nodeDefinition) {
-			throw new Error('Node definition not found');
-		}
-
-		const inputDefinition = nodeDefinition.inputs.find((inputDefinition) => {
-			return inputDefinition.key === this.key;
-		});
-		if (!inputDefinition) {
-			throw new Error('Input definition not found');
-		}
-
-		return inputDefinition;
-	}
+	abstract getInputDefinition(): InputDefinition;
 }

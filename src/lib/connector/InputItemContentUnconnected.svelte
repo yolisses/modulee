@@ -2,7 +2,7 @@
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
 	import { createId } from '$lib/data/createId';
-	import type { Input } from '$lib/data/Input.svelte';
+	import type { InputWithControl } from '$lib/data/InputWithControl';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { hashToUsize } from '$lib/engine/data/hashToUsize';
@@ -10,7 +10,7 @@
 	import { formatNumber } from './formatNumber';
 
 	interface Props {
-		input: Input;
+		input: InputWithControl;
 	}
 
 	let element: HTMLElement;

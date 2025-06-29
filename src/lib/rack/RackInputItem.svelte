@@ -2,7 +2,7 @@
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { formatNumber } from '$lib/connector/formatNumber';
 	import { createId } from '$lib/data/createId';
-	import type { Input } from '$lib/data/Input.svelte';
+	import type { InputWithControl } from '$lib/data/InputWithControl';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
 	import { hashToUsize } from '$lib/engine/data/hashToUsize';
@@ -11,7 +11,7 @@
 	import { tick } from 'svelte';
 
 	interface Props {
-		input: Input;
+		input: InputWithControl;
 	}
 
 	let textEditing = $state(false);

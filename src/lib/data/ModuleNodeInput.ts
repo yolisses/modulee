@@ -1,9 +1,9 @@
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
-import { Input } from './Input.svelte';
 import type { InputNode } from './InputNode.svelte';
+import { InputWithControl } from './InputWithControl';
 import type { ModuleNode } from './ModuleNode.svelte';
 
-export class ModuleNodeInput extends Input {
+export class ModuleNodeInput extends InputWithControl {
 	constructor(
 		public moduleNode: ModuleNode,
 		public inputNode: InputNode,
@@ -12,7 +12,7 @@ export class ModuleNodeInput extends Input {
 	}
 
 	public getUnconnectedValue() {
-		const value = super.getUnconnectedValue();
+		const value = this.node.unconnectedInputValues?.[this.inputPath.inputKey];
 		return value === undefined ? this.inputNode.defaultValue : value;
 	}
 

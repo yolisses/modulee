@@ -1,5 +1,6 @@
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { Vector } from 'nodes-editor';
+import { DefaultNodeInput } from './DefaultNodeInput.svelte';
 import { Input } from './Input.svelte';
 import type { NodeDataBase } from './NodeDataBase';
 import { Output } from './Output.svelte';
@@ -16,13 +17,14 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 
 		this.output = new Output(this);
 		this.inputs = this.getInputs();
+		console.log(this.inputs);
 		this.position = Vector.fromData(this.nodeData.position);
 	}
 
 	private getInputs() {
 		const nodeDefinition = nodeDefinitionsByName[this.type];
 		return nodeDefinition.inputs.map((input) => {
-			return new Input(input.key, input.key, this);
+			return new DefaultNodeInput(input.key, input.key, this);
 		});
 	}
 

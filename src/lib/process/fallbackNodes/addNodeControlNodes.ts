@@ -1,6 +1,7 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { createId } from '$lib/data/createId';
 import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import { InputWithControl } from '$lib/data/InputWithControl';
 import type { Node } from '$lib/data/Node.svelte';
 import type { ControlNodeData } from '$lib/data/variants/ControlNodeData';
 import { Vector } from 'nodes-editor';
@@ -8,6 +9,7 @@ import { Vector } from 'nodes-editor';
 export function addNodeControlNodes(node: Node, graphRegistry: GraphRegistry) {
 	node.inputs.forEach((input) => {
 		if (input.targetNode) return;
+		if (!(input instanceof InputWithControl)) return;
 
 		const controlNodeId = input.getControlNodeId();
 		const controlNodeData: ControlNodeData = {
