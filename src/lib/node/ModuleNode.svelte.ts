@@ -14,6 +14,7 @@ import { Node } from './Node.svelte';
 // fillModule called
 export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 	targetModule: Module | null = $state(null);
+	audioInput?: ModuleNodeAudioInput;
 
 	fillModule(modules: ById<Module>) {
 		if (this.moduleReference) {
@@ -32,7 +33,8 @@ export class ModuleNode extends Node<ModuleNodeData | ModuleVoicesNodeData> {
 		if (!targetModule) return;
 
 		if (targetModule.nodes.some(getIsAudioInputNode)) {
-			this.inputs.push(new ModuleNodeAudioInput(this));
+			this.audioInput = new ModuleNodeAudioInput(this);
+			this.inputs.push(this.audioInput);
 		}
 
 		targetModule.nodes.filter(getIsInputNode).forEach((inputNode) => {
