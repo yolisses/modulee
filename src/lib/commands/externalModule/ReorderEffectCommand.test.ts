@@ -9,11 +9,11 @@ test('ReorderEffectCommand', () => {
 		// 1<-2<-3<-4<-5
 		// 1<-3<-4<-2<-5
 		nodes: ById.fromItems([
-			{ id: 'node1' },
-			{ id: 'node2' },
-			{ id: 'node3' },
-			{ id: 'node4' },
-			{ id: 'node5' },
+			{ id: 'node1', type: 'ModuleNode' },
+			{ id: 'node2', type: 'ModuleNode' },
+			{ id: 'node3', type: 'ModuleNode' },
+			{ id: 'node4', type: 'ModuleNode' },
+			{ id: 'node5', type: 'ModuleNode' },
 		]),
 		connections: ById.fromItems([
 			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node1' },

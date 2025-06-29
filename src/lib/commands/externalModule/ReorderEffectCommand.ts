@@ -1,5 +1,11 @@
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { getModuleNodeAudioTargetNodeId } from '$lib/module/getModuleNodeAudioTargetNodeId';
+import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
+import { getId } from '$lib/ui/getId';
+import { RemoveConnectionsCommand } from '../connection/RemoveConnectionsCommand';
+import { mockCommandData } from '../test/mockNodeData';
+import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 
 /**
  * Move an effect in the effect chain:
@@ -10,12 +16,43 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
  */
 export class ReorderEffectCommand extends EditorCommand<{
 	moduleNodeId: string;
-	incommingNodeId?: string;
-	outcomingNodeId?: string;
+	referenceNodeId: string;
+	direction: 'back' | 'front';
 }> {
-	execute(graphRegistry: GraphRegistry): void {}
+	removeConnectionsToNode?: RemoveConnectionsCommand;
+	replaceConnectionsToNode?: ReplaceConnectionsTargetNodeIdCommand;
+
+	execute(graphRegistry: GraphRegistry): void {
+		const { moduleNodeId } = this.details;
+
+		const nodeData = graphRegistry.nodes.get(moduleNodeId);
+		if (!getIsSomeModuleNodeData(nodeData)) {
+			throw new Error('Invalid node type', { cause: nodeData });
+		}
+
+		const connectionToNodeIds = graphRegistry.connections
+			.values()
+			.filter((connectionData) => {
+				return connectionData.targetNodeId === moduleNodeId;
+			})
+			.map(getId);
+		const moduleNodeAudioTargetNodeId = getModuleNodeAudioTargetNodeId(moduleNodeId, graphRegistry);
+		if (moduleNodeAudioTargetNodeId) {
+			this.replaceConnectionsToNode = new ReplaceConnectionsTargetNodeIdCommand(
+				mockCommandData({
+					connectionIds: connectionToNodeIds,
+					targetId: moduleNodeAudioTargetNodeId,
+				}),
+			);
+		} else {
+			this.removeConnectionsToNode = new RemoveConnectionsCommand(
+				mockCommandData({ connectionIds: connectionToNodeIds }),
+			);
+		}
+	}
 
 	undo(graphRegistry: GraphRegistry): void {
-		throw new Error('Method not implemented.');
+		this.removeConnectionsToNode?.undo(graphRegistry);
+		this.replaceConnectionsToNode?.undo(graphRegistry);
 	}
 }
