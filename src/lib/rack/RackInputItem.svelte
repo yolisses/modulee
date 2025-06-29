@@ -36,6 +36,7 @@
 	}
 
 	function handleChange() {
+		textEditing = false;
 		if (value === initialValue) return;
 		initialValue = value;
 		const command = new SetUnconnectedInputValueCommand({
@@ -46,7 +47,6 @@
 			details: { value, inputPath: structuredClone(input.inputPath) },
 		});
 		editorContext.editor.execute(command);
-		textEditing = false;
 	}
 
 	function handleClick() {
@@ -84,7 +84,7 @@
 			onkeypress={handleKeyPress}
 			step={isBoolean ? 1 : 'any'}
 		/>
-		<button class="common-button block min-w-8 p-0 text-right" onclick={handleClick}>
+		<button class="common-button block min-w-9 p-0 text-right" onclick={handleClick}>
 			{formatNumber(value)}
 		</button>
 	{/if}
