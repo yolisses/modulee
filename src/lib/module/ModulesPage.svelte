@@ -7,7 +7,7 @@
 	import { getName } from '$lib/ui/getName';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ExternalModule } from './externalModule/ExternalModule';
-	import type { InternalModule } from './internalModule/InternalModule.svelte';
+	import type { InternalModule } from './internalModule/InternalModule';
 	import InternalModuleDotsMenuButton from './internalModule/InternalModuleDotsMenuButton.svelte';
 
 	const graphContext = getGraphContext();

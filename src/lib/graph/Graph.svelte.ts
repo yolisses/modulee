@@ -2,7 +2,7 @@ import { Connection } from '$lib/connection/Connection';
 import { ById } from '$lib/editor/ById';
 import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-import { InternalModule } from '$lib/module/internalModule/InternalModule.svelte';
+import { InternalModule } from '$lib/module/internalModule/InternalModule';
 import type { Module } from '$lib/module/Module';
 import { instantiateNode } from '$lib/node/instantiateNode';
 import { ModuleNode } from '$lib/node/ModuleNode.svelte';

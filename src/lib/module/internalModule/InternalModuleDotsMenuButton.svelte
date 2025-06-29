@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DotsMenuButton from '$lib/ui/DotsMenuButton.svelte';
 	import DeleteInternalModuleButton from './DeleteInternalModuleButton.svelte';
-	import type { InternalModule } from './InternalModule.svelte';
+	import type { InternalModule } from './InternalModule';
 	import RenameInternalModuleButton from './RenameInternalModuleButton.svelte';
 
 	interface Props {

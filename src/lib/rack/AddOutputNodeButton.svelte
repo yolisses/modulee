@@ -2,7 +2,7 @@
 	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import type { InternalModule } from '$lib/module/internalModule/InternalModule.svelte';
+	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';

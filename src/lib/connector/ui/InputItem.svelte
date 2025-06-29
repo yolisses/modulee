@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Input } from '$lib/input/Input.svelte';
+	import type { Input } from '$lib/input/Input';
 	import { InputWithControl } from '$lib/input/InputWithControl';
 	import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';

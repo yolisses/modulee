@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InputNode } from '$lib/node/InputNode.svelte';
+	import type { InputNode } from '$lib/node/InputNode';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import BaseNodeItem from './BaseNodeItem.svelte';

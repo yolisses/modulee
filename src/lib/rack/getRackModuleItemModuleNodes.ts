@@ -1,7 +1,7 @@
 import { getIsDefined } from '$lib/connection/getIsDefined';
 import { getGraphTopologicalMap } from '$lib/connection/getNodesTopologicalMap';
 import { getTopologicalOrder } from '$lib/connection/getTopologicalOrder';
-import type { InternalModule } from '$lib/module/internalModule/InternalModule.svelte';
+import type { InternalModule } from '$lib/module/internalModule/InternalModule';
 import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
 import { getIsSomeModuleNode } from './getIsSomeModuleNode';
 

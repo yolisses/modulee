@@ -3,7 +3,7 @@
 	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
 	import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-	import type { ConstantNode } from '$lib/node/ConstantNode.svelte';
+	import type { ConstantNode } from '$lib/node/ConstantNode';
 	import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';

@@ -1,7 +1,7 @@
-import { AudioInputNode } from './AudioInputNode.svelte';
-import { ConstantNode } from './ConstantNode.svelte';
+import { AudioInputNode } from './AudioInputNode';
+import { ConstantNode } from './ConstantNode';
 import type { NodeData } from './data/NodeData';
-import { InputNode } from './InputNode.svelte';
+import { InputNode } from './InputNode';
 import { ModuleNode } from './ModuleNode.svelte';
 import { Node } from './Node.svelte';
 

@@ -7,7 +7,7 @@
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getNewItemName } from '../../ui/getNewItemName';
-	import type { InternalModule } from './InternalModule.svelte';
+	import type { InternalModule } from './InternalModule';
 
 	interface Props {
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;

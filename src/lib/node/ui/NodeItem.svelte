@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ConstantNode } from '$lib/node/ConstantNode.svelte';
+	import { ConstantNode } from '$lib/node/ConstantNode';
 	import { ModuleNode } from '$lib/node/ModuleNode.svelte';
 	import { Node } from '$lib/node/Node.svelte';
-	import { InputNode } from '../InputNode.svelte';
+	import { InputNode } from '../InputNode';
 	import BaseNodeItem from './variants/BaseNodeItem.svelte';
 	import ConstantNodeItem from './variants/ConstantNodeItem.svelte';
 	import InputNodeItem from './variants/InputNodeItem.svelte';

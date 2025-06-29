@@ -1,4 +1,4 @@
-import { InputNode } from './InputNode.svelte';
+import { InputNode } from './InputNode';
 import type { Node } from './Node.svelte';
 
 export function getIsInputNode(node: Node): node is InputNode {

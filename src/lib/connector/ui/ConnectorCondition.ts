@@ -1,6 +1,6 @@
 import { getGraphContext } from '$lib/graph/graphContext';
-import { Input } from '$lib/input/Input.svelte';
-import { Output } from '$lib/node/Output.svelte';
+import { Input } from '$lib/input/Input';
+import { Output } from '$lib/node/Output';
 import type { ConnectionCondition } from 'nodes-editor';
 
 export class ConnectorCondition {

@@ -5,7 +5,7 @@
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
-	import type { InternalModule } from './InternalModule.svelte';
+	import type { InternalModule } from './InternalModule';
 
 	interface Props {
 		closeModal: () => void;

@@ -2,7 +2,7 @@
 	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
 	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import type { InputNode } from '$lib/node/InputNode.svelte';
+	import type { InputNode } from '$lib/node/InputNode';
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { getModalRootContext } from '$lib/ui/modalRootContext';

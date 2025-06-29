@@ -6,7 +6,7 @@
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { InternalModule } from './InternalModule.svelte';
+	import type { InternalModule } from './InternalModule';
 
 	// TODO find a better way to decide the redirect
 	interface Props {

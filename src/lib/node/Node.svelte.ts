@@ -1,9 +1,9 @@
-import { DefaultNodeInput } from '$lib/input/DefaultNodeInput.svelte';
-import type { Input } from '$lib/input/Input.svelte';
+import { DefaultNodeInput } from '$lib/input/DefaultNodeInput';
+import type { Input } from '$lib/input/Input';
 import { Vector } from 'nodes-editor';
 import type { NodeDataBase } from './data/NodeDataBase';
 import { nodeDefinitionsByName } from './definitions/nodeDefinitionsByName';
-import { Output } from './Output.svelte';
+import { Output } from './Output';
 
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
@@ -17,7 +17,6 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 
 		this.output = new Output(this);
 		this.inputs = this.getInputs();
-		console.log(this.inputs);
 		this.position = Vector.fromData(this.nodeData.position);
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getGraphContext } from '$lib/graph/graphContext';
-	import { Output } from '$lib/node/Output.svelte';
+	import { Output } from '$lib/node/Output';
 	import {
 		PreviewConnectionWire as BasePreviewConnectionWire,
 		getPreviewConnectionContext,

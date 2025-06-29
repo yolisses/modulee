@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InternalModule } from '$lib/module/internalModule/InternalModule.svelte';
+	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import RenameInternalModuleModal from './RenameInternalModuleModal.svelte';

@@ -1,5 +1,5 @@
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
-import type { InputNode } from '$lib/node/InputNode.svelte';
+import type { InputNode } from '$lib/node/InputNode';
 import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
 import { InputWithControl } from './InputWithControl';
 
