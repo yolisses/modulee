@@ -10,8 +10,6 @@ export function getModuleNodeAudioTargetNodeId(moduleNodeId: string, graphRegist
 		});
 	});
 
-	console.log(connections);
-
 	if (connections.length > 1) {
 		throw new Error('More than one audio connection', { cause: connections });
 	}
