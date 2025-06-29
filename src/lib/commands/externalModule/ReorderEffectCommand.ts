@@ -26,10 +26,11 @@ export class ReorderEffectCommand extends EditorCommand<{
 	direction: 'back' | 'front';
 }> {
 	removeConnectionsToNode?: RemoveConnectionsCommand;
+	connectToNode?: ReplaceConnectionsTargetNodeIdCommand;
 	replaceConnectionsToNode?: ReplaceConnectionsTargetNodeIdCommand;
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { moduleNodeId } = this.details;
+		const { moduleNodeId, referenceNodeId } = this.details;
 
 		const nodeData = graphRegistry.nodes.get(moduleNodeId);
 		if (!getIsSomeModuleNodeData(nodeData)) {
@@ -54,6 +55,18 @@ export class ReorderEffectCommand extends EditorCommand<{
 			);
 			this.removeConnectionsToNode.execute(graphRegistry);
 		}
+
+		const connectionToReferenceNodeIds = getConnectionsByTargetNodeId(
+			graphRegistry,
+			referenceNodeId,
+		).map(getId);
+		this.connectToNode = new ReplaceConnectionsTargetNodeIdCommand(
+			mockCommandData({
+				targetId: moduleNodeId,
+				connectionIds: connectionToReferenceNodeIds,
+			}),
+		);
+		this.connectToNode.execute(graphRegistry);
 	}
 
 	undo(graphRegistry: GraphRegistry): void {

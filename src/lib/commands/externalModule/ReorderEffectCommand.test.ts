@@ -41,9 +41,9 @@ test('ReorderEffectCommand', () => {
 
 	const command = new ReorderEffectCommand(
 		mockCommandData({
-			direction: 'back',
+			direction: 'front',
 			moduleNodeId: 'node2',
-			referenceNodeId: 'node5',
+			referenceNodeId: 'node4',
 		}),
 	);
 
