@@ -1,4 +1,4 @@
-import { getGraphContext } from '$lib/data/graphContext';
+import { getGraphContext } from '$lib/graph/graphContext';
 import { getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
 import { graphCanvasPositioningStep } from './graphCanvasPositioningStep';
 

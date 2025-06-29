@@ -1,6 +1,6 @@
-import type { Connector } from '$lib/data/Connector';
-import { Input } from '$lib/data/Input.svelte';
-import { Output } from '$lib/data/Output.svelte';
+import type { Connector } from '$lib/connector/Connector';
+import { Input } from '$lib/data/input/Input.sveltesvelte';
+import { Output } from '$lib/data/node/Output.sveltevelte';
 import type { ById } from '$lib/editor/ById';
 import type { EndPreviewConnectionEvent } from 'nodes-editor';
 

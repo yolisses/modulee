@@ -1,4 +1,4 @@
-import type { Node } from '$lib/data/Node.svelte';
+import type { Node } from '$lib/node/Node.svelte';
 
 export function getNodesMinPosition(nodes: Node[]) {
 	let nodesMinPosition = nodes[0].position;

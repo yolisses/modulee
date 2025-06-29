@@ -1,5 +1,5 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 export class RenameInternalModuleCommand extends EditorCommand<{
 	internalModuleId: string;

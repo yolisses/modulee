@@ -1,4 +1,4 @@
-import type { Node } from '$lib/data/Node.svelte';
+import type { Node } from '$lib/node/Node.svelte';
 import { Vector } from 'nodes-editor';
 import { getNodeSize } from './getNodeSize';
 

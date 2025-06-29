@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
-	import { ModuleNodeInput } from '$lib/data/ModuleNodeInput';
+	import { ModuleNodeInput } from '$lib/data/input/ModuleNodeInputeInput';
+	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
 	import RackInputItem from './RackInputItem.svelte';
 	import RackModuleNodeItemDotsMenuButton from './RackModuleNodeItemDotsMenuButton.svelte';
 

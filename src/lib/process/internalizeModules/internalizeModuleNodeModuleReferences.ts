@@ -1,5 +1,5 @@
 import { findOrNullById } from '$lib/array/findOrNullById';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 
 export function internalizeModuleNodeModuleReferences(

@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { getIsAudioInputNodeData } from '$lib/rack/getIsAudioInputNodeData';
 import { getIsInputNodeData } from '$lib/rack/getIsInputNodeData';
 import { getId } from '$lib/ui/getId';

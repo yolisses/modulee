@@ -1,5 +1,5 @@
-import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
+import type { InputPath } from '$lib/input/InputPath';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 
 // TODO consider adopting an OOP approach

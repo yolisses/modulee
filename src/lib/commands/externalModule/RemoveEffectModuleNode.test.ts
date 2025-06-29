@@ -1,5 +1,5 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { RemoveEffectModuleNode } from './RemoveEffectModuleNode';

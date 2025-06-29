@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getGraphContext } from '$lib/data/graphContext';
+	import { getGraphContext } from '$lib/graph/graphContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
 	import { getProjectNavbarSelectionContext } from '$lib/project/projectNavbarSelectionContext';

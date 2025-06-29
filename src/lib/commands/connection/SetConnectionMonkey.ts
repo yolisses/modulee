@@ -1,8 +1,8 @@
 import { createId } from '$lib/data/createId';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { getNodeDataInputKeys } from '$lib/fake/getNodeDataInputKeys';
 import { getRandomDistinctItems } from '$lib/fake/getRandomDistinctItems';
 import { getRandomItem } from '$lib/fake/getRandomItem';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { getNodesThatHaveInputs } from '../../monkey/getNodesThatHaveInputs';

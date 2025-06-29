@@ -1,4 +1,4 @@
-import type { GraphData } from '$lib/data/GraphData';
+import type { GraphData } from '$lib/graph/GraphData';
 import type { ModuleType } from '$lib/project/ModuleType';
 import type { UserData } from '$lib/user/UserData';
 

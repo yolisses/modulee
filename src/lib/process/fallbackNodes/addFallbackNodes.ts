@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { addFallbackNodeConnections } from './addNodeConnections';
 import { createFallbackNode } from './createFallbackNode';
 

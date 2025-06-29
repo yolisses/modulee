@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import type { ExternalModule } from '$lib/data/ExternalModule';
-	import { getGraphContext } from '$lib/data/graphContext';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getGraphContext } from '$lib/graph/graphContext';
+	import type { ExternalModule } from '$lib/module/ExternalModulele';
+	import type { InternalModule } from '$lib/module/InternalModule.svelte';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';

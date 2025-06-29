@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { RenameInternalModuleCommand } from '$lib/commands/internalModule/RenameInternalModuleCommand';
-	import { createId } from '$lib/data/createId';
-	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
+	import { createId } from '$lib/global/createId';
+	import { getGraphContext } from '$lib/graph/graphContext';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 

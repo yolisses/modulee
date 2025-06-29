@@ -2,7 +2,7 @@ import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { createId } from '$lib/data/createId';
 import { getEditorContext } from '$lib/editor/editorContext';
 import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-import { getProjectDataContext } from '$lib/project/projectDataContext';
+import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import { getSpaceContext } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
 import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';

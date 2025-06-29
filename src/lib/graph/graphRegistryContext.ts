@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 

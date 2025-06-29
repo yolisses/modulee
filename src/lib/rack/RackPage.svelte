@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getGraphContext } from '$lib/data/graphContext';
+	import { getGraphContext } from '$lib/graph/graphContext';
 	import { getProjectNavbarSelectionContext } from '$lib/project/projectNavbarSelectionContext';
 	import RackModuleItem from './RackModuleItem.svelte';
 

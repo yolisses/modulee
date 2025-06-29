@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { SomeModuleNodeData } from '$lib/rack/SomeModuleNodeData';
 import { getExternalModuleInputKeys } from './getExternalModuleInputKeys';
 import { getInternalModuleInputKeys } from './getInternalModuleInputKeys';

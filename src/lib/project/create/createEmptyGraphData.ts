@@ -1,6 +1,6 @@
 import { createId } from '$lib/data/createId';
-import type { GraphData } from '$lib/data/GraphData';
-import type { InternalModuleData } from '$lib/data/InternalModuleData';
+import type { GraphData } from '$lib/graph/GraphData';
+import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 
 export function createEmptyGraphData(): GraphData {
 	const mainInternalModule: InternalModuleData = { id: createId(), name: 'Main internal module' };

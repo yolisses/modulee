@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';

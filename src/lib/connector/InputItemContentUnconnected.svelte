@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
+	import { hashToUsize } from '$lib/audio/data/hashToUsize';
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
-	import { createId } from '$lib/data/createId';
-	import type { InputWithControl } from '$lib/data/InputWithControl';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-	import { hashToUsize } from '$lib/engine/data/hashToUsize';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
-	import { formatNumber } from './formatNumber';
+	import { createId } from '$lib/global/createId';
+	import type { InputWithControl } from '$lib/input/InputWithControl';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { formatNumber } from '../ui/formatNumber';
 
 	interface Props {
 		input: InputWithControl;

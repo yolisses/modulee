@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends ModuleType">
 	import type { ModuleType } from '$lib/project/ModuleType';
-	import { getProjectDataContextOrUndefined } from '$lib/project/projectDataContext';
+	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContextext';
 	import { faEraser, faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';

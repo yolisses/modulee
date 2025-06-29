@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { AddInternalModuleCommand } from '$lib/commands/internalModule/AddInternalModuleCommand';
-	import { createId } from '$lib/data/createId';
-	import { getGraphContext } from '$lib/data/graphContext';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import { getGraphContext } from '$lib/graph/graphContext';
+	import type { InternalModule } from '$lib/module/InternalModule.svelte';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getNewItemName } from '../../ui/getNewItemName';

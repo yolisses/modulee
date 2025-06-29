@@ -1,5 +1,5 @@
-import type { Node } from '$lib/data/Node.svelte';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
+import type { Node } from '$lib/node/Node.svelte';
 import { NODE_ITEM_WIDTH } from '$lib/node/NODE_ITEM_WIDTH';
 import { Vector } from 'nodes-editor';
 

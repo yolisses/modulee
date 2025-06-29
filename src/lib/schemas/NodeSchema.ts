@@ -1,12 +1,12 @@
 import z from 'zod/v4';
+import { ConstantNodeExtrasSchema } from '../node/schema/variants/ConstantNodeExtrasSchema';
+import { ControlNodeExtrasSchema } from '../node/schema/variants/ControlNodeExtrasSchema';
+import { InputNodeExtrasSchema } from '../node/schema/variants/InputNodeExtrasSchema';
+import { ModuleNodeExtrasSchema } from '../node/schema/variants/ModuleNodeExtrasSchema';
+import { ModuleVoicesNodeExtrasSchema } from '../node/schema/variants/ModuleVoicesNodeExtrasSchema';
+import { OutputNodeExtrasSchema } from '../node/schema/variants/OutputNodeExtrasSchema';
 import { ModuleNodeBaseSchema } from './ModuleNodeBaseSchema';
 import { NodeBaseSchema } from './NodeBaseSchema';
-import { ConstantNodeExtrasSchema } from './nodes/ConstantNodeExtrasSchema';
-import { ControlNodeExtrasSchema } from './nodes/ControlNodeExtrasSchema';
-import { InputNodeExtrasSchema } from './nodes/InputNodeExtrasSchema';
-import { ModuleNodeExtrasSchema } from './nodes/ModuleNodeExtrasSchema';
-import { ModuleVoicesNodeExtrasSchema } from './nodes/ModuleVoicesNodeExtrasSchema';
-import { OutputNodeExtrasSchema } from './nodes/OutputNodeExtrasSchema';
 
 export const NodeSchema = z.union([
 	NodeBaseSchema('AddNode', ['input1', 'input2'], z.object({})),

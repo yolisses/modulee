@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { UseEffectCommand } from '$lib/commands/externalModule/UseEffectCommand';
-	import { createId } from '$lib/data/createId';
-	import { getGraphContext } from '$lib/data/graphContext';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import { getGraphContext } from '$lib/graph/graphContext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

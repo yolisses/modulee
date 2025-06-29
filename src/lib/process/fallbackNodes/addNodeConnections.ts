@@ -1,5 +1,5 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { createInputFallbackConnection } from './createInputFallbackConnection';
 import { getIsInputConnected } from './getIsInputConnected';
 import { getNodeInputPaths } from './getNodeInputPaths';

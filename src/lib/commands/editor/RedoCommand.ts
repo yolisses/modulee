@@ -1,8 +1,8 @@
 import type { Remotion } from '$lib/array/remotion';
 import { removeById } from '$lib/array/removeById';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { EditorData } from '$lib/editor/EditorData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { NotImplementedError } from '$lib/NotImplementedError';
 
 export class RedoCommand extends EditorCommand<{

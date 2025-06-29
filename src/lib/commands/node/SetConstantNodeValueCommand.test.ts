@@ -1,6 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { ConstantNodeData } from '$lib/data/variants/ConstantNodeData';
 import { ById } from '$lib/editor/ById';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { SetConstantNodeValueCommand } from './SetConstantNodeValueCommand';

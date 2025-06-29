@@ -1,4 +1,4 @@
-import type { VectorData } from '$lib/data/VectorData';
+import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { getRandomInt } from './getRandomInt';
 
 export function createFakePosition(): VectorData {

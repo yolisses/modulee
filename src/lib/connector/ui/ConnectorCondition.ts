@@ -1,0 +1,20 @@
+import { Input } from '$lib/data/input/Input.sveltesvelte';
+import { Output } from '$lib/data/node/Output.sveltevelte';
+import { getGraphContext } from '$lib/graph/graphContext';
+import type { ConnectionCondition } from 'nodes-editor';
+
+export class ConnectorCondition {
+	graphContext = getGraphContext();
+
+	endConnectorCondition: ConnectionCondition = ({ endConnectorId, startConnectorId }) => {
+		if (endConnectorId === startConnectorId) return false;
+
+		const { graph } = this.graphContext;
+		const endConnector = graph.connectors.getOrNull(endConnectorId);
+		const startConnector = graph.connectors.getOrNull(startConnectorId);
+
+		if (startConnector instanceof Input && endConnector instanceof Input) return false;
+		if (startConnector instanceof Output && endConnector instanceof Output) return false;
+		return true;
+	};
+}

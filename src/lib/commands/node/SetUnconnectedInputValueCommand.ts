@@ -1,6 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InputPath } from '$lib/data/InputPath';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InputPath } from '$lib/input/InputPath';
 
 export class SetUnconnectedInputValueCommand extends EditorCommand<{
 	value: number;

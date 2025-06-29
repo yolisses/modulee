@@ -1,11 +1,11 @@
 import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
 import { createId } from '$lib/data/createId';
-import { getGraphContext } from '$lib/data/graphContext';
-import type { InputPath } from '$lib/data/InputPath';
 import { getEditorContext } from '$lib/editor/editorContext';
+import { getGraphContext } from '$lib/graph/graphContext';
+import type { InputPath } from '$lib/input/InputPath';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
-import { getProjectDataContext } from '$lib/project/projectDataContext';
+import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import {
 	getPreviewConnectionContext,
 	PreviewConnectionPointerStrategy,

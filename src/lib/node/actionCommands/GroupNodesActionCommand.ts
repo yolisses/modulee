@@ -1,10 +1,10 @@
 import { GroupNodesCommand } from '$lib/commands/internalModule/GroupNodesCommand';
-import { createId } from '$lib/data/createId';
-import type { Node } from '$lib/data/Node.svelte';
-import type { NodeData } from '$lib/data/NodeData';
+import { createId } from '$lib/global/createId';
+import type { Node } from '$lib/node/Node.svelte';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 import { Vector } from 'nodes-editor';
+import type { NodeData } from '../data/NodeData';
 
 function getAverageNodesPosition(nodes: Node[]) {
 	let positionsSum = Vector.zero();

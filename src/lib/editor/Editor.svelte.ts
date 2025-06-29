@@ -1,6 +1,6 @@
 import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 import { UndoCommand } from '$lib/commands/editor/UndoCommand';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
 import type { EditorCommand } from './EditorCommand';
 import type { EditorData } from './EditorData';

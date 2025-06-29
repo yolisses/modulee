@@ -1,6 +1,6 @@
-import type { GraphData } from '$lib/data/GraphData';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
+import type { GraphData } from '$lib/graph/GraphData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 
 export function getGraphRegistry(

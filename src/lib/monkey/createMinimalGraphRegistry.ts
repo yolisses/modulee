@@ -1,7 +1,7 @@
 import { createId } from '$lib/data/createId';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleData } from '$lib/data/InternalModuleData';
 import { ById } from '$lib/editor/ById';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 
 export function createMinimalGraphRegistry(): GraphRegistry {
 	// By now, every graph needs a main internal module. It can be changed

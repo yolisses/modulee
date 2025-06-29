@@ -1,9 +1,9 @@
 import { createId } from '$lib/data/createId';
-import type { ExternalModuleReference } from '$lib/data/ExternalModuleReference';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleReference } from '$lib/data/InternalModuleReference';
 import type { EditorCommand } from '$lib/editor/EditorCommand';
 import { getRandomItem } from '$lib/fake/getRandomItem';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { ExternalModuleReference } from '$lib/module/externalModule/ExternalModuleReference';
+import type { InternalModuleReference } from '$lib/module/internalModule/InternalModuleReference';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';

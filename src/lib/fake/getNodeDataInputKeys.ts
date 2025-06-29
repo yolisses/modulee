@@ -1,5 +1,5 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { NodeData } from '$lib/data/NodeData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 import { getSomeModuleNodeDataInputKeys } from './getSomeModuleNodeDataInputKeys';

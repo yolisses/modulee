@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 /**
  * Removes the connections to nodes that are not present, e.g.: deleted nodes.

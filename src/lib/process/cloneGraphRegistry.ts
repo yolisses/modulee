@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 export function cloneGraphRegistry(graphRegistry: GraphRegistry): GraphRegistry {
 	const { nodes, connections, externalModules, internalModules, mainInternalModuleId } =

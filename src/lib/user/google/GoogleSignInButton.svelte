@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getHaveJuceSupport } from '$lib/engine/getHaveJuceSupport';
+	import { getHaveJuceSupport } from '$lib/audio/getHaveJuceSupport';
 	import { onMount } from 'svelte';
 	import JuceGoogleSignInButton from './JuceGoogleSignInButton.svelte';
 	import WebGoogleSignInButton from './WebGoogleSignInButton.svelte';

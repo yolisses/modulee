@@ -1,7 +1,7 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { createId } from '$lib/data/createId';
-import type { InputPath } from '$lib/data/InputPath';
 import type { NodeData } from '$lib/data/NodeData';
+import type { InputPath } from '$lib/input/InputPath';
 import { getInternalModuleFallbackNodeId } from './getInternalModuleFallbackNodeId';
 
 export function createInputFallbackConnection(

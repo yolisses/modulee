@@ -1,11 +1,11 @@
-import { getGraphContext } from '$lib/data/graphContext';
+import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
+import { getIsMutedContext } from '$lib/audio/isMutedContexts';
 import { getEditorContext } from '$lib/editor/editorContext';
-import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-import { getIsMutedContext } from '$lib/engine/isMutedContexts';
 import { getCopyDataContext } from '$lib/graph/copy/copyDataContext';
+import { getGraphContext } from '$lib/graph/graphContext';
 import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-import { getProjectDataContext } from '$lib/project/projectDataContext';
+import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from 'nodes-editor';
 import { defaultShortcuts } from './defaultShortcuts';

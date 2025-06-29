@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
-	import { createId } from '$lib/data/createId';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
+	import { createId } from '$lib/global/createId';
+	import type { InternalModule } from '$lib/module/InternalModule.svelte';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';

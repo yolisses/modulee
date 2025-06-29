@@ -1,5 +1,5 @@
-import type { GraphData } from '$lib/data/GraphData';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphData } from '$lib/graph/GraphData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 export function getGraphData(graphRegistry: GraphRegistry): GraphData {
 	return {

@@ -1,4 +1,4 @@
-import type { Node } from '$lib/data/Node.svelte';
+import type { Node } from '$lib/node/Node.svelte';
 import { getNodeMaxPosition } from './getNodeMaxPosition';
 
 export function getNodesMaxPosition(nodes: Node[]) {

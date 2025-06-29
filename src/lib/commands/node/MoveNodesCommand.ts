@@ -1,6 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { VectorData } from '$lib/data/VectorData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { mockCommandData } from '../test/mockNodeData';
 import { MoveNodeCommand } from './MoveNodeCommand';
 

@@ -1,7 +1,7 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleData } from '$lib/data/InternalModuleData';
 import type { ModuleNodeData } from '$lib/data/variants/ModuleNodeData';
 import { ById } from '$lib/editor/ById';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { GroupNodesCommand } from './GroupNodesCommand';

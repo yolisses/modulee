@@ -1,4 +1,4 @@
-import type { Node } from '$lib/data/Node.svelte';
+import type { Node } from '$lib/node/Node.svelte';
 import { getIsDefined } from './getIsDefined';
 import type { TopologicalMap } from './TopologicalMap';
 

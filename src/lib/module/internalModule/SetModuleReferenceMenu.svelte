@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/SetModuleNodeModuleReferenceCommand';
-	import { createId } from '$lib/data/createId.js';
-	import { getGraphContext } from '$lib/data/graphContext';
-	import type { Module } from '$lib/data/Module';
 	import { getEditorContext } from '$lib/editor/editorContext.js';
-	import { getProjectDataContext } from '$lib/project/projectDataContext.js';
+	import { createId } from '$lib/global/createId.js';
+	import { getGraphContext } from '$lib/graph/graphContext';
+	import type { Module } from '$lib/module/Module';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js.js';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';

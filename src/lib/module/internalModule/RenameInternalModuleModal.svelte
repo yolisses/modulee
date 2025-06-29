@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { RenameInternalModuleCommand } from '$lib/commands/internalModule/RenameInternalModuleCommand';
-	import { createId } from '$lib/data/createId';
-	import type { InternalModuleData as InternalModule } from '$lib/data/InternalModuleData';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import type { InternalModuleData as InternalModule } from '$lib/module/internalModule/InternalModuleDataernalModuleData';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 

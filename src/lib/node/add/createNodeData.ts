@@ -1,6 +1,6 @@
 import { createId } from '$lib/data/createId';
 import type { NodeData } from '$lib/data/NodeData';
-import type { VectorData } from '$lib/data/VectorData';
+import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { NodeSchema } from '$lib/schemas/NodeSchema';
 import type { NodeDefinition } from '../definitions/NodeDefinition';
 import { createUnconnectedInputValues } from './createUnconnectedInputValues';

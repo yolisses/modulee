@@ -1,6 +1,6 @@
 import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
 import { SetConnectionCommand } from '../connection/SetConnectionCommand';

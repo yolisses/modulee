@@ -1,5 +1,5 @@
-import { Graph } from '$lib/data/Graph.svelte';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import { Graph } from '$lib/graph/Graph.svelte';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { addNodeControlNodes } from './addNodeControlNodes';
 
 export function addControlNodes(graphRegistry: GraphRegistry) {

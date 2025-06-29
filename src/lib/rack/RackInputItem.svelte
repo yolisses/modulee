@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
+	import { hashToUsize } from '$lib/audio/data/hashToUsize';
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
-	import { formatNumber } from '$lib/connector/formatNumber';
-	import { createId } from '$lib/data/createId';
-	import type { InputWithControl } from '$lib/data/InputWithControl';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getAudioBackendContext } from '$lib/engine/audioBackendContext';
-	import { hashToUsize } from '$lib/engine/data/hashToUsize';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import type { InputWithControl } from '$lib/input/InputWithControl';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
+	import { formatNumber } from '$lib/ui/formatNumber';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import { tick } from 'svelte';
 

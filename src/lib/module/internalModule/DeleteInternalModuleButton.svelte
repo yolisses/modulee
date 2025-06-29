@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
-	import { createId } from '$lib/data/createId';
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import type { InternalModule } from '$lib/module/InternalModule.svelte';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 

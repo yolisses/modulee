@@ -1,6 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { ModuleReference } from '$lib/data/ModuleReference';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { ModuleReference } from '$lib/module/ModuleReference';
 
 export class SetModuleNodeModuleReferenceCommand extends EditorCommand<{
 	moduleNodeId: string;

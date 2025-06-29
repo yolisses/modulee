@@ -1,6 +1,6 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InternalModuleData } from '$lib/data/InternalModuleData';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 
 export class RemoveInternalModuleCommand extends EditorCommand<{
 	internalModuleId: string;

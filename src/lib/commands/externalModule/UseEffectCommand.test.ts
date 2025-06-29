@@ -1,6 +1,6 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { ById } from '$lib/editor/ById';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';

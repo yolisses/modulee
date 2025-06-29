@@ -1,8 +1,8 @@
 import { getIsDefined } from '$lib/connection/getIsDefined';
 import { getGraphTopologicalMap } from '$lib/connection/getNodesTopologicalMap';
 import { getTopologicalOrder } from '$lib/connection/getTopologicalOrder';
-import type { InternalModule } from '$lib/data/InternalModule.svelte';
-import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
+import type { InternalModule } from '$lib/module/InternalModule.svelte';
+import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
 import { getIsSomeModuleNode } from './getIsSomeModuleNode';
 
 export function getRackModuleItemModuleNodes(internalModule: InternalModule): ModuleNode[] {

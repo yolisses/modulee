@@ -1,11 +1,11 @@
 import { createId } from '$lib/data/createId';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import { getRandomDistinctItems } from '$lib/fake/getRandomDistinctItems';
 import { getRandomInt } from '$lib/fake/getRandomInt';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { getId } from '$lib/ui/getId';
-import { setNewId } from '../../data/setNewId';
+import { setNewId } from '../../global/setNewId';
 import { PasteNodesCommand } from './PasteNodesCommand';
 
 export class PasteNodesMonkey extends EditorMonkey {

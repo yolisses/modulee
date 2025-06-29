@@ -2,11 +2,11 @@
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Connection } from '$lib/data/Connection';
-	import type { Node } from '$lib/data/Node.svelte';
 	import { getElementSize } from '$lib/graph/getElementSize';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
-	import NodeItem from '$lib/node/NodeItem.svelte';
+	import type { Node } from '$lib/node/Node.svelte';
+	import NodeItem from '$lib/node/ui/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getScreenFontSize } from '$lib/space/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';

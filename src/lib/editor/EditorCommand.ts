@@ -1,4 +1,4 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { CreateEditorCommandCallback } from './CreateEditorCommandCallback';
 import type { EditorCommandData } from './EditorCommandData';
 import type { EditorData } from './EditorData';

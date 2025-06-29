@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
+	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
 	import DotsMenuButton from '$lib/ui/DotsMenuButton.svelte';
 	import RemoveEffectModuleNodeButton from './RemoveEffectModuleNodeButton.svelte';
 

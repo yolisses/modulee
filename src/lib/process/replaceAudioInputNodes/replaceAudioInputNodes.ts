@@ -1,5 +1,5 @@
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
 import type { InputNodeData } from '$lib/data/variants/InputNodeData';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
 export function replaceAudioInputNodes(graphRegistry: GraphRegistry) {
 	graphRegistry.nodes.values().forEach((nodeData) => {

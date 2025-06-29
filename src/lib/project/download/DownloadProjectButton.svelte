@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import type { ProjectData } from '../ProjectData';
+	import type { ProjectData } from '../data/ProjectData';
 	import { createModuleeResource } from './createModuleeResource';
 	import { downloadJson } from './downloadJson';
 

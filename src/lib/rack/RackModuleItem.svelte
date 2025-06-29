@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InternalModule } from '$lib/data/InternalModule.svelte';
+	import type { InternalModule } from '$lib/module/InternalModule.svelte';
 	import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 	import Sortable from 'sortablejs';
 	import { onMount } from 'svelte';

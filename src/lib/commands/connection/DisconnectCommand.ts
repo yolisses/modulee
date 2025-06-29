@@ -1,8 +1,8 @@
 import type { ConnectionData } from '$lib/data/ConnectionData';
 import { getAreInputPathsEqual } from '$lib/data/getAreInputPathsEqual';
-import type { GraphRegistry } from '$lib/data/GraphRegistry';
-import type { InputPath } from '$lib/data/InputPath';
 import { EditorCommand } from '$lib/editor/EditorCommand';
+import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InputPath } from '$lib/input/InputPath';
 
 /**
  * Removes all the connections to one input path

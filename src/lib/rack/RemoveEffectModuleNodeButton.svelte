@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { RemoveEffectModuleNode } from '$lib/commands/externalModule/RemoveEffectModuleNode';
-	import { createId } from '$lib/data/createId';
-	import type { ModuleNode } from '$lib/data/ModuleNode.svelte';
 	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getProjectDataContext } from '$lib/project/projectDataContext';
+	import { createId } from '$lib/global/createId';
+	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContextext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
