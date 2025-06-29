@@ -20,27 +20,22 @@ export function getChains(graph: TopologicalMap): string[][] {
 			return;
 		}
 
-		const inputChain = chains.find((chain) => {
-			return chain.some((node) => {
-				return node === input;
-			});
-		});
+		const inputChain = chains.find((chain) => chain.includes(input));
 		if (!inputChain) {
 			throw new Error('Input missing in the chains', { cause: input });
 		}
 
 		const inputIndex = inputChain.indexOf(input);
 
-		// If the input is the tail of the chain, just add the node at the end
 		if (inputIndex === inputChain.length - 1) {
+			// Input is the tail of the chain; append node to the end
 			inputChain.push(node);
-			return;
+		} else {
+			// If the input is not the tail, split the chain at this point
+			const newChain = inputChain.splice(inputIndex + 1);
+			chains.push(newChain);
+			chains.push([node]);
 		}
-
-		// Otherwise create a new chain from beyond input, since there's a branching
-		const newInputChain = inputChain.splice(inputIndex + 1, inputChain.length - (inputIndex + 1));
-		chains.push(newInputChain);
-		chains.push([node]);
 	});
 
 	return chains;
