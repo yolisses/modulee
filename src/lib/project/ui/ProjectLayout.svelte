@@ -4,6 +4,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
+	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
@@ -15,7 +16,6 @@
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
-	import type { Graph } from 'redis';
 	import { type Snippet, onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getGraphData } from '../getGraphData';

@@ -1,6 +1,6 @@
 import { DefaultNodeInput } from '$lib/input/DefaultNodeInput.svelte';
 import type { Input } from '$lib/input/Input.svelte';
-import type { Vector } from 'nodes-editor';
+import { Vector } from 'nodes-editor';
 import type { NodeDataBase } from './data/NodeDataBase';
 import { nodeDefinitionsByName } from './definitions/nodeDefinitionsByName';
 import { Output } from './Output.svelte';

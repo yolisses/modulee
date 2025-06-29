@@ -1,7 +1,7 @@
-import type { createId } from '$lib/global/createId';
+import { createId } from '$lib/global/createId';
 import { expect, test } from 'vitest';
 import type { OutputNodeData } from '../data/variants/OutputNodeData';
-import type { NodeSchema } from './NodeSchema';
+import { NodeSchema } from './NodeSchema';
 
 test('OutputNodeSchema', () => {
 	const outputNodeData: OutputNodeData = {
