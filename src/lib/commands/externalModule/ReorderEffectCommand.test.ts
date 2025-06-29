@@ -6,6 +6,8 @@ import { ReorderEffectCommand } from './ReorderEffectCommand';
 
 test('ReorderEffectCommand', () => {
 	const graphRegistry = {
+		// 1<-2<-3<-4<-5
+		// 1<-3<-4<-2<-5
 		nodes: ById.fromItems([
 			{ id: 'node1' },
 			{ id: 'node2' },
@@ -14,17 +16,29 @@ test('ReorderEffectCommand', () => {
 			{ id: 'node5' },
 		]),
 		connections: ById.fromItems([
-			{ id: 'connection1', targetNodeId: 'node1', inputPath: { nodeId: 'node2' } },
-			{ id: 'connection2', targetNodeId: 'node2', inputPath: { nodeId: 'node3' } },
-			{ id: 'connection3', targetNodeId: 'node3', inputPath: { nodeId: 'node4' } },
-			{ id: 'connection4', targetNodeId: 'node4', inputPath: { nodeId: 'node5' } },
+			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node1' },
+			{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
+			{ id: 'connection3', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
+			{ id: 'connection4', inputPath: { nodeId: 'node5' }, targetNodeId: 'node4' },
 		]),
 	} as GraphRegistry;
 
-	const command = new ReorderEffectCommand(mockCommandData({ moduleNodeId: 'node2' }));
+	const command = new ReorderEffectCommand(
+		mockCommandData({
+			direction: 'back',
+			moduleNodeId: 'node2',
+			referenceNodeId: 'node5',
+		}),
+	);
 
 	command.execute(graphRegistry);
 
-	expect(graphRegistry.connections.get('connection1').targetNodeId).toBe('node1');
-	expect(graphRegistry.connections.get('connection4').targetNodeId).toBe('node2');
+	expect(graphRegistry.connections).toEqual(
+		ById.fromItems([
+			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node4' },
+			{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node1' },
+			{ id: 'connection3', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
+			{ id: 'connection4', inputPath: { nodeId: 'node5' }, targetNodeId: 'node2' },
+		]),
+	);
 });
