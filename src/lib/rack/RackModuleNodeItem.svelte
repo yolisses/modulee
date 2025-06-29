@@ -17,14 +17,14 @@
 	);
 </script>
 
-<div class="max-w-xs grow rounded border-1 border-white/10 p-2 select-none">
+<div class="max-w-xs grow rounded border-1 border-white/10 select-none">
 	<div class="flex flex-row items-center justify-between">
-		<div class="sortable-handle grow">
+		<div class="sortable-handle grow p-2 pb-0">
 			{moduleNode.targetModule?.name}
 		</div>
 		<RackModuleNodeItemDotsMenuButton {moduleNode} />
 	</div>
-	<div>
+	<div class="p-2">
 		{#each inputs as input}
 			<RackInputItem {input} />
 		{/each}
