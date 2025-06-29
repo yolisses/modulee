@@ -44,10 +44,12 @@ export class ReorderEffectCommand extends EditorCommand<{
 					targetId: moduleNodeAudioTargetNodeId,
 				}),
 			);
+			this.replaceConnectionsToNode.execute(graphRegistry);
 		} else {
 			this.removeConnectionsToNode = new RemoveConnectionsCommand(
 				mockCommandData({ connectionIds: connectionToNodeIds }),
 			);
+			this.removeConnectionsToNode.execute(graphRegistry);
 		}
 	}
 

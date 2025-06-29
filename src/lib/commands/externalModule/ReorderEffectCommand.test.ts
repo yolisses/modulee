@@ -16,10 +16,26 @@ test('ReorderEffectCommand', () => {
 			{ id: 'node5', type: 'ModuleNode' },
 		]),
 		connections: ById.fromItems([
-			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node1' },
-			{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
-			{ id: 'connection3', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
-			{ id: 'connection4', inputPath: { nodeId: 'node5' }, targetNodeId: 'node4' },
+			{
+				id: 'connection1',
+				targetNodeId: 'node1',
+				inputPath: { nodeId: 'node2', inputKey: 'audio' },
+			},
+			{
+				id: 'connection2',
+				targetNodeId: 'node2',
+				inputPath: { nodeId: 'node3', inputKey: 'audio' },
+			},
+			{
+				id: 'connection3',
+				targetNodeId: 'node3',
+				inputPath: { nodeId: 'node4', inputKey: 'audio' },
+			},
+			{
+				id: 'connection4',
+				targetNodeId: 'node4',
+				inputPath: { nodeId: 'node5', inputKey: 'audio' },
+			},
 		]),
 	} as GraphRegistry;
 
@@ -35,10 +51,26 @@ test('ReorderEffectCommand', () => {
 
 	expect(graphRegistry.connections).toEqual(
 		ById.fromItems([
-			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node4' },
-			{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node1' },
-			{ id: 'connection3', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
-			{ id: 'connection4', inputPath: { nodeId: 'node5' }, targetNodeId: 'node2' },
+			{
+				id: 'connection1',
+				targetNodeId: 'node4',
+				inputPath: { nodeId: 'node2', inputKey: 'audio' },
+			},
+			{
+				id: 'connection2',
+				targetNodeId: 'node1',
+				inputPath: { nodeId: 'node3', inputKey: 'audio' },
+			},
+			{
+				id: 'connection3',
+				targetNodeId: 'node3',
+				inputPath: { nodeId: 'node4', inputKey: 'audio' },
+			},
+			{
+				id: 'connection4',
+				targetNodeId: 'node2',
+				inputPath: { nodeId: 'node5', inputKey: 'audio' },
+			},
 		]),
 	);
 });
