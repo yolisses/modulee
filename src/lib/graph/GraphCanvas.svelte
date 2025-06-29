@@ -6,10 +6,10 @@
 	import { getElementSize } from '$lib/graph/getElementSize';
 	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
-	import { getScreenFontSize } from '$lib/node/getScreenFontSize';
-	import { getScreenLineHeight } from '$lib/node/getScreenLineHeight';
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
+	import { getScreenFontSize } from '$lib/space/getScreenFontSize';
+	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
 	import { getSpaceContext } from '$lib/space/spaceContext';
 	import { getZoomContext } from '$lib/space/zoom/zoomContext';
 	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
