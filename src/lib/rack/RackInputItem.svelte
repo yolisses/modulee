@@ -33,7 +33,6 @@
 		value = Number.parseFloat(e.currentTarget.value);
 		const id = hashToUsize(input.getControlNodeId());
 		audioBackendContext.audioBackend?.updateControl(id, value);
-		textEditing = false;
 	}
 
 	function handleChange() {
@@ -47,6 +46,7 @@
 			details: { value, inputPath: structuredClone(input.inputPath) },
 		});
 		editorContext.editor.execute(command);
+		textEditing = false;
 	}
 
 	function handleClick() {
@@ -66,9 +66,10 @@
 		<input
 			{value}
 			type="number"
-			onblur={handleInput}
+			onblur={handleChange}
+			oninput={handleInput}
 			bind:this={textInput}
-			onchange={handleInput}
+			onchange={handleChange}
 			class="flex-1 px-2 text-right"
 		/>
 	{:else}
