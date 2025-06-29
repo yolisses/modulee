@@ -60,7 +60,7 @@ test('UseEffectCommand', () => {
 		position: { x: 0, y: 0 },
 		unconnectedInputValues: {},
 		internalModuleId: 'internalModuleId',
-		extras: { moduleReference: { type: 'external', id: 'externalModuleId' } },
+		extras: { moduleReference: { type: 'external', moduleId: 'externalModuleId' } },
 	});
 
 	// 3. Connect the audio input nodes from the effect module node to the node

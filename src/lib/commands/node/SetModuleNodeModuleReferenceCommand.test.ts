@@ -28,14 +28,14 @@ test('SetModuleNodeModuleReferenceCommand', () => {
 
 	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toEqual({
 		type: 'internal',
-		id: 'internalModule2',
+		moduleId: 'internalModule2',
 	});
 
 	command.undo(graphRegistry);
 
 	expect((graphRegistry.nodes.get('node2') as ModuleNodeData).extras.moduleReference).toEqual({
 		type: 'internal',
-		id: 'internalModule1',
+		moduleId: 'internalModule1',
 	});
 });
 
