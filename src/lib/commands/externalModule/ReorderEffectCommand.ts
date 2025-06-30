@@ -1,76 +1,75 @@
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { AUDIO_INPUT_KEY } from '$lib/input/AUDIO_INPUT_KEY';
+import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import { getModuleNodeAudioTargetNodeId } from '$lib/module/getModuleNodeAudioTargetNodeId';
-import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
-import { getId } from '$lib/ui/getId';
-import { RemoveConnectionsCommand } from '../connection/RemoveConnectionsCommand';
-import { mockCommandData } from '../test/mockNodeData';
-import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 
-function getConnectionsByTargetNodeId(graphRegistry: GraphRegistry, targetNodeId: string) {
-	return graphRegistry.connections.values().filter((connectionData) => {
-		return connectionData.targetNodeId === targetNodeId;
-	});
-}
-
-/**
- * Move an effect in the effect chain:
- *
- * 1. Replace audio input connections targets from the module node to its target
- *    node (if any).
- * 2. Replace
- */
 export class ReorderEffectCommand extends EditorCommand<{
 	moduleNodeId: string;
 	referenceNodeId: string;
 	direction: 'back' | 'front';
+	newConnectionId?: string;
 }> {
-	removeConnectionsToNode?: RemoveConnectionsCommand;
-	connectToNode?: ReplaceConnectionsTargetNodeIdCommand;
-	replaceConnectionsToNode?: ReplaceConnectionsTargetNodeIdCommand;
-
 	execute(graphRegistry: GraphRegistry): void {
-		const { moduleNodeId, referenceNodeId } = this.details;
+		const { moduleNodeId, direction, referenceNodeId, newConnectionId } = this.details;
 
-		const nodeData = graphRegistry.nodes.get(moduleNodeId);
-		if (!getIsSomeModuleNodeData(nodeData)) {
-			throw new Error('Invalid node type', { cause: nodeData });
-		}
-
-		const connectionToNodeIds = getConnectionsByTargetNodeId(graphRegistry, moduleNodeId).map(
-			getId,
-		);
-		const moduleNodeAudioTargetNodeId = getModuleNodeAudioTargetNodeId(moduleNodeId, graphRegistry);
-		if (moduleNodeAudioTargetNodeId) {
-			this.replaceConnectionsToNode = new ReplaceConnectionsTargetNodeIdCommand(
-				mockCommandData({
-					connectionIds: connectionToNodeIds,
-					targetId: moduleNodeAudioTargetNodeId,
-				}),
+		const audioConnections = graphRegistry.connections.values().filter((connectionData) => {
+			return (
+				connectionData.inputPath.inputKey === AUDIO_INPUT_KEY &&
+				graphRegistry.nodes.getOrNull(connectionData.targetNodeId)?.type === 'ModuleNode' &&
+				graphRegistry.nodes.getOrNull(connectionData.inputPath.nodeId)?.type === 'ModuleNode'
 			);
-			this.replaceConnectionsToNode.execute(graphRegistry);
-		} else {
-			this.removeConnectionsToNode = new RemoveConnectionsCommand(
-				mockCommandData({ connectionIds: connectionToNodeIds }),
-			);
-			this.removeConnectionsToNode.execute(graphRegistry);
-		}
+		});
 
-		const connectionToReferenceNodeIds = getConnectionsByTargetNodeId(
+		const moduleNodeOldAudioTargetNodeId = getModuleNodeAudioTargetNodeId(
+			moduleNodeId,
 			graphRegistry,
-			referenceNodeId,
-		).map(getId);
-		this.connectToNode = new ReplaceConnectionsTargetNodeIdCommand(
-			mockCommandData({
-				targetId: moduleNodeId,
-				connectionIds: connectionToReferenceNodeIds,
-			}),
 		);
-		this.connectToNode.execute(graphRegistry);
+		const moduleNodeNewAudioTargetNodeId =
+			direction === 'front'
+				? referenceNodeId
+				: getModuleNodeAudioTargetNodeId(referenceNodeId, graphRegistry);
+
+		audioConnections.forEach((audioConnection) => {
+			const isToModuleNode = audioConnection.targetNodeId === moduleNodeId;
+			if (isToModuleNode) {
+				if (moduleNodeOldAudioTargetNodeId) {
+					audioConnection.targetNodeId = moduleNodeOldAudioTargetNodeId;
+				} else {
+					graphRegistry.connections.remove(audioConnection);
+				}
+			}
+
+			const isFromModuleNode = getAreInputPathsEqual(audioConnection.inputPath, {
+				nodeId: moduleNodeId,
+				inputKey: 'audio',
+			});
+			if (isFromModuleNode) {
+				if (moduleNodeNewAudioTargetNodeId) {
+					audioConnection.targetNodeId = moduleNodeNewAudioTargetNodeId;
+				} else {
+					graphRegistry.connections.remove(audioConnection);
+				}
+			}
+
+			if (moduleNodeNewAudioTargetNodeId) {
+				const isToNewAudioTarget = audioConnection.targetNodeId === moduleNodeNewAudioTargetNodeId;
+				if (isToNewAudioTarget) {
+					audioConnection.targetNodeId = moduleNodeId;
+				}
+			}
+		});
+		if (!moduleNodeNewAudioTargetNodeId) {
+			if (!newConnectionId) {
+				throw new Error('Missing required new connection id');
+			}
+			graphRegistry.connections.add({
+				id: newConnectionId,
+				targetNodeId: moduleNodeId,
+				inputPath: { inputKey: AUDIO_INPUT_KEY, nodeId: referenceNodeId },
+			});
+		}
 	}
 
-	undo(graphRegistry: GraphRegistry): void {
-		this.removeConnectionsToNode?.undo(graphRegistry);
-		this.replaceConnectionsToNode?.undo(graphRegistry);
-	}
+	undo(graphRegistry: GraphRegistry): void {}
 }

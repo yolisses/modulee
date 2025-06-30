@@ -41,9 +41,9 @@ test('ReorderEffectCommand', () => {
 
 	const command = new ReorderEffectCommand(
 		mockCommandData({
-			direction: 'front',
+			direction: 'back',
 			moduleNodeId: 'node2',
-			referenceNodeId: 'node4',
+			referenceNodeId: 'node5',
 		}),
 	);
 
@@ -69,6 +69,33 @@ test('ReorderEffectCommand', () => {
 			{
 				id: 'connection4',
 				targetNodeId: 'node2',
+				inputPath: { nodeId: 'node5', inputKey: 'audio' },
+			},
+		]),
+	);
+
+	command.undo(graphRegistry);
+
+	expect(graphRegistry.connections).toEqual(
+		ById.fromItems([
+			{
+				id: 'connection1',
+				targetNodeId: 'node1',
+				inputPath: { nodeId: 'node2', inputKey: 'audio' },
+			},
+			{
+				id: 'connection2',
+				targetNodeId: 'node2',
+				inputPath: { nodeId: 'node3', inputKey: 'audio' },
+			},
+			{
+				id: 'connection3',
+				targetNodeId: 'node3',
+				inputPath: { nodeId: 'node4', inputKey: 'audio' },
+			},
+			{
+				id: 'connection4',
+				targetNodeId: 'node4',
 				inputPath: { nodeId: 'node5', inputKey: 'audio' },
 			},
 		]),
