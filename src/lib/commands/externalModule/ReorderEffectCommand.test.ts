@@ -5,41 +5,42 @@ import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { ReorderEffectCommand } from './ReorderEffectCommand';
 
-test('ReorderEffectCommand', () => {
-	const effectData = {} as EditorData;
-	const graphRegistry = {
-		// 1<-2<-3<-4<-5
-		// 1<-3<-4<-2<-5
-		nodes: ById.fromItems([
-			{ id: 'node1', type: 'ModuleNode' },
-			{ id: 'node2', type: 'ModuleNode' },
-			{ id: 'node3', type: 'ModuleNode' },
-			{ id: 'node4', type: 'ModuleNode' },
-			{ id: 'node5', type: 'ModuleNode' },
-		]),
-		connections: ById.fromItems([
-			{
-				id: 'connection1',
-				targetNodeId: 'node1',
-				inputPath: { nodeId: 'node2', inputKey: 'audio' },
-			},
-			{
-				id: 'connection2',
-				targetNodeId: 'node2',
-				inputPath: { nodeId: 'node3', inputKey: 'audio' },
-			},
-			{
-				id: 'connection3',
-				targetNodeId: 'node3',
-				inputPath: { nodeId: 'node4', inputKey: 'audio' },
-			},
-			{
-				id: 'connection4',
-				targetNodeId: 'node4',
-				inputPath: { nodeId: 'node5', inputKey: 'audio' },
-			},
+function createNodes(ids: string[]) {
+	return ById.fromItems(ids.map((id) => ({ id, type: 'ModuleNode' })));
+}
+
+function createConnections(conns: Array<[string, string, string, string]>) {
+	return ById.fromItems(
+		conns.map(([id, targetNodeId, inputNodeId, inputKey]) => ({
+			id,
+			targetNodeId,
+			inputPath: { nodeId: inputNodeId, inputKey },
+		})),
+	);
+}
+
+function createGraphRegistry() {
+	return {
+		nodes: createNodes(['node1', 'node2', 'node3', 'node4', 'node5']),
+		connections: createConnections([
+			['connection1', 'node1', 'node2', 'audio'],
+			['connection2', 'node2', 'node3', 'audio'],
+			['connection3', 'node3', 'node4', 'audio'],
+			['connection4', 'node4', 'node5', 'audio'],
 		]),
 	} as GraphRegistry;
+}
+
+function expectConnections(
+	graphRegistry: GraphRegistry,
+	expected: Array<[string, string, string, string]>,
+) {
+	expect(graphRegistry.connections).toEqual(createConnections(expected));
+}
+
+test('ReorderEffectCommand', () => {
+	const effectData = {} as EditorData;
+	const graphRegistry = createGraphRegistry();
 
 	const command = new ReorderEffectCommand(
 		mockCommandData({
@@ -51,55 +52,19 @@ test('ReorderEffectCommand', () => {
 
 	command.execute(graphRegistry, effectData);
 
-	expect(graphRegistry.connections).toEqual(
-		ById.fromItems([
-			{
-				id: 'connection1',
-				targetNodeId: 'node4',
-				inputPath: { nodeId: 'node2', inputKey: 'audio' },
-			},
-			{
-				id: 'connection2',
-				targetNodeId: 'node1',
-				inputPath: { nodeId: 'node3', inputKey: 'audio' },
-			},
-			{
-				id: 'connection3',
-				targetNodeId: 'node3',
-				inputPath: { nodeId: 'node4', inputKey: 'audio' },
-			},
-			{
-				id: 'connection4',
-				targetNodeId: 'node2',
-				inputPath: { nodeId: 'node5', inputKey: 'audio' },
-			},
-		]),
-	);
+	expectConnections(graphRegistry, [
+		['connection1', 'node4', 'node2', 'audio'],
+		['connection2', 'node1', 'node3', 'audio'],
+		['connection3', 'node3', 'node4', 'audio'],
+		['connection4', 'node2', 'node5', 'audio'],
+	]);
 
 	command.undo(graphRegistry, effectData);
 
-	expect(graphRegistry.connections).toEqual(
-		ById.fromItems([
-			{
-				id: 'connection1',
-				targetNodeId: 'node1',
-				inputPath: { nodeId: 'node2', inputKey: 'audio' },
-			},
-			{
-				id: 'connection2',
-				targetNodeId: 'node2',
-				inputPath: { nodeId: 'node3', inputKey: 'audio' },
-			},
-			{
-				id: 'connection3',
-				targetNodeId: 'node3',
-				inputPath: { nodeId: 'node4', inputKey: 'audio' },
-			},
-			{
-				id: 'connection4',
-				targetNodeId: 'node4',
-				inputPath: { nodeId: 'node5', inputKey: 'audio' },
-			},
-		]),
-	);
+	expectConnections(graphRegistry, [
+		['connection1', 'node1', 'node2', 'audio'],
+		['connection2', 'node2', 'node3', 'audio'],
+		['connection3', 'node3', 'node4', 'audio'],
+		['connection4', 'node4', 'node5', 'audio'],
+	]);
 });
