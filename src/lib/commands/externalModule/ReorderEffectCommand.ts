@@ -18,7 +18,7 @@ export class ReorderEffectCommand extends EditorCommand<{
 }> {
 	subcommands!: EditorCommand[];
 
-	execute(graphRegistry: GraphRegistry): void {
+	execute(graphRegistry: GraphRegistry, editorData: EditorData): void {
 		this.subcommands = [];
 		const { moduleNodeId, direction, referenceNodeId, newConnectionId } = this.details;
 
@@ -123,6 +123,10 @@ export class ReorderEffectCommand extends EditorCommand<{
 				),
 			);
 		}
+
+		this.subcommands.forEach((subcommand) => {
+			subcommand.execute(graphRegistry, editorData);
+		});
 	}
 
 	undo(graphRegistry: GraphRegistry, editorData: EditorData): void {

@@ -1,10 +1,12 @@
 import { ById } from '$lib/editor/ById';
+import type { EditorData } from '$lib/editor/EditorData';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { ReorderEffectCommand } from './ReorderEffectCommand';
 
 test('ReorderEffectCommand', () => {
+	const effectData = {} as EditorData;
 	const graphRegistry = {
 		// 1<-2<-3<-4<-5
 		// 1<-3<-4<-2<-5
@@ -41,13 +43,13 @@ test('ReorderEffectCommand', () => {
 
 	const command = new ReorderEffectCommand(
 		mockCommandData({
-			direction: 'back',
+			direction: 'before',
 			moduleNodeId: 'node2',
 			referenceNodeId: 'node5',
 		}),
 	);
 
-	command.execute(graphRegistry);
+	command.execute(graphRegistry, effectData);
 
 	expect(graphRegistry.connections).toEqual(
 		ById.fromItems([
@@ -74,7 +76,7 @@ test('ReorderEffectCommand', () => {
 		]),
 	);
 
-	command.undo(graphRegistry);
+	command.undo(graphRegistry, effectData);
 
 	expect(graphRegistry.connections).toEqual(
 		ById.fromItems([
