@@ -55,6 +55,7 @@ describe('ReorderEffectCommand', () => {
 				direction: 'before',
 				moduleNodeId: 'node2',
 				referenceNodeId: 'node5',
+				newConnectionId: 'connection5',
 			}),
 		);
 
@@ -84,6 +85,7 @@ describe('ReorderEffectCommand', () => {
 				direction: 'after',
 				moduleNodeId: 'node2',
 				referenceNodeId: 'node4',
+				newConnectionId: 'connection5',
 			}),
 		);
 

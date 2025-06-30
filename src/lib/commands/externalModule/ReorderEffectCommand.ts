@@ -13,7 +13,7 @@ import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTarge
 export class ReorderEffectCommand extends EditorCommand<{
 	moduleNodeId: string;
 	referenceNodeId: string;
-	newConnectionId?: string;
+	newConnectionId: string;
 	direction: 'before' | 'after';
 }> {
 	subcommands!: EditorCommand[];
