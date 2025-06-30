@@ -7,8 +7,8 @@ import { getModuleNodeAudioTargetNodeId } from '$lib/module/getModuleNodeAudioTa
 export class ReorderEffectCommand extends EditorCommand<{
 	moduleNodeId: string;
 	referenceNodeId: string;
-	direction: 'back' | 'front';
 	newConnectionId?: string;
+	direction: 'before' | 'after';
 }> {
 	execute(graphRegistry: GraphRegistry): void {
 		const { moduleNodeId, direction, referenceNodeId, newConnectionId } = this.details;
@@ -26,7 +26,7 @@ export class ReorderEffectCommand extends EditorCommand<{
 			graphRegistry,
 		);
 		const moduleNodeNewAudioTargetNodeId =
-			direction === 'front'
+			direction === 'after'
 				? referenceNodeId
 				: getModuleNodeAudioTargetNodeId(referenceNodeId, graphRegistry);
 
