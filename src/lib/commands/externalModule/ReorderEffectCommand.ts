@@ -5,6 +5,7 @@ import { AUDIO_INPUT_KEY } from '$lib/input/AUDIO_INPUT_KEY';
 import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import { getModuleNodeAudioTargetNodeId } from '$lib/module/getModuleNodeAudioTargetNodeId';
 import { getId } from '$lib/ui/getId';
+import { getIsAudioConnectionData } from '../../connection/getIsAudioConnectionData';
 import { AddConnectionCommand } from '../connection/AddConnectionCommand';
 import { RemoveConnectionsCommand } from '../connection/RemoveConnectionsCommand';
 import { mockCommandData } from '../test/mockNodeData';
@@ -23,11 +24,7 @@ export class ReorderEffectCommand extends EditorCommand<{
 		const { moduleNodeId, direction, referenceNodeId, newConnectionId } = this.details;
 
 		const audioConnections = graphRegistry.connections.values().filter((connectionData) => {
-			return (
-				connectionData.inputPath.inputKey === AUDIO_INPUT_KEY &&
-				graphRegistry.nodes.getOrNull(connectionData.targetNodeId)?.type === 'ModuleNode' &&
-				graphRegistry.nodes.getOrNull(connectionData.inputPath.nodeId)?.type === 'ModuleNode'
-			);
+			return getIsAudioConnectionData(connectionData, graphRegistry);
 		});
 
 		const moduleNodeOldAudioTargetNodeId = getModuleNodeAudioTargetNodeId(
