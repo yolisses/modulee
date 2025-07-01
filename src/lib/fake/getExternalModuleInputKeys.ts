@@ -1,4 +1,5 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { AUDIO_INPUT_KEY } from '$lib/input/AUDIO_INPUT_KEY';
 import { getIsAudioInputNodeData } from '$lib/rack/getIsAudioInputNodeData';
 import { getIsInputNodeData } from '$lib/rack/getIsInputNodeData';
 import { getId } from '$lib/ui/getId';
@@ -10,7 +11,7 @@ export function getExternalModuleInputKeys(externalModuleId: string, graphRegist
 	});
 	const keys = mainModuleNodes.filter(getIsInputNodeData).map(getId);
 	if (mainModuleNodes.some(getIsAudioInputNodeData)) {
-		keys.push('audio');
+		keys.push(AUDIO_INPUT_KEY);
 	}
 	return keys;
 }

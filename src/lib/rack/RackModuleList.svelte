@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { expandById } from '$lib/array/expandById';
-	import type { TopologicalMap } from '$lib/connection/TopologicalMap';
+	import { ReorderEffectCommand } from '$lib/commands/externalModule/ReorderEffectCommand';
+	import { getEditorContext } from '$lib/editor/editorContext';
+	import { createId } from '$lib/global/createId';
 	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
-	import Sortable from 'sortablejs';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
+	import Sortable, { type SortableEvent } from 'sortablejs';
 	import { onMount } from 'svelte';
+	import { CHAIN_DIVISION_ID } from './CHAIN_DIVISION_ID';
 	import ChainDivision from './ChainDivision.svelte';
+	import { getAudioTopologicalMap } from './getAudioTopologicalMap';
 	import { getChains } from './getChains';
 	import { hideDraggingImage } from './hideDraggingImage';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
@@ -13,32 +18,62 @@
 		moduleNodes: ModuleNode[];
 	}
 
+	let sortable: Sortable;
 	let element = $state<HTMLElement>();
-	const { moduleNodes }: Props = $props();
 	// moduleNodes have to be topologically sorted
-
-	function getAudioTopologicalMap(moduleNodes: ModuleNode[]) {
-		const graph: TopologicalMap = new Map();
-		moduleNodes.forEach((moduleNode) => {
-			const inputs = [];
-			const targetNodeId = moduleNode.audioInput?.targetNode?.id;
-			if (targetNodeId && moduleNodes.some((moduleNode) => moduleNode.id === targetNodeId)) {
-				inputs.push(targetNodeId);
-			}
-			graph.set(moduleNode.id, inputs);
-		});
-		return graph;
-	}
-
+	const { moduleNodes }: Props = $props();
+	const editorContext = getEditorContext();
+	const projectDataContext = getProjectDataContext();
 	const idChains = getChains(getAudioTopologicalMap(moduleNodes));
 	const chains = idChains.map((idChain) => expandById(moduleNodes, idChain));
 
+	function handleSort(e: SortableEvent) {
+		const { oldIndex, newIndex } = e;
+
+		if (oldIndex === newIndex) return;
+		if (oldIndex === undefined) return;
+		if (newIndex === undefined) return;
+
+		let referenceNodeId;
+		let direction: 'before' | 'after';
+
+		const order = sortable.toArray();
+		const nextModuleNodeId = order[newIndex + 1];
+		const previousModuleNodeId = order[newIndex - 1];
+		if (nextModuleNodeId && nextModuleNodeId !== CHAIN_DIVISION_ID) {
+			direction = 'before';
+			referenceNodeId = nextModuleNodeId;
+		} else if (previousModuleNodeId && previousModuleNodeId !== CHAIN_DIVISION_ID) {
+			direction = 'after';
+			referenceNodeId = previousModuleNodeId;
+		} else {
+			return;
+		}
+
+		const command = new ReorderEffectCommand({
+			id: createId(),
+			type: 'ReorderEffectCommand',
+			createdAt: new Date().toJSON(),
+			projectId: projectDataContext.projectData.id,
+			details: {
+				direction,
+				referenceNodeId,
+				newConnectionId: createId(),
+				moduleNodeId: order[newIndex],
+			},
+		});
+		console.log(command.details);
+		editorContext.editor.execute(command);
+	}
+
 	onMount(() => {
 		if (element) {
-			const sortable = new Sortable(element, {
-				setData: hideDraggingImage,
+			sortable = new Sortable(element, {
+				onEnd: handleSort,
 				handle: '.sortable-handle',
+				setData: hideDraggingImage,
 				ghostClass: 'sortable-ghost',
+				dataIdAttr: 'data-sortable-id',
 			});
 			return () => sortable.destroy();
 		}

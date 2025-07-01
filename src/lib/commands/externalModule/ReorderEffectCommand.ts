@@ -65,7 +65,7 @@ export class ReorderEffectCommand extends EditorCommand<{
 			.filter((audioConnection) => {
 				return getAreInputPathsEqual(audioConnection.inputPath, {
 					nodeId: moduleNodeId,
-					inputKey: 'audio',
+					inputKey: AUDIO_INPUT_KEY,
 				});
 			})
 			.map(getId);
@@ -124,6 +124,8 @@ export class ReorderEffectCommand extends EditorCommand<{
 		this.subcommands.forEach((subcommand) => {
 			subcommand.execute(graphRegistry, editorData);
 		});
+
+		console.log(graphRegistry.connections.values());
 	}
 
 	undo(graphRegistry: GraphRegistry, editorData: EditorData): void {

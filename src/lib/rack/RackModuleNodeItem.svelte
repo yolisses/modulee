@@ -17,7 +17,10 @@
 	);
 </script>
 
-<div class="max-w-xs grow rounded border-1 border-white/10 select-none">
+<div
+	data-sortable-id={moduleNode.id}
+	class="max-w-xs grow rounded border-1 border-white/10 select-none"
+>
 	<div class="flex flex-row items-center justify-between">
 		<div class="sortable-handle grow p-2 pb-0">
 			{moduleNode.targetModule?.name}
