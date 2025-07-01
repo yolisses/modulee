@@ -102,9 +102,7 @@ export class ReorderEffectCommand extends EditorCommand<{
 					}),
 				),
 			);
-		}
-
-		if (!moduleNodeNewAudioTargetNodeId) {
+		} else {
 			if (!newConnectionId) {
 				throw new Error('Missing required new connection id');
 			}
