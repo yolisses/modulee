@@ -7,12 +7,9 @@ export function getIsAudioConnectionData(
 	connectionData: ConnectionData,
 	graphRegistry: GraphRegistry,
 ) {
-	const targetNode = graphRegistry.nodes.getOrNull(connectionData.targetNodeId);
 	const originNode = graphRegistry.nodes.getOrNull(connectionData.inputPath.nodeId);
 	return (
 		connectionData.inputPath.inputKey === AUDIO_INPUT_KEY &&
-		targetNode &&
-		getIsSomeModuleNodeData(targetNode) &&
 		originNode &&
 		getIsSomeModuleNodeData(originNode)
 	);
