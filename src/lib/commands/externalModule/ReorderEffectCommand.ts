@@ -103,9 +103,6 @@ export class ReorderEffectCommand extends EditorCommand<{
 				),
 			);
 		} else {
-			if (!newConnectionId) {
-				throw new Error('Missing required new connection id');
-			}
 			this.subcommands.push(
 				new AddConnectionCommand(
 					mockCommandData({
