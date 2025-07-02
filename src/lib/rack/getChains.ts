@@ -22,7 +22,13 @@ export function getChains(graph: TopologicalMap): string[][] {
 
 		const inputChain = chains.find((chain) => chain.includes(input));
 		if (!inputChain) {
-			throw new Error('Input missing in the chains', { cause: input });
+			// This handles an invalid state. Unfortun
+			if (input === node) {
+				chains.push([node]);
+				return;
+			} else {
+				throw new Error('Input missing in the chains', { cause: input });
+			}
 		}
 
 		const inputIndex = inputChain.indexOf(input);
