@@ -6,8 +6,8 @@
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Sortable, { type SortableEvent } from 'sortablejs';
 	import { onMount } from 'svelte';
-	import { CHAIN_DIVISION_PREFIX } from './CHAIN_DIVISION_PREFIX';
 	import ChainDivision from './ChainDivision.svelte';
+	import { getIsDivision } from './getIsDivision';
 	import { getModuleNodesWithDivisions } from './getModuleNodesWithDivisions';
 	import { hideDraggingImage } from './hideDraggingImage';
 	import RackModuleNodeItem from './RackModuleNodeItem.svelte';
@@ -23,10 +23,7 @@
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
 	const items = $derived(getModuleNodesWithDivisions(moduleNodes));
-
-	function getIsDivision(id: string) {
-		return id.startsWith(CHAIN_DIVISION_PREFIX);
-	}
+	$inspect(items);
 
 	function handleSort(e: SortableEvent) {
 		const { oldIndex, newIndex } = e;
