@@ -1,9 +1,9 @@
-<script>
-	import { CHAIN_DIVISION_ID } from './CHAIN_DIVISION_ID';
+<script lang="ts">
+	interface Props {
+		id: string;
+	}
+
+	const { id }: Props = $props();
 </script>
 
-<div
-	title="Chain division"
-	class="w-1 rounded bg-white/10"
-	data-sortable-id={CHAIN_DIVISION_ID}
-></div>
+<div title="Chain division" class="w-1 rounded bg-white/10" data-sortable-id={id}></div>

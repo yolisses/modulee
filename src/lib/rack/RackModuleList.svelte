@@ -7,7 +7,7 @@
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Sortable, { type SortableEvent } from 'sortablejs';
 	import { onMount } from 'svelte';
-	import { CHAIN_DIVISION_ID } from './CHAIN_DIVISION_ID';
+	import { CHAIN_DIVISION_PREFIX } from './CHAIN_DIVISION_PREFIX';
 	import ChainDivision from './ChainDivision.svelte';
 	import { getAudioTopologicalMap } from './getAudioTopologicalMap';
 	import { getChains } from './getChains';
@@ -27,6 +27,32 @@
 	const idChains = $derived(getChains(getAudioTopologicalMap(moduleNodes)));
 	const chains = $derived(idChains.map((idChain) => expandById(moduleNodes, idChain)));
 
+	type Item = { type: 'division'; id: string } | { type: 'node'; id: string; node: ModuleNode };
+
+	function getNodeItem(node: ModuleNode): Item {
+		return {
+			node,
+			id: node.id,
+			type: 'node',
+		};
+	}
+
+	function createDivisionItem(): Item {
+		return {
+			type: 'division' as const,
+			id: CHAIN_DIVISION_PREFIX + createId(),
+		};
+	}
+
+	const itemsWithEndDivision: Item[] = $derived(
+		chains.map((chain) => [...chain.map(getNodeItem), createDivisionItem()]).flat(),
+	);
+	const items = $derived(itemsWithEndDivision.slice(0, itemsWithEndDivision.length - 1));
+
+	function getIsDivision(id: string) {
+		return id.startsWith(CHAIN_DIVISION_PREFIX);
+	}
+
 	function handleSort(e: SortableEvent) {
 		const { oldIndex, newIndex } = e;
 
@@ -40,10 +66,10 @@
 		const order = sortable.toArray();
 		const nextModuleNodeId = order[newIndex + 1];
 		const previousModuleNodeId = order[newIndex - 1];
-		if (nextModuleNodeId && nextModuleNodeId !== CHAIN_DIVISION_ID) {
+		if (nextModuleNodeId && !getIsDivision(nextModuleNodeId)) {
 			direction = 'before';
 			referenceNodeId = nextModuleNodeId;
-		} else if (previousModuleNodeId && previousModuleNodeId !== CHAIN_DIVISION_ID) {
+		} else if (previousModuleNodeId && !getIsDivision(previousModuleNodeId)) {
 			direction = 'after';
 			referenceNodeId = previousModuleNodeId;
 		} else {
@@ -80,12 +106,11 @@
 </script>
 
 <div class="flex flex-row flex-wrap justify-center gap-1 p-1" bind:this={element}>
-	{#each chains as chain, index}
-		{#each chain as moduleNode (moduleNode.id)}
-			<RackModuleNodeItem {moduleNode} />
-		{/each}
-		{#if index < chains.length - 1}
-			<ChainDivision />
+	{#each items as item (item.id)}
+		{#if item.type === 'node'}
+			<RackModuleNodeItem moduleNode={item.node} />
+		{:else}
+			<ChainDivision id={item.id} />
 		{/if}
 	{/each}
 </div>
