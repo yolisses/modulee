@@ -119,8 +119,6 @@ export class ReorderEffectCommand extends EditorCommand<{
 		this.subcommands.forEach((subcommand) => {
 			subcommand.execute(graphRegistry, editorData);
 		});
-
-		console.log(graphRegistry.connections.values());
 	}
 
 	undo(graphRegistry: GraphRegistry, editorData: EditorData): void {
