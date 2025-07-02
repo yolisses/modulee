@@ -24,8 +24,8 @@
 	const { moduleNodes }: Props = $props();
 	const editorContext = getEditorContext();
 	const projectDataContext = getProjectDataContext();
-	const idChains = getChains(getAudioTopologicalMap(moduleNodes));
-	const chains = idChains.map((idChain) => expandById(moduleNodes, idChain));
+	const idChains = $derived(getChains(getAudioTopologicalMap(moduleNodes)));
+	const chains = $derived(idChains.map((idChain) => expandById(moduleNodes, idChain)));
 
 	function handleSort(e: SortableEvent) {
 		const { oldIndex, newIndex } = e;
@@ -62,7 +62,6 @@
 				moduleNodeId: order[newIndex],
 			},
 		});
-		console.log(command.details);
 		editorContext.editor.execute(command);
 	}
 
