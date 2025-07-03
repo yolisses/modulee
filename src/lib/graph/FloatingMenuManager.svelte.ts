@@ -1,7 +1,7 @@
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
-import { getMouseRelativePosition } from 'nodes-editor';
+import { getMouseRelativePosition, rootElementContextKey } from 'nodes-editor';
 
 export class FloatingMenuManager {
 	menu = $state<HTMLElement>();

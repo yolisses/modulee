@@ -48,6 +48,14 @@ import { zoomContextKey, type ZoomContext } from '$lib/space/zoom/zoomContext';
 import { baseRouteContextKey, type BaseRouteContext } from '$lib/ui/baseRouteContext';
 import { modalRootContextKey, type ModalRootContext } from '$lib/ui/modalRootContext';
 import { userDataContextKey, type UserDataContext } from '$lib/user/userDataContext';
+import type {
+	PreviewConnectionContext,
+	previewConnectionContextKey,
+	RootElementContext,
+	rootElementContextKey,
+	SelectedNodeIdsContext,
+	selectedNodeIdsContextKey,
+} from 'nodes-editor';
 
 export type Contexts = {
 	[audioBackendContextKey]: AudioBackendContext;
@@ -73,4 +81,7 @@ export type Contexts = {
 	[baseRouteContextKey]: BaseRouteContext;
 	[modalRootContextKey]: ModalRootContext;
 	[userDataContextKey]: UserDataContext;
+	[rootElementContextKey]: RootElementContext;
+	[selectedNodeIdsContextKey]: SelectedNodeIdsContext;
+	[previewConnectionContextKey]: PreviewConnectionContext;
 };

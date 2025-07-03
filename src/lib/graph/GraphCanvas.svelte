@@ -13,7 +13,7 @@
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
-	import { PointerEventDispatcher } from 'nodes-editor';
+	import { PointerEventDispatcher, rootElementContextKey } from 'nodes-editor';
 	import { tick, untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';

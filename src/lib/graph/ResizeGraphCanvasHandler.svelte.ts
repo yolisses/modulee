@@ -1,5 +1,7 @@
+import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
 import { graphCanvasPositioningStep } from './graphCanvasPositioningStep';
+import { graphContextKey } from './graphContext';
 
 export class ResizeGraphCanvasHandler {
 	graphContext = getRequiredContext(graphContextKey);

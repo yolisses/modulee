@@ -3,6 +3,7 @@
 	import type { Snippet } from 'svelte';
 	import Portal from 'svelte-portal';
 	import SetModuleReferenceMenuWrapper from './SetModuleReferenceMenuWrapper.svelte';
+	import { rootElementContextKey } from 'nodes-editor';
 
 	interface Props {
 		moduleNodeId: string;

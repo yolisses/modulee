@@ -11,6 +11,7 @@
 		NodeItem as BaseNodeItem,
 		ConnectorAreaPointerStrategy,
 		PointerEventDispatcher,
+		selectedNodeIdsContextKey,
 	} from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import type { Node } from '../../Node.svelte.js';

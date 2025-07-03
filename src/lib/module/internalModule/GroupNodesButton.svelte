@@ -4,6 +4,7 @@
 	import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
 	import { contextsContextKey } from '$lib/shortcut/contextsContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
+	import { selectedNodeIdsContextKey } from 'nodes-editor';
 	import Fa from 'svelte-fa';
 
 	const contextsContext = getRequiredContext(contextsContextKey);

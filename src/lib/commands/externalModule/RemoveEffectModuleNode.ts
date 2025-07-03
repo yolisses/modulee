@@ -54,6 +54,6 @@ export class RemoveEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 
 	undo(graphRegistry: GraphRegistry): void {
 		this.removeNodeCommand.undo(graphRegistry);
-		this.replaceConnectionsTargetNodeIdCommand?.undo();
+		this.replaceConnectionsTargetNodeIdCommand?.undo(graphRegistry);
 	}
 }

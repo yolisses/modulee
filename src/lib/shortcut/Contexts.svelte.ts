@@ -8,6 +8,7 @@ import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { zoomContextKey } from '$lib/space/zoom/zoomContext';
+import { selectedNodeIdsContextKey } from 'nodes-editor';
 
 // TODO consider using getContext without possible throwing to make shortcuts
 // not so dependent of page setup

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { computePosition, flip, shift } from '@floating-ui/dom';
-	import { getMouseRelativePosition } from 'nodes-editor';
+	import { getMouseRelativePosition, rootElementContextKey } from 'nodes-editor';
 	import SetModuleReferenceMenu from './SetModuleReferenceMenu.svelte';
 
 	interface Props {

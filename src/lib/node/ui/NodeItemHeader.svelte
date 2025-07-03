@@ -11,6 +11,8 @@
 		EmptyPointerStrategy,
 		MoverPointerStrategy,
 		PointerEventDispatcher,
+		previewConnectionContextKey,
+		selectedNodeIdsContextKey,
 		SelectOnClickPointerStrategy,
 		Vector,
 		type MoveEvent,
