@@ -1,17 +1,26 @@
 <script lang="ts">
-	import { UndoActionCommand } from '$lib/node/actionCommands/UndoActionCommand';
-	import { getContextsContext } from '$lib/shortcut/contextsContext';
+	import { UndoCommand } from '$lib/commands/editor/UndoCommand';
+	import { createId } from '$lib/global/createId';
+	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getEditorContext } from './editorContext';
 	import { getShortcutStringForCommandType } from './getShortcutStringForCommandType.svelte';
 
 	const editorContext = getEditorContext();
-	const contextsContext = getContextsContext();
+	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
-		const actionCommand = new UndoActionCommand();
-		actionCommand.execute(contextsContext.contexts);
+		const lastCommand = editorContext.editor.history.at(-1);
+		if (!lastCommand) return;
+		const command = new UndoCommand({
+			id: createId(),
+			type: 'UndoCommand',
+			createdAt: new Date().toJSON(),
+			details: { commandId: lastCommand.id },
+			projectId: projectDataContext.projectData.id,
+		});
+		editorContext.editor.execute(command);
 	}
 
 	const shortcutString = getShortcutStringForCommandType('UndoActionCommand');

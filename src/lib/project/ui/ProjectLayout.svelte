@@ -24,6 +24,7 @@
 		type ProjectNavbarSelectionContext,
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
+	import ProjectToolbar from '../ProjectToolbar.svelte';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
 	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
@@ -107,7 +108,10 @@
 </svelte:head>
 <div class="flex h-screen w-screen overflow-hidden max-md:flex-col md:flex-row">
 	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
-		{@render children?.()}
+		<div class="flex flex-1 flex-col overflow-hidden">
+			{@render children?.()}
+		</div>
+		<ProjectToolbar />
 	</div>
 	<ProjectNavbar />
 </div>
