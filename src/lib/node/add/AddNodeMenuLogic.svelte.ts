@@ -1,7 +1,8 @@
 import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { getEditorContext } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
-import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+import { getRequiredContext } from '$lib/global/getRequiredContext';
+import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import { getSpaceContext } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
@@ -15,7 +16,7 @@ export class AddNodeMenuLogic {
 	spaceContext = getSpaceContext();
 	editorContext = getEditorContext();
 	projectDataContext = getProjectDataContext();
-	internalModuleIdContext = getInternalModuleIdContext();
+	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	constructor(
 		public closeModal: () => void,

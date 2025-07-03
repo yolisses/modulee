@@ -1,10 +1,11 @@
 import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
 import { getIsMutedContext } from '$lib/audio/isMutedContexts';
 import { getEditorContext } from '$lib/editor/editorContext';
+import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { getCopyDataContext } from '$lib/graph/copy/copyDataContext';
 import { getGraphContext } from '$lib/graph/graphContext';
 import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from 'nodes-editor';
@@ -21,5 +22,5 @@ export class Contexts {
 	audioBackendContext = getAudioBackendContext();
 	graphRegistryContext = getGraphRegistryContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
-	internalModuleIdContext = getInternalModuleIdContext();
+	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 }

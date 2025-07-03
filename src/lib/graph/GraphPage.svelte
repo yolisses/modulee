@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
 	import { getProjectNavbarSelectionContext } from '$lib/project/projectNavbarSelectionContext';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
@@ -21,7 +22,7 @@
 	projectNavbarSelectionContext.projectNavbarSelection = 'graph';
 
 	const graphContext = getGraphContext();
-	const internalModuleIdContext = getInternalModuleIdContext();
+	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	const spaceContext = $state({ space: new Space() });
 	setSpaceContext(spaceContext);

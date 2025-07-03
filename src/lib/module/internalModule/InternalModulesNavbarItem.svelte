@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import type { InternalModule } from './InternalModule';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
+	import { internalModuleIdContextKey } from './internalModuleIdContext';
 
 	interface Props {
 		internalModule: InternalModule;
@@ -10,8 +11,8 @@
 
 	const { internalModule }: Props = $props();
 	const projectDataContext = getProjectDataContext();
-	const internalModuleIdContext = getInternalModuleIdContext();
 	const projectId = $derived(projectDataContext.projectData.id);
+	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 </script>
 
 <div

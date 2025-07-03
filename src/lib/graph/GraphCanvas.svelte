@@ -2,8 +2,9 @@
 	import type { Connection } from '$lib/connection/Connection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { getElementSize } from '$lib/graph/getElementSize';
-	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
@@ -47,7 +48,7 @@
 	const size = $derived(graphSizer.getSize());
 
 	/* Centering on navigation */
-	const internalModuleIdContext = getInternalModuleIdContext();
+	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	const zoomContext = getZoomContext();
 

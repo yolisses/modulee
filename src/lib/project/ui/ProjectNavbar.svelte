@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import {
 		faFileAlt,
@@ -11,9 +12,9 @@
 	import { getProjectNavbarSelectionContext } from '../projectNavbarSelectionContext';
 
 	const projectDataContext = getProjectDataContext();
-	const internalModuleIdContext = getInternalModuleIdContext();
 	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
+	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 </script>
 
 <div
