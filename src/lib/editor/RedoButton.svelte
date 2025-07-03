@@ -11,7 +11,7 @@
 	const projectDataContext = getProjectDataContext();
 
 	function handleClick() {
-		const lastCommand = editorContext.editor.history.at(-1);
+		const lastCommand = editorContext.editor.undoneHistory.at(-1);
 		if (!lastCommand) return;
 		const command = new RedoCommand({
 			id: createId(),
