@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { ToggleIsMuteActionCommand } from '$lib/node/actionCommands/ToggleIsMuteActionCommand';
+	import { contextsContextKey } from '$lib/shortcut/contextsContext';
 	import { faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { isMutedContextKey } from './isMutedContexts';
 
 	const isMutedContext = getRequiredContext(isMutedContextKey);
 	const contextsContext = getRequiredContext(contextsContextKey);
