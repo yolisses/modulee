@@ -8,12 +8,10 @@ import { getInternalModuleIdContext } from '$lib/module/internalModule/internalM
 import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { getSelectedNodeIdsContext } from 'nodes-editor';
-import { defaultShortcuts } from './defaultShortcuts';
 
 // TODO consider using getContext without possible throwing to make shortcuts
 // not so dependent of page setup
 export class Contexts {
-	shortcuts = defaultShortcuts;
 	zoomContext = getZoomContext();
 	graphContext = getGraphContext();
 	editorContext = getEditorContext();
