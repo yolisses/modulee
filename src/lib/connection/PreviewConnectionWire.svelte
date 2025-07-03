@@ -2,7 +2,10 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
 	import { Output } from '$lib/node/Output';
-	import { PreviewConnectionWire as BasePreviewConnectionWire } from 'nodes-editor';
+	import {
+		PreviewConnectionWire as BasePreviewConnectionWire,
+		previewConnectionContextKey,
+	} from 'nodes-editor';
 	import Wire from './Wire.svelte';
 
 	const graphContext = getRequiredContext(graphContextKey);
