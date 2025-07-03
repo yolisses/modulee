@@ -6,7 +6,7 @@ export type GraphContext = {
 	graph: Graph;
 };
 
-const graphContextKey = Symbol('graphContextKey');
+export const graphContextKey = Symbol('graphContextKey');
 
 export function setGraphContext(graphContext: GraphContext) {
 	setContext(graphContextKey, graphContext);

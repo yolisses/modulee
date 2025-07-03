@@ -5,7 +5,7 @@ export type IsCommandPaletteActiveContext = {
 	isCommandPaletteActive: boolean;
 };
 
-const isCommandPaletteActiveContextKey = Symbol('isCommandPaletteActiveContextKey');
+export const isCommandPaletteActiveContextKey = Symbol('isCommandPaletteActiveContextKey');
 
 export function setIsCommandPaletteActiveContext(
 	isCommandPaletteActiveContext: IsCommandPaletteActiveContext,

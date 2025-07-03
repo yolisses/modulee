@@ -5,7 +5,7 @@ export type Dev2Context = {
 	dev2: number;
 };
 
-const dev2ContextKey = Symbol('dev2ContextKey');
+export const dev2ContextKey = Symbol('dev2ContextKey');
 
 export function setDev2Context(dev2Context: Dev2Context) {
 	setContext(dev2ContextKey, dev2Context);

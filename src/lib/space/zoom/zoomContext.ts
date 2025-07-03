@@ -5,7 +5,7 @@ export type ZoomContext = {
 	zoom: number;
 };
 
-const zoomContextKey = Symbol('zoomContextKey');
+export const zoomContextKey = Symbol('zoomContextKey');
 
 export function setZoomContext(zoomContext: ZoomContext) {
 	setContext(zoomContextKey, zoomContext);

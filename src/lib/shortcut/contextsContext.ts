@@ -6,7 +6,7 @@ export type ContextsContext = {
 	contexts: Contexts;
 };
 
-const contextsContextKey = Symbol('contextsContextKey');
+export const contextsContextKey = Symbol('contextsContextKey');
 
 export function setContextsContext(contextsContext: ContextsContext) {
 	setContext(contextsContextKey, contextsContext);

@@ -6,7 +6,7 @@ export type SpaceContext = {
 	space: Space;
 };
 
-const spaceContextKey = Symbol('spaceContextKey');
+export const spaceContextKey = Symbol('spaceContextKey');
 
 export function setSpaceContext(spaceContext: SpaceContext) {
 	setContext(spaceContextKey, spaceContext);

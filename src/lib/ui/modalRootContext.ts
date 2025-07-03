@@ -5,7 +5,7 @@ export type ModalRootContext = {
 	modalRoot: HTMLElement;
 };
 
-const modalRootContextKey = Symbol('modalRootContextKey');
+export const modalRootContextKey = Symbol('modalRootContextKey');
 
 export function setModalRootContext(modalRootContext: ModalRootContext) {
 	setContext(modalRootContextKey, modalRootContext);

@@ -6,7 +6,7 @@ export type UserDataContext = {
 	userData: UserData;
 };
 
-const userDataContextKey = Symbol('userDataContextKey');
+export const userDataContextKey = Symbol('userDataContextKey');
 
 export function setUserDataContext(userDataContext: UserDataContext) {
 	setContext(userDataContextKey, userDataContext);

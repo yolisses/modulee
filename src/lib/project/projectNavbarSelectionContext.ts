@@ -5,7 +5,7 @@ export type ProjectNavbarSelectionContext = {
 	projectNavbarSelection: string;
 };
 
-const projectNavbarSelectionContextKey = Symbol('projectNavbarSelectionContextKey');
+export const projectNavbarSelectionContextKey = Symbol('projectNavbarSelectionContextKey');
 
 export function setProjectNavbarSelectionContext(
 	projectNavbarSelectionContext: ProjectNavbarSelectionContext,

@@ -6,7 +6,7 @@ export type ShortcutHandlerContext = {
 	shortcutHandler: ShortcutHandler;
 };
 
-const shortcutHandlerContextKey = Symbol('shortcutHandlerContextKey');
+export const shortcutHandlerContextKey = Symbol('shortcutHandlerContextKey');
 
 export function setShortcutHandlerContext(shortcutHandlerContext: ShortcutHandlerContext) {
 	setContext(shortcutHandlerContextKey, shortcutHandlerContext);

@@ -7,7 +7,7 @@ export type CopyDataContext = {
 	copyData?: CopyData;
 };
 
-const copyDataContextKey = Symbol('copyDataContextKey');
+export const copyDataContextKey = Symbol('copyDataContextKey');
 
 export function setCopyDataContext(copyDataContext: CopyDataContext) {
 	setContext(copyDataContextKey, copyDataContext);

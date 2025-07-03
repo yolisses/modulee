@@ -6,7 +6,7 @@ export type AudioBackendContext = {
 	audioBackend?: AudioBackend;
 };
 
-const audioBackendContextKey = Symbol('audioBackendContextKey');
+export const audioBackendContextKey = Symbol('audioBackendContextKey');
 
 export function setAudioBackendContext(audioBackendContext: AudioBackendContext) {
 	setContext(audioBackendContextKey, audioBackendContext);

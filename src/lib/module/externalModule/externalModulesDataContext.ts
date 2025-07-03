@@ -6,7 +6,7 @@ export type ExternalModulesDataContext = {
 	externalModulesData: ExternalModuleData[];
 };
 
-const externalModulesDataContextKey = Symbol('externalModulesDataContextKey');
+export const externalModulesDataContextKey = Symbol('externalModulesDataContextKey');
 
 export function setExternalModulesDataContext(
 	externalModulesDataContext: ExternalModulesDataContext,

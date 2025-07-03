@@ -5,7 +5,7 @@ export type LikedExternalModulesContext = {
 	likedExternalModules: Set<string>;
 };
 
-const likedExternalModulesContextKey = Symbol('likedExternalModulesContextKey');
+export const likedExternalModulesContextKey = Symbol('likedExternalModulesContextKey');
 
 export function setLikedExternalModulesContext(
 	likedExternalModulesContext: LikedExternalModulesContext,

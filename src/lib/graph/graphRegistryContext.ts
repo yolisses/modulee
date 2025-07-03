@@ -6,7 +6,7 @@ export type GraphRegistryContext = {
 	graphRegistry: GraphRegistry;
 };
 
-const graphRegistryContextKey = Symbol('graphRegistryContextKey');
+export const graphRegistryContextKey = Symbol('graphRegistryContextKey');
 
 export function setGraphRegistryContext(graphRegistryContext: GraphRegistryContext) {
 	setContext(graphRegistryContextKey, graphRegistryContext);

@@ -6,7 +6,7 @@ export type EditorContext = {
 	editor: Editor;
 };
 
-const editorContextKey = Symbol('editorContextKey');
+export const editorContextKey = Symbol('editorContextKey');
 
 export function setEditorContext(editorContext: EditorContext) {
 	setContext(editorContextKey, editorContext);

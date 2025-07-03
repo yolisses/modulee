@@ -7,7 +7,7 @@ export type UseExternalModuleInContext = {
 		| { type: 'moduleNode'; moduleNodeId: string };
 };
 
-const useExternalModuleInContextKey = Symbol('useExternalModuleInContextKey');
+export const useExternalModuleInContextKey = Symbol('useExternalModuleInContextKey');
 
 export function setUseExternalModuleInContext(
 	useExternalModuleInContext: UseExternalModuleInContext,

@@ -5,7 +5,7 @@ export type HomeNavbarSelectionContext = {
 	homeNavbarSelection: string;
 };
 
-const homeNavbarSelectionContextKey = Symbol('homeNavbarSelectionContextKey');
+export const homeNavbarSelectionContextKey = Symbol('homeNavbarSelectionContextKey');
 
 export function setHomeNavbarSelectionContext(
 	homeNavbarSelectionContext: HomeNavbarSelectionContext,

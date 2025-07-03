@@ -5,7 +5,7 @@ export type IsMutedContext = {
 	isMuted: boolean;
 };
 
-const isMutedContextKey = Symbol('isMutedContextKey');
+export const isMutedContextKey = Symbol('isMutedContextKey');
 
 export function setIsMutedContext(isMutedContext: IsMutedContext) {
 	setContext(isMutedContextKey, isMutedContext);

@@ -6,7 +6,7 @@ export type ProjectDataContext = {
 	projectData: ProjectData;
 };
 
-const projectDataContextKey = Symbol('projectDataContextKey');
+export const projectDataContextKey = Symbol('projectDataContextKey');
 
 export function setProjectDataContext(projectDataContext: ProjectDataContext) {
 	setContext(projectDataContextKey, projectDataContext);
