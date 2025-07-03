@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';

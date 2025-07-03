@@ -1,7 +1,9 @@
 <script lang="ts" generics="T extends ModuleType">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
+	import { userDataContextKey } from '$lib/user/userDataContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 	import ExternalModulesFiltersForm from './ExternalModulesFiltersForm.svelte';

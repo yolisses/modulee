@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
 	import { Output } from '$lib/node/Output';
 	import { PreviewConnectionWire as BasePreviewConnectionWire } from 'nodes-editor';
 	import Wire from './Wire.svelte';

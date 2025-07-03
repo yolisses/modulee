@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
 	import InternalModulesNavbarItem from './InternalModulesNavbarItem.svelte';
 
 	const graphContext = getRequiredContext(graphContextKey);

@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { SetConstantNodeValueCommand } from '$lib/commands/node/SetConstantNodeValueCommand.js';
+	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId.js';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 	import type { ConstantNode } from '$lib/node/ConstantNode';
 	import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import BaseNodeItem from './BaseNodeItem.svelte';
 

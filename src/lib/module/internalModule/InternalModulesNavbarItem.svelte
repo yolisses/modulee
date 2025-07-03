@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import type { InternalModule } from './InternalModule';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 	import { internalModuleIdContextKey } from './internalModuleIdContext';

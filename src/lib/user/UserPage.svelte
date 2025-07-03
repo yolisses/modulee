@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import EditUserButton from './EditUserButton.svelte';
 	import GuestUserWarn from './GuestUserWarn.svelte';
 	import LogoutButton from './LogoutButton.svelte';
 	import UserContent from './UserContent.svelte';
 	import type { UserData } from './UserData';
+	import { userDataContextKey } from './userDataContext';
 
 	interface Props {
 		userData: UserData;

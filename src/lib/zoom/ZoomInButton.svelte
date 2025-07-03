@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 	import { ZoomInCommand } from '$lib/space/zoom/ZoomInCommand';
 	import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';

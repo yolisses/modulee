@@ -3,13 +3,19 @@
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
+	import { isCommandPaletteActiveContextKey } from '$lib/editor/isCommandPaletteActiveContext';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-	import { setExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
+	import {
+		externalModulesDataContextKey,
+		setExternalModulesDataContext,
+	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet, onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
@@ -20,7 +26,7 @@
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
-	import { setProjectDataContext } from './projectDataContext';
+	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 
 	interface Props {

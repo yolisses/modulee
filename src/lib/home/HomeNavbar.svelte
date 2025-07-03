@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { faGuitar, faProjectDiagram, faQuestion } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { homeNavbarSelectionContextKey } from './homeNavbarSelectionContext';
 	import UserButton from './UserButton.svelte';
 
 	const homeNavbarSelectionContext = getRequiredContext(homeNavbarSelectionContextKey);

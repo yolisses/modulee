@@ -1,3 +1,5 @@
+import { getRequiredContext } from '$lib/global/getRequiredContext';
+import { graphContextKey } from '$lib/graph/graphContext';
 import { Input } from '$lib/input/Input';
 import { Output } from '$lib/node/Output';
 import type { ConnectionCondition } from 'nodes-editor';

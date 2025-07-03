@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand.js';
 	import ConnectorJoint from '$lib/connector/ui/ConnectorJoint.svelte';
+	import { editorContextKey } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
+	import { getRequiredContext } from '$lib/global/getRequiredContext.js';
+	import { graphContextKey } from '$lib/graph/graphContext.js';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext.js';
+	import { spaceContextKey } from '$lib/space/spaceContext.js';
 	import {
 		EmptyPointerStrategy,
 		MoverPointerStrategy,

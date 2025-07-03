@@ -1,5 +1,7 @@
+import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { getElementSize } from '$lib/graph/getElementSize';
 import type { Node } from '$lib/node/Node.svelte';
+import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';

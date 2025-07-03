@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { Snippet } from 'svelte';
 	import Portal from 'svelte-portal';
 	import SetModuleReferenceMenuWrapper from './SetModuleReferenceMenuWrapper.svelte';

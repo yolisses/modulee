@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { ReorderEffectCommand } from '$lib/commands/externalModule/ReorderEffectCommand';
+	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import Sortable, { type SortableEvent } from 'sortablejs';
 	import { onMount } from 'svelte';
 	import ChainDivision from './ChainDivision.svelte';

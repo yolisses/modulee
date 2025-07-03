@@ -11,6 +11,8 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getScreenFontSize } from '$lib/space/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
+	import { spaceContextKey } from '$lib/space/spaceContext';
+	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 	import { PointerEventDispatcher } from 'nodes-editor';
 	import { tick, untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';

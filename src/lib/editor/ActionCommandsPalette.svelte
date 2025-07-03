@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { EditorCommandClass } from '$lib/commands/EditorCommandClass';
 	import { editorCommandClasses } from '$lib/commands/editorCommandClasses';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getSame } from '$lib/ui/getSame';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
+	import { isCommandPaletteActiveContextKey } from './isCommandPaletteActiveContext';
 
 	let text = $state<string>('');
 	let div = $state<HTMLElement>();

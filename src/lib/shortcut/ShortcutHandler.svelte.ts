@@ -1,5 +1,6 @@
+import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { actionCommandClassesByType } from './actionCommandClassesByType';
-import { contextsContextKey, getRequiredContext } from './contextsContext';
+import { contextsContextKey } from './contextsContext';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
 import { getEventKeys } from './getEventKeys';

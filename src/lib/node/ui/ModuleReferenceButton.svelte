@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { Module } from '$lib/module/Module';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 
 	interface Props {
 		module: Module;

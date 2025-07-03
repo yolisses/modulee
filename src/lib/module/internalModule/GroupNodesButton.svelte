@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
+	import { contextsContextKey } from '$lib/shortcut/contextsContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 

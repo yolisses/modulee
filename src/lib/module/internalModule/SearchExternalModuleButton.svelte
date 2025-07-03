@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { faSearch } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { useExternalModuleInContextKey } from './useExternalModuleInContext';
 
 	interface Props {
 		moduleNodeId?: string;

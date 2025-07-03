@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { userDataContextKey } from '$lib/user/userDataContext';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { homeNavbarSelectionContextKey } from './homeNavbarSelectionContext';
 
 	const userDataContext = getRequiredContext(userDataContextKey);
 	const homeNavbarSelectionContext = getRequiredContext(homeNavbarSelectionContextKey);

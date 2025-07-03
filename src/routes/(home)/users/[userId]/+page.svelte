@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { homeNavbarSelectionContextKey } from '$lib/home/homeNavbarSelectionContext';
 	import UserPage from '$lib/user/UserPage.svelte';
 	import type { PageData } from './$types';
 

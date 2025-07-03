@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { onMount } from 'svelte';
+	import { userDataContextKey } from '../userDataContext';
 
 	interface Props {
 		loading: boolean;

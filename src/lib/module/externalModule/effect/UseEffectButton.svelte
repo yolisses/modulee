@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { UseEffectCommand } from '$lib/commands/externalModule/UseEffectCommand';
+	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { externalModulesDataContextKey } from '../externalModulesDataContext';
 	import type { EffectData } from './EffectData';
 	import { getIsAudioInputNodeData } from './getIsAudioInputNodeData';
 	import { pushIfMissingById } from './pushIfMissingById';

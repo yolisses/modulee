@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { useExternalModuleInContextKey } from '$lib/module/internalModule/useExternalModuleInContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 

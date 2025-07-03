@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ProjectData } from '../data/ProjectData';
+	import { projectNavbarSelectionContextKey } from '../projectNavbarSelectionContext';
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import ProjectForm from './ProjectForm.svelte';
 

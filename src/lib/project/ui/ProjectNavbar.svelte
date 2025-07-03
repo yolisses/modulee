@@ -8,6 +8,8 @@
 		faSlidersH,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { projectNavbarSelectionContextKey } from '../projectNavbarSelectionContext';
+	import { projectDataContextKey } from './projectDataContext';
 
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);

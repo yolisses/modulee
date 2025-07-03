@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { Vector, WireSvg } from 'nodes-editor';
 	import WirePath from './WirePath.svelte';
 	import type { WireProps } from './WireProps.js';

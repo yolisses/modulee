@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext.js';
+	import { spaceContextKey } from '$lib/space/spaceContext.js';
 	import { getPathD } from './getPathD.js';
 	import type { WireProps } from './WireProps.js';
 

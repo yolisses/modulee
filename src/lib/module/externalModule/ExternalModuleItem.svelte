@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 	import UseExternalModuleButton from './UseExternalModuleButton.svelte';

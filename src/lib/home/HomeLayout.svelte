@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import HomeNavbar from '$lib/home/HomeNavbar.svelte';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { setHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
 	let { children } = $props();
 

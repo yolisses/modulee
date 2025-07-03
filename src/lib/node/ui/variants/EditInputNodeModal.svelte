@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
+	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { InputNode } from '$lib/node/InputNode';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
+	import { modalRootContextKey } from '$lib/ui/modalRootContext';
 	import Portal from 'svelte-portal';
 
 	interface Props {

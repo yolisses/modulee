@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { editorContextKey } from '$lib/editor/editorContext';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
 	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
 	import type { Module } from '$lib/module/Module';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';

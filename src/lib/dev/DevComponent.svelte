@@ -1,4 +1,7 @@
 <script>
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { devContextKey } from './devContext';
+
 	const devContext = getRequiredContext(devContextKey);
 </script>
 

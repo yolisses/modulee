@@ -1,13 +1,17 @@
 import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
+import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
+import type { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { InputPath } from '$lib/input/InputPath';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
+import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import {
 	PreviewConnectionPointerStrategy,
 	SelectionBoxPointerStrategy,
 	type EndPreviewConnectionEvent,
 } from 'nodes-editor';
+import { graphContextKey } from './graphContext';
 
 export class GraphCanvasPointerStrategyFactory {
 	graphContext = getRequiredContext(graphContextKey);

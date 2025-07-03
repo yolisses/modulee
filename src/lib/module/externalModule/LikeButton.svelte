@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { faHeart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { likedExternalModulesContextKey } from './likedExternalModulesContext';
 
 	interface Props {
 		externalModuleId: string;

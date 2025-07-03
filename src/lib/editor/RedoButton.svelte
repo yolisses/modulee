@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { RedoCommand } from '$lib/commands/editor/RedoCommand';
 	import { createId } from '$lib/global/createId';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import { faRedo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { editorContextKey } from './editorContext';
 	import { getShortcutStringForCommandType } from './getShortcutStringForCommandType.svelte';
 
 	const editorContext = getRequiredContext(editorContextKey);
