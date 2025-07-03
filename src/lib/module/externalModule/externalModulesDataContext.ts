@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 import type { ExternalModuleData } from './ExternalModuleData';
 
@@ -12,8 +11,4 @@ export function setExternalModulesDataContext(
 	externalModulesDataContext: ExternalModulesDataContext,
 ) {
 	setContext(externalModulesDataContextKey, externalModulesDataContext);
-}
-
-export function getRequiredContext(externalModulesDataContextKey) {
-	return getContextOrThrow<ExternalModulesDataContext>(externalModulesDataContextKey);
 }

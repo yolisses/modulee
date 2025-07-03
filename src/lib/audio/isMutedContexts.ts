@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type IsMutedContext = {
@@ -9,8 +8,4 @@ export const isMutedContextKey = Symbol('isMutedContextKey');
 
 export function setIsMutedContext(isMutedContext: IsMutedContext) {
 	setContext(isMutedContextKey, isMutedContext);
-}
-
-export function getRequiredContext(isMutedContextKey) {
-	return getContextOrThrow<IsMutedContext>(isMutedContextKey);
 }

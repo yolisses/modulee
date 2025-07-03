@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { getContext, setContext } from 'svelte';
 
 export type UseExternalModuleInContext = {
@@ -13,10 +12,6 @@ export function setUseExternalModuleInContext(
 	useExternalModuleInContext: UseExternalModuleInContext,
 ) {
 	setContext(useExternalModuleInContextKey, useExternalModuleInContext);
-}
-
-export function getRequiredContext(useExternalModuleInContextKey) {
-	return getContextOrThrow<UseExternalModuleInContext>(useExternalModuleInContextKey);
 }
 
 export function getUseExternalModuleInContextOrUndefined(): UseExternalModuleInContext | undefined {

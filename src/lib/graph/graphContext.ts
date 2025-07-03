@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 import type { Graph } from './Graph.svelte';
 
@@ -10,8 +9,4 @@ export const graphContextKey = Symbol('graphContextKey');
 
 export function setGraphContext(graphContext: GraphContext) {
 	setContext(graphContextKey, graphContext);
-}
-
-export function getRequiredContext(graphContextKey) {
-	return getContextOrThrow<GraphContext>(graphContextKey);
 }

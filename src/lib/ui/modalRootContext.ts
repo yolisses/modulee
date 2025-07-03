@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type ModalRootContext = {
@@ -9,8 +8,4 @@ export const modalRootContextKey = Symbol('modalRootContextKey');
 
 export function setModalRootContext(modalRootContext: ModalRootContext) {
 	setContext(modalRootContextKey, modalRootContext);
-}
-
-export function getRequiredContext(modalRootContextKey) {
-	return getContextOrThrow<ModalRootContext>(modalRootContextKey);
 }

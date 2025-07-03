@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type IsCommandPaletteActiveContext = {
@@ -11,8 +10,4 @@ export function setIsCommandPaletteActiveContext(
 	isCommandPaletteActiveContext: IsCommandPaletteActiveContext,
 ) {
 	setContext(isCommandPaletteActiveContextKey, isCommandPaletteActiveContext);
-}
-
-export function getRequiredContext(isCommandPaletteActiveContextKey) {
-	return getContextOrThrow<IsCommandPaletteActiveContext>(isCommandPaletteActiveContextKey);
 }

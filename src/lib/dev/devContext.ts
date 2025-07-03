@@ -1,4 +1,3 @@
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { getContext, setContext } from 'svelte';
 
 export type DevContext = {
@@ -9,10 +8,6 @@ export const devContextKey = Symbol('devContextKey');
 
 export function setDevContext(devContext: DevContext) {
 	setContext(devContextKey, devContext);
-}
-
-export function getRequiredContext(devContextKey) {
-	return getContextOrThrow<DevContext>(devContextKey);
 }
 
 export function getDevContextOrUndefined() {

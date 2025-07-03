@@ -1,5 +1,4 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type GraphRegistryContext = {
@@ -10,8 +9,4 @@ export const graphRegistryContextKey = Symbol('graphRegistryContextKey');
 
 export function setGraphRegistryContext(graphRegistryContext: GraphRegistryContext) {
 	setContext(graphRegistryContextKey, graphRegistryContext);
-}
-
-export function getRequiredContext(graphRegistryContextKey) {
-	return getContextOrThrow<GraphRegistryContext>(graphRegistryContextKey);
 }

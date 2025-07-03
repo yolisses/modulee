@@ -1,5 +1,4 @@
 import type { AudioBackend } from '$lib/audio/AudioBackend';
-import { getContextOrThrow } from '$lib/ui/getContextOrThrow';
 import { setContext } from 'svelte';
 
 export type AudioBackendContext = {
@@ -10,8 +9,4 @@ export const audioBackendContextKey = Symbol('audioBackendContextKey');
 
 export function setAudioBackendContext(audioBackendContext: AudioBackendContext) {
 	setContext(audioBackendContextKey, audioBackendContext);
-}
-
-export function getRequiredContext(audioBackendContextKey) {
-	return getContextOrThrow<AudioBackendContext>(audioBackendContextKey);
 }
