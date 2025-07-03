@@ -1,5 +1,5 @@
-import { CHAIN_DIVISION_PREFIX } from './CHAIN_DIVISION_PREFIX';
+import { CHAIN_DIVISION_ID } from './CHAIN_DIVISION_ID';
 
 export function getIsDivision(id: string) {
-	return id.startsWith(CHAIN_DIVISION_PREFIX);
+	return id === CHAIN_DIVISION_ID;
 }

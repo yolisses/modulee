@@ -78,11 +78,13 @@
 </script>
 
 <div class="flex flex-row flex-wrap justify-center gap-1 p-1" bind:this={element}>
-	{#each items as item (item.id)}
-		{#if item.type === 'node'}
+	<!-- fakeId is used to prevent an integration bug on Svelte and Sortable-js,
+	since both change the order of the elements -->
+	{#each items as item (item.fakeId)}
+		{#if item.node}
 			<RackModuleNodeItem moduleNode={item.node} />
 		{:else}
-			<ChainDivision id={item.id} />
+			<ChainDivision />
 		{/if}
 	{/each}
 </div>
