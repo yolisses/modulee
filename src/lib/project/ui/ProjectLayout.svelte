@@ -24,7 +24,6 @@
 		type ProjectNavbarSelectionContext,
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
-	import ProjectToolbar from '../ProjectToolbar.svelte';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
 	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
@@ -111,7 +110,7 @@
 		<div class="flex flex-1 flex-col overflow-hidden">
 			{@render children?.()}
 		</div>
-		<ProjectToolbar />
+		<!-- <ProjectToolbar /> -->
 	</div>
 	<ProjectNavbar />
 </div>
