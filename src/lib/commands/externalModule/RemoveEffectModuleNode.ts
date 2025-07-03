@@ -39,8 +39,13 @@ export class RemoveEffectModuleNode extends EditorCommand<{ moduleNodeId: string
 			if (audioInputConnection) {
 				this.replaceConnectionsTargetNodeIdCommand = new ReplaceConnectionsTargetNodeIdCommand(
 					mockCommandData({
-						previousTargetId: moduleNodeId,
-						newTargetId: audioInputConnection.targetNodeId,
+						targetId: audioInputConnection.targetNodeId,
+						connectionIds: graphRegistry.connections
+							.values()
+							.filter((connection) => {
+								return connection.targetNodeId === moduleNodeId;
+							})
+							.map(getId),
 					}),
 				);
 				this.replaceConnectionsTargetNodeIdCommand.execute(graphRegistry);
