@@ -13,6 +13,6 @@ export function setIsCommandPaletteActiveContext(
 	setContext(isCommandPaletteActiveContextKey, isCommandPaletteActiveContext);
 }
 
-export function getIsCommandPaletteActiveContext() {
+export function getRequiredContext(isCommandPaletteActiveContextKey) {
 	return getContextOrThrow<IsCommandPaletteActiveContext>(isCommandPaletteActiveContextKey);
 }

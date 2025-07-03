@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { ProjectData } from '../data/ProjectData';
-	import { getProjectNavbarSelectionContext } from '../projectNavbarSelectionContext';
 	import CreateExternalModuleButton from './CreateExternalModuleButton.svelte';
 	import ProjectForm from './ProjectForm.svelte';
 
@@ -11,7 +10,7 @@
 
 	const { projectData }: Props = $props();
 
-	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
 	projectNavbarSelectionContext.projectNavbarSelection = 'project';
 </script>
 

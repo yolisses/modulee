@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { faHeart } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getLikedExternalModulesContext } from './likedExternalModulesContext';
 
 	interface Props {
 		externalModuleId: string;
 	}
 
 	const { externalModuleId }: Props = $props();
-	const likedExternalModulesContext = getLikedExternalModulesContext();
+	const likedExternalModulesContext = getRequiredContext(likedExternalModulesContextKey);
 
 	let liked = $state(likedExternalModulesContext.likedExternalModules.has(externalModuleId));
 

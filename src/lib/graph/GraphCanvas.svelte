@@ -11,9 +11,7 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { getScreenFontSize } from '$lib/space/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
-	import { getSpaceContext } from '$lib/space/spaceContext';
-	import { getZoomContext } from '$lib/space/zoom/zoomContext';
-	import { getRootElementContext, PointerEventDispatcher } from 'nodes-editor';
+	import { PointerEventDispatcher } from 'nodes-editor';
 	import { tick, untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
@@ -31,8 +29,8 @@
 
 	const { nodes, graphSizer, connections }: Props = $props();
 
-	const spaceContext = getSpaceContext();
-	const rootElementContext = getRootElementContext();
+	const spaceContext = getRequiredContext(spaceContextKey);
+	const rootElementContext = getRequiredContext(rootElementContextKey);
 
 	/* Pointer events handling */
 	const graphCanvasPointerStrategyFactory = new GraphCanvasPointerStrategyFactory();
@@ -50,7 +48,7 @@
 	/* Centering on navigation */
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
-	const zoomContext = getZoomContext();
+	const zoomContext = getRequiredContext(zoomContextKey);
 
 	function autoScroll() {
 		if (!scrollArea) return;

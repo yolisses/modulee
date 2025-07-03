@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getHomeNavbarSelectionContext } from '$lib/home/homeNavbarSelectionContext';
 	import EditUserPage from '$lib/user/EditUserPage.svelte';
 	import type { PageData } from './$types';
 
@@ -8,7 +7,7 @@
 	}
 
 	const { data }: Props = $props();
-	getHomeNavbarSelectionContext().homeNavbarSelection = 'user';
+	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'user';
 </script>
 
 <EditUserPage userData={data.userData} />

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 	import UseExternalModuleButton from './UseExternalModuleButton.svelte';
@@ -9,7 +8,7 @@
 		externalModuleData: ExternalModuleData;
 	}
 
-	const baseRouteContext = getBaseRouteContext();
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
 	const { externalModuleData }: Props = $props();
 </script>
 

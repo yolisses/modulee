@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { RemoveInternalModuleCommand } from '$lib/commands/internalModule/RemoveInternalModuleCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { InternalModule } from './InternalModule';
@@ -14,13 +12,13 @@
 		redirectsTo?: 'mainInternalModuleGraph';
 	}
 
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const { internalModule, redirectsTo }: Props = $props();
 
 	// TODO consider creating a commandFactoryContext to remove the need for
 	// manually getting id, createdAt, type and projectId. It could work like:
-	// const commandFactoryContext = getCommandContext();
+	// const commandFactoryContext = getRequiredContext(commandContextKey);
 	// const { commandFactory } = commandFactoryContext;
 	// const command = commandFactory.create(SomeCommandClass, { someData:
 	// 'someValue' })

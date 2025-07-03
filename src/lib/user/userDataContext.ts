@@ -12,6 +12,6 @@ export function setUserDataContext(userDataContext: UserDataContext) {
 	setContext(userDataContextKey, userDataContext);
 }
 
-export function getUserDataContext() {
+export function getRequiredContext(userDataContextKey) {
 	return getContextOrThrow<UserDataContext>(userDataContextKey);
 }

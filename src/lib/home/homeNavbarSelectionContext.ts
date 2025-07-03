@@ -13,6 +13,6 @@ export function setHomeNavbarSelectionContext(
 	setContext(homeNavbarSelectionContextKey, homeNavbarSelectionContext);
 }
 
-export function getHomeNavbarSelectionContext() {
+export function getRequiredContext(homeNavbarSelectionContextKey) {
 	return getContextOrThrow<HomeNavbarSelectionContext>(homeNavbarSelectionContextKey);
 }

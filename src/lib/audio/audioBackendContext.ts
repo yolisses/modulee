@@ -12,6 +12,6 @@ export function setAudioBackendContext(audioBackendContext: AudioBackendContext)
 	setContext(audioBackendContextKey, audioBackendContext);
 }
 
-export function getAudioBackendContext() {
+export function getRequiredContext(audioBackendContextKey) {
 	return getContextOrThrow<AudioBackendContext>(audioBackendContextKey);
 }

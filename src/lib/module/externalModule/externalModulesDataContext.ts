@@ -14,6 +14,6 @@ export function setExternalModulesDataContext(
 	setContext(externalModulesDataContextKey, externalModulesDataContext);
 }
 
-export function getExternalModulesDataContext() {
+export function getRequiredContext(externalModulesDataContextKey) {
 	return getContextOrThrow<ExternalModulesDataContext>(externalModulesDataContextKey);
 }

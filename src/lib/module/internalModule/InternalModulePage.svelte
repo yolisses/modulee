@@ -1,17 +1,14 @@
 <script lang="ts">
 	import { RenameInternalModuleCommand } from '$lib/commands/internalModule/RenameInternalModuleCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
 	import { internalModuleIdContextKey } from './internalModuleIdContext';
 
-	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const graphContext = getRequiredContext(graphContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	const internalModule = $derived(

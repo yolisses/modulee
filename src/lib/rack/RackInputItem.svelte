@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
 	import { hashToUsize } from '$lib/audio/data/hashToUsize';
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { InputWithControl } from '$lib/input/InputWithControl';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { formatNumber } from '$lib/ui/formatNumber';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import { tick } from 'svelte';
@@ -16,14 +13,14 @@
 
 	let textEditing = $state(false);
 	const { input }: Props = $props();
-	const editorContext = getEditorContext();
+	const editorContext = getRequiredContext(editorContextKey);
 	let textInput = $state<HTMLInputElement>();
 	let initialValue = input.getUnconnectedValue();
 	let value = $state(initialValue);
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 
-	const audioBackendContext = getAudioBackendContext();
+	const audioBackendContext = getRequiredContext(audioBackendContextKey);
 
 	function handleKeyPress(e: Event) {
 		e.preventDefault();

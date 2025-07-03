@@ -15,7 +15,7 @@ export function setUseExternalModuleInContext(
 	setContext(useExternalModuleInContextKey, useExternalModuleInContext);
 }
 
-export function getUseExternalModuleInContext() {
+export function getRequiredContext(useExternalModuleInContextKey) {
 	return getContextOrThrow<UseExternalModuleInContext>(useExternalModuleInContextKey);
 }
 

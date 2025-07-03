@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/SetModuleNodeModuleReferenceCommand';
-	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { getGraphContext } from '$lib/graph/graphContext';
 	import type { Module } from '$lib/module/Module';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
@@ -17,9 +14,9 @@
 		closeModal: () => void;
 	}
 
-	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const graphContext = getRequiredContext(graphContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	const { closeModal, moduleNodeId }: Props = $props();

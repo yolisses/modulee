@@ -1,23 +1,19 @@
 import { DisconnectCommand } from '$lib/commands/connection/DisconnectCommand';
 import { SetConnectionCommand } from '$lib/commands/connection/SetConnectionCommand';
-import { getEditorContext } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
-import { getGraphContext } from '$lib/graph/graphContext';
 import type { InputPath } from '$lib/input/InputPath';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
-import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 import {
-	getPreviewConnectionContext,
 	PreviewConnectionPointerStrategy,
 	SelectionBoxPointerStrategy,
 	type EndPreviewConnectionEvent,
 } from 'nodes-editor';
 
 export class GraphCanvasPointerStrategyFactory {
-	graphContext = getGraphContext();
-	editorContext = getEditorContext();
-	projectDataContext = getProjectDataContext();
-	previewConnectionContext = getPreviewConnectionContext();
+	graphContext = getRequiredContext(graphContextKey);
+	editorContext = getRequiredContext(editorContextKey);
+	projectDataContext = getRequiredContext(projectDataContextKey);
+	previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 
 	handleEndPreviewConnection = (e: EndPreviewConnectionEvent) => {
 		const { input, output } = getInputAndOutput(e, this.graphContext.graph.connectors);

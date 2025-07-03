@@ -13,6 +13,6 @@ export function setProjectNavbarSelectionContext(
 	setContext(projectNavbarSelectionContextKey, projectNavbarSelectionContext);
 }
 
-export function getProjectNavbarSelectionContext() {
+export function getRequiredContext(projectNavbarSelectionContextKey) {
 	return getContextOrThrow<ProjectNavbarSelectionContext>(projectNavbarSelectionContextKey);
 }

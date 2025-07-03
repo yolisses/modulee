@@ -1,6 +1,5 @@
 import { getElementSize } from '$lib/graph/getElementSize';
 import type { Node } from '$lib/node/Node.svelte';
-import { getZoomContext } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
@@ -8,7 +7,7 @@ import { getNodesMinPosition } from './getNodesMinPosition';
 export class GraphSizer {
 	minPosition = $state<Vector>();
 	maxPosition = $state<Vector>();
-	zoomContext = getZoomContext();
+	zoomContext = getRequiredContext(zoomContextKey);
 	scrollArea = $state<HTMLElement>();
 
 	getPadding() {

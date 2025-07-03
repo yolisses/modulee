@@ -1,10 +1,9 @@
-import { getGraphContext } from '$lib/graph/graphContext';
 import { Input } from '$lib/input/Input';
 import { Output } from '$lib/node/Output';
 import type { ConnectionCondition } from 'nodes-editor';
 
 export class ConnectorCondition {
-	graphContext = getGraphContext();
+	graphContext = getRequiredContext(graphContextKey);
 
 	endConnectorCondition: ConnectionCondition = ({ endConnectorId, startConnectorId }) => {
 		if (endConnectorId === startConnectorId) return false;

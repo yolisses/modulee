@@ -2,7 +2,6 @@
 	import type { ModuleType } from '$lib/project/ModuleType';
 	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import { getUserDataContext } from '$lib/user/userDataContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 	import ExternalModulesFiltersForm from './ExternalModulesFiltersForm.svelte';
@@ -15,7 +14,7 @@
 	}
 
 	const loader = new Loader(getPath);
-	const userDataContext = getUserDataContext();
+	const userDataContext = getRequiredContext(userDataContextKey);
 	const { title, moduleType }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
 	let filters = $state({ text: '', sort: '', group: '', moduleType: moduleType ?? '' });

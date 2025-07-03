@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getHomeNavbarSelectionContext } from '$lib/home/homeNavbarSelectionContext';
 	import ProjectsPage from '$lib/project/ui/ProjectsPage.svelte';
 	import type { PageData } from './$types';
 
@@ -9,7 +8,7 @@
 
 	const { data }: Props = $props();
 
-	getHomeNavbarSelectionContext().homeNavbarSelection = 'projects';
+	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'projects';
 </script>
 
 <ProjectsPage projectsData={data.projects} />

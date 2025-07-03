@@ -11,7 +11,7 @@ export function setDev2Context(dev2Context: Dev2Context) {
 	setContext(dev2ContextKey, dev2Context);
 }
 
-export function getDev2Context() {
+export function getRequiredContext(dev2ContextKey) {
 	return getContextOrThrow<Dev2Context>(dev2ContextKey);
 }
 

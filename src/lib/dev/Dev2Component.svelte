@@ -1,7 +1,5 @@
 <script>
-	import { getDev2Context } from './dev2Context';
-
-	const dev2Context = getDev2Context();
+	const dev2Context = getRequiredContext(dev2ContextKey);
 </script>
 
 <div>

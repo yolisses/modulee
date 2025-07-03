@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { UndoCommand } from '$lib/commands/editor/UndoCommand';
 	import { createId } from '$lib/global/createId';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faUndo } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getEditorContext } from './editorContext';
 	import { getShortcutStringForCommandType } from './getShortcutStringForCommandType.svelte';
 
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function handleClick() {
 		const lastCommand = editorContext.editor.history.at(-1);

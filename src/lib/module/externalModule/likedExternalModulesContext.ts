@@ -13,6 +13,6 @@ export function setLikedExternalModulesContext(
 	setContext(likedExternalModulesContextKey, likedExternalModulesContext);
 }
 
-export function getLikedExternalModulesContext() {
+export function getRequiredContext(likedExternalModulesContextKey) {
 	return getContextOrThrow<LikedExternalModulesContext>(likedExternalModulesContextKey);
 }

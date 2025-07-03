@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { InputNode } from '$lib/node/InputNode';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
-	import { getModalRootContext } from '$lib/ui/modalRootContext';
 	import Portal from 'svelte-portal';
 
 	interface Props {
@@ -13,10 +10,10 @@
 		closeModal: () => void;
 	}
 
-	const editorContext = getEditorContext();
-	const modalRootContext = getModalRootContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const modalRootContext = getRequiredContext(modalRootContextKey);
 	const { closeModal, inputNode }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function handleBlur(key: string, value: string | number) {
 		const command = new UpdateInputNodeExtrasCommand({

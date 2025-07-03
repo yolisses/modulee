@@ -1,7 +1,5 @@
-import { getShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
-
 export function getShortcutStringForCommandType(commandType: string) {
-	const shortcutHandlerContext = getShortcutHandlerContext();
+	const shortcutHandlerContext = getRequiredContext(shortcutHandlerContextKey);
 	const shortcutString =
 		shortcutHandlerContext.shortcutHandler.getShortcutStringForCommandType(commandType);
 	return shortcutString;

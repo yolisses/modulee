@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
@@ -10,8 +8,8 @@
 	}
 
 	const { internalModuleId }: Props = $props();
-	const baseRouteContext = getBaseRouteContext();
-	const useExternalModuleInContext = getUseExternalModuleInContext();
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
+	const useExternalModuleInContext = getRequiredContext(useExternalModuleInContextKey);
 
 	function handleClick() {
 		useExternalModuleInContext.useExternalModuleIn = { type: 'rack', internalModuleId };

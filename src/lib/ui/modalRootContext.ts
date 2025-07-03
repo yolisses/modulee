@@ -11,6 +11,6 @@ export function setModalRootContext(modalRootContext: ModalRootContext) {
 	setContext(modalRootContextKey, modalRootContext);
 }
 
-export function getModalRootContext() {
+export function getRequiredContext(modalRootContextKey) {
 	return getContextOrThrow<ModalRootContext>(modalRootContextKey);
 }

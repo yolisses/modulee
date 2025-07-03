@@ -2,14 +2,10 @@
 	import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand.js';
 	import { ConnectorCondition } from '$lib/connector/ui/ConnectorCondition.js';
 	import InputItem from '$lib/connector/ui/InputItem.svelte';
-	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js';
-	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		NodeItem as BaseNodeItem,
 		ConnectorAreaPointerStrategy,
-		getSelectedNodeIdsContext,
 		PointerEventDispatcher,
 	} from 'nodes-editor';
 	import type { Snippet } from 'svelte';
@@ -24,10 +20,10 @@
 		postInputsChildren?: Snippet;
 	}
 
-	const spaceContext = getSpaceContext();
+	const spaceContext = getRequiredContext(spaceContextKey);
 	const { node, postInputsChildren, preInputsChildren, headerChildren }: Props = $props();
 
-	const selectedNodeIdsContext = getSelectedNodeIdsContext();
+	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
 
@@ -38,8 +34,8 @@
 		connectorCondition.endConnectorCondition,
 	);
 
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
 		e.stopPropagation();

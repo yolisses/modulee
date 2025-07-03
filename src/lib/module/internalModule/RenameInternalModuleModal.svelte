@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { RenameInternalModuleCommand } from '$lib/commands/internalModule/RenameInternalModuleCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 	import type { InternalModule } from './InternalModule';
@@ -16,8 +14,8 @@
 
 	let textInput: HTMLInputElement;
 	let name = $state(internalModule.name);
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function handleSubmit() {
 		const command = new RenameInternalModuleCommand({

@@ -2,9 +2,8 @@
 	import { faGuitar, faProjectDiagram, faQuestion } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import UserButton from './UserButton.svelte';
-	import { getHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
 
-	const homeNavbarSelectionContext = getHomeNavbarSelectionContext();
+	const homeNavbarSelectionContext = getRequiredContext(homeNavbarSelectionContextKey);
 </script>
 
 <div

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Connection } from '$lib/connection/Connection';
-	import { ConnectionItem, getSelectedNodeIdsContext } from 'nodes-editor';
+	import { ConnectionItem } from 'nodes-editor';
 	import Wire from './Wire.svelte';
 	import { getInputPathId } from './getInputPathId';
 
@@ -8,7 +8,7 @@
 		connection: Connection;
 	}
 
-	const selectedNodeIdsContext = getSelectedNodeIdsContext();
+	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const { connection }: Props = $props();
 
 	const isSelected = $derived.by(() => {

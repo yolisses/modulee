@@ -11,6 +11,6 @@ export function setZoomContext(zoomContext: ZoomContext) {
 	setContext(zoomContextKey, zoomContext);
 }
 
-export function getZoomContext() {
+export function getRequiredContext(zoomContextKey) {
 	return getContextOrThrow<ZoomContext>(zoomContextKey);
 }

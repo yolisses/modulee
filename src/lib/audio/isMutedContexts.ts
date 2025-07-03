@@ -11,6 +11,6 @@ export function setIsMutedContext(isMutedContext: IsMutedContext) {
 	setContext(isMutedContextKey, isMutedContext);
 }
 
-export function getIsMutedContext() {
+export function getRequiredContext(isMutedContextKey) {
 	return getContextOrThrow<IsMutedContext>(isMutedContextKey);
 }

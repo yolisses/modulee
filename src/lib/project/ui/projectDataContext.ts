@@ -12,7 +12,7 @@ export function setProjectDataContext(projectDataContext: ProjectDataContext) {
 	setContext(projectDataContextKey, projectDataContext);
 }
 
-export function getProjectDataContext() {
+export function getRequiredContext(projectDataContextKey) {
 	return getContextOrThrow<ProjectDataContext>(projectDataContextKey);
 }
 

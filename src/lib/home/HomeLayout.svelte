@@ -1,10 +1,9 @@
 <script lang="ts">
 	import HomeNavbar from '$lib/home/HomeNavbar.svelte';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setHomeNavbarSelectionContext } from './homeNavbarSelectionContext';
 	let { children } = $props();
 
-	const baseRouteContext = getBaseRouteContext();
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
 	baseRouteContext.baseRoute = '';
 
 	const homeNavbarSelectionContext = $state({ homeNavbarSelection: 'instruments' });

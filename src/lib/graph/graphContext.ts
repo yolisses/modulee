@@ -12,6 +12,6 @@ export function setGraphContext(graphContext: GraphContext) {
 	setContext(graphContextKey, graphContext);
 }
 
-export function getGraphContext() {
+export function getRequiredContext(graphContextKey) {
 	return getContextOrThrow<GraphContext>(graphContextKey);
 }

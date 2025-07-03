@@ -5,8 +5,6 @@ import { JuceAudioBackend } from '$lib/audio/JuceAudioBackend';
 import { VirtualPianoMidiBackend } from '$lib/audio/VirtualPianoMidiBackend';
 import { WasmAudioBackend } from '$lib/audio/WasmAudioBackend';
 import { WebMidiBackend } from '$lib/audio/WebMidiBackend';
-import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
-import { getExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 import { onMount } from 'svelte';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
@@ -57,8 +55,8 @@ export function initializeAudioFeatures() {
 		}
 	});
 
-	const graphRegistryContext = getGraphRegistryContext();
-	const externalModulesDataContext = getExternalModulesDataContext();
+	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
+	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
 
 	$effect(() => {
 		// An error on updating the audio graph should not stop the full

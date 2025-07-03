@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { getAudioBackendContext } from '$lib/audio/audioBackendContext';
 	import { hashToUsize } from '$lib/audio/data/hashToUsize';
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { InputWithControl } from '$lib/input/InputWithControl';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { formatNumber } from '$lib/ui/formatNumber';
 
 	interface Props {
@@ -19,8 +16,8 @@
 	let sizeElement: HTMLElement;
 	let pointerId = $state<number>();
 	const { input }: Props = $props();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	let value = $state(input.getUnconnectedValue());
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
@@ -58,7 +55,7 @@
 		editorContext.editor.execute(command);
 	}
 
-	const audioBackendContext = getAudioBackendContext();
+	const audioBackendContext = getRequiredContext(audioBackendContextKey);
 	function handlePointerMove(e: PointerEvent) {
 		if (!pointerId) return;
 		value = getNewValue(e);

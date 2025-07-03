@@ -3,18 +3,13 @@
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
-	import { getIsCommandPaletteActiveContext } from '$lib/editor/isCommandPaletteActiveContext';
 	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-	import {
-		getExternalModulesDataContext,
-		setExternalModulesDataContext,
-	} from '$lib/module/externalModule/externalModulesDataContext';
+	import { setExternalModulesDataContext } from '$lib/module/externalModule/externalModulesDataContext';
 	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
 	import { type Snippet, onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
@@ -25,7 +20,7 @@
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
-	import { getProjectDataContext, setProjectDataContext } from './projectDataContext';
+	import { setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 
 	interface Props {
@@ -36,7 +31,7 @@
 
 	const { children, projectData, externalModulesData }: Props = $props();
 
-	const baseRouteContext = getBaseRouteContext();
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
 	onMount(() => {
 		baseRouteContext.baseRoute = `/projects/${projectData.id}`;
 	});
@@ -50,15 +45,15 @@
 	});
 	setInternalModuleIdContext(internalModuleIdContext);
 
-	const projectDataContext = getProjectDataContext();
-	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
+	const isCommandPaletteActiveContext = getRequiredContext(isCommandPaletteActiveContextKey);
 
 	const graphRegistryContext = $state({
 		graphRegistry: getGraphRegistry(projectDataContext.projectData.graph, externalModulesData),
 	});
 	setGraphRegistryContext(graphRegistryContext);
 
-	const externalModulesDataContext = getExternalModulesDataContext();
+	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
 
 	const graph = new Graph(
 		graphRegistryContext.graphRegistry,

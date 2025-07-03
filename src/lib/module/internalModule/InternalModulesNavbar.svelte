@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { getGraphContext } from '$lib/graph/graphContext';
 	import InternalModulesNavbarItem from './InternalModulesNavbarItem.svelte';
 
-	const graphContext = getGraphContext();
+	const graphContext = getRequiredContext(graphContextKey);
 	const internalModules = $derived(graphContext.graph.internalModules.values());
 </script>
 

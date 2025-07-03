@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import {
 		faFileAlt,
 		faProjectDiagram,
@@ -9,10 +8,9 @@
 		faSlidersH,
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getProjectNavbarSelectionContext } from '../projectNavbarSelectionContext';
 
-	const projectDataContext = getProjectDataContext();
-	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
+	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 </script>

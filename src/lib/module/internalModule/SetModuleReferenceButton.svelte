@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getRootElementContext } from 'nodes-editor';
 	import type { Snippet } from 'svelte';
 	import Portal from 'svelte-portal';
 	import SetModuleReferenceMenuWrapper from './SetModuleReferenceMenuWrapper.svelte';
@@ -21,7 +20,7 @@
 		mouseEvent = e;
 	}
 
-	const rootElementContext = getRootElementContext();
+	const rootElementContext = getRequiredContext(rootElementContextKey);
 </script>
 
 <button onclick={handleClick} onpointerdown={handlePointerDown} class="hover-bg">

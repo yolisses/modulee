@@ -1,15 +1,9 @@
 <script lang="ts">
 	import { MoveNodesCommand } from '$lib/commands/node/MoveNodesCommand.js';
 	import ConnectorJoint from '$lib/connector/ui/ConnectorJoint.svelte';
-	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
-	import { getGraphContext } from '$lib/graph/graphContext.js';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext.js';
-	import { getSpaceContext } from '$lib/space/spaceContext.js';
 	import {
 		EmptyPointerStrategy,
-		getPreviewConnectionContext,
-		getSelectedNodeIdsContext,
 		MoverPointerStrategy,
 		PointerEventDispatcher,
 		SelectOnClickPointerStrategy,
@@ -26,14 +20,14 @@
 	}
 
 	let element = $state<Element>();
-	const spaceContext = getSpaceContext();
-	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
+	const spaceContext = getRequiredContext(spaceContextKey);
+	const graphContext = getRequiredContext(graphContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
 	const { node, children }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	let initialMouseDataPosition = $state(Vector.zero());
-	const selectedNodeIdsContext = getSelectedNodeIdsContext();
-	const previewConnectionContext = getPreviewConnectionContext();
+	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
+	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
 
 	// The criteria to this movement function is: Keep the cursor always in the

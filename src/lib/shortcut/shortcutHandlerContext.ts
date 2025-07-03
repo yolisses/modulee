@@ -12,6 +12,6 @@ export function setShortcutHandlerContext(shortcutHandlerContext: ShortcutHandle
 	setContext(shortcutHandlerContextKey, shortcutHandlerContext);
 }
 
-export function getShortcutHandlerContext() {
+export function getRequiredContext(shortcutHandlerContextKey) {
 	return getContextOrThrow<ShortcutHandlerContext>(shortcutHandlerContextKey);
 }

@@ -12,6 +12,6 @@ export function setSpaceContext(spaceContext: SpaceContext) {
 	setContext(spaceContextKey, spaceContext);
 }
 
-export function getSpaceContext() {
+export function getRequiredContext(spaceContextKey) {
 	return getContextOrThrow<SpaceContext>(spaceContextKey);
 }

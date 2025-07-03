@@ -1,18 +1,15 @@
 <script lang="ts">
-	import { getEditorContext } from '$lib/editor/editorContext';
-	import { getGraphContext } from '$lib/graph/graphContext';
 	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
 	import type { Module } from '$lib/module/Module';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 
-	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const graphContext = getRequiredContext(graphContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function getHref(module: Module) {
 		const { projectData } = projectDataContext;

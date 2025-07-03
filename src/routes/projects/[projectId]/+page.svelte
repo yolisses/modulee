@@ -1,8 +1,7 @@
 <script>
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import ProjectPage from '$lib/project/ui/ProjectPage.svelte';
 
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 </script>
 
 <ProjectPage projectData={projectDataContext.projectData} />

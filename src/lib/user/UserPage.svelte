@@ -5,14 +5,13 @@
 	import LogoutButton from './LogoutButton.svelte';
 	import UserContent from './UserContent.svelte';
 	import type { UserData } from './UserData';
-	import { getUserDataContext } from './userDataContext';
 
 	interface Props {
 		userData: UserData;
 	}
 
 	const { userData }: Props = $props();
-	const userDataContext = getUserDataContext();
+	const userDataContext = getRequiredContext(userDataContextKey);
 	const isCurrentUser = $derived(userData.id === userDataContext.userData?.id);
 </script>
 

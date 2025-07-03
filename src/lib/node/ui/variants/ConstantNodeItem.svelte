@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { SetConstantNodeValueCommand } from '$lib/commands/node/SetConstantNodeValueCommand.js';
-	import { getEditorContext } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
-	import { getGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ConstantNode } from '$lib/node/ConstantNode';
 	import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import type { InputChangeEvent } from '$lib/utils/InputChangeEvent';
 	import BaseNodeItem from './BaseNodeItem.svelte';
 
@@ -15,9 +12,9 @@
 
 	const { constantNode }: Props = $props();
 	let value = $state(constantNode.extras.value);
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
-	const graphRegistryContext = getGraphRegistryContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
+	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
 
 	$effect(() => {
 		const nodeData = graphRegistryContext.graphRegistry.nodes.get(constantNode.id);

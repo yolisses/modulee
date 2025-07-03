@@ -1,9 +1,8 @@
-import { getGraphContext } from '$lib/graph/graphContext';
 import { getRectsBoundingRect, Vector, type Rect } from 'nodes-editor';
 import { graphCanvasPositioningStep } from './graphCanvasPositioningStep';
 
 export class ResizeGraphCanvasHandler {
-	graphContext = getGraphContext();
+	graphContext = getRequiredContext(graphContextKey);
 	containerSize = $state(Vector.zero());
 	minSize = $state(new Vector(graphCanvasPositioningStep, graphCanvasPositioningStep));
 

@@ -1,14 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { UseEffectCommand } from '$lib/commands/externalModule/UseEffectCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
-	import { getBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { getExternalModulesDataContext } from '../externalModulesDataContext';
 	import type { EffectData } from './EffectData';
 	import { getIsAudioInputNodeData } from './getIsAudioInputNodeData';
 	import { pushIfMissingById } from './pushIfMissingById';
@@ -17,12 +12,12 @@
 		effectData: EffectData;
 	}
 
-	const graphContext = getGraphContext();
+	const graphContext = getRequiredContext(graphContextKey);
 	const { effectData }: Props = $props();
-	const editorContext = getEditorContext();
-	const baseRouteContext = getBaseRouteContext();
-	const projectDataContext = getProjectDataContext();
-	const externalModulesDataContext = getExternalModulesDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
+	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
 
 	function handleClick() {
 		const outputNode = graphContext.graph.nodes.values().find((node) => node.type === 'OutputNode');

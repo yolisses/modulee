@@ -1,10 +1,10 @@
 import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
-import { getEditorContext } from '$lib/editor/editorContext';
+import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
-import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
-import { getSpaceContext } from '$lib/space/spaceContext';
+import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
+import { spaceContextKey } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
 import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 import type { NodeDefinition } from '../definitions/NodeDefinition';
@@ -13,9 +13,9 @@ import { createNodeData } from './createNodeData';
 
 export class AddNodeMenuLogic {
 	searchText = $state('');
-	spaceContext = getSpaceContext();
-	editorContext = getEditorContext();
-	projectDataContext = getProjectDataContext();
+	spaceContext = getRequiredContext(spaceContextKey);
+	editorContext = getRequiredContext(editorContextKey);
+	projectDataContext = getRequiredContext(projectDataContextKey);
 	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	constructor(

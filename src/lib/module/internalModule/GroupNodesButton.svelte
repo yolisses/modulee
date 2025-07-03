@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
 	import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
-	import { getContextsContext } from '$lib/shortcut/contextsContext';
 	import { faObjectGroup } from '@fortawesome/free-solid-svg-icons';
-	import { getSelectedNodeIdsContext } from 'nodes-editor';
 	import Fa from 'svelte-fa';
 
-	const contextsContext = getContextsContext();
-	const selectedNodeIdsContext = getSelectedNodeIdsContext();
+	const contextsContext = getRequiredContext(contextsContextKey);
+	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 
 	function handleClick() {
 		const actionCommand = new GroupNodesActionCommand();

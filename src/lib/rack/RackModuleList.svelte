@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { ReorderEffectCommand } from '$lib/commands/externalModule/ReorderEffectCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import type { ModuleNode } from '$lib/node/ModuleNode.svelte';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import Sortable, { type SortableEvent } from 'sortablejs';
 	import { onMount } from 'svelte';
 	import ChainDivision from './ChainDivision.svelte';
@@ -20,8 +18,8 @@
 	let element = $state<HTMLElement>();
 	// moduleNodes have to be topologically sorted
 	const { moduleNodes }: Props = $props();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const items = $derived(getModuleNodesWithDivisions(moduleNodes));
 	$inspect(items);
 

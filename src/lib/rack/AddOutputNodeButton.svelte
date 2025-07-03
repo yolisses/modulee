@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
 	import Fa from 'svelte-fa';
@@ -14,9 +12,9 @@
 		internalModule: InternalModule;
 	}
 
-	const editorContext = getEditorContext();
+	const editorContext = getRequiredContext(editorContextKey);
 	const { internalModule }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	function handleClick() {

@@ -12,6 +12,6 @@ export function setEditorContext(editorContext: EditorContext) {
 	setContext(editorContextKey, editorContext);
 }
 
-export function getEditorContext() {
+export function getRequiredContext(editorContextKey) {
 	return getContextOrThrow<EditorContext>(editorContextKey);
 }

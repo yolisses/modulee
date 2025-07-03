@@ -1,13 +1,12 @@
 <script lang="ts">
 	import type { Module } from '$lib/module/Module';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 
 	interface Props {
 		module: Module;
 	}
 
 	const { module }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const href = $derived(
 		module.getReference().type === 'internal'
 			? `/projects/${projectDataContext.projectData.id}/internalModules/${module.id}/graph`

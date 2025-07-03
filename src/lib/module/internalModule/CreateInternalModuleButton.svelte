@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { AddInternalModuleCommand } from '$lib/commands/internalModule/AddInternalModuleCommand';
-	import { getEditorContext } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
-	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { getNewItemName } from '../../ui/getNewItemName';
@@ -15,9 +12,9 @@
 
 	const { onInternalModuleCreated }: Props = $props();
 
-	const graphContext = getGraphContext();
-	const editorContext = getEditorContext();
-	const projectDataContext = getProjectDataContext();
+	const graphContext = getRequiredContext(graphContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function handleCreateClick() {
 		const internalModuleId = createId();

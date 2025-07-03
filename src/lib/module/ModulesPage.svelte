@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
 	import { getName } from '$lib/ui/getName';
@@ -10,8 +8,8 @@
 	import type { InternalModule } from './internalModule/InternalModule';
 	import InternalModuleDotsMenuButton from './internalModule/InternalModuleDotsMenuButton.svelte';
 
-	const graphContext = getGraphContext();
-	const projectDataContext = getProjectDataContext();
+	const graphContext = getRequiredContext(graphContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function getHrefInternal(internalModule: InternalModule) {
 		const { projectData } = projectDataContext;

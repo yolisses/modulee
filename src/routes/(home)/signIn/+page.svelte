@@ -1,8 +1,7 @@
 <script>
-	import { getHomeNavbarSelectionContext } from '$lib/home/homeNavbarSelectionContext';
 	import SignInPage from '$lib/user/SignInPage.svelte';
 
-	getHomeNavbarSelectionContext().homeNavbarSelection = 'user';
+	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'user';
 </script>
 
 <SignInPage />

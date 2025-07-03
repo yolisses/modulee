@@ -12,6 +12,6 @@ export function setGraphRegistryContext(graphRegistryContext: GraphRegistryConte
 	setContext(graphRegistryContextKey, graphRegistryContext);
 }
 
-export function getGraphRegistryContext() {
+export function getRequiredContext(graphRegistryContextKey) {
 	return getContextOrThrow<GraphRegistryContext>(graphRegistryContextKey);
 }

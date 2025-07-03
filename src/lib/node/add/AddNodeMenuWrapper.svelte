@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
-	import { getMouseRelativePosition, getRootElementContext } from 'nodes-editor';
+	import { getMouseRelativePosition } from 'nodes-editor';
 
 	interface Props {
 		mouseEvent?: MouseEvent;
@@ -12,7 +12,7 @@
 	let menu = $state<HTMLElement>();
 	let positioner = $state<HTMLElement>();
 
-	const rootElementContext = getRootElementContext();
+	const rootElementContext = getRequiredContext(rootElementContextKey);
 	const menuPosition = $derived.by(() => {
 		if (!mouseEvent) return;
 		if (!rootElementContext.rootElement) return;

@@ -4,11 +4,10 @@
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getSame } from '$lib/ui/getSame';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
-	import { getIsCommandPaletteActiveContext } from './isCommandPaletteActiveContext';
 
 	let text = $state<string>('');
 	let div = $state<HTMLElement>();
-	const isCommandPaletteActiveContext = getIsCommandPaletteActiveContext();
+	const isCommandPaletteActiveContext = getRequiredContext(isCommandPaletteActiveContextKey);
 
 	const values = $derived(
 		editorCommandClasses.filter((editorCommandClass) => getName(editorCommandClass).includes(text)),

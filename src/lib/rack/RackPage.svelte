@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { getGraphContext } from '$lib/graph/graphContext';
-	import { getProjectNavbarSelectionContext } from '$lib/project/projectNavbarSelectionContext';
 	import RackModuleItem from './RackModuleItem.svelte';
 
-	const graphContext = getGraphContext();
+	const graphContext = getRequiredContext(graphContextKey);
 
-	const projectNavbarSelectionContext = getProjectNavbarSelectionContext();
+	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
 	projectNavbarSelectionContext.projectNavbarSelection = 'rack';
 </script>
 

@@ -2,13 +2,12 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_AUTH_GOOGLE_ID } from '$env/static/public';
 	import { onMount } from 'svelte';
-	import { getUserDataContext } from '../userDataContext';
 
 	interface Props {
 		loading: boolean;
 	}
 
-	const userDataContext = getUserDataContext();
+	const userDataContext = getRequiredContext(userDataContextKey);
 	let { loading = $bindable() }: Props = $props();
 
 	async function onGoogleSignIn({ credential }: { credential: string }) {

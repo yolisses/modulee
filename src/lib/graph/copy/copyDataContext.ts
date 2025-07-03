@@ -13,6 +13,6 @@ export function setCopyDataContext(copyDataContext: CopyDataContext) {
 	setContext(copyDataContextKey, copyDataContext);
 }
 
-export function getCopyDataContext() {
+export function getRequiredContext(copyDataContextKey) {
 	return getContextOrThrow<CopyDataContext>(copyDataContextKey);
 }

@@ -1,5 +1,5 @@
 import { actionCommandClassesByType } from './actionCommandClassesByType';
-import { getContextsContext } from './contextsContext';
+import { contextsContextKey, getRequiredContext } from './contextsContext';
 import { defaultShortcuts } from './defaultShortcuts';
 import { getAreKeyListsEqual } from './getAreKeyListsEqual';
 import { getEventKeys } from './getEventKeys';
@@ -7,7 +7,7 @@ import { getIsTextEdit } from './getIsTextEdit';
 
 export class ShortcutHandler {
 	shortcuts = defaultShortcuts;
-	contextsContext = getContextsContext();
+	contextsContext = getRequiredContext(contextsContextKey);
 
 	handleKeyDown = (e: KeyboardEvent) => {
 		if (getIsTextEdit(e)) return;

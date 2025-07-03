@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { getProjectDataContext } from '$lib/project/ui/projectDataContext';
 	import type { InternalModule } from './InternalModule';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 	import { internalModuleIdContextKey } from './internalModuleIdContext';
@@ -10,7 +9,7 @@
 	}
 
 	const { internalModule }: Props = $props();
-	const projectDataContext = getProjectDataContext();
+	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const projectId = $derived(projectDataContext.projectData.id);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 </script>

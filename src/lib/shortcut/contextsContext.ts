@@ -12,6 +12,6 @@ export function setContextsContext(contextsContext: ContextsContext) {
 	setContext(contextsContextKey, contextsContext);
 }
 
-export function getContextsContext() {
+export function getRequiredContext(contextsContextKey) {
 	return getContextOrThrow<ContextsContext>(contextsContextKey);
 }
