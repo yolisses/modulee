@@ -36,6 +36,10 @@ import {
 	type ProjectNavbarSelectionContext,
 } from '$lib/project/projectNavbarSelectionContext';
 import { projectDataContextKey, type ProjectDataContext } from '$lib/project/ui/projectDataContext';
+import type {
+	ProjectToolbarContext,
+	projectToolbarContextKey,
+} from '$lib/project/ui/projectToobalContext';
 import { contextsContextKey, type ContextsContext } from '$lib/shortcut/contextsContext';
 import {
 	shortcutHandlerContextKey,
@@ -73,6 +77,7 @@ export type ContextsByKey = {
 	[previewConnectionContextKey]: PreviewConnectionContext;
 	[projectDataContextKey]: ProjectDataContext;
 	[projectNavbarSelectionContextKey]: ProjectNavbarSelectionContext;
+	[projectToolbarContextKey]: ProjectToolbarContext;
 	[rootElementContextKey]: RootElementContext;
 	[selectedNodeIdsContextKey]: SelectedNodeIdsContext;
 	[shortcutHandlerContextKey]: ShortcutHandlerContext;

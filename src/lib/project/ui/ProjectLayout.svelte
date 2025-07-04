@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
+	import MuteButton from '$lib/audio/MuteButton.svelte';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { isCommandPaletteActiveContextKey } from '$lib/editor/isCommandPaletteActiveContext';
+	import RedoButton from '$lib/editor/RedoButton.svelte';
+	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
@@ -26,10 +29,10 @@
 		type ProjectNavbarSelectionContext,
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
-	import ProjectToolbar from '../ProjectToolbar.svelte';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
+	import { type ProjectToolbarContext, setProjectToolbarContext } from './projectToobalContext';
 
 	interface Props {
 		children: Snippet;
@@ -104,6 +107,9 @@
 	setUseExternalModuleInContext(useExternalModuleInContext);
 
 	initializeAudioFeatures();
+
+	const projectToolbarContext = $state({} as ProjectToolbarContext);
+	setProjectToolbarContext(projectToolbarContext);
 </script>
 
 <svelte:head>
@@ -114,7 +120,14 @@
 		<div class="flex flex-1 flex-col overflow-hidden">
 			{@render children?.()}
 		</div>
-		<ProjectToolbar />
+		<div
+			bind:this={projectToolbarContext.projectToolbar}
+			class="flex flex-row items-start overflow-auto border-t-2 border-black/50"
+		>
+			<UndoButton />
+			<RedoButton />
+			<MuteButton />
+		</div>
 	</div>
 	<ProjectNavbar />
 </div>
