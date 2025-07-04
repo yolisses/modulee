@@ -11,7 +11,7 @@
 
 	setGraphContext({ graph: {} });
 
-	contexts.updateContext(graphContextKey);
+	contexts.get(updateContextKey)(graphContextKey);
 
 	function handleClick() {
 		const command = new SelectedAllNodesActionCommand();

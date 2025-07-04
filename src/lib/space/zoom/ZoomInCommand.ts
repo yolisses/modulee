@@ -1,8 +1,9 @@
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
-import type { ZoomContext } from './zoomContext';
+import type { Contexts } from '$lib/shortcut/Contexts.svelte';
+import { zoomContextKey } from './zoomContext';
 
 export class ZoomInCommand extends ActionCommand {
-	execute(contexts: { zoomContext: ZoomContext }): void {
-		contexts.zoomContext.zoom += 1;
+	execute(contexts: Contexts): void {
+		contexts.get(zoomContextKey).zoom += 1;
 	}
 }

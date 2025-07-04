@@ -1,10 +1,14 @@
+import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';
+import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
+import { selectedNodeIdsContextKey } from 'nodes-editor';
 
 export class CopyNodesActionCommand extends ActionCommand {
 	execute(contexts: Contexts): void {
-		const { projectData } = contexts.projectDataContext;
-		const { selectedNodeIds } = contexts.selectedNodeIdsContext;
+		const copyDataContext = contexts.get(copyDataContextKey);
+		const { projectData } = contexts.get(projectDataContextKey);
+		const { selectedNodeIds } = contexts.get(selectedNodeIdsContextKey);
 
 		if (selectedNodeIds.size === 0) {
 			return;
@@ -26,7 +30,6 @@ export class CopyNodesActionCommand extends ActionCommand {
 			}),
 		);
 
-		const { copyDataContext } = contexts;
 		copyDataContext.copyData = {
 			nodes: selectedNodesData,
 			connections: selectedConnectionsData,

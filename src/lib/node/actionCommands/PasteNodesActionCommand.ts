@@ -1,19 +1,23 @@
 import { PasteNodesCommand } from '$lib/commands/node/PasteNodesCommand';
+import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
+import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';
+import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 import type { NodeData } from '$lib/node/data/NodeData';
+import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
-import { Vector } from 'nodes-editor';
+import { selectedNodeIdsContextKey, Vector } from 'nodes-editor';
 import { SvelteSet } from 'svelte/reactivity';
 
 export class PasteNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {
-		const { copyDataContext } = contexts;
-		const { editor } = contexts.editorContext;
-		const { projectData } = contexts.projectDataContext;
-		const { internalModuleId } = contexts.internalModuleIdContext;
+		const { editor } = contexts.get(editorContextKey);
+		const copyDataContext = contexts.get(copyDataContextKey);
+		const { projectData } = contexts.get(projectDataContextKey);
+		const { internalModuleId } = contexts.get(internalModuleIdContextKey);
 
 		if (!copyDataContext.copyData) return;
 
@@ -57,7 +61,7 @@ export class PasteNodesActionCommand extends ActionCommand {
 
 		editor.execute(undoCommand);
 
-		contexts.selectedNodeIdsContext.selectedNodeIds = new SvelteSet(
+		contexts.get(selectedNodeIdsContextKey).selectedNodeIds = new SvelteSet(
 			nodes.map((nodeData) => {
 				return nodeData.id;
 			}),
