@@ -1,7 +1,5 @@
 import { audioBackendContextKey, type AudioBackendContext } from '$lib/audio/audioBackendContext';
 import { isMutedContextKey, type IsMutedContext } from '$lib/audio/isMutedContexts';
-import { dev2ContextKey, type Dev2Context } from '$lib/dev/dev2Context';
-import { devContextKey, type DevContext } from '$lib/dev/devContext';
 import { editorContextKey, type EditorContext } from '$lib/editor/editorContext';
 import {
 	isCommandPaletteActiveContextKey,
@@ -60,8 +58,6 @@ import type {
 export type ContextsByKey = {
 	[audioBackendContextKey]: AudioBackendContext;
 	[isMutedContextKey]: IsMutedContext;
-	[dev2ContextKey]: Dev2Context;
-	[devContextKey]: DevContext;
 	[editorContextKey]: EditorContext;
 	[isCommandPaletteActiveContextKey]: IsCommandPaletteActiveContext;
 	[copyDataContextKey]: CopyDataContext;

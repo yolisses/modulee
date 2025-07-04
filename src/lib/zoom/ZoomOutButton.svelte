@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { getShortcutStringForCommandType } from '$lib/editor/getShortcutStringForCommandType.svelte';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
+	import { contextsContextKey } from '$lib/shortcut/contextsContext';
 	import { ZoomOutCommand } from '$lib/space/zoom/ZoomOutCommand';
 	import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 
-	const zoomContext = getRequiredContext(zoomContextKey);
+	const contextsContext = getRequiredContext(contextsContextKey);
 
 	function handleClick() {
 		const command = new ZoomOutCommand();
-		command.execute({ zoomContext });
+		command.execute(contextsContext.contexts);
 	}
 
 	const shortcutString = getShortcutStringForCommandType('ZoomOutCommand');
