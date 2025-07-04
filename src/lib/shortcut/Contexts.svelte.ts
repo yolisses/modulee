@@ -1,26 +1,22 @@
-import { audioBackendContextKey } from '$lib/audio/audioBackendContext';
-import { isMutedContextKey } from '$lib/audio/isMutedContexts';
-import { editorContextKey } from '$lib/editor/editorContext';
+import type { ContextsByKey } from '$lib/global/ContextsByKey';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
-import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';
-import { graphContextKey } from '$lib/graph/graphContext';
-import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
-import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
-import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
-import { zoomContextKey } from '$lib/space/zoom/zoomContext';
-import { selectedNodeIdsContextKey } from 'nodes-editor';
 
-// TODO consider using getContext without possible throwing to make shortcuts
-// not so dependent of page setup
 export class Contexts {
-	zoomContext = getRequiredContext(zoomContextKey);
-	graphContext = getRequiredContext(graphContextKey);
-	editorContext = getRequiredContext(editorContextKey);
-	isMutedContext = getRequiredContext(isMutedContextKey);
-	copyDataContext = getRequiredContext(copyDataContextKey);
-	projectDataContext = getRequiredContext(projectDataContextKey);
-	audioBackendContext = getRequiredContext(audioBackendContextKey);
-	graphRegistryContext = getRequiredContext(graphRegistryContextKey);
-	selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
-	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	private contextsByKey: Partial<ContextsByKey> = {};
+
+	get<T extends keyof ContextsByKey>(key: T): ContextsByKey[T] {
+		const context = this.contextsByKey[key];
+		if (context === undefined) {
+			throw new Error(`Context ${key.toString()} is not defined`);
+		}
+		return context;
+	}
+
+	updateContext<T extends keyof ContextsByKey>(key: T) {
+		$effect(() => {
+			const context = getRequiredContext(key);
+			this.contextsByKey[key] = context;
+			return () => delete this.contextsByKey[key];
+		});
+	}
 }

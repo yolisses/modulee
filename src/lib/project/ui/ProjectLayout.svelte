@@ -4,6 +4,7 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { isCommandPaletteActiveContextKey } from '$lib/editor/isCommandPaletteActiveContext';
+	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
@@ -111,6 +112,7 @@
 		<div class="flex flex-1 flex-col overflow-hidden">
 			{@render children?.()}
 		</div>
+		<UndoButton />
 		<!-- <ProjectToolbar /> -->
 	</div>
 	<ProjectNavbar />

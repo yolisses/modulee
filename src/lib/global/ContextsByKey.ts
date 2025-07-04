@@ -57,7 +57,7 @@ import type {
 	selectedNodeIdsContextKey,
 } from 'nodes-editor';
 
-export type Contexts = {
+export type ContextsByKey = {
 	[audioBackendContextKey]: AudioBackendContext;
 	[isMutedContextKey]: IsMutedContext;
 	[dev2ContextKey]: Dev2Context;

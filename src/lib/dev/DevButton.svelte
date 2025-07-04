@@ -1,24 +1,22 @@
 <script lang="ts">
+	import { graphContextKey, setGraphContext } from '$lib/graph/graphContext';
 	import { SelectedAllNodesActionCommand } from '$lib/node/actionCommands/SelectedAllNodesActionCommand';
 	import { Contexts } from '$lib/shortcut/Contexts.svelte';
-	import DevButton from './DevButton.svelte';
 
-	let isShowing = $state(false);
-	const contexts = new Contexts();
+	interface Props {
+		contexts: Contexts;
+	}
+
+	const { contexts }: Props = $props();
+
+	setGraphContext({ graph: {} });
+
+	contexts.updateContext(graphContextKey);
 
 	function handleClick() {
 		const command = new SelectedAllNodesActionCommand();
 		command.execute(contexts);
 	}
-
-	function toggle() {
-		isShowing = !isShowing;
-	}
 </script>
 
 <button onclick={handleClick}>click me</button>
-<button onclick={toggle}>toggle</button>
-
-{#if isShowing}
-	<DevButton {contexts} />
-{/if}
