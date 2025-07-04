@@ -19,10 +19,9 @@
 	{#snippet topChildren()}
 		<CreateProjectButton />
 	{/snippet}
-	{#snippet children()}
-		{#if userDataContext.userData.isGuest}
-			<GuestUserWarn />
-		{/if}
-		<ProjectList {projectsData} />
-	{/snippet}
+
+	{#if userDataContext.userData.isGuest}
+		<GuestUserWarn />
+	{/if}
+	<ProjectList {projectsData} />
 </ListPageLayout>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
 	import { getMouseRelativePosition, rootElementContextKey } from 'nodes-editor';
 
@@ -43,11 +42,4 @@
 
 		return autoUpdate(positioner, menu, updatePosition);
 	});
-
-	function handleWindowClick(e: InputMouseEvent) {
-		const clickedInside = menu?.contains(e.target as Node);
-		if (!clickedInside) {
-			closeModal();
-		}
-	}
 </script>

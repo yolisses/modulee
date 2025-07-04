@@ -1,4 +1,4 @@
-<script lang="ts" generics="T">
+<script lang="ts">
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
 	type Props = HTMLButtonAttributes & HTMLAnchorAttributes;

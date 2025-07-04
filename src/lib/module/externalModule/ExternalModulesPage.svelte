@@ -66,14 +66,13 @@
 	{#snippet sideBar()}
 		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
 	{/snippet}
-	{#snippet children()}
-		<InfiniteList {loader}>
-			{#snippet children(externalModuleData: ExternalModuleData<T>)}
-				<ExternalModuleItem {externalModuleData} />
-			{/snippet}
-			{#snippet emptyStateButtons()}
-				<button class="common-button" onclick={clearFilters}> Clear filters </button>
-			{/snippet}
-		</InfiniteList>
-	{/snippet}
+
+	<InfiniteList {loader}>
+		{#snippet children(externalModuleData: ExternalModuleData<T>)}
+			<ExternalModuleItem {externalModuleData} />
+		{/snippet}
+		{#snippet emptyStateButtons()}
+			<button class="common-button" onclick={clearFilters}> Clear filters </button>
+		{/snippet}
+	</InfiniteList>
 </ListPageLayout>

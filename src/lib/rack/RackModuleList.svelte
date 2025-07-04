@@ -24,7 +24,6 @@
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const items = $derived(getModuleNodesWithDivisions(moduleNodes));
-	$inspect(items);
 
 	function handleSort(e: SortableEvent) {
 		const { oldIndex, newIndex } = e;

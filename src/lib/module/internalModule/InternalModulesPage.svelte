@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { editorContextKey } from '$lib/editor/editorContext';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
 	import CreateInternalModuleButton from '$lib/module/internalModule/CreateInternalModuleButton.svelte';
@@ -12,7 +11,6 @@
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
 
 	const graphContext = getRequiredContext(graphContextKey);
-	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 
 	function getHref(module: Module) {

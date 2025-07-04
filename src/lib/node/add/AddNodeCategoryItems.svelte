@@ -22,6 +22,6 @@
 	);
 </script>
 
-{#each sortedNodeDefinitionCategories as nodeDefinitionCategory}
+{#each sortedNodeDefinitionCategories as nodeDefinitionCategory (nodeDefinitionCategory.name)}
 	<AddNodeCategoryItem {addNodeMenuLogic} {nodeDefinitionCategory} />
 {/each}
