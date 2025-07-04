@@ -3,16 +3,11 @@
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
 	import { projectNavbarSelectionContextKey } from '$lib/project/projectNavbarSelectionContext';
-	import { Contexts } from '$lib/shortcut/Contexts.svelte';
-	import { setContextsContext } from '$lib/shortcut/contextsContext';
-	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
-	import { setShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
 	import { Space } from '$lib/space/Space.js';
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { onMount } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import { graphContextKey } from './graphContext';
 	import { GraphSizer } from './GraphSizer.svelte';
@@ -44,17 +39,6 @@
 			return node.internalModuleId === internalModuleIdContext.internalModuleId;
 		}),
 	);
-
-	const contexts = new Contexts();
-	setContextsContext({ contexts });
-
-	const shortcutHandler = new ShortcutHandler();
-	setShortcutHandlerContext({ shortcutHandler });
-
-	onMount(() => {
-		shortcutHandler.initialize();
-		return () => shortcutHandler.destroy();
-	});
 </script>
 
 <svelte:head>

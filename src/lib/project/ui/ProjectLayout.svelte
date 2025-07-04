@@ -4,7 +4,6 @@
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
 	import { isCommandPaletteActiveContextKey } from '$lib/editor/isCommandPaletteActiveContext';
-	import UndoButton from '$lib/editor/UndoButton.svelte';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { Graph } from '$lib/graph/Graph.svelte';
 	import { setGraphContext } from '$lib/graph/graphContext';
@@ -14,11 +13,12 @@
 		externalModulesDataContextKey,
 		setExternalModulesDataContext,
 	} from '$lib/module/externalModule/externalModulesDataContext';
-	import { setInternalModuleIdContext } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
+	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
-	import { type Snippet, onMount } from 'svelte';
+	import { type Snippet, onMount, setContext } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getGraphData } from '../getGraphData';
 	import { getGraphRegistry } from '../getGraphRegistry';
@@ -26,6 +26,7 @@
 		type ProjectNavbarSelectionContext,
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
+	import ProjectToolbar from '../ProjectToolbar.svelte';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
@@ -50,7 +51,8 @@
 	const internalModuleIdContext = $state({
 		internalModuleId: projectData.graph.mainInternalModuleId,
 	});
-	setInternalModuleIdContext(internalModuleIdContext);
+	setContext(internalModuleIdContextKey, internalModuleIdContext);
+	updateContext(internalModuleIdContextKey);
 
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const isCommandPaletteActiveContext = getRequiredContext(isCommandPaletteActiveContextKey);
@@ -112,8 +114,7 @@
 		<div class="flex flex-1 flex-col overflow-hidden">
 			{@render children?.()}
 		</div>
-		<UndoButton />
-		<!-- <ProjectToolbar /> -->
+		<ProjectToolbar />
 	</div>
 	<ProjectNavbar />
 </div>

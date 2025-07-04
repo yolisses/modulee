@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 
 export type LikedExternalModulesContext = {
@@ -10,4 +11,5 @@ export function setLikedExternalModulesContext(
 	likedExternalModulesContext: LikedExternalModulesContext,
 ) {
 	setContext(likedExternalModulesContextKey, likedExternalModulesContext);
+	updateContext(likedExternalModulesContextKey);
 }

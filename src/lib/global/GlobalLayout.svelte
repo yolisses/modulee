@@ -4,6 +4,10 @@
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
 	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
 	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
+	import { Contexts } from '$lib/shortcut/Contexts.svelte';
+	import { setContextsContext } from '$lib/shortcut/contextsContext';
+	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
+	import { setShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
 	import { setBaseRouteContext } from '$lib/ui/baseRouteContext';
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
@@ -19,6 +23,9 @@
 	}
 
 	const { children, userData }: Props = $props();
+
+	const contexts = new Contexts();
+	setContextsContext({ contexts });
 
 	const userDataContext = $state({ userData });
 	setUserDataContext(userDataContext);
@@ -61,6 +68,14 @@
 		if (authToken) {
 			window.__JUCE__?.backend.emitEvent('setAuthToken', { authToken });
 		}
+	});
+
+	const shortcutHandler = new ShortcutHandler();
+	setShortcutHandlerContext({ shortcutHandler });
+
+	onMount(() => {
+		shortcutHandler.initialize();
+		return () => shortcutHandler.destroy();
 	});
 </script>
 

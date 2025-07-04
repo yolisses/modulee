@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 import type { Space } from './Space';
 
@@ -9,4 +10,5 @@ export const spaceContextKey = Symbol('spaceContextKey');
 
 export function setSpaceContext(spaceContext: SpaceContext) {
 	setContext(spaceContextKey, spaceContext);
+	updateContext(spaceContextKey);
 }

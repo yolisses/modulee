@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 import type { ExternalModuleData } from './ExternalModuleData';
 
@@ -11,4 +12,5 @@ export function setExternalModulesDataContext(
 	externalModulesDataContext: ExternalModulesDataContext,
 ) {
 	setContext(externalModulesDataContextKey, externalModulesDataContext);
+	updateContext(externalModulesDataContextKey);
 }

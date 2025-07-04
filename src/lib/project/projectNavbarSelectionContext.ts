@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 
 export type ProjectNavbarSelectionContext = {
@@ -10,4 +11,5 @@ export function setProjectNavbarSelectionContext(
 	projectNavbarSelectionContext: ProjectNavbarSelectionContext,
 ) {
 	setContext(projectNavbarSelectionContextKey, projectNavbarSelectionContext);
+	updateContext(projectNavbarSelectionContextKey);
 }

@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { getContext, setContext } from 'svelte';
 import type { ProjectData } from '../data/ProjectData';
 
@@ -9,6 +10,7 @@ export const projectDataContextKey = Symbol('projectDataContextKey');
 
 export function setProjectDataContext(projectDataContext: ProjectDataContext) {
 	setContext(projectDataContextKey, projectDataContext);
+	updateContext(projectDataContextKey);
 }
 
 export function getProjectDataContextOrUndefined() {

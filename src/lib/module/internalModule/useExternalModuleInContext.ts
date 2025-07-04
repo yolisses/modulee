@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { getContext, setContext } from 'svelte';
 
 export type UseExternalModuleInContext = {
@@ -12,6 +13,7 @@ export function setUseExternalModuleInContext(
 	useExternalModuleInContext: UseExternalModuleInContext,
 ) {
 	setContext(useExternalModuleInContextKey, useExternalModuleInContext);
+	updateContext(useExternalModuleInContextKey);
 }
 
 export function getUseExternalModuleInContextOrUndefined(): UseExternalModuleInContext | undefined {

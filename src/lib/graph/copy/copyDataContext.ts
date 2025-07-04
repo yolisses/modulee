@@ -1,4 +1,5 @@
 import type { CopyData } from '$lib/graph/copy/CopyData';
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 
 export type CopyDataContext = {
@@ -10,4 +11,5 @@ export const copyDataContextKey = Symbol('copyDataContextKey');
 
 export function setCopyDataContext(copyDataContext: CopyDataContext) {
 	setContext(copyDataContextKey, copyDataContext);
+	updateContext(copyDataContextKey);
 }

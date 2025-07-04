@@ -1,3 +1,4 @@
+import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 
 export type InternalModuleIdContext = {
@@ -8,4 +9,5 @@ export const internalModuleIdContextKey = Symbol('internalModuleIdContextKey');
 
 export function setInternalModuleIdContext(internalModuleIdContext: InternalModuleIdContext) {
 	setContext(internalModuleIdContextKey, internalModuleIdContext);
+	updateContext(internalModuleIdContextKey);
 }
