@@ -5,18 +5,11 @@
 		"source.addMissingImports.ts": "always"
 	},
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"cSpell.words": [
-		"IDBP",
-		"juce",
-		"maxlength",
-		"modulee"
-	],
+	"cSpell.words": ["IDBP", "juce", "maxlength", "modulee"],
 	"[ignore]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
-	"typescript.preferences.autoImportFileExcludePatterns": [
-		"vite"
-	],
+	"typescript.preferences.autoImportFileExcludePatterns": ["vite"],
 	"[dotenv]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
@@ -28,5 +21,8 @@
 			"source.organizeImports": "always",
 			"source.addMissingImports": "always"
 		}
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
