@@ -32,7 +32,7 @@
 		</div>
 	{/if}
 	<div class="flex flex-1 flex-col items-center">
-		<div class="flex w-full max-w-xl flex-col gap-2 p-2">
+		<div class="flex w-full max-w-xl grow flex-col gap-2 p-2">
 			{@render children?.()}
 		</div>
 	</div>

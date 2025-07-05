@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { faGuitar, faProjectDiagram, faQuestion } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faDownload,
+		faGuitar,
+		faProjectDiagram,
+		faQuestion,
+	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { homeNavbarSelectionContextKey } from './homeNavbarSelectionContext';
 	import UserButton from './UserButton.svelte';
@@ -40,6 +45,14 @@
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" />
 		<div class="max-md:hidden">Projects</div>
+	</a>
+	<a
+		href="/plugin"
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'plugin'}
+	>
+		<Fa fw icon={faDownload} />
+		<div class="max-md:hidden">Get the plugin</div>
 	</a>
 	<div class="flex-1 max-md:hidden"></div>
 	<a

@@ -57,6 +57,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.6.13",
+		"@fortawesome/free-brands-svg-icons": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
@@ -70,6 +71,7 @@
 		"sortablejs": "^1.15.6",
 		"svelte-fa": "^4.0.3",
 		"svelte-portal": "^2.2.1",
+		"ua-parser-js": "^2.0.4",
 		"uuid": "^11.1.0",
 		"vite-plugin-top-level-await": "^1.5.0",
 		"vite-plugin-wasm": "^3.4.1",
