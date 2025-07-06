@@ -3,7 +3,7 @@ import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
 
 export type AddNodeInputContext = {
-	addNodeInput: Input;
+	addNodeInput?: Input;
 };
 
 export const addNodeInputContextKey = Symbol('addNodeInputContextKey');

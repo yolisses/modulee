@@ -5,6 +5,7 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { getElementSize } from '$lib/graph/getElementSize';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { setAddNodeInputContext } from '$lib/node/add/addNodeInputContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
@@ -89,6 +90,9 @@
 		floatingMenuManager.getMenuPosition();
 		return floatingMenuManager.configureMenuPosition();
 	});
+
+	const addNodeInputContext = $state({});
+	setAddNodeInputContext(addNodeInputContext);
 </script>
 
 <HowToAddNodesHint {nodes} />
