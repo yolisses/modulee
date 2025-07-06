@@ -35,6 +35,10 @@ import type {
 	AddNodeInputContext,
 	addNodeInputContextKey,
 } from '$lib/node/add/addNodeInputContext';
+import type {
+	AddNodeMenuParamsContext,
+	addNodeMenuParamsContextKey,
+} from '$lib/node/add/addNodeMenuParamsContext';
 import {
 	projectNavbarSelectionContextKey,
 	type ProjectNavbarSelectionContext,
@@ -65,6 +69,7 @@ import type {
 
 export type ContextsByKey = {
 	[addNodeInputContextKey]: AddNodeInputContext;
+	[addNodeMenuParamsContextKey]: AddNodeMenuParamsContext;
 	[audioBackendContextKey]: AudioBackendContext;
 	[baseRouteContextKey]: BaseRouteContext;
 	[contextsContextKey]: ContextsContext;

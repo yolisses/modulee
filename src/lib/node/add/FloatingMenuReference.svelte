@@ -1,19 +1,21 @@
 <script lang="ts">
-	import type { FloatingMenuManager } from './FloatingMenuManager.svelte';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { spaceContextKey } from '$lib/space/spaceContext';
+	import type { Vector } from 'nodes-editor';
 
 	interface Props {
-		floatingMenuManager: FloatingMenuManager;
+		dataPosition: Vector;
+		floatingMenuReference?: HTMLElement;
 	}
 
-	const { floatingMenuManager }: Props = $props();
-	const menuPosition = $derived(floatingMenuManager.getMenuPosition());
+	let { floatingMenuReference = $bindable(), dataPosition }: Props = $props();
+	const spaceContext = getRequiredContext(spaceContextKey);
+	const screenPosition = $derived(spaceContext.space.getScreenPosition(dataPosition));
 </script>
 
-{#if menuPosition}
-	<div
-		class="absolute"
-		style:top={menuPosition.y + 'px'}
-		style:left={menuPosition.x + 'px'}
-		bind:this={floatingMenuManager.positioner}
-	></div>
-{/if}
+<div
+	class="absolute"
+	bind:this={floatingMenuReference}
+	style:top={screenPosition.y + 'px'}
+	style:left={screenPosition.x + 'px'}
+></div>

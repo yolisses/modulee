@@ -7,7 +7,11 @@
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setAddNodeInputContext } from '$lib/node/add/addNodeInputContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
-	import { FloatingMenuManager } from '$lib/node/add/FloatingMenuManager.svelte';
+	import {
+		setAddNodeMenuParamsContext,
+		type AddNodeMenuParamsContext,
+	} from '$lib/node/add/addNodeMenuParamsContext';
+	import FloatingMenuReference from '$lib/node/add/FloatingMenuReference.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
@@ -16,6 +20,7 @@
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 	import {
+		getElementPosition,
 		getEventClientPosition,
 		PointerEventDispatcher,
 		rootElementContextKey,
@@ -25,8 +30,6 @@
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
-	import FloatingMenuReference from '$lib/node/add/FloatingMenuReference.svelte';
-	import FloatingMenuWrapper from '$lib/node/add/FloatingMenuWrapper.svelte';
 
 	interface Props {
 		nodes: Node[];
@@ -70,10 +73,7 @@
 			.subtract(minPosition)
 			.multiplyByNumber(zoomContext.zoom)
 			.subtract(scrollAreaSize.divideByNumber(2));
-		scrollArea?.scrollTo({
-			top: scrollPosition.y,
-			left: scrollPosition.x,
-		});
+		scrollArea?.scrollTo({ top: scrollPosition.y, left: scrollPosition.x });
 	}
 
 	$effect(() => {
@@ -87,29 +87,35 @@
 		});
 	});
 
-	/* Add node menu position */
-	const floatingMenuManager = new FloatingMenuManager();
-	$effect(() => {
-		// Forces update on menu position change
-		floatingMenuManager.getMenuPosition();
-		return floatingMenuManager.configureMenuPosition();
-	});
-
 	const addNodeInputContext = $state({});
 	setAddNodeInputContext(addNodeInputContext);
 
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
-		floatingMenuManager.menuClientPosition = getEventClientPosition(e);
+		if (!rootElementContext.rootElement) return;
+		const relativeScreenPosition = getEventClientPosition(e).subtract(
+			getElementPosition(rootElementContext.rootElement),
+		);
+		const dataPosition = spaceContext.space.getDataPosition(relativeScreenPosition);
+		addNodeMenuParamsContext.addNodeMenuParams = { position: dataPosition };
 	}
+
+	function handleScroll() {
+		addNodeMenuParamsContext.addNodeMenuParams = undefined;
+	}
+
+	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
+	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
+
+	let floatingMenuReference = $state<HTMLElement>();
 </script>
 
 <HowToAddNodesHint {nodes} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	bind:this={scrollArea}
+	onscroll={handleScroll}
 	class="flex-1 overflow-scroll"
-	onscroll={floatingMenuManager.closeModal}
 	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 >
@@ -131,16 +137,23 @@
 
 			<PreviewConnectionWire />
 			<SelectionBox />
-			<FloatingMenuReference {floatingMenuManager} />
+
+			{#if addNodeMenuParamsContext.addNodeMenuParams}
+				<FloatingMenuReference
+					bind:floatingMenuReference
+					dataPosition={addNodeMenuParamsContext.addNodeMenuParams.position}
+				/>
+			{/if}
 		</div>
 	</PointerEventDispatcher>
 </div>
+{addNodeMenuParamsContext.addNodeMenuParams?.position.toString()}
 
 <!-- The floating menu is outside the scrollable area to prevent the container
 from scrolling when the menu is created -->
-<FloatingMenuWrapper {floatingMenuManager}>
-	<AddNodeMenu />
-</FloatingMenuWrapper>
+{#if floatingMenuReference}
+	<AddNodeMenu {floatingMenuReference} />
+{/if}
 
 <style lang="postcss">
 	.bg-dots {
