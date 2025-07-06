@@ -1,6 +1,4 @@
 <script lang="ts">
-	import FloatingMenuReference from '$lib/commands/node/FloatingMenuReference.svelte';
-	import FloatingMenuWrapper from '$lib/commands/node/FloatingMenuWrapper.svelte';
 	import type { Connection } from '$lib/connection/Connection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
@@ -27,6 +25,8 @@
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
+	import FloatingMenuReference from '$lib/node/add/FloatingMenuReference.svelte';
+	import FloatingMenuWrapper from '$lib/node/add/FloatingMenuWrapper.svelte';
 
 	interface Props {
 		nodes: Node[];
