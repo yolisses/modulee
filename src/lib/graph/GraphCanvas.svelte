@@ -1,4 +1,6 @@
 <script lang="ts">
+	import FloatingMenuReference from '$lib/commands/node/FloatingMenuReference.svelte';
+	import FloatingMenuWrapper from '$lib/commands/node/FloatingMenuWrapper.svelte';
 	import type { Connection } from '$lib/connection/Connection';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
@@ -7,6 +9,7 @@
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setAddNodeInputContext } from '$lib/node/add/addNodeInputContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
+	import { FloatingMenuManager } from '$lib/node/add/FloatingMenuManager.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
@@ -20,9 +23,6 @@
 		rootElementContextKey,
 	} from 'nodes-editor';
 	import { tick, untrack } from 'svelte';
-	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
-	import FloatingMenuReference from './FloatingMenuReference.svelte';
-	import FloatingMenuWrapper from './FloatingMenuWrapper.svelte';
 	import { getNodesAveragePosition } from './getNodesAveragePosition';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
