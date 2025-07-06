@@ -20,7 +20,7 @@
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
-	import { setDefaultContexts } from 'nodes-editor';
+	import { selectedNodeIdsContextKey, setDefaultContexts } from 'nodes-editor';
 	import { type Snippet, onMount, setContext } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getGraphData } from '../getGraphData';
@@ -75,6 +75,7 @@
 	setGraphContext(graphContext);
 
 	setDefaultContexts();
+	updateContext(selectedNodeIdsContextKey);
 
 	const editor = new Editor(graphRegistryContext.graphRegistry);
 
