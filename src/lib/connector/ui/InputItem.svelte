@@ -4,7 +4,7 @@
 	import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';
 	import AudioInputItemContentUnconnected from './AudioInputItemContentUnconnected.svelte';
-	import { ConnectorCondition } from './ConnectorCondition';
+	import { connectorCondition } from './connectorCondition';
 	import ConnectorJoint from './ConnectorJoint.svelte';
 	import InputItemContentConnected from './InputItemContentConnected.svelte';
 	import InputItemContentUnconnected from './InputItemContentUnconnected.svelte';
@@ -15,12 +15,7 @@
 	}
 
 	const { input, isLast }: Props = $props();
-	const connectorCondition = new ConnectorCondition();
-
-	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		input,
-		connectorCondition.endConnectorCondition,
-	);
+	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(input, connectorCondition);
 </script>
 
 <PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
