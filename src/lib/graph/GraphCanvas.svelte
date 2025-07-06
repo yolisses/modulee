@@ -130,9 +130,7 @@
 <!-- The floating menu is outside the scrollable area to prevent the container
 from scrolling when the menu is created -->
 <FloatingMenuWrapper {floatingMenuManager}>
-	{#snippet children({ menuPosition })}
-		<AddNodeMenu closeModal={floatingMenuManager.closeModal} screenPosition={menuPosition} />
-	{/snippet}
+	<AddNodeMenu />
 </FloatingMenuWrapper>
 
 <style lang="postcss">
