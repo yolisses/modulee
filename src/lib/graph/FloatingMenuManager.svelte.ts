@@ -1,31 +1,28 @@
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 import { autoUpdate, computePosition, flip, shift } from '@floating-ui/dom';
-import { getMouseRelativePosition, rootElementContextKey } from 'nodes-editor';
+import { getElementPosition, rootElementContextKey, Vector } from 'nodes-editor';
 
 export class FloatingMenuManager {
 	menu = $state<HTMLElement>();
-	mouseEvent = $state<MouseEvent>();
 	positioner = $state<HTMLElement>();
+	menuClientPosition = $state<Vector>();
 	rootElementContext = getRequiredContext(rootElementContextKey);
 
 	getIsActive() {
-		return !!this.mouseEvent;
+		return !!this.menuClientPosition;
 	}
 
-	handleContextMenu = (e: MouseEvent) => {
-		e.preventDefault();
-		this.mouseEvent = e;
-	};
-
 	getMenuPosition() {
-		if (!this.mouseEvent) return;
+		if (!this.menuClientPosition) return;
 		if (!this.rootElementContext.rootElement) return;
-		return getMouseRelativePosition(this.mouseEvent, this.rootElementContext.rootElement);
+		return this.menuClientPosition.subtract(
+			getElementPosition(this.rootElementContext.rootElement),
+		);
 	}
 
 	closeModal = () => {
-		this.mouseEvent = undefined;
+		this.menuClientPosition = undefined;
 	};
 
 	updatePosition = () => {

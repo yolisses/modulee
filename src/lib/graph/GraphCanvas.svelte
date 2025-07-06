@@ -14,7 +14,11 @@
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { zoomContextKey } from '$lib/space/zoom/zoomContext';
-	import { PointerEventDispatcher, rootElementContextKey } from 'nodes-editor';
+	import {
+		getEventClientPosition,
+		PointerEventDispatcher,
+		rootElementContextKey,
+	} from 'nodes-editor';
 	import { tick, untrack } from 'svelte';
 	import { FloatingMenuManager } from './FloatingMenuManager.svelte';
 	import FloatingMenuReference from './FloatingMenuReference.svelte';
@@ -93,6 +97,11 @@
 
 	const addNodeInputContext = $state({});
 	setAddNodeInputContext(addNodeInputContext);
+
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
+		floatingMenuManager.menuClientPosition = getEventClientPosition(e);
+	}
 </script>
 
 <HowToAddNodesHint {nodes} />
@@ -108,8 +117,8 @@
 		<div
 			style:width={size.x + 'lh'}
 			style:height={size.y + 'lh'}
+			oncontextmenu={handleContextMenu}
 			bind:this={rootElementContext.rootElement}
-			oncontextmenu={floatingMenuManager.handleContextMenu}
 			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
 		>
 			{#each connections as connection (connection.id)}
