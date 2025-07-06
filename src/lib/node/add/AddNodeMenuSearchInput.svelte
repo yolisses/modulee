@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { AddNodeHandler } from './AddNodeHandler';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
-	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
 
 	interface Props {
 		searchText: string;
 	}
 
+	const addNodeHandler = new AddNodeHandler();
 	let { searchText = $bindable() }: Props = $props();
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -13,7 +14,7 @@
 		if (searchText.length === 0) return;
 		const nodeDefinition = getNodeDefinitionsBySearchText(searchText)[0];
 		if (!nodeDefinition) return;
-		handleNodeDefinitionSelect(nodeDefinition);
+		addNodeHandler.handleNodeDefinitionSelect(nodeDefinition);
 	}
 </script>
 

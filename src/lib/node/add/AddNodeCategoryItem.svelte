@@ -7,7 +7,7 @@
 	import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
-	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
+	import { AddNodeHandler } from './AddNodeHandler';
 
 	interface Props {
 		nodeDefinitionCategory: NodeDefinitionCategory;
@@ -15,6 +15,7 @@
 
 	let floating: HTMLElement;
 	let reference: HTMLElement;
+	const addNodeHandler = new AddNodeHandler();
 	const { nodeDefinitionCategory }: Props = $props();
 
 	function updatePosition() {
@@ -46,8 +47,8 @@
 		<BasicList
 			getId={getType}
 			getName={getNodeDefinitionName}
-			onClick={handleNodeDefinitionSelect}
 			items={nodeDefinitionCategory.nodeDefinitions}
+			onClick={addNodeHandler.handleNodeDefinitionSelect}
 		/>
 	</div>
 </div>

@@ -4,35 +4,21 @@ import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
-import { spaceContextKey } from '$lib/space/spaceContext';
-import type { Vector } from 'nodes-editor';
-import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 import type { NodeDefinition } from '../definitions/NodeDefinition';
-import { nodeDefinitions } from '../definitions/nodeDefinitions';
+import { addNodeMenuParamsContextKey } from './addNodeMenuParamsContext';
 import { createNodeData } from './createNodeData';
 
-export class AddNodeMenuLogic {
-	searchText = $state('');
-	spaceContext = getRequiredContext(spaceContextKey);
+export class AddNodeHandler {
 	editorContext = getRequiredContext(editorContextKey);
 	projectDataContext = getRequiredContext(projectDataContextKey);
 	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
-
-	constructor(
-		public closeModal: () => void,
-		public screenPosition: Vector,
-	) {}
-
-	getOptions() {
-		return nodeDefinitions.filter((nodeDefinition) => {
-			return getNodeDefinitionName(nodeDefinition)
-				.toLowerCase()
-				.includes(this.searchText.toLowerCase());
-		});
-	}
+	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
 
 	handleNodeDefinitionSelect = (nodeDefinition: NodeDefinition) => {
-		const dataPosition = this.spaceContext.space.getDataPosition(this.screenPosition).floor();
+		const { addNodeMenuParams } = this.addNodeMenuParamsContext;
+		if (!addNodeMenuParams) return;
+
+		const dataPosition = addNodeMenuParams.position.floor();
 		const nodeData = createNodeData(
 			nodeDefinition,
 			this.internalModuleIdContext.internalModuleId,
@@ -46,6 +32,6 @@ export class AddNodeMenuLogic {
 			projectId: this.projectDataContext.projectData.id,
 		});
 		this.editorContext.editor.execute(addNodeCommand);
-		this.closeModal();
+		this.addNodeMenuParamsContext.addNodeMenuParams = undefined;
 	};
 }

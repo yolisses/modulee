@@ -5,14 +5,15 @@
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinition } from '../definitions/NodeDefinition';
 	import { nodesName } from '../definitions/nodesName';
+	import { AddNodeHandler } from './AddNodeHandler';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
-	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
 
 	interface Props {
 		searchText: string;
 	}
 
 	const { searchText }: Props = $props();
+	const addNodeHandler = new AddNodeHandler();
 	const nodeDefinitions = $derived(getNodeDefinitionsBySearchText(searchText));
 
 	function compareByCategoryAndName(a: NodeDefinition, b: NodeDefinition) {
@@ -30,7 +31,7 @@
 		items={nodeDefinitions}
 		getName={getNodeDefinitionName}
 		compare={compareByCategoryAndName}
-		onClick={handleNodeDefinitionSelect}
+		onClick={addNodeHandler.handleNodeDefinitionSelect}
 	>
 		{#snippet content({ item: nodeDefinition })}
 			<div class="mr-1 text-white/50">
