@@ -1,20 +1,19 @@
 <script lang="ts">
 	import AddNodeCategoryItems from './AddNodeCategoryItems.svelte';
 	import AddNodeMenuSearchInput from './AddNodeMenuSearchInput.svelte';
-	import { AddNodeMenuSearchState } from './AddNodeMenuSearchState.svelte';
 	import AddNodeSearchNodeItems from './AddNodeSearchNodeItems.svelte';
 
-	const addNodeMenuSearchState = new AddNodeMenuSearchState();
+	let searchText = $state('');
 </script>
 
 <!-- TODO consider adding a descriptive text like "Add node" -->
 <div class="menu-container flex flex-col">
-	<AddNodeMenuSearchInput {addNodeMenuSearchState} />
+	<AddNodeMenuSearchInput bind:searchText />
 	<div
 		class="scroll-small flex flex-col overflow-auto overscroll-contain whitespace-nowrap select-none"
 	>
-		{#if addNodeMenuSearchState.searchText}
-			<AddNodeSearchNodeItems {addNodeMenuSearchState} />
+		{#if searchText}
+			<AddNodeSearchNodeItems {searchText} />
 		{:else}
 			<AddNodeCategoryItems />
 		{/if}
