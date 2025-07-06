@@ -2,7 +2,7 @@ import { getInputPathId } from '$lib/connection/getInputPathId';
 import type { InputPath } from '$lib/input/InputPath';
 import type { InputDefinition } from '$lib/node/definitions/InputDefinition';
 import type { Node } from '$lib/node/Node.svelte';
-import type { Connector } from '../connector/Connector';
+import type { Connector } from 'nodes-editor';
 
 export abstract class Input implements Connector {
 	id: string;

@@ -11,9 +11,9 @@
 	const graphContext = getRequiredContext(graphContextKey);
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 	const startOnOutput = $derived.by(() => {
-		const { startConnectorId } = previewConnectionContext;
-		if (!startConnectorId) return false;
-		const connector = graphContext.graph.connectors.getOrNull(startConnectorId);
+		const { startConnector } = previewConnectionContext;
+		if (!startConnector) return false;
+		const connector = graphContext.graph.connectors.getOrNull(startConnector.id);
 		return connector instanceof Output;
 	});
 </script>

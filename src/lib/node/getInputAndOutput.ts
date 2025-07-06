@@ -1,7 +1,5 @@
-import type { Connector } from '$lib/connector/Connector';
-import type { ById } from '$lib/editor/ById';
 import { Input } from '$lib/input/Input';
-import type { EndPreviewConnectionEvent } from 'nodes-editor';
+import type { Connector } from 'nodes-editor';
 import { Output } from './Output';
 
 type PossibleInputAndOutput = {
@@ -9,16 +7,17 @@ type PossibleInputAndOutput = {
 	output?: Output;
 };
 
-export function getInputAndOutput(
-	e: EndPreviewConnectionEvent,
-	connectors: ById<Connector>,
-): PossibleInputAndOutput {
+export function getInputAndOutput({
+	startConnector,
+	endConnector,
+}: {
+	startConnector: Connector;
+	endConnector?: Connector;
+}): PossibleInputAndOutput {
 	const result: PossibleInputAndOutput = {
 		input: undefined,
 		output: undefined,
 	};
-	const startConnector = connectors.getOrNull(e.startConnectorId);
-	const endConnector = e.endConnectorId ? connectors.getOrNull(e.endConnectorId) : undefined;
 
 	if (startConnector instanceof Input) {
 		result.input = startConnector;

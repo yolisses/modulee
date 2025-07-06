@@ -1,5 +1,5 @@
 import { getNodeOutputId } from '$lib/connection/getNodeOutputId';
-import type { Connector } from '../connector/Connector';
+import type { Connector } from 'nodes-editor';
 import type { Node } from './Node.svelte';
 
 // TODO consider removing it, since every node have only one output.

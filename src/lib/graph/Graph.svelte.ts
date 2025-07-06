@@ -8,7 +8,7 @@ import { instantiateNode } from '$lib/node/instantiateNode';
 import { ModuleNode } from '$lib/node/ModuleNode.svelte';
 import type { Node } from '$lib/node/Node.svelte';
 import { cloneGraphRegistry } from '$lib/process/cloneGraphRegistry';
-import type { Connector } from '../connector/Connector';
+import type { Connector } from 'nodes-editor';
 import { ExternalModule } from '../module/externalModule/ExternalModule';
 import type { GraphRegistry } from './GraphRegistry';
 
@@ -16,6 +16,7 @@ export class Graph {
 	mainInternalModuleId: string;
 	nodes = new ById<Node>();
 	modules = new ById<Module>();
+	// TODO consider removing connectors
 	connectors = new ById<Connector>();
 	connections = new ById<Connection>();
 	internalModules = new ById<InternalModule>();

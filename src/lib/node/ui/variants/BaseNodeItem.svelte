@@ -32,10 +32,9 @@
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
 
-	const connectorId = node.output.id;
 	const connectorCondition = new ConnectorCondition();
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		connectorId,
+		node.output,
 		connectorCondition.endConnectorCondition,
 	);
 

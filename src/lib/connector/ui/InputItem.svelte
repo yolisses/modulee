@@ -3,11 +3,11 @@
 	import { InputWithControl } from '$lib/input/InputWithControl';
 	import { ModuleNodeAudioInput } from '$lib/input/ModuleNodeAudioInput';
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';
-	import InputItemContentUnconnected from '../InputItemContentUnconnected.svelte';
 	import AudioInputItemContentUnconnected from './AudioInputItemContentUnconnected.svelte';
 	import { ConnectorCondition } from './ConnectorCondition';
 	import ConnectorJoint from './ConnectorJoint.svelte';
 	import InputItemContentConnected from './InputItemContentConnected.svelte';
+	import InputItemContentUnconnected from './InputItemContentUnconnected.svelte';
 
 	interface Props {
 		input: Input;
@@ -18,7 +18,7 @@
 	const connectorCondition = new ConnectorCondition();
 
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		input.id,
+		input,
 		connectorCondition.endConnectorCondition,
 	);
 </script>

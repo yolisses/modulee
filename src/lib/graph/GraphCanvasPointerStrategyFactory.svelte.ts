@@ -21,7 +21,7 @@ export class GraphCanvasPointerStrategyFactory {
 	previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 
 	handleEndPreviewConnection = (e: EndPreviewConnectionEvent) => {
-		const { input, output } = getInputAndOutput(e, this.graphContext.graph.connectors);
+		const { input, output } = getInputAndOutput(e);
 		if (!input) return;
 
 		const inputPath: InputPath = {
@@ -65,7 +65,7 @@ export class GraphCanvasPointerStrategyFactory {
 			this.handleEndPreviewConnection,
 		);
 
-		const pointerStrategy = this.previewConnectionContext.startConnectorId
+		const pointerStrategy = this.previewConnectionContext.startConnector
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy;
 

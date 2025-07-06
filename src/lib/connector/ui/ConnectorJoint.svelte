@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { ConnectorJoint as ConnectorJointBase } from 'nodes-editor';
-	import type { Connector } from '../Connector';
+	import { ConnectorJoint as ConnectorJointBase, type Connector } from 'nodes-editor';
 
 	interface Props {
 		connector: Connector;
