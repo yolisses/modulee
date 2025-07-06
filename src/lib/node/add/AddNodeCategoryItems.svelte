@@ -3,13 +3,6 @@
 	import { nodeDefinitionCategories } from '../definitions/nodeDefinitionCategories';
 	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
 	import AddNodeCategoryItem from './AddNodeCategoryItem.svelte';
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
-
-	interface Props {
-		addNodeMenuLogic: AddNodeMenuLogic;
-	}
-
-	const { addNodeMenuLogic }: Props = $props();
 
 	function getNodeDefinitionCategoryText(nodeDefinitionCategory: NodeDefinitionCategory) {
 		return nodeCategoryNames[nodeDefinitionCategory.name];
@@ -23,5 +16,5 @@
 </script>
 
 {#each sortedNodeDefinitionCategories as nodeDefinitionCategory (nodeDefinitionCategory.name)}
-	<AddNodeCategoryItem {addNodeMenuLogic} {nodeDefinitionCategory} />
+	<AddNodeCategoryItem {nodeDefinitionCategory} />
 {/each}

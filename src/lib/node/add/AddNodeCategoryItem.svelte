@@ -7,16 +7,15 @@
 	import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
 
 	interface Props {
 		nodeDefinitionCategory: NodeDefinitionCategory;
-		addNodeMenuLogic: AddNodeMenuLogic;
 	}
 
 	let floating = $state<HTMLElement>();
 	let reference = $state<HTMLElement>();
-	const { nodeDefinitionCategory, addNodeMenuLogic }: Props = $props();
+	const { nodeDefinitionCategory }: Props = $props();
 
 	function updatePosition() {
 		if (!floating) return;
@@ -52,8 +51,8 @@
 		<BasicList
 			getId={getType}
 			getName={getNodeDefinitionName}
+			onClick={handleNodeDefinitionSelect}
 			items={nodeDefinitionCategory.nodeDefinitions}
-			onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
 		/>
 	</div>
 </div>

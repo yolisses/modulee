@@ -5,14 +5,15 @@
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinition } from '../definitions/NodeDefinition';
 	import { nodesName } from '../definitions/nodesName';
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import type { AddNodeMenuSearchState } from './AddNodeMenuSearchState.svelte';
+	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
 
 	interface Props {
-		addNodeMenuLogic: AddNodeMenuLogic;
+		addNodeMenuSearchState: AddNodeMenuSearchState;
 	}
 
-	const { addNodeMenuLogic }: Props = $props();
-	const options = $derived(addNodeMenuLogic.getOptions());
+	const { addNodeMenuSearchState }: Props = $props();
+	const options = $derived(addNodeMenuSearchState.getOptions());
 
 	function compareByCategoryAndName(a: NodeDefinition, b: NodeDefinition) {
 		const aFullText = nodeCategoryNames[a.category] + ' ' + nodesName[a.type];
@@ -29,7 +30,7 @@
 		items={options}
 		getName={getNodeDefinitionName}
 		compare={compareByCategoryAndName}
-		onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
+		onClick={handleNodeDefinitionSelect}
 	>
 		{#snippet content({ item: nodeDefinition })}
 			<div class="mr-1 text-white/50">
