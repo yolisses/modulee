@@ -13,26 +13,21 @@
 		nodeDefinitionCategory: NodeDefinitionCategory;
 	}
 
-	let floating = $state<HTMLElement>();
-	let reference = $state<HTMLElement>();
+	let floating: HTMLElement;
+	let reference: HTMLElement;
 	const { nodeDefinitionCategory }: Props = $props();
 
 	function updatePosition() {
-		if (!floating) return;
-		if (!reference) return;
 		computePosition(reference, floating, {
 			strategy: 'fixed',
 			placement: 'right',
 			middleware: [flip(), shift()],
 		}).then(({ x, y }) => {
-			if (!floating) return;
-			Object.assign(floating.style, { left: `${x}px`, top: `${y}px` });
+			Object.assign(floating.style, { top: y + 'px', left: x + 'px' });
 		});
 	}
 
 	$effect(() => {
-		if (!floating) return;
-		if (!reference) return;
 		return autoUpdate(reference, floating, updatePosition);
 	});
 </script>

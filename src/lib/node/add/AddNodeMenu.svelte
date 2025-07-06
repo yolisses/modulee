@@ -11,11 +11,9 @@
 		floatingMenuReference: HTMLElement;
 	}
 
-	const { floatingMenuReference }: Props = $props();
-
-	let searchText = $state('');
-
 	let menu: HTMLElement;
+	let searchText = $state('');
+	const { floatingMenuReference: reference }: Props = $props();
 	const addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
 
 	function handleWindowClick(e: MouseEvent) {
@@ -26,7 +24,7 @@
 	}
 
 	onMount(() => {
-		computePosition(floatingMenuReference, menu, {
+		computePosition(reference, menu, {
 			placement: 'right',
 			middleware: [flip(), shift()],
 		}).then(({ x, y }) => {
