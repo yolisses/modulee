@@ -2,10 +2,18 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { Vector, WireSvg } from 'nodes-editor';
+	import type { Snippet } from 'svelte';
 	import WirePath from './WirePath.svelte';
-	import type { WireProps } from './WireProps.js';
+	import type { WireProps } from './WireProps';
 
-	const { endPosition, startPosition, isSelected }: WireProps = $props();
+	interface Props {
+		endPosition: Vector;
+		isSelected?: boolean;
+		startPosition: Vector;
+		children?: Snippet<[WireProps]>;
+	}
+
+	const { endPosition, startPosition, isSelected, children }: Props = $props();
 
 	// Found empirically with the WirePath curve
 	const dataMargin = new Vector(3, 1);
@@ -15,4 +23,5 @@
 
 <WireSvg {startPosition} {endPosition} margin={screenMargin}>
 	<WirePath {startPosition} {endPosition} {isSelected} />
+	{@render children?.({ startPosition, endPosition, isSelected })}
 </WireSvg>

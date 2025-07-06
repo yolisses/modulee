@@ -5,10 +5,11 @@
 		PreviewConnectionWire as BasePreviewConnectionWire,
 		previewConnectionContextKey,
 	} from 'nodes-editor';
+	import PreviewConnectionPlus from './PreviewConnectionPlus.svelte';
 	import Wire from './Wire.svelte';
 
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
-	const startOnOutput = $derived.by(() => {
+	const startIsOutput = $derived.by(() => {
 		const { startConnector } = previewConnectionContext;
 		return startConnector instanceof Output;
 	});
@@ -16,10 +17,16 @@
 
 <BasePreviewConnectionWire>
 	{#snippet children({ endPosition, startPosition })}
-		{#if startOnOutput}
-			<Wire {endPosition} {startPosition} />
+		{#snippet a()}
+			{#if !previewConnectionContext.endConnector}
+				<PreviewConnectionPlus position={endPosition} />
+			{/if}
+		{/snippet}
+
+		{#if startIsOutput}
+			<Wire {endPosition} {startPosition} children={a} />
 		{:else}
-			<Wire endPosition={startPosition} startPosition={endPosition} />
+			<Wire endPosition={startPosition} startPosition={endPosition} children={a} />
 		{/if}
 	{/snippet}
 </BasePreviewConnectionWire>
