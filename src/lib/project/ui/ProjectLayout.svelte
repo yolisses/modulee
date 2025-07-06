@@ -16,12 +16,11 @@
 		externalModulesDataContextKey,
 		setExternalModulesDataContext,
 	} from '$lib/module/externalModule/externalModulesDataContext';
-	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
+	import { setInternalModuleContext } from '$lib/module/internalModule/internalModuleContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { setDefaultContexts } from 'nodes-editor';
-	import { type Snippet, onMount, setContext } from 'svelte';
+	import { type Snippet, onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getGraphData } from '../getGraphData';
 	import { getGraphRegistry } from '../getGraphRegistry';
@@ -51,12 +50,6 @@
 	setProjectDataContext({ projectData });
 	setExternalModulesDataContext({ externalModulesData });
 
-	const internalModuleContext = $state({
-		internalModuleId: projectData.graph.mainInternalModuleId,
-	});
-	setContext(internalModuleContextKey, internalModuleContext);
-	updateContext(internalModuleContextKey);
-
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const isCommandPaletteActiveContext = getRequiredContext(isCommandPaletteActiveContextKey);
 
@@ -73,6 +66,11 @@
 	);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
+
+	const internalModuleContext = $state({
+		internalModule: graph.internalModules.get(graph.mainInternalModuleId),
+	});
+	setInternalModuleContext(internalModuleContext);
 
 	setDefaultContexts();
 

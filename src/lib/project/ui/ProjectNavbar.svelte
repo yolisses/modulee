@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
+	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import {
 		faFileAlt,
 		faProjectDiagram,
@@ -9,12 +10,10 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { projectNavbarSelectionContextKey } from '../projectNavbarSelectionContext';
-	import { projectDataContextKey } from './projectDataContext';
 
-	const projectDataContext = getRequiredContext(projectDataContextKey);
-	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
-	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
+	const baseRouteContext = getRequiredContext(baseRouteContextKey);
 	const internalModuleContext = getRequiredContext(internalModuleContextKey);
+	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
 </script>
 
 <div
@@ -22,7 +21,7 @@
 >
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
-		href="{baseUrl}/rack"
+		href="{baseRouteContext.baseRoute}/rack"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
 	>
 		<Fa fw icon={faSlidersH} />
@@ -30,14 +29,15 @@
 	</a>
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
-		href="{baseUrl}/internalModules/{internalModuleContext.internalModule.id}/graph"
+		href="{baseRouteContext.baseRoute}/internalModules/{internalModuleContext.internalModule
+			.id}/graph"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		<div class="max-md:hidden">Graph</div>
 	</a>
 	<a
-		href="{baseUrl}/modules"
+		href="{baseRouteContext.baseRoute}/modules"
 		class="max-md:horizontal-tab md:vertical-tab"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'modules'}
 	>
@@ -45,7 +45,7 @@
 		<div class="max-md:hidden">Modules</div>
 	</a>
 	<a
-		href={baseUrl}
+		href={baseRouteContext.baseRoute}
 		class="max-md:horizontal-tab md:vertical-tab"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
 	>
