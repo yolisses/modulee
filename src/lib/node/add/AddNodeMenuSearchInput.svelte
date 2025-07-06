@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { NotImplementedError } from '$lib/NotImplementedError';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
+	import { handleNodeDefinitionSelect } from './handleNodeDefinitionSelect';
 
 	interface Props {
 		searchText: string;
@@ -13,9 +13,7 @@
 		if (searchText.length === 0) return;
 		const nodeDefinition = getNodeDefinitionsBySearchText(searchText)[0];
 		if (!nodeDefinition) return;
-
-		// addNodeMenuSearchState.handleNodeDefinitionSelect(option);
-		throw new NotImplementedError();
+		handleNodeDefinitionSelect(nodeDefinition);
 	}
 </script>
 
