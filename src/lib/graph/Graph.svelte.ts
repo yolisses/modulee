@@ -12,7 +12,6 @@ import { ExternalModule } from '../module/externalModule/ExternalModule';
 import type { GraphRegistry } from './GraphRegistry';
 
 export class Graph {
-	mainInternalModuleId: string;
 	nodes = new ById<Node>();
 	modules = new ById<Module>();
 	connections = new ById<Connection>();
@@ -21,7 +20,6 @@ export class Graph {
 
 	constructor(graphRegistry: GraphRegistry, externalModulesData: ExternalModuleData[]) {
 		graphRegistry = cloneGraphRegistry(graphRegistry);
-		this.mainInternalModuleId = graphRegistry.mainInternalModuleId;
 
 		graphRegistry.nodes.values().forEach((nodeData) => {
 			const node = instantiateNode(nodeData);
