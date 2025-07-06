@@ -4,8 +4,10 @@ import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { InputPath } from '$lib/input/InputPath';
+import { addNodeMenuParamsContextKey } from '$lib/node/add/addNodeMenuParamsContext';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
+import { spaceContextKey } from '$lib/space/spaceContext';
 import {
 	previewConnectionContextKey,
 	PreviewConnectionPointerStrategy,
@@ -16,9 +18,11 @@ import { graphContextKey } from './graphContext';
 
 export class GraphCanvasPointerStrategyFactory {
 	graphContext = getRequiredContext(graphContextKey);
+	spaceContext = getRequiredContext(spaceContextKey);
 	editorContext = getRequiredContext(editorContextKey);
 	projectDataContext = getRequiredContext(projectDataContextKey);
 	previewConnectionContext = getRequiredContext(previewConnectionContextKey);
+	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
 
 	handleEndPreviewConnection = (e: EndPreviewConnectionEvent) => {
 		const { input, output } = getInputAndOutput(e);
@@ -53,6 +57,13 @@ export class GraphCanvasPointerStrategyFactory {
 				projectId: this.projectDataContext.projectData.id,
 			});
 			this.editorContext.editor.execute(command);
+
+			const screenPosition = e.mousePosition;
+			const dataPosition = this.spaceContext.space.getDataPosition(screenPosition);
+			this.addNodeMenuParamsContext.addNodeMenuParams = {
+				input,
+				position: dataPosition,
+			};
 		}
 	};
 

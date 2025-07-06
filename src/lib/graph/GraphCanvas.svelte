@@ -42,6 +42,9 @@
 	const spaceContext = getRequiredContext(spaceContextKey);
 	const rootElementContext = getRequiredContext(rootElementContextKey);
 
+	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
+	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
+
 	/* Pointer events handling */
 	const graphCanvasPointerStrategyFactory = new GraphCanvasPointerStrategyFactory();
 
@@ -104,9 +107,6 @@
 		addNodeMenuParamsContext.addNodeMenuParams = undefined;
 	}
 
-	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
-	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
-
 	let floatingMenuReference = $state<HTMLElement>();
 </script>
 
@@ -147,11 +147,10 @@
 		</div>
 	</PointerEventDispatcher>
 </div>
-{addNodeMenuParamsContext.addNodeMenuParams?.position.toString()}
 
 <!-- The floating menu is outside the scrollable area to prevent the container
 from scrolling when the menu is created -->
-{#if floatingMenuReference}
+{#if floatingMenuReference && addNodeMenuParamsContext.addNodeMenuParams}
 	<AddNodeMenu {floatingMenuReference} />
 {/if}
 
