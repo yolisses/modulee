@@ -31,6 +31,10 @@ import {
 	useExternalModuleInContextKey,
 	type UseExternalModuleInContext,
 } from '$lib/module/internalModule/useExternalModuleInContext';
+import type {
+	AddNodeInputContext,
+	addNodeInputContextKey,
+} from '$lib/node/add/addNodeInputContext';
 import {
 	projectNavbarSelectionContextKey,
 	type ProjectNavbarSelectionContext,
@@ -60,6 +64,7 @@ import type {
 } from 'nodes-editor';
 
 export type ContextsByKey = {
+	[addNodeInputContextKey]: AddNodeInputContext;
 	[audioBackendContextKey]: AudioBackendContext;
 	[baseRouteContextKey]: BaseRouteContext;
 	[contextsContextKey]: ContextsContext;
