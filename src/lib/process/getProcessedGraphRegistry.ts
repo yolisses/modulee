@@ -5,6 +5,7 @@ import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
 import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
+import { removeReferencesToMissingModules } from './removeReferencesToMissingModules/removeReferencesToMissingModules';
 import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
 
 export function getProcessedGraphRegistry(
@@ -16,6 +17,7 @@ export function getProcessedGraphRegistry(
 	externalModulesData = structuredClone(externalModulesData);
 
 	internalizeModules(graphRegistry, externalModulesData);
+	removeReferencesToMissingModules(graphRegistry);
 	removeConnectionsToMissingNodes(graphRegistry);
 	replaceAudioInputNodes(graphRegistry);
 	addImplicitNodes(graphRegistry);
