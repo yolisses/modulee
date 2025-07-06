@@ -10,14 +10,31 @@
 	type OsOption = {
 		id: string;
 		name: string;
+		downloadUrl: string;
 		icon: IconDefinition;
 	};
 
 	let os = $state<Os>('windows');
 	const osOptions = ById.fromItems<OsOption>([
-		{ id: 'windows', name: 'Windows', icon: faWindows },
-		{ id: 'macos', name: 'MacOs', icon: faApple },
-		{ id: 'linux', name: 'Linux', icon: faLinux },
+		{
+			id: 'windows',
+			name: 'Windows',
+			icon: faWindows,
+			downloadUrl:
+				'https://github.com/yolisses0/modulee-plugin/releases/download/Windows/Modulee.vst3',
+		},
+		{
+			id: 'macos',
+			name: 'MacOs',
+			icon: faApple,
+			downloadUrl: 'https://github.com/yolisses0/modulee-plugin/releases/download/MacOS/Modulee.au',
+		},
+		{
+			id: 'linux',
+			name: 'Linux',
+			icon: faLinux,
+			downloadUrl: 'https://github.com/yolisses0/modulee-plugin/releases/download/Linux/Modulee.so',
+		},
 	]);
 	const osOption = $derived(osOptions.get(os));
 
@@ -31,7 +48,7 @@
 		<div></div>
 		<div class="flex flex-col items-center gap-2">
 			<p>The Modulee audio plugin allows you to use it in your DAW</p>
-			<a class="button primary-button" href="/download">
+			<a class="button primary-button" href={osOption.downloadUrl}>
 				<Fa icon={osOption.icon} />
 				Download for {osOption.name}
 			</a>
@@ -41,7 +58,7 @@
 			<div>Other options</div>
 			<div class="flex flex-row gap-2">
 				{#each osOptions.values().filter((osOption) => osOption.id !== os) as osOption}
-					<a class="button common-button" href="/download">
+					<a class="button common-button" href={osOption.downloadUrl}>
 						<Fa icon={osOption.icon} />
 						Download for {osOption.name}
 					</a>
