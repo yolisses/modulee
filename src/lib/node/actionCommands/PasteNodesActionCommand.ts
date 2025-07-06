@@ -2,7 +2,7 @@ import { PasteNodesCommand } from '$lib/commands/node/PasteNodesCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';
-import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { ActionCommand } from '$lib/shortcut/ActionCommand';
@@ -17,7 +17,7 @@ export class PasteNodesActionCommand extends ActionCommand {
 		const { editor } = contexts.get(editorContextKey);
 		const copyDataContext = contexts.get(copyDataContextKey);
 		const { projectData } = contexts.get(projectDataContextKey);
-		const { internalModuleId } = contexts.get(internalModuleIdContextKey);
+		const { internalModule } = contexts.get(internalModuleContextKey);
 
 		if (!copyDataContext.copyData) return;
 
@@ -33,7 +33,7 @@ export class PasteNodesActionCommand extends ActionCommand {
 			idMap.set(node.id, newId);
 			node.id = newId;
 
-			node.internalModuleId = internalModuleId;
+			node.internalModuleId = internalModule.id;
 
 			node.position = Vector.fromData(node.position).addByNumber(copyDataContext.offset).getData();
 		});

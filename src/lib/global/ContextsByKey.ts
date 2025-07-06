@@ -24,9 +24,9 @@ import {
 	type LikedExternalModulesContext,
 } from '$lib/module/externalModule/likedExternalModulesContext';
 import type {
-	InternalModuleIdContext,
-	internalModuleIdContextKey,
-} from '$lib/module/internalModule/internalModuleIdContext';
+	InternalModuleContext,
+	internalModuleContextKey,
+} from '$lib/module/internalModule/internalModuleContext';
 import {
 	useExternalModuleInContextKey,
 	type UseExternalModuleInContext,
@@ -69,7 +69,7 @@ export type ContextsByKey = {
 	[graphContextKey]: GraphContext;
 	[graphRegistryContextKey]: GraphRegistryContext;
 	[homeNavbarSelectionContextKey]: HomeNavbarSelectionContext;
-	[internalModuleIdContextKey]: InternalModuleIdContext;
+	[internalModuleContextKey]: InternalModuleContext;
 	[isCommandPaletteActiveContextKey]: IsCommandPaletteActiveContext;
 	[isMutedContextKey]: IsMutedContext;
 	[likedExternalModulesContextKey]: LikedExternalModulesContext;

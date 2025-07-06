@@ -4,7 +4,7 @@
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
-	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import { Vector } from 'nodes-editor';
@@ -17,7 +17,7 @@
 	const editorContext = getRequiredContext(editorContextKey);
 	const { internalModule }: Props = $props();
 	const projectDataContext = getRequiredContext(projectDataContextKey);
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 
 	function handleClick() {
 		const position =
@@ -41,7 +41,7 @@
 					type: 'OutputNode',
 					position: position.getData(),
 					unconnectedInputValues: { input: 0 },
-					internalModuleId: internalModuleIdContext.internalModuleId,
+					internalModuleId: internalModuleContext.internalModule.id,
 				},
 			},
 		});

@@ -3,7 +3,7 @@
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import type { InternalModule } from './InternalModule';
 	import InternalModuleDotsMenuButton from './InternalModuleDotsMenuButton.svelte';
-	import { internalModuleIdContextKey } from './internalModuleIdContext';
+	import { internalModuleContextKey } from './internalModuleContext';
 
 	interface Props {
 		internalModule: InternalModule;
@@ -12,12 +12,12 @@
 	const { internalModule }: Props = $props();
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const projectId = $derived(projectDataContext.projectData.id);
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 </script>
 
 <div
 	class="horizontal-tab group flex max-w-[10rem] flex-row p-0"
-	data-tab-selected={internalModuleIdContext.internalModuleId === internalModule.id}
+	data-tab-selected={internalModuleContext.internalModule === internalModule}
 >
 	<a
 		title={internalModule.name}
@@ -26,7 +26,7 @@
 	>
 		{internalModule.name}
 	</a>
-	{#if internalModuleIdContext.internalModuleId === internalModule.id}
+	{#if internalModuleContext.internalModule === internalModule}
 		<InternalModuleDotsMenuButton {internalModule} redirectsTo="mainInternalModuleGraph" />
 	{/if}
 </div>

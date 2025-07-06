@@ -4,7 +4,7 @@
 	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { getElementSize } from '$lib/graph/getElementSize';
-	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 	import AddNodeMenu from '$lib/node/add/AddNodeMenu.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
@@ -48,7 +48,7 @@
 	const size = $derived(graphSizer.getSize());
 
 	/* Centering on navigation */
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 
 	const zoomContext = getRequiredContext(zoomContextKey);
 
@@ -73,7 +73,7 @@
 
 	$effect(() => {
 		// Only runs when internalModuleId changes
-		internalModuleIdContext.internalModuleId;
+		internalModuleContext.internalModule;
 		untrack(() => {
 			// Wait for DOM updates
 			tick().then(() => {

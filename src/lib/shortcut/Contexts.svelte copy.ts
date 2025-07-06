@@ -5,7 +5,7 @@ import { getTypedContext } from '$lib/global/getTypedContext';
 import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';
 import { graphContextKey } from '$lib/graph/graphContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
-import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 import { selectedNodeIdsContextKey } from 'nodes-editor';
@@ -22,5 +22,5 @@ export class Contexts {
 	audioBackendContext = getTypedContext(audioBackendContextKey);
 	graphRegistryContext = getTypedContext(graphRegistryContextKey);
 	selectedNodeIdsContext = getTypedContext(selectedNodeIdsContextKey);
-	internalModuleIdContext = getTypedContext(internalModuleIdContextKey);
+	internalModuleContext = getTypedContext(internalModuleContextKey);
 }

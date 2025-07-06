@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 	import {
 		faFileAlt,
 		faProjectDiagram,
@@ -14,7 +14,7 @@
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const projectNavbarSelectionContext = getRequiredContext(projectNavbarSelectionContextKey);
 	const baseUrl = $derived('/projects/' + projectDataContext.projectData.id);
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 </script>
 
 <div
@@ -30,7 +30,7 @@
 	</a>
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
-		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
+		href="{baseUrl}/internalModules/{internalModuleContext.internalModule.id}/graph"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />

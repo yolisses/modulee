@@ -16,7 +16,7 @@
 		externalModulesDataContextKey,
 		setExternalModulesDataContext,
 	} from '$lib/module/externalModule/externalModulesDataContext';
-	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
@@ -51,11 +51,11 @@
 	setProjectDataContext({ projectData });
 	setExternalModulesDataContext({ externalModulesData });
 
-	const internalModuleIdContext = $state({
+	const internalModuleContext = $state({
 		internalModuleId: projectData.graph.mainInternalModuleId,
 	});
-	setContext(internalModuleIdContextKey, internalModuleIdContext);
-	updateContext(internalModuleIdContextKey);
+	setContext(internalModuleContextKey, internalModuleContext);
+	updateContext(internalModuleContextKey);
 
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 	const isCommandPaletteActiveContext = getRequiredContext(isCommandPaletteActiveContextKey);

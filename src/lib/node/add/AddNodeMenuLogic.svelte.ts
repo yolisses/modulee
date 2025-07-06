@@ -2,7 +2,7 @@ import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
-import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { spaceContextKey } from '$lib/space/spaceContext';
 import type { Vector } from 'nodes-editor';
@@ -16,7 +16,7 @@ export class AddNodeMenuLogic {
 	spaceContext = getRequiredContext(spaceContextKey);
 	editorContext = getRequiredContext(editorContextKey);
 	projectDataContext = getRequiredContext(projectDataContextKey);
-	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	internalModuleContext = getRequiredContext(internalModuleContextKey);
 
 	constructor(
 		public closeModal: () => void,
@@ -35,7 +35,7 @@ export class AddNodeMenuLogic {
 		const dataPosition = this.spaceContext.space.getDataPosition(this.screenPosition).floor();
 		const nodeData = createNodeData(
 			nodeDefinition,
-			this.internalModuleIdContext.internalModuleId,
+			this.internalModuleContext.internalModule.id,
 			dataPosition,
 		);
 		const addNodeCommand = new AddNodeCommand({

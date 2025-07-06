@@ -3,20 +3,14 @@
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { graphContextKey } from '$lib/graph/graphContext';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import type { InputBlurEvent } from '$lib/utils/InputBlurEvent';
-	import { internalModuleIdContextKey } from './internalModuleIdContext';
+	import { internalModuleContextKey } from './internalModuleContext';
 
-	const graphContext = getRequiredContext(graphContextKey);
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
-
-	const internalModule = $derived(
-		graphContext.graph.internalModules.get(internalModuleIdContext.internalModuleId),
-	);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 
 	// TODO prevent command if name don't change
 	function handleBlur(e: InputBlurEvent) {
@@ -27,7 +21,7 @@
 			type: 'RenameInternalModuleCommand',
 			createdAt: new Date().toJSON(),
 			projectId: projectDataContext.projectData.id,
-			details: { name: value, internalModuleId: internalModuleIdContext.internalModuleId },
+			details: { name: value, internalModuleId: internalModuleContext.internalModule.id },
 		});
 		editor.execute(command);
 	}
@@ -39,8 +33,8 @@
 			Name
 			<input
 				type="text"
-				value={internalModule.name}
 				onblur={handleBlur}
+				value={internalModuleContext.internalModule.name}
 				class="rounded border border-white/10 bg-transparent p-2"
 			/>
 		</label>

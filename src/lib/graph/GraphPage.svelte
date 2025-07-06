@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
+	import { internalModuleContextKey } from '$lib/module/internalModule/internalModuleContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
 	import { projectNavbarSelectionContextKey } from '$lib/project/projectNavbarSelectionContext';
 	import { OffsetConverter } from '$lib/space/OffsetConverter';
@@ -17,7 +17,7 @@
 	projectNavbarSelectionContext.projectNavbarSelection = 'graph';
 
 	const graphContext = getRequiredContext(graphContextKey);
-	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	const internalModuleContext = getRequiredContext(internalModuleContextKey);
 
 	const spaceContext = $state({ space: new Space() });
 	setSpaceContext(spaceContext);
@@ -33,12 +33,6 @@
 			new ZoomConverter(zoomContext.zoom),
 		]);
 	});
-
-	const visibleNodes = $derived(
-		graphContext.graph.nodes.values().filter((node) => {
-			return node.internalModuleId === internalModuleIdContext.internalModuleId;
-		}),
-	);
 </script>
 
 <svelte:head>
@@ -52,7 +46,7 @@ sounds better on singular and contains things like connections too. -->
 	<GraphToolbar />
 	<GraphCanvas
 		{graphSizer}
-		nodes={visibleNodes}
+		nodes={internalModuleContext.internalModule.nodes}
 		connections={graphContext.graph.connections.values()}
 	/>
 </div>
