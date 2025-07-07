@@ -85,6 +85,16 @@ export const nodeDefinitions: NodeDefinition[] = [
 		category: 'basic',
 		defaultExtras: {},
 		inputs: [
+			{ default: 0, isBoolean: false, key: 'max_time', max: 1, min: 0 },
+			{ default: 0, isBoolean: false, key: 'input', max: -1, min: 1 },
+			{ default: 1, isBoolean: false, key: 'time', max: 2, min: 0 },
+		],
+		type: 'DelayNode',
+	},
+	{
+		category: 'basic',
+		defaultExtras: {},
+		inputs: [
 			{ default: 0.01, isBoolean: false, key: 'attack', max: 1, min: 0 },
 			{ default: 0.1, isBoolean: false, key: 'decay', max: 1, min: 0 },
 			{ default: 0.7, isBoolean: false, key: 'sustain', max: 1, min: 0 },
@@ -154,12 +164,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [],
 		type: 'InputNode',
 	},
-	{
-		category: 'module',
-		defaultExtras: {},
-		inputs: [],
-		type: 'AudioInputNode',
-	},
+	{ category: 'module', defaultExtras: {}, inputs: [], type: 'AudioInputNode' },
 	{
 		category: 'wave',
 		defaultExtras: {},
