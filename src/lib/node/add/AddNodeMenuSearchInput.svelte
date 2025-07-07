@@ -1,18 +1,20 @@
 <script lang="ts">
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import { AddNodeHandler } from './AddNodeHandler';
+	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
 
 	interface Props {
-		addNodeMenuLogic: AddNodeMenuLogic;
+		searchText: string;
 	}
 
-	const { addNodeMenuLogic }: Props = $props();
+	const addNodeHandler = new AddNodeHandler();
+	let { searchText = $bindable() }: Props = $props();
 
 	function handleKeyDown(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
-		if (addNodeMenuLogic.searchText.length === 0) return;
-		const option = addNodeMenuLogic.getOptions()[0];
-		if (!option) return;
-		addNodeMenuLogic.handleNodeDefinitionSelect(option);
+		if (searchText.length === 0) return;
+		const nodeDefinition = getNodeDefinitionsBySearchText(searchText)[0];
+		if (!nodeDefinition) return;
+		addNodeHandler.handleNodeDefinitionSelect(nodeDefinition);
 	}
 </script>
 
@@ -22,6 +24,6 @@
 	type="search"
 	placeholder="Search"
 	class="common-input"
+	bind:value={searchText}
 	onkeydown={handleKeyDown}
-	bind:value={addNodeMenuLogic.searchText}
 />

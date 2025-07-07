@@ -7,33 +7,28 @@
 	import { getNodeDefinitionName } from '../definitions/getNodeDefinitionName';
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import { AddNodeHandler } from './AddNodeHandler';
 
 	interface Props {
 		nodeDefinitionCategory: NodeDefinitionCategory;
-		addNodeMenuLogic: AddNodeMenuLogic;
 	}
 
-	let floating = $state<HTMLElement>();
-	let reference = $state<HTMLElement>();
-	const { nodeDefinitionCategory, addNodeMenuLogic }: Props = $props();
+	let floating: HTMLElement;
+	let reference: HTMLElement;
+	const addNodeHandler = new AddNodeHandler();
+	const { nodeDefinitionCategory }: Props = $props();
 
 	function updatePosition() {
-		if (!floating) return;
-		if (!reference) return;
 		computePosition(reference, floating, {
 			strategy: 'fixed',
 			placement: 'right',
 			middleware: [flip(), shift()],
 		}).then(({ x, y }) => {
-			if (!floating) return;
-			Object.assign(floating.style, { left: `${x}px`, top: `${y}px` });
+			Object.assign(floating.style, { top: y + 'px', left: x + 'px' });
 		});
 	}
 
 	$effect(() => {
-		if (!floating) return;
-		if (!reference) return;
 		return autoUpdate(reference, floating, updatePosition);
 	});
 </script>
@@ -53,7 +48,7 @@
 			getId={getType}
 			getName={getNodeDefinitionName}
 			items={nodeDefinitionCategory.nodeDefinitions}
-			onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
+			onClick={addNodeHandler.handleNodeDefinitionSelect}
 		/>
 	</div>
 </div>

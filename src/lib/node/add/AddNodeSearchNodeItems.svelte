@@ -5,14 +5,16 @@
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinition } from '../definitions/NodeDefinition';
 	import { nodesName } from '../definitions/nodesName';
-	import type { AddNodeMenuLogic } from './AddNodeMenuLogic.svelte';
+	import { AddNodeHandler } from './AddNodeHandler';
+	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
 
 	interface Props {
-		addNodeMenuLogic: AddNodeMenuLogic;
+		searchText: string;
 	}
 
-	const { addNodeMenuLogic }: Props = $props();
-	const options = $derived(addNodeMenuLogic.getOptions());
+	const { searchText }: Props = $props();
+	const addNodeHandler = new AddNodeHandler();
+	const nodeDefinitions = $derived(getNodeDefinitionsBySearchText(searchText));
 
 	function compareByCategoryAndName(a: NodeDefinition, b: NodeDefinition) {
 		const aFullText = nodeCategoryNames[a.category] + ' ' + nodesName[a.type];
@@ -21,15 +23,15 @@
 	}
 </script>
 
-{#if options.length === 0}
+{#if nodeDefinitions.length === 0}
 	<div class="p-2 text-white/50">No options found for the search text</div>
 {:else}
 	<BasicList
 		getId={getType}
-		items={options}
+		items={nodeDefinitions}
 		getName={getNodeDefinitionName}
 		compare={compareByCategoryAndName}
-		onClick={addNodeMenuLogic.handleNodeDefinitionSelect}
+		onClick={addNodeHandler.handleNodeDefinitionSelect}
 	>
 		{#snippet content({ item: nodeDefinition })}
 			<div class="mr-1 text-white/50">
