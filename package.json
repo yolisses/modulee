@@ -1,26 +1,27 @@
 {
-	"type": "module",
-	"version": "0.1.0",
-	"scripts": {
-		"test:unit": "vitest",
-		"preview": "vite preview",
-		"dev": "vite dev",
-		"build": "vite build",
-		"prepare": "svelte-kit sync || echo ''",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"seed:fake": "vite-node src/lib/fake/seedFake.ts",
-		"unseed:fake": "vite-node src/lib/fake/unseedFake.ts",
-		"test:e2e": "playwright test",
-		"test": "npm run test:unit -- --run && npm run test:e2e"
+	"dependencies": {
+		"@floating-ui/dom": "^1.6.13",
+		"@fortawesome/free-brands-svg-icons": "^6.7.2",
+		"@fortawesome/free-solid-svg-icons": "^6.7.2",
+		"@oslojs/crypto": "^1.0.1",
+		"@oslojs/encoding": "^1.1.0",
+		"@prisma/client": "^6.10.0",
+		"google-auth-library": "^10.1.0",
+		"idb": "^8.0.2",
+		"js-cookie": "^3.0.5",
+		"nodes-editor": "^0.2.0",
+		"redis": "^5.5.6",
+		"sort-json": "^2.0.1",
+		"sortablejs": "^1.15.6",
+		"svelte-fa": "^4.0.3",
+		"svelte-portal": "^2.2.1",
+		"ua-parser-js": "^2.0.4",
+		"uuid": "^11.1.0",
+		"vite-plugin-top-level-await": "^1.5.0",
+		"vite-plugin-wasm": "^3.4.1",
+		"webmidi": "^3.1.12",
+		"zod": "^3.25.63"
 	},
-	"private": true,
-	"prisma": {
-		"seed": "tsx src/seed.ts"
-	},
-	"name": "modulee",
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
@@ -55,27 +56,26 @@
 		"vite": "^6.2.5",
 		"vitest": "^3.0.0"
 	},
-	"dependencies": {
-		"@floating-ui/dom": "^1.6.13",
-		"@fortawesome/free-brands-svg-icons": "^6.7.2",
-		"@fortawesome/free-solid-svg-icons": "^6.7.2",
-		"@oslojs/crypto": "^1.0.1",
-		"@oslojs/encoding": "^1.1.0",
-		"@prisma/client": "^6.10.0",
-		"google-auth-library": "^10.1.0",
-		"idb": "^8.0.2",
-		"js-cookie": "^3.0.5",
-		"nodes-editor": "^0.2.0",
-		"redis": "^5.5.6",
-		"sort-json": "^2.0.1",
-		"sortablejs": "^1.15.6",
-		"svelte-fa": "^4.0.3",
-		"svelte-portal": "^2.2.1",
-		"ua-parser-js": "^2.0.4",
-		"uuid": "^11.1.0",
-		"vite-plugin-top-level-await": "^1.5.0",
-		"vite-plugin-wasm": "^3.4.1",
-		"webmidi": "^3.1.12",
-		"zod": "^3.25.63"
-	}
+	"name": "modulee",
+	"prisma": {
+		"seed": "tsx src/seed.ts"
+	},
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"prepare": "svelte-kit sync || echo ''",
+		"preview": "vite preview",
+		"seed:fake": "vite-node src/lib/fake/seedFake.ts",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright test",
+		"test:unit": "vitest",
+		"unseed:fake": "vite-node src/lib/fake/unseedFake.ts"
+	},
+	"type": "module",
+	"version": "0.1.0"
 }

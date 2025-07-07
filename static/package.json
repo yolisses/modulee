@@ -1,16 +1,16 @@
 {
-	"name": "static",
-	"version": "1.0.0",
+	"author": "yolisses",
+	"dependencies": {
+		"modulee-engine-wasm": "^0.2.5"
+	},
+	"description": "The content that should be shared over network without the usual bundler due to WASM restrictions",
+	"keywords": [],
+	"license": "ISC",
 	"main": "engine-processor.js",
+	"name": "static",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
 	"type": "commonjs",
-	"description": "The content that should be shared over network without the usual bundler due to WASM restrictions",
-	"dependencies": {
-		"modulee-engine-wasm": "^0.2.5"
-	}
+	"version": "1.0.0"
 }
