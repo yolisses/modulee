@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { Input } from '$lib/input/Input';
 	import { Output } from '$lib/node/Output';
 	import {
 		PreviewConnectionWire as BasePreviewConnectionWire,
@@ -9,16 +10,14 @@
 	import Wire from './Wire.svelte';
 
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
-	const startIsOutput = $derived.by(() => {
-		const { startConnector } = previewConnectionContext;
-		return startConnector instanceof Output;
-	});
+	const startIsInput = $derived(previewConnectionContext.startConnector instanceof Input);
+	const startIsOutput = $derived(previewConnectionContext.startConnector instanceof Output);
 </script>
 
 <BasePreviewConnectionWire>
 	{#snippet children({ endPosition, startPosition })}
 		{#snippet a()}
-			{#if !previewConnectionContext.endConnector}
+			{#if !previewConnectionContext.endConnector && startIsInput}
 				<PreviewConnectionPlus position={endPosition} />
 			{/if}
 		{/snippet}
