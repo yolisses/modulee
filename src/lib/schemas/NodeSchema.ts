@@ -17,6 +17,7 @@ export const NodeSchema = z.union([
 	NodeBaseSchema('AudioInputNode', [], z.object({})),
 	NodeBaseSchema('ConstantNode', [], ConstantNodeExtrasSchema),
 	NodeBaseSchema('ControlNode', [], ControlNodeExtrasSchema),
+	NodeBaseSchema('DelayNode', ['input', 'time', 'max_time'], z.object({})),
 	NodeBaseSchema('DivideNode', ['input1', 'input2'], z.object({})),
 	NodeBaseSchema('EnvelopeNode', ['attack', 'decay', 'sustain', 'release'], z.object({})),
 	NodeBaseSchema('FrequencyNode', ['pitch'], z.object({})),
