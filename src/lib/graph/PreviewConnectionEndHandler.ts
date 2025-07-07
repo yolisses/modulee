@@ -6,9 +6,10 @@ import { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { InputPath } from '$lib/input/InputPath';
 import { addNodeMenuParamsContextKey } from '$lib/node/add/addNodeMenuParamsContext';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
+import { NODE_ITEM_WIDTH } from '$lib/node/NODE_ITEM_WIDTH';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 import { spaceContextKey } from '$lib/space/spaceContext';
-import { type EndPreviewConnectionEvent } from 'nodes-editor';
+import { Vector, type EndPreviewConnectionEvent } from 'nodes-editor';
 
 export class PreviewConnectionEndHandler {
 	spaceContext = getRequiredContext(spaceContextKey);
@@ -51,7 +52,8 @@ export class PreviewConnectionEndHandler {
 			this.editorContext.editor.execute(command);
 
 			const screenPosition = e.mousePosition;
-			const dataPosition = this.spaceContext.space.getDataPosition(screenPosition);
+			let dataPosition = this.spaceContext.space.getDataPosition(screenPosition);
+			dataPosition = dataPosition.subtract(new Vector(NODE_ITEM_WIDTH - 1, 0));
 			this.addNodeMenuParamsContext.addNodeMenuParams = {
 				input,
 				position: dataPosition,
