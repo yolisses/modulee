@@ -16,10 +16,20 @@
 	const { floatingMenuReference: reference }: Props = $props();
 	const addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
 
+	function closeMenu() {
+		addNodeMenuParamsContext.addNodeMenuParams = undefined;
+	}
+
 	function handleWindowClick(e: MouseEvent) {
 		const clickedInside = menu?.contains(e.target as Node);
 		if (!clickedInside) {
-			addNodeMenuParamsContext.addNodeMenuParams = undefined;
+			closeMenu();
+		}
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
+			closeMenu();
 		}
 	}
 
@@ -47,4 +57,4 @@
 	</div>
 </div>
 
-<svelte:window onpointerdown={handleWindowClick} />
+<svelte:window onpointerdown={handleWindowClick} onkeydown={handleKeyDown} />
