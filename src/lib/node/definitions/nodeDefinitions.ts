@@ -85,9 +85,9 @@ export const nodeDefinitions: NodeDefinition[] = [
 		category: 'basic',
 		defaultExtras: {},
 		inputs: [
-			{ default: 0, isBoolean: false, key: 'max_time', max: 1, min: 0 },
 			{ default: 0, isBoolean: false, key: 'input', max: -1, min: 1 },
 			{ default: 1, isBoolean: false, key: 'time', max: 2, min: 0 },
+			{ default: 0, isBoolean: false, key: 'max_time', max: 1, min: 0 },
 		],
 		type: 'DelayNode',
 	},
