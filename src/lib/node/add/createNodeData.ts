@@ -11,9 +11,7 @@ export function createNodeData(
 	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
-	// TODO find a more secure way to type this result
-
-	return NodeSchema.parse({
+	const nodeData = {
 		internalModuleId,
 		position,
 		id: createId(),
@@ -21,5 +19,7 @@ export function createNodeData(
 		extras: structuredClone(nodeDefinition.defaultExtras),
 		unconnectedInputValues: createUnconnectedInputValues(nodeDefinition),
 		isInputAutoConnectedMap: createIsInputAutoConnectedMap(nodeDefinition),
-	}) as NodeData;
+	} as NodeData;
+
+	return NodeSchema.parse(nodeData) as NodeData;
 }

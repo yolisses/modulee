@@ -4,6 +4,7 @@ export type InputDefinition = {
 	key: string;
 	default: number;
 	isBoolean: boolean;
+	canBeAutoConnected: boolean;
 	autoConnectedByDefault: boolean;
 };
 

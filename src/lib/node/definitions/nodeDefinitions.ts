@@ -7,6 +7,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -15,6 +16,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1,
 				isBoolean: false,
 				key: 'input2',
@@ -30,6 +32,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -38,6 +41,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 2,
 				isBoolean: false,
 				key: 'input2',
@@ -53,6 +57,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -61,6 +66,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 2,
 				isBoolean: false,
 				key: 'input2',
@@ -76,6 +82,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -84,6 +91,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input2',
@@ -99,6 +107,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -107,6 +116,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1,
 				isBoolean: false,
 				key: 'input2',
@@ -122,6 +132,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -130,6 +141,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 2,
 				isBoolean: false,
 				key: 'input2',
@@ -163,6 +175,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 261.625565,
 				isBoolean: false,
 				key: 'frequency',
@@ -178,6 +191,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 60,
 				isBoolean: false,
 				key: 'pitch',
@@ -209,6 +223,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -217,6 +232,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'trigger',
@@ -232,6 +248,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -240,6 +257,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1,
 				isBoolean: false,
 				key: 'time',
@@ -248,6 +266,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'max_time',
@@ -263,6 +282,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.01,
 				isBoolean: false,
 				key: 'attack',
@@ -271,6 +291,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.1,
 				isBoolean: false,
 				key: 'decay',
@@ -279,6 +300,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.7,
 				isBoolean: false,
 				key: 'sustain',
@@ -287,6 +309,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.2,
 				isBoolean: false,
 				key: 'release',
@@ -302,6 +325,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -310,6 +334,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1000,
 				isBoolean: false,
 				key: 'frequency',
@@ -318,6 +343,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.7071067811865476,
 				isBoolean: false,
 				key: 'resonance',
@@ -333,6 +359,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -341,6 +368,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1000,
 				isBoolean: false,
 				key: 'frequency',
@@ -349,6 +377,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.7071067811865476,
 				isBoolean: false,
 				key: 'resonance',
@@ -364,6 +393,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -372,6 +402,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1000,
 				isBoolean: false,
 				key: 'frequency',
@@ -380,6 +411,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.7071067811865476,
 				isBoolean: false,
 				key: 'resonance',
@@ -395,6 +427,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -403,6 +436,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1000,
 				isBoolean: false,
 				key: 'frequency',
@@ -411,6 +445,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0.7071067811865476,
 				isBoolean: false,
 				key: 'resonance',
@@ -419,6 +454,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 1,
 				isBoolean: false,
 				key: 'gain',
@@ -440,6 +476,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'value',
@@ -467,6 +504,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input',
@@ -499,6 +537,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 0,
 				isBoolean: false,
 				key: 'phase',
@@ -514,6 +553,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 0,
 				isBoolean: false,
 				key: 'phase',
@@ -529,6 +569,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 0,
 				isBoolean: false,
 				key: 'phase',
@@ -544,6 +585,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: true,
+				canBeAutoConnected: true,
 				default: 0,
 				isBoolean: false,
 				key: 'phase',
@@ -552,6 +594,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'duty_cycle',
@@ -567,6 +610,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'input',
@@ -582,6 +626,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'input1',
@@ -590,6 +635,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'input2',
@@ -605,6 +651,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'input1',
@@ -613,6 +660,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'input2',
@@ -628,6 +676,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 		inputs: [
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: true,
 				key: 'condition',
@@ -636,6 +685,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input1',
@@ -644,6 +694,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			},
 			{
 				autoConnectedByDefault: false,
+				canBeAutoConnected: false,
 				default: 0,
 				isBoolean: false,
 				key: 'input2',
