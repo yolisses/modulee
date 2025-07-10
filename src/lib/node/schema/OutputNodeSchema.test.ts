@@ -9,6 +9,7 @@ test('OutputNodeSchema', () => {
 		id: createId(),
 		type: 'OutputNode',
 		position: { x: 1, y: 2 },
+		isInputAutoConnectedMap: {},
 		internalModuleId: createId(),
 		unconnectedInputValues: { input: 3 },
 	};
@@ -21,6 +22,7 @@ test('OutputNodeSchema with incorrect input', () => {
 		id: createId(),
 		type: 'OutputNode',
 		position: { x: 1, y: 2 },
+		isInputAutoConnectedMap: {},
 		internalModuleId: createId(),
 		unconnectedInputValues: { input1: 3 },
 	};

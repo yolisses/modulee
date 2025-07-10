@@ -9,5 +9,6 @@ export function ModuleNodeBaseSchema<T extends string, E extends z.ZodTypeAny>(t
 		position: VectorSchema,
 		internalModuleId: z.uuidv4(),
 		unconnectedInputValues: z.record(z.string(), z.number()),
+		isInputAutoConnectedMap: z.record(z.enum([]), z.boolean()),
 	});
 }

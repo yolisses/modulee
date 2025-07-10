@@ -16,6 +16,7 @@ export function addNodeControlNodes(node: Node, graphRegistry: GraphRegistry) {
 			id: controlNodeId,
 			type: 'ControlNode',
 			unconnectedInputValues: {},
+			isInputAutoConnectedMap: {},
 			position: Vector.zero().getData(),
 			internalModuleId: input.node.internalModuleId,
 			extras: { value: input.getUnconnectedValue() },

@@ -60,6 +60,7 @@ export class UseEffectCommand extends EditorCommand<{
 					internalModuleId,
 					type: 'ModuleNode',
 					unconnectedInputValues: {},
+					isInputAutoConnectedMap: {},
 					position: moduleNodePosition,
 					extras: {
 						moduleReference: {

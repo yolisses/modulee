@@ -8,6 +8,7 @@ export function createFallbackNode(internalModuleId: string): NodeData {
 		extras: { value: 0 },
 		position: { x: 0, y: 0 },
 		unconnectedInputValues: {},
+		isInputAutoConnectedMap: {},
 		id: getInternalModuleFallbackNodeId(internalModuleId),
 	};
 }

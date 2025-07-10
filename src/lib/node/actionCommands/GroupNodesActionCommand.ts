@@ -50,6 +50,7 @@ export class GroupNodesActionCommand extends ActionCommand {
 					id: createId(),
 					type: 'ModuleNode',
 					unconnectedInputValues: {},
+					isInputAutoConnectedMap: {},
 					position: averagePosition.getData(),
 					internalModuleId: currentInternalModuleId,
 					extras: { moduleReference: { type: 'internal', moduleId: newInternalModuleId } },

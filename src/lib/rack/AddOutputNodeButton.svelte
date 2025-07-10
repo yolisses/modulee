@@ -39,6 +39,7 @@
 					extras: {},
 					id: createId(),
 					type: 'OutputNode',
+					isInputAutoConnectedMap: {},
 					position: position.getData(),
 					unconnectedInputValues: { input: 0 },
 					internalModuleId: internalModuleIdContext.internalModuleId,
