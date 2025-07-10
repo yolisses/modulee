@@ -19,6 +19,8 @@ export class ModuleNodeAudioInput extends Input {
 			default: 0,
 			key: 'audio',
 			isBoolean: false,
+			canBeAutoConnected: false,
+			autoConnectedByDefault: false,
 		};
 	}
 }

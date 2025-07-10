@@ -18,6 +18,14 @@ export class ModuleNodeInput extends InputWithControl {
 
 	public getInputDefinition(): InputDefinition {
 		const { min, max, defaultValue } = this.inputNode;
-		return { min, max, default: defaultValue, isBoolean: false, key: this.inputNode.id };
+		return {
+			min,
+			max,
+			isBoolean: false,
+			default: defaultValue,
+			key: this.inputNode.id,
+			canBeAutoConnected: false,
+			autoConnectedByDefault: false,
+		};
 	}
 }
