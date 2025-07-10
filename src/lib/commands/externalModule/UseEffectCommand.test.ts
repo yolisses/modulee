@@ -59,6 +59,7 @@ test('UseEffectCommand', () => {
 		type: 'ModuleNode',
 		position: { x: 0, y: 0 },
 		unconnectedInputValues: {},
+		isInputAutoConnectedMap: {},
 		internalModuleId: 'internalModuleId',
 		extras: { moduleReference: { type: 'external', moduleId: 'externalModuleId' } },
 	});
