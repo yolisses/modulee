@@ -5,10 +5,10 @@ import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { AddConnectedNodeCommand } from './AddConnectedNodeCommand';
 
-test('AddNodeCommand', () => {
+test('AddConnectedNodeCommand', () => {
 	const graphRegistry = {
+		connections: new ById(),
 		nodes: ById.fromItems([{ id: 'node1' }]),
-		connections: ById.fromItems([{ id: 'connection1' }]),
 	} as GraphRegistry;
 
 	const command = new AddConnectedNodeCommand(
@@ -22,7 +22,6 @@ test('AddNodeCommand', () => {
 
 	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 	expect(graphRegistry.connections.values()).toEqual([
-		{ id: 'connection1' },
 		{
 			id: 'connection2',
 			targetNodeId: 'node2',
@@ -33,5 +32,5 @@ test('AddNodeCommand', () => {
 	command.undo(graphRegistry);
 
 	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }]);
-	expect(graphRegistry.connections.values()).toEqual([{ id: 'connection1' }]);
+	expect(graphRegistry.connections.values()).toEqual([]);
 });
