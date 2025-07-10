@@ -9,13 +9,11 @@
 	}
 
 	const { externalModuleData }: Props = $props();
-
-	function handleClick() {}
 </script>
 
 <form action="/projects?/createFromExternalModule" method="post" use:enhance>
 	<input type="hidden" name="externalModuleId" value={externalModuleData.id} />
-	<button class="common-button" onclick={handleClick}>
+	<button class="common-button">
 		<Fa fw icon={faDownload} />
 		Use
 	</button>

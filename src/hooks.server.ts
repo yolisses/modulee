@@ -2,7 +2,8 @@ import { deleteSessionTokenCookie } from '$lib/session/deleteSessionTokenCookie'
 import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
 import { setSessionTokenCookie } from '$lib/session/setSessionTokenCookie';
 import { validateSessionToken } from '$lib/session/validateSessionToken';
-import type { Handle } from '@sveltejs/kit';
+import { type Handle, type HandleServerError } from '@sveltejs/kit';
+import { prettifyError, ZodError } from 'zod/v4';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const { cookies, locals, route } = event;
@@ -26,4 +27,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	locals.session = session;
 	return resolve(event);
+};
+
+export const handleError: HandleServerError = ({ error }) => {
+	console.error(error);
+	if (error instanceof ZodError) {
+		return { message: prettifyError(error) };
+	}
 };

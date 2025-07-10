@@ -10,5 +10,5 @@ export const ProjectSchema = z.object({
 	createdAt: z.string(),
 	updatedAt: z.string(),
 	moduleType: ModuleTypeSchema,
-	description: z.string().optional(),
+	description: z.string().nullish(),
 });
