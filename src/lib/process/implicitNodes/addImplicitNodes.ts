@@ -5,7 +5,6 @@ import type { InputPath } from '$lib/input/InputPath';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { createNodeData } from '$lib/node/add/createNodeData';
 import type { NodeData } from '$lib/node/data/NodeData';
-import { nodeDefinitions } from '$lib/node/definitions/nodeDefinitions';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
@@ -26,16 +25,9 @@ function getNodeDefinitionName(inputKey: string) {
 	return inputKey[0].toUpperCase() + inputKey.slice(1) + 'Node';
 }
 
-function getInputDefinition(nodeData: NodeData, inputKey: string) {
-	const nodeDef = nodeDefinitions.find((def) => def.type === nodeData.type);
-	return nodeDef?.inputs.find((input) => input.key === inputKey);
-}
-
 export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData) {
-	const inputDef = getInputDefinition(nodeData, inputPath.inputKey);
-	if (!inputDef || !inputDef.canBeAutoConnected || !inputDef.autoConnectionNodeType) return;
-
-	const nodeDefinition = nodeDefinitionsByName[inputDef.autoConnectionNodeType];
+	const nodeDefinitionName = getNodeDefinitionName(inputPath.inputKey);
+	const nodeDefinition = nodeDefinitionsByName[nodeDefinitionName];
 	if (!nodeDefinition) return;
 
 	const positionData: VectorData = { x: 0, y: 0 };
