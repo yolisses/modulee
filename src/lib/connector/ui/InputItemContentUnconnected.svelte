@@ -12,14 +12,14 @@
 
 	interface Props {
 		input: InputWithControl;
+		sizeElement: HTMLElement;
 	}
 
 	let element: HTMLElement;
 	let initialValue: number;
 	let initialClientX: number;
-	let sizeElement: HTMLElement;
 	let pointerId = $state<number>();
-	const { input }: Props = $props();
+	const { input, sizeElement }: Props = $props();
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 
@@ -87,21 +87,12 @@
 </script>
 
 <div style:width class="absolute left-0 h-full bg-green-500/25"></div>
-<div class="relative flex flex-1 flex-row items-center overflow-hidden" bind:this={sizeElement}>
-	<div
-		title={input.name}
-		style:padding-left="0.3lh"
-		class="overflow-and-ellipsis flex-1 overflow-hidden hover:bg-white/10"
-	>
-		{input.name}
-	</div>
-	<div
-		bind:this={element}
-		onpointerdown={handlePointerDown}
-		onpointerup={pointerId ? handlePointerUp : undefined}
-		onpointermove={pointerId ? handlePointerMove : undefined}
-		class="flex-1 cursor-ew-resize text-end opacity-50 hover:bg-white/10"
-	>
-		{formatNumber(value)}
-	</div>
+<div
+	bind:this={element}
+	onpointerdown={handlePointerDown}
+	onpointerup={pointerId ? handlePointerUp : undefined}
+	onpointermove={pointerId ? handlePointerMove : undefined}
+	class="flex-1 cursor-ew-resize text-end opacity-50 hover:bg-white/10"
+>
+	{formatNumber(value)}
 </div>

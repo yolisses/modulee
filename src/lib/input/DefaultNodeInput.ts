@@ -7,6 +7,10 @@ export class DefaultNodeInput extends InputWithControl {
 		return this.node.unconnectedInputValues?.[this.inputPath.inputKey];
 	}
 
+	getIsAutoConnected() {
+		return this.node.isInputAutoConnectedMap?.[this.inputPath.inputKey];
+	}
+
 	getInputDefinition(): InputDefinition {
 		const nodeDefinition = nodeDefinitions.find((nodeDefinition) => {
 			return this.node.type === nodeDefinition.type;

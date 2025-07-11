@@ -5,5 +5,6 @@ export abstract class InputWithControl extends Input {
 		return this.id + '.control';
 	}
 
+	abstract getIsAutoConnected(): boolean;
 	abstract getUnconnectedValue(): number;
 }

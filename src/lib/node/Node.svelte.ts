@@ -46,4 +46,8 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 	get unconnectedInputValues(): T['unconnectedInputValues'] {
 		return this.nodeData.unconnectedInputValues;
 	}
+
+	get isInputAutoConnectedMap(): T['isInputAutoConnectedMap'] {
+		return this.nodeData.isInputAutoConnectedMap;
+	}
 }
