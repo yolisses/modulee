@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { audioBackendContextKey } from '$lib/audio/audioBackendContext';
 	import { hashToUsize } from '$lib/audio/data/hashToUsize';
+	import { SetAutoConnectionInputCommand } from '$lib/commands/node/SetAutoConnectionInputCommand';
 	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { InputWithControl } from '$lib/input/InputWithControl';
+	import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import { formatNumber } from '$lib/ui/formatNumber';
 
@@ -84,16 +86,36 @@
 			return newValue;
 		}
 	}
+
+	function handleDoubleClick() {
+		const nodeDefinition = nodeDefinitionsByName[input.node.type];
+		if (!nodeDefinition) return;
+
+		const getInputDefinition = nodeDefinition.inputs.find(
+			(inputDefinition) => inputDefinition.key === input.key,
+		);
+		if (!getInputDefinition?.canBeAutoConnected) return;
+
+		const command = new SetAutoConnectionInputCommand({
+			createdAt: new Date().toJSON(),
+			details: { inputPath: input.inputPath, value: true },
+			id: createId(),
+			projectId: projectDataContext.projectData.id,
+			type: 'SetAutoConnectionInputCommand',
+		});
+		editorContext.editor.execute(command);
+	}
 </script>
 
 <div style:width class="pointer-events-none absolute left-0 -z-10 h-full bg-green-500/25"></div>
-<div
+<button
 	bind:this={element}
 	style:padding-right="0.2lh"
+	ondblclick={handleDoubleClick}
 	onpointerdown={handlePointerDown}
 	onpointerup={pointerId ? handlePointerUp : undefined}
 	onpointermove={pointerId ? handlePointerMove : undefined}
-	class="flex-1 cursor-ew-resize text-end opacity-50 hover:bg-white/10"
+	class="flex flex-1 cursor-ew-resize justify-end opacity-50 hover:bg-white/10"
 >
 	{formatNumber(value)}
-</div>
+</button>
