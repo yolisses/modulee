@@ -64,6 +64,8 @@ export function addInputImplicitNode(
 export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 	nodeDefinition.inputs.forEach((inputDefinition) => {
+		if (!nodeData.isInputAutoConnectedMap[inputDefinition.key]) return;
+
 		if (!inputDefinition.autoConnection) return;
 		const inputPath: InputPath = { nodeId: nodeData.id, inputKey: inputDefinition.key };
 		if (getIsInputConnected(inputPath, graphRegistry)) return;
