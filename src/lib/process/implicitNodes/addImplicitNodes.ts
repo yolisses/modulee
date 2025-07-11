@@ -5,9 +5,8 @@ import type { InputPath } from '$lib/input/InputPath';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import { createNodeData } from '$lib/node/add/createNodeData';
 import type { NodeData } from '$lib/node/data/NodeData';
+import type { NodeDefinition } from '$lib/node/definitions/NodeDefinition';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
-import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
-import { getNodeInputPaths } from '../fallbackNodes/getNodeInputPaths';
 
 function getImplicitConnectionId(inputPath: InputPath) {
 	return 'implicit_connection_for_input_path_' + getInputPathId(inputPath);
@@ -17,19 +16,11 @@ function getImplicitNodeId(inputPath: InputPath) {
 	return 'implicit_node_for_input_path_' + getInputPathId(inputPath);
 }
 
-function getIsSomeModuleNode(nodeData: NodeData) {
-	return nodeData.type === 'ModuleNode' || nodeData.type === 'ModuleVoicesNode';
-}
-
-function getNodeDefinitionName(inputKey: string) {
-	return inputKey[0].toUpperCase() + inputKey.slice(1) + 'Node';
-}
-
-export function createInputImplicitNode(inputPath: InputPath, nodeData: NodeData) {
-	const nodeDefinitionName = getNodeDefinitionName(inputPath.inputKey);
-	const nodeDefinition = nodeDefinitionsByName[nodeDefinitionName];
-	if (!nodeDefinition) return;
-
+export function createInputImplicitNode(
+	inputPath: InputPath,
+	nodeData: NodeData,
+	nodeDefinition: NodeDefinition,
+) {
 	const positionData: VectorData = { x: 0, y: 0 };
 	const implicitNodeData: NodeData = createNodeData(
 		nodeDefinition,
@@ -55,8 +46,9 @@ export function addInputImplicitNode(
 	inputPath: InputPath,
 	nodeData: NodeData,
 	graphRegistry: GraphRegistry,
+	nodeDefinition: NodeDefinition,
 ) {
-	const implicitNodeData = createInputImplicitNode(inputPath, nodeData);
+	const implicitNodeData = createInputImplicitNode(inputPath, nodeData, nodeDefinition);
 	if (implicitNodeData) {
 		graphRegistry.nodes.add(implicitNodeData);
 
@@ -72,23 +64,15 @@ export function addInputImplicitNode(
 }
 
 export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
-	if (getIsSomeModuleNode(nodeData)) return;
+	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 
-	const inputPaths = getNodeInputPaths(nodeData, graphRegistry);
-
-	inputPaths.forEach((inputPath) => {
-		const isInputConnected = getIsInputConnected(inputPath, graphRegistry);
-		if (isInputConnected) return;
-
-		addInputImplicitNode(inputPath, nodeData, graphRegistry);
+	nodeDefinition.inputs.forEach((inputDefinition) => {
+		if (!inputDefinition.autoConnection) return;
+		const inputPath: InputPath = { nodeId: nodeData.id, inputKey: inputDefinition.key };
+		addInputImplicitNode(inputPath, nodeData, graphRegistry, nodeDefinition);
 	});
 }
 
-// TODO consider adopting an OOP approach
-/**
- * Add automatic nodes based in the node type name and the input key, e.g.:
- * create a `PitchNode` for a input which key is `"pitch"`
- */
 export function addImplicitNodes(graphRegistry: GraphRegistry) {
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		addNodeImplicitNodes(nodeData, graphRegistry);

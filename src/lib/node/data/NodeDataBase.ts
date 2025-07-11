@@ -10,4 +10,5 @@ export type NodeDataBase<T extends string = string, E = object> = {
 	isInputAutoConnectedMap: Record<string, boolean>;
 };
 
+// TODO rename NodeDataBase to BaseNodeData
 // TODO find a better name for isInputAutoConnectedMap
