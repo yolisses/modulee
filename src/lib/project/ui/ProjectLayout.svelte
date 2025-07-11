@@ -123,7 +123,7 @@
 		</div>
 		<div
 			bind:this={projectToolbarContext.projectToolbar}
-			class="flex flex-row items-start overflow-auto border-t-2 border-black/50 max-sm:justify-between"
+			class="flex flex-row items-start overflow-auto border-t-2 border-black/50 max-md:justify-between"
 		>
 			<UndoButton />
 			<RedoButton />
