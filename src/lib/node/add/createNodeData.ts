@@ -11,6 +11,7 @@ export function createNodeData(
 	internalModuleId: string,
 	position: VectorData,
 ): NodeData {
+	console.log(nodeDefinition);
 	const nodeData = {
 		internalModuleId,
 		position,

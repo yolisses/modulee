@@ -7,6 +7,7 @@ import { createNodeData } from '$lib/node/add/createNodeData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { NodeDefinition } from '$lib/node/definitions/NodeDefinition';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
+import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
 
 function getImplicitConnectionId(inputPath: InputPath) {
 	return 'implicit_connection_for_input_path_' + getInputPathId(inputPath);
@@ -49,26 +50,23 @@ export function addInputImplicitNode(
 	nodeDefinition: NodeDefinition,
 ) {
 	const implicitNodeData = createInputImplicitNode(inputPath, nodeData, nodeDefinition);
-	if (implicitNodeData) {
-		graphRegistry.nodes.add(implicitNodeData);
+	graphRegistry.nodes.add(implicitNodeData);
 
-		const implicitConnectionData: ConnectionData = createImplicitConnection(
-			inputPath,
-			implicitNodeData,
-		);
+	const implicitConnectionData: ConnectionData = createImplicitConnection(
+		inputPath,
+		implicitNodeData,
+	);
+	graphRegistry.connections.add(implicitConnectionData);
 
-		graphRegistry.connections.add(implicitConnectionData);
-
-		addNodeImplicitNodes(implicitNodeData, graphRegistry);
-	}
+	addNodeImplicitNodes(implicitNodeData, graphRegistry);
 }
 
 export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
-
 	nodeDefinition.inputs.forEach((inputDefinition) => {
 		if (!inputDefinition.autoConnection) return;
 		const inputPath: InputPath = { nodeId: nodeData.id, inputKey: inputDefinition.key };
+		if (getIsInputConnected(inputPath, graphRegistry)) return;
 		addInputImplicitNode(inputPath, nodeData, graphRegistry, nodeDefinition);
 	});
 }
