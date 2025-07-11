@@ -1,7 +1,4 @@
-export type AutoConnectionDefinition = {
-	nodeType: string;
-	byDefault: boolean;
-};
+import type { AutoConnectionDefinition } from './AutoConnectionDefinition';
 
 export type InputDefinition = {
 	min: number;
