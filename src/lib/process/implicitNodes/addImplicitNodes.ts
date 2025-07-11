@@ -67,7 +67,11 @@ export function addNodeImplicitNodes(nodeData: NodeData, graphRegistry: GraphReg
 		if (!inputDefinition.autoConnection) return;
 		const inputPath: InputPath = { nodeId: nodeData.id, inputKey: inputDefinition.key };
 		if (getIsInputConnected(inputPath, graphRegistry)) return;
-		addInputImplicitNode(inputPath, nodeData, graphRegistry, nodeDefinition);
+
+		const implicitNodeDefinition = nodeDefinitionsByName[inputDefinition.autoConnection.nodeType];
+		if (!implicitNodeDefinition) return;
+
+		addInputImplicitNode(inputPath, nodeData, graphRegistry, implicitNodeDefinition);
 	});
 }
 
