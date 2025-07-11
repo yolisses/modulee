@@ -19,9 +19,9 @@ test('SetAutoConnectionInputCommand', () => {
 
 	command.execute(graphRegistry);
 
-	expect(graphRegistry.nodes.get('node2').unconnectedInputValues.key1).toBe(false);
+	expect(graphRegistry.nodes.get('node2').isInputAutoConnectedMap.key1).toBe(false);
 
 	command.undo(graphRegistry);
 
-	expect(graphRegistry.nodes.get('node2').unconnectedInputValues.key1).toBe(true);
+	expect(graphRegistry.nodes.get('node2').isInputAutoConnectedMap.key1).toBe(true);
 });
