@@ -4,9 +4,9 @@
 	import { ConnectorAreaPointerStrategy, PointerEventDispatcher } from 'nodes-editor';
 	import { connectorCondition } from './connectorCondition';
 	import ConnectorJoint from './ConnectorJoint.svelte';
-	import InputItemContentAuto from './InputItemContentAuto.svelte';
-	import InputItemContentUnconnected from './InputItemContentUnconnected.svelte';
+	import InputItemAutoButton from './InputItemAutoButton.svelte';
 	import InputItemName from './InputItemName.svelte';
+	import InputItemValueSlider from './InputItemValueSlider.svelte';
 
 	interface Props {
 		input: Input;
@@ -31,9 +31,9 @@
 	</PointerEventDispatcher>
 	{#if !input.targetNode && input instanceof InputWithControl}
 		{#if input?.getIsAutoConnected()}
-			<InputItemContentAuto {input} />
+			<InputItemAutoButton {input} />
 		{:else}
-			<InputItemContentUnconnected {input} {sizeElement} />
+			<InputItemValueSlider {input} {sizeElement} />
 		{/if}
 	{/if}
 </div>
