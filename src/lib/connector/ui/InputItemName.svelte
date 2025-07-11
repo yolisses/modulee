@@ -13,7 +13,7 @@
 	title={input.name}
 	style:padding-left="0.3lh"
 	class:italic={input instanceof ModuleNodeAudioInput}
-	class="overflow-and-ellipsis flex flex-1 flex-row justify-start overflow-hidden italic hover:bg-white/10"
+	class="overflow-and-ellipsis block flex-1 overflow-hidden text-start italic hover:bg-white/10"
 >
 	{input.name}
 </button>

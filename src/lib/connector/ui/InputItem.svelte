@@ -26,7 +26,7 @@
 	class="relative z-0 flex flex-row items-center overflow-hidden"
 	style:border-radius={isLast ? '0 0 0.4lh 0.4lh' : undefined}
 >
-	<PointerEventDispatcher class="flex-1" pointerStrategy={connectorAreaPointerStrategy}>
+	<PointerEventDispatcher class="contents" pointerStrategy={connectorAreaPointerStrategy}>
 		<InputItemName {input} />
 	</PointerEventDispatcher>
 	{#if !input.targetNode && input instanceof InputWithControl}
