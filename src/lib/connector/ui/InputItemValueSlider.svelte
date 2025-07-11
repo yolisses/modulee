@@ -86,7 +86,7 @@
 	}
 </script>
 
-<div style:width class="absolute left-0 h-full bg-green-500/25"></div>
+<div style:width class="pointer-events-none absolute left-0 -z-10 h-full bg-green-500/25"></div>
 <div
 	bind:this={element}
 	onpointerdown={handlePointerDown}

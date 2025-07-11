@@ -23,7 +23,7 @@
 </div>
 <div
 	bind:this={sizeElement}
-	class="relative flex flex-row items-center overflow-hidden"
+	class="relative z-0 flex flex-row items-center overflow-hidden"
 	style:border-radius={isLast ? '0 0 0.4lh 0.4lh' : undefined}
 >
 	<PointerEventDispatcher class="flex-1" pointerStrategy={connectorAreaPointerStrategy}>
