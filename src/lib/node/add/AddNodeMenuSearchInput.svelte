@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { AddNodeHandler } from './AddNodeHandler';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
 
@@ -6,6 +7,7 @@
 		searchText: string;
 	}
 
+	let element: HTMLElement;
 	const addNodeHandler = new AddNodeHandler();
 	let { searchText = $bindable() }: Props = $props();
 
@@ -16,12 +18,16 @@
 		if (!nodeDefinition) return;
 		addNodeHandler.handleNodeDefinitionSelect(nodeDefinition);
 	}
+
+	onMount(() => {
+		// Using autofocus attribute is not reliable
+		element.focus();
+	});
 </script>
 
-<!-- svelte-ignore a11y_autofocus -->
 <input
-	autofocus
 	type="search"
+	bind:this={element}
 	placeholder="Search"
 	class="common-input"
 	bind:value={searchText}
