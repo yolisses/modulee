@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand.js';
-	import { connectorCondition } from '$lib/connector/ui/connectorCondition.js';
 	import InputItem from '$lib/connector/ui/InputItem.svelte';
 	import { editorContextKey } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
@@ -9,7 +8,7 @@
 	import { spaceContextKey } from '$lib/space/spaceContext.js';
 	import {
 		NodeItem as BaseNodeItem,
-		ConnectorAreaPointerStrategy,
+		EndConnectorAreaPointerStrategy,
 		PointerEventDispatcher,
 		selectedNodeIdsContextKey,
 	} from 'nodes-editor';
@@ -25,17 +24,13 @@
 		postInputsChildren?: Snippet;
 	}
 
-	const spaceContext = getRequiredContext(spaceContextKey);
 	const { node, postInputsChildren, preInputsChildren, headerChildren }: Props = $props();
 
+	const spaceContext = getRequiredContext(spaceContextKey);
 	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
-
-	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		node.output,
-		connectorCondition,
-	);
+	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(node.output);
 
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
@@ -55,8 +50,8 @@
 </script>
 
 <PointerEventDispatcher
-	pointerStrategy={connectorAreaPointerStrategy}
 	oncontextmenu={handleContextMenu}
+	pointerStrategy={endConnectorAreaPointerStrategy}
 >
 	<BaseNodeItem {node} position={screenPosition}>
 		<div
