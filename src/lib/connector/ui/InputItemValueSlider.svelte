@@ -89,6 +89,7 @@
 <div style:width class="pointer-events-none absolute left-0 -z-10 h-full bg-green-500/25"></div>
 <div
 	bind:this={element}
+	style:padding-right="0.2lh"
 	onpointerdown={handlePointerDown}
 	onpointerup={pointerId ? handlePointerUp : undefined}
 	onpointermove={pointerId ? handlePointerMove : undefined}
