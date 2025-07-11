@@ -9,13 +9,11 @@
 	const { input }: Props = $props();
 </script>
 
-<div class="relative flex flex-1 flex-row items-center overflow-hidden">
-	<div
-		title={input.name}
-		style:padding-left="0.3lh"
-		class:italic={input instanceof ModuleNodeAudioInput}
-		class="overflow-and-ellipsis flex-1 overflow-hidden italic hover:bg-white/10"
-	>
-		{input.name}
-	</div>
-</div>
+<button
+	title={input.name}
+	style:padding-left="0.3lh"
+	class:italic={input instanceof ModuleNodeAudioInput}
+	class="overflow-and-ellipsis flex flex-1 flex-row justify-start overflow-hidden italic hover:bg-white/10"
+>
+	{input.name}
+</button>
