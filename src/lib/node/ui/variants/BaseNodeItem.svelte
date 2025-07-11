@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand.js';
+	import { connectorCondition } from '$lib/connector/ui/connectorCondition.js';
 	import InputItem from '$lib/connector/ui/InputItem.svelte';
 	import { editorContextKey } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
@@ -30,7 +31,10 @@
 	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 	const screenPosition = $derived(spaceContext.space.getScreenPosition(node.position));
-	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(node.output);
+	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(
+		node.output,
+		connectorCondition,
+	);
 
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);

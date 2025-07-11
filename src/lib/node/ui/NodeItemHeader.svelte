@@ -14,6 +14,7 @@
 		previewConnectionContextKey,
 		selectedNodeIdsContextKey,
 		SelectOnClickPointerStrategy,
+		StartConnectorAreaPointerStrategy,
 		Vector,
 		type MoveEvent,
 	} from 'nodes-editor';
@@ -36,6 +37,8 @@
 	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
+
+	const startConnectorAreaPointerStrategy = new StartConnectorAreaPointerStrategy(node.output);
 
 	// The criteria to this movement function is: Keep the cursor always in the
 	// node area. Move the node only if the cursor passes the grid lines.
@@ -126,6 +129,8 @@
 	</PointerEventDispatcher>
 	{@render children?.()}
 	<div class="absolute" style:right="-0.2lh">
-		<ConnectorJoint connector={node.output} />
+		<PointerEventDispatcher pointerStrategy={startConnectorAreaPointerStrategy}>
+			<ConnectorJoint connector={node.output} />
+		</PointerEventDispatcher>
 	</div>
 </div>
