@@ -105,7 +105,7 @@
 	});
 </script>
 
-<div class="hover-bg relative flex w-full flex-row items-center">
+<div class="hover-bg relative flex w-full cursor-move flex-row items-center">
 	<PointerEventDispatcher
 		class="flex flex-row items-center"
 		{pointerStrategy}
