@@ -24,8 +24,10 @@ export class ModuleNodeInput extends InputWithControl {
 			isBoolean: false,
 			default: defaultValue,
 			key: this.inputNode.id,
-			canBeAutoConnected: false,
-			autoConnectedByDefault: false,
 		};
+	}
+
+	public getIsAutoConnected() {
+		return false;
 	}
 }

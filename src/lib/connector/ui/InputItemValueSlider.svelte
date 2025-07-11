@@ -94,7 +94,7 @@
 		const getInputDefinition = nodeDefinition.inputs.find(
 			(inputDefinition) => inputDefinition.key === input.key,
 		);
-		if (!getInputDefinition?.canBeAutoConnected) return;
+		if (!getInputDefinition?.autoConnection) return;
 
 		const command = new SetAutoConnectionInputCommand({
 			createdAt: new Date().toJSON(),
