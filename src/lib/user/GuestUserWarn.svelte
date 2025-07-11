@@ -4,7 +4,7 @@
 	import GoogleSignInButton from './google/GoogleSignInButton.svelte';
 </script>
 
-<div class="flex flex-col gap-2 rounded border border-yellow-500 p-2">
+<div class="flex flex-col gap-2 rounded border-2 border-yellow-500/50 p-2">
 	<div class="text-center text-lg font-bold">
 		<Fa icon={faWarning} class="inline text-yellow-500" />
 		You risk losing access!
