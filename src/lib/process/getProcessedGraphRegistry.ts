@@ -1,9 +1,9 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
+import { addAutoNodes } from './autoNodes/addAutoNodes';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
-import { addImplicitNodes } from './implicitNodes/addImplicitNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
 import { removeReferencesToMissingModules } from './removeReferencesToMissingModules/removeReferencesToMissingModules';
 import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
@@ -20,7 +20,7 @@ export function getProcessedGraphRegistry(
 	removeReferencesToMissingModules(graphRegistry);
 	removeConnectionsToMissingNodes(graphRegistry);
 	replaceAudioInputNodes(graphRegistry);
-	addImplicitNodes(graphRegistry);
+	addAutoNodes(graphRegistry);
 	addControlNodes(graphRegistry);
 	return graphRegistry;
 }

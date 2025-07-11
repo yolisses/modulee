@@ -3,9 +3,9 @@ import type { InputPath } from '$lib/input/InputPath';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { getIsInputConnected } from '../fallbackNodes/getIsInputConnected';
-import { addImplicitNodeForInput } from './addImplicitNodeForInput';
+import { addAutoNodeForInput } from './addAutoNodeForInput';
 
-export function addImplicitNodesForNode(nodeData: NodeData, graphRegistry: GraphRegistry): void {
+export function addAutoNodesForNode(nodeData: NodeData, graphRegistry: GraphRegistry): void {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 	if (!nodeDefinition) return;
 
@@ -16,10 +16,10 @@ export function addImplicitNodesForNode(nodeData: NodeData, graphRegistry: Graph
 		const inputPath: InputPath = { nodeId: nodeData.id, inputKey: inputDefinition.key };
 		if (getIsInputConnected(inputPath, graphRegistry)) return;
 
-		const implicitNodeDefinition = nodeDefinitionsByName[inputDefinition.autoConnection.nodeType];
-		if (!implicitNodeDefinition) return;
+		const autoNodeDefinition = nodeDefinitionsByName[inputDefinition.autoConnection.nodeType];
+		if (!autoNodeDefinition) return;
 
 		const { internalModuleId } = nodeData;
-		addImplicitNodeForInput(inputPath, internalModuleId, graphRegistry, implicitNodeDefinition);
+		addAutoNodeForInput(inputPath, internalModuleId, graphRegistry, autoNodeDefinition);
 	});
 }
