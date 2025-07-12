@@ -10,17 +10,12 @@ export function topologicalSort(nodes: Node[]): string[] {
 	const delayNodesOnStack = new Set<Node>();
 
 	function visit(node: Node): boolean {
-		console.log('enter', node.id);
-		if (result.has(node)) {
-			console.log('leave', node.id, 'already in the result');
-			return false;
-		}
+		if (result.has(node)) return false;
 		if (stack.has(node)) {
 			// Cycle found
 			if (delayNodesOnStack.size == 1 && delayNodesOnStack.has(node)) {
 				result.add(node);
 			} else if (delayNodesOnStack.size > 0) {
-				console.log('leave', node.id, 'cycle found');
 				return true;
 			} else {
 				throw new CycleWithoutDelayError();
@@ -41,13 +36,11 @@ export function topologicalSort(nodes: Node[]): string[] {
 		});
 
 		if (gotCycle && delayNodesOnStack.size === 1 && delayNodesOnStack.has(node)) {
-			console.log('add node', node.id);
 			result.add(node);
 			return false;
 		}
 
 		if (!gotCycle) {
-			console.log('add node', node.id);
 			result.add(node);
 		}
 
@@ -56,12 +49,10 @@ export function topologicalSort(nodes: Node[]): string[] {
 			delayNodesOnStack.delete(node);
 		}
 
-		console.log('leave', node.id);
 		return gotCycle;
 	}
 
 	nodes.forEach((node) => {
-		console.log(node.id);
 		visit(node);
 	});
 
