@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { CycleWithoutDelayError } from './CycleWithoutDelayError';
 import type { Node } from './Node';
 import { topologicalSort } from './topologicalSort';
 
@@ -34,5 +35,15 @@ describe('topologicalSort', () => {
 		];
 		const result = topologicalSort(nodes);
 		expect(result).toEqual(['node1', 'node2', 'node3', 'node4']);
+	});
+
+	test('cycle without delay', () => {
+		const nodes: Node[] = [
+			{ id: 'node1', inputs: ['node3'], isDelay: false },
+			{ id: 'node2', inputs: ['node1'], isDelay: false },
+			{ id: 'node3', inputs: ['node2'], isDelay: false },
+		];
+
+		expect(() => topologicalSort(nodes)).toThrow(CycleWithoutDelayError);
 	});
 });
