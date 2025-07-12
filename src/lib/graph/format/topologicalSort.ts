@@ -40,7 +40,13 @@ export function topologicalSort(nodes: Node[]): string[] {
 			}
 		});
 
-		if (!gotCycle || (delayNodesOnStack.size === 1 && delayNodesOnStack.has(node))) {
+		if (gotCycle && delayNodesOnStack.size === 1 && delayNodesOnStack.has(node)) {
+			console.log('add node', node.id);
+			result.add(node);
+			return false;
+		}
+
+		if (!gotCycle) {
 			console.log('add node', node.id);
 			result.add(node);
 		}
