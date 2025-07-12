@@ -29,12 +29,12 @@ describe('topologicalSort', () => {
 	test('graph with branch', () => {
 		const nodes: Node[] = [
 			{ id: 'B', inputs: ['A'], isDelay: false },
-			{ id: 'node4', inputs: ['B', 'C'], isDelay: false },
+			{ id: 'D', inputs: ['B', 'C'], isDelay: false },
 			{ id: 'C', inputs: ['A'], isDelay: false },
 			{ id: 'A', inputs: [], isDelay: false },
 		];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['A', 'B', 'C', 'node4']);
+		expect(result).toEqual(['A', 'B', 'C', 'D']);
 	});
 
 	test('cycle without delay', () => {
@@ -58,7 +58,7 @@ describe('topologicalSort', () => {
 		expect(result).toEqual(['B', 'C', 'A']);
 	});
 
-	test.only('cycle with delay - rotation 2', () => {
+	test('cycle with delay - rotation 2', () => {
 		const nodes: Node[] = [
 			{ id: 'A', inputs: ['C'], isDelay: false },
 			{ id: 'B', inputs: ['A'], isDelay: true },
