@@ -1,94 +1,38 @@
 import { describe, expect, test } from 'vitest';
+import type { Node } from './Node';
 import { topologicalSort } from './topologicalSort';
 
-interface Node {
-	id: string;
-	isDelay: boolean;
-	inputs: string[];
-}
-
 describe('topologicalSort', () => {
-	test('should sort a simple acyclic graph', () => {
-		// A─B─D
-		// └─C─┘
-		const nodes: Node[] = [
-			{ id: 'A', isDelay: false, inputs: [] },
-			{ id: 'B', isDelay: false, inputs: ['A'] },
-			{ id: 'C', isDelay: false, inputs: ['A'] },
-			{ id: 'D', isDelay: false, inputs: ['B', 'C'] },
-		];
-		const result = topologicalSort(nodes);
-		expect(result).toEqual(['A', 'B', 'C', 'D']);
-	});
-
-	test('should handle a cycle with a delay node', () => {
-		// ┌A─B─C
-		// └────┘
-		const nodes: Node[] = [
-			{ id: 'A', isDelay: false, inputs: ['C'] },
-			{ id: 'B', isDelay: true, inputs: ['A'] },
-			{ id: 'C', isDelay: false, inputs: ['B'] },
-		];
-		const result = topologicalSort(nodes);
-		expect(result).toEqual(expect.arrayContaining(['A', 'B', 'C']));
-	});
-
-	test('should return null for a cycle without delay nodes', () => {
-		// ┌A─B
-		// └──┘
-		const nodes: Node[] = [
-			{ id: 'A', isDelay: false, inputs: ['B'] },
-			{ id: 'B', isDelay: false, inputs: ['A'] },
-		];
-		const result = topologicalSort(nodes);
-		expect(result).toBeNull();
-	});
-
-	test('should handle an empty graph', () => {
+	test('zero nodes', () => {
 		const nodes: Node[] = [];
 		const result = topologicalSort(nodes);
 		expect(result).toEqual([]);
 	});
 
-	test('should handle a single node with no inputs', () => {
-		// A
-		const nodes: Node[] = [{ id: 'A', isDelay: false, inputs: [] }];
+	test('single node', () => {
+		const nodes: Node[] = [{ id: 'node1', inputs: [], isDelay: false }];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['A']);
+		expect(result).toEqual(['node1']);
 	});
 
-	test('should handle disconnected graph', () => {
-		// A─C
-		// B
+	test('linear graph', () => {
 		const nodes: Node[] = [
-			{ id: 'A', isDelay: false, inputs: [] },
-			{ id: 'B', isDelay: false, inputs: [] },
-			{ id: 'C', isDelay: false, inputs: ['A'] },
+			{ id: 'node3', inputs: ['node2'], isDelay: false },
+			{ id: 'node1', inputs: [], isDelay: false },
+			{ id: 'node2', inputs: ['node1'], isDelay: false },
 		];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(expect.arrayContaining(['A', 'B', 'C']));
+		expect(result).toEqual(['node1', 'node2', 'node3']);
 	});
 
-	test('should return null for invalid node reference', () => {
-		// B-A
-		const nodes: Node[] = [{ id: 'A', isDelay: false, inputs: ['B'] }];
-		const result = topologicalSort(nodes);
-		expect(result).toBeNull();
-	});
-
-	test('should handle complex graph with multiple delay nodes', () => {
-		//  ┌─────┐
-		//  A─B─C─E
-		// ┌D─┘ │
-		// └────┘
+	test('graph with branch', () => {
 		const nodes: Node[] = [
-			{ id: 'A', isDelay: false, inputs: [] },
-			{ id: 'B', isDelay: true, inputs: ['A', 'D'] },
-			{ id: 'C', isDelay: false, inputs: ['B'] },
-			{ id: 'D', isDelay: true, inputs: ['C'] },
-			{ id: 'E', isDelay: false, inputs: ['A', 'C'] },
+			{ id: 'node2', inputs: ['node1'], isDelay: false },
+			{ id: 'node4', inputs: ['node2', 'node3'], isDelay: false },
+			{ id: 'node3', inputs: ['node1'], isDelay: false },
+			{ id: 'node1', inputs: [], isDelay: false },
 		];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(expect.arrayContaining(['A', 'B', 'C', 'D', 'E']));
+		expect(result).toEqual(['node1', 'node2', 'node3', 'node4']);
 	});
 });

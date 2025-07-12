@@ -1,60 +1,21 @@
-interface Node {
-	id: string;
-	isDelay: boolean;
-	inputs: string[];
-}
+import { ById } from '$lib/editor/ById';
+import { getId } from '$lib/ui/getId';
+import type { Node } from './Node';
 
-export function topologicalSort(nodes: Node[]): string[] | null {
-	const visited = new Set<string>();
-	const recStack = new Set<string>();
-	const result: string[] = [];
+export function topologicalSort(nodes: Node[]): string[] {
+	const nodesById = ById.fromItems(nodes);
+	const result = new Set<Node>();
 
-	function dfs(nodeId: string, parentStack: Set<string> = new Set()): boolean {
-		if (recStack.has(nodeId)) {
-			// Cycle detected, check if it contains a delay node
-			const cycleHasDelay = Array.from(parentStack).some((id) => {
-				const node = nodes.find((n) => n.id === id);
-				return node?.isDelay || false;
-			});
-			return cycleHasDelay;
-		}
+	function visit(node: Node) {
+		if (result.has(node)) return;
+		node.inputs.forEach((input) => {
+			visit(nodesById.get(input));
+		});
 
-		if (visited.has(nodeId)) {
-			return true;
-		}
-
-		visited.add(nodeId);
-		recStack.add(nodeId);
-		parentStack.add(nodeId);
-
-		const node = nodes.find((n) => n.id === nodeId);
-		if (!node) {
-			recStack.delete(nodeId);
-			parentStack.delete(nodeId);
-			return false;
-		}
-
-		for (const inputId of node.inputs) {
-			if (!dfs(inputId, parentStack)) {
-				recStack.delete(nodeId);
-				parentStack.delete(nodeId);
-				return false;
-			}
-		}
-
-		recStack.delete(nodeId);
-		parentStack.delete(nodeId);
-		result.push(nodeId);
-		return true;
+		result.add(node);
 	}
 
-	for (const node of nodes) {
-		if (!visited.has(node.id)) {
-			if (!dfs(node.id)) {
-				return null; // Invalid graph: cycle without delay node or invalid reference
-			}
-		}
-	}
+	nodes.forEach(visit);
 
-	return result; // Return without reversing to match expected order
+	return [...result].map(getId);
 }
