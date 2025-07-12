@@ -11,37 +11,37 @@ describe('topologicalSort', () => {
 	});
 
 	test('single node', () => {
-		const nodes: Node[] = [{ id: 'node1', inputs: [], isDelay: false }];
+		const nodes: Node[] = [{ id: 'A', inputs: [], isDelay: false }];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node1']);
+		expect(result).toEqual(['A']);
 	});
 
 	test('linear graph', () => {
 		const nodes: Node[] = [
-			{ id: 'node3', inputs: ['node2'], isDelay: false },
-			{ id: 'node1', inputs: [], isDelay: false },
-			{ id: 'node2', inputs: ['node1'], isDelay: false },
+			{ id: 'C', inputs: ['B'], isDelay: false },
+			{ id: 'A', inputs: [], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: false },
 		];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node1', 'node2', 'node3']);
+		expect(result).toEqual(['A', 'B', 'C']);
 	});
 
 	test('graph with branch', () => {
 		const nodes: Node[] = [
-			{ id: 'node2', inputs: ['node1'], isDelay: false },
-			{ id: 'node4', inputs: ['node2', 'node3'], isDelay: false },
-			{ id: 'node3', inputs: ['node1'], isDelay: false },
-			{ id: 'node1', inputs: [], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: false },
+			{ id: 'node4', inputs: ['B', 'C'], isDelay: false },
+			{ id: 'C', inputs: ['A'], isDelay: false },
+			{ id: 'A', inputs: [], isDelay: false },
 		];
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node1', 'node2', 'node3', 'node4']);
+		expect(result).toEqual(['A', 'B', 'C', 'node4']);
 	});
 
 	test('cycle without delay', () => {
 		const nodes: Node[] = [
-			{ id: 'node1', inputs: ['node3'], isDelay: false },
-			{ id: 'node2', inputs: ['node1'], isDelay: false },
-			{ id: 'node3', inputs: ['node2'], isDelay: false },
+			{ id: 'A', inputs: ['C'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: false },
+			{ id: 'C', inputs: ['B'], isDelay: false },
 		];
 
 		expect(() => topologicalSort(nodes)).toThrow(CycleWithoutDelayError);
@@ -49,34 +49,60 @@ describe('topologicalSort', () => {
 
 	test('cycle with delay - rotation 1', () => {
 		const nodes: Node[] = [
-			{ id: 'node2', inputs: ['node1'], isDelay: true },
-			{ id: 'node3', inputs: ['node2'], isDelay: false },
-			{ id: 'node1', inputs: ['node3'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: true },
+			{ id: 'C', inputs: ['B'], isDelay: false },
+			{ id: 'A', inputs: ['C'], isDelay: false },
 		];
 
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node2', 'node3', 'node1']);
+		expect(result).toEqual(['B', 'C', 'A']);
 	});
 
-	test('cycle with delay - rotation 2', () => {
+	test.only('cycle with delay - rotation 2', () => {
 		const nodes: Node[] = [
-			{ id: 'node1', inputs: ['node3'], isDelay: false },
-			{ id: 'node2', inputs: ['node1'], isDelay: true },
-			{ id: 'node3', inputs: ['node2'], isDelay: false },
+			{ id: 'A', inputs: ['C'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: true },
+			{ id: 'C', inputs: ['B'], isDelay: false },
 		];
 
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node2', 'node3', 'node1']);
+		expect(result).toEqual(['B', 'C', 'A']);
 	});
 
 	test('cycle with delay - rotation 3', () => {
 		const nodes: Node[] = [
-			{ id: 'node1', inputs: ['node3'], isDelay: false },
-			{ id: 'node3', inputs: ['node2'], isDelay: false },
-			{ id: 'node2', inputs: ['node1'], isDelay: true },
+			{ id: 'A', inputs: ['C'], isDelay: false },
+			{ id: 'C', inputs: ['B'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: true },
 		];
 
 		const result = topologicalSort(nodes);
-		expect(result).toEqual(['node2', 'node3', 'node1']);
+		expect(result).toEqual(['B', 'C', 'A']);
+	});
+
+	test('big cycle with delay - rotation 1', () => {
+		const nodes: Node[] = [
+			{ id: 'A', inputs: ['E'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: true },
+			{ id: 'C', inputs: ['B'], isDelay: false },
+			{ id: 'D', inputs: ['C'], isDelay: false },
+			{ id: 'E', inputs: ['D'], isDelay: false },
+		];
+
+		const result = topologicalSort(nodes);
+		expect(result).toEqual(['B', 'C', 'D', 'E', 'A']);
+	});
+
+	test('big cycle with delay - rotation 2', () => {
+		const nodes: Node[] = [
+			{ id: 'E', inputs: ['D'], isDelay: false },
+			{ id: 'A', inputs: ['E'], isDelay: false },
+			{ id: 'C', inputs: ['B'], isDelay: false },
+			{ id: 'B', inputs: ['A'], isDelay: true },
+			{ id: 'D', inputs: ['C'], isDelay: false },
+		];
+
+		const result = topologicalSort(nodes);
+		expect(result).toEqual(['B', 'C', 'D', 'E', 'A']);
 	});
 });
