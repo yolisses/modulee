@@ -40,6 +40,12 @@ export function testTopologicalSortPermutations(
 
 describe('topologicalSort with permutations', () => {
 	testTopologicalSortPermutations(
+		[{ id: 'A', inputs: ['A'], isDelay: true }],
+		['A'],
+		'1 node cycle with delay',
+	);
+
+	testTopologicalSortPermutations(
 		[
 			{ id: 'A', inputs: ['B'], isDelay: false },
 			{ id: 'B', inputs: ['A'], isDelay: true },
