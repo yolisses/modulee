@@ -9,15 +9,19 @@ export function topologicalSort(nodes: Node[]): string[] {
 	const stack = new Set<Node>();
 	const delayNodesOnStack = new Set<Node>();
 
-	function visit(node: Node) {
-		console.log(node.id);
-		if (result.has(node)) return;
+	function visit(node: Node): boolean {
+		console.log('enter', node.id);
+		if (result.has(node)) {
+			console.log('leave', node.id, 'already in the result');
+			return false;
+		}
 		if (stack.has(node)) {
 			// Cycle found
-			if (delayNodesOnStack.size == 1 && node.isDelay) {
+			if (delayNodesOnStack.size == 1 && delayNodesOnStack.has(node)) {
 				result.add(node);
 			} else if (delayNodesOnStack.size > 0) {
-				return;
+				console.log('leave', node.id, 'cycle found');
+				return true;
 			} else {
 				throw new CycleWithoutDelayError();
 			}
@@ -28,18 +32,32 @@ export function topologicalSort(nodes: Node[]): string[] {
 			delayNodesOnStack.add(node);
 		}
 
+		let gotCycle = false;
 		node.inputs.forEach((input) => {
-			visit(nodesById.get(input));
+			const gotCycleInInputs = visit(nodesById.get(input));
+			if (gotCycleInInputs) {
+				gotCycle = true;
+			}
 		});
 
-		result.add(node);
+		if (!gotCycle || (delayNodesOnStack.size === 1 && delayNodesOnStack.has(node))) {
+			console.log('add node', node.id);
+			result.add(node);
+		}
+
 		stack.delete(node);
 		if (node.isDelay) {
 			delayNodesOnStack.delete(node);
 		}
+
+		console.log('leave', node.id);
+		return gotCycle;
 	}
 
-	nodes.forEach(visit);
+	nodes.forEach((node) => {
+		console.log(node.id);
+		visit(node);
+	});
 
 	return [...result].map(getId);
 }
