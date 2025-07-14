@@ -36,7 +36,7 @@ export class GroupNodesActionCommand extends ActionCommand {
 
 		const newInternalModuleId = createId();
 		const groupNodesCommand = new GroupNodesCommand({
-			id: newInternalModuleId,
+			id: createId(),
 			type: 'GroupNodesCommand',
 			projectId: projectData.id,
 			createdAt: new Date().toJSON(),
