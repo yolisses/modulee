@@ -2,18 +2,23 @@ import { ById } from '$lib/editor/ById';
 import { Vector } from 'nodes-editor';
 import type { FormatingNode } from './FormatingNode';
 
-type GetNextY = (node: FormatingNode) => number;
+type GetNextY<T extends FormatingNode> = (node: T) => number;
 
 // TODO consider returning the positions instead of changing them in place
 /**
  * @param nodes Must be topologically sorted beforehand
  */
-export function formatNodes(nodes: FormatingNode[], getNextY: GetNextY, xStep: number) {
+export function formatNodes<T extends FormatingNode>(
+	nodes: T[],
+	getNextY: GetNextY<T>,
+	xStep: number,
+) {
 	const nextPositionsByLayer = [0];
+	console.log(nodes);
 	const nodesById = ById.fromItems(nodes);
-	const positions = new Map<FormatingNode, Vector>();
+	const positions = new Map<T, Vector>();
 
-	function visit(node: FormatingNode, parent: FormatingNode | null, layer: number) {
+	function visit(node: T, parent: T | null, layer: number) {
 		if (positions.has(node)) return;
 
 		const x = layer * xStep;
