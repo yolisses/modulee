@@ -14,7 +14,6 @@ export function formatNodes<T extends FormatingNode>(
 	xStep: number,
 ) {
 	const nextPositionsByLayer = [0];
-	console.log(nodes);
 	const nodesById = ById.fromItems(nodes);
 	const positions = new Map<T, Vector>();
 
