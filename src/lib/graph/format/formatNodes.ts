@@ -19,7 +19,7 @@ export function formatNodes(nodes: FormatingNode[], getNextY: GetNextY, xStep: n
 			nextPositionsByLayer[layer] = 0;
 		}
 		const y = nextPositionsByLayer[layer];
-		console.log(node, parent, layer, x);
+
 		const position = new Vector(x, y);
 		positions.set(node, position);
 		nextPositionsByLayer[layer] = getNextY(node);
@@ -34,5 +34,5 @@ export function formatNodes(nodes: FormatingNode[], getNextY: GetNextY, xStep: n
 		visit(node, null, 0);
 	});
 
-	return [...positions.values()];
+	return positions;
 }
