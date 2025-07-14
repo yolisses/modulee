@@ -1,6 +1,6 @@
 import { getId } from '$lib/ui/getId';
 import { describe, expect, test } from 'vitest';
-import type { Node } from './Node';
+import type { TopologicalNode } from './TopologicalNode';
 import { topologicalSort } from './topologicalSort';
 
 // Helper function to generate all permutations of an array
@@ -25,7 +25,7 @@ function generatePermutations<T>(arr: T[]): T[][] {
 
 // Helper function to test topological sort on all permutations of nodes
 export function testTopologicalSortPermutations(
-	nodes: Node[],
+	nodes: TopologicalNode[],
 	expected: string[],
 	testName: string,
 ) {
