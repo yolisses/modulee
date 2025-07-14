@@ -1,4 +1,5 @@
 import { CopyNodesActionCommand } from '$lib/node/actionCommands/CopyNodesActionCommand';
+import { FormatNodesActionCommand } from '$lib/node/actionCommands/FormatNodesActionCommand';
 import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
 import { PasteNodesActionCommand } from '$lib/node/actionCommands/PasteNodesActionCommand';
 import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
@@ -14,15 +15,16 @@ import type { ActionCommandClass } from './actionCommandClass';
 // TODO remove name duplication of this command list and the nodes editor
 // command list
 export const actionCommandClasses: ActionCommandClass[] = [
-	ZoomInCommand,
-	ZoomOutCommand,
-	ResetZoomCommand,
-	UndoActionCommand,
-	RedoActionCommand,
 	CopyNodesActionCommand,
+	FormatNodesActionCommand,
 	GroupNodesActionCommand,
 	PasteNodesActionCommand,
+	RedoActionCommand,
 	RemoveNodesActionCommand,
-	ToggleIsMuteActionCommand,
+	ResetZoomCommand,
 	SelectedAllNodesActionCommand,
+	ToggleIsMuteActionCommand,
+	UndoActionCommand,
+	ZoomInCommand,
+	ZoomOutCommand,
 ];

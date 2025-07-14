@@ -15,6 +15,7 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'C'], commandType: 'CopyNodesActionCommand' },
 	{ keys: ['Ctrl', 'V'], commandType: 'PasteNodesActionCommand' },
 	{ keys: ['Ctrl', 'G'], commandType: 'GroupNodesActionCommand' },
+	{ keys: ['Ctrl', 'F'], commandType: 'FormatNodesActionCommand' },
 	{ keys: ['Ctrl', 'M'], commandType: 'ToggleIsMuteActionCommand' },
 	{ keys: ['Ctrl', 'Shift', 'Z'], commandType: 'RedoActionCommand' },
 	{ keys: ['Ctrl', 'A'], commandType: 'SelectedAllNodesActionCommand' },
