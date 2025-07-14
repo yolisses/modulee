@@ -5,6 +5,9 @@ import type { FormatingNode } from './FormatingNode';
 type GetNextY = (node: FormatingNode) => number;
 
 // TODO consider returning the positions instead of changing them in place
+/**
+ * @param nodes Must be topologically sorted beforehand
+ */
 export function formatNodes(nodes: FormatingNode[], getNextY: GetNextY, xStep: number) {
 	const nextPositionsByLayer = [0];
 	const nodesById = ById.fromItems(nodes);
