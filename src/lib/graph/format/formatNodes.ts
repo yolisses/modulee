@@ -1,6 +1,7 @@
 import { ById } from '$lib/editor/ById';
 import { Vector } from 'nodes-editor';
 import type { FormatingNode } from './FormatingNode';
+import { getLayerByNode } from './getLayerByNode';
 
 type GetNodeYSpace<T extends FormatingNode> = (node: T) => number;
 
@@ -16,9 +17,11 @@ export function formatNodes<T extends FormatingNode>(
 	const nextPositionsByLayer = [0];
 	const nodesById = ById.fromItems(nodes);
 	const positions = new Map<T, Vector>();
+	const layerByNode = getLayerByNode(ById.fromItems(nodes));
 
 	function visit(node: T, minY: number, layer: number) {
 		if (positions.has(node)) return;
+		if (layerByNode.get(node.id) !== layer) return;
 
 		const x = layer * xStep;
 
