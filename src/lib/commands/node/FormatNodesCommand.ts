@@ -3,6 +3,8 @@ import type { EmptyObject } from '$lib/editor/EmptyObject';
 import type { FormatingNodeWithType } from '$lib/graph/format/FormatingNodeWithType';
 import { formatNodes } from '$lib/graph/format/formatNodes';
 import { getFormatingNodeWithType } from '$lib/graph/format/getFormatingNode';
+import { getTopologicalNode } from '$lib/graph/format/getTopologicalNode';
+import { topologicalSort } from '$lib/graph/format/topologicalSort';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import type { NodeData } from '$lib/node/data/NodeData';
@@ -34,6 +36,9 @@ export class FormatNodesCommand extends EditorCommand<EmptyObject> {
 			return getNodeHeight(node.type) + NODE_ITEM_GAP;
 		}
 		nodesByInternalModuleId.forEach((nodes) => {
+			nodes = topologicalSort(nodes.map((node) => getTopologicalNode(node, graphRegistry))).map(
+				(id) => graphRegistry.nodes.get(id),
+			);
 			const positions = formatNodes(
 				nodes.map((nodeData) => getFormatingNodeWithType(nodeData, graphRegistry)),
 				getNextY,

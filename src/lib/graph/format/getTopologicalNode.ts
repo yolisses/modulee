@@ -1,14 +1,14 @@
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { GraphRegistry } from '../GraphRegistry';
-import type { FormatingNodeWithType } from './FormatingNodeWithType';
+import type { TopologicalNode } from './TopologicalNode';
 
-export function getFormatingNodeWithType(
+export function getTopologicalNode(
 	nodeData: NodeData,
 	graphRegistry: GraphRegistry,
-): FormatingNodeWithType {
+): TopologicalNode {
 	return {
 		id: nodeData.id,
-		type: nodeData.type,
+		isDelay: nodeData.type === 'DelayNode',
 		inputs: graphRegistry.connections
 			.values()
 			.filter((connectionData) => {
