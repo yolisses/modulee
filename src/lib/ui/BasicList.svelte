@@ -11,6 +11,7 @@
 		buttons?: Snippet<[{ item: T }]>;
 		compare?: (a: T, b: T) => number;
 		content?: Snippet<[{ item: T; text: string }]>;
+		disableSorting?: boolean;
 	};
 
 	function compareByName(a: T, b: T) {
@@ -25,13 +26,16 @@
 		buttons,
 		getHref,
 		content,
+		disableSorting,
 		compare = compareByName,
 	}: Props = $props();
 
 	const sortedItems = $derived(
-		items.toSorted((a, b) => {
-			return (compare ?? compareByName)(a, b);
-		}),
+		disableSorting
+			? items
+			: items.toSorted((a, b) => {
+					return (compare ?? compareByName)(a, b);
+				}),
 	);
 </script>
 

@@ -19,7 +19,7 @@
 {#if projectsData.length === 0}
 	<div class="opacity-50">Use the create project button to make something</div>
 {:else}
-	<BasicList items={projectsData} {getId} {getName} getHref={getProjectFriendlyPath}>
+	<BasicList items={projectsData} {getId} {getName} disableSorting getHref={getProjectFriendlyPath}>
 		{#snippet buttons({ item: projectData })}
 			<DotsMenuButton>
 				<RenameProjectButton {projectData} />
