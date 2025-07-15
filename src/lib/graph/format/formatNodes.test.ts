@@ -21,7 +21,7 @@ describe('formatNodes', () => {
 	test('one node', () => {
 		const nodes: FormatingNode[] = [{ id: 'node1', height: 1, inputs: [] }];
 		const result = getResult(formatNodes(nodes, nodeWidth, 0));
-		expect(result).toEqual([['node1', [0, 0]]]);
+		expect(result).toEqual([['node1', [-0, 0]]]);
 	});
 
 	test('two separate nodes', () => {
@@ -31,8 +31,8 @@ describe('formatNodes', () => {
 		];
 		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
-			['node2', [0, 0]],
-			['node1', [0, 1]],
+			['node2', [-0, 0]],
+			['node1', [-0, 1]],
 		]);
 	});
 
@@ -43,8 +43,8 @@ describe('formatNodes', () => {
 		];
 		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
-			['node2', [0, 0]],
-			['node1', [1, 0]],
+			['node2', [-0, 0]],
+			['node1', [-1, 0]],
 		]);
 	});
 
@@ -57,10 +57,10 @@ describe('formatNodes', () => {
 		];
 		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
-			['node4', [0, 0]],
-			['node2', [1, 0]],
-			['node1', [2, 0]],
-			['node3', [1, 1]],
+			['node4', [-0, 0]],
+			['node2', [-1, 0]],
+			['node1', [-2, 0]],
+			['node3', [-1, 1]],
 		]);
 	});
 });

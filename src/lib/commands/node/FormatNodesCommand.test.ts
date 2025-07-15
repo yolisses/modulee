@@ -3,8 +3,6 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { NodeDataBase } from '$lib/node/data/NodeDataBase';
-import { NODE_ITEM_GAP } from '$lib/node/NODE_ITEM_GAP';
-import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
 import { FormatNodesCommand } from './FormatNodesCommand';
@@ -54,8 +52,8 @@ test('c', () => {
 
 	expect(getPositionsById(graphRegistry.nodes.values())).toEqual(
 		new Map([
-			['node1', { x: -NODE_ITEM_WIDTH_PLUS_GAP, y: 0 }],
-			['node2', { x: -0, y: 2 + NODE_ITEM_GAP }],
+			['node1', { x: -7, y: 3 }],
+			['node2', { x: -0, y: 3 }],
 			['node3', { x: -0, y: 0 }],
 		]),
 	);

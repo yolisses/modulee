@@ -17,7 +17,7 @@ export function formatNodes<T extends FormatingNode>(nodes: T[], nodeWidth: numb
 		if (positions.has(node)) return;
 		if (layerByNode.get(node.id) !== layer) return;
 
-		const x = layer * (nodeWidth + gap);
+		const x = -layer * (nodeWidth + gap);
 
 		if (nextPositionsByLayer[layer] === undefined) {
 			nextPositionsByLayer[layer] = minY;
