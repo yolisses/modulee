@@ -2,7 +2,7 @@ import { ById } from '$lib/editor/ById';
 import { Vector } from 'nodes-editor';
 import type { FormatingNode } from './FormatingNode';
 
-type GetNextY<T extends FormatingNode> = (node: T) => number;
+type GetNodeYSpace<T extends FormatingNode> = (node: T) => number;
 
 // TODO consider returning the positions instead of changing them in place
 /**
@@ -10,7 +10,7 @@ type GetNextY<T extends FormatingNode> = (node: T) => number;
  */
 export function formatNodes<T extends FormatingNode>(
 	nodes: T[],
-	getNextY: GetNextY<T>,
+	getNodeYSpace: GetNodeYSpace<T>,
 	xStep: number,
 ) {
 	const nextPositionsByLayer = [0];
@@ -29,7 +29,7 @@ export function formatNodes<T extends FormatingNode>(
 
 		const position = new Vector(x, y);
 		positions.set(node, position);
-		nextPositionsByLayer[layer] = getNextY(node);
+		nextPositionsByLayer[layer] += getNodeYSpace(node);
 
 		node.inputs.forEach((input) => {
 			const nextNode = nodesById.get(input);
