@@ -9,31 +9,35 @@ function getInputIndex(inputDefinitions: string[], connectionData: ConnectionDat
 	return inputDefinitions.indexOf(connectionData.inputPath.inputKey);
 }
 
-export function getFormatingNodeWithType(
-	nodeData: NodeData,
-	graphRegistry: GraphRegistry,
-):FormatingNode {
+function getFormatingNodeInputs(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 	const inputDefinitions = nodeDefinition.inputs.map((inputDefinition) => {
 		return inputDefinition.key;
 	});
 
+	return graphRegistry.connections
+		.values()
+		.filter((connectionData) => {
+			return (
+				connectionData.inputPath.nodeId === nodeData.id &&
+				graphRegistry.nodes.get(connectionData.targetNodeId)
+			);
+		})
+		.sort((a, b) => {
+			return getInputIndex(inputDefinitions, a) - getInputIndex(inputDefinitions, b);
+		})
+		.map((connectionData) => {
+			return connectionData.targetNodeId;
+		});
+}
+
+export function getFormatingNodeWithType(
+	nodeData: NodeData,
+	graphRegistry: GraphRegistry,
+): FormatingNode {
 	return {
 		id: nodeData.id,
 		height: getNodeHeight(nodeData.type),
-		inputs: graphRegistry.connections
-			.values()
-			.filter((connectionData) => {
-				return (
-					connectionData.inputPath.nodeId === nodeData.id &&
-					graphRegistry.nodes.get(connectionData.targetNodeId)
-				);
-			})
-			.sort((a, b) => {
-				return getInputIndex(inputDefinitions, a) - getInputIndex(inputDefinitions, b);
-			})
-			.map((connectionData) => {
-				return connectionData.targetNodeId;
-			}),
+		inputs: getFormatingNodeInputs(nodeData, graphRegistry),
 	};
 }
