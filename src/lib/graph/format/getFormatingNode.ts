@@ -3,7 +3,7 @@ import type { ConnectionData } from '$lib/connection/ConnectionData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import type { GraphRegistry } from '../GraphRegistry';
-import type { FormatingNodeWithType } from './FormatingNodeWithType';
+import type { FormatingNode } from './FormatingNode';
 
 function getInputIndex(inputDefinitions: string[], connectionData: ConnectionData): number {
 	return inputDefinitions.indexOf(connectionData.inputPath.inputKey);
@@ -12,7 +12,7 @@ function getInputIndex(inputDefinitions: string[], connectionData: ConnectionDat
 export function getFormatingNodeWithType(
 	nodeData: NodeData,
 	graphRegistry: GraphRegistry,
-): FormatingNodeWithType {
+):FormatingNode {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 	const inputDefinitions = nodeDefinition.inputs.map((inputDefinition) => {
 		return inputDefinition.key;
@@ -20,7 +20,6 @@ export function getFormatingNodeWithType(
 
 	return {
 		id: nodeData.id,
-		type: nodeData.type,
 		height: getNodeHeight(nodeData.type),
 		inputs: graphRegistry.connections
 			.values()
