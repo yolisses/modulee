@@ -32,6 +32,7 @@ export class GroupNodesActionCommand extends ActionCommand {
 		const nodes = graph.nodes.values().filter((node) => {
 			return selectedNodeIds.has(node.id);
 		});
+		if (!nodes) return;
 		const averagePosition = getAverageNodesPosition(nodes);
 
 		const newInternalModuleId = createId();
