@@ -1,7 +1,11 @@
 import type { ById } from '$lib/editor/ById';
-import type { FormatingNode } from './FormatingNode';
 
-export function getLayerByNode<T extends FormatingNode>(nodes: ById<T>) {
+type Node = {
+	id: string;
+	inputs: string[];
+};
+
+export function getLayerByNode<T extends Node>(nodes: ById<T>) {
 	const layerByNode = new Map<string, number>();
 
 	function visit(node: T, layer: number) {

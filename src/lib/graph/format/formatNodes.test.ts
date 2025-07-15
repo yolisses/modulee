@@ -10,27 +10,26 @@ function getResult(map: Map<FormatingNode, Vector>) {
 }
 
 describe('formatNodes', () => {
-	const xStep = 1;
-	const getNextY = () => 1;
+	const nodeWidth = 1;
 
 	test('zero nodes', () => {
 		const nodes: FormatingNode[] = [];
-		const result = getResult(formatNodes(nodes, getNextY, xStep));
+		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([]);
 	});
 
 	test('one node', () => {
-		const nodes: FormatingNode[] = [{ id: 'node1', inputs: [] }];
-		const result = getResult(formatNodes(nodes, getNextY, xStep));
+		const nodes: FormatingNode[] = [{ id: 'node1', height: 1, inputs: [] }];
+		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([['node1', [0, 0]]]);
 	});
 
 	test('two separate nodes', () => {
 		const nodes: FormatingNode[] = [
-			{ id: 'node1', inputs: [] },
-			{ id: 'node2', inputs: [] },
+			{ id: 'node1', height: 1, inputs: [] },
+			{ id: 'node2', height: 1, inputs: [] },
 		];
-		const result = getResult(formatNodes(nodes, getNextY, xStep));
+		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
 			['node2', [0, 0]],
 			['node1', [0, 1]],
@@ -39,10 +38,10 @@ describe('formatNodes', () => {
 
 	test('two connected nodes', () => {
 		const nodes: FormatingNode[] = [
-			{ id: 'node1', inputs: [] },
-			{ id: 'node2', inputs: ['node1'] },
+			{ id: 'node1', height: 1, inputs: [] },
+			{ id: 'node2', height: 1, inputs: ['node1'] },
 		];
-		const result = getResult(formatNodes(nodes, getNextY, xStep));
+		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
 			['node2', [0, 0]],
 			['node1', [1, 0]],
@@ -51,12 +50,12 @@ describe('formatNodes', () => {
 
 	test('graph with branch', () => {
 		const nodes: FormatingNode[] = [
-			{ id: 'node1', inputs: [] },
-			{ id: 'node2', inputs: ['node1'] },
-			{ id: 'node3', inputs: ['node1'] },
-			{ id: 'node4', inputs: ['node2', 'node3'] },
+			{ id: 'node1', height: 1, inputs: [] },
+			{ id: 'node2', height: 1, inputs: ['node1'] },
+			{ id: 'node3', height: 1, inputs: ['node1'] },
+			{ id: 'node4', height: 1, inputs: ['node2', 'node3'] },
 		];
-		const result = getResult(formatNodes(nodes, getNextY, xStep));
+		const result = getResult(formatNodes(nodes, nodeWidth, 0));
 		expect(result).toEqual([
 			['node4', [0, 0]],
 			['node2', [1, 0]],

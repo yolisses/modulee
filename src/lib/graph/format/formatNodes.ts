@@ -3,17 +3,11 @@ import { Vector } from 'nodes-editor';
 import type { FormatingNode } from './FormatingNode';
 import { getLayerByNode } from './getLayerByNode';
 
-type GetNodeYSpace<T extends FormatingNode> = (node: T) => number;
-
 // TODO consider returning the positions instead of changing them in place
 /**
  * @param nodes Must be topologically sorted beforehand
  */
-export function formatNodes<T extends FormatingNode>(
-	nodes: T[],
-	getNodeYSpace: GetNodeYSpace<T>,
-	xStep: number,
-) {
+export function formatNodes<T extends FormatingNode>(nodes: T[], nodeWidth: number, gap: number) {
 	const nextPositionsByLayer = [0];
 	const nodesById = ById.fromItems(nodes);
 	const positions = new Map<T, Vector>();
@@ -23,7 +17,7 @@ export function formatNodes<T extends FormatingNode>(
 		if (positions.has(node)) return;
 		if (layerByNode.get(node.id) !== layer) return;
 
-		const x = layer * xStep;
+		const x = layer * (nodeWidth + gap);
 
 		if (nextPositionsByLayer[layer] === undefined) {
 			nextPositionsByLayer[layer] = minY;
@@ -33,7 +27,7 @@ export function formatNodes<T extends FormatingNode>(
 
 		const position = new Vector(x, y);
 		positions.set(node, position);
-		nextPositionsByLayer[layer] += getNodeYSpace(node);
+		nextPositionsByLayer[layer] += node.height + gap;
 
 		node.inputs.forEach((input) => {
 			const nextNode = nodesById.get(input);

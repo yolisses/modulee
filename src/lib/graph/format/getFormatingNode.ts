@@ -1,3 +1,4 @@
+import { getNodeHeight } from '$lib/commands/node/getNodeHeight';
 import type { ConnectionData } from '$lib/connection/ConnectionData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
@@ -20,6 +21,7 @@ export function getFormatingNodeWithType(
 	return {
 		id: nodeData.id,
 		type: nodeData.type,
+		height: getNodeHeight(nodeData.type),
 		inputs: graphRegistry.connections
 			.values()
 			.filter((connectionData) => {
