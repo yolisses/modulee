@@ -17,15 +17,16 @@ export function formatNodes<T extends FormatingNode>(
 	const nodesById = ById.fromItems(nodes);
 	const positions = new Map<T, Vector>();
 
-	function visit(node: T, parent: T | null, layer: number) {
+	function visit(node: T, minY: number, layer: number) {
 		if (positions.has(node)) return;
 
 		const x = layer * xStep;
 
 		if (nextPositionsByLayer[layer] === undefined) {
-			nextPositionsByLayer[layer] = 0;
+			nextPositionsByLayer[layer] = minY;
 		}
-		const y = nextPositionsByLayer[layer];
+		let y = nextPositionsByLayer[layer];
+		y = Math.max(y, minY);
 
 		const position = new Vector(x, y);
 		positions.set(node, position);
@@ -33,12 +34,12 @@ export function formatNodes<T extends FormatingNode>(
 
 		node.inputs.forEach((input) => {
 			const nextNode = nodesById.get(input);
-			visit(nextNode, node, layer + 1);
+			visit(nextNode, y, layer + 1);
 		});
 	}
 
 	nodes.toReversed().forEach((node) => {
-		visit(node, null, 0);
+		visit(node, 0, 0);
 	});
 
 	return positions;
