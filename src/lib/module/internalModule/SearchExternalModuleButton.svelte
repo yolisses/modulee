@@ -23,9 +23,9 @@
 </script>
 
 <a
-	class="common-button"
-	onclick={handleClick}
+	class="common-button center-content"
 	href="{baseRouteContext.baseRoute}/externalModules?closePath={page.url}"
+	onclick={handleClick}
 >
 	<Fa fw icon={faSearch} />
 	Search for external module

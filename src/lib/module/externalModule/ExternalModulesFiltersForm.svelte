@@ -66,11 +66,11 @@
 		</div>
 	</div>
 	<div class="mt-2 flex flex-row items-end justify-end gap-2">
-		<button type="reset" class="common-button">
+		<button type="reset" class="common-button center-content">
 			<Fa fw icon={faEraser} />
 			Clear
 		</button>
-		<button type="submit" class="primary-button">
+		<button type="submit" class="primary-button center-content">
 			<Fa fw icon={faSearch} />
 			Search
 		</button>

@@ -58,7 +58,7 @@
 	}
 </script>
 
-<button class="common-button" onclick={handleClick}>
+<button class="common-button center-content" onclick={handleClick}>
 	<Fa fw icon={faDownload} />
 	Use
 </button>

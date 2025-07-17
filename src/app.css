@@ -20,6 +20,10 @@
 	@apply button hover-bg gap-1 rounded p-2;
 }
 
+@utility center-content {
+	@apply flex flex-1 flex-row justify-center;
+}
+
 @utility vertical-tab {
 	@apply common-button flex flex-row rounded-none outline-white/25 data-[tab-selected='true']:shadow-[inset_4px_0_0_0_rgba(255,255,255,0.25)];
 }

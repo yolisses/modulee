@@ -15,7 +15,7 @@
 	}
 </script>
 
-<button class="common-button">
+<button class="common-button center-content">
 	<Fa icon={faDownload} />
 	Use
 </button>
