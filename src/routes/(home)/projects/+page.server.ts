@@ -1,5 +1,4 @@
 import prisma from '$lib/prisma';
-import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
 import { createProject } from '$lib/project/create/createProject';
 import { createProjectFromExternalModule } from '$lib/project/create/createProjectFromExternalModule';
 import { getProjectFriendlyPath } from '$lib/project/getProjectFriendlyPath';
@@ -19,10 +18,9 @@ export const actions = {
 	create: async ({ locals, request }) => {
 		const data = await request.formData();
 		const name = data.get('name');
-		const graph = createEmptyGraphData();
 		const { userId } = getSession(locals);
 		const moduleType = data.get('moduleType');
-		const projectData = await createProject({ name, graph, userId, moduleType });
+		const projectData = await createProject({ name, userId, moduleType });
 		redirect(303, getProjectFriendlyPath(projectData));
 	},
 

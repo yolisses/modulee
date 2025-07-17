@@ -96,6 +96,8 @@
 		});
 	};
 
+	console.log(projectData.graph);
+
 	const editorContext = $state({ editor });
 	setEditorContext(editorContext);
 

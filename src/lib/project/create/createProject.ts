@@ -1,16 +1,16 @@
+import { ModuleTypeSchema } from '$lib/db/externalModule/ModuleTypeSchema';
 import prisma from '$lib/prisma';
 import { ProjectSchema } from '$lib/schemas/ProjectSchema';
-import { error } from '@sveltejs/kit';
-import z from 'zod/v4';
 import type { ProjectData } from '../data/ProjectData';
+import { createGraphDataByModuleType } from '../ui/createGraphDataByModuleType';
 
 export async function createProject(arg: object) {
-	const res = ProjectSchema.omit({ id: true, createdAt: true, updatedAt: true }).safeParse(arg);
+	const data = ProjectSchema.pick({ name: true, userId: true, moduleType: true }).parse(arg);
 
-	if (!res.success) {
-		error(400, z.prettifyError(res.error));
-	}
+	const moduleType = ModuleTypeSchema.parse(data.moduleType);
+	const graphData = createGraphDataByModuleType(moduleType);
 
-	const projectData = await prisma.project.create({ data: res.data });
+	const projectData = await prisma.project.create({ data: { ...data, graph: graphData } });
+
 	return projectData as unknown as ProjectData;
 }
