@@ -1,7 +1,7 @@
 import { createId } from '$lib/global/createId';
 import type { GraphData } from '$lib/graph/GraphData';
 
-export function createEffectInitialGraphData(): GraphData {
+export function createUtilityInitialGraphData(): GraphData {
 	const mainInternalModuleId = createId();
 
 	return {
@@ -17,15 +17,6 @@ export function createEffectInitialGraphData(): GraphData {
 				position: { x: 0, y: 0 },
 				type: 'OutputNode',
 				unconnectedInputValues: { input: 0 },
-			},
-			{
-				extras: {},
-				id: createId(),
-				internalModuleId: mainInternalModuleId,
-				isInputAutoConnectedMap: {},
-				position: { x: -14, y: 0 },
-				type: 'AudioInputNode',
-				unconnectedInputValues: {},
 			},
 		],
 	};
