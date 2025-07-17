@@ -48,7 +48,12 @@
 		<div></div>
 		<div class="flex flex-col items-center gap-2">
 			<p>The Modulee audio plugin allows you to use it in your DAW</p>
-			<a class="button primary-button" href={osOption.downloadUrl}>
+			<a
+				class="button primary-button"
+				href={osOption.downloadUrl}
+				rel="noopener noreferrer"
+				target="_blank"
+			>
 				<Fa icon={osOption.icon} />
 				Download for {osOption.name}
 			</a>
@@ -58,7 +63,12 @@
 			<div>Other options</div>
 			<div class="flex flex-row gap-2">
 				{#each osOptions.values().filter((osOption) => osOption.id !== os) as osOption}
-					<a class="button common-button" href={osOption.downloadUrl}>
+					<a
+						class="button common-button"
+						href={osOption.downloadUrl}
+						rel="noopener noreferrer"
+						target="_blank"
+					>
 						<Fa icon={osOption.icon} />
 						Download for {osOption.name}
 					</a>
