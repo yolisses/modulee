@@ -40,7 +40,14 @@
 							Effect
 						</label>
 						<label class="common-button">
-							<input type="radio" required name="moduleType" id="instrument" value="instrument" />
+							<input
+								type="radio"
+								required
+								name="moduleType"
+								id="instrument"
+								value="instrument"
+								checked
+							/>
 							Instrument
 						</label>
 						<label class="common-button">
