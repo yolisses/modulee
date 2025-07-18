@@ -28,7 +28,7 @@
 		<RackModuleNodeItemDotsMenuButton {moduleNode} />
 	</div>
 	<div class="p-2">
-		{#each inputs as input}
+		{#each inputs as input (input.id)}
 			<RackInputItem {input} />
 		{/each}
 	</div>
