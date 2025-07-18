@@ -62,7 +62,9 @@
 			<hr class="w-full border border-t border-white/10" />
 			<div>Other options</div>
 			<div class="flex flex-row gap-2">
-				{#each osOptions.values().filter((osOption) => osOption.id !== os) as osOption}
+				{#each osOptions
+					.values()
+					.filter((osOption) => osOption.id !== os) as osOption (osOption.id)}
 					<a
 						class="button common-button"
 						href={osOption.downloadUrl}
