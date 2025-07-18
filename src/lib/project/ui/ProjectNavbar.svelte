@@ -1,12 +1,7 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
-	import {
-		faFileAlt,
-		faProjectDiagram,
-		faPuzzlePiece,
-		faSlidersH,
-	} from '@fortawesome/free-solid-svg-icons';
+	import { faFileAlt, faProjectDiagram, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import { projectNavbarSelectionContextKey } from '../projectNavbarSelectionContext';
 	import { projectDataContextKey } from './projectDataContext';
@@ -35,14 +30,6 @@
 	>
 		<Fa fw icon={faSlidersH} />
 		<div class="max-md:hidden">Rack</div>
-	</a>
-	<a
-		href="{baseUrl}/modules"
-		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'modules'}
-	>
-		<Fa fw icon={faPuzzlePiece} />
-		<div class="max-md:hidden">Modules</div>
 	</a>
 	<a
 		href={baseUrl}
