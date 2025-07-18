@@ -25,14 +25,10 @@
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
 
-	let value = $state(input.getUnconnectedValue());
+	let value = $derived(input.getUnconnectedValue());
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
 	const ratio = $derived((value - min) / (max - min));
 	const width = $derived(100 * ratio + '%');
-
-	$effect(() => {
-		value = input.getUnconnectedValue();
-	});
 
 	function handlePointerDown(e: PointerEvent) {
 		e.stopPropagation();
