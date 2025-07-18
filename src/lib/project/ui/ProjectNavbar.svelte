@@ -22,19 +22,19 @@
 >
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
-		href="{baseUrl}/rack"
-		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
-	>
-		<Fa fw icon={faSlidersH} />
-		<div class="max-md:hidden">Rack</div>
-	</a>
-	<a
-		class="max-md:horizontal-tab md:vertical-tab"
 		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
 		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 	>
 		<Fa fw icon={faProjectDiagram} flip="horizontal" />
 		<div class="max-md:hidden">Graph</div>
+	</a>
+	<a
+		class="max-md:horizontal-tab md:vertical-tab"
+		href="{baseUrl}/rack"
+		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
+	>
+		<Fa fw icon={faSlidersH} />
+		<div class="max-md:hidden">Rack</div>
 	</a>
 	<a
 		href="{baseUrl}/modules"
