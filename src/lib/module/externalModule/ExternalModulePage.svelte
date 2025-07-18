@@ -19,11 +19,11 @@
 			{externalModuleData.moduleType}
 		</div>
 	{/snippet}
-	{#snippet topChildren()}
-		<LikeButton externalModuleId={externalModuleData.id} />
-		<UseExternalModuleButton {externalModuleData} />
-	{/snippet}
 	<div class="flex flex-col gap-4">
+		<div class="flex flex-row">
+			<UseExternalModuleButton {externalModuleData} />
+			<LikeButton externalModuleId={externalModuleData.id} />
+		</div>
 		<div class="flex flex-row items-center gap-2">
 			<Fa icon={faUser} class="opacity-50" />
 			<span>
