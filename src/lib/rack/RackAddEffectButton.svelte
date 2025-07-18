@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { useExternalModuleInContextKey } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
@@ -20,9 +19,9 @@
 </script>
 
 <a
-	onclick={handleClick}
 	class="common-button"
-	href="{baseRouteContext.baseRoute}/externalModules/effects?closePath={page.url}"
+	href="{baseRouteContext.baseRoute}/externalModules/effects"
+	onclick={handleClick}
 >
 	<Fa fw icon={faPlus} />
 	Add effect

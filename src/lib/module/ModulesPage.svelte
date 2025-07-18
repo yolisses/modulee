@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
@@ -21,7 +20,7 @@
 
 	function getHrefExternal(externalModule: ExternalModule) {
 		const { projectData } = projectDataContext;
-		return `/projects/${projectData.id}/externalModules/${externalModule.id}?closePath=${page.url}`;
+		return `/projects/${projectData.id}/externalModules/${externalModule.id}`;
 	}
 </script>
 

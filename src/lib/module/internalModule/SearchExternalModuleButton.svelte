@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +23,7 @@
 
 <a
 	class="common-button center-content"
-	href="{baseRouteContext.baseRoute}/externalModules?closePath={page.url}"
+	href="{baseRouteContext.baseRoute}/externalModules"
 	onclick={handleClick}
 >
 	<Fa fw icon={faSearch} />

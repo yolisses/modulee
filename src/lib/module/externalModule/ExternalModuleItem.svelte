@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -17,7 +16,7 @@
 <div class="border-b border-white/10 p-2 last:border-none">
 	<a
 		class="hover:underline"
-		href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}?closePath={page.url}"
+		href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}"
 	>
 		{externalModuleData.name}
 	</a>
@@ -29,7 +28,7 @@
 		• By
 		<a
 			class="hover:underline"
-			href="{baseRouteContext.baseRoute}/users/{externalModuleData.userId}?closePath={page.url}"
+			href="{baseRouteContext.baseRoute}/users/{externalModuleData.userId}"
 		>
 			{externalModuleData.user?.username}
 		</a>

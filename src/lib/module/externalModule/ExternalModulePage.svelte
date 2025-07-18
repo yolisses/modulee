@@ -7,13 +7,14 @@
 	import UseExternalModuleButton from './UseExternalModuleButton.svelte';
 
 	interface Props {
+		showCloseButton: boolean;
 		externalModuleData: ExternalModuleData;
 	}
 
-	const { externalModuleData }: Props = $props();
+	const { externalModuleData, showCloseButton }: Props = $props();
 </script>
 
-<ListPageLayout title={externalModuleData.name}>
+<ListPageLayout title={externalModuleData.name} {showCloseButton}>
 	{#snippet badges()}
 		<div class="self-center rounded bg-white/10 px-2 text-sm">
 			{externalModuleData.moduleType}

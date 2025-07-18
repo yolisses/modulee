@@ -6,4 +6,4 @@
 	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'instruments';
 </script>
 
-<ExternalModulesPage title="Instruments" moduleType="instrument" />
+<ExternalModulesPage title="Instruments" moduleType="instrument" showCloseButton={false} />

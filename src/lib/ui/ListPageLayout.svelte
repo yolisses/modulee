@@ -8,9 +8,10 @@
 		sideBar?: Snippet;
 		children?: Snippet;
 		topChildren?: Snippet;
+		showCloseButton?: boolean;
 	}
 
-	const { title, children, topChildren, badges, sideBar }: Props = $props();
+	const { title, children, topChildren, badges, sideBar, showCloseButton }: Props = $props();
 </script>
 
 <svelte:head>
@@ -22,7 +23,9 @@
 	{@render badges?.()}
 	<div class="flex flex-1"></div>
 	{@render topChildren?.()}
-	<CloseButton />
+	{#if showCloseButton}
+		<CloseButton />
+	{/if}
 </div>
 
 <div class="flex flex-1 overflow-auto max-md:flex-col md:flex-row">

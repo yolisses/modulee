@@ -13,11 +13,12 @@
 	interface Props {
 		title: string;
 		moduleType?: T;
+		showCloseButton: boolean;
 	}
 
 	const loader = new Loader(getPath);
 	const userDataContext = getRequiredContext(userDataContextKey);
-	const { title, moduleType }: Props = $props();
+	const { title, moduleType, showCloseButton }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
 	let filters = $state({ text: '', sort: '', group: '', moduleType: moduleType ?? '' });
 
@@ -62,7 +63,7 @@
 	}
 </script>
 
-<ListPageLayout {title}>
+<ListPageLayout {title} {showCloseButton}>
 	{#snippet sideBar()}
 		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
 	{/snippet}
