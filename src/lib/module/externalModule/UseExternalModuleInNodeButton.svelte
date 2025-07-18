@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { NotImplementedError } from '$lib/NotImplementedError';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import type { ExternalModuleData } from './ExternalModuleData';
@@ -11,11 +12,11 @@
 	const { useInNodeId, externalModuleData }: Props = $props();
 
 	function handleClick() {
-		// TODO
+		throw new NotImplementedError();
 	}
 </script>
 
-<button class="common-button center-content">
+<button class="common-button center-content" onclick={handleClick}>
 	<Fa icon={faDownload} />
 	Use
 </button>
