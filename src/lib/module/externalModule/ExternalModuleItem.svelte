@@ -14,7 +14,7 @@
 	const { externalModuleData }: Props = $props();
 </script>
 
-<div class="border-b border-white/10 p-2 pb-6 last:border-none">
+<div class="border-b border-white/10 p-2 last:border-none">
 	<a
 		class="hover:underline"
 		href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}?closePath={page.url}"
