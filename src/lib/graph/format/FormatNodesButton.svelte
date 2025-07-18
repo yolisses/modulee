@@ -17,5 +17,5 @@
 </script>
 
 <button class="common-button" onclick={handleClick} title="Format nodes {shortcutString}">
-	<Fa rotate={90} flip={'horizontal'} fw icon={faArrowUpWideShort} />
+	<Fa rotate={90} flip="horizontal" fw icon={faArrowUpWideShort} />
 </button>
