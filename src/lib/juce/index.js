@@ -199,7 +199,6 @@ class SliderState {
 			this.valueChangedEvent.callListeners();
 		}
 		if (event.eventType == BasicControl_propertiesChangedId) {
-			 
 			let { eventType: _, ...rest } = event;
 			this.properties = rest;
 			this.propertiesChangedEvent.callListeners();
@@ -330,7 +329,6 @@ class ToggleState {
 			this.valueChangedEvent.callListeners();
 		}
 		if (event.eventType == BasicControl_propertiesChangedId) {
-			 
 			let { eventType: _, ...rest } = event;
 			this.properties = rest;
 			this.propertiesChangedEvent.callListeners();
@@ -423,7 +421,6 @@ class ComboBoxState {
 			this.valueChangedEvent.callListeners();
 		}
 		if (event.eventType == BasicControl_propertiesChangedId) {
-			 
 			let { eventType: _, ...rest } = event;
 			this.properties = rest;
 			this.propertiesChangedEvent.callListeners();
