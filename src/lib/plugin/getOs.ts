@@ -1,4 +1,5 @@
 import { UAParser } from 'ua-parser-js';
+import type { Os } from './Os';
 
 export function getOs(): Os | null {
 	const parser = new UAParser();

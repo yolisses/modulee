@@ -6,9 +6,10 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { getOs } from './getOs';
+	import type { Os } from './Os';
 
 	type OsOption = {
-		id: string;
+		id: Os;
 		name: string;
 		downloadUrl: string;
 		icon: IconDefinition;
@@ -24,7 +25,7 @@
 				'https://github.com/yolisses0/modulee-plugin/releases/download/Windows/Modulee.vst3',
 		},
 		{
-			id: 'macos',
+			id: 'mac',
 			name: 'MacOs',
 			icon: faApple,
 			downloadUrl: 'https://github.com/yolisses0/modulee-plugin/releases/download/MacOS/Modulee.au',
