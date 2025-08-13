@@ -3,6 +3,7 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import { homeNavbarSelectionContextKey } from '$lib/home/homeNavbarSelectionContext';
+	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
 	import { setActivePitchesContext } from '$lib/piano/activePitchesContext';
 	import PianoDisplay from '$lib/piano/PianoDisplay.svelte';
@@ -13,10 +14,23 @@
 	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'instruments';
 
 	setActivePitchesContext({ activePitches: new SvelteSet() });
-	setGraphRegistryContext({ graphRegistry: getGraphRegistry(createEmptyGraphData(), []) });
+	const graphRegistryContext = $state({
+		graphRegistry: getGraphRegistry(createEmptyGraphData(), []),
+	});
+	setGraphRegistryContext(graphRegistryContext);
 	initializeAudioFeatures();
+
+	function handleModuleHover(externalModuleData: ExternalModuleData) {
+		const graphRegistry = getGraphRegistry(externalModuleData.graph, []);
+		graphRegistryContext.graphRegistry = graphRegistry;
+	}
 </script>
 
-<ExternalModulesPage title="Instruments" moduleType="instrument" showCloseButton={false} />
+<ExternalModulesPage
+	{handleModuleHover}
+	moduleType="instrument"
+	showCloseButton={false}
+	title="Instruments"
+/>
 
 <PianoDisplay />

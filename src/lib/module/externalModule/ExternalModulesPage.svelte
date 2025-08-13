@@ -14,12 +14,13 @@
 		title: string;
 		moduleType?: T;
 		showCloseButton: boolean;
+		handleModuleHover?: (externalModuleData: ExternalModuleData) => void;
 	}
 
+	const { title, moduleType, showCloseButton, handleModuleHover }: Props = $props();
 	const loader = new Loader(getPath);
-	const userDataContext = getRequiredContext(userDataContextKey);
-	const { title, moduleType, showCloseButton }: Props = $props();
 	const projectDataContext = getProjectDataContextOrUndefined();
+	const userDataContext = getRequiredContext(userDataContextKey);
 	let filters = $state({ text: '', sort: '', group: '', moduleType: moduleType ?? '' });
 
 	function clearFilters() {
@@ -70,7 +71,7 @@
 
 	<InfiniteList {loader}>
 		{#snippet children(externalModuleData: ExternalModuleData<T>)}
-			<ExternalModuleItem {externalModuleData} />
+			<ExternalModuleItem {externalModuleData} {handleModuleHover} />
 		{/snippet}
 		{#snippet emptyStateButtons()}
 			<button class="common-button" onclick={clearFilters}> Clear filters </button>

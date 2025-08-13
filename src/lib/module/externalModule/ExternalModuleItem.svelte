@@ -7,13 +7,17 @@
 
 	interface Props {
 		externalModuleData: ExternalModuleData;
+		handleModuleHover?: (externalModuleData: ExternalModuleData) => void;
 	}
 
+	const { externalModuleData, handleModuleHover }: Props = $props();
 	const baseRouteContext = getRequiredContext(baseRouteContextKey);
-	const { externalModuleData }: Props = $props();
 </script>
 
-<div class="border-b border-white/10 p-2 last:border-none">
+<div
+	class="rounded border-b border-white/10 p-2 last:border-none hover:bg-white/10"
+	onpointerenter={() => handleModuleHover?.(externalModuleData)}
+>
 	<a
 		class="hover:underline"
 		href="{baseRouteContext.baseRoute}/externalModules/{externalModuleData.id}"
