@@ -15,7 +15,9 @@
 	<div class="relative flex min-w-fit flex-row">
 		<div class="flex h-10 flex-1 flex-row">
 			{#each whiteKeys as key}
-				<button class="min-w-3 flex-1 bg-white outline outline-black"></button>
+				<button
+					class="min-w-3 flex-1 bg-white outline outline-black hover:bg-neutral-200 active:bg-blue-500"
+				></button>
 			{/each}
 		</div>
 		<div
@@ -26,7 +28,9 @@
 				{#if key !== -1}
 					<div class="flex flex-1 flex-col items-center" class:self-start={!getIsBlack(key)}>
 						{#if getIsBlack(key)}
-							<button class="pointer-events-auto w-2/3 flex-1 bg-black"></button>
+							<button
+								class="pointer-events-auto w-2/3 flex-1 bg-black hover:bg-neutral-800 active:bg-blue-500"
+							></button>
 						{/if}
 					</div>
 				{/if}
