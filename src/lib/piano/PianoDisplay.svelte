@@ -11,14 +11,18 @@
 
 	const pitches = range(10 * 12 + 8);
 
-	const pianoDisplayMidiBackend = new PianoDisplayMidiBackend(
-		audioBackendContext.audioBackend!,
-		activePitchesContext.activePitches,
+	const pianoDisplayMidiBackend = $derived(
+		audioBackendContext.audioBackend
+			? new PianoDisplayMidiBackend(
+					audioBackendContext.audioBackend,
+					activePitchesContext.activePitches,
+				)
+			: null,
 	);
 
 	onMount(() => {
-		pianoDisplayMidiBackend.initialize();
-		return pianoDisplayMidiBackend.destroy;
+		pianoDisplayMidiBackend?.initialize();
+		return pianoDisplayMidiBackend?.destroy;
 	});
 
 	function getIsBlack(key: number) {
@@ -36,10 +40,10 @@
 						class:bg-blue-500={activePitchesContext.activePitches.has(pitch)}
 						class:bg-white={!activePitchesContext.activePitches.has(pitch)}
 						class="flex min-w-3 flex-1 flex-col justify-end text-xs text-black outline outline-black"
-						onpointerup={(e) => pianoDisplayMidiBackend.setNoteOff(pitch)}
-						onpointerdown={(e) => pianoDisplayMidiBackend.setNoteOn(pitch)}
-						onpointerenter={(e) => pianoDisplayMidiBackend.handlePointerEnter(e, pitch)}
-						onpointerleave={(e) => pianoDisplayMidiBackend.handlePointerLeave(e, pitch)}
+						onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
+						onpointerdown={(e) => pianoDisplayMidiBackend?.setNoteOn(pitch)}
+						onpointerenter={(e) => pianoDisplayMidiBackend?.handlePointerEnter(e, pitch)}
+						onpointerleave={(e) => pianoDisplayMidiBackend?.handlePointerLeave(e, pitch)}
 					>
 					</button>
 				{/if}
@@ -53,10 +57,10 @@
 							class="pointer-events-auto w-full flex-1"
 							class:bg-black={!activePitchesContext.activePitches.has(pitch)}
 							class:bg-blue-500={activePitchesContext.activePitches.has(pitch)}
-							onpointerup={(e) => pianoDisplayMidiBackend.setNoteOff(pitch)}
-							onpointerdown={(e) => pianoDisplayMidiBackend.setNoteOn(pitch)}
-							onpointerenter={(e) => pianoDisplayMidiBackend.handlePointerEnter(e, pitch)}
-							onpointerleave={(e) => pianoDisplayMidiBackend.handlePointerLeave(e, pitch)}
+							onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
+							onpointerdown={(e) => pianoDisplayMidiBackend?.setNoteOn(pitch)}
+							onpointerenter={(e) => pianoDisplayMidiBackend?.handlePointerEnter(e, pitch)}
+							onpointerleave={(e) => pianoDisplayMidiBackend?.handlePointerLeave(e, pitch)}
 						>
 						</button>
 					{/if}
