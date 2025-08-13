@@ -45,7 +45,6 @@ export class VirtualPianoMidiBackend {
 
 		this.audioBackend?.setNoteOn(pitch);
 		this.activePitches.add(pitch);
-		console.log('down', pitch);
 	};
 
 	handleKeyUp = (e: KeyboardEvent) => {
@@ -61,7 +60,6 @@ export class VirtualPianoMidiBackend {
 
 		this.audioBackend?.setNoteOff(pitch);
 		this.activePitches.delete(pitch);
-		console.log('up', pitch);
 	};
 
 	handleBlur = () => {
