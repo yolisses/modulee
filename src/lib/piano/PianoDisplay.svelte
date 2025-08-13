@@ -19,14 +19,14 @@
 			{/each}
 		</div>
 		<div
-			class="absolute inset-x-0 top-0 z-10 flex h-3/4 flex-row"
+			class="pointer-events-none absolute inset-x-0 top-0 z-10 flex h-3/4 flex-row"
 			style="transform: translateX(-{100 / blackKeys.length / 2}%);"
 		>
 			{#each blackKeys as key}
 				{#if key !== -1}
 					<div class="flex flex-1 flex-col items-center" class:self-start={!getIsBlack(key)}>
 						{#if getIsBlack(key)}
-							<button class="w-2/3 flex-1 bg-black"></button>
+							<button class="pointer-events-auto w-2/3 flex-1 bg-black"></button>
 						{/if}
 					</div>
 				{/if}
