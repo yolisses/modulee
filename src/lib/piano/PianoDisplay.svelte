@@ -30,7 +30,7 @@
 	}
 </script>
 
-<div class="overflow-auto">
+<div class="overflow-auto select-none" draggable="false">
 	<!-- svelte-ignore a11y_consider_explicit_label -->
 	<div class="relative flex min-w-fit flex-row">
 		<div class="flex h-10 flex-1 flex-row">

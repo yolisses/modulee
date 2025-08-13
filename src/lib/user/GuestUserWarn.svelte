@@ -10,9 +10,7 @@
 		You risk losing access!
 	</div>
 	<div class="flex flex-col gap-2 sm:flex-row">
-		<div>
-			This is a guest account. Sign in for free to keep your projects safe and unlock features.
-		</div>
+		<p>This is a guest account. Sign in for free to keep your projects safe and unlock features.</p>
 		<GoogleSignInButton />
 	</div>
 </div>

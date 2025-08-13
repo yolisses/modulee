@@ -36,9 +36,11 @@ export class PianoDisplayMidiBackend {
 
 	initialize = () => {
 		window.addEventListener('blur', this.handleBlur);
+		window.addEventListener('pointerup', this.handleBlur);
 	};
 
 	destroy = () => {
 		window.removeEventListener('blur', this.handleBlur);
+		window.removeEventListener('pointerup', this.handleBlur);
 	};
 }

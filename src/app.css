@@ -44,7 +44,11 @@
 	}
 
 	html {
-		@apply cursor-default bg-zinc-900 text-white accent-blue-500;
+		@apply cursor-default bg-zinc-900 text-white accent-blue-500 select-none;
+	}
+
+	p {
+		@apply select-auto;
 	}
 
 	button:disabled {
