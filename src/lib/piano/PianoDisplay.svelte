@@ -49,12 +49,12 @@
 				{/if}
 			{/each}
 		</div>
-		<div class="pointer-events-none absolute inset-x-0 top-0 z-10 flex h-3/4 flex-row">
+		<div class="pointer-events-none absolute inset-x-0 top-0 z-10 flex h-2/3 flex-row">
 			{#each pitches as pitch}
 				<div class="flex flex-1 flex-col items-center" class:self-start={!getIsBlack(pitch)}>
 					{#if getIsBlack(pitch)}
 						<button
-							class="pointer-events-auto w-full flex-1"
+							class="pointer-events-auto w-full flex-1 outline outline-black"
 							class:bg-black={!activePitchesContext.activePitches.has(pitch)}
 							class:bg-blue-500={activePitchesContext.activePitches.has(pitch)}
 							onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
