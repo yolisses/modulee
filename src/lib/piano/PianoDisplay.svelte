@@ -12,24 +12,21 @@
 
 <div class="overflow-auto">
 	<!-- svelte-ignore a11y_consider_explicit_label -->
-	<div class="relative flex min-w-fit flex-row bg-red-500">
+	<div class="relative flex min-w-fit flex-row">
 		<div class="flex h-10 flex-1 flex-row">
 			{#each whiteKeys as key}
 				<button class="min-w-3 flex-1 bg-white outline outline-black"></button>
 			{/each}
 		</div>
 		<div
-			class="absolute inset-x-0 top-0 z-10 flex h-0 flex-row"
+			class="absolute inset-x-0 top-0 z-10 flex h-3/4 flex-row"
 			style="transform: translateX(-{100 / blackKeys.length / 2}%);"
 		>
 			{#each blackKeys as key}
 				{#if key !== -1}
-					<div
-						class="flex flex-1 flex-col items-center bg-red-400"
-						class:self-start={!getIsBlack(key)}
-					>
+					<div class="flex flex-1 flex-col items-center" class:self-start={!getIsBlack(key)}>
 						{#if getIsBlack(key)}
-							<button class="h-5 w-2/3 flex-1 bg-black"></button>
+							<button class="w-2/3 flex-1 bg-black"></button>
 						{/if}
 					</div>
 				{/if}
