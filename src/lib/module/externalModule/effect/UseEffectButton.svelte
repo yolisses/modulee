@@ -5,25 +5,24 @@
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
+	import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { faDownload } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
-	import { externalModulesDataContextKey } from '../externalModulesDataContext';
 	import type { EffectData } from './EffectData';
 	import { getIsAudioInputNodeData } from './getIsAudioInputNodeData';
-	import { pushIfMissingById } from './pushIfMissingById';
 
 	interface Props {
 		effectData: EffectData;
 	}
 
-	const graphContext = getRequiredContext(graphContextKey);
 	const { effectData }: Props = $props();
-	const editorContext = getRequiredContext(editorContextKey);
 	const baseRouteContext = getRequiredContext(baseRouteContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const graphContext = getRequiredContext(graphContextKey);
+	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
-	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
 
 	function handleClick() {
 		const outputNode = graphContext.graph.nodes.values().find((node) => node.type === 'OutputNode');
@@ -52,7 +51,7 @@
 
 		editorContext.editor.execute(command);
 
-		pushIfMissingById(externalModulesDataContext.externalModulesData, effectData);
+		graphRegistryContext.graphRegistry.externalModules.set(effectData);
 
 		goto(baseRouteContext.baseRoute + '/rack');
 	}

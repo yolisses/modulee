@@ -12,10 +12,6 @@
 	import { setGraphContext } from '$lib/graph/graphContext';
 	import { setGraphRegistryContext } from '$lib/graph/graphRegistryContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
-	import {
-		externalModulesDataContextKey,
-		setExternalModulesDataContext,
-	} from '$lib/module/externalModule/externalModulesDataContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
 	import { updateContext } from '$lib/shortcut/contextsContext';
@@ -49,7 +45,6 @@
 
 	setMenuVisibilityContexts();
 	setProjectDataContext({ projectData });
-	setExternalModulesDataContext({ externalModulesData });
 
 	const internalModuleIdContext = $state({
 		internalModuleId: projectData.graph.mainInternalModuleId,
@@ -65,12 +60,7 @@
 	});
 	setGraphRegistryContext(graphRegistryContext);
 
-	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
-
-	const graph = new Graph(
-		graphRegistryContext.graphRegistry,
-		externalModulesDataContext.externalModulesData,
-	);
+	const graph = new Graph(graphRegistryContext.graphRegistry);
 	const graphContext = $state({ graph });
 	setGraphContext(graphContext);
 
@@ -81,10 +71,7 @@
 
 	editor.onExecute = (command, graphRegistry) => {
 		graphRegistryContext.graphRegistry = graphRegistry;
-		graphContext.graph = new Graph(
-			graphRegistryContext.graphRegistry,
-			externalModulesDataContext.externalModulesData,
-		);
+		graphContext.graph = new Graph(graphRegistryContext.graphRegistry);
 
 		const graphData = getGraphData(graphRegistry);
 

@@ -7,7 +7,6 @@ import { WasmAudioBackend } from '$lib/audio/WasmAudioBackend';
 import { WebMidiBackend } from '$lib/audio/WebMidiBackend';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
-import { externalModulesDataContextKey } from '$lib/module/externalModule/externalModulesDataContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 import { onMount } from 'svelte';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
@@ -59,15 +58,13 @@ export function initializeAudioFeatures() {
 	});
 
 	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
-	const externalModulesDataContext = getRequiredContext(externalModulesDataContextKey);
 
 	$effect(() => {
 		// An error on updating the audio graph should not stop the full
 		// application
 		try {
 			const { graphRegistry } = graphRegistryContext;
-			const { externalModulesData } = externalModulesDataContext;
-			const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry, externalModulesData);
+			const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry);
 			const graphEngineData = getGraphEngineData(processedGraphRegistry);
 			audioBackendContext.audioBackend?.setGraph(graphEngineData);
 		} catch (e) {

@@ -16,10 +16,6 @@ import {
 	type HomeNavbarSelectionContext,
 } from '$lib/home/homeNavbarSelectionContext';
 import {
-	externalModulesDataContextKey,
-	type ExternalModulesDataContext,
-} from '$lib/module/externalModule/externalModulesDataContext';
-import {
 	likedExternalModulesContextKey,
 	type LikedExternalModulesContext,
 } from '$lib/module/externalModule/likedExternalModulesContext';
@@ -75,7 +71,6 @@ export type ContextsByKey = {
 	[contextsContextKey]: ContextsContext;
 	[copyDataContextKey]: CopyDataContext;
 	[editorContextKey]: EditorContext;
-	[externalModulesDataContextKey]: ExternalModulesDataContext;
 	[graphContextKey]: GraphContext;
 	[graphRegistryContextKey]: GraphRegistryContext;
 	[homeNavbarSelectionContextKey]: HomeNavbarSelectionContext;

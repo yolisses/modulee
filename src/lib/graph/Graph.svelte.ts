@@ -1,7 +1,6 @@
 import { Connection } from '$lib/connection/Connection';
 import { ById } from '$lib/editor/ById';
 import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
-import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { InternalModule } from '$lib/module/internalModule/InternalModule';
 import type { Module } from '$lib/module/Module';
 import { instantiateNode } from '$lib/node/instantiateNode';
@@ -18,7 +17,7 @@ export class Graph {
 	internalModules = new ById<InternalModule>();
 	externalModules = new ById<ExternalModule>();
 
-	constructor(graphRegistry: GraphRegistry, externalModulesData: ExternalModuleData[]) {
+	constructor(graphRegistry: GraphRegistry) {
 		graphRegistry = cloneGraphRegistry(graphRegistry);
 
 		graphRegistry.nodes.values().forEach((nodeData) => {
@@ -32,7 +31,7 @@ export class Graph {
 			this.modules.add(internalModule);
 		});
 
-		externalModulesData.forEach((externalModuleData) => {
+		graphRegistry.externalModules.values().forEach((externalModuleData) => {
 			const externalModule = new ExternalModule(externalModuleData);
 			this.externalModules.add(externalModule);
 			this.modules.add(externalModule);
