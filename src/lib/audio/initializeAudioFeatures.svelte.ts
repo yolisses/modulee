@@ -7,6 +7,7 @@ import { WasmAudioBackend } from '$lib/audio/WasmAudioBackend';
 import { WebMidiBackend } from '$lib/audio/WebMidiBackend';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
+import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 import { onMount } from 'svelte';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
@@ -15,6 +16,9 @@ import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
  * Initializes the audio, MIDI and virtual piano contexts
  */
 export function initializeAudioFeatures() {
+	const activePitchesContext = getRequiredContext(activePitchesContextKey);
+	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
+
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
 
@@ -32,7 +36,10 @@ export function initializeAudioFeatures() {
 			const audioBackend = new JuceAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
-			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
+				audioBackend,
+				activePitchesContext.activePitches,
+			);
 			virtualPianoMidiBackend.initialize();
 
 			return () => {
@@ -43,10 +50,13 @@ export function initializeAudioFeatures() {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
-			const webMidiBackend = new WebMidiBackend(audioBackend);
+			const webMidiBackend = new WebMidiBackend(audioBackend, activePitchesContext.activePitches);
 			webMidiBackend.initialize();
 
-			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(audioBackend);
+			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
+				audioBackend,
+				activePitchesContext.activePitches,
+			);
 			virtualPianoMidiBackend.initialize();
 
 			return () => {
@@ -56,8 +66,6 @@ export function initializeAudioFeatures() {
 			};
 		}
 	});
-
-	const graphRegistryContext = getRequiredContext(graphRegistryContextKey);
 
 	$effect(() => {
 		// An error on updating the audio graph should not stop the full

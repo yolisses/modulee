@@ -4,7 +4,10 @@ import type { AudioBackend } from './AudioBackend';
 export class WebMidiBackend {
 	webMidi?: typeof WebMidi;
 
-	constructor(public audioBackend: AudioBackend) {}
+	constructor(
+		public audioBackend: AudioBackend,
+		public activePitches: Set<number>,
+	) {}
 
 	async initialize() {
 		this.webMidi = await WebMidi.enable();
@@ -35,10 +38,14 @@ export class WebMidiBackend {
 	}
 
 	onNoteOn = (e: NoteMessageEvent) => {
-		this.audioBackend?.setNoteOn(e.note.number);
+		const pitch = e.note.number;
+		this.audioBackend?.setNoteOn(pitch);
+		this.activePitches.add(pitch);
 	};
 
 	onNoteOff = (e: NoteMessageEvent) => {
-		this.audioBackend?.setNoteOff(e.note.number);
+		const pitch = e.note.number;
+		this.audioBackend?.setNoteOff(pitch);
+		this.activePitches.delete(pitch);
 	};
 }

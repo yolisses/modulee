@@ -35,6 +35,10 @@ import type {
 	AddNodeMenuParamsContext,
 	addNodeMenuParamsContextKey,
 } from '$lib/node/add/addNodeMenuParamsContext';
+import type {
+	ActivePitchesContext,
+	activePitchesContextKey,
+} from '$lib/piano/activePitchesContext';
 import {
 	projectNavbarSelectionContextKey,
 	type ProjectNavbarSelectionContext,
@@ -64,6 +68,7 @@ import type {
 } from 'nodes-editor';
 
 export type ContextsByKey = {
+	[activePitchesContextKey]: ActivePitchesContext;
 	[addNodeInputContextKey]: AddNodeInputContext;
 	[addNodeMenuParamsContextKey]: AddNodeMenuParamsContext;
 	[audioBackendContextKey]: AudioBackendContext;

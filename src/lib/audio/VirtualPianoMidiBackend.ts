@@ -1,12 +1,13 @@
 import { getIsTextEdit } from '$lib/shortcut/getIsTextEdit';
-import { SvelteSet } from 'svelte/reactivity';
 import type { AudioBackend } from './AudioBackend';
 import { virtualPianoKeyOffsets } from './virtualPianoKeyOffsets';
 
 export class VirtualPianoMidiBackend {
 	pressedKeys: Record<string, true> = {};
-	activePitches: Set<number> = new SvelteSet();
-	constructor(public audioBackend: AudioBackend) {}
+	constructor(
+		public audioBackend: AudioBackend,
+		public activePitches: Set<number>,
+	) {}
 
 	async initialize() {
 		window.addEventListener('blur', this.handleBlur);
@@ -44,6 +45,7 @@ export class VirtualPianoMidiBackend {
 
 		this.audioBackend?.setNoteOn(pitch);
 		this.activePitches.add(pitch);
+		console.log('down', pitch);
 	};
 
 	handleKeyUp = (e: KeyboardEvent) => {
@@ -59,6 +61,7 @@ export class VirtualPianoMidiBackend {
 
 		this.audioBackend?.setNoteOff(pitch);
 		this.activePitches.delete(pitch);
+		console.log('up', pitch);
 	};
 
 	handleBlur = () => {

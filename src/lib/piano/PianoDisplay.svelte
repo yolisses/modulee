@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { range } from '$lib/fake/range';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { activePitchesContextKey } from './activePitchesContext';
+
+	const activePitchesContext = getRequiredContext(activePitchesContextKey);
 
 	const octaves = 10;
 	const whiteKeys = range(octaves * 7 + 5);
@@ -16,8 +20,11 @@
 		<div class="flex h-10 flex-1 flex-row">
 			{#each whiteKeys as key}
 				<button
-					class="min-w-3 flex-1 bg-white outline outline-black hover:bg-neutral-200 active:bg-blue-500"
-				></button>
+					class="flex min-w-3 flex-1 flex-col justify-end text-xs text-black outline outline-black hover:bg-neutral-200 active:bg-blue-500"
+					class:bg-white={!activePitchesContext.activePitches.has(key)}
+					class:bg-blue-500={activePitchesContext.activePitches.has(key)}
+				>
+				</button>
 			{/each}
 		</div>
 		<div
@@ -29,7 +36,9 @@
 					<div class="flex flex-1 flex-col items-center" class:self-start={!getIsBlack(key)}>
 						{#if getIsBlack(key)}
 							<button
-								class="pointer-events-auto w-2/3 flex-1 bg-black hover:bg-neutral-800 active:bg-blue-500"
+								class="pointer-events-auto w-2/3 flex-1 hover:bg-neutral-800"
+								class:bg-black={!activePitchesContext.activePitches.has(key)}
+								class:bg-blue-500={activePitchesContext.activePitches.has(key)}
 							></button>
 						{/if}
 					</div>
