@@ -12,6 +12,7 @@
 	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
 	import type { UserData } from '$lib/user/UserData';
 	import { setUserDataContext } from '$lib/user/userDataContext';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import cookies from 'js-cookie';
 	import { onMount, type Snippet } from 'svelte';
 	import '../../app.css';
@@ -77,6 +78,8 @@
 		shortcutHandler.initialize();
 		return () => shortcutHandler.destroy();
 	});
+
+	injectSpeedInsights();
 </script>
 
 <ModalRootLayout>
