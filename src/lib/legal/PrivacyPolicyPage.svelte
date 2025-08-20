@@ -3,13 +3,7 @@
 </script>
 
 <div class="flex flex-col items-center overflow-auto">
-	<div class="w-full max-w-3xl bg-white p-8">
+	<div class="w-full max-w-3xl p-2">
 		<PrivacyPolicy />
 	</div>
 </div>
-
-<style lang="postcss">
-	:global(h1) {
-		color: black;
-	}
-</style>
