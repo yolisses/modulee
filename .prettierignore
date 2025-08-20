@@ -6,4 +6,5 @@ bun.lock
 bun.lockb
 
 *-original.html
-*PreProcessed.svelte
+PrivacyPolicy.svelte
+PrivacyPolicyPreProcessed.svelte
