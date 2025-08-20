@@ -1,34 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="generator" content=
-"HTML Tidy for HTML5 for Linux version 5.6.0">
 <style>
-                        [data-custom-class='body'],
-                        [data-custom-class='body'] * {
-                                background: transparent !important;
-                        }
                         [data-custom-class='title'],
                         [data-custom-class='title'] * {
-                                font-family: Arial !important;
                                 font-size: 26px !important;
                                 color: #000000 !important;
                         }
                         [data-custom-class='subtitle'],
                         [data-custom-class='subtitle'] * {
-                                font-family: Arial !important;
                                 color: #595959 !important;
                                 font-size: 14px !important;
                         }
                         [data-custom-class='heading_1'],
                         [data-custom-class='heading_1'] * {
-                                font-family: Arial !important;
                                 font-size: 19px !important;
                                 color: #000000 !important;
                         }
                         [data-custom-class='heading_2'],
                         [data-custom-class='heading_2'] * {
-                                font-family: Arial !important;
                                 font-size: 17px !important;
                                 color: #000000 !important;
                         }
@@ -36,19 +23,13 @@
                         [data-custom-class='body_text'] * {
                                 color: #595959 !important;
                                 font-size: 14px !important;
-                                font-family: Arial !important;
                         }
                         [data-custom-class='link'],
                         [data-custom-class='link'] * {
                                 color: #3030f1 !important;
                                 font-size: 14px !important;
-                                font-family: Arial !important;
                                 word-break: break-word !important;
                         }
-</style>
-<title></title>
-
-<style>
                         ul {
                                 list-style-type: square;
                         }
@@ -58,12 +39,7 @@
                         ul > li > ul > li > ul {
                                 list-style-type: square;
                         }
-                        ol li {
-                                font-family: Arial;
-                        }
 </style>
-</head>
-<body>
 <div data-custom-class="body">
 <div>
 <h1><strong><span class="question">PRIVACY
@@ -2128,21 +2104,6 @@ you have questions or comments about this notice, you may
 email us at <span class=
 "question noTranslate">moduleeapp@gmail.com</span></span></span></span></span></span></div>
 <div style="line-height: 1.5"><br></div>
-<div style="line-height: 1.5"><span style=
-"font-size: 15px; color: rgb( 89, 89, 89 );"><span style=
-"font-size: 15px; color: rgb( 89, 89, 89 );"><span data-custom-class="body_text">
-<span style="font-size: 15px;"><span style=
-"color: rgb( 89, 89, 89 );"><span style=
-"color: rgb( 89, 89, 89 );"><span data-custom-class=
-"body_text"><span class=
-"question noTranslate">Modulee</span></span></span></span></span></span></span></span></div>
-<div style="line-height: 1.5"><span style=
-"font-size: 15px;"><span data-custom-class="body_text"><span class=
-"question noTranslate">__________</span></span></span></div>
-<div style="line-height: 1.5"><span style=
-"font-size: 15px;"><span data-custom-class="body_text"><span class=
-"question">__________</span></span></span></div>
-<div style="line-height: 1.5"><br></div>
 <div id="request" style="line-height: 1.5"><span style=
 "color: rgb( 127, 127, 127 );"><span style=
 "color: rgb( 89, 89, 89 ); font-size: 15px;"><span style=
@@ -2203,5 +2164,3 @@ review, update, or delete your personal information, please</span>
 </div>
 </div>
 </div>
-</body>
-</html>
