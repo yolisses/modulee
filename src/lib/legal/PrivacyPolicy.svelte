@@ -1,4 +1,6 @@
+<script>
 
+</script>
 <div data-custom-class="body">
 <div>
 <h1><strong><span class="question">PRIVACY
