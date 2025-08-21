@@ -1,19 +1,19 @@
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 
+const STEREO_PREFIX = '/channel1';
+
 export function makeStereo(graphRegistry: GraphRegistry) {
-	const newNodeIds = new Map<string, string>();
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		const newNodeData = structuredClone(nodeData);
-		const newNodeId = createId();
-		newNodeIds.set(newNodeId, newNodeData.id);
-		newNodeData.id = newNodeId;
+		newNodeData.id += STEREO_PREFIX;
 		graphRegistry.nodes.add(newNodeData);
 	});
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const newConnectionData = structuredClone(connectionData);
 		newConnectionData.id = createId();
-		connectionData.targetNodeId = newNodeIds.get(connectionData.targetNodeId)!;
-		connectionData.inputPath.nodeId = newNodeIds.get(connectionData.inputPath.nodeId)!;
+		newConnectionData.targetNodeId += STEREO_PREFIX;
+		newConnectionData.inputPath.nodeId += STEREO_PREFIX;
+		graphRegistry.connections.add(newConnectionData);
 	});
 }
