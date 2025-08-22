@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import { page } from '$app/state';
 	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
 	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
@@ -79,7 +80,9 @@
 		return () => shortcutHandler.destroy();
 	});
 
-	injectSpeedInsights();
+	if (!dev) {
+		injectSpeedInsights();
+	}
 </script>
 
 <ModalRootLayout>
