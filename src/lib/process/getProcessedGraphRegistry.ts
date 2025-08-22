@@ -15,6 +15,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	removeReferencesToMissingModules(graphRegistry);
 	removeConnectionsToMissingNodes(graphRegistry);
 	replaceAudioInputNodes(graphRegistry);
+	// DEBUG
 	// addAutoNodes(graphRegistry);
 	addControlNodes(graphRegistry);
 	makeStereo(graphRegistry);
