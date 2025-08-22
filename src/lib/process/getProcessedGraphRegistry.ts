@@ -8,7 +8,7 @@ import { removeReferencesToMissingModules } from './removeReferencesToMissingMod
 import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
 
 export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
-	// Uses clones to avoid hard to debug bugs in other parts of the system
+	// Uses clones since graphRegistry is mutated
 	graphRegistry = cloneGraphRegistry(graphRegistry);
 
 	internalizeModules(graphRegistry);
