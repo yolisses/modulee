@@ -98,8 +98,7 @@ You may not:
 		@apply mt-2;
 	}
 
-	ul,
-	ol {
+	ul {
 		list-style: revert;
 	}
 </style>
