@@ -25,6 +25,8 @@ export class WasmAudioBackend implements AudioBackend {
 
 		this.engineNode = new AudioWorkletNode(this.audioContext, 'engine-processor', {
 			processorOptions: { bytes },
+			channelCount: 2,
+			channelCountMode: 'explicit',
 		});
 		this.engineNode.connect(this.audioContext.destination);
 

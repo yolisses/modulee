@@ -6,6 +6,10 @@ import {
 	set_panic_hook,
 } from '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.js';
 
+// It comes from the current implementation on the browsers. It may change in
+// the future.
+const BUFFER_SIZE = 128;
+
 class EngineProcessor extends AudioWorkletProcessor {
 	constructor(params) {
 		super();
@@ -37,7 +41,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 		initialize_logging();
 
 		this.graph = new Graph();
-		this.bufferPointer = this.graph.get_buffer_pointer();
+		this.buffer0Pointer = this.graph.get_buffer_0_pointer();
+		this.buffer1Pointer = this.graph.get_buffer_1_pointer();
 	}
 
 	process(inputs, outputs) {
@@ -47,12 +52,8 @@ class EngineProcessor extends AudioWorkletProcessor {
 
 		if (this.isMuted) return true;
 
-		const outputBuffer = new Float32Array(this.wasm.memory.buffer, this.bufferPointer, 128);
-
-		const output = outputs[0];
-		for (let channel = 0; channel < output.length; channel++) {
-			output[channel].set(outputBuffer);
-		}
+		outputs[0][0].set(new Float32Array(this.wasm.memory.buffer, this.buffer0Pointer, BUFFER_SIZE));
+		outputs[0][1].set(new Float32Array(this.wasm.memory.buffer, this.buffer1Pointer, BUFFER_SIZE));
 
 		return true;
 	}
