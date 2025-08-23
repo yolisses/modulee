@@ -199,6 +199,22 @@ export const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		category: 'basic',
+		defaultExtras: {
+			channel: 0,
+		},
+		inputs: [
+			{
+				default: 0,
+				isBoolean: false,
+				key: 'input',
+				max: 1,
+				min: -1,
+			},
+		],
+		type: 'ValueFromChannelNode',
+	},
+	{
+		category: 'basic',
 		defaultExtras: {},
 		inputs: [
 			{

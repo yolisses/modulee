@@ -7,9 +7,8 @@ import type { ModuleNodeData } from './variants/ModuleNodeData';
 import type { ModuleVoicesNodeData } from './variants/ModuleVoicesNodeData';
 import type { OutputNodeData } from './variants/OutputNodeData';
 import type { TriangleWaveNodeData } from './variants/TriangleWaveNodeData';
+import type { ValueFromChannelNodeData } from './variants/ValueFromChannelNodeData';
 
-// Technically, a NodeData can represent any node variant, but it doesn't seem
-// necessary.
 export type NodeData =
 	| AudioInputNodeData
 	| ConstantNodeData
@@ -19,4 +18,8 @@ export type NodeData =
 	| ModuleNodeData
 	| ModuleVoicesNodeData
 	| OutputNodeData
-	| TriangleWaveNodeData;
+	| TriangleWaveNodeData
+	| ValueFromChannelNodeData;
+
+// Technically, a NodeData can represent any node variant, but it doesn't seem
+// necessary.

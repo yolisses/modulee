@@ -38,4 +38,5 @@ export const nodesName: Record<string, string> = {
 	SubtractNode: 'Subtract',
 	TimeNode: 'Time',
 	TriangleWaveNode: 'Triangle wave',
+	ValueFromChannelNode: 'Value from channel',
 };

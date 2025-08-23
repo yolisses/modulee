@@ -1,5 +1,6 @@
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { ValueFromChannelNodeData } from '$lib/node/data/variants/ValueFromChannelNodeData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 
 const STEREO_PREFIX = '/channel1';
@@ -26,7 +27,24 @@ export function makeStereo(graphRegistry: GraphRegistry) {
 
 	graphRegistry.nodes.values().forEach((nodeData) => {
 		if (getIsSomeModuleNodeData(nodeData)) {
-			idsMap[nodeData.id] = nodeData.id;
+			const valueFromChannelNodeData: ValueFromChannelNodeData = {
+				extras: { channel: 1 },
+				id: nodeData.id + STEREO_PREFIX,
+				internalModuleId: nodeData.internalModuleId,
+				isInputAutoConnectedMap: {},
+				position: structuredClone(nodeData.position),
+				type: 'ValueFromChannelNode',
+				unconnectedInputValues: {},
+			};
+			graphRegistry.nodes.add(valueFromChannelNodeData);
+
+			graphRegistry.connections.add({
+				id: nodeData.id + STEREO_PREFIX + 'connection',
+				inputPath: { nodeId: valueFromChannelNodeData.id, inputKey: 'input' },
+				targetNodeId: nodeData.id,
+			});
+
+			idsMap[nodeData.id] = valueFromChannelNodeData.id;
 			return;
 		}
 
@@ -47,6 +65,7 @@ export function makeStereo(graphRegistry: GraphRegistry) {
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const newConnectionData = structuredClone(connectionData);
 		newConnectionData.id = createId();
+
 		newConnectionData.targetNodeId = idsMap[connectionData.targetNodeId];
 
 		const inputNodeData = graphRegistry.nodes.getOrNull(connectionData.inputPath.nodeId);

@@ -125,6 +125,8 @@
 			class="overflow-and-ellipsis"
 		>
 			{nodesName[node.type]}
+			<!-- DEBUG -->
+			{node.extras?.channel}
 		</div>
 	</PointerEventDispatcher>
 	{@render children?.()}
