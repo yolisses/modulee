@@ -6,6 +6,7 @@
 	import type { NodeDefinition } from '../definitions/NodeDefinition';
 	import { nodesName } from '../definitions/nodesName';
 	import { AddNodeHandler } from './AddNodeHandler';
+	import { getCanNodeBeCreated } from './getCanNodeBeCreated';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
 
 	interface Props {
@@ -27,10 +28,10 @@
 	<div class="p-2 text-white/50">No options found for the search text</div>
 {:else}
 	<BasicList
-		getId={getType}
-		items={nodeDefinitions}
-		getName={getNodeDefinitionName}
 		compare={compareByCategoryAndName}
+		getId={getType}
+		getName={getNodeDefinitionName}
+		items={nodeDefinitions.filter(getCanNodeBeCreated)}
 		onClick={addNodeHandler.handleNodeDefinitionSelect}
 	>
 		{#snippet content({ item: nodeDefinition })}
