@@ -27,6 +27,8 @@ export function makeStereo(graphRegistry: GraphRegistry) {
 		if (newNodeData.type === 'OutputNode') {
 			newNodeData.extras.channel = 1;
 		}
+
+		// DEBUG
 		// newNodeData.position.x += 10;
 		newNodeData.position.y += 10;
 
