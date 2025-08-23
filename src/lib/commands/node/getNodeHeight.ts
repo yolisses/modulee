@@ -1,6 +1,7 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
+import { getIsSomeInputNodeData } from '$lib/rack/getIsSomeInputNodeData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 
 export function getNodeHeight(nodeData: NodeData, graphRegistry: GraphRegistry) {
@@ -22,7 +23,7 @@ export function getNodeHeight(nodeData: NodeData, graphRegistry: GraphRegistry) 
 		const someModuleNodeData = nodeData;
 		const inputNodes = graphRegistry.nodes.values().filter((possibleNodeData) => {
 			return (
-				possibleNodeData.type === 'InputNode' &&
+				getIsSomeInputNodeData(possibleNodeData) &&
 				possibleNodeData.internalModuleId === someModuleNodeData.extras.moduleReference?.moduleId
 			);
 		});
