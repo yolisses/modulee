@@ -37,7 +37,7 @@ export function getFormatingNodeWithType(
 ): FormatingNode {
 	return {
 		id: nodeData.id,
-		height: getNodeHeight(nodeData.type),
+		height: getNodeHeight(nodeData, graphRegistry),
 		inputs: getFormatingNodeInputs(nodeData, graphRegistry),
 	};
 }
