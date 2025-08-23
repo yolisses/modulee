@@ -1,5 +1,6 @@
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 
 const STEREO_PREFIX = '/channel1';
 
@@ -19,10 +20,16 @@ const STEREO_PREFIX = '/channel1';
 // - A node inherently stereo should be duplicated (e.g.: NoiseNode)
 // - A node that depends on a inherently stereo node should be duplicated
 // - Module nodes should not be duplicated
+// - Module inputs should be duplicated
 export function makeStereo(graphRegistry: GraphRegistry) {
 	const idsMap: Record<string, string> = {};
 
 	graphRegistry.nodes.values().forEach((nodeData) => {
+		if (getIsSomeModuleNodeData(nodeData)) {
+			idsMap[nodeData.id] = nodeData.id;
+			return;
+		}
+
 		const newNodeData = structuredClone(nodeData);
 		if (newNodeData.type === 'OutputNode') {
 			newNodeData.extras.channel = 1;
@@ -40,8 +47,14 @@ export function makeStereo(graphRegistry: GraphRegistry) {
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const newConnectionData = structuredClone(connectionData);
 		newConnectionData.id = createId();
-		newConnectionData.targetNodeId += STEREO_PREFIX;
-		newConnectionData.inputPath.nodeId += STEREO_PREFIX;
+		newConnectionData.targetNodeId = idsMap[connectionData.targetNodeId];
+
+		const inputNodeData = graphRegistry.nodes.getOrNull(connectionData.inputPath.nodeId);
+		if (inputNodeData && getIsSomeModuleNodeData(inputNodeData)) {
+			newConnectionData.inputPath.inputKey += STEREO_PREFIX;
+		} else {
+			newConnectionData.inputPath.nodeId = idsMap[connectionData.inputPath.nodeId];
+		}
 		graphRegistry.connections.add(newConnectionData);
 	});
 }
