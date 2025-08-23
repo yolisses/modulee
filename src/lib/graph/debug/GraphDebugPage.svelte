@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { FormatNodesCommand } from '$lib/commands/node/FormatNodesCommand';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
@@ -35,9 +36,12 @@
 		]);
 	});
 
-	const processedGraphRegistry = $derived(
-		getProcessedGraphRegistry(graphRegistryContext.graphRegistry),
-	);
+	const processedGraphRegistry = $derived.by(() => {
+		const formatNodesCommand = new FormatNodesCommand({} as any);
+		const graphRegistry = getProcessedGraphRegistry(graphRegistryContext.graphRegistry);
+		formatNodesCommand.execute(graphRegistry);
+		return graphRegistry;
+	});
 	const graph = $derived(new Graph(processedGraphRegistry));
 	const visibleNodes = $derived(
 		graph.nodes.values().filter((node) => {
