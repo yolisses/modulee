@@ -10,7 +10,7 @@ export function createUtilityInitialGraphData(): GraphData {
 		mainInternalModuleId: mainInternalModuleId,
 		nodes: [
 			{
-				extras: {},
+				extras: { channel: 0 },
 				id: createId(),
 				internalModuleId: mainInternalModuleId,
 				isInputAutoConnectedMap: {},

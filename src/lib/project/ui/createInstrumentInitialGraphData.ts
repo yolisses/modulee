@@ -14,7 +14,7 @@ export function createInstrumentInitialGraphData(): GraphData {
 			{
 				id: outputNodeId,
 				type: 'OutputNode',
-				extras: {},
+				extras: { channel: 0 },
 				position: { x: 0, y: 0 },
 				internalModuleId: mainModuleId,
 				unconnectedInputValues: { input: 0 },
@@ -32,7 +32,7 @@ export function createInstrumentInitialGraphData(): GraphData {
 			{
 				id: voiceOutputNodeId,
 				type: 'OutputNode',
-				extras: {},
+				extras: { channel: 0 },
 				position: { x: 0, y: 0 },
 				internalModuleId: voiceModuleId,
 				unconnectedInputValues: { input: 0 },

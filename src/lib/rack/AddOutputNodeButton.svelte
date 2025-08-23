@@ -36,9 +36,9 @@
 			type: 'AddNodeCommand',
 			details: {
 				node: {
-					extras: {},
 					id: createId(),
 					type: 'OutputNode',
+					extras: { channel: 0 },
 					isInputAutoConnectedMap: {},
 					position: position.getData(),
 					unconnectedInputValues: { input: 0 },

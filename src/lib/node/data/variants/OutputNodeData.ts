@@ -1,3 +1,3 @@
 import type { NodeDataBase } from '../NodeDataBase';
 
-export type OutputNodeData = NodeDataBase<'OutputNode'>;
+export type OutputNodeData = NodeDataBase<'OutputNode', { channel: number }>;

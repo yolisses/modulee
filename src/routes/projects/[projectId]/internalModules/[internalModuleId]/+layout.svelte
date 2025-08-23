@@ -9,10 +9,12 @@
 	}
 
 	const { children }: Props = $props();
+	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 
 	$effect(() => {
-		const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
-		internalModuleIdContext.internalModuleId = page.params.internalModuleId;
+		if (page.params.internalModuleId) {
+			internalModuleIdContext.internalModuleId = page.params.internalModuleId;
+		}
 	});
 </script>
 
