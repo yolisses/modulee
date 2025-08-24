@@ -28,13 +28,13 @@
 	{/if}
 </div>
 
-<div class="flex flex-1 overflow-auto max-md:flex-col md:flex-row">
+<div class="flex flex-1 max-md:flex-col max-md:overflow-auto md:flex-row md:overflow-hidden">
 	{#if sideBar}
-		<div class="border-black/50 p-4 max-md:border-b-2 md:border-r-2">
+		<div class="border-black/50 p-4 max-md:border-b-2 md:overflow-auto md:border-r-2">
 			{@render sideBar()}
 		</div>
 	{/if}
-	<div class="flex flex-1 flex-col items-center">
+	<div class="flex flex-1 flex-col items-center md:overflow-auto">
 		<div class="flex w-full max-w-xl grow flex-col gap-2 p-2">
 			{@render children?.()}
 		</div>

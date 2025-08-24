@@ -66,7 +66,11 @@
 
 <ListPageLayout {title} {showCloseButton}>
 	{#snippet sideBar()}
-		<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
+		<div class="flex flex-col items-center">
+			<div class="w-full max-w-xl">
+				<ExternalModulesFiltersForm bind:values={filters} {loader} {moduleType} />
+			</div>
+		</div>
 	{/snippet}
 
 	<InfiniteList {loader}>
