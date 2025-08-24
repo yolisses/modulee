@@ -53,10 +53,6 @@ export function makeStereo(graphRegistry: GraphRegistry) {
 			newNodeData.extras.channel = 1;
 		}
 
-		// DEBUG
-		// newNodeData.position.x += 10;
-		newNodeData.position.y += 10;
-
 		newNodeData.id += STEREO_PREFIX;
 		graphRegistry.nodes.add(newNodeData);
 		idsMap[nodeData.id] = newNodeData.id;
