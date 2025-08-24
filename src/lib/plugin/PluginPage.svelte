@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ById } from '$lib/editor/ById';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
-	import { faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons';
+	import { faLinux, faWindows } from '@fortawesome/free-brands-svg-icons';
 	import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
@@ -24,13 +24,13 @@
 			downloadUrl:
 				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee.vst3',
 		},
-		{
-			id: 'mac',
-			name: 'macOS',
-			icon: faApple,
-			downloadUrl:
-				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee.au',
-		},
+		// {
+		// 	id: 'mac',
+		// 	name: 'macOS',
+		// 	icon: faApple,
+		// 	downloadUrl:
+		// 		'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee.au',
+		// },
 		{
 			id: 'linux',
 			name: 'Linux',
