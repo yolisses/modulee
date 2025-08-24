@@ -74,7 +74,6 @@ export function initializeAudioFeatures() {
 			const { graphRegistry } = graphRegistryContext;
 			const processedGraphRegistry = getProcessedGraphRegistry(graphRegistry);
 			const graphEngineData = getGraphEngineData(processedGraphRegistry);
-			console.log(graphEngineData);
 			audioBackendContext.audioBackend?.setGraph(graphEngineData);
 		} catch (e) {
 			console.error(e);
