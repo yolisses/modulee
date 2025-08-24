@@ -26,7 +26,7 @@
 		},
 		{
 			id: 'mac',
-			name: 'MacOs',
+			name: 'macOS',
 			icon: faApple,
 			downloadUrl:
 				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee.au',
