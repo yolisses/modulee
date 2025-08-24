@@ -1,7 +1,7 @@
 {
 	"author": "yolisses",
 	"dependencies": {
-		"modulee-engine-wasm": "^0.3.0"
+		"modulee-engine-wasm": "^0.4.0"
 	},
 	"description": "The content that should be shared over network without the usual bundler due to WASM restrictions",
 	"keywords": [],
