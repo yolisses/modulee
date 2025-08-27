@@ -30,14 +30,14 @@ CookieConsent.run({
 		translations: {
 			en: {
 				consentModal: {
-					title: 'Cookie consent',
+					title: 'Cookie Consent',
 					description:
-						'Would you please allow us to use analytics tools? It helps a lot to make the app great.',
+						'We use cookies to enhance your experience. Please allow analytics cookies to help us improve our app by tracking usage and behavior.',
 					acceptAllBtn: 'Accept all',
 					acceptNecessaryBtn: 'Reject all',
 					showPreferencesBtn: 'Manage preferences',
 					footer:
-						'<a href="privacy-policy">Privacy Policy</a>\n<a href="/terms-of-use">Terms of use</a>',
+						'<a href="privacy-policy">Privacy Policy</a>\n<a href="/terms-of-use">Terms of Use</a>',
 				},
 				preferencesModal: {
 					title: 'Consent Preferences',
@@ -48,25 +48,24 @@ CookieConsent.run({
 					serviceCounterLabel: 'Service|Services',
 					sections: [
 						{
-							title: 'Cookie Usage',
 							description:
-								'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+								'Cookies are small data files stored on your device to help our website function, improve user experience, and analyze usage. You can choose which cookies to allow below.',
 						},
 						{
 							title: 'Strictly Necessary Cookies <span class="pm__badge">Always Enabled</span>',
 							description:
-								'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+								'These cookies are essential for the website to function properly, enabling core features like page navigation and secure access. They cannot be disabled.',
 							linkedCategory: 'necessary',
 						},
 						{
 							title: 'Analytics Cookies',
 							description:
-								'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+								'We use Google Analytics and Hotjar. Google Analytics collects data on user interactions, like page visits and time spent. And Hotjar tracks user behavior, such as clicks and scrolling, to help us understand site usage and improve the design.',
 							linkedCategory: 'analytics',
 						},
 						{
-							title: 'More information',
-							description: 'If you have any question, please contact us at moduleeapp@gmail.com',
+							title: 'More Information',
+							description: 'For questions, contact us at moduleeapp@gmail.com.',
 						},
 					],
 				},
