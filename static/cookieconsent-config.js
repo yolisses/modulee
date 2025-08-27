@@ -60,7 +60,7 @@ CookieConsent.run({
 						{
 							title: 'Analytics Cookies',
 							description:
-								'We use Google Analytics and Hotjar. Google Analytics collects data on user interactions, like page visits and time spent. And Hotjar tracks user behavior, such as clicks and scrolling, to help us understand site usage and improve the design.',
+								'Google Analytics collects basic user iteration such as page visits, clicks, scrolls and time spent.<br> Hotjar records basically all user iteration, such as mouse position at any time, allowing us to deduce how users interpret the app so we can improve design.',
 							linkedCategory: 'analytics',
 						},
 						{

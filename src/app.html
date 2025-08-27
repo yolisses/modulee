@@ -27,8 +27,14 @@
 		%sveltekit.head%
 
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEPPBCF7EV"></script>
-		<script>
+		<script
+			type="text/plain"
+			data-category="analytics"
+			data-service="Google Analytics"
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-QEPPBCF7EV"
+		></script>
+		<script type="text/plain" data-category="analytics" data-service="Google Analytics">
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
@@ -39,7 +45,7 @@
 		</script>
 
 		<!-- Hotjar Tracking Code for https://modulee.app/ -->
-		<script>
+		<script type="text/plain" data-category="analytics" data-service="Hotjar">
 			(function (h, o, t, j, a, r) {
 				h.hj =
 					h.hj ||
