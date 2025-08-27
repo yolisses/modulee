@@ -1,12 +1,18 @@
+:root {
+	--cc-font-family: inherit;
+	--cc-modal-border-radius: 0.5rem;
+	--cc-btn-border-radius: 0.4rem;
+	--cc-modal-transition-duration: 0.25s;
+	--cc-link-color: var(--cc-btn-primary-bg);
+	--cc-modal-margin: 1rem;
+	--cc-z-index: 2147483647;
+}
+
 /** Light color-scheme **/
 .cc--darkmode {
-	--cc-bg: var(--color-zinc-900);
+	--cc-bg: var(--color-zinc-800);
 	--cc-primary-color: var(--color-white);
-	--cc-secondary-color: color-mix(
-		in oklab,
-		var(--color-white) /* #fff = #ffffff */ 50%,
-		transparent
-	);
+	--cc-secondary-color: color-mix(in oklab, var(--color-white) 50%, transparent);
 
 	--cc-btn-primary-bg: var(--color-blue-500);
 	--cc-btn-primary-color: var(--cc-primary-color);
@@ -18,45 +24,41 @@
 	--cc-btn-secondary-bg: transparent;
 	--cc-btn-secondary-color: var(--cc-primary-color);
 	--cc-btn-secondary-border-color: transparent;
-	--cc-btn-secondary-hover-bg: color-mix(
-		in oklab,
-		var(--color-white) /* #fff = #ffffff */ 10%,
-		transparent
-	);
-	--cc-btn-secondary-hover-color: #ffffff;
+	--cc-btn-secondary-hover-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
+	--cc-btn-secondary-hover-color: var(--cc-primary-color);
 	--cc-btn-secondary-hover-border-color: transparent;
-	--cc-separator-border-color: #222a30;
+	--cc-separator-border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
 
 	--cc-toggle-on-bg: var(--cc-btn-primary-bg);
-	--cc-toggle-off-bg: #525f6b;
+	--cc-toggle-off-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
 	--cc-toggle-on-knob-bg: var(--cc-btn-primary-color);
 	--cc-toggle-off-knob-bg: var(--cc-btn-primary-color);
 
 	/* yes (v tick) */
 	--cc-toggle-enabled-icon-color: var(--cc-btn-primary-color);
 	/* no (x tick) */
-	--cc-toggle-disabled-icon-color: var(--cc-btn-primary-color);
+	--cc-toggle-disabled-icon-color: var(--color-zinc-900);
 
-	--cc-toggle-readonly-bg: #343e45;
-	--cc-toggle-readonly-knob-bg: #5f6b72;
-	--cc-toggle-readonly-knob-icon-color: var(--cc-toggle-readonly-bg);
+	--cc-toggle-readonly-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
+	--cc-toggle-readonly-knob-bg: color-mix(in oklab, var(--color-white) 50%, transparent);
+	--cc-toggle-readonly-knob-icon-color: color-mix(in oklab, var(--color-white) 50%, transparent);
 
-	--cc-section-category-border: #1e2428;
+	--cc-section-category-border: color-mix(in oklab, var(--color-white) 10%, transparent);
 
-	--cc-cookie-category-block-bg: #1e2428;
+	--cc-cookie-category-block-bg: transparent;
 	--cc-cookie-category-block-border: var(--cc-section-category-border);
-	--cc-cookie-category-block-hover-bg: #242c31;
-	--cc-cookie-category-block-hover-border: #232a2f;
+	--cc-cookie-category-block-hover-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
+	--cc-cookie-category-block-hover-border: var(--cc-section-category-border);
 	--cc-cookie-category-expanded-block-bg: transparent;
 	--cc-cookie-category-expanded-block-hover-bg: var(--cc-toggle-readonly-bg);
 
-	--cc-overlay-bg: rgba(0, 0, 0, 0.65);
+	--cc-overlay-bg: transparent;
 	--cc-webkit-scrollbar-bg: var(--cc-section-category-border);
 	--cc-webkit-scrollbar-hover-bg: var(--cc-btn-primary-hover-bg);
 
-	--cc-footer-bg: #0c0e0f;
+	--cc-footer-bg: var(--color-zinc-900);
 	--cc-footer-color: var(--cc-secondary-color);
-	--cc-footer-border-color: #060809;
+	--cc-footer-border-color: var(--color-black);
 }
 
 .cc--darkmode #cc-main {
