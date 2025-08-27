@@ -32,7 +32,7 @@ CookieConsent.run({
 				consentModal: {
 					title: 'Cookie Consent',
 					description:
-						'We use cookies to enhance your experience. Please allow analytics cookies to help us improve our app by tracking usage and behavior.',
+						'Would you please allow us to use analytics tools? It helps a lot to make the app great.',
 					acceptAllBtn: 'Accept all',
 					acceptNecessaryBtn: 'Reject all',
 					showPreferencesBtn: 'Manage preferences',
