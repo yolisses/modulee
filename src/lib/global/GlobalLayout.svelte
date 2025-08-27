@@ -17,6 +17,7 @@
 	import cookies from 'js-cookie';
 	import { onMount, type Snippet } from 'svelte';
 	import '../../app.css';
+	import '../../cookieConsent.css';
 	import '../../inputTypeRange.css';
 
 	interface Props {
