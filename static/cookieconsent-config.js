@@ -32,14 +32,15 @@ CookieConsent.run({
 				consentModal: {
 					title: 'Cookie consent',
 					description:
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
+						'Would you please allow us to use analytics tools? It helps a lot to make the app great.',
 					acceptAllBtn: 'Accept all',
 					acceptNecessaryBtn: 'Reject all',
 					showPreferencesBtn: 'Manage preferences',
-					footer: '<a href="#link">Privacy Policy</a>\n<a href="#link">Terms and conditions</a>',
+					footer:
+						'<a href="privacy-policy">Privacy Policy</a>\n<a href="/terms-of-use">Terms of use</a>',
 				},
 				preferencesModal: {
-					title: 'Consent Preferences Center',
+					title: 'Consent Preferences',
 					acceptAllBtn: 'Accept all',
 					acceptNecessaryBtn: 'Reject all',
 					savePreferencesBtn: 'Save preferences',
@@ -65,8 +66,7 @@ CookieConsent.run({
 						},
 						{
 							title: 'More information',
-							description:
-								'For any query in relation to my policy on cookies and your choices, please <a class="cc__link" href="#yourdomain.com">contact me</a>.',
+							description: 'If you have any question, please contact us at moduleeapp@gmail.com',
 						},
 					],
 				},
