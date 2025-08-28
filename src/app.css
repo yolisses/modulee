@@ -62,6 +62,10 @@
 		@apply cursor-pointer;
 	}
 
+	select {
+		-webkit-appearance: none;
+	}
+
 	button {
 		@apply button;
 	}
