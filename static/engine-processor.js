@@ -40,7 +40,7 @@ class EngineProcessor extends AudioWorkletProcessor {
 		set_panic_hook();
 		initialize_logging();
 
-		this.graph = new Graph();
+		this.graph = new Graph(sampleRate);
 		this.buffer0Pointer = this.graph.get_buffer_0_pointer();
 		this.buffer1Pointer = this.graph.get_buffer_1_pointer();
 	}
