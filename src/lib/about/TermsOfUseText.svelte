@@ -84,21 +84,3 @@ You may not:
 	For questions, contact <a href="mailto:moduleeapp@gmail.com"> moduleeapp@gmail.com</a>
 	.
 </p>
-
-<style lang="postcss">
-	@reference "../../app.css";
-
-	h1 {
-		@apply mt-6 text-xl font-medium;
-	}
-	h2 {
-		@apply mt-6 text-lg font-medium;
-	}
-	p {
-		@apply mt-2;
-	}
-
-	ul {
-		list-style: revert;
-	}
-</style>

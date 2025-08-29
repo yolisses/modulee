@@ -1,0 +1,13 @@
+<script lang="ts">
+	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
+	import PrivacyPolicyText from './PrivacyPolicyText.svelte';
+	import PrettyText from './PrettyText.svelte';
+	import TermlyLogo from './TermlyLogo.svelte';
+</script>
+
+<ListPageLayout title="Privacy Policy" showCloseButton>
+	<TermlyLogo />
+	<PrettyText>
+		<PrivacyPolicyText />
+	</PrettyText>
+</ListPageLayout>
