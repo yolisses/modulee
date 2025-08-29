@@ -3,4 +3,5 @@
 	music production. It is free and open source.
 </p>
 <p><a href="/privacy-policy">Privacy Policy</a></p>
+<p><a href="/terms-of-use">Terms of Use</a></p>
 <p><a href="https://github.com/yolisses0/modulee" target="_blank">Github</a></p>

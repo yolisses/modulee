@@ -50,9 +50,7 @@ You may not:
 </p>
 <h2>Privacy</h2>
 <p>
-	Your use of Modulee is subject to our <a href="https://modulee.app/privacy-policy">
-		Privacy Policy</a
-	>
+	Your use of Modulee is subject to our <a href="/privacy-policy">Privacy Policy</a>
 	.
 </p>
 <h2>Termination</h2>
