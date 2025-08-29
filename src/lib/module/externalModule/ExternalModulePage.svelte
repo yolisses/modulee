@@ -43,11 +43,13 @@
 			Liked {externalModuleData.likeCount} times
 		</div>
 		<div class="flex flex-col gap-2">
-			<h2 class="opacity-50">Description</h2>
 			{#if externalModuleData.description}
+				<h2 class="opacity-50">Description</h2>
 				{#each externalModuleData.description?.split('\n') as text}
 					<p>{text}</p>
 				{/each}
+			{:else}
+				<h2 class="opacity-50">No description</h2>
 			{/if}
 		</div>
 	</div>
