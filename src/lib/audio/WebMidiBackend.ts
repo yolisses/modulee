@@ -10,6 +10,7 @@ export class WebMidiBackend {
 	) {}
 
 	async initialize() {
+		await WebMidi.enable();
 		// Brute force of keeping stuff updated.
 		//
 		// TODO find a more elegant solution, maybe allowing users to select
@@ -23,7 +24,7 @@ export class WebMidiBackend {
 	updateDeviceListeners = () => {
 		// Removes the possible previous listeners to prevent duplicate event
 		// handling
-		WebMidi?.inputs.forEach((device) => {
+		WebMidi.inputs.forEach((device) => {
 			device.removeListener('noteon', this.onNoteOn);
 			device.addListener('noteon', this.onNoteOn);
 

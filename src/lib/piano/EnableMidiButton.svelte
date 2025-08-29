@@ -11,10 +11,9 @@
 
 	const activePitchesContext = getRequiredContext(activePitchesContextKey);
 	const audioBackendContext = getRequiredContext(audioBackendContextKey);
-	const webMidiBackend = $derived(
-		audioBackendContext.audioBackend
-			? new WebMidiBackend(audioBackendContext.audioBackend, activePitchesContext.activePitches)
-			: undefined,
+	const webMidiBackend = new WebMidiBackend(
+		audioBackendContext.audioBackend!,
+		activePitchesContext.activePitches,
 	);
 
 	let hasPermission = $state<boolean>();
@@ -23,22 +22,17 @@
 
 	async function handleClick() {
 		await WebMidi.enable();
-		hasPermission = WebMidi.enabled;
-		webMidiBackend?.initialize();
+		hasPermission = getHasMidiSupport();
 	}
-
-	$effect(() => {
-		if (hasPermission) {
-			console.log(webMidiBackend);
-			webMidiBackend?.initialize();
-		}
-	});
 
 	onMount(() => {
 		hasMidiSupport = getHasMidiSupport();
 		hasJuceSupport = getHasJuceSupport();
 		getHasMidiPermission().then((value) => {
 			hasPermission = value;
+			if (hasPermission) {
+				webMidiBackend?.initialize();
+			}
 		});
 		return () => webMidiBackend?.destroy();
 	});
