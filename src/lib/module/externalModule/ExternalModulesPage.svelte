@@ -13,13 +13,21 @@
 
 	interface Props {
 		handleModuleHover?: (externalModuleData: ExternalModuleData) => void;
+		initialChildren?: Snippet;
 		moduleType?: T;
 		showCloseButton: boolean;
 		title: string;
 		topChildren?: Snippet;
 	}
 
-	const { title, moduleType, showCloseButton, handleModuleHover, topChildren }: Props = $props();
+	const {
+		handleModuleHover,
+		initialChildren,
+		moduleType,
+		showCloseButton,
+		title,
+		topChildren,
+	}: Props = $props();
 	const loader = new Loader(getPath);
 	const projectDataContext = getProjectDataContextOrUndefined();
 	const userDataContext = getRequiredContext(userDataContextKey);
@@ -66,7 +74,7 @@
 	}
 </script>
 
-<ListPageLayout {title} {showCloseButton}>
+<ListPageLayout {title} {showCloseButton} {topChildren}>
 	{#snippet sideBar()}
 		<div class="flex flex-col items-center">
 			<div class="w-full max-w-xl">
@@ -76,7 +84,7 @@
 	{/snippet}
 	<InfiniteList {loader}>
 		{#snippet children(externalModuleData: ExternalModuleData<T>)}
-			{@render topChildren?.()}
+			{@render initialChildren?.()}
 			<ExternalModuleItem {externalModuleData} {handleModuleHover} />
 		{/snippet}
 		{#snippet emptyStateButtons()}

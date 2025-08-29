@@ -3,15 +3,15 @@
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		title: string;
 		badges?: Snippet;
-		sideBar?: Snippet;
 		children?: Snippet;
-		topChildren?: Snippet;
 		showCloseButton?: boolean;
+		sideBar?: Snippet;
+		title: string;
+		topChildren?: Snippet;
 	}
 
-	const { title, children, topChildren, badges, sideBar, showCloseButton }: Props = $props();
+	const { badges, children, showCloseButton, sideBar, title, topChildren }: Props = $props();
 </script>
 
 <svelte:head>

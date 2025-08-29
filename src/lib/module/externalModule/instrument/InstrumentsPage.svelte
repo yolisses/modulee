@@ -8,6 +8,7 @@
 	import { setActivePitchesContext } from '$lib/piano/activePitchesContext';
 	import PianoDisplay from '$lib/piano/PianoDisplay.svelte';
 	import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
+	import CreateInstrumentButton from '$lib/project/create/CreateInstrumentButton.svelte';
 	import { getGraphRegistry } from '$lib/project/getGraphRegistry';
 	import { SvelteSet } from 'svelte/reactivity';
 
@@ -33,6 +34,9 @@
 	title="Instruments"
 >
 	{#snippet topChildren()}
+		<CreateInstrumentButton />
+	{/snippet}
+	{#snippet initialChildren()}
 		<p class="p-2 text-sm">Hover over an option to use the instrument as preview.</p>
 		<hr class="opacity-10" />
 	{/snippet}
