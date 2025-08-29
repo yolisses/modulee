@@ -31,6 +31,11 @@
 	moduleType="instrument"
 	showCloseButton={false}
 	title="Instruments"
-/>
+>
+	{#snippet topChildren()}
+		<p class="p-2 text-sm">Hover over an option to use the instrument as preview.</p>
+		<hr class="opacity-10" />
+	{/snippet}
+</ExternalModulesPage>
 
 <PianoDisplay />

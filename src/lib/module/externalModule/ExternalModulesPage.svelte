@@ -4,6 +4,7 @@
 	import { getProjectDataContextOrUndefined } from '$lib/project/ui/projectDataContext';
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { userDataContextKey } from '$lib/user/userDataContext';
+	import type { Snippet } from 'svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import ExternalModuleItem from './ExternalModuleItem.svelte';
 	import ExternalModulesFiltersForm from './ExternalModulesFiltersForm.svelte';
@@ -11,13 +12,14 @@
 	import { Loader } from './Loader.svelte';
 
 	interface Props {
-		title: string;
+		handleModuleHover?: (externalModuleData: ExternalModuleData) => void;
 		moduleType?: T;
 		showCloseButton: boolean;
-		handleModuleHover?: (externalModuleData: ExternalModuleData) => void;
+		title: string;
+		topChildren?: Snippet;
 	}
 
-	const { title, moduleType, showCloseButton, handleModuleHover }: Props = $props();
+	const { title, moduleType, showCloseButton, handleModuleHover, topChildren }: Props = $props();
 	const loader = new Loader(getPath);
 	const projectDataContext = getProjectDataContextOrUndefined();
 	const userDataContext = getRequiredContext(userDataContextKey);
@@ -72,9 +74,9 @@
 			</div>
 		</div>
 	{/snippet}
-
 	<InfiniteList {loader}>
 		{#snippet children(externalModuleData: ExternalModuleData<T>)}
+			{@render topChildren?.()}
 			<ExternalModuleItem {externalModuleData} {handleModuleHover} />
 		{/snippet}
 		{#snippet emptyStateButtons()}
