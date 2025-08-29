@@ -1,5 +1,5 @@
 <script>
-	import TermsOfUsePage from '$lib/legal/TermsOfUsePage.svelte';
+	import TermsOfUsePage from '$lib/about/TermsOfUsePage.svelte';
 </script>
 
 <TermsOfUsePage />

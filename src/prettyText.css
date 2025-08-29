@@ -1,0 +1,36 @@
+@reference "tailwindcss";
+
+.pretty {
+	a {
+		@apply text-blue-200;
+	}
+
+	h2 {
+		@apply mt-5 text-xl;
+	}
+	h3 {
+		@apply mt-4 text-lg;
+	}
+
+	ul {
+		@apply list-disc;
+	}
+	ol {
+		@apply list-decimal;
+	}
+
+	table,
+	th,
+	td {
+		@apply border-collapse border border-white/50;
+	}
+
+	td,
+	th {
+		@apply p-2;
+	}
+
+	table {
+		@apply my-4;
+	}
+}

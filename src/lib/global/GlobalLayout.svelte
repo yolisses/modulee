@@ -1,24 +1,25 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { page } from '$app/state';
-	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
-	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
-	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
-	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
-	import { Contexts } from '$lib/shortcut/Contexts.svelte';
-	import { setContextsContext } from '$lib/shortcut/contextsContext';
-	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
-	import { setShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
-	import { setBaseRouteContext } from '$lib/ui/baseRouteContext';
-	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
-	import type { UserData } from '$lib/user/UserData';
-	import { setUserDataContext } from '$lib/user/userDataContext';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-	import cookies from 'js-cookie';
-	import { onMount, type Snippet } from 'svelte';
 	import '../../app.css';
 	import '../../cookieConsent.css';
 	import '../../inputTypeRange.css';
+	import '../../prettyText.css';
+	import { Contexts } from '$lib/shortcut/Contexts.svelte';
+	import { dev } from '$app/environment';
+	import { handleSignInResponse } from '$lib/session/handleSignInResponse';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+	import { onMount, type Snippet } from 'svelte';
+	import { page } from '$app/state';
+	import { SESSION_COOKIE_NAME } from '$lib/session/SESSION_COOKIE_NAME';
+	import { setBaseRouteContext } from '$lib/ui/baseRouteContext';
+	import { setContextsContext } from '$lib/shortcut/contextsContext';
+	import { setCopyDataContext } from '$lib/graph/copy/copyDataContext';
+	import { setLikedExternalModulesContext } from '$lib/module/externalModule/likedExternalModulesContext';
+	import { setShortcutHandlerContext } from '$lib/shortcut/shortcutHandlerContext';
+	import { setUserDataContext } from '$lib/user/userDataContext';
+	import { ShortcutHandler } from '$lib/shortcut/ShortcutHandler.svelte';
+	import cookies from 'js-cookie';
+	import ModalRootLayout from '$lib/ui/ModalRootLayout.svelte';
+	import type { UserData } from '$lib/user/UserData';
 
 	interface Props {
 		children: Snippet;
