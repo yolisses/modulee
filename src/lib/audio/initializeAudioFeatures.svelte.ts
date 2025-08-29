@@ -1,10 +1,9 @@
 import { type AudioBackendContext, setAudioBackendContext } from '$lib/audio/audioBackendContext';
 import { getGraphEngineData } from '$lib/audio/data/getGraphEngineData';
-import { getHaveJuceSupport } from '$lib/audio/getHaveJuceSupport';
+import { getHasJuceSupport } from '$lib/audio/getHaveJuceSupport';
 import { JuceAudioBackend } from '$lib/audio/JuceAudioBackend';
 import { VirtualPianoMidiBackend } from '$lib/audio/VirtualPianoMidiBackend';
 import { WasmAudioBackend } from '$lib/audio/WasmAudioBackend';
-import { WebMidiBackend } from '$lib/audio/WebMidiBackend';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
@@ -32,7 +31,7 @@ export function initializeAudioFeatures() {
 	});
 
 	onMount(() => {
-		if (getHaveJuceSupport()) {
+		if (getHasJuceSupport()) {
 			const audioBackend = new JuceAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
@@ -50,9 +49,6 @@ export function initializeAudioFeatures() {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 
-			const webMidiBackend = new WebMidiBackend(audioBackend, activePitchesContext.activePitches);
-			webMidiBackend.initialize();
-
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
 				audioBackend,
 				activePitchesContext.activePitches,
@@ -61,7 +57,6 @@ export function initializeAudioFeatures() {
 
 			return () => {
 				audioBackend.destroy();
-				webMidiBackend.destroy();
 				virtualPianoMidiBackend.destroy();
 			};
 		}

@@ -1,3 +1,3 @@
-export function getHaveJuceSupport() {
+export function getHasJuceSupport() {
 	return !!window.__JUCE__;
 }

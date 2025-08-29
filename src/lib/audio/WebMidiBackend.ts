@@ -10,21 +10,20 @@ export class WebMidiBackend {
 	) {}
 
 	async initialize() {
-		this.webMidi = await WebMidi.enable();
 		// Brute force of keeping stuff updated.
 		//
 		// TODO find a more elegant solution, maybe allowing users to select
 		// devices.
-		this.webMidi.addListener('midiaccessgranted', this.updateDeviceListeners);
-		this.webMidi.addListener('connected', this.updateDeviceListeners);
-		this.webMidi.addListener('disabled', this.updateDeviceListeners);
+		WebMidi.addListener('midiaccessgranted', this.updateDeviceListeners);
+		WebMidi.addListener('connected', this.updateDeviceListeners);
+		WebMidi.addListener('disabled', this.updateDeviceListeners);
 		this.updateDeviceListeners();
 	}
 
 	updateDeviceListeners = () => {
 		// Removes the possible previous listeners to prevent duplicate event
 		// handling
-		this.webMidi?.inputs.forEach((device) => {
+		WebMidi?.inputs.forEach((device) => {
 			device.removeListener('noteon', this.onNoteOn);
 			device.addListener('noteon', this.onNoteOn);
 
@@ -34,7 +33,7 @@ export class WebMidiBackend {
 	};
 
 	async destroy() {
-		this.webMidi?.disable();
+		WebMidi?.disable();
 	}
 
 	onNoteOn = (e: NoteMessageEvent) => {

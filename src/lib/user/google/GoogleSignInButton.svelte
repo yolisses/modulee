@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getHaveJuceSupport } from '$lib/audio/getHaveJuceSupport';
+	import { getHasJuceSupport } from '$lib/audio/getHaveJuceSupport';
 	import { onMount } from 'svelte';
 	import JuceGoogleSignInButton from './JuceGoogleSignInButton.svelte';
 	import WebGoogleSignInButton from './WebGoogleSignInButton.svelte';
@@ -8,7 +8,7 @@
 	let haveJuceSuport = $state<boolean>();
 
 	onMount(() => {
-		haveJuceSuport = getHaveJuceSupport();
+		haveJuceSuport = getHasJuceSupport();
 	});
 </script>
 
