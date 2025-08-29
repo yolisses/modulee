@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getHasJuceSupport } from '$lib/audio/getHasJuceSupport';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import {
 		faDownload,
@@ -6,11 +7,18 @@
 		faProjectDiagram,
 		faQuestion,
 	} from '@fortawesome/free-solid-svg-icons';
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { homeNavbarSelectionContextKey } from './homeNavbarSelectionContext';
 	import UserButton from './UserButton.svelte';
 
 	const homeNavbarSelectionContext = getRequiredContext(homeNavbarSelectionContextKey);
+
+	let hasJuceSupport = $state<boolean>();
+
+	onMount(() => {
+		hasJuceSupport = getHasJuceSupport();
+	});
 </script>
 
 <div
@@ -46,14 +54,16 @@
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" />
 		<div class="max-md:hidden">Projects</div>
 	</a>
-	<a
-		href="/plugin"
-		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'plugin'}
-	>
-		<Fa fw icon={faDownload} />
-		<div class="max-md:hidden">Get the plugin</div>
-	</a>
+	{#if hasJuceSupport === false}
+		<a
+			href="/plugin"
+			class="max-md:horizontal-tab md:vertical-tab"
+			data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'plugin'}
+		>
+			<Fa fw icon={faDownload} />
+			<div class="max-md:hidden">Get the plugin</div>
+		</a>
+	{/if}
 	<div class="flex-1 max-md:hidden"></div>
 	<a
 		href="/help"
