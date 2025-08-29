@@ -1,6 +1,6 @@
 import { type AudioBackendContext, setAudioBackendContext } from '$lib/audio/audioBackendContext';
 import { getGraphEngineData } from '$lib/audio/data/getGraphEngineData';
-import { getHasJuceSupport } from '$lib/audio/getHaveJuceSupport';
+import { getHasJuceSupport } from '$lib/audio/getHasJuceSupport';
 import { JuceAudioBackend } from '$lib/audio/JuceAudioBackend';
 import { VirtualPianoMidiBackend } from '$lib/audio/VirtualPianoMidiBackend';
 import { WasmAudioBackend } from '$lib/audio/WasmAudioBackend';

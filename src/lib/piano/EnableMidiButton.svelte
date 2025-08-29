@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { audioBackendContextKey } from '$lib/audio/audioBackendContext';
+	import { getHasJuceSupport } from '$lib/audio/getHasJuceSupport';
 	import { getHasMidiPermission } from '$lib/audio/getHasMidiPermission';
 	import { getHasMidiSupport } from '$lib/audio/getHasMidiSupport';
-	import { getHasJuceSupport } from '$lib/audio/getHaveJuceSupport';
 	import { WebMidiBackend } from '$lib/audio/WebMidiBackend';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { onMount } from 'svelte';
