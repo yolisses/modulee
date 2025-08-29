@@ -66,12 +66,12 @@
 	{/if}
 	<div class="flex-1 max-md:hidden"></div>
 	<a
-		href="/help"
+		href="/about"
 		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'help'}
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'about'}
 	>
 		<Fa fw icon={faQuestion} />
-		<div class="max-md:hidden">Help</div>
+		<div class="max-md:hidden">About</div>
 	</a>
 	<UserButton />
 </div>
