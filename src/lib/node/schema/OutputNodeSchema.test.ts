@@ -5,12 +5,12 @@ import { NodeSchema } from './NodeSchema';
 
 test('OutputNodeSchema', () => {
 	const outputNodeData: OutputNodeData = {
-		extras: {},
+		extras: { channel: 0 },
 		id: createId(),
-		type: 'OutputNode',
-		position: { x: 1, y: 2 },
-		isInputAutoConnectedMap: {},
 		internalModuleId: createId(),
+		isInputAutoConnectedMap: {},
+		position: { x: 1, y: 2 },
+		type: 'OutputNode',
 		unconnectedInputValues: { input: 3 },
 	};
 	NodeSchema.parse(outputNodeData);
@@ -18,12 +18,12 @@ test('OutputNodeSchema', () => {
 
 test('OutputNodeSchema with incorrect input', () => {
 	const outputNodeData: OutputNodeData = {
-		extras: {},
+		extras: { channel: 0 },
 		id: createId(),
-		type: 'OutputNode',
-		position: { x: 1, y: 2 },
-		isInputAutoConnectedMap: {},
 		internalModuleId: createId(),
+		isInputAutoConnectedMap: {},
+		position: { x: 1, y: 2 },
+		type: 'OutputNode',
 		unconnectedInputValues: { input1: 3 },
 	};
 	expect(() => NodeSchema.parse(outputNodeData)).toThrow();
