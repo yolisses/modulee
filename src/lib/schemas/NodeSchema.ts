@@ -8,7 +8,7 @@ import z from 'zod/v4';
 import { ModuleNodeBaseSchema } from './ModuleNodeBaseSchema';
 import { NodeBaseSchema } from './NodeBaseSchema';
 
-export const NodeSchema = z.union([
+export const NodeSchema = z.discriminatedUnion('type', [
 	ModuleNodeBaseSchema('ModuleNode', ModuleNodeExtrasSchema),
 	ModuleNodeBaseSchema('ModuleVoicesNode', ModuleVoicesNodeExtrasSchema),
 	NodeBaseSchema('AddNode', ['input1', 'input2'], [], z.object({})),
