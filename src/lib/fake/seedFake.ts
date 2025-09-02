@@ -1,7 +1,9 @@
-import prisma from '$lib/prisma';
+import { PrismaClient } from '../../generated/prisma/client';
 import { createFakeExternalModule } from './createFakeExternalModule';
 import { createFakeUser } from './createFakeUser';
 import { range } from './range';
+
+const prisma = new PrismaClient();
 
 export async function main() {
 	await prisma.externalModule.deleteMany({ where: { isForDevTesting: true } });
