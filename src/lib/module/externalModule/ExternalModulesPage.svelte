@@ -82,9 +82,9 @@
 			</div>
 		</div>
 	{/snippet}
+	{@render initialChildren?.()}
 	<InfiniteList {loader}>
 		{#snippet children(externalModuleData: ExternalModuleData<T>)}
-			{@render initialChildren?.()}
 			<ExternalModuleItem {externalModuleData} {handleModuleHover} />
 		{/snippet}
 		{#snippet emptyStateButtons()}
