@@ -6,7 +6,7 @@
 	import type { NodeDefinition } from '../definitions/NodeDefinition';
 	import { nodesName } from '../definitions/nodesName';
 	import { AddNodeHandler } from './AddNodeHandler';
-	import { getCanNodeBeCreated } from './getCanNodeBeCreated';
+	import { getCanNodeBeAdded } from './getCanNodeBeAdded';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
 
 	interface Props {
@@ -31,7 +31,7 @@
 		compare={compareByCategoryAndName}
 		getId={getType}
 		getName={getNodeDefinitionName}
-		items={nodeDefinitions.filter(getCanNodeBeCreated)}
+		items={nodeDefinitions.filter(getCanNodeBeAdded)}
 		onClick={addNodeHandler.handleNodeDefinitionSelect}
 	>
 		{#snippet content({ item: nodeDefinition })}

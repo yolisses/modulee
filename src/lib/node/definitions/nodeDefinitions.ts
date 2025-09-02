@@ -195,6 +195,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 			value: 0,
 		},
 		inputs: [],
+		isIntermediary: true,
 		type: 'ControlNode',
 	},
 	{
@@ -211,6 +212,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 				min: -1,
 			},
 		],
+		isIntermediary: true,
 		type: 'ValueFromChannelNode',
 	},
 	{
@@ -450,7 +452,7 @@ export const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		category: 'module',
-		defaultExtras: {},
+		defaultExtras: { channel: 0 },
 		inputs: [
 			{
 				default: 0,

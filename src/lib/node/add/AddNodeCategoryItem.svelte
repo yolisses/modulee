@@ -8,7 +8,7 @@
 	import { nodeCategoryNames } from '../definitions/nodeCategoryNames';
 	import type { NodeDefinitionCategory } from '../definitions/NodeDefinitionCategory';
 	import { AddNodeHandler } from './AddNodeHandler';
-	import { getCanNodeBeCreated } from './getCanNodeBeCreated';
+	import { getCanNodeBeAdded } from './getCanNodeBeAdded';
 
 	interface Props {
 		nodeDefinitionCategory: NodeDefinitionCategory;
@@ -48,7 +48,7 @@
 		<BasicList
 			getId={getType}
 			getName={getNodeDefinitionName}
-			items={nodeDefinitionCategory.nodeDefinitions.filter(getCanNodeBeCreated)}
+			items={nodeDefinitionCategory.nodeDefinitions.filter(getCanNodeBeAdded)}
 			onClick={addNodeHandler.handleNodeDefinitionSelect}
 		/>
 	</div>
