@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getIsMobile } from '$lib/node/add/getIsMobile';
 	import { onMount } from 'svelte';
 	import { AddNodeHandler } from './AddNodeHandler';
 	import { getNodeDefinitionsBySearchText } from './getNodeDefinitionsBySearchText';
@@ -20,8 +21,9 @@
 	}
 
 	onMount(() => {
-		// Using autofocus attribute is not reliable
-		element.focus();
+		if (!getIsMobile()) {
+			element.focus();
+		}
 	});
 </script>
 
