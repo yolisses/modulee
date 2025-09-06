@@ -107,7 +107,7 @@
 <svelte:head>
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
-<div class="flex h-screen w-screen overflow-hidden max-md:flex-col md:flex-row">
+<div class="flex h-svh w-screen overflow-hidden max-md:flex-col md:flex-row">
 	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
 		<div class="flex flex-1 flex-col overflow-hidden">
 			{@render children?.()}

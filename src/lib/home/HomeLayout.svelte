@@ -12,7 +12,7 @@
 	setHomeNavbarSelectionContext(homeNavbarSelectionContext);
 </script>
 
-<div class="flex h-screen overflow-hidden max-md:flex-col">
+<div class="flex h-svh overflow-hidden max-md:flex-col">
 	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
 		{@render children()}
 	</div>

@@ -29,6 +29,6 @@
 	});
 </script>
 
-<div class="flex min-h-screen flex-col items-center justify-center">
+<div class="flex min-h-svh flex-col items-center justify-center">
 	<Spinner />
 </div>
