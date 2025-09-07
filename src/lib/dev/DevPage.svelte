@@ -1,14 +1,22 @@
 <script>
-	import Movable from './Movable.svelte';
+	import Connection from './Connection.svelte';
+	import { ConnectionHandler } from './ConnectionHandler.svelte';
+	import Connector from './Connector.svelte';
 
-	function handleClick() {
-		console.log('here');
-	}
+	const connectionHandler = new ConnectionHandler();
 </script>
 
 <div class="h-[300px] w-[300px] overflow-auto border">
-	<div class="relative h-[600px] w-[600px] touch-pan-x touch-pan-y">
-		<button onclick={handleClick}>click me</button>
-		<Movable />
+	<div class="relative flex h-[600px] w-[600px] touch-pan-x touch-pan-y flex-col gap-10">
+		<Connector id="1" />
+		<Connector id="2" />
+		{#if connectionHandler.startPosition && connectionHandler.endPosition}
+			<Connection
+				endPosition={connectionHandler.endPosition}
+				startPosition={connectionHandler.startPosition}
+			/>
+		{/if}
 	</div>
 </div>
+<div>start {connectionHandler.start}</div>
+<div>end {connectionHandler.end}</div>
