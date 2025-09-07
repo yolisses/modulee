@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Vector } from 'nodes-editor';
+	import Slider from './Slider.svelte';
 
 	let element: HTMLElement;
 	let initialNodePosition = $state<Vector>();
@@ -38,6 +39,7 @@
 >
 	<button>Move me</button>
 	<div>some content here</div>
+	<Slider />
 </div>
 
 <div>
