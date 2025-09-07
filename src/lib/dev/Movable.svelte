@@ -11,12 +11,14 @@
 		initialNodePosition = position.clone();
 		initialPointerPosition = new Vector(e.clientX, e.clientY);
 		element.setPointerCapture(e.pointerId);
+		e.stopPropagation();
 	}
 
 	function handlePointerUp(e: PointerEvent) {
 		initialPointerPosition = undefined;
 		initialNodePosition = undefined;
 		element.releasePointerCapture(e.pointerId);
+		e.stopPropagation();
 	}
 
 	function handlePointerMove(e: PointerEvent) {
