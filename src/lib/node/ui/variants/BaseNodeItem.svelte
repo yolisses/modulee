@@ -64,7 +64,7 @@
 			style:width="{NODE_ITEM_WIDTH}lh"
 			class:outline-blue-500={isSelected}
 			class:outline-zinc-800={!isSelected}
-			class="node-item flex flex-col bg-zinc-700 outline"
+			class="node-item flex touch-none flex-col bg-zinc-700 outline"
 		>
 			<NodeItemHeader {node}>
 				{@render headerChildren?.()}
