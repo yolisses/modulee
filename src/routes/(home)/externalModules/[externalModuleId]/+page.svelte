@@ -9,4 +9,4 @@
 	const { data }: Props = $props();
 </script>
 
-<ExternalModulePage externalModuleData={data.externalModuleData} showCloseButton={false} />
+<ExternalModulePage externalModuleData={data.externalModuleData} showCloseButton />

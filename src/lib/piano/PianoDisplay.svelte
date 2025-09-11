@@ -30,6 +30,10 @@
 	function getIsBlack(key: number) {
 		return [1, 3, 6, 8, 10].includes(key % 12);
 	}
+
+	function handleContextMenu(e: MouseEvent) {
+		e.preventDefault();
+	}
 </script>
 
 <div class="relative">
@@ -44,6 +48,8 @@
 							class:bg-blue-500={activePitchesContext.activePitches.has(pitch)}
 							class:bg-white={!activePitchesContext.activePitches.has(pitch)}
 							class="flex min-w-3 flex-1 flex-col justify-end text-xs text-black outline outline-black"
+							oncontextmenu={handleContextMenu}
+							onpointercancel={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
 							onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
 							onpointerdown={(e) => pianoDisplayMidiBackend?.setNoteOn(pitch)}
 							onpointerenter={(e) => pianoDisplayMidiBackend?.handlePointerEnter(e, pitch)}
@@ -59,13 +65,15 @@
 						{#if getIsBlack(pitch)}
 							<button
 								aria-label={getMidiPitchName(pitch)}
-								class="pointer-events-auto w-full flex-1 outline outline-black"
 								class:bg-black={!activePitchesContext.activePitches.has(pitch)}
 								class:bg-blue-500={activePitchesContext.activePitches.has(pitch)}
-								onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
+								class="pointer-events-auto w-full flex-1 outline outline-black"
+								oncontextmenu={handleContextMenu}
+								onpointercancel={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
 								onpointerdown={(e) => pianoDisplayMidiBackend?.setNoteOn(pitch)}
 								onpointerenter={(e) => pianoDisplayMidiBackend?.handlePointerEnter(e, pitch)}
 								onpointerleave={(e) => pianoDisplayMidiBackend?.handlePointerLeave(e, pitch)}
+								onpointerup={(e) => pianoDisplayMidiBackend?.setNoteOff(pitch)}
 							>
 							</button>
 						{/if}
