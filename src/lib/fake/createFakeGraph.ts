@@ -1,5 +1,5 @@
 import type { GraphData } from '$lib/graph/GraphData';
-import type { ModuleType } from '../../generated/prisma/enums';
+import type { ModuleType } from '@prisma/client';
 import { createFakeEffectGraph } from './createFakeEffectGraph';
 
 export function createFakeGraph(moduleType: ModuleType): GraphData {
