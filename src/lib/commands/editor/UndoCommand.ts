@@ -8,9 +8,6 @@ import { NotImplementedError } from '$lib/NotImplementedError';
 export class UndoCommand extends EditorCommand<{
 	commandId: string;
 }> {
-	static getName() {
-		return 'test1';
-	}
 	static name = 'UndoCommand';
 
 	remotion!: Remotion<EditorCommand>;
