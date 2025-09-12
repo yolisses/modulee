@@ -27,15 +27,15 @@
 		children?: Snippet;
 	}
 
-	let element = $state<Element>();
-	const spaceContext = getRequiredContext(spaceContextKey);
-	const graphContext = getRequiredContext(graphContextKey);
-	const editorContext = getRequiredContext(editorContextKey);
 	const { node, children }: Props = $props();
-	const projectDataContext = getRequiredContext(projectDataContextKey);
-	let initialMouseDataPosition = $state(Vector.zero());
-	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
+	const editorContext = getRequiredContext(editorContextKey);
+	const graphContext = getRequiredContext(graphContextKey);
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
+	const projectDataContext = getRequiredContext(projectDataContextKey);
+	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
+	const spaceContext = getRequiredContext(spaceContextKey);
+	let element = $state<Element>();
+	let initialMouseDataPosition = $state(Vector.zero());
 	let initialNodePositions = $state<Map<Node, Vector>>(new Map());
 
 	const startConnectorAreaPointerStrategy = new StartConnectorAreaPointerStrategy(node.output);
