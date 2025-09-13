@@ -39,6 +39,10 @@
 			return node.internalModuleId === internalModuleIdContext.internalModuleId;
 		}),
 	);
+
+	$effect(() => {
+		graphSizer.handleNodesUpdate(visibleNodes);
+	});
 </script>
 
 <svelte:head>

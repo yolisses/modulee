@@ -26,16 +26,12 @@
 	/* Pointer events handling */
 	const graphCanvasPointerStrategyFactory = new GraphCanvasPointerStrategyFactory();
 
-	/* Resizing */
-	$effect(() => {
-		graphSizer.handleNodesUpdate(nodes);
-	});
-	const size = $derived(graphSizer.getSize());
-
 	const addNodeInputContext = $state({});
 	setAddNodeInputContext(addNodeInputContext);
 
 	new CenterOnInternalModuleChange(graphSizer, nodes);
+
+	const size = $derived(graphSizer.getSize());
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
