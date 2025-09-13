@@ -39,5 +39,7 @@
 </script>
 
 {#if hasMidiSupport && hasJuceSupport === false && hasPermission === false}
-	<button class="common-button" onclick={handleClick}> Enable MIDI </button>
+	<div class="rounded bg-zinc-800">
+		<button class="common-button" onclick={handleClick}> Enable MIDI </button>
+	</div>
 {/if}
