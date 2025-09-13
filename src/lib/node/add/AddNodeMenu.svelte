@@ -43,6 +43,8 @@
 	});
 </script>
 
+<button onclick={closeMenu} class="absolute h-full w-full" aria-label="overlay"></button>
+
 <!-- TODO consider adding a descriptive text like "Add node" -->
 <div class="menu-container absolute flex flex-col" bind:this={menu}>
 	<AddNodeMenuSearchInput bind:searchText />

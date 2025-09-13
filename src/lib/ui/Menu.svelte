@@ -40,6 +40,8 @@
 	});
 </script>
 
+<button onclick={closeModal} class="fixed inset-0 z-10" aria-label="overlay"></button>
+
 <div
 	class="absolute top-0 left-0 z-10 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"
 	bind:this={menu}
