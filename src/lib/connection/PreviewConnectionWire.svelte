@@ -16,16 +16,18 @@
 
 <BasePreviewConnectionWire>
 	{#snippet children({ endPosition, startPosition })}
-		{#snippet a()}
-			{#if !previewConnectionContext.endConnector && startIsInput}
-				<PreviewConnectionPlus position={endPosition} />
-			{/if}
-		{/snippet}
-
 		{#if startIsOutput}
-			<Wire {endPosition} {startPosition} children={a} />
+			<Wire {endPosition} {startPosition}>
+				{#if !previewConnectionContext.endConnector && startIsInput}
+					<PreviewConnectionPlus position={endPosition} />
+				{/if}
+			</Wire>
 		{:else}
-			<Wire endPosition={startPosition} startPosition={endPosition} children={a} />
+			<Wire endPosition={startPosition} startPosition={endPosition}>
+				{#if !previewConnectionContext.endConnector && startIsInput}
+					<PreviewConnectionPlus position={endPosition} />
+				{/if}
+			</Wire>
 		{/if}
 	{/snippet}
 </BasePreviewConnectionWire>
