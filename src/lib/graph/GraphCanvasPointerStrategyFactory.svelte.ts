@@ -6,29 +6,42 @@ import { spaceContextKey } from '$lib/space/spaceContext';
 import {
 	previewConnectionContextKey,
 	PreviewConnectionPointerStrategy,
+	rootElementContextKey,
 	SelectionBoxPointerStrategy,
 } from 'nodes-editor';
+import { onMount } from 'svelte';
 import { graphContextKey } from './graphContext';
 import { PreviewConnectionEndHandler } from './PreviewConnectionEndHandler';
 
 export class GraphCanvasPointerStrategyFactory {
-	graphContext = getRequiredContext(graphContextKey);
-	spaceContext = getRequiredContext(spaceContextKey);
-	editorContext = getRequiredContext(editorContextKey);
-	projectDataContext = getRequiredContext(projectDataContextKey);
-	previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
+	editorContext = getRequiredContext(editorContextKey);
+	graphContext = getRequiredContext(graphContextKey);
+	isTouchDevice = $state<boolean>();
+	previewConnectionContext = getRequiredContext(previewConnectionContextKey);
 	previewConnectionEndHandler: PreviewConnectionEndHandler;
+	projectDataContext = getRequiredContext(projectDataContextKey);
+	rootElementContext = getRequiredContext(rootElementContextKey);
+	spaceContext = getRequiredContext(spaceContextKey);
 
 	constructor() {
 		this.previewConnectionEndHandler = new PreviewConnectionEndHandler();
+		onMount(() => {
+			this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+		});
 	}
 
 	getPointerStrategy() {
-		const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy((e) => {
-			// Ignore mouse right button
+		function selectionBoxPointerCondition(e: PointerEvent) {
+			// Ignore mouse right button, used for adding a node
 			return e.button !== 2;
-		});
+		}
+
+		const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy(
+			this.rootElementContext.rootElement!,
+			!!this.isTouchDevice,
+			selectionBoxPointerCondition,
+		);
 		const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(
 			this.previewConnectionEndHandler.handleEndPreviewConnection,
 		);
