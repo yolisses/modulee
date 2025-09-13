@@ -114,18 +114,18 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	bind:this={scrollArea}
-	onscroll={handleScroll}
 	class="flex-1 overflow-scroll"
+	onscroll={handleScroll}
 	style:font-size={getScreenFontSize(spaceContext.space) + 'px'}
 	style:line-height={getScreenLineHeight(spaceContext.space) + 'px'}
 >
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
-			style:width={size.x + 'lh'}
-			style:height={size.y + 'lh'}
-			oncontextmenu={handleContextMenu}
 			bind:this={rootElementContext.rootElement}
 			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
+			oncontextmenu={handleContextMenu}
+			style:height={size.y + 'lh'}
+			style:width={size.x + 'lh'}
 		>
 			{#each connections as connection (connection.id)}
 				<ConnectionItem {connection} />
@@ -156,8 +156,8 @@ from scrolling when the menu is created -->
 
 <style lang="postcss">
 	.bg-dots {
-		background-size: 1lh 1lh;
-		background-position: 0.5lh 0.5lh;
 		background-image: radial-gradient(circle, #8884 0.05lh, rgba(0, 0, 0, 0) 0.05lh);
+		background-position: 0.5lh 0.5lh;
+		background-size: 1lh 1lh;
 	}
 </style>
