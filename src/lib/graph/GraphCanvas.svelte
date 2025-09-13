@@ -38,11 +38,9 @@
 	}
 
 	const { nodes, graphSizer, connections }: Props = $props();
-
-	const spaceContext = getRequiredContext(spaceContextKey);
-	const rootElementContext = getRequiredContext(rootElementContextKey);
-
 	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
+	const rootElementContext = getRequiredContext(rootElementContextKey);
+	const spaceContext = getRequiredContext(spaceContextKey);
 	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
 
 	/* Pointer events handling */
@@ -122,7 +120,7 @@
 	<PointerEventDispatcher pointerStrategy={graphCanvasPointerStrategyFactory.getPointerStrategy()}>
 		<div
 			bind:this={rootElementContext.rootElement}
-			class="bg-dots relative shrink-0 grow-0 overflow-hidden select-none"
+			class="bg-dots relative shrink-0 grow-0 touch-pan-x touch-pan-y overflow-hidden select-none"
 			oncontextmenu={handleContextMenu}
 			style:height={size.y + 'lh'}
 			style:width={size.x + 'lh'}
