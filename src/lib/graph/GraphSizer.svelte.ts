@@ -6,6 +6,11 @@ import { Vector } from 'nodes-editor';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
 
+/**
+ * Calculates the graph canvas area in a way that prevents shrinking. It is
+ * desired to deal with complex cases like moving nodes away from the edges,
+ * which usually causes flickering.
+ */
 export class GraphSizer {
 	minPosition = $state<Vector>();
 	maxPosition = $state<Vector>();
