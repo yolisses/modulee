@@ -73,11 +73,11 @@
 		if (delta.equals(Vector.zero())) return;
 		const nodeIds = [...selectedNodeIdsContext.selectedNodeIds];
 		const moveNodeCommand = new MoveNodesCommand({
-			id: createId(),
-			type: 'MoveNodesCommand',
-			details: { delta, nodeIds },
 			createdAt: new Date().toJSON(),
+			details: { delta, nodeIds },
+			id: createId(),
 			projectId: projectDataContext.projectData.id,
+			type: 'MoveNodesCommand',
 		});
 		editorContext.editor.execute(moveNodeCommand);
 	}
