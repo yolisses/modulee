@@ -17,6 +17,11 @@ export class GraphSizer {
 	zoomContext = getRequiredContext(zoomContextKey);
 	scrollArea = $state<HTMLElement>();
 
+	clearPositions() {
+		this.minPosition = undefined;
+		this.maxPosition = undefined;
+	}
+
 	getPadding() {
 		if (!this.scrollArea) return Vector.zero();
 

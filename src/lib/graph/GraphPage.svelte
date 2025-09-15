@@ -41,6 +41,12 @@
 	);
 
 	$effect(() => {
+		if (internalModuleIdContext.internalModuleId) {
+			graphSizer.clearPositions();
+		}
+	});
+
+	$effect(() => {
 		graphSizer.handleNodesUpdate(visibleNodes);
 	});
 </script>
