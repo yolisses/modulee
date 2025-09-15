@@ -31,10 +31,8 @@ export class CenterOnInternalModuleChange {
 	autoScroll() {
 		if (this.nodes.length === 0) return;
 
-		const { scrollArea } = this.graphSizer;
+		const { scrollArea, minPosition } = this.graphSizer;
 		if (!scrollArea) return;
-
-		const { minPosition } = this.graphSizer;
 		if (!minPosition) return;
 
 		const scrollAreaSize = getElementSize(scrollArea);
