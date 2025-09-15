@@ -52,12 +52,7 @@
 </script>
 
 <HowToAddNodesHint {nodes} />
-<GraphCanvasContainer
-	{graphSizer}
-	{nodes}
-	oncontextmenu={handleContextMenu}
-	onscroll={handleScroll}
->
+<GraphCanvasContainer {graphSizer} oncontextmenu={handleContextMenu} onscroll={handleScroll}>
 	{#each connections as connection (connection.id)}
 		<ConnectionItem {connection} />
 	{/each}

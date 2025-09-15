@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { setAddNodeInputContext } from '$lib/node/add/addNodeInputContext';
-	import type { Node } from '$lib/node/Node.svelte';
 	import { getScreenFontSize } from '$lib/space/getScreenFontSize';
 	import { getScreenLineHeight } from '$lib/space/getScreenLineHeight';
 	import { spaceContextKey } from '$lib/space/spaceContext';
@@ -13,12 +12,11 @@
 	interface Props {
 		children: Snippet;
 		graphSizer: GraphSizer;
-		nodes: Node[];
 		oncontextmenu: (e: MouseEvent) => void;
 		onscroll: (e: UIEvent) => void;
 	}
 
-	const { nodes, graphSizer, children, onscroll, oncontextmenu }: Props = $props();
+	const { graphSizer, children, onscroll, oncontextmenu }: Props = $props();
 	const rootElementContext = getRequiredContext(rootElementContextKey);
 	const spaceContext = getRequiredContext(spaceContextKey);
 
