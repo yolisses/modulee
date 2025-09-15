@@ -3,9 +3,11 @@ import { getElementSize } from '$lib/graph/getElementSize';
 import type { Node } from '$lib/node/Node.svelte';
 import { zoomContextKey } from '$lib/space/zoom/zoomContext';
 import { Vector } from 'nodes-editor';
+import { getNodesAveragePosition } from './getNodesAveragePosition';
 import { getNodesMaxPosition } from './getNodesMaxPosition';
 import { getNodesMinPosition } from './getNodesMinPosition';
 
+// TODO find a better name or consider separating autoScrollToNodesCenter
 /**
  * Calculates the graph canvas area in a way that prevents shrinking. It is
  * desired to deal with complex cases like moving nodes away from the edges,
@@ -94,5 +96,21 @@ export class GraphSizer {
 		} else {
 			return this.getPadding().multiplyByNumber(2);
 		}
+	}
+
+	autoScrollToNodesCenter(nodes: Node[]) {
+		if (nodes.length === 0) return;
+
+		const { scrollArea, minPosition } = this;
+		if (!scrollArea) return;
+		if (!minPosition) return;
+
+		const scrollAreaSize = getElementSize(scrollArea);
+		const averagePosition = getNodesAveragePosition(nodes);
+		const scrollPosition = averagePosition
+			.subtract(minPosition)
+			.multiplyByNumber(this.zoomContext.zoom)
+			.subtract(scrollAreaSize.divideByNumber(2));
+		scrollArea.scrollTo({ top: scrollPosition.y, left: scrollPosition.x });
 	}
 }

@@ -7,7 +7,6 @@
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { PointerEventDispatcher, rootElementContextKey } from 'nodes-editor';
 	import { type Snippet } from 'svelte';
-	import { CenterOnInternalModuleChange } from './CenterOnInternalModuleChange.svelte';
 	import { GraphCanvasPointerStrategyFactory } from './GraphCanvasPointerStrategyFactory.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 
@@ -28,8 +27,6 @@
 
 	const addNodeInputContext = $state({});
 	setAddNodeInputContext(addNodeInputContext);
-
-	new CenterOnInternalModuleChange(graphSizer, nodes);
 
 	const size = $derived(graphSizer.getSize());
 </script>

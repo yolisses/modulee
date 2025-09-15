@@ -8,6 +8,7 @@
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import { tick, untrack } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import { graphContextKey } from './graphContext';
 	import { GraphSizer } from './GraphSizer.svelte';
@@ -43,6 +44,12 @@
 	$effect(() => {
 		if (internalModuleIdContext.internalModuleId) {
 			graphSizer.clearPositions();
+			untrack(() => {
+				// Wait for DOM updates
+				tick().then(() => {
+					graphSizer.autoScrollToNodesCenter(visibleNodes);
+				});
+			});
 		}
 	});
 
