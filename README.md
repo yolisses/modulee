@@ -21,12 +21,15 @@ for your operational system.
 
 To run as an web app locally:
 
-1. Clone the repository.
-2. Install the dependencies: `npm install`
-3. Install the audio backend dependencies: **go to the `static` folder** and
-   run `npm install`
-4. Start the server: `npm run dev`
-5. Open the url [http://localhost:5173](http://localhost:5173) on the browser
+1. Clone the repository
+2. `npm install` to install the dependencies
+3. **go to the `static` folder** and run `npm install` to install the audio
+   backend dependencies
+4. `docker compose up -d` to start the databases
+5. Create a copy of `.env.example` named `.env`
+6. `npx prisma migrate dev` to run the database migrations
+7. `npm run dev` to start the server.
+8. Open the url [http://localhost:5173](http://localhost:5173) on the browser
 
 ## Contributing
 
