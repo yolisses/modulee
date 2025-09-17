@@ -23,7 +23,7 @@ To run as an web app locally:
 
 1. Clone the repository.
 2. Install the dependencies: `npm install`
-3. Install the audio backend dependencies: **go to the `/static` folder** and
+3. Install the audio backend dependencies: **go to the `static` folder** and
    run `npm install`
 4. Start the server: `npm run dev`
 5. Open the url [http://localhost:5173](http://localhost:5173) on the browser
