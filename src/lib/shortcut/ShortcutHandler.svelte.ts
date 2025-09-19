@@ -28,8 +28,13 @@ export class ShortcutHandler {
 
 		if (!shortcut) return;
 
+		console.log(shortcut);
+
 		const { contexts } = this.contextsContext;
 		const commandClass = actionCommandClassesByType[shortcut.commandType];
+
+		console.log(actionCommandClassesByType);
+		console.log(commandClass);
 
 		if (commandClass) {
 			e.preventDefault();
