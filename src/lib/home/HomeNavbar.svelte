@@ -26,9 +26,9 @@
 >
 	<a
 		aria-label="Home"
-		title="Go to projects page"
-		href="/externalModules/instruments"
 		class="md:vertical-tab max-md:hidden"
+		href="/projects"
+		title="Go to projects page"
 	>
 		<img
 			height="16"
@@ -39,26 +39,26 @@
 		/>
 	</a>
 	<a
-		href="/externalModules/instruments"
-		class="max-md:horizontal-tab md:vertical-tab"
-		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'instruments'}
-	>
-		<Fa fw icon={faGuitar} />
-		<div class="max-md:hidden">Instruments</div>
-	</a>
-	<a
-		href="/projects"
 		class="max-md:horizontal-tab md:vertical-tab"
 		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'projects'}
+		href="/projects"
 	>
 		<Fa fw icon={faProjectDiagram} rotate={180} flip="vertical" />
 		<div class="max-md:hidden">Projects</div>
 	</a>
+	<a
+		class="max-md:horizontal-tab md:vertical-tab"
+		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'instruments'}
+		href="/externalModules/instruments"
+	>
+		<Fa fw icon={faGuitar} />
+		<div class="max-md:hidden">Instruments</div>
+	</a>
 	{#if hasJuceSupport === false}
 		<a
-			href="/plugin"
 			class="max-md:horizontal-tab md:vertical-tab"
 			data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'plugin'}
+			href="/plugin"
 		>
 			<Fa fw icon={faDownload} />
 			<div class="max-md:hidden">Get the plugin</div>
@@ -66,9 +66,9 @@
 	{/if}
 	<div class="flex-1 max-md:hidden"></div>
 	<a
-		href="/about"
 		class="max-md:horizontal-tab md:vertical-tab"
 		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'about'}
+		href="/about"
 	>
 		<Fa fw icon={faQuestion} />
 		<div class="max-md:hidden">About</div>
