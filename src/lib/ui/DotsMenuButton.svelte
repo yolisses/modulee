@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import type { Placement } from '@floating-ui/dom';
 	import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 	import type { Snippet } from 'svelte';
@@ -10,31 +11,23 @@
 		placement?: Placement;
 	}
 
-	let isModalActive = $state(false);
-	let button = $state<HTMLElement>();
 	const { children, placement }: Props = $props();
-
-	function handleClick() {
-		isModalActive = true;
-	}
-
-	function closeModal() {
-		isModalActive = false;
-	}
+	const modalState = new ModalState();
+	let button = $state<HTMLElement>();
 </script>
 
 <!-- This px-2.5 is a hacky solution to use in home pages -->
 <button
 	title="Options"
 	bind:this={button}
-	onclick={handleClick}
+	onclick={modalState.open}
 	class="common-button self-stretch px-2.5"
 >
 	<Fa fw icon={faEllipsisV} />
 </button>
 
-{#if isModalActive}
-	<Menu {closeModal} referenceElement={button} {placement}>
+{#if modalState.isOpen}
+	<Menu {modalState} referenceElement={button} {placement}>
 		{@render children()}
 	</Menu>
 {/if}

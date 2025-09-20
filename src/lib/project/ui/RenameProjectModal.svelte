@@ -3,13 +3,14 @@
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
+	import type { ModalState } from './ModalState.svelte';
 
 	interface Props {
-		closeModal: () => void;
+		modalState: ModalState;
 		projectData: ProjectData;
 	}
 
-	const { closeModal, projectData }: Props = $props();
+	const { modalState, projectData }: Props = $props();
 	let textInput: HTMLInputElement;
 
 	onMount(() => {
@@ -17,24 +18,24 @@
 	});
 </script>
 
-<Modal {closeModal}>
+<Modal {modalState}>
 	<form
-		method="post"
-		class="contents"
-		use:enhance={closeModal}
 		action="/projects/{projectData.id}?/patch"
+		class="contents"
+		method="post"
+		use:enhance={modalState.close}
 	>
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Rename project "{projectData?.name}"</p>
 			<input
-				type="text"
-				name="name"
-				class="common-input"
 				bind:this={textInput}
+				class="common-input"
+				name="name"
+				type="text"
 				value={projectData.name}
 			/>
 			<div class="flex flex-row justify-end gap-2">
-				<button type="button" class="common-button" onclick={closeModal}> Cancel </button>
+				<button type="button" class="common-button" onclick={modalState.close}> Cancel </button>
 				<button type="submit" class="primary-button"> Rename </button>
 			</div>
 		</div>

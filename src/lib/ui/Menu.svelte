@@ -1,28 +1,29 @@
 <script lang="ts">
+	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { computePosition, flip, shift, type Placement } from '@floating-ui/dom';
 	import { type Snippet } from 'svelte';
 
 	interface Props {
 		children: Snippet;
+		modalState: ModalState;
 		placement?: Placement;
-		closeModal: () => void;
 		referenceElement: HTMLElement;
 	}
 
 	let menu = $state<HTMLElement>();
-	const { children, closeModal, placement = 'bottom', referenceElement }: Props = $props();
+	const { modalState, children, placement = 'bottom', referenceElement }: Props = $props();
 
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = menu?.contains(e.target as Node);
 		if (!clickedInside) {
-			closeModal();
+			modalState.close();
 		}
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			closeModal();
+			modalState.close();
 		}
 	}
 
@@ -40,7 +41,7 @@
 	});
 </script>
 
-<button onclick={closeModal} class="fixed inset-0 z-10" aria-label="overlay"></button>
+<button onclick={modalState.close} class="fixed inset-0 z-10" aria-label="overlay"></button>
 
 <div
 	class="absolute top-0 left-0 z-10 flex w-max flex-col rounded border border-black/50 bg-zinc-800 shadow-lg"

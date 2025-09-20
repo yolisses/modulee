@@ -1,24 +1,17 @@
 <script lang="ts">
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { ModalState } from '../ui/ModalState.svelte';
 	import CreateProjectModal from './CreateProjectModal.svelte';
 
-	let isModalActive = $state(false);
-
-	function handleClick() {
-		isModalActive = true;
-	}
-
-	function closeModal() {
-		isModalActive = false;
-	}
+	const modalState = new ModalState();
 </script>
 
-<button onclick={handleClick} class="primary-button">
+<button onclick={modalState.open} class="primary-button">
 	<Fa fw icon={faPlus} />
 	Create project
 </button>
 
-{#if isModalActive}
-	<CreateProjectModal {closeModal} />
+{#if modalState.isOpen}
+	<CreateProjectModal {modalState} />
 {/if}

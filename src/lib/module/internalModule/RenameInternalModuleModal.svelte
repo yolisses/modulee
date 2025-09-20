@@ -3,17 +3,18 @@
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 	import type { InternalModule } from './InternalModule';
 
 	interface Props {
-		closeModal: () => void;
+		modalState: ModalState;
 		internalModule: InternalModule;
 	}
 
-	const { closeModal, internalModule }: Props = $props();
+	const { modalState, internalModule }: Props = $props();
 
 	let textInput: HTMLInputElement;
 	let name = $state(internalModule.name);
@@ -29,7 +30,7 @@
 			details: { name, internalModuleId: internalModule.id },
 		});
 		editorContext.editor.execute(command);
-		closeModal();
+		modalState.close();
 	}
 
 	onMount(() => {
@@ -37,7 +38,7 @@
 	});
 </script>
 
-<Modal {closeModal}>
+<Modal {modalState}>
 	<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 		<p>Rename internalModule "{internalModule?.name}"</p>
 		<input
@@ -48,7 +49,7 @@
 			onchange={handleSubmit}
 		/>
 		<div class="flex flex-row justify-end gap-2">
-			<button class="common-button" onclick={closeModal}> Cancel </button>
+			<button class="common-button" onclick={modalState.close}> Cancel </button>
 			<button class="primary-button" onclick={handleSubmit}> Rename </button>
 		</div>
 	</div>

@@ -2,6 +2,7 @@
 	import ListPageLayout from '$lib/ui/ListPageLayout.svelte';
 	import { faCalendarAlt, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import DeleteExternalModuleButton from './DeleteExternalModuleButton.svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 	import LikeButton from './LikeButton.svelte';
 	import UseExternalModuleButton from './UseExternalModuleButton.svelte';
@@ -24,6 +25,7 @@
 		<div class="flex flex-row">
 			<UseExternalModuleButton {externalModuleData} />
 			<LikeButton externalModuleId={externalModuleData.id} />
+			<DeleteExternalModuleButton />
 		</div>
 		<div class="flex flex-row items-center gap-2">
 			<Fa icon={faUser} class="opacity-50" />

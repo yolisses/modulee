@@ -1,25 +1,26 @@
 <script lang="ts">
+	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
 		children: Snippet;
-		closeModal: () => void;
+		modalState: ModalState;
 	}
 
 	let modal = $state<HTMLElement>();
-	const { children, closeModal }: Props = $props();
+	const { children, modalState }: Props = $props();
 
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = modal?.contains(e.target as Node);
 		if (!clickedInside) {
-			closeModal();
+			modalState.close();
 		}
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape') {
-			closeModal();
+			modalState.close();
 		}
 	}
 </script>

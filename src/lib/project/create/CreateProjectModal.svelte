@@ -2,13 +2,14 @@
 	import { enhance } from '$app/forms';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
+	import type { ModalState } from '../ui/ModalState.svelte';
 
 	interface Props {
-		closeModal: () => void;
+		modalState: ModalState;
 	}
 
 	let textInput: HTMLInputElement;
-	const { closeModal }: Props = $props();
+	const { modalState }: Props = $props();
 
 	onMount(() => {
 		textInput.focus();
@@ -16,7 +17,7 @@
 	});
 </script>
 
-<Modal {closeModal}>
+<Modal {modalState}>
 	<form action="?/create" method="post" use:enhance>
 		<div class="flex flex-col gap-4 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Create project</p>
@@ -58,7 +59,7 @@
 				</div>
 			</div>
 			<div class="flex flex-row justify-end gap-2">
-				<button type="button" class="common-button" onclick={closeModal}> Cancel </button>
+				<button type="button" class="common-button" onclick={modalState.close}> Cancel </button>
 				<button type="submit" class="primary-button"> Create </button>
 			</div>
 		</div>

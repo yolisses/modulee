@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
+	import { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import RenameInternalModuleModal from './RenameInternalModuleModal.svelte';
@@ -8,23 +9,15 @@
 		internalModule: InternalModule;
 	}
 
-	let isModalActive = $state(false);
+	const modalState = new ModalState();
 	const { internalModule }: Props = $props();
-
-	function handleClick() {
-		isModalActive = true;
-	}
-
-	function closeModal() {
-		isModalActive = false;
-	}
 </script>
 
-<button class="common-button" onclick={handleClick}>
+<button class="common-button" onclick={modalState.open}>
 	<Fa fw icon={faEdit} />
 	Rename
 </button>
 
-{#if isModalActive}
-	<RenameInternalModuleModal {internalModule} {closeModal} />
+{#if modalState.isOpen}
+	<RenameInternalModuleModal {internalModule} {modalState} />
 {/if}

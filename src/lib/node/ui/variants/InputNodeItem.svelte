@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { InputNode } from '$lib/node/InputNode';
+	import { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import BaseNodeItem from './BaseNodeItem.svelte';
@@ -10,16 +11,11 @@
 	}
 
 	const { inputNode }: Props = $props();
-
-	let isModalActive = $state(false);
+	const modalState = new ModalState();
 
 	function handleClick(e: Event) {
 		e.stopPropagation();
-		isModalActive = true;
-	}
-
-	function closeModal() {
-		isModalActive = false;
+		modalState.open();
 	}
 </script>
 
@@ -41,6 +37,6 @@
 	{/snippet}
 </BaseNodeItem>
 
-{#if isModalActive}
-	<EditInputNodeModal {inputNode} {closeModal} />
+{#if modalState.isOpen}
+	<EditInputNodeModal {inputNode} {modalState} />
 {/if}

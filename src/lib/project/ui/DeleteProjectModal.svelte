@@ -3,28 +3,34 @@
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
 	import type { ProjectData } from '../data/ProjectData';
+	import type { ModalState } from './ModalState.svelte';
 
 	interface Props {
-		closeModal: () => void;
+		modalState: ModalState;
 		projectData: ProjectData;
 	}
 
 	let cancelButton: HTMLButtonElement;
-	const { closeModal, projectData }: Props = $props();
+	const { modalState, projectData }: Props = $props();
 
 	onMount(() => {
 		cancelButton.focus();
 	});
 </script>
 
-<Modal {closeModal}>
+<Modal {modalState}>
 	<form action="?/delete" method="post" use:enhance>
 		<input type="hidden" name="projectId" value={projectData.id} />
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
 			<p>Delete the project <b>{projectData.name}</b>?</p>
 			<p>This action is <b>irreversible</b>.</p>
 			<div class="flex flex-row justify-end gap-2">
-				<button type="button" bind:this={cancelButton} class="common-button" onclick={closeModal}>
+				<button
+					bind:this={cancelButton}
+					class="common-button"
+					onclick={modalState.close}
+					type="button"
+				>
 					Cancel
 				</button>
 				<button type="submit" class="rounded bg-red-500 p-2 hover:bg-red-600"> Delete </button>
