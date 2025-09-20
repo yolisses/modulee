@@ -25,7 +25,7 @@
 		<div class="flex flex-row">
 			<UseExternalModuleButton {externalModuleData} />
 			<LikeButton externalModuleId={externalModuleData.id} />
-			<DeleteExternalModuleButton />
+			<DeleteExternalModuleButton {externalModuleData} />
 		</div>
 		<div class="flex flex-row items-center gap-2">
 			<Fa icon={faUser} class="opacity-50" />
