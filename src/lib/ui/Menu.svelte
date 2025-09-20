@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
+	import type { ModalState } from '$lib/ui/ModalState.svelte';
 	import type { InputMouseEvent } from '$lib/utils/InputMouseEvent';
 	import { computePosition, flip, shift, type Placement } from '@floating-ui/dom';
 	import { type Snippet } from 'svelte';

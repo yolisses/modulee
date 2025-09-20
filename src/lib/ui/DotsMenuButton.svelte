@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ModalState } from '$lib/project/ui/ModalState.svelte';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import type { Placement } from '@floating-ui/dom';
 	import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 	import type { Snippet } from 'svelte';

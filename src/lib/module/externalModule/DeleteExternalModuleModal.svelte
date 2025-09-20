@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import Modal from '$lib/ui/Modal.svelte';
+	import type { ModalState } from '$lib/ui/ModalState.svelte';
 	import { onMount } from 'svelte';
 	import type { ExternalModuleData } from './ExternalModuleData';
 

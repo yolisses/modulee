@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InputNode } from '$lib/node/InputNode';
-	import { ModalState } from '$lib/project/ui/ModalState.svelte';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import BaseNodeItem from './BaseNodeItem.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InternalModule } from '$lib/module/internalModule/InternalModule';
-	import { ModalState } from '$lib/project/ui/ModalState.svelte';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import RenameInternalModuleModal from './RenameInternalModuleModal.svelte';

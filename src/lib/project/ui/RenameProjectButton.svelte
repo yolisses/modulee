@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
+	import { ModalState } from '../../ui/ModalState.svelte';
 	import type { ProjectData } from '../data/ProjectData';
-	import { ModalState } from './ModalState.svelte';
 	import RenameProjectModal from './RenameProjectModal.svelte';
 
 	interface Props {

@@ -3,9 +3,9 @@
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
+	import type { ModalState } from '$lib/ui/ModalState.svelte';
 	import { onMount } from 'svelte';
 	import type { InternalModule } from './InternalModule';
 

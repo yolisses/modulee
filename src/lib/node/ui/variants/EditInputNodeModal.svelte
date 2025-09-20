@@ -4,10 +4,10 @@
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import type { InputNode } from '$lib/node/InputNode';
-	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { modalRootContextKey } from '$lib/ui/modalRootContext';
+	import type { ModalState } from '$lib/ui/ModalState.svelte';
 	import Portal from 'svelte-portal';
 
 	interface Props {

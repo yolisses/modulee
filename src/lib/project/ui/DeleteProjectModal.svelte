@@ -2,8 +2,8 @@
 	import { enhance } from '$app/forms';
 	import Modal from '$lib/ui/Modal.svelte';
 	import { onMount } from 'svelte';
+	import type { ModalState } from '../../ui/ModalState.svelte';
 	import type { ProjectData } from '../data/ProjectData';
-	import type { ModalState } from './ModalState.svelte';
 
 	interface Props {
 		modalState: ModalState;

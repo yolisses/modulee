@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { ModalState } from '$lib/project/ui/ModalState.svelte';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { userDataContextKey } from '$lib/user/userDataContext';
 	import { faTrash } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
