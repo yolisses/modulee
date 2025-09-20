@@ -40,7 +40,7 @@
 </script>
 
 {#if menuPosition}
-	<button onclick={modalState.close} class="absolute h-full w-full" aria-label="overlay"></button>
+	<button onclick={closeModal} class="absolute h-full w-full" aria-label="overlay"></button>
 	<div
 		class="absolute"
 		bind:this={positioner}
@@ -48,6 +48,6 @@
 		style:left={menuPosition.x + 'px'}
 	></div>
 	<div bind:this={menu} class="absolute">
-		<SetModuleReferenceMenu {modalState} {moduleNodeId} />
+		<SetModuleReferenceMenu {closeModal} {moduleNodeId} />
 	</div>
 {/if}

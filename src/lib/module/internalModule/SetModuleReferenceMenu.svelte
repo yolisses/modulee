@@ -5,7 +5,6 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
 	import type { Module } from '$lib/module/Module';
-	import type { ModalState } from '$lib/project/ui/ModalState.svelte';
 	import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
 	import BasicList from '$lib/ui/BasicList.svelte';
 	import { getId } from '$lib/ui/getId';
@@ -15,10 +14,10 @@
 
 	interface Props {
 		moduleNodeId: string;
-		modalState: ModalState;
+		closeModal: () => void;
 	}
 
-	const { modalState, moduleNodeId }: Props = $props();
+	const { closeModal, moduleNodeId }: Props = $props();
 	const editorContext = getRequiredContext(editorContextKey);
 	const graphContext = getRequiredContext(graphContextKey);
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
@@ -34,7 +33,7 @@
 			projectId: projectDataContext.projectData.id,
 		});
 		editorContext.editor.execute(command);
-		modalState.close();
+		closeModal();
 	}
 
 	function getName(module: Module) {
