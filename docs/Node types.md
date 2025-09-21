@@ -28,8 +28,8 @@ one of two options: true or false. A boolean input is true if its greater than
 - **Frequency**: Outputs the correspondent frequency for a MIDI pitch.
 - **Constant**: Outputs a specified value.
 - **Hold**: Outputs the input at the moment the trigger input become true.
-- **Delay**: Delays a value based on a time input. It has a maximum time input to
-  prevent wasting all device's memory.
+- **Delay**: Delays a value based on a time input. It has a maximum time input
+  to prevent wasting all device's memory.
 - **Envelope**: Creates an envelope signal using attack, decay, sustain, and
   release parameters.
 
