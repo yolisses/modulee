@@ -1,4 +1,4 @@
-import { FormatNodesCommand } from '$lib/commands/node/FormatNodesCommand';
+import { OrganizeNodesCommand } from '$lib/commands/node/OrganizeNodesCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';
@@ -6,7 +6,7 @@ import { ActionCommand } from '$lib/shortcut/ActionCommand';
 import type { Contexts } from '$lib/shortcut/Contexts.svelte';
 import type { NodeData } from '../data/NodeData';
 
-export class FormatNodesActionCommand extends ActionCommand {
+export class OrganizeNodesActionCommand extends ActionCommand {
 	nodesData!: NodeData[];
 
 	execute(contexts: Contexts): void {
@@ -14,12 +14,12 @@ export class FormatNodesActionCommand extends ActionCommand {
 		const { projectData } = contexts.get(projectDataContextKey);
 
 		const newInternalModuleId = createId();
-		const command = new FormatNodesCommand({
+		const command = new OrganizeNodesCommand({
 			createdAt: new Date().toJSON(),
 			details: {},
 			id: newInternalModuleId,
 			projectId: projectData.id,
-			type: 'FormatNodesCommand',
+			type: 'OrganizeNodesCommand',
 		});
 
 		editor.execute(command);

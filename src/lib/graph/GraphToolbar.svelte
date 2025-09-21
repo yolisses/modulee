@@ -5,7 +5,7 @@
 	import ZoomInButton from '$lib/zoom/ZoomInButton.svelte';
 	import ZoomOutButton from '$lib/zoom/ZoomOutButton.svelte';
 	import { portal } from 'svelte-portal';
-	import FormatNodesButton from './format/FormatNodesButton.svelte';
+	import OrganizeNodesButton from './organize/OrganizeNodesButton.svelte';
 
 	const projectToobalContext = getRequiredContext(projectToolbarContextKey);
 </script>
@@ -14,5 +14,5 @@
 	<ZoomInButton />
 	<ZoomOutButton />
 	<GroupNodesButton />
-	<FormatNodesButton />
+	<OrganizeNodesButton />
 </div>

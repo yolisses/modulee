@@ -3,13 +3,13 @@ import type { ConnectionData } from '$lib/connection/ConnectionData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import type { GraphRegistry } from '../GraphRegistry';
-import type { FormatingNode } from './FormatingNode';
+import type { OrganizingNode } from './OrganizingNode';
 
 function getInputIndex(inputDefinitions: string[], connectionData: ConnectionData): number {
 	return inputDefinitions.indexOf(connectionData.inputPath.inputKey);
 }
 
-function getFormatingNodeInputs(nodeData: NodeData, graphRegistry: GraphRegistry) {
+function getOrganizingNodeInputs(nodeData: NodeData, graphRegistry: GraphRegistry) {
 	const nodeDefinition = nodeDefinitionsByName[nodeData.type];
 	const inputDefinitions = nodeDefinition.inputs.map((inputDefinition) => {
 		return inputDefinition.key;
@@ -31,13 +31,13 @@ function getFormatingNodeInputs(nodeData: NodeData, graphRegistry: GraphRegistry
 		});
 }
 
-export function getFormatingNodeWithType(
+export function getOrganizingNodeWithType(
 	nodeData: NodeData,
 	graphRegistry: GraphRegistry,
-): FormatingNode {
+): OrganizingNode {
 	return {
 		id: nodeData.id,
 		height: getNodeHeight(nodeData, graphRegistry),
-		inputs: getFormatingNodeInputs(nodeData, graphRegistry),
+		inputs: getOrganizingNodeInputs(nodeData, graphRegistry),
 	};
 }

@@ -5,7 +5,7 @@ import type { NodeData } from '$lib/node/data/NodeData';
 import type { NodeDataBase } from '$lib/node/data/NodeDataBase';
 import { expect, test } from 'vitest';
 import { mockCommandData } from '../test/mockNodeData';
-import { FormatNodesCommand } from './FormatNodesCommand';
+import { OrganizeNodesCommand } from './OrganizeNodesCommand';
 
 function getPositionsById(nodesData: NodeData[]) {
 	const positions = new Map<string, VectorData>();
@@ -47,7 +47,7 @@ test('c', () => {
 		]),
 	} as GraphRegistry;
 
-	const command = new FormatNodesCommand(mockCommandData({}));
+	const command = new OrganizeNodesCommand(mockCommandData({}));
 	command.execute(graphRegistry);
 
 	expect(getPositionsById(graphRegistry.nodes.values())).toEqual(

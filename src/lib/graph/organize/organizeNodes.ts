@@ -1,13 +1,17 @@
 import { ById } from '$lib/editor/ById';
 import { Vector } from 'nodes-editor';
-import type { FormatingNode } from './FormatingNode';
+import type { OrganizingNode } from './OrganizingNode';
 import { getLayerByNode } from './getLayerByNode';
 
 // TODO consider returning the positions instead of changing them in place
 /**
  * @param nodes Must be topologically sorted beforehand
  */
-export function formatNodes<T extends FormatingNode>(nodes: T[], nodeWidth: number, gap: number) {
+export function organizeNodes<T extends OrganizingNode>(
+	nodes: T[],
+	nodeWidth: number,
+	gap: number,
+) {
 	const nextPositionsByLayer = [0];
 	const nodesById = ById.fromItems(nodes);
 	const positions = new Map<T, Vector>();

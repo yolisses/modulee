@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FormatNodesCommand } from '$lib/commands/node/FormatNodesCommand';
+	import { OrganizeNodesCommand } from '$lib/commands/node/OrganizeNodesCommand';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';
@@ -37,9 +37,9 @@
 	});
 
 	const processedGraphRegistry = $derived.by(() => {
-		const formatNodesCommand = new FormatNodesCommand({} as any);
+		const organizeNodesCommand = new OrganizeNodesCommand({} as any);
 		const graphRegistry = getProcessedGraphRegistry(graphRegistryContext.graphRegistry);
-		formatNodesCommand.execute(graphRegistry);
+		organizeNodesCommand.execute(graphRegistry);
 		return graphRegistry;
 	});
 	const graph = $derived(new Graph(processedGraphRegistry));

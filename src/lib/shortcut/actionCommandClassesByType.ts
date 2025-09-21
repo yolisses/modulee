@@ -1,6 +1,6 @@
 import { CopyNodesActionCommand } from '$lib/node/actionCommands/CopyNodesActionCommand';
-import { FormatNodesActionCommand } from '$lib/node/actionCommands/FormatNodesActionCommand';
 import { GroupNodesActionCommand } from '$lib/node/actionCommands/GroupNodesActionCommand';
+import { OrganizeNodesActionCommand } from '$lib/node/actionCommands/OrganizeNodesActionCommand';
 import { PasteNodesActionCommand } from '$lib/node/actionCommands/PasteNodesActionCommand';
 import { RedoActionCommand } from '$lib/node/actionCommands/RedoActionCommand';
 import { RemoveNodesActionCommand } from '$lib/node/actionCommands/RemoveNodesActionCommand';
@@ -14,7 +14,7 @@ import type { ActionCommandClass } from './actionCommandClass';
 
 export const actionCommandClassesByType: Record<string, ActionCommandClass> = {
 	CopyNodesActionCommand,
-	FormatNodesActionCommand,
+	OrganizeNodesActionCommand: OrganizeNodesActionCommand,
 	GroupNodesActionCommand,
 	PasteNodesActionCommand,
 	RedoActionCommand,
