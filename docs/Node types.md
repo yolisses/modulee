@@ -5,8 +5,9 @@ increasing complexity. Below is a list of node types, grouped by category,
 describing what each does.
 
 Some nodes have boolean inputs or output. It means they are only interpreted as
-one of two options: true or false. A boolean input is true if its greater than
-0.5, and false otherwise. A boolean output is always 1 for true and 0 to false.
+one of two options: true or false. A boolean input value is true if it is
+greater than 0.5, and false otherwise. A boolean output value is 1 for true and
+0 to false.
 
 ## Math
 
