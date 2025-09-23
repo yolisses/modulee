@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { audioBackendContextKey } from '$lib/audio/audioBackendContext';
 	import { hashToUsize } from '$lib/audio/data/hashToUsize';
-	import { SetAutoConnectionInputCommand } from '$lib/commands/node/SetAutoConnectionInputCommand';
-	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/SetUnconnectedInputValueCommand';
+	import { SetAutoConnectionInputCommand } from '$lib/commands/node/attribute/SetAutoConnectionInputCommand';
+	import { SetUnconnectedInputValueCommand } from '$lib/commands/node/attribute/SetUnconnectedInputValueCommand';
 	import { clamp } from '$lib/connection/clamp';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetAutoConnectionInputCommand } from '$lib/commands/node/SetAutoConnectionInputCommand';
+	import { SetAutoConnectionInputCommand } from '$lib/commands/node/attribute/SetAutoConnectionInputCommand';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';

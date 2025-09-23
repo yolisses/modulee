@@ -1,4 +1,4 @@
-import { getNodeHeight } from '$lib/commands/node/getNodeHeight';
+import { getNodeHeight } from '$lib/commands/node/move/getNodeHeight';
 import type { ConnectionData } from '$lib/connection/ConnectionData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';

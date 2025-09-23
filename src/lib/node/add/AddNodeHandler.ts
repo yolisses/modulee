@@ -1,5 +1,5 @@
-import { AddConnectedNodeCommand } from '$lib/commands/node/AddConnectedNodeCommand';
-import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
+import { AddConnectedNodeCommand } from '$lib/commands/node/create/AddConnectedNodeCommand';
+import { AddNodeCommand } from '$lib/commands/node/create/AddNodeCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';

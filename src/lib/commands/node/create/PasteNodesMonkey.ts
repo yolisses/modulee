@@ -5,7 +5,7 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { EditorMonkey } from '$lib/monkey/EditorMonkey';
 import { FAKE_PROJECT_ID } from '$lib/monkey/FAKE_PROJECT_ID';
 import { getId } from '$lib/ui/getId';
-import { setNewId } from '../../global/setNewId';
+import { setNewId } from '../../../global/setNewId';
 import { PasteNodesCommand } from './PasteNodesCommand';
 
 export class PasteNodesMonkey extends EditorMonkey {

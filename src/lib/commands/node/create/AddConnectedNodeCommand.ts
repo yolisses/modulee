@@ -2,8 +2,8 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InputPath } from '$lib/input/InputPath';
 import type { NodeData } from '$lib/node/data/NodeData';
-import { SetConnectionCommand } from '../connection/SetConnectionCommand';
-import { mockCommandData } from '../test/mockNodeData';
+import { SetConnectionCommand } from '../../connection/SetConnectionCommand';
+import { mockCommandData } from '../../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
 export class AddConnectedNodeCommand extends EditorCommand<{

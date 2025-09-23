@@ -1,7 +1,7 @@
 import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { VectorData } from '$lib/node/actionCommands/VectorData';
-import { mockCommandData } from '../test/mockNodeData';
+import { mockCommandData } from '../../test/mockNodeData';
 import { MoveNodeCommand } from './MoveNodeCommand';
 
 export class MoveNodesCommand extends EditorCommand<{

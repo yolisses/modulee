@@ -1,4 +1,4 @@
-import { PasteNodesCommand } from '$lib/commands/node/PasteNodesCommand';
+import { PasteNodesCommand } from '$lib/commands/node/create/PasteNodesCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { copyDataContextKey } from '$lib/graph/copy/copyDataContext';

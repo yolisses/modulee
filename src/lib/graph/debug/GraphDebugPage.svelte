@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { OrganizeNodesCommand } from '$lib/commands/node/OrganizeNodesCommand';
+	import { OrganizeNodesCommand } from '$lib/commands/node/move/OrganizeNodesCommand';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import InternalModulesNavbar from '$lib/module/internalModule/InternalModulesNavbar.svelte';

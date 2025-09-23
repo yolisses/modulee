@@ -4,7 +4,7 @@ import type { VectorData } from '$lib/node/actionCommands/VectorData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { NodeDataBase } from '$lib/node/data/NodeDataBase';
 import { expect, test } from 'vitest';
-import { mockCommandData } from '../test/mockNodeData';
+import { mockCommandData } from '../../test/mockNodeData';
 import { OrganizeNodesCommand } from './OrganizeNodesCommand';
 
 function getPositionsById(nodesData: NodeData[]) {

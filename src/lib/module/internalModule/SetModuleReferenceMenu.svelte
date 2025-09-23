@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/SetModuleNodeModuleReferenceCommand';
+	import { SetModuleNodeModuleReferenceCommand } from '$lib/commands/node/attribute/SetModuleNodeModuleReferenceCommand';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId.js';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';

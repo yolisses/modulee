@@ -1,4 +1,4 @@
-import { AddNodeCommand } from '$lib/commands/node/AddNodeCommand';
+import { AddNodeCommand } from '$lib/commands/node/create/AddNodeCommand';
 import { createFakePosition } from '$lib/fake/createFakePosition';
 import { getRandomItem } from '$lib/fake/getRandomItem';
 import { createId } from '$lib/global/createId';

@@ -1,4 +1,4 @@
-import { OrganizeNodesCommand } from '$lib/commands/node/OrganizeNodesCommand';
+import { OrganizeNodesCommand } from '$lib/commands/node/move/OrganizeNodesCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { projectDataContextKey } from '$lib/project/ui/projectDataContext';

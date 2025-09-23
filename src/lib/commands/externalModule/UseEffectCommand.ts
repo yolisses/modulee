@@ -4,8 +4,8 @@ import { getAreInputPathsEqual } from '$lib/input/getAreInputPathsEqual';
 import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 import { NODE_ITEM_WIDTH_PLUS_GAP } from '$lib/node/NODE_ITEM_WIDTH_PLUS_GAP';
 import { SetConnectionCommand } from '../connection/SetConnectionCommand';
-import { AddNodeCommand } from '../node/AddNodeCommand';
-import { MoveNodeCommand } from '../node/MoveNodeCommand';
+import { AddNodeCommand } from '../node/create/AddNodeCommand';
+import { MoveNodeCommand } from '../node/move/MoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { ConnectAudioInputsCommand } from './ConnectAudioInputsCommand';
 

@@ -8,16 +8,16 @@ import { AddInternalModuleCommand } from './internalModule/AddInternalModuleComm
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
 import { RenameInternalModuleCommand } from './internalModule/RenameInternalModuleCommand';
-import { AddNodeCommand } from './node/AddNodeCommand';
-import { MoveNodeCommand } from './node/MoveNodeCommand';
-import { MoveNodesCommand } from './node/MoveNodesCommand';
-import { PasteNodesCommand } from './node/PasteNodesCommand';
+import { SetConstantNodeValueCommand } from './node/attribute/SetConstantNodeValueCommand';
+import { SetModuleNodeModuleReferenceCommand } from './node/attribute/SetModuleNodeModuleReferenceCommand';
+import { SetUnconnectedInputValueCommand } from './node/attribute/SetUnconnectedInputValueCommand';
+import { UpdateInputNodeExtrasCommand } from './node/attribute/UpdateInputNodeExtrasCommand';
+import { AddNodeCommand } from './node/create/AddNodeCommand';
+import { PasteNodesCommand } from './node/create/PasteNodesCommand';
+import { MoveNodeCommand } from './node/move/MoveNodeCommand';
+import { MoveNodesCommand } from './node/move/MoveNodesCommand';
 import { RemoveNodeCommand } from './node/remove/RemoveNodeCommand';
 import { RemoveNodesCommand } from './node/remove/RemoveNodesCommand';
-import { SetConstantNodeValueCommand } from './node/SetConstantNodeValueCommand';
-import { SetModuleNodeModuleReferenceCommand } from './node/SetModuleNodeModuleReferenceCommand';
-import { SetUnconnectedInputValueCommand } from './node/SetUnconnectedInputValueCommand';
-import { UpdateInputNodeExtrasCommand } from './node/UpdateInputNodeExtrasCommand';
 
 // Class names are not preserved on production build
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

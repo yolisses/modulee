@@ -2,7 +2,7 @@ import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ConstantNodeData } from '$lib/node/data/variants/ConstantNodeData';
 import { expect, test } from 'vitest';
-import { mockCommandData } from '../test/mockNodeData';
+import { mockCommandData } from '../../test/mockNodeData';
 import { SetConstantNodeValueCommand } from './SetConstantNodeValueCommand';
 
 test('SetConstantNodeValueCommand', () => {

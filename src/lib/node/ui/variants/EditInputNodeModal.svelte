@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/UpdateInputNodeExtrasCommand';
+	import { UpdateInputNodeExtrasCommand } from '$lib/commands/node/attribute/UpdateInputNodeExtrasCommand';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
