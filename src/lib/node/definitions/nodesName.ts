@@ -36,6 +36,7 @@ export const nodesName: Record<string, string> = {
 	PulseWaveNode: 'Pulse wave',
 	RandomFromValueNode: 'Random from value',
 	RoundNode: 'Round',
+	SampleRateNode: 'Sample rate',
 	SawtoothWaveNode: 'Sawtooth wave',
 	SineWaveNode: 'Sine wave',
 	SubtractNode: 'Subtract',

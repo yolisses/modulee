@@ -183,6 +183,12 @@ export const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		category: 'basic',
+		type: 'SampleRateNode',
+		defaultExtras: {},
+		inputs: [],
+	},
+	{
+		category: 'basic',
 		type: 'PitchNode',
 		defaultExtras: {},
 		inputs: [],

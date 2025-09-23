@@ -42,6 +42,7 @@ export const NodeSchema = z.discriminatedUnion('type', [
 	NodeBaseSchema('PulseWaveNode', ['phase', 'duty_cycle'], ['phase'], z.object({})),
 	NodeBaseSchema('RandomFromValueNode', ['value'], [], z.object({})),
 	NodeBaseSchema('RoundNode', ['input'], [], z.object({})),
+	NodeBaseSchema('SampleRateNode', [], [], z.object({})),
 	NodeBaseSchema('SawtoothWaveNode', ['phase'], ['phase'], z.object({})),
 	NodeBaseSchema('SineWaveNode', ['phase'], ['phase'], z.object({})),
 	NodeBaseSchema('SubtractNode', ['input1', 'input2'], [], z.object({})),
