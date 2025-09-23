@@ -11,10 +11,11 @@
 	import type { InternalModule } from './InternalModule';
 
 	interface Props {
+		text?: string;
 		onInternalModuleCreated?: (internalModule: InternalModule) => void;
 	}
 
-	const { onInternalModuleCreated }: Props = $props();
+	const { onInternalModuleCreated, text }: Props = $props();
 
 	const graphContext = getRequiredContext(graphContextKey);
 	const editorContext = getRequiredContext(editorContextKey);
@@ -49,5 +50,5 @@
 
 <button class="common-button" onclick={handleCreateClick}>
 	<Fa fw icon={faPlus} />
-	Create internal module
+	{text}
 </button>
