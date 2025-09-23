@@ -5,7 +5,6 @@
 	import InternalModulesNavbarItem from './InternalModulesNavbarItem.svelte';
 
 	const graphContext = getRequiredContext(graphContextKey);
-	const internalModules = $derived(graphContext.graph.internalModules.values());
 </script>
 
 <div class="flex flex-row overflow-auto border-b-2 border-black/50">
