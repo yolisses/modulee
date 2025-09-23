@@ -16,20 +16,20 @@ import { AddInternalModuleMonkey } from '../commands/internalModule/AddInternalM
 import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInternalModuleMonkey';
 
 export const editorMonkeyClasses = [
-	RedoMonkey,
-	UndoMonkey,
+	AddInternalModuleMonkey,
 	AddNodeMonkey,
+	DisconnectMonkey,
 	MoveNodeMonkey,
 	MoveNodesMonkey,
-	DisconnectMonkey,
-	RemoveNodeMonkey,
 	PasteNodesMonkey,
-	RemoveNodesMonkey,
-	SetConnectionMonkey,
-	AddInternalModuleMonkey,
+	RedoMonkey,
 	RemoveInternalModuleMonkey,
+	RemoveNodeMonkey,
+	RemoveNodesMonkey,
 	RenameInternalModuleMonkey,
+	SetConnectionMonkey,
 	SetConstantNodeValueMonkey,
-	SetUnconnectedInputValueMonkey,
 	SetModuleNodeModuleReferenceMonkey,
+	SetUnconnectedInputValueMonkey,
+	UndoMonkey,
 ];
