@@ -17,6 +17,34 @@ export const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		category: 'math',
+		type: 'SineNode',
+		defaultExtras: {},
+		inputs: [
+			{
+				default: 0,
+				max: 4,
+				min: -4,
+				key: 'input',
+				isBoolean: false,
+			},
+		],
+	},
+	{
+		category: 'math',
+		type: 'CosineNode',
+		defaultExtras: {},
+		inputs: [
+			{
+				default: 0,
+				max: 4,
+				min: -4,
+				key: 'input',
+				isBoolean: false,
+			},
+		],
+	},
+	{
+		category: 'math',
 		type: 'FloorNode',
 		defaultExtras: {},
 		inputs: [
