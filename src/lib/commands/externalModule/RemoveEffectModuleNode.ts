@@ -3,7 +3,7 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { getIsAudioInputNodeData } from '$lib/module/externalModule/effect/getIsAudioInputNodeData';
 import { getIsSomeModuleNodeData } from '$lib/rack/getIsSomeModuleNodeData';
 import { getId } from '$lib/ui/getId';
-import { RemoveNodeCommand } from '../node/RemoveNodeCommand';
+import { RemoveNodeCommand } from '../node/remove/RemoveNodeCommand';
 import { mockCommandData } from '../test/mockNodeData';
 import { ReplaceConnectionsTargetNodeIdCommand } from './ReplaceConnectionsTargetNodeIdCommand';
 

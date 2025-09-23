@@ -1,4 +1,4 @@
-import { RemoveNodeCommand } from '$lib/commands/node/RemoveNodeCommand';
+import { RemoveNodeCommand } from '$lib/commands/node/remove/RemoveNodeCommand';
 import { getRandomItem } from '$lib/fake/getRandomItem';
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';

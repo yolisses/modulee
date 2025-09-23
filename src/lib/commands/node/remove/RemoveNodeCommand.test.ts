@@ -1,7 +1,7 @@
 import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { expect, test } from 'vitest';
-import { mockCommandData } from '../test/mockNodeData';
+import { mockCommandData } from '../../test/mockNodeData';
 import { RemoveNodeCommand } from './RemoveNodeCommand';
 
 test('RemoveNodeCommand', () => {

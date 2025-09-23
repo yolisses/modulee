@@ -1,4 +1,4 @@
-import { RemoveNodesCommand } from '$lib/commands/node/RemoveNodesCommand';
+import { RemoveNodesCommand } from '$lib/commands/node/remove/RemoveNodesCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import type { NodeData } from '$lib/node/data/NodeData';
