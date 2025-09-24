@@ -18,8 +18,13 @@
 		if (previewConnectionContext.startConnector instanceof Output) {
 			return previewConnectionContext.startConnector.node?.id;
 		}
-		if (previewConnectionContext.endConnector instanceof Output) {
-			return previewConnectionContext.endConnector.node?.id;
+
+		if (previewConnectionContext.startConnector instanceof Input) {
+			if (previewConnectionContext.endConnector instanceof Output) {
+				return previewConnectionContext.endConnector.node?.id;
+			} else {
+				return previewConnectionContext.startConnector.node.id;
+			}
 		}
 	}
 </script>
