@@ -20,19 +20,19 @@
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
 
 	interface Props {
-		nodes: Node[];
-		graphSizer: GraphSizer;
 		connections: Connection[];
+		graphSizer: GraphSizer;
+		nodes: Node[];
 	}
 
 	const { nodes, graphSizer, connections }: Props = $props();
+	const addNodeInputContext = $state({});
 	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
 	const rootElementContext = getRequiredContext(rootElementContextKey);
 	const spaceContext = getRequiredContext(spaceContextKey);
-	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
-
-	const addNodeInputContext = $state({});
+	let floatingMenuReference = $state<HTMLElement>();
 	setAddNodeInputContext(addNodeInputContext);
+	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
 
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
@@ -47,8 +47,6 @@
 	function handleScroll() {
 		addNodeMenuParamsContext.addNodeMenuParams = undefined;
 	}
-
-	let floatingMenuReference = $state<HTMLElement>();
 </script>
 
 <HowToAddNodesHint {nodes} />
