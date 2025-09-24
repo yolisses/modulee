@@ -13,17 +13,18 @@
 	import { formatNumber } from '$lib/ui/formatNumber';
 
 	interface Props {
+		color: string;
 		input: InputWithControl;
 		sizeElement: HTMLElement;
 	}
 
-	let element: HTMLElement;
-	let initialValue: number;
-	let initialClientX: number;
-	let pointerId = $state<number>();
-	const { input, sizeElement }: Props = $props();
+	const { input, sizeElement, color }: Props = $props();
 	const editorContext = getRequiredContext(editorContextKey);
 	const projectDataContext = getRequiredContext(projectDataContextKey);
+	let element: HTMLElement;
+	let initialClientX: number;
+	let initialValue: number;
+	let pointerId = $state<number>();
 
 	let value = $derived(input.getUnconnectedValue());
 	const { min, max, isBoolean } = $derived(input.getInputDefinition());
@@ -103,7 +104,12 @@
 	}
 </script>
 
-<div style:width class="pointer-events-none absolute left-0 -z-10 h-full bg-green-500/25"></div>
+<div
+	style:width
+	style:opacity={0.25}
+	style:background-color={color}
+	class="pointer-events-none absolute left-0 -z-10 h-full"
+></div>
 <button
 	bind:this={element}
 	style:padding-right="0.2lh"

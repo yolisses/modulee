@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { MoveNodesCommand } from '$lib/commands/node/move/MoveNodesCommand.js';
+	import { getColorFromId } from '$lib/connection/getColorFromId.js';
 	import ConnectorJoint from '$lib/connector/ui/ConnectorJoint.svelte';
 	import { editorContextKey } from '$lib/editor/editorContext.js';
 	import { createId } from '$lib/global/createId.js';
@@ -130,7 +131,7 @@
 	{@render children?.()}
 	<div class="absolute" style:right="-0.2lh">
 		<PointerEventDispatcher pointerStrategy={startConnectorAreaPointerStrategy}>
-			<ConnectorJoint connector={node.output} />
+			<ConnectorJoint connector={node.output} color={getColorFromId(node.id)} />
 		</PointerEventDispatcher>
 	</div>
 </div>

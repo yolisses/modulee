@@ -5,7 +5,7 @@
 		"source.addMissingImports.ts": "always"
 	},
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"cSpell.words": ["IDBP", "juce", "maxlength", "modulee"],
+	"cSpell.words": ["IDBP", "juce", "maxlength", "modulee", "Oklch"],
 	"[ignore]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},

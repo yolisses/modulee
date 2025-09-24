@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { getColorFromId } from '$lib/connection/getColorFromId';
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
+	import { graphContextKey } from '$lib/graph/graphContext';
 	import type { Input } from '$lib/input/Input';
 	import { InputWithControl } from '$lib/input/InputWithControl';
 	import {
@@ -17,9 +20,10 @@
 		isLast: boolean;
 	}
 
-	let sizeElement = $state<HTMLElement>();
 	const { input, isLast }: Props = $props();
+	const graphContext = getRequiredContext(graphContextKey);
 	const startConnectorAreaPointerStrategy = new StartConnectorAreaPointerStrategy(input);
+	let sizeElement = $state<HTMLElement>();
 	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(
 		input,
 		connectorCondition,
@@ -28,7 +32,10 @@
 
 <PointerEventDispatcher class="contents" pointerStrategy={endConnectorAreaPointerStrategy}>
 	<div class="relative h-0 w-0" style:left="-0.2lh" style:top="0.35lh">
-		<ConnectorJoint connector={input} />
+		<ConnectorJoint
+			connector={input}
+			color={getColorFromId(input.targetNode?.id ?? input.node.id)}
+		/>
 	</div>
 	<div
 		bind:this={sizeElement}
@@ -42,7 +49,7 @@
 			{#if input?.getIsAutoConnected()}
 				<InputItemAutoButton {input} />
 			{:else}
-				<InputItemValueSlider {input} {sizeElement} />
+				<InputItemValueSlider {input} {sizeElement} color={getColorFromId(input.node.id)} />
 			{/if}
 		{/if}
 	</div>

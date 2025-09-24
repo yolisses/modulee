@@ -3,6 +3,7 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { ConnectionItem, selectedNodeIdsContextKey } from 'nodes-editor';
 	import Wire from './Wire.svelte';
+	import { getColorFromId } from './getColorFromId';
 	import { getInputPathId } from './getInputPathId';
 
 	interface Props {
@@ -29,6 +30,11 @@
 	}}
 >
 	{#snippet children({ endPosition, startPosition })}
-		<Wire {startPosition} {endPosition} {isSelected} />
+		<Wire
+			{endPosition}
+			{isSelected}
+			{startPosition}
+			color={getColorFromId(connection.targetNodeId)}
+		/>
 	{/snippet}
 </ConnectionItem>

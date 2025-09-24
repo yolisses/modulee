@@ -7,13 +7,14 @@
 	import type { WireProps } from './WireProps';
 
 	interface Props {
+		children?: Snippet<[WireProps]>;
+		color: string;
 		endPosition: Vector;
 		isSelected?: boolean;
 		startPosition: Vector;
-		children?: Snippet<[WireProps]>;
 	}
 
-	const { endPosition, startPosition, isSelected, children }: Props = $props();
+	const { endPosition, startPosition, isSelected, color, children }: Props = $props();
 
 	// Found empirically with the WirePath curve
 	const dataMargin = new Vector(3, 1);
@@ -22,6 +23,6 @@
 </script>
 
 <WireSvg {startPosition} {endPosition} margin={screenMargin}>
-	<WirePath {startPosition} {endPosition} {isSelected} />
+	<WirePath {startPosition} {endPosition} {isSelected} {color} />
 	{@render children?.({ startPosition, endPosition, isSelected })}
 </WireSvg>
