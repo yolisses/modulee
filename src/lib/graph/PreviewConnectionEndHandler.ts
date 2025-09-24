@@ -31,7 +31,8 @@ export class PreviewConnectionEndHandler {
 		if (output) {
 			this.connectNode(inputPath, output);
 		} else {
-			this.disconnectNode(inputPath, input, e.mousePosition);
+			this.disconnectNode(inputPath);
+			this.showAddNodeMenu(input, e.mousePosition);
 		}
 	};
 
@@ -52,7 +53,7 @@ export class PreviewConnectionEndHandler {
 		this.editorContext.editor.execute(command);
 	}
 
-	disconnectNode(inputPath: InputPath, input: Input, mousePosition: Vector) {
+	disconnectNode(inputPath: InputPath) {
 		const command = new DisconnectCommand({
 			createdAt: new Date().toJSON(),
 			details: {
@@ -63,8 +64,9 @@ export class PreviewConnectionEndHandler {
 			type: 'DisconnectCommand',
 		});
 		this.editorContext.editor.execute(command);
+	}
 
-		const screenPosition = mousePosition;
+	showAddNodeMenu(input: Input, screenPosition: Vector) {
 		let dataPosition = this.spaceContext.space.getDataPosition(screenPosition);
 		dataPosition = dataPosition.subtract(new Vector(NODE_ITEM_WIDTH - 1, 0));
 		this.addNodeMenuParamsContext.addNodeMenuParams = {
