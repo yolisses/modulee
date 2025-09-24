@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { getColorFromId } from '$lib/connection/getColorFromId';
-	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { graphContextKey } from '$lib/graph/graphContext';
 	import type { Input } from '$lib/input/Input';
 	import { InputWithControl } from '$lib/input/InputWithControl';
 	import {
@@ -21,7 +19,6 @@
 	}
 
 	const { input, isLast }: Props = $props();
-	const graphContext = getRequiredContext(graphContextKey);
 	const startConnectorAreaPointerStrategy = new StartConnectorAreaPointerStrategy(input);
 	let sizeElement = $state<HTMLElement>();
 	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(

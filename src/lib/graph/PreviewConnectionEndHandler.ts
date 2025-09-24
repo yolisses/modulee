@@ -4,7 +4,6 @@ import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import type { Input } from '$lib/input/Input';
-import type { InputPath } from '$lib/input/InputPath';
 import { addNodeMenuParamsContextKey } from '$lib/node/add/addNodeMenuParamsContext';
 import { getInputAndOutput } from '$lib/node/getInputAndOutput';
 import { NODE_ITEM_WIDTH } from '$lib/node/NODE_ITEM_WIDTH';
@@ -14,35 +13,31 @@ import { spaceContextKey } from '$lib/space/spaceContext';
 import { Vector, type EndPreviewConnectionEvent } from 'nodes-editor';
 
 export class PreviewConnectionEndHandler {
-	spaceContext = getRequiredContext(spaceContextKey);
+	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
 	editorContext = getRequiredContext(editorContextKey);
 	projectDataContext = getRequiredContext(projectDataContextKey);
-	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
+	spaceContext = getRequiredContext(spaceContextKey);
 
 	public handleEndPreviewConnection = (e: EndPreviewConnectionEvent) => {
 		const { input, output } = getInputAndOutput(e);
-		if (!input) return;
 
-		const inputPath: InputPath = {
-			inputKey: input.key,
-			nodeId: input.node.id,
-		};
-
-		if (output) {
-			this.connectNode(inputPath, output);
+		if (input && output) {
+			this.connectNode(input, output);
 		} else {
-			this.disconnectNode(inputPath);
-			this.showAddNodeMenu(input, e.mousePosition);
+			if (input) {
+				this.disconnectNode(input);
+			}
+			this.showAddNodeMenu(e);
 		}
 	};
 
-	connectNode(inputPath: InputPath, output: Output) {
+	connectNode(input: Input, output: Output) {
 		const command = new SetConnectionCommand({
 			createdAt: new Date().toJSON(),
 			details: {
 				connection: {
 					id: createId(),
-					inputPath,
+					inputPath: input.inputPath,
 					targetNodeId: output?.node.id,
 				},
 			},
@@ -53,12 +48,10 @@ export class PreviewConnectionEndHandler {
 		this.editorContext.editor.execute(command);
 	}
 
-	disconnectNode(inputPath: InputPath) {
+	disconnectNode(input: Input) {
 		const command = new DisconnectCommand({
 			createdAt: new Date().toJSON(),
-			details: {
-				inputPath,
-			},
+			details: { inputPath: input.inputPath },
 			id: createId(),
 			projectId: this.projectDataContext.projectData.id,
 			type: 'DisconnectCommand',
@@ -66,12 +59,10 @@ export class PreviewConnectionEndHandler {
 		this.editorContext.editor.execute(command);
 	}
 
-	showAddNodeMenu(input: Input, screenPosition: Vector) {
-		let dataPosition = this.spaceContext.space.getDataPosition(screenPosition);
+	showAddNodeMenu(e: EndPreviewConnectionEvent) {
+		let dataPosition = this.spaceContext.space.getDataPosition(e.mousePosition);
 		dataPosition = dataPosition.subtract(new Vector(NODE_ITEM_WIDTH - 1, 0));
-		this.addNodeMenuParamsContext.addNodeMenuParams = {
-			input,
-			position: dataPosition,
-		};
+		const { input, output } = getInputAndOutput(e);
+		this.addNodeMenuParamsContext.addNodeMenuParams = { input, output, position: dataPosition };
 	}
 }

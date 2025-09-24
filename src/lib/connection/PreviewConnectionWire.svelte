@@ -11,7 +11,6 @@
 	import { getColorFromId } from './getColorFromId';
 
 	const previewConnectionContext = getRequiredContext(previewConnectionContextKey);
-	const startIsInput = $derived(previewConnectionContext.startConnector instanceof Input);
 	const startIsOutput = $derived(previewConnectionContext.startConnector instanceof Output);
 
 	function getColorId() {
@@ -33,7 +32,7 @@
 	{#snippet children({ endPosition, startPosition })}
 		{#if startIsOutput}
 			<Wire {endPosition} {startPosition} color={getColorFromId(getColorId() ?? '')}>
-				{#if !previewConnectionContext.endConnector && startIsInput}
+				{#if !previewConnectionContext.endConnector}
 					<PreviewConnectionPlus position={endPosition} />
 				{/if}
 			</Wire>
@@ -43,7 +42,7 @@
 				startPosition={endPosition}
 				color={getColorFromId(getColorId() ?? '')}
 			>
-				{#if !previewConnectionContext.endConnector && startIsInput}
+				{#if !previewConnectionContext.endConnector}
 					<PreviewConnectionPlus position={endPosition} />
 				{/if}
 			</Wire>

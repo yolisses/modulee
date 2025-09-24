@@ -1,5 +1,6 @@
 import { AddConnectedNodeCommand } from '$lib/commands/node/create/AddConnectedNodeCommand';
 import { AddNodeCommand } from '$lib/commands/node/create/AddNodeCommand';
+import type { EditorCommand } from '$lib/editor/EditorCommand';
 import { editorContextKey } from '$lib/editor/editorContext';
 import { createId } from '$lib/global/createId';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
@@ -10,10 +11,10 @@ import { addNodeMenuParamsContextKey } from './addNodeMenuParamsContext';
 import { createNodeData } from './createNodeData';
 
 export class AddNodeHandler {
-	editorContext = getRequiredContext(editorContextKey);
-	projectDataContext = getRequiredContext(projectDataContextKey);
-	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 	addNodeMenuParamsContext = getRequiredContext(addNodeMenuParamsContextKey);
+	editorContext = getRequiredContext(editorContextKey);
+	internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
+	projectDataContext = getRequiredContext(projectDataContextKey);
 
 	handleNodeDefinitionSelect = (nodeDefinition: NodeDefinition) => {
 		const { addNodeMenuParams } = this.addNodeMenuParamsContext;
@@ -26,26 +27,34 @@ export class AddNodeHandler {
 			dataPosition,
 		);
 
-		const command = addNodeMenuParams.input
-			? new AddConnectedNodeCommand({
-					id: createId(),
-					createdAt: new Date().toJSON(),
-					type: 'AddConnectedNodeCommand',
-					projectId: this.projectDataContext.projectData.id,
-					details: {
-						node: nodeData,
-						connectionId: createId(),
-						inputPath: addNodeMenuParams.input.inputPath,
-					},
-				})
-			: new AddNodeCommand({
-					id: createId(),
-					type: 'AddNodeCommand',
-					details: { node: nodeData },
-					createdAt: new Date().toJSON(),
-					projectId: this.projectDataContext.projectData.id,
-				});
+		let command: EditorCommand;
+		if (addNodeMenuParams.input) {
+			const { output, input } = addNodeMenuParams;
 
+			const outputParams = output
+				? { targetNodeId: output?.id, outputConnectionId: createId() }
+				: undefined;
+
+			const inputParams = input
+				? { inputPath: input.inputPath, inputConnectionId: createId() }
+				: undefined;
+
+			command = new AddConnectedNodeCommand({
+				id: createId(),
+				createdAt: new Date().toJSON(),
+				type: 'AddConnectedNodeCommand',
+				projectId: this.projectDataContext.projectData.id,
+				details: { node: nodeData, inputParams, outputParams },
+			});
+		} else {
+			command = new AddNodeCommand({
+				id: createId(),
+				type: 'AddNodeCommand',
+				details: { node: nodeData },
+				createdAt: new Date().toJSON(),
+				projectId: this.projectDataContext.projectData.id,
+			});
+		}
 		this.editorContext.editor.execute(command);
 		this.addNodeMenuParamsContext.addNodeMenuParams = undefined;
 	};

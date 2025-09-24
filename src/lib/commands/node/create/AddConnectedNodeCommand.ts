@@ -2,33 +2,62 @@ import { EditorCommand } from '$lib/editor/EditorCommand';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InputPath } from '$lib/input/InputPath';
 import type { NodeData } from '$lib/node/data/NodeData';
+import { nodeDefinitionsByName } from '$lib/node/definitions/nodeDefinitionsByName';
 import { SetConnectionCommand } from '../../connection/SetConnectionCommand';
 import { mockCommandData } from '../../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
+type InputParams = { inputPath: InputPath; inputConnectionId: string };
+type OutputParams = { targetNodeId: string; outputConnectionId: string };
+
 export class AddConnectedNodeCommand extends EditorCommand<{
 	node: NodeData;
-	inputPath: InputPath;
-	connectionId: string;
+	inputParams?: InputParams;
+	outputParams?: OutputParams;
 }> {
 	static name = 'AddConnectedNodeCommand';
 	addNodeCommand!: AddNodeCommand;
-	setConnectionCommand!: SetConnectionCommand;
+	setInputConnectionCommand?: SetConnectionCommand;
+	setOutputConnectionCommand?: SetConnectionCommand;
 
 	execute(graphRegistry: GraphRegistry): void {
-		const { node, inputPath, connectionId } = this.details;
+		const { node, inputParams, outputParams } = this.details;
 
 		this.addNodeCommand = new AddNodeCommand(mockCommandData({ node }));
 		this.addNodeCommand.execute(graphRegistry);
 
-		this.setConnectionCommand = new SetConnectionCommand(
-			mockCommandData({ connection: { inputPath, id: connectionId, targetNodeId: node.id } }),
-		);
-		this.setConnectionCommand.execute(graphRegistry);
+		console.log(inputParams, outputParams);
+
+		if (inputParams) {
+			const { inputPath, inputConnectionId } = inputParams;
+			this.setInputConnectionCommand = new SetConnectionCommand(
+				mockCommandData({
+					connection: { inputPath, id: inputConnectionId, targetNodeId: node.id },
+				}),
+			);
+			this.setInputConnectionCommand.execute(graphRegistry);
+		}
+
+		if (outputParams) {
+			const { targetNodeId, outputConnectionId } = outputParams;
+			const nodeData = graphRegistry.nodes.get(targetNodeId);
+			const nodeDefinition = nodeDefinitionsByName[nodeData.type];
+			const firstInput = nodeDefinition.inputs.at(0);
+			if (firstInput) {
+				const inputPath: InputPath = { inputKey: firstInput.key, nodeId: targetNodeId };
+				this.setInputConnectionCommand = new SetConnectionCommand(
+					mockCommandData({
+						connection: { inputPath, id: outputConnectionId, targetNodeId: node.id },
+					}),
+				);
+				this.setInputConnectionCommand.execute(graphRegistry);
+			}
+		}
 	}
 
 	undo(graphRegistry: GraphRegistry): void {
 		this.addNodeCommand.undo(graphRegistry);
-		this.setConnectionCommand.undo(graphRegistry);
+		this.setInputConnectionCommand?.undo(graphRegistry);
+		this.setOutputConnectionCommand?.undo(graphRegistry);
 	}
 }
