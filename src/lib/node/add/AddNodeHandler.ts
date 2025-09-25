@@ -28,11 +28,10 @@ export class AddNodeHandler {
 		);
 
 		let command: EditorCommand;
-		if (addNodeMenuParams.input) {
-			const { output, input } = addNodeMenuParams;
-
+		const { output, input } = addNodeMenuParams;
+		if (input || output) {
 			const outputParams = output
-				? { targetNodeId: output?.id, outputConnectionId: createId() }
+				? { targetNodeId: output.node.id, outputConnectionId: createId() }
 				: undefined;
 
 			const inputParams = input
@@ -40,19 +39,19 @@ export class AddNodeHandler {
 				: undefined;
 
 			command = new AddConnectedNodeCommand({
-				id: createId(),
 				createdAt: new Date().toJSON(),
-				type: 'AddConnectedNodeCommand',
-				projectId: this.projectDataContext.projectData.id,
 				details: { node: nodeData, inputParams, outputParams },
+				id: createId(),
+				projectId: this.projectDataContext.projectData.id,
+				type: 'AddConnectedNodeCommand',
 			});
 		} else {
 			command = new AddNodeCommand({
-				id: createId(),
-				type: 'AddNodeCommand',
-				details: { node: nodeData },
 				createdAt: new Date().toJSON(),
+				details: { node: nodeData },
+				id: createId(),
 				projectId: this.projectDataContext.projectData.id,
+				type: 'AddNodeCommand',
 			});
 		}
 		this.editorContext.editor.execute(command);
