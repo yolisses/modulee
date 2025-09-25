@@ -7,7 +7,6 @@
 	let value = $state(0.5);
 
 	function handlePointerDown(e: PointerEvent) {
-		console.log('here');
 		initialValue = value;
 		initialPointerX = e.clientX;
 		element.setPointerCapture(e.pointerId);

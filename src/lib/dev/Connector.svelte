@@ -12,7 +12,6 @@
 	let element: HTMLElement;
 
 	function handlePointerDown(e: PointerEvent) {
-		console.log('handlePointerDown');
 		element.releasePointerCapture(e.pointerId);
 		connectionHandler.start = id;
 		connectionHandler.startPosition = new Vector(e.clientX, e.clientY);
@@ -21,7 +20,6 @@
 	}
 
 	function handlePointerUp(e: PointerEvent) {
-		console.log('handlePointerUp');
 		connectionHandler.end = undefined;
 		connectionHandler.endPosition = undefined;
 		connectionHandler.start = undefined;
@@ -31,18 +29,14 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		console.log('handlePointerMove');
 		if (!connectionHandler.start) return;
 		const currentPointerPosition = new Vector(e.clientX, e.clientY);
 		connectionHandler.endPosition = currentPointerPosition;
 	}
 
-	function handlePointerEnter(e: PointerEvent) {
-		console.log('handlePointerEnter');
-	}
+	function handlePointerEnter(e: PointerEvent) {}
 
 	function handleTouchStart(e: TouchEvent) {
-		console.log('handleTouchStart');
 		e.stopImmediatePropagation();
 	}
 </script>
