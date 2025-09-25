@@ -5,6 +5,7 @@ import { RedoCommand } from './editor/RedoCommand';
 import { UndoCommand } from './editor/UndoCommand';
 import { UseEffectCommand } from './externalModule/UseEffectCommand';
 import { AddInternalModuleCommand } from './internalModule/AddInternalModuleCommand';
+import { AddInternalModuleWithOutputNodeCommand } from './internalModule/AddInternalModuleWithOutputNodeCommand';
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
 import { RenameInternalModuleCommand } from './internalModule/RenameInternalModuleCommand';
@@ -23,6 +24,7 @@ import { RemoveNodesCommand } from './node/remove/RemoveNodesCommand';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const editorCommandClassesByType: Record<string, EditorCommandClass<any>> = {
 	AddInternalModuleCommand,
+	AddInternalModuleWithOutputNodeCommand,
 	AddNodeCommand,
 	DisconnectCommand,
 	GroupNodesCommand,

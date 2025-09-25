@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { AddInternalModuleCommand } from '$lib/commands/internalModule/AddInternalModuleCommand';
+	import { AddInternalModuleWithOutputNodeCommand } from '$lib/commands/internalModule/AddInternalModuleWithOutputNodeCommand';
 	import { editorContextKey } from '$lib/editor/editorContext';
 	import { createId } from '$lib/global/createId';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
@@ -22,15 +22,24 @@
 			graphContext.graph.internalModules.values(),
 			'Internal module',
 		);
-		const command = new AddInternalModuleCommand({
-			id: createId(),
-			type: 'AddInternalModuleCommand',
+		const command = new AddInternalModuleWithOutputNodeCommand({
 			createdAt: new Date().toJSON(),
+			id: createId(),
 			projectId: projectDataContext.projectData.id,
+			type: 'AddInternalModuleWithOutputNodeCommand',
 			details: {
 				internalModule: {
 					id: internalModuleId,
 					name: internalModuleName,
+				},
+				node: {
+					extras: { channel: 0 },
+					id: createId(),
+					internalModuleId,
+					isInputAutoConnectedMap: {},
+					position: { x: 0, y: 0 },
+					type: 'OutputNode',
+					unconnectedInputValues: { input: 0 },
 				},
 			},
 		});

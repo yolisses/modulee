@@ -2,6 +2,7 @@ import { DisconnectMonkey } from '$lib/commands/connection/DisconnectMonkey';
 import { SetConnectionMonkey } from '$lib/commands/connection/SetConnectionMonkey';
 import { RedoMonkey } from '$lib/commands/editor/RedoMonkey';
 import { UndoMonkey } from '$lib/commands/editor/UndoMonkey';
+import { AddInternalModuleWithOutputNodeMonkey } from '$lib/commands/internalModule/AddInternalModuleWithOutputNodeMonkey';
 import { RenameInternalModuleMonkey } from '$lib/commands/internalModule/RenameInternalModuleMonkey';
 import { SetConstantNodeValueMonkey } from '$lib/commands/node/attribute/SetConstantNodeValueMonkey';
 import { SetModuleNodeModuleReferenceMonkey } from '$lib/commands/node/attribute/SetModuleNodeModuleReferenceMonkey';
@@ -17,6 +18,7 @@ import { RemoveInternalModuleMonkey } from '../commands/internalModule/RemoveInt
 
 export const editorMonkeyClasses = [
 	AddInternalModuleMonkey,
+	AddInternalModuleWithOutputNodeMonkey,
 	AddNodeMonkey,
 	DisconnectMonkey,
 	MoveNodeMonkey,
