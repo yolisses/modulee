@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { graphContextKey } from '$lib/graph/graphContext';
-	import CreateInternalModuleButton from './CreateInternalModuleButton.svelte';
+	import InternalModulesNavbarCreateButton from './InternalModulesNavbarCreateButton.svelte';
 	import InternalModulesNavbarItem from './InternalModulesNavbarItem.svelte';
 
 	const graphContext = getRequiredContext(graphContextKey);
@@ -11,5 +11,5 @@
 	{#each graphContext.graph.internalModules.values() as internalModule (internalModule.id)}
 		<InternalModulesNavbarItem {internalModule} />
 	{/each}
-	<CreateInternalModuleButton />
+	<InternalModulesNavbarCreateButton />
 </div>
