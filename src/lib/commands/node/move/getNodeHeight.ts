@@ -12,10 +12,15 @@ export function getNodeHeight(nodeData: NodeData, graphRegistry: GraphRegistry) 
 	// header height
 	height += 1;
 
-	const specialTypes = new Set(['InputNode', 'ConstantNode', 'ModuleNode', 'ModuleVoicesNode']);
+	const specialTypes = new Set(['ConstantNode', 'ModuleNode', 'ModuleVoicesNode']);
 
 	if (specialTypes.has(type)) {
 		height += 1;
+	}
+
+	if (type === 'InputNode') {
+		// Input edit button and value slider
+		height += 2;
 	}
 
 	// TODO handle cases for ModuleNodeData and ModuleVoicesNodeData
