@@ -8,6 +8,8 @@
 	import Modal from '$lib/ui/Modal.svelte';
 	import { modalRootContextKey } from '$lib/ui/modalRootContext';
 	import type { ModalState } from '$lib/ui/ModalState.svelte';
+	import { faTimes } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 	import Portal from 'svelte-portal';
 
 	interface Props {
@@ -33,9 +35,15 @@
 </script>
 
 <Portal target={modalRootContext.modalRoot}>
-	<Modal {modalState}>
+	<Modal {modalState} closeOnClickOverlay>
 		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
-			<p>Edit input node</p>
+			<div class="flex items-center justify-between">
+				<div>Edit input node</div>
+				<button class="common-button" onclick={modalState.close}>
+					<Fa icon={faTimes} />
+					Close
+				</button>
+			</div>
 			<label>
 				<div>Name</div>
 				<input

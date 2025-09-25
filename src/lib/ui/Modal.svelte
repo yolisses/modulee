@@ -6,10 +6,11 @@
 	interface Props {
 		children: Snippet;
 		modalState: ModalState;
+		closeOnClickOverlay?: boolean;
 	}
 
 	let modal = $state<HTMLElement>();
-	const { children, modalState }: Props = $props();
+	const { children, modalState, closeOnClickOverlay }: Props = $props();
 
 	function handleWindowClick(e: InputMouseEvent) {
 		const clickedInside = modal?.contains(e.target as Node);
@@ -25,8 +26,11 @@
 	}
 </script>
 
-<div class="pointer-events-none fixed inset-0 flex items-center justify-center bg-black/50">
-	<div class="pointer-events-auto contents" bind:this={modal}>
+<div
+	class:pointer-events-none={!closeOnClickOverlay}
+	class="fixed inset-0 flex items-center justify-center bg-black/50"
+>
+	<div class:pointer-events-auto={!closeOnClickOverlay} class="contents" bind:this={modal}>
 		{@render children?.()}
 	</div>
 </div>
