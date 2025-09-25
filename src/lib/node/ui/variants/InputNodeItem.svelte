@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { getColorFromId } from '$lib/connection/getColorFromId';
 	import type { InputNode } from '$lib/node/InputNode';
 	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { faEdit } from '@fortawesome/free-solid-svg-icons';
 	import Fa from 'svelte-fa';
 	import BaseNodeItem from './BaseNodeItem.svelte';
 	import EditInputNodeModal from './EditInputNodeModal.svelte';
+	import InputNodeValueSlider from './InputNodeValueSlider.svelte';
 
 	interface Props {
 		inputNode: InputNode;
@@ -34,6 +36,7 @@
 			</div>
 			<Fa icon={faEdit} style="padding-inline: 0.25lh;" />
 		</button>
+		<InputNodeValueSlider {inputNode} color={getColorFromId(inputNode.id)} />
 	{/snippet}
 </BaseNodeItem>
 
