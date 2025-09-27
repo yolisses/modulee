@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { audioContextContextKey } from '$lib/audio/audioContextContext';
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
 	import MuteButton from '$lib/audio/MuteButton.svelte';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
@@ -103,6 +104,9 @@
 
 	const projectToolbarContext = $state({} as ProjectToolbarContext);
 	setProjectToolbarContext(projectToolbarContext);
+
+	const audioContextContext = getRequiredContext(audioContextContextKey);
+	$inspect(audioContextContext);
 </script>
 
 <svelte:head>
@@ -120,7 +124,10 @@
 			<UndoButton />
 			<RedoButton />
 			<MuteButton />
-			<Scope />
+
+			{#if audioContextContext.audioContext}
+				<Scope audioContext={audioContextContext.audioContext} />
+			{/if}
 		</div>
 	</div>
 	<ProjectNavbar />

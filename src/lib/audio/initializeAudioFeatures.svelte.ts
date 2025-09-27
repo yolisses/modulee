@@ -9,6 +9,7 @@ import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
 import { onMount } from 'svelte';
+import { type AudioContextContext, setAudioContextContext } from './audioContextContext';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
 
 /**
@@ -20,6 +21,9 @@ export function initializeAudioFeatures() {
 
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
+
+	const audioContextContext: AudioContextContext = $state({});
+	setAudioContextContext(audioContextContext);
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
@@ -48,7 +52,9 @@ export function initializeAudioFeatures() {
 		} else {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
-
+			audioBackend.initialize().then(() => {
+				audioContextContext.audioContext = audioBackend.audioContext;
+			});
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
 				audioBackend,
 				activePitchesContext.activePitches,

@@ -1,4 +1,5 @@
 import { audioBackendContextKey, type AudioBackendContext } from '$lib/audio/audioBackendContext';
+import type { AudioContextContext, audioContextContextKey } from '$lib/audio/audioContextContext';
 import { isMutedContextKey, type IsMutedContext } from '$lib/audio/isMutedContexts';
 import { editorContextKey, type EditorContext } from '$lib/editor/editorContext';
 import {
@@ -72,6 +73,7 @@ export type ContextsByKey = {
 	[addNodeInputContextKey]: AddNodeInputContext;
 	[addNodeMenuParamsContextKey]: AddNodeMenuParamsContext;
 	[audioBackendContextKey]: AudioBackendContext;
+	[audioContextContextKey]: AudioContextContext;
 	[baseRouteContextKey]: BaseRouteContext;
 	[contextsContextKey]: ContextsContext;
 	[copyDataContextKey]: CopyDataContext;

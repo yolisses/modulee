@@ -11,10 +11,6 @@ export class WasmAudioBackend implements AudioBackend {
 	engineNode?: AudioWorkletNode;
 	pendingMessages: Message[] = [];
 
-	constructor() {
-		this.initialize();
-	}
-
 	async initialize() {
 		const wasmFilePath = '/node_modules/modulee-engine-wasm/modulee_engine_wasm_bg.wasm';
 		const response = await fetch(wasmFilePath);
