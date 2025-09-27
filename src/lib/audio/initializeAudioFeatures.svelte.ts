@@ -55,7 +55,10 @@ export function initializeAudioFeatures() {
 			audioBackendContext.audioBackend = audioBackend;
 			audioBackend.initialize().then(() => {
 				const scopeHandler = new ScopeHandler(audioBackend.audioContext!);
-				scopeHandlerContext.scopeHandler = scopeHandler;
+				scopeHandler.initialize().then(() => {
+					audioBackend.engineNode?.connect(scopeHandler.workletNode);
+					scopeHandlerContext.scopeHandler = scopeHandler;
+				});
 			});
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
 				audioBackend,

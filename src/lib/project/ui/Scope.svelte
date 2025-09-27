@@ -24,8 +24,6 @@
 		if (!ctx) return;
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.lineWidth = 1;
-		ctx.strokeStyle = '#0f0';
 		ctx.beginPath();
 
 		const sliceWidth = canvas.width / bufferLength;
@@ -49,7 +47,10 @@
 
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#3b82f6';
 		setupWorklet();
+		scopeHandler.drawWave = drawWave;
 	});
 </script>
 
