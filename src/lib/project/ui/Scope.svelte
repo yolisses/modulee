@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { ScopeHandler } from './ScopeHandler';
 
 	interface Props {
-		audioContext: AudioContext;
+		scopeHandler: ScopeHandler;
 	}
 
-	const { audioContext }: Props = $props();
+	const { scopeHandler }: Props = $props();
+	const { audioContext } = scopeHandler;
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
-	let workletNode: AudioWorkletNode | null = null;
 
 	async function setupWorklet(): Promise<void> {
 		await audioContext.audioWorklet.addModule('/waveProcessor.js');
-		workletNode = new AudioWorkletNode(audioContext, 'wave-processor');
+		const workletNode = new AudioWorkletNode(audioContext, 'wave-processor');
 		workletNode.connect(audioContext.destination);
 		workletNode.port.onmessage = (e: MessageEvent) => {
 			drawWave(e.data, e.data.length);

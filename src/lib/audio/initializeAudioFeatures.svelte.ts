@@ -8,9 +8,10 @@ import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
+import { ScopeHandler } from '$lib/project/ui/ScopeHandler';
 import { onMount } from 'svelte';
-import { type AudioContextContext, setAudioContextContext } from './audioContextContext';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
+import { type ScopeHandlerContext, setScopeHandlerContext } from './scopeHandlerContext';
 
 /**
  * Initializes the audio, MIDI and virtual piano contexts
@@ -22,8 +23,8 @@ export function initializeAudioFeatures() {
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
 
-	const audioContextContext: AudioContextContext = $state({});
-	setAudioContextContext(audioContextContext);
+	const scopeHandlerContext: ScopeHandlerContext = $state({});
+	setScopeHandlerContext(scopeHandlerContext);
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
@@ -53,7 +54,8 @@ export function initializeAudioFeatures() {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 			audioBackend.initialize().then(() => {
-				audioContextContext.audioContext = audioBackend.audioContext;
+				const scopeHandler = new ScopeHandler(audioBackend.audioContext!);
+				scopeHandlerContext.scopeHandler = scopeHandler;
 			});
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
 				audioBackend,
