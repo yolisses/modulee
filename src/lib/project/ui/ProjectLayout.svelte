@@ -31,6 +31,7 @@
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 	import { type ProjectToolbarContext, setProjectToolbarContext } from './projectToobalContext';
+	import Scope from './Scope.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -119,6 +120,7 @@
 			<UndoButton />
 			<RedoButton />
 			<MuteButton />
+			<Scope />
 		</div>
 	</div>
 	<ProjectNavbar />
