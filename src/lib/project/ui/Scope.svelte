@@ -9,7 +9,7 @@
 	const { scopeHandler }: Props = $props();
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
-	let buffer: Float32Array;
+	let animationFrameId: number;
 
 	function drawWave(): void {
 		if (!ctx) return;
@@ -40,14 +40,16 @@
 
 	const animate = () => {
 		drawWave();
-		requestAnimationFrame(animate);
+		animationFrameId = requestAnimationFrame(animate);
 	};
 
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = '#3b82f6';
+
 		animate();
+		return () => cancelAnimationFrame(animationFrameId);
 	});
 </script>
 
