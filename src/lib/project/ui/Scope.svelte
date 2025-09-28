@@ -7,29 +7,22 @@
 	}
 
 	const { scopeHandler }: Props = $props();
-	const { audioContext } = scopeHandler;
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
+	let buffer: Float32Array;
 
-	async function setupWorklet(): Promise<void> {
-		await audioContext.audioWorklet.addModule('/waveProcessor.js');
-		const workletNode = new AudioWorkletNode(audioContext, 'wave-processor');
-		workletNode.connect(audioContext.destination);
-		workletNode.port.onmessage = (e: MessageEvent) => {
-			drawWave(e.data, e.data.length);
-		};
-	}
-
-	function drawWave(data: Float32Array, bufferLength: number): void {
+	function drawWave(): void {
 		if (!ctx) return;
+		const { data } = scopeHandler;
+		if (!data) return;
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
 
-		const sliceWidth = canvas.width / bufferLength;
+		const sliceWidth = canvas.width / data.length;
 		let x = 0;
 
-		for (let i = 0; i < bufferLength; i++) {
+		for (let i = 0; i < data.length; i++) {
 			const v = (data[i] + 1) / 2; // Normalize [-1, 1] to [0, 1]
 			const y = v * canvas.height;
 
@@ -45,12 +38,16 @@
 		ctx.stroke();
 	}
 
+	const animate = () => {
+		drawWave();
+		requestAnimationFrame(animate);
+	};
+
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = '#3b82f6';
-		setupWorklet();
-		scopeHandler.drawWave = drawWave;
+		animate();
 	});
 </script>
 
