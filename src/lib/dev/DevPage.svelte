@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Oscilloscope from './Oscilloscope.svelte';
 
-	let data = $state([1, 2, 1]);
+	let data = $state<number[]>([]);
 	let index = 0;
 	const wavelength = 10;
 
