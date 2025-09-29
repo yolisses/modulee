@@ -4,9 +4,17 @@
 	import { OscilloscopeBuffer } from './OscilloscopeBuffer.svelte';
 
 	const chunkSize = 100;
-	const wavelength = 20;
+	let wavelength = 20;
 	let index = 0;
-	const oscilloscopeBuffer = $derived(new OscilloscopeBuffer(wavelength));
+	let maxWindowSize = 50;
+	const oscilloscopeBuffer = $derived(
+		new OscilloscopeBuffer(getWindowSize(wavelength, maxWindowSize)),
+	);
+
+	function getWindowSize(num: number, max: number): number {
+		const maxMultiple = Math.floor(max / num) * num;
+		return maxMultiple === 0 ? num : maxMultiple;
+	}
 
 	function getNewChunk() {
 		const newChunk = [];
@@ -27,13 +35,24 @@
 		});
 	}
 
+	function increase() {
+		wavelength += 3;
+		oscilloscopeBuffer.setSize(getWindowSize(wavelength, maxWindowSize));
+	}
+
+	function decrease() {
+		wavelength -= 3;
+		oscilloscopeBuffer.setSize(getWindowSize(wavelength, maxWindowSize));
+	}
+
 	onMount(() => {
-		const handle = setInterval(pushData, 100);
+		const handle = setInterval(pushData, 1000);
 		return () => clearInterval(handle);
 	});
 </script>
 
-<button onclick={pushData}>Add data</button>
+<button onclick={increase}>increase</button>
+<button onclick={decrease}>decrease</button>
 <Oscilloscope data={oscilloscopeBuffer.buffer} />
 
 {oscilloscopeBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}

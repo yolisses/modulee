@@ -1,7 +1,7 @@
 export class OscilloscopeBuffer {
 	public buffer: number[] = $state([]);
-	private size: number;
-	private tail: number = 0;
+	public size: number;
+	public tail: number = 0;
 
 	constructor(size: number) {
 		this.buffer = new Array(size);
@@ -11,5 +11,10 @@ export class OscilloscopeBuffer {
 	push(item: number): void {
 		this.buffer[this.tail] = item;
 		this.tail = (this.tail + 1) % this.size;
+	}
+
+	setSize(size: number) {
+		this.size = size;
+		this.buffer = this.buffer.slice(-this.size);
 	}
 }
