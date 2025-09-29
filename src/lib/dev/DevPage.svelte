@@ -3,19 +3,12 @@
 	import Oscilloscope from './Oscilloscope.svelte';
 	import { OscilloscopeBuffer } from './OscilloscopeBuffer.svelte';
 
-	const chunkSize = 100;
+	const chunkSize = 1000;
 	let index = 0;
-	let maxWindowSize = 50;
-	let wavelength = $state(20.1);
+	let wavelength = $state(100.1);
 
-	const oscilloscopeBuffer = new OscilloscopeBuffer();
+	const oscilloscopeBuffer = new OscilloscopeBuffer(400);
 	updateOscilloscope();
-
-	function getWindowSize(num: number, max: number): number {
-		return Math.floor(num);
-		const maxMultiple = Math.floor(max / num) * num;
-		return Math.floor(maxMultiple === 0 ? num : maxMultiple);
-	}
 
 	function getNewChunk() {
 		const newChunk = [];
@@ -37,19 +30,18 @@
 	}
 
 	function increase() {
-		wavelength += 3;
+		wavelength *= 3;
 		updateOscilloscope();
 	}
 
 	function decrease() {
-		wavelength -= 3;
+		wavelength /= 3;
 		updateOscilloscope();
 	}
 
 	function updateOscilloscope() {
-		const windowSize = getWindowSize(wavelength, maxWindowSize);
-		oscilloscopeBuffer.setSize(windowSize);
-		oscilloscopeBuffer.ratio = windowSize / wavelength;
+		const multiplier = Math.max(Math.floor(oscilloscopeBuffer.size / wavelength), 1);
+		oscilloscopeBuffer.ratio = oscilloscopeBuffer.size / wavelength / multiplier;
 	}
 
 	onMount(() => {
@@ -65,6 +57,6 @@
 <div>
 	{oscilloscopeBuffer.ratio}
 </div>
-<div>
+<!-- <div>
 	{oscilloscopeBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
-</div>
+</div> -->
