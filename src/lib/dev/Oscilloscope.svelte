@@ -1,6 +1,6 @@
 <script lang="ts">
 	interface Props {
-		data: Float32Array;
+		data: number[];
 	}
 
 	const { data }: Props = $props();
@@ -8,7 +8,7 @@
 	const ctx = $derived(canvas?.getContext('2d'));
 
 	function drawWave(
-		data: Float32Array,
+		data: number[],
 		canvas: HTMLCanvasElement,
 		ctx: CanvasRenderingContext2D,
 	): void {
@@ -43,4 +43,4 @@
 	});
 </script>
 
-<canvas bind:this={canvas} width="800" height="400"></canvas>
+<canvas bind:this={canvas} width="800" height="400" class="border"></canvas>
