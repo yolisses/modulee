@@ -1,12 +1,9 @@
 export class OscilloscopeBuffer {
+	public accumulator: number = 0;
 	public buffer: number[] = $state([]);
-	public size: number;
+	public ratio: number = 1;
+	public size: number = 0;
 	public tail: number = 0;
-
-	constructor(size: number) {
-		this.buffer = new Array(size);
-		this.size = size;
-	}
 
 	push(item: number): void {
 		this.buffer[this.tail] = item;

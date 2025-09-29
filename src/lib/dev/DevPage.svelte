@@ -4,16 +4,16 @@
 	import { OscilloscopeBuffer } from './OscilloscopeBuffer.svelte';
 
 	const chunkSize = 100;
-	let wavelength = 20;
 	let index = 0;
 	let maxWindowSize = 50;
-	const oscilloscopeBuffer = $derived(
-		new OscilloscopeBuffer(getWindowSize(wavelength, maxWindowSize)),
-	);
+	let wavelength = $state(20);
+
+	const oscilloscopeBuffer = new OscilloscopeBuffer();
+	updateOscilloscope();
 
 	function getWindowSize(num: number, max: number): number {
 		const maxMultiple = Math.floor(max / num) * num;
-		return maxMultiple === 0 ? num : maxMultiple;
+		return Math.floor(maxMultiple === 0 ? num : maxMultiple);
 	}
 
 	function getNewChunk() {
@@ -37,16 +37,22 @@
 
 	function increase() {
 		wavelength += 3;
-		oscilloscopeBuffer.setSize(getWindowSize(wavelength, maxWindowSize));
+		updateOscilloscope();
 	}
 
 	function decrease() {
 		wavelength -= 3;
-		oscilloscopeBuffer.setSize(getWindowSize(wavelength, maxWindowSize));
+		updateOscilloscope();
+	}
+
+	function updateOscilloscope() {
+		const windowSize = getWindowSize(wavelength, maxWindowSize);
+		oscilloscopeBuffer.setSize(windowSize);
+		oscilloscopeBuffer.ratio = wavelength / windowSize;
 	}
 
 	onMount(() => {
-		const handle = setInterval(pushData, 1000);
+		const handle = setInterval(pushData, 100);
 		return () => clearInterval(handle);
 	});
 </script>
