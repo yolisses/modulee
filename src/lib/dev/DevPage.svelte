@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { CircularBuffer } from './CircularBuffer.svelte';
 	import Oscilloscope from './Oscilloscope.svelte';
 
-	const chunkSize = 20;
-	const maxSize = 20;
-	const wavelength = 10;
-	let data = $state<number[]>([]);
+	const chunkSize = 100;
+	const wavelength = 20;
 	let index = 0;
+	const circularBuffer = $derived(new CircularBuffer(wavelength));
 
 	function getNewChunk() {
 		const newChunk = [];
 
 		for (let i = 0; i < chunkSize; i++) {
-			const newValue = Math.sin(((2 * Math.PI) / wavelength) * index);
+			let newValue = Math.sin(((2 * Math.PI) / wavelength) * index);
+			newValue += 0.1 * (2 * Math.random() - 1);
 			newChunk.push(newValue);
 			index++;
 		}
@@ -21,17 +22,18 @@
 
 	function pushData() {
 		const newChunk = getNewChunk();
-		data = [...data, ...newChunk];
-		data = data.slice(-maxSize);
+		newChunk.forEach((value) => {
+			circularBuffer.push(value);
+		});
 	}
 
 	onMount(() => {
-		const handle = setInterval(pushData, 1000);
+		const handle = setInterval(pushData, 100);
 		return () => clearInterval(handle);
 	});
 </script>
 
 <button onclick={pushData}>Add data</button>
-<Oscilloscope {data} />
+<Oscilloscope data={circularBuffer.buffer} />
 
-{data.map((value) => value.toFixed(2)).join(' ')}
+{circularBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
