@@ -1,4 +1,4 @@
-export class CircularBuffer {
+export class OscilloscopeBuffer {
 	public buffer: number[] = $state([]);
 	private size: number;
 	private tail: number = 0;

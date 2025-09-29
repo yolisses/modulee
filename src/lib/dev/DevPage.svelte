@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { CircularBuffer } from './CircularBuffer.svelte';
 	import Oscilloscope from './Oscilloscope.svelte';
+	import { OscilloscopeBuffer } from './OscilloscopeBuffer.svelte';
 
 	const chunkSize = 100;
 	const wavelength = 20;
 	let index = 0;
-	const circularBuffer = $derived(new CircularBuffer(wavelength));
+	const oscilloscopeBuffer = $derived(new OscilloscopeBuffer(wavelength));
 
 	function getNewChunk() {
 		const newChunk = [];
@@ -23,7 +23,7 @@
 	function pushData() {
 		const newChunk = getNewChunk();
 		newChunk.forEach((value) => {
-			circularBuffer.push(value);
+			oscilloscopeBuffer.push(value);
 		});
 	}
 
@@ -34,6 +34,6 @@
 </script>
 
 <button onclick={pushData}>Add data</button>
-<Oscilloscope data={circularBuffer.buffer} />
+<Oscilloscope data={oscilloscopeBuffer.buffer} />
 
-{circularBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
+{oscilloscopeBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
