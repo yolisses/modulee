@@ -2,15 +2,16 @@
 	import { onMount } from 'svelte';
 	import Oscilloscope from './Oscilloscope.svelte';
 
+	const chunkSize = 20;
+	const maxSize = 20;
+	const wavelength = 10;
 	let data = $state<number[]>([]);
 	let index = 0;
-	const maxSize = 10;
-	const wavelength = 7;
 
 	function getNewChunk() {
 		const newChunk = [];
 
-		for (let i = 0; i < 20; i++) {
+		for (let i = 0; i < chunkSize; i++) {
 			const newValue = Math.sin(((2 * Math.PI) / wavelength) * index);
 			newChunk.push(newValue);
 			index++;
