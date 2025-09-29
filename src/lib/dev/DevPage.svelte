@@ -6,12 +6,13 @@
 	const chunkSize = 100;
 	let index = 0;
 	let maxWindowSize = 50;
-	let wavelength = $state(20);
+	let wavelength = $state(20.1);
 
 	const oscilloscopeBuffer = new OscilloscopeBuffer();
 	updateOscilloscope();
 
 	function getWindowSize(num: number, max: number): number {
+		return Math.floor(num);
 		const maxMultiple = Math.floor(max / num) * num;
 		return Math.floor(maxMultiple === 0 ? num : maxMultiple);
 	}
@@ -48,11 +49,11 @@
 	function updateOscilloscope() {
 		const windowSize = getWindowSize(wavelength, maxWindowSize);
 		oscilloscopeBuffer.setSize(windowSize);
-		oscilloscopeBuffer.ratio = wavelength / windowSize;
+		oscilloscopeBuffer.ratio = windowSize / wavelength;
 	}
 
 	onMount(() => {
-		const handle = setInterval(pushData, 100);
+		const handle = setInterval(pushData, 10);
 		return () => clearInterval(handle);
 	});
 </script>
@@ -61,4 +62,9 @@
 <button onclick={decrease}>decrease</button>
 <Oscilloscope data={oscilloscopeBuffer.buffer} />
 
-{oscilloscopeBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
+<div>
+	{oscilloscopeBuffer.ratio}
+</div>
+<div>
+	{oscilloscopeBuffer.buffer.map((value) => value.toFixed(2)).join(' ')}
+</div>

@@ -6,8 +6,13 @@ export class OscilloscopeBuffer {
 	public tail: number = 0;
 
 	push(item: number): void {
-		this.buffer[this.tail] = item;
-		this.tail = (this.tail + 1) % this.size;
+		this.accumulator += this.ratio;
+
+		if (this.accumulator >= 1) {
+			this.buffer[this.tail] = item;
+			this.tail = (this.tail + 1) % this.size;
+			this.accumulator = this.accumulator - Math.floor(this.accumulator);
+		}
 	}
 
 	setSize(size: number) {
