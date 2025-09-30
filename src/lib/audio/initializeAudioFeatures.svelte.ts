@@ -59,7 +59,7 @@ export function initializeAudioFeatures() {
 			audioBackend.initialize().then(() => {
 				const oscilloscopeHandler = new OscilloscopeHandler(audioBackend.audioContext!);
 				oscilloscopeHandler.initialize().then(() => {
-					audioBackend.engineNode?.connect(oscilloscopeHandler.workletNode!);
+					audioBackend.engineNode?.connect(oscilloscopeHandler.oscilloscopeNode!);
 					oscilloscopeHandlerContext.oscilloscopeHandler = oscilloscopeHandler;
 				});
 			});

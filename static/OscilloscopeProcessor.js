@@ -35,7 +35,7 @@ class OscilloscopeProcessor extends AudioWorkletProcessor {
 		const { type } = messageEvent.data;
 
 		const callbacksByType = {
-			setNoteOff: this.setRatio,
+			setRatio: this.setRatio,
 		};
 
 		// The command data have it's own `data` and `type`
