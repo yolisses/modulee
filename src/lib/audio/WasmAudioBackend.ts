@@ -17,9 +17,9 @@ export class WasmAudioBackend implements AudioBackend {
 		const bytes = await response.arrayBuffer();
 
 		this.audioContext = new AudioContext();
-		await this.audioContext.audioWorklet.addModule('/engine-processor.js');
+		await this.audioContext.audioWorklet.addModule('/EngineProcessor.js');
 
-		this.engineNode = new AudioWorkletNode(this.audioContext, 'engine-processor', {
+		this.engineNode = new AudioWorkletNode(this.audioContext, 'EngineProcessor', {
 			processorOptions: { bytes },
 			channelCount: 2,
 			channelCountMode: 'explicit',

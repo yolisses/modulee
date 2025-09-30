@@ -101,4 +101,4 @@ class EngineProcessor extends AudioWorkletProcessor {
 	};
 }
 
-registerProcessor('engine-processor', EngineProcessor);
+registerProcessor('EngineProcessor', EngineProcessor);

@@ -6,7 +6,7 @@
 	"description": "The content that should be shared over network without the usual bundler due to WASM restrictions",
 	"keywords": [],
 	"license": "ISC",
-	"main": "engine-processor.js",
+	"main": "EngineProcessor.js",
 	"name": "static",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
