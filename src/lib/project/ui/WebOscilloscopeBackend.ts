@@ -1,14 +1,20 @@
+import type { OscilloscopeBackend } from './OscilloscopeBackend';
+
 type Message = {
 	type: string;
 	data: object;
 };
 
-export class OscilloscopeHandler {
+export class WebOscilloscopeBackend implements OscilloscopeBackend {
 	oscilloscopeNode?: AudioWorkletNode;
 	pendingMessages: Message[] = [];
 	data = new Float32Array([0]);
 
 	constructor(public audioContext: AudioContext) {}
+
+	getData(): Float32Array {
+		return this.data;
+	}
 
 	async initialize() {
 		await this.audioContext.audioWorklet.addModule('/OscilloscopeProcessor.js');

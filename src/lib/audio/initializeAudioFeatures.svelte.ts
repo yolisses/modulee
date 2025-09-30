@@ -8,13 +8,13 @@ import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
-import { OscilloscopeHandler } from '$lib/project/ui/OscilloscopeHandler';
+import { WebOscilloscopeBackend } from '$lib/project/ui/WebOscilloscopeBackend';
 import { onMount } from 'svelte';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
 import {
-	type OscilloscopeHandlerContext,
-	setOscilloscopeHandlerContext,
-} from './oscilloscopeHandlerContext';
+	type OscilloscopeBackendContext,
+	setOscilloscopeBackendContext,
+} from './oscilloscopeBackendContext';
 
 /**
  * Initializes the audio, MIDI and virtual piano contexts
@@ -26,8 +26,8 @@ export function initializeAudioFeatures() {
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
 
-	const oscilloscopeHandlerContext: OscilloscopeHandlerContext = $state({});
-	setOscilloscopeHandlerContext(oscilloscopeHandlerContext);
+	const oscilloscopeBackendContext: OscilloscopeBackendContext = $state({});
+	setOscilloscopeBackendContext(oscilloscopeBackendContext);
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
@@ -57,10 +57,10 @@ export function initializeAudioFeatures() {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 			audioBackend.initialize().then(() => {
-				const oscilloscopeHandler = new OscilloscopeHandler(audioBackend.audioContext!);
-				oscilloscopeHandler.initialize().then(() => {
-					audioBackend.engineNode?.connect(oscilloscopeHandler.oscilloscopeNode!);
-					oscilloscopeHandlerContext.oscilloscopeHandler = oscilloscopeHandler;
+				const webOscilloscopeBackend = new WebOscilloscopeBackend(audioBackend.audioContext!);
+				webOscilloscopeBackend.initialize().then(() => {
+					audioBackend.engineNode?.connect(webOscilloscopeBackend.oscilloscopeNode!);
+					oscilloscopeBackendContext.oscilloscopeBackend = webOscilloscopeBackend;
 				});
 			});
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
@@ -92,6 +92,6 @@ export function initializeAudioFeatures() {
 	$effect(() => {
 		if (activePitchesContext.activePitches.size == 0) return;
 		const minPitch = Math.min(...activePitchesContext.activePitches);
-		oscilloscopeHandlerContext.oscilloscopeHandler?.setPitch(minPitch);
+		oscilloscopeBackendContext.oscilloscopeBackend?.setPitch(minPitch);
 	});
 }

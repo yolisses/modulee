@@ -1,9 +1,9 @@
 import { audioBackendContextKey, type AudioBackendContext } from '$lib/audio/audioBackendContext';
 import { isMutedContextKey, type IsMutedContext } from '$lib/audio/isMutedContexts';
 import type {
-	OscilloscopeHandlerContext,
-	oscilloscopeHandlerContextKey,
-} from '$lib/audio/oscilloscopeHandlerContext';
+	OscilloscopeBackendContext,
+	oscilloscopeBackendContextKey,
+} from '$lib/audio/oscilloscopeBackendContext';
 import { editorContextKey, type EditorContext } from '$lib/editor/editorContext';
 import {
 	isCommandPaletteActiveContextKey,
@@ -76,7 +76,6 @@ export type ContextsByKey = {
 	[addNodeInputContextKey]: AddNodeInputContext;
 	[addNodeMenuParamsContextKey]: AddNodeMenuParamsContext;
 	[audioBackendContextKey]: AudioBackendContext;
-	[oscilloscopeHandlerContextKey]: OscilloscopeHandlerContext;
 	[baseRouteContextKey]: BaseRouteContext;
 	[contextsContextKey]: ContextsContext;
 	[copyDataContextKey]: CopyDataContext;
@@ -89,6 +88,7 @@ export type ContextsByKey = {
 	[isMutedContextKey]: IsMutedContext;
 	[likedExternalModulesContextKey]: LikedExternalModulesContext;
 	[modalRootContextKey]: ModalRootContext;
+	[oscilloscopeBackendContextKey]: OscilloscopeBackendContext;
 	[previewConnectionContextKey]: PreviewConnectionContext;
 	[projectDataContextKey]: ProjectDataContext;
 	[projectNavbarSelectionContextKey]: ProjectNavbarSelectionContext;

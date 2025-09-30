@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
 	import MuteButton from '$lib/audio/MuteButton.svelte';
-	import { oscilloscopeHandlerContextKey } from '$lib/audio/oscilloscopeHandlerContext';
+	import { oscilloscopeBackendContextKey } from '$lib/audio/oscilloscopeBackendContext';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
@@ -105,7 +105,7 @@
 	const projectToolbarContext = $state({} as ProjectToolbarContext);
 	setProjectToolbarContext(projectToolbarContext);
 
-	const oscilloscopeHandlerContext = getRequiredContext(oscilloscopeHandlerContextKey);
+	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 </script>
 
 <svelte:head>
@@ -124,8 +124,8 @@
 			<RedoButton />
 			<MuteButton />
 			<div class="w-32">
-				{#if oscilloscopeHandlerContext.oscilloscopeHandler}
-					<Scope oscilloscopeHandler={oscilloscopeHandlerContext.oscilloscopeHandler} />
+				{#if oscilloscopeBackendContext.oscilloscopeBackend}
+					<Scope oscilloscopeBackend={oscilloscopeBackendContext.oscilloscopeBackend} />
 				{/if}
 			</div>
 		</div>
