@@ -106,7 +106,6 @@
 	setProjectToolbarContext(projectToolbarContext);
 
 	const oscilloscopeHandlerContext = getRequiredContext(oscilloscopeHandlerContextKey);
-	$inspect(oscilloscopeHandlerContext);
 </script>
 
 <svelte:head>
