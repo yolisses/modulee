@@ -88,4 +88,10 @@ export function initializeAudioFeatures() {
 			console.error(e);
 		}
 	});
+
+	$effect(() => {
+		if (activePitchesContext.activePitches.size == 0) return;
+		const minPitch = Math.min(...activePitchesContext.activePitches);
+		oscilloscopeHandlerContext.oscilloscopeHandler?.setPitch(minPitch);
+	});
 }

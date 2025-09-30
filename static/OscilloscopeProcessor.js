@@ -35,7 +35,7 @@ class OscilloscopeProcessor extends AudioWorkletProcessor {
 		const { type } = messageEvent.data;
 
 		const callbacksByType = {
-			setRatio: this.setRatio,
+			setPitch: this.setPitch,
 		};
 
 		// The command data have it's own `data` and `type`
@@ -43,7 +43,16 @@ class OscilloscopeProcessor extends AudioWorkletProcessor {
 		callback(messageEvent.data.data);
 	};
 
-	setRatio = ({ ratio }) => {
+	getWavelength = (pitch) => {
+		const frequency = 440 * Math.pow(2, (pitch - 69) / 12);
+		return sampleRate / frequency;
+	};
+
+	setPitch = ({ pitch }) => {
+		const { length } = this.oscilloscopeBuffer.buffer;
+		const wavelength = this.getWavelength(pitch);
+		const multiplier = Math.max(Math.floor(length / wavelength), 1);
+		const ratio = length / wavelength / multiplier;
 		this.oscilloscopeBuffer.setRatio(ratio);
 	};
 }

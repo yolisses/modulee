@@ -37,10 +37,10 @@ export class OscilloscopeHandler {
 		}
 	}
 
-	setRatio(ratio: number): void {
+	setPitch(pitch: number): void {
 		this.postOrSaveMessage({
-			type: 'setRatio',
-			data: { ratio },
+			type: 'setPitch',
+			data: { pitch },
 		});
 	}
 }

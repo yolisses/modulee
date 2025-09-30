@@ -9,9 +9,8 @@ export class OscilloscopeBuffer {
 
 	push(value) {
 		this.accumulator += this.ratio;
-
 		while (this.accumulator >= 1) {
-			this.buffer.set(value, this.tail);
+			this.buffer[this.tail] = value;
 			this.tail = (this.tail + 1) % this.buffer.length;
 			this.accumulator = this.accumulator - 1;
 		}
