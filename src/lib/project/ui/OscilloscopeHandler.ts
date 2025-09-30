@@ -1,4 +1,4 @@
-export class ScopeHandler {
+export class OscilloscopeHandler {
 	workletNode?: AudioWorkletNode;
 	data?: Float32Array;
 

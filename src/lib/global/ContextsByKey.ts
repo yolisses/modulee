@@ -1,6 +1,9 @@
 import { audioBackendContextKey, type AudioBackendContext } from '$lib/audio/audioBackendContext';
 import { isMutedContextKey, type IsMutedContext } from '$lib/audio/isMutedContexts';
-import type { ScopeHandlerContext, scopeHandlerContextKey } from '$lib/audio/scopeHandlerContext';
+import type {
+	OscilloscopeHandlerContext,
+	oscilloscopeHandlerContextKey,
+} from '$lib/audio/oscilloscopeHandlerContext';
 import { editorContextKey, type EditorContext } from '$lib/editor/editorContext';
 import {
 	isCommandPaletteActiveContextKey,
@@ -73,7 +76,7 @@ export type ContextsByKey = {
 	[addNodeInputContextKey]: AddNodeInputContext;
 	[addNodeMenuParamsContextKey]: AddNodeMenuParamsContext;
 	[audioBackendContextKey]: AudioBackendContext;
-	[scopeHandlerContextKey]: ScopeHandlerContext;
+	[oscilloscopeHandlerContextKey]: OscilloscopeHandlerContext;
 	[baseRouteContextKey]: BaseRouteContext;
 	[contextsContextKey]: ContextsContext;
 	[copyDataContextKey]: CopyDataContext;

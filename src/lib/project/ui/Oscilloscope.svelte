@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { ScopeHandler } from './ScopeHandler';
+	import type { OscilloscopeHandler } from './OscilloscopeHandler';
 
 	interface Props {
-		scopeHandler: ScopeHandler;
+		oscilloscopeHandler: OscilloscopeHandler;
 	}
 
-	const { scopeHandler }: Props = $props();
+	const { oscilloscopeHandler }: Props = $props();
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
 	let animationFrameId: number;
 
 	function drawWave(): void {
 		if (!ctx) return;
-		const { data } = scopeHandler;
+		const { data } = oscilloscopeHandler;
 		if (!data) return;
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);

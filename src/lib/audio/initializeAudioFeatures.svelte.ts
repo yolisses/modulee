@@ -8,10 +8,13 @@ import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { graphRegistryContextKey } from '$lib/graph/graphRegistryContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
 import { getProcessedGraphRegistry } from '$lib/process/getProcessedGraphRegistry';
-import { ScopeHandler } from '$lib/project/ui/ScopeHandler';
+import { OscilloscopeHandler } from '$lib/project/ui/OscilloscopeHandler';
 import { onMount } from 'svelte';
 import { type IsMutedContext, setIsMutedContext } from './isMutedContexts';
-import { type ScopeHandlerContext, setScopeHandlerContext } from './scopeHandlerContext';
+import {
+	type OscilloscopeHandlerContext,
+	setOscilloscopeHandlerContext,
+} from './oscilloscopeHandlerContext';
 
 /**
  * Initializes the audio, MIDI and virtual piano contexts
@@ -23,8 +26,8 @@ export function initializeAudioFeatures() {
 	const audioBackendContext: AudioBackendContext = $state({});
 	setAudioBackendContext(audioBackendContext);
 
-	const scopeHandlerContext: ScopeHandlerContext = $state({});
-	setScopeHandlerContext(scopeHandlerContext);
+	const oscilloscopeHandlerContext: OscilloscopeHandlerContext = $state({});
+	setOscilloscopeHandlerContext(oscilloscopeHandlerContext);
 
 	const isMutedContext: IsMutedContext = $state({ isMuted: false });
 	setIsMutedContext(isMutedContext);
@@ -54,10 +57,10 @@ export function initializeAudioFeatures() {
 			const audioBackend = new WasmAudioBackend();
 			audioBackendContext.audioBackend = audioBackend;
 			audioBackend.initialize().then(() => {
-				const scopeHandler = new ScopeHandler(audioBackend.audioContext!);
-				scopeHandler.initialize().then(() => {
-					audioBackend.engineNode?.connect(scopeHandler.workletNode);
-					scopeHandlerContext.scopeHandler = scopeHandler;
+				const oscilloscopeHandler = new OscilloscopeHandler(audioBackend.audioContext!);
+				oscilloscopeHandler.initialize().then(() => {
+					audioBackend.engineNode?.connect(oscilloscopeHandler.workletNode!);
+					oscilloscopeHandlerContext.oscilloscopeHandler = oscilloscopeHandler;
 				});
 			});
 			const virtualPianoMidiBackend = new VirtualPianoMidiBackend(

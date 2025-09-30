@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
 	import MuteButton from '$lib/audio/MuteButton.svelte';
-	import { scopeHandlerContextKey } from '$lib/audio/scopeHandlerContext';
+	import { oscilloscopeHandlerContextKey } from '$lib/audio/oscilloscopeHandlerContext';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
@@ -29,10 +29,10 @@
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
+	import Scope from './Oscilloscope.svelte';
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 	import { type ProjectToolbarContext, setProjectToolbarContext } from './projectToobalContext';
-	import Scope from './Scope.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -105,8 +105,8 @@
 	const projectToolbarContext = $state({} as ProjectToolbarContext);
 	setProjectToolbarContext(projectToolbarContext);
 
-	const scopeHandlerContext = getRequiredContext(scopeHandlerContextKey);
-	$inspect(scopeHandlerContext);
+	const oscilloscopeHandlerContext = getRequiredContext(oscilloscopeHandlerContextKey);
+	$inspect(oscilloscopeHandlerContext);
 </script>
 
 <svelte:head>
@@ -124,8 +124,8 @@
 			<UndoButton />
 			<RedoButton />
 			<MuteButton />
-			{#if scopeHandlerContext.scopeHandler}
-				<Scope scopeHandler={scopeHandlerContext.scopeHandler} />
+			{#if oscilloscopeHandlerContext.oscilloscopeHandler}
+				<Scope oscilloscopeHandler={oscilloscopeHandlerContext.oscilloscopeHandler} />
 			{/if}
 		</div>
 	</div>
