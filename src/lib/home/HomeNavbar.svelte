@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
 	import { getHasJuceSupport } from '$lib/audio/getHasJuceSupport';
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import {
+		faComputer,
 		faDownload,
 		faGuitar,
 		faProjectDiagram,
@@ -65,6 +67,17 @@
 		</a>
 	{/if}
 	<div class="flex-1 max-md:hidden"></div>
+
+	{#if dev}
+		<a
+			class="max-md:horizontal-tab md:vertical-tab"
+			data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'dev'}
+			href="/dev"
+		>
+			<Fa fw icon={faComputer} />
+			<div class="max-md:hidden">Dev</div>
+		</a>
+	{/if}
 	<a
 		class="max-md:horizontal-tab md:vertical-tab"
 		data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'about'}
