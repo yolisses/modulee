@@ -11,9 +11,9 @@
 	let ctx: CanvasRenderingContext2D;
 	let animationFrameId: number;
 
-	function drawWave(): void {
+	async function drawWave() {
 		if (!ctx) return;
-		const data = oscilloscopeBackend.getData();
+		const data = await oscilloscopeBackend.getData();
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
@@ -45,8 +45,8 @@
 		ctx.stroke();
 	}
 
-	const animate = () => {
-		drawWave();
+	const animate = async () => {
+		await drawWave();
 		animationFrameId = requestAnimationFrame(animate);
 	};
 

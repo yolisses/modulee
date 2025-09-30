@@ -5,7 +5,7 @@ export class JuceOscilloscopeBackend implements OscilloscopeBackend {
 	async initialize() {}
 
 	setPitch(pitch: number): void {
-		window.__JUCE__?.backend.emitEvent('setPitch', { pitch });
+		window.__JUCE__?.backend.emitEvent('setOscilloscopePitch', { pitch });
 	}
 
 	async getData() {
