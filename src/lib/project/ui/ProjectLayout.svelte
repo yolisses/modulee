@@ -15,12 +15,10 @@
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import { setActivePitchesContext } from '$lib/piano/activePitchesContext';
 	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { selectedNodeIdsContextKey, setDefaultContexts } from 'nodes-editor';
 	import { type Snippet, onMount, setContext } from 'svelte';
-	import { SvelteSet } from 'svelte/reactivity';
 	import type { ProjectData } from '../data/ProjectData';
 	import { getGraphData } from '../getGraphData';
 	import { getGraphRegistry } from '../getGraphRegistry';
@@ -39,8 +37,6 @@
 		projectData: ProjectData;
 		externalModulesData: ExternalModuleData[];
 	}
-
-	setActivePitchesContext({ activePitches: new SvelteSet() });
 
 	const { children, projectData, externalModulesData }: Props = $props();
 
