@@ -1,0 +1,51 @@
+import { OscilloscopeBuffer } from './OscilloscopeBuffer.js';
+
+class OscilloscopeProcessor extends AudioWorkletProcessor {
+	constructor() {
+		super();
+		this.frameCount = 0;
+		this.oscilloscopeBuffer = new OscilloscopeBuffer(400);
+		this.port.onmessage = this.handleMessage;
+		this.throttle = 4; // Post every 4th frame (~12ms at 44100Hz, 128 samples)
+	}
+
+	process(inputs) {
+		const input = inputs[0][0];
+
+		for (let i = 0; i < input.length; i++) {
+			const value = input[i];
+			this.oscilloscopeBuffer.push(value);
+		}
+
+		if (input) {
+			if (this.frameCount >= this.throttle) {
+				this.port.postMessage(this.oscilloscopeBuffer.buffer);
+				this.frameCount = 0;
+			}
+			this.frameCount++;
+		}
+		return true;
+	}
+
+	/**
+	 * @param {MessageEvent} messageEvent
+	 */
+	handleMessage = (messageEvent) => {
+		// The data of the command is passed through `messageEvent.data`.
+		const { type } = messageEvent.data;
+
+		const callbacksByType = {
+			setNoteOff: this.setRatio,
+		};
+
+		// The command data have it's own `data` and `type`
+		const callback = callbacksByType[type];
+		callback(messageEvent.data.data);
+	};
+
+	setRatio = ({ ratio }) => {
+		this.oscilloscopeBuffer.setRatio(ratio);
+	};
+}
+
+registerProcessor('OscilloscopeProcessor', OscilloscopeProcessor);

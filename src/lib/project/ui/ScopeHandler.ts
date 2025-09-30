@@ -5,8 +5,8 @@ export class ScopeHandler {
 	constructor(public audioContext: AudioContext) {}
 
 	async initialize() {
-		await this.audioContext.audioWorklet.addModule('/waveProcessor.js');
-		this.workletNode = new AudioWorkletNode(this.audioContext, 'wave-processor');
+		await this.audioContext.audioWorklet.addModule('/OscilloscopeProcessor.js');
+		this.workletNode = new AudioWorkletNode(this.audioContext, 'OscilloscopeProcessor');
 		this.workletNode.connect(this.audioContext.destination);
 		this.workletNode.port.onmessage = (e: MessageEvent) => {
 			this.data = e.data;
