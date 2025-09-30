@@ -11,23 +11,37 @@ export function initializeWebAudioFeatures() {
 	const audioBackendContext = getRequiredContext(audioBackendContextKey);
 	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 
-	const audioBackend = new WebAudioBackend();
+	const audioContext = new AudioContext();
+	const audioBackend = new WebAudioBackend(audioContext);
 	audioBackendContext.audioBackend = audioBackend;
 	audioBackend.initialize().then(() => {
-		const webOscilloscopeBackend = new WebOscilloscopeBackend(audioBackend.audioContext!);
+		const webOscilloscopeBackend = new WebOscilloscopeBackend(audioContext);
 		webOscilloscopeBackend.initialize().then(() => {
 			audioBackend.engineNode?.connect(webOscilloscopeBackend.oscilloscopeNode!);
 			oscilloscopeBackendContext.oscilloscopeBackend = webOscilloscopeBackend;
 		});
 	});
+
 	const virtualPianoMidiBackend = new VirtualPianoMidiBackend(
 		audioBackend,
 		activePitchesContext.activePitches,
 	);
 	virtualPianoMidiBackend.initialize();
 
+	const startAudioContext = () => {
+		audioContext.resume();
+		window.removeEventListener('keydown', startAudioContext);
+		window.removeEventListener('pointerdown', startAudioContext);
+	};
+	// If the audio context can't start because of the user hasn't
+	// interacted with the page
+	if (audioContext.state !== 'running') {
+		window.addEventListener('keydown', startAudioContext);
+		window.addEventListener('pointerdown', startAudioContext);
+	}
+
 	return () => {
-		audioBackend.destroy();
 		virtualPianoMidiBackend.destroy();
+		audioContext.close();
 	};
 }

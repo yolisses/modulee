@@ -2,8 +2,6 @@ import type { AudioBackend } from './AudioBackend';
 import type { GraphEngineData } from './data/GraphEngineData';
 
 export class JuceAudioBackend implements AudioBackend {
-	destroy(): void {}
-
 	setGraph(graphEngineData: GraphEngineData) {
 		window.__JUCE__?.backend.emitEvent('setGraph', {
 			graphEngineData: JSON.stringify(graphEngineData),

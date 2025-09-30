@@ -12,7 +12,7 @@ export class WebOscilloscopeBackend implements OscilloscopeBackend {
 
 	constructor(public audioContext: AudioContext) {}
 
-	getData(): Float32Array {
+	async getData() {
 		return this.data;
 	}
 

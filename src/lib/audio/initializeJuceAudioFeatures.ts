@@ -18,7 +18,6 @@ export function initializeJuceAudioFeatures() {
 	virtualPianoMidiBackend.initialize();
 
 	return () => {
-		audioBackend.destroy();
 		virtualPianoMidiBackend.destroy();
 	};
 }
