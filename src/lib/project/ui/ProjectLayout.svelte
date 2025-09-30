@@ -123,9 +123,11 @@
 			<UndoButton />
 			<RedoButton />
 			<MuteButton />
-			{#if oscilloscopeHandlerContext.oscilloscopeHandler}
-				<Scope oscilloscopeHandler={oscilloscopeHandlerContext.oscilloscopeHandler} />
-			{/if}
+			<div class="w-32">
+				{#if oscilloscopeHandlerContext.oscilloscopeHandler}
+					<Scope oscilloscopeHandler={oscilloscopeHandlerContext.oscilloscopeHandler} />
+				{/if}
+			</div>
 		</div>
 	</div>
 	<ProjectNavbar />

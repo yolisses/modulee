@@ -60,4 +60,4 @@
 	});
 </script>
 
-<canvas bind:this={canvas} width="128" height="32" class="bg-black"></canvas>
+<canvas bind:this={canvas} width="128" height="32" class="w-32 bg-black"></canvas>
