@@ -1,6 +1,6 @@
-import type { OscilloscopeBackend } from '$lib/project/ui/OscilloscopeBackend';
 import { updateContext } from '$lib/shortcut/contextsContext';
 import { setContext } from 'svelte';
+import type { OscilloscopeBackend } from './OscilloscopeBackend';
 
 export type OscilloscopeBackendContext = {
 	oscilloscopeBackend?: OscilloscopeBackend;

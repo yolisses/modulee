@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
 	import MuteButton from '$lib/audio/MuteButton.svelte';
+	import Oscilloscope from '$lib/audio/Oscilloscope.svelte';
 	import { oscilloscopeBackendContextKey } from '$lib/audio/oscilloscopeBackendContext';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
@@ -27,7 +28,6 @@
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
-	import Scope from './Oscilloscope.svelte';
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 	import { type ProjectToolbarContext, setProjectToolbarContext } from './projectToobalContext';
@@ -121,7 +121,7 @@
 			<MuteButton />
 			<div class="w-32">
 				{#if oscilloscopeBackendContext.oscilloscopeBackend}
-					<Scope oscilloscopeBackend={oscilloscopeBackendContext.oscilloscopeBackend} />
+					<Oscilloscope oscilloscopeBackend={oscilloscopeBackendContext.oscilloscopeBackend} />
 				{/if}
 			</div>
 		</div>

@@ -1,6 +1,6 @@
+import { WebOscilloscopeBackend } from '$lib/audio/WebOscilloscopeBackend';
 import { getRequiredContext } from '$lib/global/getRequiredContext';
 import { activePitchesContextKey } from '$lib/piano/activePitchesContext';
-import { WebOscilloscopeBackend } from '$lib/project/ui/WebOscilloscopeBackend';
 import { audioBackendContextKey } from './audioBackendContext';
 import { oscilloscopeBackendContextKey } from './oscilloscopeBackendContext';
 import { VirtualPianoMidiBackend } from './VirtualPianoMidiBackend';
