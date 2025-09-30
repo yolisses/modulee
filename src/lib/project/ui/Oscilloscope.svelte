@@ -22,8 +22,11 @@
 		const sliceWidth = canvas.width / data.length;
 		let x = 0;
 
+		let clipped = false;
 		for (let i = 0; i < data.length; i++) {
-			const v = (data[i] + 1) / 2; // Normalize [-1, 1] to [0, 1]
+			const value = data[i];
+			// Normalize [-1, 1] to [0, 1]
+			const v = value * 0.5 + 0.5;
 			const y = v * canvas.height;
 
 			if (i === 0) {
@@ -32,9 +35,14 @@
 				ctx.lineTo(x, y);
 			}
 
+			if (value > 1 || value < -1) {
+				clipped = true;
+			}
+
 			x += sliceWidth;
 		}
 
+		ctx.strokeStyle = clipped ? '#ef4444' : '#3b82f6';
 		ctx.stroke();
 	}
 
@@ -46,7 +54,6 @@
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = '#3b82f6';
 
 		animate();
 		return () => cancelAnimationFrame(animationFrameId);
