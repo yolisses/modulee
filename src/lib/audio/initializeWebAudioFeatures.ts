@@ -4,14 +4,14 @@ import { WebOscilloscopeBackend } from '$lib/project/ui/WebOscilloscopeBackend';
 import { audioBackendContextKey } from './audioBackendContext';
 import { oscilloscopeBackendContextKey } from './oscilloscopeBackendContext';
 import { VirtualPianoMidiBackend } from './VirtualPianoMidiBackend';
-import { WasmAudioBackend } from './WasmAudioBackend';
+import { WebAudioBackend } from './WebAudioBackend';
 
 export function initializeWebAudioFeatures() {
 	const activePitchesContext = getRequiredContext(activePitchesContextKey);
 	const audioBackendContext = getRequiredContext(audioBackendContextKey);
 	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 
-	const audioBackend = new WasmAudioBackend();
+	const audioBackend = new WebAudioBackend();
 	audioBackendContext.audioBackend = audioBackend;
 	audioBackend.initialize().then(() => {
 		const webOscilloscopeBackend = new WebOscilloscopeBackend(audioBackend.audioContext!);

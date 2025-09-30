@@ -6,7 +6,7 @@ type Message = {
 	data: object;
 };
 
-export class WasmAudioBackend implements AudioBackend {
+export class WebAudioBackend implements AudioBackend {
 	audioContext?: AudioContext;
 	engineNode?: AudioWorkletNode;
 	pendingMessages: Message[] = [];
