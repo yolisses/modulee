@@ -22,21 +22,21 @@
 			name: 'Windows',
 			icon: faWindows,
 			downloadUrl:
-				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee_Windows.exe',
+				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/ModuleeInstaller.exe',
 		},
 		{
 			id: 'mac',
 			name: 'macOS',
 			icon: faApple,
 			downloadUrl:
-				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee_macOS.pkg',
+				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/ModuleeInstaller.pkg',
 		},
 		{
 			id: 'linux',
 			name: 'Linux',
 			icon: faLinux,
 			downloadUrl:
-				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee_Linux.so',
+				'https://github.com/yolisses0/modulee-plugin/releases/latest/download/Modulee.zip',
 		},
 	]);
 	const osOption = $derived(osOptions.get(os));
