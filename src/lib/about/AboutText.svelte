@@ -14,19 +14,39 @@
 <br />
 <div>
 	<div>You can contact me on:</div>
-	<a href="https://www.reddit.com/user/yolisses/" about="_blank" class="flex items-center gap-1">
+	<a
+		class="flex items-center gap-1"
+		href="https://www.reddit.com/user/yolisses/"
+		rel="noopener noreferrer"
+		target="_blank"
+	>
 		<Fa icon={faReddit} fw />
 		Reddit: yolisses
 	</a>
-	<a href="mailto:yolisses0@gmail.com" about="_blank" class="flex items-center gap-1">
+	<a
+		class="flex items-center gap-1"
+		href="mailto:yolisses0@gmail.com"
+		rel="noopener noreferrer"
+		target="_blank"
+	>
 		<Fa icon={faEnvelope} fw />
 		Email: yolisses0@gmail.com
 	</a>
-	<a href="https://wa.me/5583993757502" about="_blank" class="flex items-center gap-1">
+	<a
+		class="flex items-center gap-1"
+		href="https://wa.me/5583993757502"
+		rel="noopener noreferrer"
+		target="_blank"
+	>
 		<Fa icon={faWhatsapp} fw />
 		WhatsApp: +55 83 99375-7502
 	</a>
-	<a href="https://discord.gg/J9n2SuBe" about="_blank" class="flex items-center gap-1">
+	<a
+		class="flex items-center gap-1"
+		href="https://discord.gg/J9n2SuBe"
+		rel="noopener noreferrer"
+		target="_blank"
+	>
 		<Fa icon={faDiscord} fw />
 		Discord: yolisses0
 	</a>
