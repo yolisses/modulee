@@ -11,6 +11,7 @@ declare global {
 			initialisationData: {
 				lastPage: [string];
 				authToken?: [string];
+				versionString: string;
 			};
 		};
 	}
