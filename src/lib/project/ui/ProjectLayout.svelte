@@ -16,6 +16,7 @@
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
+	import PianoDisplay from '$lib/piano/PianoDisplay.svelte';
 	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { selectedNodeIdsContextKey, setDefaultContexts } from 'nodes-editor';
@@ -125,6 +126,7 @@
 				{/if}
 			</div>
 		</div>
+		<PianoDisplay />
 	</div>
 	<ProjectNavbar />
 </div>
