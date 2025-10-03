@@ -5,7 +5,7 @@
 	import { homeNavbarSelectionContextKey } from '$lib/home/homeNavbarSelectionContext';
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import ExternalModulesPage from '$lib/module/externalModule/ExternalModulesPage.svelte';
-	import PianoDisplay from '$lib/piano/PianoDisplay.svelte';
+	import PianoBar from '$lib/piano/PianoBar.svelte';
 	import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
 	import CreateInstrumentButton from '$lib/project/create/CreateInstrumentButton.svelte';
 	import { getGraphRegistry } from '$lib/project/getGraphRegistry';
@@ -44,4 +44,4 @@
 	{/snippet}
 </ExternalModulesPage>
 
-<PianoDisplay />
+<PianoBar />

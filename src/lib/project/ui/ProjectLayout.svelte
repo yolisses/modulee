@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { initializeAudioFeatures } from '$lib/audio/initializeAudioFeatures.svelte';
 	import MuteButton from '$lib/audio/MuteButton.svelte';
-	import Oscilloscope from '$lib/audio/Oscilloscope.svelte';
-	import { oscilloscopeBackendContextKey } from '$lib/audio/oscilloscopeBackendContext';
 	import ActionCommandsPalette from '$lib/editor/ActionCommandsPalette.svelte';
 	import { Editor } from '$lib/editor/Editor.svelte';
 	import { setEditorContext } from '$lib/editor/editorContext';
@@ -16,7 +14,7 @@
 	import type { ExternalModuleData } from '$lib/module/externalModule/ExternalModuleData';
 	import { internalModuleIdContextKey } from '$lib/module/internalModule/internalModuleIdContext';
 	import { setUseExternalModuleInContext } from '$lib/module/internalModule/useExternalModuleInContext';
-	import PianoDisplay from '$lib/piano/PianoDisplay.svelte';
+	import PianoBar from '$lib/piano/PianoBar.svelte';
 	import { updateContext } from '$lib/shortcut/contextsContext';
 	import { baseRouteContextKey } from '$lib/ui/baseRouteContext';
 	import { selectedNodeIdsContextKey, setDefaultContexts } from 'nodes-editor';
@@ -101,8 +99,6 @@
 
 	const projectToolbarContext = $state({} as ProjectToolbarContext);
 	setProjectToolbarContext(projectToolbarContext);
-
-	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 </script>
 
 <svelte:head>
@@ -120,13 +116,8 @@
 			<UndoButton />
 			<RedoButton />
 			<MuteButton />
-			<div class="w-32">
-				{#if oscilloscopeBackendContext.oscilloscopeBackend}
-					<Oscilloscope oscilloscopeBackend={oscilloscopeBackendContext.oscilloscopeBackend} />
-				{/if}
-			</div>
 		</div>
-		<PianoDisplay />
+		<PianoBar />
 	</div>
 	<ProjectNavbar />
 </div>

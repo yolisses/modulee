@@ -1,19 +1,15 @@
 <script lang="ts">
+	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { onMount } from 'svelte';
-	import type { OscilloscopeBackend } from './OscilloscopeBackend';
+	import { oscilloscopeBackendContextKey } from './oscilloscopeBackendContext';
 
-	interface Props {
-		oscilloscopeBackend: OscilloscopeBackend;
-	}
-
-	const { oscilloscopeBackend }: Props = $props();
+	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
 	let animationFrameId: number;
 
-	async function drawWave() {
+	function drawWave(data: Float32Array) {
 		if (!ctx) return;
-		const data = await oscilloscopeBackend.getData();
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
@@ -46,7 +42,10 @@
 	}
 
 	const animate = async () => {
-		await drawWave();
+		const data = await oscilloscopeBackendContext.oscilloscopeBackend?.getData();
+		if (data) {
+			drawWave(data);
+		}
 		animationFrameId = requestAnimationFrame(animate);
 	};
 
@@ -59,4 +58,4 @@
 	});
 </script>
 
-<canvas bind:this={canvas} width="128" height="32" class="w-32 bg-black"></canvas>
+<canvas bind:this={canvas} width="128" height="40" class="w-32 bg-black"></canvas>
