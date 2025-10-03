@@ -10,6 +10,7 @@
 
 	const activePitchesContext = getRequiredContext(activePitchesContextKey);
 	const audioBackendContext = getRequiredContext(audioBackendContextKey);
+	let container: HTMLDivElement;
 
 	const pitches = range(10 * 12 + 8);
 
@@ -34,10 +35,15 @@
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
 	}
+
+	// Centers the view
+	onMount(() => {
+		container.scrollLeft = container.scrollWidth / 2 - container.clientWidth / 2;
+	});
 </script>
 
 <div class="relative">
-	<div class="overflow-auto select-none" draggable="false">
+	<div class="overflow-auto select-none" draggable="false" bind:this={container}>
 		<!-- overflow-hidden prevents border edge conditions (ba dum tss) -->
 		<div class="relative flex h-10 min-w-fit flex-row overflow-hidden">
 			<div class="flex flex-1 flex-row">
