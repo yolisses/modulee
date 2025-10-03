@@ -63,7 +63,7 @@
 			href="/plugin"
 		>
 			<Fa fw icon={faDownload} />
-			<div class="navbar-item-text">Get the plugin</div>
+			<div class="navbar-item-text">Plugin</div>
 		</a>
 	{/if}
 
