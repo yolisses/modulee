@@ -109,4 +109,12 @@
 	.menu-container {
 		@apply flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800;
 	}
+
+	.navbar-item {
+		@apply max-md:horizontal-tab md:vertical-tab overflow-and-ellipsis max-md:flex-1;
+	}
+
+	.navbar-item-text {
+		@apply whitespace-nowrap max-md:text-xs;
+	}
 }

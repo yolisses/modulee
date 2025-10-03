@@ -11,11 +11,11 @@
 
 <a
 	data-tab-selected={homeNavbarSelectionContext.homeNavbarSelection === 'user'}
-	class="max-md:horizontal-tab md:vertical-tab"
+	class="navbar-item"
 	href={userDataContext.userData && !userDataContext.userData.isGuest
 		? '/users/' + userDataContext.userData.id
 		: '/signIn'}
 >
 	<Fa fw icon={faUser} />
-	<div class="max-md:hidden">{userDataContext.userData.name}</div>
+	<div class="navbar-item-text">{userDataContext.userData.name}</div>
 </a>
