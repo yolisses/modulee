@@ -23,6 +23,7 @@ export class PianoDisplayMidiBackend {
 	};
 
 	setNoteOn = (pitch: number) => {
+		if (this.activePitches.has(pitch)) return;
 		this.audioBackend.setNoteOn(pitch);
 		this.activePitches.add(pitch);
 		this.pitchesToClear.add(pitch);
