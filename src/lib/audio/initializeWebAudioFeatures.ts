@@ -28,16 +28,25 @@ export function initializeWebAudioFeatures() {
 	);
 	virtualPianoMidiBackend.initialize();
 
-	const startAudioContext = () => {
-		audioContext.resume();
-		window.removeEventListener('keydown', startAudioContext);
-		window.removeEventListener('pointerdown', startAudioContext);
+	const startAudioContext = async () => {
+		await audioContext.resume();
+		if (audioContext.state === 'running') {
+			window.removeEventListener('click', startAudioContext);
+			window.removeEventListener('keydown', startAudioContext);
+			window.removeEventListener('pointerdown', startAudioContext);
+			window.removeEventListener('submit', startAudioContext);
+			window.removeEventListener('touchstart', startAudioContext);
+		}
 	};
+
 	// If the audio context can't start because of the user hasn't
 	// interacted with the page
 	if (audioContext.state !== 'running') {
+		window.addEventListener('click', startAudioContext);
 		window.addEventListener('keydown', startAudioContext);
 		window.addEventListener('pointerdown', startAudioContext);
+		window.addEventListener('submit', startAudioContext);
+		window.addEventListener('touchstart', startAudioContext);
 	}
 
 	return () => {
