@@ -111,10 +111,10 @@
 	}
 
 	.navbar-item {
-		@apply max-md:horizontal-tab md:vertical-tab overflow-and-ellipsis max-md:flex-1;
+		@apply max-md:horizontal-tab md:vertical-tab overflow-hidden max-md:flex-1 max-md:px-1;
 	}
 
 	.navbar-item-text {
-		@apply whitespace-nowrap max-md:text-xs;
+		@apply block w-full overflow-hidden text-clip whitespace-nowrap max-md:text-center max-md:text-xs;
 	}
 }
