@@ -9,6 +9,8 @@
 	import { createEmptyGraphData } from '$lib/project/create/createEmptyGraphData';
 	import CreateInstrumentButton from '$lib/project/create/CreateInstrumentButton.svelte';
 	import { getGraphRegistry } from '$lib/project/getGraphRegistry';
+	import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+	import Fa from 'svelte-fa';
 
 	getRequiredContext(homeNavbarSelectionContextKey).homeNavbarSelection = 'instruments';
 
@@ -34,7 +36,10 @@
 		<CreateInstrumentButton />
 	{/snippet}
 	{#snippet initialChildren()}
-		<p class="p-2 text-sm">Hover over an option to use the instrument as preview.</p>
+		<p class="p-2 text-sm">
+			<Fa icon={faInfoCircle} class="inline-block opacity-50" fw />
+			Hover over an option to use the instrument as preview.
+		</p>
 		<hr class="opacity-10" />
 	{/snippet}
 </ExternalModulesPage>
