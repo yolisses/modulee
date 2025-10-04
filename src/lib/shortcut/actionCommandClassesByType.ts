@@ -14,7 +14,7 @@ import type { ActionCommandClass } from './actionCommandClass';
 
 export const actionCommandClassesByType: Record<string, ActionCommandClass> = {
 	CopyNodesActionCommand,
-	OrganizeNodesActionCommand: OrganizeNodesActionCommand,
+	OrganizeNodesActionCommand,
 	GroupNodesActionCommand,
 	PasteNodesActionCommand,
 	RedoActionCommand,
