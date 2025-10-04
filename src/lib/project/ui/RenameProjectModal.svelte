@@ -25,7 +25,7 @@
 		method="post"
 		use:enhance={modalState.close}
 	>
-		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
+		<div class="modal-container">
 			<p>Rename project "{projectData?.name}"</p>
 			<input
 				bind:this={textInput}

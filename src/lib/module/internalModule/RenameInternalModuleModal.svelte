@@ -39,7 +39,7 @@
 </script>
 
 <Modal {modalState}>
-	<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
+	<div class="modal-container">
 		<p>Rename internalModule "{internalModule?.name}"</p>
 		<input
 			type="text"

@@ -36,7 +36,7 @@
 
 <Portal target={modalRootContext.modalRoot}>
 	<Modal {modalState} closeOnClickOverlay>
-		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
+		<div class="modal-container">
 			<div class="flex items-center justify-between">
 				<div>Edit input node</div>
 				<button class="common-button" onclick={modalState.close}>

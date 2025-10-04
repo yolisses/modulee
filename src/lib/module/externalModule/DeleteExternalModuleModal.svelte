@@ -21,7 +21,7 @@
 <Modal {modalState}>
 	<form action="/externalModules?/delete" method="post" use:enhance>
 		<input type="hidden" name="externalModuleId" value={externalModuleData.id} />
-		<div class="flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50">
+		<div class="modal-container">
 			<p>Delete the external module <b>{externalModuleData.name}</b>?</p>
 			<p>This action is <b>irreversible</b>.</p>
 			<div class="flex flex-row justify-end gap-2">

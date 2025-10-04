@@ -107,7 +107,11 @@
 	}
 
 	.menu-container {
-		@apply flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-zinc-800;
+		@apply flex max-h-[75vh] flex-col rounded bg-zinc-700 shadow-lg shadow-black/50 outline-1 outline-white/25;
+	}
+
+	.modal-container {
+		@apply flex flex-col gap-2 rounded bg-zinc-800 p-2 shadow-xl shadow-black/50 outline-1 outline-white/25;
 	}
 
 	.navbar-item {
