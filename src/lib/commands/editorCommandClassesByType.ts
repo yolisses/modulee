@@ -9,6 +9,7 @@ import { AddInternalModuleWithOutputNodeCommand } from './internalModule/AddInte
 import { GroupNodesCommand } from './internalModule/GroupNodesCommand';
 import { RemoveInternalModuleCommand } from './internalModule/RemoveInternalModuleCommand';
 import { RenameInternalModuleCommand } from './internalModule/RenameInternalModuleCommand';
+import { RenameNodesCommand } from './internalModule/RenameNodesCommand';
 import { SetConstantNodeValueCommand } from './node/attribute/SetConstantNodeValueCommand';
 import { SetModuleNodeModuleReferenceCommand } from './node/attribute/SetModuleNodeModuleReferenceCommand';
 import { SetUnconnectedInputValueCommand } from './node/attribute/SetUnconnectedInputValueCommand';
@@ -36,6 +37,7 @@ export const editorCommandClassesByType: Record<string, EditorCommandClass<any>>
 	RemoveNodeCommand,
 	RemoveNodesCommand,
 	RenameInternalModuleCommand,
+	RenameNodesCommand,
 	SetConnectionCommand,
 	SetConstantNodeValueCommand,
 	SetModuleNodeModuleReferenceCommand,

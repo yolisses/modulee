@@ -11,10 +11,11 @@ export function NodeBaseSchema<
 	return z.object({
 		extras,
 		id: z.uuidv4(),
-		type: z.literal(type),
-		position: VectorSchema,
 		internalModuleId: z.uuidv4(),
-		unconnectedInputValues: z.record(z.enum(inputNames), z.number()),
 		isInputAutoConnectedMap: z.record(z.enum(autoConnectedInputNames), z.boolean()),
+		name: z.string().optional(),
+		position: VectorSchema,
+		type: z.literal(type),
+		unconnectedInputValues: z.record(z.enum(inputNames), z.number()),
 	});
 }

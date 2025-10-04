@@ -5,10 +5,11 @@ export function ModuleNodeBaseSchema<T extends string, E extends z.ZodTypeAny>(t
 	return z.object({
 		extras,
 		id: z.uuidv4(),
-		type: z.literal(type),
-		position: VectorSchema,
 		internalModuleId: z.uuidv4(),
-		unconnectedInputValues: z.record(z.string(), z.number()),
 		isInputAutoConnectedMap: z.record(z.enum([]), z.boolean()),
+		name: z.string().optional(),
+		position: VectorSchema,
+		type: z.literal(type),
+		unconnectedInputValues: z.record(z.string(), z.number()),
 	});
 }
