@@ -14,6 +14,7 @@ export class ShortcutHandler {
 		if (getIsTextEdit(e)) return;
 
 		const eventKeys = getEventKeys(e);
+		console.log('eventKeys', eventKeys);
 		const eventKeysWithoutShift = eventKeys.filter((key) => key !== 'Shift');
 
 		let shortcut = this.shortcuts.find((shortcut) => {

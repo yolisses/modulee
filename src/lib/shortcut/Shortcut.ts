@@ -1,4 +1,6 @@
+import type { actionCommandClassesByType } from './actionCommandClassesByType';
+
 export type Shortcut = {
 	keys: string[];
-	commandType: string;
+	commandType: keyof typeof actionCommandClassesByType;
 };

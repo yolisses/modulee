@@ -19,4 +19,5 @@ export const defaultShortcuts: Shortcut[] = [
 	{ keys: ['Ctrl', 'Y'], commandType: 'RedoActionCommand' },
 	{ keys: ['Ctrl', 'Z'], commandType: 'UndoActionCommand' },
 	{ keys: ['Delete'], commandType: 'RemoveNodesActionCommand' },
+	{ keys: ['F2'], commandType: 'RenameNodesActionCommand' },
 ];
