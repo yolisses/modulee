@@ -1,9 +1,9 @@
 import { updateContext } from '$lib/shortcut/contextsContext';
-import type { ModalState } from '$lib/ui/ModalState.svelte';
 import { setContext } from 'svelte';
+import type { Node } from './Node.svelte';
 
 export type RenameNodesStateContext = {
-	modalState: ModalState;
+	nodes: Node[];
 };
 
 export const renameNodesStateContextKey = Symbol('renameNodesStateContextKey');

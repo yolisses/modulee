@@ -1,26 +1,22 @@
 <script lang="ts">
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
-	import { graphContextKey } from '$lib/graph/graphContext';
 	import Modal from '$lib/ui/Modal.svelte';
-	import type { ModalState } from '$lib/ui/ModalState.svelte';
-	import { selectedNodeIdsContextKey } from 'nodes-editor';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { onMount } from 'svelte';
 	import { nodesName } from '../definitions/nodesName';
-
-	interface Props {
-		modalState: ModalState;
-	}
-
-	const { modalState }: Props = $props();
+	import { renameNodesStateContextKey } from '../RenameNodesStateContext';
 
 	let textInput: HTMLInputElement;
-	const graphContext = getRequiredContext(graphContextKey);
-	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
-	const selectedNodes = $derived(
-		graphContext.graph.nodes
-			.values()
-			.filter((node) => selectedNodeIdsContext.selectedNodeIds.has(node.id)),
-	);
+	const renameNodesStateContext = getRequiredContext(renameNodesStateContextKey);
+
+	class CustomModalState extends ModalState {
+		isOpen = $derived(renameNodesStateContext.nodes.length > 0);
+		close = () => {
+			renameNodesStateContext.nodes = [];
+		};
+	}
+
+	const modalState = new CustomModalState();
 
 	onMount(() => {
 		textInput.focus();
@@ -37,7 +33,8 @@
 		<div class="modal-container outline-1 outline-white/20">
 			<p>
 				Rename nodes
-				{#each selectedNodes as node}
+				{#each renameNodesStateContext.nodes as node, index (node.id)}
+					{#if index > 0},{/if}
 					<b>{node.name ?? nodesName[node.type]}</b>
 				{/each}
 			</p>
@@ -46,7 +43,7 @@
 				class="common-input"
 				name="name"
 				type="text"
-				value={selectedNodes[0]?.name}
+				value={renameNodesStateContext.nodes[0]?.name}
 			/>
 			<div class="flex flex-row justify-end gap-2">
 				<button type="button" class="common-button" onclick={modalState.close}> Cancel </button>

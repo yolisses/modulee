@@ -35,7 +35,7 @@
 </script>
 
 <Portal target={modalRootContext.modalRoot}>
-	<Modal {modalState} closeOnClickOverlay>
+	<Modal {modalState}>
 		<div class="modal-container">
 			<div class="flex items-center justify-between">
 				<div>Edit input node</div>
