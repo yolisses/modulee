@@ -1,13 +1,14 @@
 import type { VectorData } from '../actionCommands/VectorData';
 
 export type NodeDataBase<T extends string = string, E = object> = {
-	type: T;
 	extras: E;
 	id: string;
-	position: VectorData;
 	internalModuleId: string;
-	unconnectedInputValues: Record<string, number>;
 	isInputAutoConnectedMap: Record<string, boolean>;
+	name?: string;
+	position: VectorData;
+	type: T;
+	unconnectedInputValues: Record<string, number>;
 };
 
 // TODO rename NodeDataBase to BaseNodeData

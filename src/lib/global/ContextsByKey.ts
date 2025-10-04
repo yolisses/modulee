@@ -40,6 +40,10 @@ import type {
 	addNodeMenuParamsContextKey,
 } from '$lib/node/add/addNodeMenuParamsContext';
 import type {
+	RenameNodesStateContext,
+	renameNodesStateContextKey,
+} from '$lib/node/RenameNodesStateContext';
+import type {
 	ActivePitchesContext,
 	activePitchesContextKey,
 } from '$lib/piano/activePitchesContext';
@@ -93,6 +97,7 @@ export type ContextsByKey = {
 	[projectDataContextKey]: ProjectDataContext;
 	[projectNavbarSelectionContextKey]: ProjectNavbarSelectionContext;
 	[projectToolbarContextKey]: ProjectToolbarContext;
+	[renameNodesStateContextKey]: RenameNodesStateContext;
 	[rootElementContextKey]: RootElementContext;
 	[selectedNodeIdsContextKey]: SelectedNodeIdsContext;
 	[shortcutHandlerContextKey]: ShortcutHandlerContext;

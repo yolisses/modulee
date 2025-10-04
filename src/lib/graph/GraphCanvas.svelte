@@ -11,9 +11,12 @@
 	} from '$lib/node/add/addNodeMenuParamsContext';
 	import FloatingMenuReference from '$lib/node/add/FloatingMenuReference.svelte';
 	import type { Node } from '$lib/node/Node.svelte';
+	import { setRenameNodesStateContext } from '$lib/node/RenameNodesStateContext';
 	import NodeItem from '$lib/node/ui/NodeItem.svelte';
+	import RenameNodesModal from '$lib/node/ui/RenameNodesModal.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { spaceContextKey } from '$lib/space/spaceContext';
+	import { ModalState } from '$lib/ui/ModalState.svelte';
 	import { getElementPosition, getEventClientPosition, rootElementContextKey } from 'nodes-editor';
 	import GraphCanvasContainer from './GraphCanvasContainer.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
@@ -27,12 +30,14 @@
 
 	const { nodes, graphSizer, connections }: Props = $props();
 	const addNodeInputContext = $state({});
+	const renameNodesStateContext = $state({ modalState: new ModalState() });
 	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
 	const rootElementContext = getRequiredContext(rootElementContextKey);
 	const spaceContext = getRequiredContext(spaceContextKey);
 	let floatingMenuReference = $state<HTMLElement>();
 	setAddNodeInputContext(addNodeInputContext);
 	setAddNodeMenuParamsContext(addNodeMenuParamsContext);
+	setRenameNodesStateContext(renameNodesStateContext);
 
 	function handleContextMenu(e: MouseEvent) {
 		e.preventDefault();
@@ -74,4 +79,8 @@
 from scrolling when the menu is created -->
 {#if floatingMenuReference && addNodeMenuParamsContext.addNodeMenuParams}
 	<AddNodeMenu {floatingMenuReference} />
+{/if}
+
+{#if renameNodesStateContext.modalState.isOpen}
+	<RenameNodesModal modalState={renameNodesStateContext.modalState} />
 {/if}

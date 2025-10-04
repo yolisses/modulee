@@ -27,27 +27,25 @@ export class Node<T extends NodeDataBase = NodeDataBase> {
 		});
 	}
 
-	get id() {
-		return this.nodeData.id;
-	}
-
-	get type(): T['type'] {
-		return this.nodeData.type;
-	}
-
 	get extras(): T['extras'] {
 		return this.nodeData.extras;
 	}
-
+	get id() {
+		return this.nodeData.id;
+	}
 	get internalModuleId() {
 		return this.nodeData.internalModuleId;
 	}
-
-	get unconnectedInputValues(): T['unconnectedInputValues'] {
-		return this.nodeData.unconnectedInputValues;
-	}
-
 	get isInputAutoConnectedMap(): T['isInputAutoConnectedMap'] {
 		return this.nodeData.isInputAutoConnectedMap;
+	}
+	get name() {
+		return this.nodeData.name;
+	}
+	get type(): T['type'] {
+		return this.nodeData.type;
+	}
+	get unconnectedInputValues(): T['unconnectedInputValues'] {
+		return this.nodeData.unconnectedInputValues;
 	}
 }
