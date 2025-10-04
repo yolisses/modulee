@@ -25,20 +25,20 @@
 		}
 	}
 
-	function handleClickOnOverlay(e: MouseEvent) {
+	function handleClickOnOverlay(e: Event) {
 		if (preventCloseOnOverlayClick) {
 			e.stopPropagation();
 		}
 	}
 </script>
 
-<div
+<button
 	onclick={handleClickOnOverlay}
 	class="fixed inset-0 z-10 flex items-center justify-center bg-black/50"
 >
 	<div class="contents" bind:this={modal}>
 		{@render children?.()}
 	</div>
-</div>
+</button>
 
 <svelte:window onpointerdown={handleWindowClick} onkeydown={handleKeydown} />
