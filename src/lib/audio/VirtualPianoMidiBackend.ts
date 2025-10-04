@@ -68,6 +68,7 @@ export class VirtualPianoMidiBackend {
 			if (pitch === undefined) return;
 			this.audioBackend.setNoteOff(pitch);
 		});
+		this.activePitches.clear();
 		this.pressedKeys = {};
 	};
 }
