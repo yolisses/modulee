@@ -11,7 +11,7 @@ export function initializeWebAudioFeatures() {
 	const audioBackendContext = getRequiredContext(audioBackendContextKey);
 	const oscilloscopeBackendContext = getRequiredContext(oscilloscopeBackendContextKey);
 
-	const audioContext = new AudioContext();
+	const audioContext = new AudioContext({ latencyHint: 'interactive' });
 	const audioBackend = new WebAudioBackend(audioContext);
 	audioBackendContext.audioBackend = audioBackend;
 	audioBackend.initialize().then(() => {
