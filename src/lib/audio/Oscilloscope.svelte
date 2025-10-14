@@ -24,7 +24,11 @@
 			const v = value * 0.5 + 0.5;
 			const y = v * canvas.height;
 
-			ctx.fillRect(x, y, 1, 1);
+			if (i === 0) {
+				ctx.moveTo(x, y);
+			} else {
+				ctx.lineTo(x, y);
+			}
 
 			if (value > 1 || value < -1) {
 				clipped = true;
