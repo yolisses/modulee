@@ -11,11 +11,6 @@ export class InternalModule extends Module<InternalModuleData> {
 		this.nodes = nodeOptions.values().filter((node) => node.internalModuleId === this.id);
 	}
 
-	// This value is overridden in the constructor
-	getNodes(): Node[] {
-		return [];
-	}
-
 	getReference(): InternalModuleReference {
 		return { moduleId: this.id, type: 'internal' };
 	}

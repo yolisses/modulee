@@ -4,8 +4,8 @@ import type { ModuleReference } from './ModuleReference';
 
 export abstract class Module<T extends ModuleDataBase = ModuleDataBase> {
 	nodes!: Node[];
-	protected moduleData: T;
 	abstract getReference(): ModuleReference;
+	protected moduleData: T;
 
 	constructor(moduleData: T) {
 		this.moduleData = structuredClone(moduleData);
