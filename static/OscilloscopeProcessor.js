@@ -5,25 +5,29 @@ class OscilloscopeProcessor extends AudioWorkletProcessor {
 		super();
 		this.frameCount = 0;
 		const resolution = 128;
-		this.oscilloscopeBuffer = new OscilloscopeBuffer(resolution);
+		this.oscilloscopeBuffers = [
+			new OscilloscopeBuffer(resolution),
+			new OscilloscopeBuffer(resolution),
+		];
 		this.port.onmessage = this.handleMessage;
 		this.throttle = 4; // Post every 4th frame (~12ms at 44100Hz, 128 samples)
 	}
 
 	process(inputs) {
-		const input = inputs[0][0];
+		const { length } = inputs[0][0];
 
-		for (let i = 0; i < input.length; i++) {
-			const value = input[i];
-			this.oscilloscopeBuffer.push(value);
+		for (let i = 0; i < length; i++) {
+			this.oscilloscopeBuffers[0].push(inputs[0][0][i]);
+			this.oscilloscopeBuffers[1].push(inputs[0][1][i]);
 		}
 
-		if (input) {
-			if (this.frameCount >= this.throttle) {
-				this.port.postMessage(this.oscilloscopeBuffer.buffer);
-				this.frameCount = 0;
-			}
-			this.frameCount++;
+		this.frameCount++;
+		if (this.frameCount >= this.throttle) {
+			this.port.postMessage([
+				this.oscilloscopeBuffers[0].buffer,
+				this.oscilloscopeBuffers[1].buffer,
+			]);
+			this.frameCount = 0;
 		}
 		return true;
 	}
@@ -50,11 +54,12 @@ class OscilloscopeProcessor extends AudioWorkletProcessor {
 	};
 
 	setPitch = ({ pitch }) => {
-		const { length } = this.oscilloscopeBuffer.buffer;
+		const { length } = this.oscilloscopeBuffers[0].buffer;
 		const wavelength = this.getWavelength(pitch);
 		const multiplier = Math.max(Math.floor(length / wavelength) + 2, 1);
 		const ratio = length / wavelength / multiplier;
-		this.oscilloscopeBuffer.setRatio(ratio);
+		this.oscilloscopeBuffers[0].setRatio(ratio);
+		this.oscilloscopeBuffers[1].setRatio(ratio);
 	};
 }
 

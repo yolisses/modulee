@@ -1,5 +1,5 @@
 export interface OscilloscopeBackend {
 	initialize(): Promise<void>;
 	setPitch(pitch: number): void;
-	getData(): Promise<Float32Array>;
+	getData(): Promise<[Float32Array, Float32Array]>;
 }

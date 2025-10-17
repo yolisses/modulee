@@ -44,7 +44,9 @@
 	const animate = async () => {
 		const data = await oscilloscopeBackendContext.oscilloscopeBackend?.getData();
 		if (data) {
-			drawWave(data);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawWave(data[0]);
+			drawWave(data[1]);
 		}
 		animationFrameId = requestAnimationFrame(animate);
 	};

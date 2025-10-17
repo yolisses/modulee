@@ -8,7 +8,7 @@ type Message = {
 export class WebOscilloscopeBackend implements OscilloscopeBackend {
 	oscilloscopeNode?: AudioWorkletNode;
 	pendingMessages: Message[] = [];
-	data = new Float32Array([0]);
+	data = [new Float32Array([0]), new Float32Array([0])] as [Float32Array, Float32Array];
 
 	constructor(public audioContext: AudioContext) {}
 
