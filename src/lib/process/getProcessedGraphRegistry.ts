@@ -4,7 +4,6 @@ import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
-import { makeStereo } from './makeStereo/makeStereo';
 import { removeReferencesToMissingModules } from './removeReferencesToMissingModules/removeReferencesToMissingModules';
 import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
 
@@ -18,7 +17,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	replaceAudioInputNodes(graphRegistry);
 	addAutoNodes(graphRegistry);
 	addControlNodes(graphRegistry);
-	makeStereo(graphRegistry);
+	// makeStereo(graphRegistry);
 
 	return graphRegistry;
 }
