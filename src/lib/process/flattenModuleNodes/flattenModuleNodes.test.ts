@@ -6,7 +6,7 @@ import { flattenModuleNodes } from './flattenModuleNodes';
 
 function mockCreateId() {
 	vi.mock('$lib/global/createId', () => {
-		let counter = 0;
+		let counter = 1;
 		return {
 			counter,
 			createId: () => 'newId' + counter++,
@@ -18,7 +18,7 @@ describe('flattenModuleNodes', () => {
 	it('does not interfere nodes unrelated to module', () => {
 		mockCreateId();
 		const graphData = {
-			internalModules: [{ id: 'module1' }],
+			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
 				{ id: 'node1', internalModuleId: 'module1' },
 				{ id: 'node2', internalModuleId: 'module1' },
@@ -39,5 +39,43 @@ describe('flattenModuleNodes', () => {
 		flattenModuleNodes(graphRegistry);
 
 		expect(getGraphData(graphRegistry)).toEqual(graphData);
+	});
+
+	it('replaces module nodes by the module nodes', () => {
+		mockCreateId();
+		const graphData = {
+			mainInternalModuleId: 'module1',
+			internalModules: [{ id: 'module1' }, { id: 'module2' }],
+			nodes: [
+				{
+					id: 'node1',
+					internalModuleId: 'module1',
+					type: 'ModuleNode',
+					extras: { moduleReference: { moduleId: 'module2' } },
+				},
+				{ id: 'node2', internalModuleId: 'module2' },
+				{ id: 'node3', internalModuleId: 'module2' },
+			],
+			connections: [{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' }],
+		} as GraphData;
+		const graphRegistry = getGraphRegistry(graphData, []);
+
+		flattenModuleNodes(graphRegistry);
+
+		expect(getGraphData(graphRegistry)).toEqual({
+			mainInternalModuleId: 'module1',
+			internalModules: [{ id: 'module1' }, { id: 'module2' }],
+			nodes: [
+				{ id: 'node2', internalModuleId: 'module2' },
+				{ id: 'node3', internalModuleId: 'module2' },
+				{ id: 'newId1', internalModuleId: 'module1' },
+				{ id: 'newId2', internalModuleId: 'module1' },
+			],
+			connections: [
+				//
+				{ id: 'connection2', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
+				{ id: 'newId3', inputPath: { nodeId: 'newId2' }, targetNodeId: 'newId1' },
+			],
+		} as GraphData);
 	});
 });

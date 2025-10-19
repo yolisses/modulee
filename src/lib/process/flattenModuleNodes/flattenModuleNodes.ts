@@ -36,8 +36,11 @@ function flattenModuleNodesStep(graphRegistry: GraphRegistry, internalModuleId: 
 			const targetNodeId = replacements.get(connectionData.targetNodeId);
 			const originNodeId = replacements.get(connectionData.inputPath.nodeId);
 			if (targetNodeId && originNodeId) {
-				connectionData.targetNodeId = targetNodeId;
-				connectionData.inputPath.nodeId = originNodeId;
+				const copy = structuredClone(connectionData);
+				copy.id = createId();
+				copy.targetNodeId = targetNodeId;
+				copy.inputPath.nodeId = originNodeId;
+				graphRegistry.connections.add(copy);
 			}
 		});
 
