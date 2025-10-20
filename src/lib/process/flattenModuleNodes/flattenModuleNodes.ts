@@ -39,20 +39,27 @@ function copyModuleNodes(
 
 function copyModuleConnections(graphRegistry: GraphRegistry, replacements: Map<string, string>) {
 	graphRegistry.connections.values().forEach((connectionData) => {
-		const targetNodeId = replacements.get(connectionData.targetNodeId);
-		const originNodeId = replacements.get(connectionData.inputPath.nodeId);
+		const newOriginNodeId = replacements.get(connectionData.inputPath.nodeId);
+		const newTargetNodeId = replacements.get(connectionData.targetNodeId);
+		const originNode = graphRegistry.nodes.get(connectionData.inputPath.nodeId);
+		const targetNode = graphRegistry.nodes.get(connectionData.targetNodeId);
 		/*
 		Cases:
+		- from input node	-> delete, not used
+		- from output node	-> delete
+		- from module node	-> delete
 		- to input node	-> replace input node by external node
- 		- from output node	-> delete
+ 		- to output node	-> replace by output node target
 		- to module node	-> replace module node by the node connected to output node
 		- between remaining internal nodes	-> duplicate
 		*/
-		if (targetNodeId && originNodeId) {
+		if (originNode.type === 'InputNode') {
+			return;
+		} else if (newTargetNodeId && newOriginNodeId) {
 			const copy = structuredClone(connectionData);
 			copy.id = createId();
-			copy.targetNodeId = targetNodeId;
-			copy.inputPath.nodeId = originNodeId;
+			copy.targetNodeId = newTargetNodeId;
+			copy.inputPath.nodeId = newOriginNodeId;
 			graphRegistry.connections.add(copy);
 		}
 	});
