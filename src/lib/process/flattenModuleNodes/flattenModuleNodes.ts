@@ -37,37 +37,47 @@ function copyModuleNodes(
 		});
 }
 
-// Recursive, depth first
-function flattenModuleNodesStep(graphRegistry: GraphRegistry, internalModuleId: string) {
-	// Propagate until the leaf modules
-	propagateFlattenModuleNodes(graphRegistry, internalModuleId);
-
-	const replacements = new Map<string, string>();
-	graphRegistry.nodes.values().forEach((nodeData) => {
-		if (
-			nodeData.internalModuleId === internalModuleId &&
-			nodeData.type === 'ModuleNode' &&
-			nodeData.extras.moduleReference?.moduleId
-		) {
-			copyModuleNodes(
-				graphRegistry,
-				nodeData.extras.moduleReference.moduleId,
-				internalModuleId,
-				replacements,
-			);
-			graphRegistry.nodes.remove(nodeData);
-		}
-	});
-
+function copyModuleConnections(graphRegistry: GraphRegistry, replacements: Map<string, string>) {
 	graphRegistry.connections.values().forEach((connectionData) => {
 		const targetNodeId = replacements.get(connectionData.targetNodeId);
 		const originNodeId = replacements.get(connectionData.inputPath.nodeId);
+		/*
+		Cases:
+		- to input node	-> replace input node by external node
+ 		- from output node	-> delete
+		- to module node	-> replace module node by the node connected to output node
+		- between remaining internal nodes	-> duplicate
+		*/
 		if (targetNodeId && originNodeId) {
 			const copy = structuredClone(connectionData);
 			copy.id = createId();
 			copy.targetNodeId = targetNodeId;
 			copy.inputPath.nodeId = originNodeId;
 			graphRegistry.connections.add(copy);
+		}
+	});
+}
+
+// Recursive, depth first
+function flattenModuleNodesStep(graphRegistry: GraphRegistry, internalModuleId: string) {
+	// Propagate until the leaf modules
+	propagateFlattenModuleNodes(graphRegistry, internalModuleId);
+
+	graphRegistry.nodes.values().forEach((nodeData) => {
+		if (
+			nodeData.internalModuleId === internalModuleId &&
+			nodeData.type === 'ModuleNode' &&
+			nodeData.extras.moduleReference?.moduleId
+		) {
+			const replacements = new Map<string, string>();
+			copyModuleNodes(
+				graphRegistry,
+				nodeData.extras.moduleReference.moduleId,
+				internalModuleId,
+				replacements,
+			);
+			copyModuleConnections(graphRegistry, replacements);
+			graphRegistry.nodes.remove(nodeData);
 		}
 	});
 }
