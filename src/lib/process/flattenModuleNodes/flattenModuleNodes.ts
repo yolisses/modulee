@@ -2,95 +2,55 @@ import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 
-function propagateFlattenModuleNodes(graphRegistry: GraphRegistry, internalModuleId: string) {
-	graphRegistry.nodes.values().forEach((nodeData) => {
-		if (nodeData.internalModuleId !== internalModuleId) return;
-		if (nodeData.type !== 'ModuleNode') return;
-		const moduleNodeData = nodeData as ModuleNodeData;
-		const moduleId = moduleNodeData.extras.moduleReference?.moduleId;
-		if (!moduleId) return;
-		flattenModuleNodesStep(graphRegistry, moduleId);
-	});
-}
-
-function copyModuleNodes(
+function copyNodesFromModule(
 	graphRegistry: GraphRegistry,
-	oldModuleId: string,
-	newModuleId: string,
-	replacements: Map<string, string>,
+	fromModuleId: string,
+	toModuleId: string,
 ) {
-	graphRegistry.nodes
+	const idMap = new Map();
+	const nodesToCopy = graphRegistry.nodes
 		.values()
-		.filter((nodeData) => {
-			return (
-				nodeData.internalModuleId === oldModuleId &&
-				nodeData.type !== 'ModuleNode' &&
-				nodeData.type !== 'InputNode'
-			);
+		.filter((nodeData) => nodeData.internalModuleId === fromModuleId);
+
+	nodesToCopy.forEach((nodeData) => {
+		const copy = structuredClone(nodeData);
+		copy.id = createId();
+		copy.internalModuleId = toModuleId;
+		graphRegistry.nodes.add(copy);
+		idMap.set(nodeData.id, copy.id);
+	});
+
+	graphRegistry.connections
+		.values()
+		.filter((connectionData) => {
+			return idMap.has(connectionData.inputPath.nodeId) && idMap.has(connectionData.targetNodeId);
 		})
-		.forEach((nodeData) => {
-			const copy = structuredClone(nodeData);
+		.forEach((connectionData) => {
+			const copy = structuredClone(connectionData);
 			copy.id = createId();
-			copy.internalModuleId = newModuleId;
-			graphRegistry.nodes.add(copy);
-			replacements.set(nodeData.id, copy.id);
+			copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId);
+			copy.targetNodeId = idMap.get(connectionData.targetNodeId);
+			graphRegistry.connections.add(copy);
+			idMap.set(connectionData.id, copy.id);
 		});
 }
 
-function copyModuleConnections(graphRegistry: GraphRegistry, replacements: Map<string, string>) {
-	graphRegistry.connections.values().forEach((connectionData) => {
-		const newOriginNodeId = replacements.get(connectionData.inputPath.nodeId);
-		const newTargetNodeId = replacements.get(connectionData.targetNodeId);
-		const originNode = graphRegistry.nodes.get(connectionData.inputPath.nodeId);
-		const targetNode = graphRegistry.nodes.get(connectionData.targetNodeId);
-		/*
-		Cases:
-		- from input node	-> delete, not used
-		- from output node	-> delete
-		- from module node	-> delete
-		- to input node	-> replace input node by external node
- 		- to output node	-> replace by output node target
-		- to module node	-> replace module node by the node connected to output node
-		- between remaining internal nodes	-> duplicate
-		*/
-		if (originNode.type === 'InputNode') {
-			return;
-		} else if (newTargetNodeId && newOriginNodeId) {
-			const copy = structuredClone(connectionData);
-			copy.id = createId();
-			copy.targetNodeId = newTargetNodeId;
-			copy.inputPath.nodeId = newOriginNodeId;
-			graphRegistry.connections.add(copy);
-		}
-	});
-}
+function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData) {
+	if (!moduleNodeData.extras.moduleReference) {
+		graphRegistry.nodes.remove(moduleNodeData);
+		return;
+	}
 
-// Recursive, depth first
-function flattenModuleNodesStep(graphRegistry: GraphRegistry, internalModuleId: string) {
-	// Propagate until the leaf modules
-	propagateFlattenModuleNodes(graphRegistry, internalModuleId);
+	const { moduleId } = moduleNodeData.extras.moduleReference;
 
-	graphRegistry.nodes.values().forEach((nodeData) => {
-		if (
-			nodeData.internalModuleId === internalModuleId &&
-			nodeData.type === 'ModuleNode' &&
-			nodeData.extras.moduleReference?.moduleId
-		) {
-			const replacements = new Map<string, string>();
-			copyModuleNodes(
-				graphRegistry,
-				nodeData.extras.moduleReference.moduleId,
-				internalModuleId,
-				replacements,
-			);
-			copyModuleConnections(graphRegistry, replacements);
-			graphRegistry.nodes.remove(nodeData);
-		}
-	});
+	copyNodesFromModule(graphRegistry, moduleNodeData.internalModuleId, moduleId);
+	graphRegistry.nodes.remove(moduleNodeData);
 }
 
 export function flattenModuleNodes(graphRegistry: GraphRegistry) {
-	graphRegistry.internalModules.values().forEach((internalModule) => {
-		flattenModuleNodesStep(graphRegistry, internalModule.id);
+	graphRegistry.nodes.values().forEach((nodeData) => {
+		if (nodeData.type === 'ModuleNode') {
+			flattenModuleNode(graphRegistry, nodeData);
+		}
 	});
 }
