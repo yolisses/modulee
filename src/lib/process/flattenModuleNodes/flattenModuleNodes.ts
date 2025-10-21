@@ -10,7 +10,15 @@ function copyNodesFromModule(
 	const idMap = new Map();
 	const nodesToCopy = graphRegistry.nodes
 		.values()
-		.filter((nodeData) => nodeData.internalModuleId === fromModuleId);
+		.filter(
+			(nodeData) =>
+				nodeData.internalModuleId === fromModuleId &&
+				nodeData.type !== 'ModuleNode' &&
+				nodeData.type !== 'OutputNode' &&
+				nodeData.type !== 'InputNode',
+		);
+
+	console.log(nodesToCopy);
 
 	nodesToCopy.forEach((nodeData) => {
 		const copy = structuredClone(nodeData);
@@ -43,7 +51,7 @@ function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleN
 
 	const { moduleId } = moduleNodeData.extras.moduleReference;
 
-	copyNodesFromModule(graphRegistry, moduleNodeData.internalModuleId, moduleId);
+	copyNodesFromModule(graphRegistry, moduleId, moduleNodeData.internalModuleId);
 	graphRegistry.nodes.remove(moduleNodeData);
 }
 

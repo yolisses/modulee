@@ -38,7 +38,7 @@ describe('flattenModuleNodes', () => {
 		expect(getGraphData(graphRegistry)).toEqual(graphData);
 	});
 
-	it.only('replaces module nodes by the module nodes', () => {
+	it('replaces module nodes by the module nodes', () => {
 		mockCreateId();
 		const graphData = {
 			mainInternalModuleId: 'module1',
@@ -76,7 +76,7 @@ describe('flattenModuleNodes', () => {
 		} as GraphData);
 	});
 
-	it('replaces module nodes by the module nodes and replaces input nodes', () => {
+	it.only('replaces module nodes by the module nodes and replaces input nodes', () => {
 		mockCreateId();
 		const graphData = {
 			mainInternalModuleId: 'module1',
