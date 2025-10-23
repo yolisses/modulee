@@ -4,16 +4,19 @@ import { getGraphRegistry } from '$lib/project/getGraphRegistry';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { flattenModuleNodes } from './flattenModuleNodes';
 
-function mockCreateId() {
-	vi.mock('$lib/global/createId', () => {
-		let counter = 1;
-		return { counter, createId: () => 'newId' + counter++ };
-	});
-}
+import * as idModule from '$lib/global/createId';
 
 describe('flattenModuleNodes', () => {
+	let counter: number;
+
 	beforeEach(() => {
-		mockCreateId();
+		// Reset counter before each test (`it`)
+		counter = 1;
+
+		// Mock the module
+		vi.spyOn(idModule, 'createId').mockImplementation(() => {
+			return 'newId' + counter++;
+		});
 	});
 
 	it('does not interfere nodes unrelated to module', () => {
@@ -109,8 +112,6 @@ describe('flattenModuleNodes', () => {
 		const graphRegistry = getGraphRegistry(graphData, []);
 
 		flattenModuleNodes(graphRegistry);
-
-		console.dir(getGraphData(graphRegistry), { depth: null });
 
 		expect(getGraphData(graphRegistry)).toEqual({
 			mainInternalModuleId: 'module1',
