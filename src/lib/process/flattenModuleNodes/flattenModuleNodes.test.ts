@@ -4,7 +4,9 @@ import { getGraphRegistry } from '$lib/project/getGraphRegistry';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { flattenModuleNodes } from './flattenModuleNodes';
 
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import * as idModule from '$lib/global/createId';
+import type { NodeData } from '$lib/node/data/NodeData';
 
 describe('flattenModuleNodes', () => {
 	let counter: number;
@@ -64,21 +66,17 @@ describe('flattenModuleNodes', () => {
 
 		flattenModuleNodes(graphRegistry);
 
-		expect(getGraphData(graphRegistry)).toEqual({
-			mainInternalModuleId: 'module1',
-			internalModules: [{ id: 'module1' }, { id: 'module2' }],
-			nodes: [
-				{ id: 'node2', internalModuleId: 'module2' },
-				{ id: 'node3', internalModuleId: 'module2' },
-				{ id: 'newId1', internalModuleId: 'module1' },
-				{ id: 'newId2', internalModuleId: 'module1' },
-			],
-			connections: [
-				//
-				{ id: 'connection1', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
-				{ id: 'newId3', inputPath: { nodeId: 'newId2' }, targetNodeId: 'newId1' },
-			],
-		} as GraphData);
+		expect(getGraphData(graphRegistry).nodes).toEqual([
+			{ id: 'node2', internalModuleId: 'module2' },
+			{ id: 'node3', internalModuleId: 'module2' },
+			{ id: 'newId1', internalModuleId: 'module1' },
+			{ id: 'newId2', internalModuleId: 'module1' },
+		] as NodeData[]);
+
+		expect(getGraphData(graphRegistry).connections).toEqual([
+			{ id: 'connection1', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
+			{ id: 'newId3', inputPath: { nodeId: 'newId2' }, targetNodeId: 'newId1' },
+		] as ConnectionData[]);
 	});
 
 	it('replaces module nodes by the module nodes and replaces input nodes', () => {
@@ -113,27 +111,24 @@ describe('flattenModuleNodes', () => {
 
 		flattenModuleNodes(graphRegistry);
 
-		expect(getGraphData(graphRegistry)).toEqual({
-			mainInternalModuleId: 'module1',
-			internalModules: [{ id: 'module1' }, { id: 'module2' }],
-			nodes: [
-				{ id: 'node1', internalModuleId: 'module1' },
-				{ id: 'node3', internalModuleId: 'module2', type: 'InputNode' },
-				{ id: 'node4', internalModuleId: 'module2' },
-				{ id: 'newId1', internalModuleId: 'module1' },
-			],
-			connections: [
-				{
-					id: 'connection2',
-					inputPath: { nodeId: 'node4', inputKey: 'input1' },
-					targetNodeId: 'node3',
-				},
-				{
-					id: 'newId2',
-					inputPath: { nodeId: 'newId1', inputKey: 'input1' },
-					targetNodeId: 'node1',
-				},
-			],
-		} as GraphData);
+		expect(getGraphData(graphRegistry).nodes).toEqual([
+			{ id: 'node1', internalModuleId: 'module1' },
+			{ id: 'node3', internalModuleId: 'module2', type: 'InputNode' },
+			{ id: 'node4', internalModuleId: 'module2' },
+			{ id: 'newId1', internalModuleId: 'module1' },
+		] as NodeData[]);
+
+		expect(getGraphData(graphRegistry).connections).toEqual([
+			{
+				id: 'connection2',
+				inputPath: { nodeId: 'node4', inputKey: 'input1' },
+				targetNodeId: 'node3',
+			},
+			{
+				id: 'newId2',
+				inputPath: { nodeId: 'newId1', inputKey: 'input1' },
+				targetNodeId: 'node1',
+			},
+		] as ConnectionData[]);
 	});
 });
