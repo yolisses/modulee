@@ -2,6 +2,7 @@ import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { NodeData } from '$lib/node/data/NodeData';
+import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 
 function copyNode(
@@ -35,7 +36,7 @@ function copyNodesFromModule(
 	toModuleId: string,
 	moduleNodeData: ModuleNodeData,
 ) {
-	const idMap = new Map();
+	const idMap = new Map<string, string>();
 	graphRegistry.nodes.values().filter((nodeData) => {
 		if (nodeData.internalModuleId !== fromModuleId) return;
 		if (nodeData.type === 'ModuleNode') return;
@@ -56,26 +57,40 @@ function copyNodesFromModule(
 			} else {
 				const targetNode = graphRegistry.nodes.getOrNull(targetNodeId);
 				if (targetNode?.type === 'InputNode') {
-					const previousConnectionData = graphRegistry.connections
-						.values()
-						.find((connectionData) => {
-							return (
-								connectionData.inputPath.inputKey === targetNode.id &&
-								connectionData.inputPath.nodeId === moduleNodeData.id
-							);
-						});
-
-					if (previousConnectionData) {
-						const copy = structuredClone(connectionData);
-						copy.id = createId();
-						copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
-						graphRegistry.connections.add(copy);
-						copy.targetNodeId = previousConnectionData.targetNodeId;
-					}
+					copyConnectionToInputNode(
+						graphRegistry,
+						targetNode,
+						moduleNodeData,
+						connectionData,
+						idMap,
+					);
 				}
 			}
 		}
 	});
+}
+
+function copyConnectionToInputNode(
+	graphRegistry: GraphRegistry,
+	targetNode: InputNodeData,
+	moduleNodeData: ModuleNodeData,
+	connectionData: ConnectionData,
+	idMap: Map<string, string>,
+) {
+	const previousConnectionData = graphRegistry.connections.values().find((connectionData) => {
+		return (
+			connectionData.inputPath.inputKey === targetNode.id &&
+			connectionData.inputPath.nodeId === moduleNodeData.id
+		);
+	});
+
+	if (previousConnectionData) {
+		const copy = structuredClone(connectionData);
+		copy.id = createId();
+		copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
+		graphRegistry.connections.add(copy);
+		copy.targetNodeId = previousConnectionData.targetNodeId;
+	}
 }
 
 function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData) {
