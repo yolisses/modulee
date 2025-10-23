@@ -1,7 +1,7 @@
 import type { GraphData } from '$lib/graph/GraphData';
 import { getGraphData } from '$lib/project/getGraphData';
 import { getGraphRegistry } from '$lib/project/getGraphRegistry';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { flattenModuleNodes } from './flattenModuleNodes';
 
 function mockCreateId() {
@@ -12,8 +12,11 @@ function mockCreateId() {
 }
 
 describe('flattenModuleNodes', () => {
-	it('does not interfere nodes unrelated to module', () => {
+	beforeEach(() => {
 		mockCreateId();
+	});
+
+	it('does not interfere nodes unrelated to module', () => {
 		const graphData = {
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
@@ -39,7 +42,6 @@ describe('flattenModuleNodes', () => {
 	});
 
 	it('replaces module nodes by the module nodes', () => {
-		mockCreateId();
 		const graphData = {
 			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
@@ -77,7 +79,6 @@ describe('flattenModuleNodes', () => {
 	});
 
 	it('replaces module nodes by the module nodes and replaces input nodes', () => {
-		mockCreateId();
 		const graphData = {
 			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
@@ -109,6 +110,8 @@ describe('flattenModuleNodes', () => {
 
 		flattenModuleNodes(graphRegistry);
 
+		console.dir(getGraphData(graphRegistry), { depth: null });
+
 		expect(getGraphData(graphRegistry)).toEqual({
 			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
@@ -116,13 +119,17 @@ describe('flattenModuleNodes', () => {
 				{ id: 'node1', internalModuleId: 'module1' },
 				{ id: 'node3', internalModuleId: 'module2', type: 'InputNode' },
 				{ id: 'node4', internalModuleId: 'module2' },
-				{ id: 'newId4', internalModuleId: 'module1' },
+				{ id: 'newId1', internalModuleId: 'module1' },
 			],
 			connections: [
-				{ id: 'connection2', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
 				{
-					id: 'newId5',
-					inputPath: { nodeId: 'newId4', inputKey: 'input1' },
+					id: 'connection2',
+					inputPath: { nodeId: 'node4', inputKey: 'input1' },
+					targetNodeId: 'node3',
+				},
+				{
+					id: 'newId2',
+					inputPath: { nodeId: 'newId1', inputKey: 'input1' },
 					targetNodeId: 'node1',
 				},
 			],

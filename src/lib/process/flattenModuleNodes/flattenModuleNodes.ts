@@ -33,42 +33,61 @@ function copyNodesFromModule(
 	graphRegistry: GraphRegistry,
 	fromModuleId: string,
 	toModuleId: string,
+	moduleNodeData: ModuleNodeData,
 ) {
 	const idMap = new Map();
-	const inputTargetMap = new Map();
 	graphRegistry.nodes.values().filter((nodeData) => {
 		if (nodeData.internalModuleId !== fromModuleId) return;
 		if (nodeData.type === 'ModuleNode') return;
 		if (nodeData.type === 'OutputNode') return;
-		if (nodeData.type === 'InputNode') {
-			const targetNode = graphRegistry.connections.values().find((connectionData) => {
-				return (connectionData.inputPath.nodeId = nodeData.id);
-			});
-			inputTargetMap.set(nodeData.id, targetNode?.targetNodeId);
-		} else {
-			copyNode(graphRegistry, idMap, nodeData, toModuleId);
-		}
+		if (nodeData.type === 'InputNode') return;
+		copyNode(graphRegistry, idMap, nodeData, toModuleId);
 	});
 
 	graphRegistry.connections.values().forEach((connectionData) => {
-		const isInternalConnection =
-			idMap.has(connectionData.inputPath.nodeId) && idMap.has(connectionData.targetNodeId);
-		if (isInternalConnection) {
-			copyConnection(graphRegistry, idMap, connectionData);
+		const {
+			inputPath: { nodeId: originNodeId },
+			targetNodeId,
+		} = connectionData;
+
+		if (idMap.has(originNodeId)) {
+			if (idMap.has(targetNodeId)) {
+				copyConnection(graphRegistry, idMap, connectionData);
+			} else {
+				const targetNode = graphRegistry.nodes.getOrNull(targetNodeId);
+				if (targetNode?.type === 'InputNode') {
+					const previousConnectionData = graphRegistry.connections
+						.values()
+						.find((connectionData) => {
+							return (
+								connectionData.inputPath.inputKey === targetNode.id &&
+								connectionData.inputPath.nodeId === moduleNodeData.id
+							);
+						});
+
+					if (previousConnectionData) {
+						const copy = structuredClone(connectionData);
+						copy.id = createId();
+						copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
+						graphRegistry.connections.add(copy);
+						copy.targetNodeId = previousConnectionData.targetNodeId;
+						console.log(connectionData, previousConnectionData, copy);
+					}
+				}
+			}
 		}
 	});
 }
 
 function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData) {
-	if (!moduleNodeData.extras.moduleReference) {
-		graphRegistry.nodes.remove(moduleNodeData);
-		return;
+	if (moduleNodeData.extras.moduleReference) {
+		const { moduleId } = moduleNodeData.extras.moduleReference;
+		copyNodesFromModule(graphRegistry, moduleId, moduleNodeData.internalModuleId, moduleNodeData);
 	}
-
-	const { moduleId } = moduleNodeData.extras.moduleReference;
-
-	copyNodesFromModule(graphRegistry, moduleId, moduleNodeData.internalModuleId);
 	graphRegistry.nodes.remove(moduleNodeData);
+	graphRegistry.connections.removeByCondition((connectionData) => {
+		return connectionData.inputPath.nodeId === moduleNodeData.id;
+	});
 }
 
 export function flattenModuleNodes(graphRegistry: GraphRegistry) {
