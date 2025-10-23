@@ -32,11 +32,11 @@ function copyConnection(
 
 function copyNodesFromModule(
 	graphRegistry: GraphRegistry,
+	idMap: Map<string, string>,
 	fromModuleId: string,
 	toModuleId: string,
 	moduleNodeData: ModuleNodeData,
 ) {
-	const idMap = new Map<string, string>();
 	graphRegistry.nodes.values().filter((nodeData) => {
 		if (nodeData.internalModuleId !== fromModuleId) return;
 		if (nodeData.type === 'ModuleNode') return;
@@ -93,14 +93,54 @@ function copyConnectionToInputNode(
 	}
 }
 
+function getModuleNodeOutputTargetId(
+	graphRegistry: GraphRegistry,
+	moduleNodeData: ModuleNodeData,
+	idMap: Map<string, string>,
+) {
+	if (!moduleNodeData.extras.moduleReference) return;
+	const { moduleId } = moduleNodeData.extras.moduleReference;
+	const outputNode = graphRegistry.nodes.values().find((nodeData) => {
+		return nodeData.type === 'OutputNode' && nodeData.internalModuleId === moduleId;
+	});
+	if (!outputNode) return;
+	const connection = graphRegistry.connections.values().find((connectionData) => {
+		return connectionData.inputPath.nodeId === outputNode.id;
+	});
+	if (!connection) return;
+	return idMap.get(connection.targetNodeId);
+}
+
 function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData) {
-	if (moduleNodeData.extras.moduleReference) {
-		const { moduleId } = moduleNodeData.extras.moduleReference;
-		copyNodesFromModule(graphRegistry, moduleId, moduleNodeData.internalModuleId, moduleNodeData);
+	const idMap = new Map<string, string>();
+	const moduleId = moduleNodeData.extras.moduleReference?.moduleId;
+	if (moduleId) {
+		copyNodesFromModule(
+			graphRegistry,
+			idMap,
+			moduleId,
+			moduleNodeData.internalModuleId,
+			moduleNodeData,
+		);
 	}
+
 	graphRegistry.nodes.remove(moduleNodeData);
-	graphRegistry.connections.removeByCondition((connectionData) => {
-		return connectionData.inputPath.nodeId === moduleNodeData.id;
+
+	const outputTargetId = getModuleNodeOutputTargetId(graphRegistry, moduleNodeData, idMap);
+	graphRegistry.connections.values().forEach((connectionData) => {
+		const isToModuleNode = connectionData.targetNodeId === moduleNodeData.id;
+		if (isToModuleNode) {
+			if (outputTargetId) {
+				connectionData.targetNodeId = outputTargetId;
+			} else {
+				graphRegistry.connections.remove(connectionData);
+			}
+		}
+
+		const isFromModuleNode = connectionData.inputPath.nodeId === moduleNodeData.id;
+		if (isFromModuleNode) {
+			graphRegistry.connections.remove(connectionData);
+		}
 	});
 }
 
