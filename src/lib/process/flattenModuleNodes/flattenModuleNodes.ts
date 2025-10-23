@@ -71,7 +71,6 @@ function copyNodesFromModule(
 						copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
 						graphRegistry.connections.add(copy);
 						copy.targetNodeId = previousConnectionData.targetNodeId;
-						console.log(connectionData, previousConnectionData, copy);
 					}
 				}
 			}
