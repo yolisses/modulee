@@ -1,6 +1,33 @@
+import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { createId } from '$lib/global/createId';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { NodeData } from '$lib/node/data/NodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
+
+function copyNode(
+	graphRegistry: GraphRegistry,
+	idMap: Map<string, string>,
+	nodeData: NodeData,
+	toModuleId: string,
+) {
+	const copy = structuredClone(nodeData);
+	copy.id = createId();
+	copy.internalModuleId = toModuleId;
+	graphRegistry.nodes.add(copy);
+	idMap.set(nodeData.id, copy.id);
+}
+
+function copyConnection(
+	graphRegistry: GraphRegistry,
+	idMap: Map<string, string>,
+	connectionData: ConnectionData,
+) {
+	const copy = structuredClone(connectionData);
+	copy.id = createId();
+	copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
+	copy.targetNodeId = idMap.get(connectionData.targetNodeId)!;
+	graphRegistry.connections.add(copy);
+}
 
 function copyNodesFromModule(
 	graphRegistry: GraphRegistry,
@@ -8,39 +35,28 @@ function copyNodesFromModule(
 	toModuleId: string,
 ) {
 	const idMap = new Map();
-	const nodesToCopy = graphRegistry.nodes
-		.values()
-		.filter(
-			(nodeData) =>
-				nodeData.internalModuleId === fromModuleId &&
-				nodeData.type !== 'ModuleNode' &&
-				nodeData.type !== 'OutputNode' &&
-				nodeData.type !== 'InputNode',
-		);
-
-	console.log(nodesToCopy);
-
-	nodesToCopy.forEach((nodeData) => {
-		const copy = structuredClone(nodeData);
-		copy.id = createId();
-		copy.internalModuleId = toModuleId;
-		graphRegistry.nodes.add(copy);
-		idMap.set(nodeData.id, copy.id);
+	const inputTargetMap = new Map();
+	graphRegistry.nodes.values().filter((nodeData) => {
+		if (nodeData.internalModuleId !== fromModuleId) return;
+		if (nodeData.type === 'ModuleNode') return;
+		if (nodeData.type === 'OutputNode') return;
+		if (nodeData.type === 'InputNode') {
+			const targetNode = graphRegistry.connections.values().find((connectionData) => {
+				return (connectionData.inputPath.nodeId = nodeData.id);
+			});
+			inputTargetMap.set(nodeData.id, targetNode?.targetNodeId);
+		} else {
+			copyNode(graphRegistry, idMap, nodeData, toModuleId);
+		}
 	});
 
-	graphRegistry.connections
-		.values()
-		.filter((connectionData) => {
-			return idMap.has(connectionData.inputPath.nodeId) && idMap.has(connectionData.targetNodeId);
-		})
-		.forEach((connectionData) => {
-			const copy = structuredClone(connectionData);
-			copy.id = createId();
-			copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId);
-			copy.targetNodeId = idMap.get(connectionData.targetNodeId);
-			graphRegistry.connections.add(copy);
-			idMap.set(connectionData.id, copy.id);
-		});
+	graphRegistry.connections.values().forEach((connectionData) => {
+		const isInternalConnection =
+			idMap.has(connectionData.inputPath.nodeId) && idMap.has(connectionData.targetNodeId);
+		if (isInternalConnection) {
+			copyConnection(graphRegistry, idMap, connectionData);
+		}
+	});
 }
 
 function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData) {

@@ -76,7 +76,7 @@ describe('flattenModuleNodes', () => {
 		} as GraphData);
 	});
 
-	it.only('replaces module nodes by the module nodes and replaces input nodes', () => {
+	it('replaces module nodes by the module nodes and replaces input nodes', () => {
 		mockCreateId();
 		const graphData = {
 			mainInternalModuleId: 'module1',
