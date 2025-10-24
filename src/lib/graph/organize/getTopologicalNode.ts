@@ -14,7 +14,7 @@ export function getTopologicalNode(
 			.filter((connectionData) => {
 				return (
 					connectionData.inputPath.nodeId === nodeData.id &&
-					graphRegistry.nodes.get(connectionData.targetNodeId)
+					graphRegistry.nodes.getOrNull(connectionData.targetNodeId)
 				);
 			})
 			.map((connectionData) => {

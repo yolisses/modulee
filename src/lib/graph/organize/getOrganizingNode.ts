@@ -20,7 +20,7 @@ function getOrganizingNodeInputs(nodeData: NodeData, graphRegistry: GraphRegistr
 		.filter((connectionData) => {
 			return (
 				connectionData.inputPath.nodeId === nodeData.id &&
-				graphRegistry.nodes.get(connectionData.targetNodeId)
+				graphRegistry.nodes.getOrNull(connectionData.targetNodeId)
 			);
 		})
 		.sort((a, b) => {
