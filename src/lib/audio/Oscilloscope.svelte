@@ -21,7 +21,7 @@
 		for (let i = 0; i < data.length; i++) {
 			const value = data[i];
 			// Normalize [-1, 1] to [0, 1]
-			const v = value * 0.5 + 0.5;
+			const v = -value * 0.5 + 0.5;
 			const y = v * canvas.height;
 
 			if (i === 0) {
