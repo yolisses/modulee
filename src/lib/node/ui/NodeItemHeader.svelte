@@ -126,6 +126,8 @@
 			title={nodesName[node.type]}
 		>
 			{node.name ?? nodesName[node.type]}
+			<!-- DEBUG -->
+			{node.id}
 		</div>
 	</PointerEventDispatcher>
 	{@render children?.()}

@@ -17,5 +17,7 @@ export function getNodeEngineData(
 		type: nodeData.type,
 		input_ids: inputIds,
 		id: hashToUsize(nodeData.id),
+		// DEBUG
+		originalId: nodeData.id,
 	};
 }
