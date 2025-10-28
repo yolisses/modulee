@@ -1,4 +1,5 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { getGraphData } from '$lib/project/getGraphData';
 import { addAutoNodes } from './autoNodes/addAutoNodes';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';
@@ -21,6 +22,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	flattenModuleNodes(graphRegistry);
 	// makeStereo(graphRegistry);
 
+	console.log(getGraphData(graphRegistry));
 	// downloadJson(getGraphData(graphRegistry), 'graphData.json');
 
 	return graphRegistry;

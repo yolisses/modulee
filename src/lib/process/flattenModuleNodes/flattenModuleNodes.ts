@@ -233,8 +233,8 @@ function createReplacementZeroValuedNode(graphRegistry: GraphRegistry, nodeData:
 function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData): void {
 	const idMap = new Map<string, string>();
 	const moduleId = moduleNodeData.extras.moduleReference?.moduleId;
-
-	if (moduleId) {
+	const outputTargetId = getModuleNodeOutputTargetId(graphRegistry, moduleNodeData, idMap);
+	if (moduleId && outputTargetId) {
 		copyNodesFromModule(
 			graphRegistry,
 			idMap,
@@ -244,7 +244,6 @@ function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleN
 		);
 		graphRegistry.nodes.remove(moduleNodeData);
 
-		const outputTargetId = getModuleNodeOutputTargetId(graphRegistry, moduleNodeData, idMap);
 		updateModuleNodeConnections(graphRegistry, moduleNodeData, outputTargetId);
 	} else {
 		graphRegistry.nodes.remove(moduleNodeData);
