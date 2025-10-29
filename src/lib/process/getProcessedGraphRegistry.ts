@@ -19,11 +19,13 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	replaceAudioInputNodes(graphRegistry);
 	addAutoNodes(graphRegistry);
 	addControlNodes(graphRegistry);
+	// DEBUG all comments
+	// downloadJson(getGraphData(graphRegistry), 'graphData before.json');
 	flattenModuleNodes(graphRegistry);
 	// makeStereo(graphRegistry);
 
 	console.log(getGraphData(graphRegistry));
-	// downloadJson(getGraphData(graphRegistry), 'graphData.json');
+	// downloadJson(getGraphData(graphRegistry), 'graphData after.json');
 
 	return graphRegistry;
 }
