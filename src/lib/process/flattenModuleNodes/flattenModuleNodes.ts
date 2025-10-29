@@ -1,266 +1,94 @@
 import type { ConnectionData } from '$lib/connection/ConnectionData';
+import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
-import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
+import type { ModuleVoicesNodeData } from '$lib/node/data/variants/ModuleVoicesNodeData';
 
-/**
- * Creates a copy of a node in the target module and records the ID mapping.
- */
-function copyNode(
-	graphRegistry: GraphRegistry,
-	idMap: Map<string, string>,
-	nodeData: NodeData,
-	toModuleId: string,
-	moduleNodeDataId: string,
-): void {
-	const copy = structuredClone(nodeData);
-	copy.id += ' into ' + moduleNodeDataId;
-	copy.internalModuleId = toModuleId;
-	idMap.set(nodeData.id, copy.id);
-	graphRegistry.nodes.add(copy);
-}
+class FlattingModule {
+	constructor(
+		public graphRegistry: GraphRegistry,
+		public internalModuleData: InternalModuleData,
+	) {}
 
-/**
- * Creates a copy of a connection with remapped node IDs.
- */
-function copyConnection(
-	graphRegistry: GraphRegistry,
-	idMap: Map<string, string>,
-	connectionData: ConnectionData,
-	moduleNodeDataId: string,
-): void {
-	const copy = structuredClone(connectionData);
-	copy.id += ' into ' + moduleNodeDataId;
-	copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
-	copy.targetNodeId = idMap.get(connectionData.targetNodeId)!;
-	graphRegistry.connections.add(copy);
-}
+	// TODO rename
+	doTheThing() {
+		const nodes = this.graphRegistry.nodes.values().filter((nodeData) => {
+			return nodeData.internalModuleId === this.internalModuleData.id;
+		});
 
-/**
- * Checks if a node should be copied during module flattening. Excludes
- * ModuleNode, OutputNode, and InputNode types.
- */
-function shouldCopyNode(nodeData: NodeData, fromModuleId: string): boolean {
-	if (nodeData.internalModuleId !== fromModuleId) return false;
-	if (nodeData.type === 'ModuleNode') return false;
-	if (nodeData.type === 'OutputNode') return false;
-	if (nodeData.type === 'InputNode') return false;
-	return true;
-}
+		const nodesById = ById.fromItems(nodes);
 
-/**
- * Finds the connection that provides input to a module node's input key.
- */
-function findModuleInputConnection(
-	graphRegistry: GraphRegistry,
-	moduleNodeData: ModuleNodeData,
-	inputNodeId: string,
-): ConnectionData | undefined {
-	return graphRegistry.connections.values().find((connectionData) => {
-		return (
-			connectionData.inputPath.inputKey === inputNodeId &&
-			connectionData.inputPath.nodeId === moduleNodeData.id
-		);
-	});
-}
-
-/**
- * Creates a connection that bypasses an InputNode by connecting directly to the
- * module node's input source.
- */
-function copyConnectionBypassingInputNode(
-	graphRegistry: GraphRegistry,
-	targetNode: InputNodeData,
-	moduleNodeData: ModuleNodeData,
-	connectionData: ConnectionData,
-	idMap: Map<string, string>,
-): void {
-	const moduleInputConnection = findModuleInputConnection(
-		graphRegistry,
-		moduleNodeData,
-		targetNode.id,
-	);
-
-	if (!moduleInputConnection) return;
-
-	const copy = structuredClone(connectionData);
-	copy.id += ' into ' + moduleNodeData.id;
-	copy.inputPath.nodeId = idMap.get(connectionData.inputPath.nodeId)!;
-	copy.targetNodeId = moduleInputConnection.targetNodeId;
-	graphRegistry.connections.add(copy);
-}
-
-/**
- * Determines if a connection should be copied during module flattening.
- */
-function shouldCopyConnection(
-	idMap: Map<string, string>,
-	originNodeId: string,
-	targetNodeId: string,
-): boolean {
-	return idMap.has(originNodeId) && idMap.has(targetNodeId);
-}
-
-/**
- * Handles connection copying with special logic for InputNode targets.
- */
-function processConnection(
-	graphRegistry: GraphRegistry,
-	idMap: Map<string, string>,
-	moduleNodeData: ModuleNodeData,
-	connectionData: ConnectionData,
-): void {
-	const { inputPath, targetNodeId } = connectionData;
-	const originNodeId = inputPath.nodeId;
-
-	if (!idMap.has(originNodeId)) return;
-
-	if (shouldCopyConnection(idMap, originNodeId, targetNodeId)) {
-		copyConnection(graphRegistry, idMap, connectionData, moduleNodeData.id);
-	} else {
-		const targetNode = graphRegistry.nodes.getOrNull(targetNodeId);
-		if (targetNode?.type === 'InputNode') {
-			copyConnectionBypassingInputNode(
-				graphRegistry,
-				targetNode,
-				moduleNodeData,
-				connectionData,
-				idMap,
+		const connections = this.graphRegistry.connections.values().filter((connectionData) => {
+			return (
+				nodesById.containsId(connectionData.inputPath.nodeId) &&
+				nodesById.containsId(connectionData.targetNodeId)
 			);
-		}
-	}
-}
+		});
 
-/**
- * Copies all eligible nodes and their connections from a source module to a
- * target module.
- */
-function copyNodesFromModule(
-	graphRegistry: GraphRegistry,
-	idMap: Map<string, string>,
-	fromModuleId: string,
-	toModuleId: string,
-	moduleNodeData: ModuleNodeData,
-): void {
-	// Copy nodes
-	graphRegistry.nodes.values().forEach((nodeData) => {
-		if (shouldCopyNode(nodeData, fromModuleId)) {
-			copyNode(graphRegistry, idMap, nodeData, toModuleId, moduleNodeData.id);
-		}
-	});
+		const connectionsById = ById.fromItems(connections);
 
-	// Copy connections
-	graphRegistry.connections.values().forEach((connectionData) => {
-		processConnection(graphRegistry, idMap, moduleNodeData, connectionData);
-	});
-}
-
-/**
- * Finds the output connection from a module and returns the mapped target ID.
- */
-function getModuleNodeOutputTargetId(
-	graphRegistry: GraphRegistry,
-	moduleNodeData: ModuleNodeData,
-	idMap: Map<string, string>,
-): string | undefined {
-	const moduleId = moduleNodeData.extras.moduleReference?.moduleId;
-	if (!moduleId) return undefined;
-
-	const outputNode = graphRegistry.nodes.values().find((nodeData) => {
-		return nodeData.type === 'OutputNode' && nodeData.internalModuleId === moduleId;
-	});
-
-	if (!outputNode) return undefined;
-
-	const connection = graphRegistry.connections.values().find((connectionData) => {
-		return connectionData.inputPath.nodeId === outputNode.id;
-	});
-
-	if (!connection) return undefined;
-
-	return idMap.get(connection.targetNodeId);
-}
-
-/**
- * Updates connections that reference the module node being flattened.
- */
-function updateModuleNodeConnections(
-	graphRegistry: GraphRegistry,
-	moduleNodeData: ModuleNodeData,
-	outputTargetId: string | undefined,
-): void {
-	const connectionsToRemove: ConnectionData[] = [];
-
-	graphRegistry.connections.values().forEach((connectionData) => {
-		const isToModuleNode = connectionData.targetNodeId === moduleNodeData.id;
-		const isFromModuleNode = connectionData.inputPath.nodeId === moduleNodeData.id;
-
-		if (isToModuleNode) {
-			if (outputTargetId) {
-				connectionData.targetNodeId = outputTargetId;
-			} else {
-				connectionsToRemove.push(connectionData);
+		nodes.forEach((nodeData) => {
+			if (nodeData.type === 'ModuleVoicesNode') {
+				this.doTheThingForModuleVoicesNode(nodeData, nodesById, connectionsById);
 			}
-		}
+			if (nodeData.type === 'ModuleNode') {
+				this.doTheThingForModuleNode(nodeData, nodesById, connectionsById);
+			}
+		});
 
-		if (isFromModuleNode) {
-			connectionsToRemove.push(connectionData);
-		}
-	});
+		return {
+			nodes: nodesById,
+			connections: connectionsById,
+		};
+	}
 
-	connectionsToRemove.forEach((connection) => {
-		graphRegistry.connections.remove(connection);
-	});
-}
+	private doTheThingForModuleNode(
+		nodeData: ModuleNodeData,
+		nodesById: ById<NodeData>,
+		connectionsById: ById<ConnectionData>,
+	) {
+		const moduleId = nodeData.extras.moduleReference?.moduleId;
 
-function createReplacementZeroValuedNode(graphRegistry: GraphRegistry, nodeData: NodeData) {
-	graphRegistry.nodes.add({
-		id: nodeData.id,
-		type: 'ConstantNode',
-		position: structuredClone(nodeData.position),
-		extras: { value: 0 },
-		internalModuleId: nodeData.internalModuleId,
-		isInputAutoConnectedMap: {},
-		unconnectedInputValues: {},
-	});
-}
+		if (!moduleId) return;
+		if (!this.graphRegistry.internalModules.containsId(moduleId)) return;
 
-/**
- * Flattens a single module node by copying its internal nodes and rewiring
- * connections.
- */
-function flattenModuleNode(graphRegistry: GraphRegistry, moduleNodeData: ModuleNodeData): void {
-	const idMap = new Map<string, string>();
-	const moduleId = moduleNodeData.extras.moduleReference?.moduleId;
-	const outputTargetId = getModuleNodeOutputTargetId(graphRegistry, moduleNodeData, idMap);
-	if (moduleId && outputTargetId) {
-		copyNodesFromModule(
-			graphRegistry,
-			idMap,
-			moduleId,
-			moduleNodeData.internalModuleId,
-			moduleNodeData,
-		);
-		graphRegistry.nodes.remove(moduleNodeData);
+		const requiredInternalModuleData = this.graphRegistry.internalModules.get(moduleId);
+		const flattingModule = new FlattingModule(this.graphRegistry, requiredInternalModuleData);
 
-		updateModuleNodeConnections(graphRegistry, moduleNodeData, outputTargetId);
-	} else {
-		graphRegistry.nodes.remove(moduleNodeData);
-		createReplacementZeroValuedNode(graphRegistry, moduleNodeData);
+		const result = flattingModule.doTheThing();
+		nodesById.addMany(result.nodes.values());
+		connectionsById.addMany(result.connections.values());
+	}
+
+	private doTheThingForModuleVoicesNode(
+		nodeData: ModuleVoicesNodeData,
+		nodesById: ById<NodeData>,
+		connectionsById: ById<ConnectionData>,
+	) {
+		const moduleId = nodeData.extras.moduleReference?.moduleId;
+
+		if (!moduleId) return;
+		if (!this.graphRegistry.internalModules.containsId(moduleId)) return;
+
+		const requiredInternalModuleData = this.graphRegistry.internalModules.get(moduleId);
+		const flattingModule = new FlattingModule(this.graphRegistry, requiredInternalModuleData);
+
+		const result = flattingModule.doTheThing();
+		nodesById.addMany(result.nodes.values());
+		connectionsById.addMany(result.connections.values());
 	}
 }
 
-/**
- * Flattens all module nodes in the graph by replacing them with their internal
- * node structures.
- */
-export function flattenModuleNodes(graphRegistry: GraphRegistry): void {
-	const moduleNodes = graphRegistry.nodes
-		.values()
-		.filter((nodeData) => nodeData.type === 'ModuleNode') as ModuleNodeData[];
+export function flattenModuleNodes(graphRegistry: GraphRegistry) {
+	const mainInternalModule = graphRegistry.internalModules.get(graphRegistry.mainInternalModuleId);
 
-	moduleNodes.forEach((moduleNodeData) => {
-		flattenModuleNode(graphRegistry, moduleNodeData);
-	});
+	const flattingModule = new FlattingModule(graphRegistry, mainInternalModule);
+	const { nodes, connections } = flattingModule.doTheThing();
+
+	graphRegistry.nodes = nodes;
+	graphRegistry.connections = connections;
+
+	console.log(graphRegistry);
 }
