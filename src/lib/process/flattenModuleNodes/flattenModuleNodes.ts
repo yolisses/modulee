@@ -46,6 +46,14 @@ class FlattingModuleNode extends FlattingNode {
 	) {
 		super(graphRegistry, moduleNodeData);
 	}
+
+	setTarget(moduleOptions: FlattingModule[]) {
+		const moduleId = this.moduleNodeData.extras.moduleReference?.moduleId;
+		if (!moduleId) return;
+		this.targetModule = moduleOptions.find(
+			(moduleOption) => moduleOption.moduleData.id === moduleId,
+		);
+	}
 }
 
 class FlattingModule {
@@ -70,11 +78,7 @@ class FlattingModule {
 	setModuleNodeTargets(moduleOptions: FlattingModule[]) {
 		this.nodes.forEach((node) => {
 			if (node instanceof FlattingModuleNode) {
-				const moduleId = node.moduleNodeData.extras.moduleReference?.moduleId;
-				if (!moduleId) return;
-				node.targetModule = moduleOptions.find(
-					(moduleOption) => moduleOption.moduleData.id === moduleId,
-				);
+				node.setTarget(moduleOptions);
 			}
 		});
 	}
