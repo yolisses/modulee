@@ -3,6 +3,7 @@ import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
+import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 
 class FlattingConnection {
 	constructor(
@@ -36,6 +37,17 @@ class FlattingNode {
 	}
 }
 
+class FlattingModuleNode extends FlattingNode {
+	targetModule?: FlattingModule;
+
+	constructor(
+		public graphRegistry: GraphRegistry,
+		public moduleNodeData: ModuleNodeData,
+	) {
+		super(graphRegistry, moduleNodeData);
+	}
+}
+
 class FlattingModule {
 	nodes: FlattingNode[];
 
@@ -46,7 +58,25 @@ class FlattingModule {
 		this.nodes = graphRegistry.nodes
 			.values()
 			.filter((nodeData) => nodeData.internalModuleId === moduleData.id)
-			.map((nodeData) => new FlattingNode(graphRegistry, nodeData));
+			.map((nodeData) => {
+				if (nodeData.type === 'ModuleNode') {
+					return new FlattingModuleNode(graphRegistry, nodeData);
+				} else {
+					return new FlattingNode(graphRegistry, nodeData);
+				}
+			});
+	}
+
+	setModuleNodeTargets(moduleOptions: FlattingModule[]) {
+		this.nodes.forEach((node) => {
+			if (node instanceof FlattingModuleNode) {
+				const moduleId = node.moduleNodeData.extras.moduleReference?.moduleId;
+				if (!moduleId) return;
+				node.targetModule = moduleOptions.find(
+					(moduleOption) => moduleOption.moduleData.id === moduleId,
+				);
+			}
+		});
 	}
 
 	flatten(result: GraphRegistry) {
@@ -64,6 +94,10 @@ class FlatteningGraph {
 		this.modules = graphRegistry.internalModules
 			.values()
 			.map((moduleData) => new FlattingModule(graphRegistry, moduleData));
+
+		this.modules.forEach((module) => {
+			module.setModuleNodeTargets(this.modules);
+		});
 	}
 
 	flatten(): GraphRegistry {
