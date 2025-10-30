@@ -14,18 +14,24 @@ class FlattingModule {
 
 	// TODO rename
 	doTheThing() {
-		const nodes = this.graphRegistry.nodes.values().filter((nodeData) => {
-			return nodeData.internalModuleId === this.internalModuleData.id;
-		});
+		const nodes = this.graphRegistry.nodes
+			.values()
+			.filter((nodeData) => {
+				return nodeData.internalModuleId === this.internalModuleData.id;
+			})
+			.map((value) => structuredClone(value));
 
 		const nodesById = ById.fromItems(nodes);
 
-		const connections = this.graphRegistry.connections.values().filter((connectionData) => {
-			return (
-				nodesById.containsId(connectionData.inputPath.nodeId) &&
-				nodesById.containsId(connectionData.targetNodeId)
-			);
-		});
+		const connections = this.graphRegistry.connections
+			.values()
+			.filter((connectionData) => {
+				return (
+					nodesById.containsId(connectionData.inputPath.nodeId) &&
+					nodesById.containsId(connectionData.targetNodeId)
+				);
+			})
+			.map((value) => structuredClone(value));
 
 		const connectionsById = ById.fromItems(connections);
 
@@ -34,7 +40,12 @@ class FlattingModule {
 				this.doTheThingForModuleVoicesNode(nodeData, nodesById, connectionsById);
 			}
 			if (nodeData.type === 'ModuleNode') {
-				this.doTheThingForModuleNode(nodeData, nodesById, connectionsById);
+				this.doTheThingForModuleNode(
+					nodeData,
+					nodesById,
+					connectionsById,
+					nodeData.internalModuleId,
+				);
 			}
 		});
 
@@ -48,6 +59,7 @@ class FlattingModule {
 		nodeData: ModuleNodeData,
 		nodesById: ById<NodeData>,
 		connectionsById: ById<ConnectionData>,
+		newModuleId: string,
 	) {
 		const moduleId = nodeData.extras.moduleReference?.moduleId;
 
@@ -58,6 +70,15 @@ class FlattingModule {
 		const flattingModule = new FlattingModule(this.graphRegistry, requiredInternalModuleData);
 
 		const result = flattingModule.doTheThing();
+		result.nodes.values().forEach((nodeData) => {
+			nodeData.id += '_copy_to_' + newModuleId;
+		});
+		result.connections.values().forEach((connection) => {
+			connection.id += '_copy_to_' + newModuleId;
+			connection.targetNodeId += '_copy_to_' + newModuleId;
+			connection.inputPath.nodeId += '_copy_to_' + newModuleId;
+		});
+
 		nodesById.addMany(result.nodes.values());
 		connectionsById.addMany(result.connections.values());
 	}
