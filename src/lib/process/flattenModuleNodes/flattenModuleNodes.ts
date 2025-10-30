@@ -4,15 +4,22 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
+import { cloneGraphRegistry } from '../cloneGraphRegistry';
 
 class FlattingConnection {
 	constructor(
-		public graphRegistry: GraphRegistry,
+		graphRegistry: GraphRegistry,
 		public connectionData: ConnectionData,
 	) {}
 
-	flatten(result: GraphRegistry) {
-		result.connections.add(this.connectionData);
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		const copy = structuredClone(this.connectionData);
+		if (parentInternalModuleId) {
+			copy.id += '_into_' + parentInternalModuleId;
+			copy.targetNodeId += '_into_' + parentInternalModuleId;
+			copy.inputPath.nodeId += '_into_' + parentInternalModuleId;
+		}
+		result.connections.add(copy);
 	}
 }
 
@@ -20,7 +27,7 @@ class FlattingNode {
 	connections: FlattingConnection[];
 
 	constructor(
-		public graphRegistry: GraphRegistry,
+		graphRegistry: GraphRegistry,
 		public nodeData: NodeData,
 	) {
 		this.connections = graphRegistry.connections
@@ -29,10 +36,16 @@ class FlattingNode {
 			.map((connectionData) => new FlattingConnection(graphRegistry, connectionData));
 	}
 
-	flatten(result: GraphRegistry) {
-		result.nodes.add(this.nodeData);
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		const copy = structuredClone(this.nodeData);
+		if (parentInternalModuleId) {
+			copy.id += '_into_' + parentInternalModuleId;
+			copy.internalModuleId = parentInternalModuleId;
+		}
+		result.nodes.add(copy);
+
 		this.connections.forEach((connection) => {
-			connection.flatten(result);
+			connection.flatten(result, parentInternalModuleId);
 		});
 	}
 }
@@ -41,7 +54,7 @@ class FlattingModuleNode extends FlattingNode {
 	targetModule?: FlattingModule;
 
 	constructor(
-		public graphRegistry: GraphRegistry,
+		graphRegistry: GraphRegistry,
 		public moduleNodeData: ModuleNodeData,
 	) {
 		super(graphRegistry, moduleNodeData);
@@ -54,13 +67,21 @@ class FlattingModuleNode extends FlattingNode {
 			(moduleOption) => moduleOption.moduleData.id === moduleId,
 		);
 	}
+
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		this.targetModule?.flatten(result, this.moduleNodeData.internalModuleId);
+
+		this.connections.forEach((connection) => {
+			connection.flatten(result, parentInternalModuleId);
+		});
+	}
 }
 
 class FlattingModule {
 	nodes: FlattingNode[];
 
 	constructor(
-		public graphRegistry: GraphRegistry,
+		graphRegistry: GraphRegistry,
 		public moduleData: InternalModuleData,
 	) {
 		this.nodes = graphRegistry.nodes
@@ -83,10 +104,13 @@ class FlattingModule {
 		});
 	}
 
-	flatten(result: GraphRegistry) {
-		this.graphRegistry.internalModules.add(this.moduleData);
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		if (!parentInternalModuleId) {
+			result.internalModules.add(this.moduleData);
+		}
+
 		this.nodes.forEach((node) => {
-			node.flatten(result);
+			node.flatten(result, parentInternalModuleId);
 		});
 	}
 }
@@ -122,6 +146,8 @@ class FlatteningGraph {
 }
 
 export function flattenModuleNodes(graphRegistry: GraphRegistry) {
-	const flatteningGraph = new FlatteningGraph(graphRegistry);
-	flatteningGraph.flatten();
+	const flatteningGraph = new FlatteningGraph(cloneGraphRegistry(graphRegistry));
+	const result = flatteningGraph.flatten();
+	graphRegistry.nodes = result.nodes;
+	graphRegistry.connections = result.connections;
 }
