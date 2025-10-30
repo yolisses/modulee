@@ -4,6 +4,7 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
+import type { OutputNodeData } from '$lib/node/data/variants/OutputNodeData';
 import { cloneGraphRegistry } from '../cloneGraphRegistry';
 
 class FlattingConnection {
@@ -77,6 +78,22 @@ class FlattingModuleNode extends FlattingNode {
 	}
 }
 
+class FlattingOutputNode extends FlattingNode {
+	constructor(
+		graphRegistry: GraphRegistry,
+		public outputNodeData: OutputNodeData,
+	) {
+		super(graphRegistry, outputNodeData);
+	}
+
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		if (!parentInternalModuleId) {
+			const copy = structuredClone(this.nodeData);
+			result.nodes.add(copy);
+		}
+	}
+}
+
 class FlattingModule {
 	nodes: FlattingNode[];
 
@@ -90,6 +107,8 @@ class FlattingModule {
 			.map((nodeData) => {
 				if (nodeData.type === 'ModuleNode') {
 					return new FlattingModuleNode(graphRegistry, nodeData);
+				} else if (nodeData.type === 'OutputNode') {
+					return new FlattingOutputNode(graphRegistry, nodeData);
 				} else {
 					return new FlattingNode(graphRegistry, nodeData);
 				}

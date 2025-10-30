@@ -108,10 +108,10 @@ describe('flattenModuleNodes', () => {
 		flattenModuleNodes(graphRegistry);
 
 		expect(getGraphData(graphRegistry).nodes).toEqual([
+			{ id: 'node3_into_module1', internalModuleId: 'module1' },
 			{ id: 'node2', internalModuleId: 'module1' },
 			{ id: 'node3', internalModuleId: 'module2' },
 			{ id: 'node4', internalModuleId: 'module2', type: 'OutputNode' },
-			{ id: 'newId1', internalModuleId: 'module1' },
 		] as NodeData[]);
 
 		expect(getGraphData(graphRegistry).connections).toEqual([
