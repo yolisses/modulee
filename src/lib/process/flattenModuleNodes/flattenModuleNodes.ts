@@ -1,7 +1,6 @@
 import type { ConnectionData } from '$lib/connection/ConnectionData';
 import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
-import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 import type { ModuleVoicesNodeData } from '$lib/node/data/variants/ModuleVoicesNodeData';
@@ -9,7 +8,7 @@ import type { ModuleVoicesNodeData } from '$lib/node/data/variants/ModuleVoicesN
 class FlattingModule {
 	constructor(
 		public graphRegistry: GraphRegistry,
-		public internalModuleData: InternalModuleData,
+		public internalModuleId: string,
 	) {}
 
 	// TODO rename
@@ -17,7 +16,7 @@ class FlattingModule {
 		const nodes = this.graphRegistry.nodes
 			.values()
 			.filter((nodeData) => {
-				return nodeData.internalModuleId === this.internalModuleData.id;
+				return nodeData.internalModuleId === this.internalModuleId;
 			})
 			.map((value) => structuredClone(value));
 
@@ -66,8 +65,7 @@ class FlattingModule {
 		if (!moduleId) return;
 		if (!this.graphRegistry.internalModules.containsId(moduleId)) return;
 
-		const requiredInternalModuleData = this.graphRegistry.internalModules.get(moduleId);
-		const flattingModule = new FlattingModule(this.graphRegistry, requiredInternalModuleData);
+		const flattingModule = new FlattingModule(this.graphRegistry, moduleId);
 
 		const result = flattingModule.doTheThing();
 		result.nodes.values().forEach((nodeData) => {
@@ -91,10 +89,8 @@ class FlattingModule {
 		const moduleId = nodeData.extras.moduleReference?.moduleId;
 
 		if (!moduleId) return;
-		if (!this.graphRegistry.internalModules.containsId(moduleId)) return;
 
-		const requiredInternalModuleData = this.graphRegistry.internalModules.get(moduleId);
-		const flattingModule = new FlattingModule(this.graphRegistry, requiredInternalModuleData);
+		const flattingModule = new FlattingModule(this.graphRegistry, moduleId);
 
 		const result = flattingModule.doTheThing();
 		nodesById.addMany(result.nodes.values());
@@ -103,9 +99,7 @@ class FlattingModule {
 }
 
 export function flattenModuleNodes(graphRegistry: GraphRegistry) {
-	const mainInternalModule = graphRegistry.internalModules.get(graphRegistry.mainInternalModuleId);
-
-	const flattingModule = new FlattingModule(graphRegistry, mainInternalModule);
+	const flattingModule = new FlattingModule(graphRegistry, graphRegistry.mainInternalModuleId);
 	const { nodes, connections } = flattingModule.doTheThing();
 
 	graphRegistry.nodes = nodes;
