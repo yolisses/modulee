@@ -83,7 +83,7 @@ describe('flattenModuleNodes', () => {
 		] as ConnectionData[]);
 	});
 
-	it.only('replaces module nodes by the module nodes and replaces output nodes', () => {
+	it('replaces module nodes by the module nodes and replaces output nodes', () => {
 		const graphData = {
 			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
@@ -154,10 +154,12 @@ describe('flattenModuleNodes', () => {
 
 		expect(getGraphData(graphRegistry).nodes).toEqual([
 			{ id: 'node1', internalModuleId: 'module1' },
+			{ id: 'node4_into_module1', internalModuleId: 'module1' },
 			{ id: 'node3', internalModuleId: 'module2', type: 'InputNode' },
 			{ id: 'node4', internalModuleId: 'module2' },
-			{ id: 'newId1', internalModuleId: 'module1' },
 		] as NodeData[]);
+
+		console.log(getGraphData(graphRegistry).connections);
 
 		expect(getGraphData(graphRegistry).connections).toEqual([
 			{

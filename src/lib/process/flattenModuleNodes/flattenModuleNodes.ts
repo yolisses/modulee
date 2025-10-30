@@ -3,6 +3,7 @@ import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
+import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 import type { OutputNodeData } from '$lib/node/data/variants/OutputNodeData';
 import { cloneGraphRegistry } from '../cloneGraphRegistry';
@@ -10,10 +11,7 @@ import { cloneGraphRegistry } from '../cloneGraphRegistry';
 class FlattingConnection {
 	targetNode!: FlattingNode;
 
-	constructor(
-		graphRegistry: GraphRegistry,
-		public connectionData: ConnectionData,
-	) {}
+	constructor(public connectionData: ConnectionData) {}
 
 	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
 		const copy = structuredClone(this.connectionData);
@@ -46,7 +44,7 @@ class FlattingNode {
 		this.connections = graphRegistry.connections
 			.values()
 			.filter((connectionData) => connectionData.inputPath.nodeId === nodeData.id)
-			.map((connectionData) => new FlattingConnection(graphRegistry, connectionData));
+			.map((connectionData) => new FlattingConnection(connectionData));
 	}
 
 	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
@@ -110,6 +108,12 @@ class FlattingModuleNode extends FlattingNode {
 
 		return this.moduleNodeData.id + '_placeholder';
 	}
+
+	getTargetForInputNode(inputNode: FlattingInputNode) {
+		return this.connections.find(
+			(connection) => connection.connectionData.inputPath.inputKey === inputNode.inputNodeData.id,
+		)?.targetNode;
+	}
 }
 
 class FlattingOutputNode extends FlattingNode {
@@ -139,6 +143,29 @@ class FlattingOutputNode extends FlattingNode {
 	}
 }
 
+class FlattingInputNode extends FlattingNode {
+	constructor(
+		graphRegistry: GraphRegistry,
+		public inputNodeData: InputNodeData,
+	) {
+		super(graphRegistry, inputNodeData);
+	}
+
+	flatten(result: GraphRegistry, parentInternalModuleId?: string) {
+		if (parentInternalModuleId) return;
+		super.flatten(result, parentInternalModuleId);
+	}
+
+	getIdForConnectionTarget(parentInternalModuleId?: string) {
+		const targetNode = parentInternalModuleId?.getTargetForInputNode(this);
+		if (targetNode) {
+			targetNode.getIdForConnectionTarget(parentInternalModuleId);
+		}
+
+		return this.inputNodeData.id + '_placeholder';
+	}
+}
+
 class FlattingModule {
 	nodes: FlattingNode[];
 
@@ -154,6 +181,8 @@ class FlattingModule {
 					return new FlattingModuleNode(graphRegistry, nodeData);
 				} else if (nodeData.type === 'OutputNode') {
 					return new FlattingOutputNode(graphRegistry, nodeData);
+				} else if (nodeData.type === 'InputNode') {
+					return new FlattingInputNode(graphRegistry, nodeData);
 				} else {
 					return new FlattingNode(graphRegistry, nodeData);
 				}
