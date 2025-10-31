@@ -159,18 +159,16 @@ describe('flattenModuleNodes', () => {
 			{ id: 'node4', internalModuleId: 'module2' },
 		] as NodeData[]);
 
-		console.log(getGraphData(graphRegistry).connections);
-
 		expect(getGraphData(graphRegistry).connections).toEqual([
+			{
+				id: 'connection2_into_module1',
+				inputPath: { nodeId: 'node4_into_module1', inputKey: 'input1' },
+				targetNodeId: 'node1',
+			},
 			{
 				id: 'connection2',
 				inputPath: { nodeId: 'node4', inputKey: 'input1' },
 				targetNodeId: 'node3',
-			},
-			{
-				id: 'newId2',
-				inputPath: { nodeId: 'newId1', inputKey: 'input1' },
-				targetNodeId: 'node1',
 			},
 		] as ConnectionData[]);
 	});

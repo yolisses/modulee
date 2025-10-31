@@ -13,13 +13,14 @@ class FlattingConnection {
 
 	constructor(public connectionData: ConnectionData) {}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		const copy = structuredClone(this.connectionData);
+		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
 			copy.id += '_into_' + lastModuleNode.nodeData.internalModuleId;
 			copy.inputPath.nodeId += '_into_' + lastModuleNode.nodeData.internalModuleId;
 		}
-		copy.targetNodeId = this.targetNode.getIdForConnectionTarget(lastModuleNode);
+		copy.targetNodeId = this.targetNode.getIdForConnectionTarget(stack);
 		result.connections.add(copy);
 	}
 
@@ -47,8 +48,9 @@ class FlattingNode {
 			.map((connectionData) => new FlattingConnection(connectionData));
 	}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		const copy = structuredClone(this.nodeData);
+		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
 			copy.id += '_into_' + lastModuleNode.nodeData.internalModuleId;
 			copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
@@ -56,12 +58,13 @@ class FlattingNode {
 		result.nodes.add(copy);
 
 		this.connections.forEach((connection) => {
-			connection.flatten(result, lastModuleNode);
+			connection.flatten(result, stack);
 		});
 	}
 
-	getIdForConnectionTarget(lastModuleNode?: FlattingModuleNode) {
+	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
 		let { id } = this.nodeData;
+		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
 			id += '_into_' + lastModuleNode.nodeData.internalModuleId;
 		}
@@ -79,12 +82,8 @@ class FlattingModuleNode extends FlattingNode {
 		super(graphRegistry, moduleNodeData);
 	}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
-		this.targetModule?.flatten(result, this);
-
-		this.connections.forEach((connection) => {
-			connection.flatten(result, this);
-		});
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
+		this.targetModule?.flatten(result, [...stack, this]);
 	}
 
 	setTarget(moduleOptions: FlattingModule[]) {
@@ -99,11 +98,11 @@ class FlattingModuleNode extends FlattingNode {
 		return this.targetModule?.nodes.find((node) => node instanceof FlattingOutputNode);
 	}
 
-	getIdForConnectionTarget() {
+	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
 		const moduleOutputNode = this.getModuleOutputNode();
 
 		if (moduleOutputNode && this.targetModule) {
-			return moduleOutputNode.getIdForConnectionTarget(this);
+			return moduleOutputNode.getIdForConnectionTarget([...stack, this]);
 		}
 
 		return this.moduleNodeData.id + '_placeholder';
@@ -124,19 +123,19 @@ class FlattingOutputNode extends FlattingNode {
 		super(graphRegistry, outputNodeData);
 	}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
-		if (lastModuleNode) return;
-		super.flatten(result, lastModuleNode);
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
+		if (stack.length > 0) return;
+		super.flatten(result, stack);
 	}
 
 	getTargetNode() {
 		return this.connections.at(0)?.targetNode;
 	}
 
-	getIdForConnectionTarget(lastModuleNode?: FlattingModuleNode) {
+	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
 		const targetNode = this.getTargetNode();
 		if (targetNode) {
-			return targetNode.getIdForConnectionTarget(lastModuleNode);
+			return targetNode.getIdForConnectionTarget(stack);
 		}
 
 		return this.outputNodeData.id + '_placeholder';
@@ -151,15 +150,21 @@ class FlattingInputNode extends FlattingNode {
 		super(graphRegistry, inputNodeData);
 	}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
-		if (lastModuleNode) return;
-		super.flatten(result, lastModuleNode);
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
+		if (stack.length > 0) return;
+		super.flatten(result, stack);
 	}
 
-	getIdForConnectionTarget(lastModuleNode?: FlattingModuleNode) {
+	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
+		const lastModuleNode = stack.at(-1);
+
+		if (!lastModuleNode) {
+			return this.inputNodeData.id;
+		}
+
 		const targetNode = lastModuleNode?.getTargetForInputNode(this);
 		if (targetNode) {
-			targetNode.getIdForConnectionTarget(lastModuleNode);
+			return targetNode.getIdForConnectionTarget(stack.slice(0, -1));
 		}
 
 		return this.inputNodeData.id + '_placeholder';
@@ -197,13 +202,13 @@ class FlattingModule {
 		});
 	}
 
-	flatten(result: GraphRegistry, lastModuleNode?: FlattingModuleNode) {
-		if (!lastModuleNode) {
+	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
+		if (stack.length === 0) {
 			result.internalModules.add(this.moduleData);
 		}
 
 		this.nodes.forEach((node) => {
-			node.flatten(result, lastModuleNode);
+			node.flatten(result, stack);
 		});
 	}
 }
@@ -235,7 +240,7 @@ class FlatteningGraph {
 		};
 
 		this.modules.forEach((module) => {
-			module.flatten(result);
+			module.flatten(result, []);
 		});
 
 		return result;
