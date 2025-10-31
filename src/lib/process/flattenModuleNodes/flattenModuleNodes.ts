@@ -3,6 +3,7 @@ import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InternalModuleData } from '$lib/module/internalModule/InternalModuleData';
 import type { NodeData } from '$lib/node/data/NodeData';
+import type { ConstantNodeData } from '$lib/node/data/variants/ConstantNodeData';
 import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import type { ModuleNodeData } from '$lib/node/data/variants/ModuleNodeData';
 import type { OutputNodeData } from '$lib/node/data/variants/OutputNodeData';
@@ -70,6 +71,19 @@ class FlattingNode {
 		}
 		return id;
 	}
+
+	createPlaceholder(result: GraphRegistry, replacedNode: NodeData) {
+		const placeholder: ConstantNodeData = {
+			extras: { value: 0 },
+			id: replacedNode.id + '_placeholder',
+			internalModuleId: replacedNode.internalModuleId,
+			isInputAutoConnectedMap: {},
+			position: { x: 0, y: 0 },
+			type: 'ConstantNode',
+			unconnectedInputValues: {},
+		};
+		result.nodes.add(placeholder);
+	}
 }
 
 class FlattingModuleNode extends FlattingNode {
@@ -84,6 +98,9 @@ class FlattingModuleNode extends FlattingNode {
 
 	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		this.targetModule?.flatten(result, [...stack, this]);
+		if (!this.getModuleOutputNode()) {
+			this.createPlaceholder(result, this.nodeData);
+		}
 	}
 
 	setTarget(moduleOptions: FlattingModule[]) {
