@@ -38,13 +38,7 @@ export class FlatteningModule {
 
 	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {
 		this.nodes.forEach((node) => {
-			if (stack.length === 0) {
-				if (node instanceof FlatteningModuleNode) {
-					node.flatten(result, stack);
-				}
-			} else {
-				node.flatten(result, stack);
-			}
+			node.flatten(result, stack);
 		});
 	}
 }

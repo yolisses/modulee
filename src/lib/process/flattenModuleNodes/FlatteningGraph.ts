@@ -1,30 +1,33 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { cloneGraphRegistry } from '../cloneGraphRegistry';
 import { FlatteningModule } from './FlatteningModule';
+import { FlatteningModuleNode } from './FlatteningModuleNode';
+import type { FlatteningNode } from './FlatteningNode';
+import { getFlatteningModuleNodesInOrder } from './getFlatteningModuleNodesInOrder';
 
 export class FlatteningGraph {
-	modules: FlatteningModule[];
+	nodes: FlatteningNode[];
 
 	constructor(public graphRegistry: GraphRegistry) {
-		this.modules = graphRegistry.internalModules
+		const modules = graphRegistry.internalModules
 			.values()
 			.map((moduleData) => new FlatteningModule(graphRegistry, moduleData));
 
-		this.modules.forEach((module) => {
-			module.setModuleNodeTargets(this.modules);
+		modules.forEach((module) => {
+			module.setModuleNodeTargets(modules);
 		});
 
-		const nodes = this.modules.flatMap((module) => module.nodes);
-		const connections = nodes.flatMap((node) => node.connections);
-		connections.forEach((connection) => connection.setTargetNode(nodes));
+		this.nodes = modules.flatMap((module) => module.nodes);
+		const connections = this.nodes.flatMap((node) => node.connections);
+		connections.forEach((connection) => connection.setTargetNode(this.nodes));
 	}
 
 	flatten(): GraphRegistry {
-		const result = cloneGraphRegistry(this.graphRegistry);
+		const moduleNodesInOrder = getFlatteningModuleNodesInOrder(this.nodes);
 
-		this.modules.forEach((module) => {
-			module.flatten(result, []);
-		});
+		const result = cloneGraphRegistry(this.graphRegistry);
+		const stack: FlatteningModuleNode[] = [];
+		moduleNodesInOrder.toReversed().forEach((moduleNode) => moduleNode.flatten(result, stack));
 
 		return result;
 	}
