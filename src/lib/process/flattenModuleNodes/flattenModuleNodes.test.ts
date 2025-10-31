@@ -48,7 +48,6 @@ describe('flattenModuleNodes', () => {
 
 	it('replaces module nodes by the module nodes', () => {
 		const graphData = {
-			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
 				{
@@ -85,7 +84,6 @@ describe('flattenModuleNodes', () => {
 
 	it('replaces module nodes by the module nodes and replaces output nodes', () => {
 		const graphData = {
-			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
 				{
@@ -122,7 +120,6 @@ describe('flattenModuleNodes', () => {
 
 	it('replaces module nodes by the module nodes and replaces input nodes', () => {
 		const graphData = {
-			mainInternalModuleId: 'module1',
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
 				{ id: 'node1', internalModuleId: 'module1' },
