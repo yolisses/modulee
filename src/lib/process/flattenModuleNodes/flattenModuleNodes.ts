@@ -18,8 +18,8 @@ class FlattingConnection {
 		const copy = structuredClone(this.connectionData);
 		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
-			copy.id += '_into_' + lastModuleNode.nodeData.internalModuleId;
-			copy.inputPath.nodeId += '_into_' + lastModuleNode.nodeData.internalModuleId;
+			copy.id += '_for_' + lastModuleNode.nodeData.id;
+			copy.inputPath.nodeId += '_for_' + lastModuleNode.nodeData.id;
 		}
 		copy.targetNodeId = this.targetNode.getIdForConnectionTarget(stack);
 		result.connections.add(copy);
@@ -53,7 +53,7 @@ class FlattingNode {
 		const copy = structuredClone(this.nodeData);
 		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
-			copy.id += '_into_' + lastModuleNode.nodeData.internalModuleId;
+			copy.id += '_for_' + lastModuleNode.nodeData.id;
 			copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
 		}
 		result.nodes.add(copy);
@@ -67,12 +67,12 @@ class FlattingNode {
 		let { id } = this.nodeData;
 		const lastModuleNode = stack.at(-1);
 		if (lastModuleNode) {
-			id += '_into_' + lastModuleNode.nodeData.internalModuleId;
+			id += '_for_' + lastModuleNode.nodeData.id;
 		}
 		return id;
 	}
 
-	createPlaceholder(result: GraphRegistry, replacedNode: NodeData) {
+	createPlaceholder(result: GraphRegistry, stack: FlattingModuleNode[], replacedNode: NodeData) {
 		const placeholder: ConstantNodeData = {
 			extras: { value: 0 },
 			id: replacedNode.id + '_placeholder',
@@ -82,6 +82,10 @@ class FlattingNode {
 			type: 'ConstantNode',
 			unconnectedInputValues: {},
 		};
+		const lastModuleNode = stack.at(-1);
+		if (lastModuleNode) {
+			placeholder.id += '_for_' + lastModuleNode.nodeData.id;
+		}
 		result.nodes.add(placeholder);
 	}
 }
@@ -99,7 +103,7 @@ class FlattingModuleNode extends FlattingNode {
 	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		this.targetModule?.flatten(result, [...stack, this]);
 		if (!this.getModuleOutputNode()) {
-			this.createPlaceholder(result, this.nodeData);
+			this.createPlaceholder(result, stack, this.nodeData);
 		}
 	}
 
