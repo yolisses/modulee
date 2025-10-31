@@ -32,10 +32,10 @@ export class FlattingNode {
 
 	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
 		let { id } = this.nodeData;
-		console.log(id, stack);
-
-		const lastModuleNode = getLast(stack);
-		id += '_for_' + lastModuleNode.nodeData.id;
+		const lastModuleNode = stack.at(-1);
+		if (lastModuleNode) {
+			id += '_for_' + lastModuleNode.nodeData.id;
+		}
 		return id;
 	}
 

@@ -22,7 +22,12 @@ export class FlattingModuleNode extends FlattingNode {
 			this.createPlaceholder(result, stack, this.nodeData);
 		}
 
-		// Handle connections to its output
+		// Remove connections from inputs
+		result.connections.removeByCondition((connection) => {
+			return connection.inputPath.nodeId === this.nodeData.id;
+		});
+
+		// Redirect to output
 		result.connections.values().forEach((connection) => {
 			if (connection.targetNodeId === this.nodeData.id) {
 				connection.targetNodeId = this.getIdForConnectionTarget(stack);
@@ -46,7 +51,6 @@ export class FlattingModuleNode extends FlattingNode {
 		const moduleOutputNode = this.getModuleOutputNode();
 
 		if (moduleOutputNode && this.targetModule) {
-			console.log(stack);
 			return moduleOutputNode.getIdForConnectionTarget([...stack, this]);
 		}
 
