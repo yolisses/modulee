@@ -21,6 +21,13 @@ export class FlattingModuleNode extends FlattingNode {
 		if (!this.getModuleOutputNode()) {
 			this.createPlaceholder(result, stack, this.nodeData);
 		}
+
+		// Handle connections to its output
+		result.connections.values().forEach((connection) => {
+			if (connection.targetNodeId === this.nodeData.id) {
+				connection.targetNodeId = this.getIdForConnectionTarget(stack);
+			}
+		});
 	}
 
 	setTarget(moduleOptions: FlattingModule[]) {
@@ -39,6 +46,7 @@ export class FlattingModuleNode extends FlattingNode {
 		const moduleOutputNode = this.getModuleOutputNode();
 
 		if (moduleOutputNode && this.targetModule) {
+			console.log(stack);
 			return moduleOutputNode.getIdForConnectionTarget([...stack, this]);
 		}
 

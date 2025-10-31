@@ -47,7 +47,7 @@ describe('flattenModuleNodes', () => {
 		expect(getGraphData(graphRegistry)).toEqual(graphData);
 	});
 
-	it.only('replaces module nodes by the module nodes', () => {
+	it('replaces module nodes by the module nodes', () => {
 		const graphData = {
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
@@ -84,7 +84,6 @@ describe('flattenModuleNodes', () => {
 		] as NodeData[]);
 
 		const connections = getGraphData(graphRegistry).connections.sort(idOrder);
-		console.log(connections);
 		expect(connections).toEqual([
 			{ id: 'connection1', inputPath: { nodeId: 'node3' }, targetNodeId: 'node2' },
 			{
@@ -95,7 +94,7 @@ describe('flattenModuleNodes', () => {
 		] as ConnectionData[]);
 	});
 
-	it('replaces module nodes by the module nodes and replaces output nodes', () => {
+	it.only('replaces module nodes by the module nodes and replaces output nodes', () => {
 		const graphData = {
 			internalModules: [{ id: 'module1' }, { id: 'module2' }],
 			nodes: [
@@ -118,14 +117,18 @@ describe('flattenModuleNodes', () => {
 
 		flattenModuleNodes(graphRegistry);
 
-		expect(getGraphData(graphRegistry).nodes).toEqual([
-			{ id: 'node3_for_node1', internalModuleId: 'module1' },
+		const nodes = getGraphData(graphRegistry).nodes.sort(idOrder);
+		expect(nodes).toEqual([
 			{ id: 'node2', internalModuleId: 'module1' },
 			{ id: 'node3', internalModuleId: 'module2' },
+			{ id: 'node3_for_node1', internalModuleId: 'module1' },
 			{ id: 'node4', internalModuleId: 'module2', type: 'OutputNode' },
 		] as NodeData[]);
 
-		expect(getGraphData(graphRegistry).connections).toEqual([
+		const connections = getGraphData(graphRegistry).connections.sort(idOrder);
+		console.log(connections);
+
+		expect(connections).toEqual([
 			{ id: 'connection1', inputPath: { nodeId: 'node2' }, targetNodeId: 'node3_for_node1' },
 			{ id: 'connection2', inputPath: { nodeId: 'node4' }, targetNodeId: 'node3' },
 		] as ConnectionData[]);
@@ -162,14 +165,16 @@ describe('flattenModuleNodes', () => {
 
 		flattenModuleNodes(graphRegistry);
 
-		expect(getGraphData(graphRegistry).nodes).toEqual([
+		const nodes = getGraphData(graphRegistry).nodes.sort(idOrder);
+		expect(nodes).toEqual([
 			{ id: 'node1', internalModuleId: 'module1' },
 			{ id: 'node4_into_module1', internalModuleId: 'module1' },
 			{ id: 'node3', internalModuleId: 'module2', type: 'InputNode' },
 			{ id: 'node4', internalModuleId: 'module2' },
 		] as NodeData[]);
 
-		expect(getGraphData(graphRegistry).connections).toEqual([
+		const connections = getGraphData(graphRegistry).connections.sort(idOrder);
+		expect(connections).toEqual([
 			{
 				id: 'connection2_into_module1',
 				inputPath: { nodeId: 'node4_into_module1', inputKey: 'input1' },
