@@ -37,12 +37,14 @@ export class FlattingModule {
 	}
 
 	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
-		if (stack.length === 0) {
-			result.internalModules.add(this.moduleData);
-		}
-
 		this.nodes.forEach((node) => {
-			node.flatten(result, stack);
+			if (stack.length === 0) {
+				if (node instanceof FlattingModuleNode) {
+					node.flatten(result, stack);
+				}
+			} else {
+				node.flatten(result, stack);
+			}
 		});
 	}
 }

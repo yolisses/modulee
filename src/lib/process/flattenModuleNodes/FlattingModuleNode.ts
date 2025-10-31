@@ -17,6 +17,7 @@ export class FlattingModuleNode extends FlattingNode {
 
 	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		this.targetModule?.flatten(result, [...stack, this]);
+		result.nodes.remove(this.nodeData);
 		if (!this.getModuleOutputNode()) {
 			this.createPlaceholder(result, stack, this.nodeData);
 		}

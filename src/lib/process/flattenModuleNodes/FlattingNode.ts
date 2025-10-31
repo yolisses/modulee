@@ -3,6 +3,7 @@ import type { NodeData } from '$lib/node/data/NodeData';
 import type { ConstantNodeData } from '$lib/node/data/variants/ConstantNodeData';
 import { FlattingConnection } from './FlattingConnection';
 import type { FlattingModuleNode } from './FlattingModuleNode';
+import { getLast } from './getLast';
 
 export class FlattingNode {
 	connections: FlattingConnection[];
@@ -19,11 +20,9 @@ export class FlattingNode {
 
 	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {
 		const copy = structuredClone(this.nodeData);
-		const lastModuleNode = stack.at(-1);
-		if (lastModuleNode) {
-			copy.id += '_for_' + lastModuleNode.nodeData.id;
-			copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
-		}
+		const lastModuleNode = getLast(stack);
+		copy.id += '_for_' + lastModuleNode.nodeData.id;
+		copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
 		result.nodes.add(copy);
 
 		this.connections.forEach((connection) => {
@@ -33,10 +32,10 @@ export class FlattingNode {
 
 	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
 		let { id } = this.nodeData;
-		const lastModuleNode = stack.at(-1);
-		if (lastModuleNode) {
-			id += '_for_' + lastModuleNode.nodeData.id;
-		}
+		console.log(id, stack);
+
+		const lastModuleNode = getLast(stack);
+		id += '_for_' + lastModuleNode.nodeData.id;
 		return id;
 	}
 
@@ -50,10 +49,6 @@ export class FlattingNode {
 			type: 'ConstantNode',
 			unconnectedInputValues: {},
 		};
-		const lastModuleNode = stack.at(-1);
-		if (lastModuleNode) {
-			placeholder.id += '_for_' + lastModuleNode.nodeData.id;
-		}
 		result.nodes.add(placeholder);
 	}
 }

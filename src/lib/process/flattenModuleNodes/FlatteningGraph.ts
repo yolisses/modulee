@@ -1,5 +1,5 @@
-import { ById } from '$lib/editor/ById';
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
+import { cloneGraphRegistry } from '../cloneGraphRegistry';
 import { FlattingModule } from './FlattingModule';
 
 export class FlatteningGraph {
@@ -20,13 +20,7 @@ export class FlatteningGraph {
 	}
 
 	flatten(): GraphRegistry {
-		const result: GraphRegistry = {
-			connections: new ById(),
-			externalModules: new ById(),
-			internalModules: new ById(),
-			mainInternalModuleId: this.graphRegistry.mainInternalModuleId,
-			nodes: new ById(),
-		};
+		const result = cloneGraphRegistry(this.graphRegistry);
 
 		this.modules.forEach((module) => {
 			module.flatten(result, []);
