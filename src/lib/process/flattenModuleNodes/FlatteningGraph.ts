@@ -1,14 +1,14 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import { cloneGraphRegistry } from '../cloneGraphRegistry';
-import { FlattingModule } from './FlattingModule';
+import { FlatteningModule } from './FlatteningModule';
 
 export class FlatteningGraph {
-	modules: FlattingModule[];
+	modules: FlatteningModule[];
 
 	constructor(public graphRegistry: GraphRegistry) {
 		this.modules = graphRegistry.internalModules
 			.values()
-			.map((moduleData) => new FlattingModule(graphRegistry, moduleData));
+			.map((moduleData) => new FlatteningModule(graphRegistry, moduleData));
 
 		this.modules.forEach((module) => {
 			module.setModuleNodeTargets(this.modules);

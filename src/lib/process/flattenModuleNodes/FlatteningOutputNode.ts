@@ -1,9 +1,9 @@
 import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { OutputNodeData } from '$lib/node/data/variants/OutputNodeData';
-import type { FlattingModuleNode } from './FlattingModuleNode';
-import { FlattingNode } from './FlattingNode';
+import type { FlatteningModuleNode } from './FlatteningModuleNode';
+import { FlatteningNode } from './FlatteningNode';
 
-export class FlattingOutputNode extends FlattingNode {
+export class FlatteningOutputNode extends FlatteningNode {
 	constructor(
 		graphRegistry: GraphRegistry,
 		public outputNodeData: OutputNodeData,
@@ -11,13 +11,13 @@ export class FlattingOutputNode extends FlattingNode {
 		super(graphRegistry, outputNodeData);
 	}
 
-	flatten(result: GraphRegistry, stack: FlattingModuleNode[]) {}
+	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {}
 
 	getTargetNode() {
 		return this.connections.at(0)?.targetNode;
 	}
 
-	getIdForConnectionTarget(stack: FlattingModuleNode[]) {
+	getIdForConnectionTarget(stack: FlatteningModuleNode[]) {
 		const targetNode = this.getTargetNode();
 		if (targetNode) {
 			return targetNode.getIdForConnectionTarget(stack);
