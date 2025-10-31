@@ -12,7 +12,9 @@ export class FlatteningInputNode extends FlatteningNode {
 		super(graphRegistry, inputNodeData);
 	}
 
-	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {}
+	flatten() {
+		// do nothing
+	}
 
 	getIdForConnectionTarget(stack: FlatteningModuleNode[]) {
 		const lastModuleNode = getLast(stack);

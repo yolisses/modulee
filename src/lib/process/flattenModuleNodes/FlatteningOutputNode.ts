@@ -11,7 +11,9 @@ export class FlatteningOutputNode extends FlatteningNode {
 		super(graphRegistry, outputNodeData);
 	}
 
-	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {}
+	flatten() {
+		// do nothing
+	}
 
 	getTargetNode() {
 		return this.connections.at(0)?.targetNode;
