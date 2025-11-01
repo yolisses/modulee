@@ -2,6 +2,7 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { OutputNodeData } from '$lib/node/data/variants/OutputNodeData';
 import type { FlatteningModuleNode } from './FlatteningModuleNode';
 import { FlatteningNode } from './FlatteningNode';
+import { getIdForStack } from './getIdForStack';
 
 export class FlatteningOutputNode extends FlatteningNode {
 	constructor(
@@ -25,6 +26,6 @@ export class FlatteningOutputNode extends FlatteningNode {
 			return targetNode.getIdForConnectionTarget(stack);
 		}
 
-		return this.outputNodeData.id + '_placeholder';
+		return this.outputNodeData.id + '_placeholder' + getIdForStack(stack);
 	}
 }

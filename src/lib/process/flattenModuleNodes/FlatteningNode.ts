@@ -40,8 +40,9 @@ export class FlatteningNode {
 	createPlaceholder(result: GraphRegistry, stack: FlatteningModuleNode[], replacedNode: NodeData) {
 		const placeholder: ConstantNodeData = {
 			extras: { value: 0 },
-			id: replacedNode.id + '_placeholder',
-			internalModuleId: replacedNode.internalModuleId,
+			id: replacedNode.id + '_placeholder' + getIdForStack(stack),
+			internalModuleId:
+				stack.at(0)?.moduleNodeData.internalModuleId ?? replacedNode.internalModuleId,
 			isInputAutoConnectedMap: {},
 			position: { x: 0, y: 0 },
 			type: 'ConstantNode',

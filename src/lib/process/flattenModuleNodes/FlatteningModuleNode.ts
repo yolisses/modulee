@@ -4,6 +4,7 @@ import { FlatteningInputNode } from './FlatteningInputNode';
 import { FlatteningModule } from './FlatteningModule';
 import { FlatteningNode } from './FlatteningNode';
 import { FlatteningOutputNode } from './FlatteningOutputNode';
+import { getIdForStack } from './getIdForStack';
 
 export class FlatteningModuleNode extends FlatteningNode {
 	targetModule?: FlatteningModule;
@@ -54,7 +55,7 @@ export class FlatteningModuleNode extends FlatteningNode {
 			return moduleOutputNode.getIdForConnectionTarget([...stack, this]);
 		}
 
-		return this.moduleNodeData.id + '_placeholder';
+		return this.moduleNodeData.id + '_placeholder' + getIdForStack(stack);
 	}
 
 	getTargetForInputNode(inputNode: FlatteningInputNode) {
