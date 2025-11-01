@@ -3,6 +3,7 @@ import type { NodeData } from '$lib/node/data/NodeData';
 import type { ConstantNodeData } from '$lib/node/data/variants/ConstantNodeData';
 import { FlatteningConnection } from './FlatteningConnection';
 import type { FlatteningModuleNode } from './FlatteningModuleNode';
+import { getIdForStack } from './getIdForStack';
 import { getLast } from './getLast';
 
 export class FlatteningNode {
@@ -21,7 +22,7 @@ export class FlatteningNode {
 	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {
 		const copy = structuredClone(this.nodeData);
 		const lastModuleNode = getLast(stack);
-		copy.id += '_for_' + lastModuleNode.nodeData.id;
+		copy.id += getIdForStack(stack);
 		copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
 		result.nodes.add(copy);
 
@@ -32,10 +33,7 @@ export class FlatteningNode {
 
 	getIdForConnectionTarget(stack: FlatteningModuleNode[]) {
 		let { id } = this.nodeData;
-		const lastModuleNode = stack.at(-1);
-		if (lastModuleNode) {
-			id += '_for_' + lastModuleNode.nodeData.id;
-		}
+		id += getIdForStack(stack);
 		return id;
 	}
 

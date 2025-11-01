@@ -43,6 +43,7 @@ export class WebAudioBackend implements AudioBackend {
 	setGraph(graphEngineData: GraphEngineData): void {
 		// DEBUG
 		// downloadJson(graphEngineData, 'graphEngineData.json');
+		console.log(graphEngineData);
 		this.postOrSaveMessage({
 			type: 'setGraph',
 			data: { graphEngineData },

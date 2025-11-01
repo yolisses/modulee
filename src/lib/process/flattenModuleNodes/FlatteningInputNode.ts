@@ -17,6 +17,7 @@ export class FlatteningInputNode extends FlatteningNode {
 	}
 
 	getIdForConnectionTarget(stack: FlatteningModuleNode[]) {
+		// TODO check if this code does even make
 		const lastModuleNode = getLast(stack);
 
 		if (!lastModuleNode) {
