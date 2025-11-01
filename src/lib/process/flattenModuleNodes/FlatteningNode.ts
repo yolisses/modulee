@@ -21,8 +21,8 @@ export class FlatteningNode {
 
 	flatten(result: GraphRegistry, stack: FlatteningModuleNode[]) {
 		const copy = structuredClone(this.nodeData);
-		const lastModuleNode = getLast(stack);
 		copy.id += getIdForStack(stack);
+		const lastModuleNode = getLast(stack);
 		copy.internalModuleId = lastModuleNode.nodeData.internalModuleId;
 		result.nodes.add(copy);
 
