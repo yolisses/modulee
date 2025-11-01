@@ -2,7 +2,6 @@ import type { GraphRegistry } from '$lib/graph/GraphRegistry';
 import type { InputNodeData } from '$lib/node/data/variants/InputNodeData';
 import type { FlatteningModuleNode } from './FlatteningModuleNode';
 import { FlatteningNode } from './FlatteningNode';
-import { getLast } from './getLast';
 
 export class FlatteningInputNode extends FlatteningNode {
 	constructor(
@@ -17,8 +16,7 @@ export class FlatteningInputNode extends FlatteningNode {
 	}
 
 	getIdForConnectionTarget(stack: FlatteningModuleNode[]) {
-		// TODO check if this code does even make
-		const lastModuleNode = getLast(stack);
+		const lastModuleNode = stack.at(-1);
 
 		if (!lastModuleNode) {
 			return this.inputNodeData.id;
