@@ -5,6 +5,7 @@ export async function getProjects(userId: string) {
 	const projectsData = await prisma.project.findMany({
 		where: { userId },
 		orderBy: { updatedAt: 'desc' },
+		omit: { graph: true },
 	});
 	return projectsData as unknown as ProjectData[];
 }
