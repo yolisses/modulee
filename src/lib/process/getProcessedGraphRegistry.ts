@@ -6,6 +6,7 @@ import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectio
 import { flattenModuleNodes } from './flattenModuleNodes/flattenModuleNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
 import { removeReferencesToMissingModules } from './removeReferencesToMissingModules/removeReferencesToMissingModules';
+import { removeUnusedNodes } from './removeUnusedNodes/removeUnusedNodes';
 import { replaceAudioInputNodes } from './replaceAudioInputNodes/replaceAudioInputNodes';
 
 export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
@@ -21,6 +22,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	// DEBUG all comments
 	// downloadJson(getGraphData(graphRegistry), 'graphData before.json');
 	flattenModuleNodes(graphRegistry);
+	removeUnusedNodes(graphRegistry);
 	// makeStereo(graphRegistry);
 	// downloadJson(getGraphData(graphRegistry), 'graphData after.json');
 	// console.log(getGraphData(graphRegistry));

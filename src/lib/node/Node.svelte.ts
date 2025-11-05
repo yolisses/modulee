@@ -8,10 +8,9 @@ import { Output } from './Output';
 export class Node<T extends NodeDataBase = NodeDataBase> {
 	output: Output;
 	inputs: Input[];
-	protected nodeData: T;
 	position: Vector = $state()!;
 
-	constructor(nodeData: T) {
+	constructor(public nodeData: T) {
 		this.nodeData = structuredClone(nodeData);
 		Object.freeze(this.nodeData);
 
