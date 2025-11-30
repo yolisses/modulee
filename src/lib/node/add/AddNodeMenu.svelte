@@ -2,6 +2,7 @@
 	import { getRequiredContext } from '$lib/global/getRequiredContext';
 	import { computePosition, flip, shift } from '@floating-ui/dom';
 	import { onMount } from 'svelte';
+	import AddNodeAutoNodeOption from './AddNodeAutoNodeOption.svelte';
 	import AddNodeCategoryItems from './AddNodeCategoryItems.svelte';
 	import { addNodeMenuParamsContextKey } from './addNodeMenuParamsContext';
 	import AddNodeMenuSearchInput from './AddNodeMenuSearchInput.svelte';
@@ -54,6 +55,7 @@
 		{#if searchText}
 			<AddNodeSearchNodeItems {searchText} />
 		{:else}
+			<AddNodeAutoNodeOption />
 			<AddNodeCategoryItems />
 		{/if}
 	</div>
