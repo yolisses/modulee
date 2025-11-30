@@ -2,7 +2,7 @@ import prisma from '$lib/prisma';
 import { createProject } from '$lib/project/create/createProject';
 import { createProjectFromExternalModule } from '$lib/project/create/createProjectFromExternalModule';
 import { getProjectFriendlyPath } from '$lib/project/getProjectFriendlyPath';
-import { getProjects } from '$lib/project/getProjects';
+import { getUserProjects } from '$lib/project/getUserProjects';
 import { getSession } from '$lib/user/getSession';
 import { type Actions, error, redirect } from '@sveltejs/kit';
 import { z } from 'zod/v4';
@@ -10,7 +10,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { userId } = getSession(locals);
-	const projects = await getProjects(userId);
+	const projects = await getUserProjects(userId);
 	return { projects };
 };
 

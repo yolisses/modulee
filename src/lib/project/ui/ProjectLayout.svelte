@@ -102,9 +102,6 @@
 	setProjectToolbarContext(projectToolbarContext);
 </script>
 
-<svelte:head>
-	<title>{projectDataContext.projectData.name} - Modulee</title>
-</svelte:head>
 <div class="flex h-dvh flex-col overflow-hidden">
 	<div class="flex flex-row flex-wrap border-b-2 border-black/50">
 		<HomeLogoButton />
