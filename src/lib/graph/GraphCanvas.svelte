@@ -17,6 +17,7 @@
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { spaceContextKey } from '$lib/space/spaceContext';
 	import { getElementPosition, getEventClientPosition, rootElementContextKey } from 'nodes-editor';
+	import { tick, untrack } from 'svelte';
 	import GraphCanvasContainer from './GraphCanvasContainer.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
@@ -51,6 +52,17 @@
 	function handleScroll() {
 		addNodeMenuParamsContext.addNodeMenuParams = undefined;
 	}
+
+	$effect(() => {
+		graphSizer.clearPositions();
+		graphSizer.handleNodesUpdate(nodes);
+		untrack(() => {
+			// Wait for DOM updates
+			tick().then(() => {
+				graphSizer.autoScrollToNodesCenter(nodes);
+			});
+		});
+	});
 </script>
 
 <HowToAddNodesHint {nodes} />

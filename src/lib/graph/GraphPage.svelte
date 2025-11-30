@@ -8,7 +8,6 @@
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
-	import { tick, untrack } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import { graphContextKey } from './graphContext';
 	import { GraphSizer } from './GraphSizer.svelte';
@@ -35,35 +34,21 @@
 		]);
 	});
 
-	const visibleNodes = $derived(
-		graphContext.graph.nodes.values().filter((node) => {
-			return node.internalModuleId === internalModuleIdContext.internalModuleId;
-		}),
-	);
-
-	$effect(() => {
-		if (internalModuleIdContext.internalModuleId) {
-			graphSizer.clearPositions();
-			untrack(() => {
-				// Wait for DOM updates
-				tick().then(() => {
-					graphSizer.autoScrollToNodesCenter(visibleNodes);
-				});
-			});
-		}
-	});
-
-	$effect(() => {
-		graphSizer.handleNodesUpdate(visibleNodes);
+	const internalModule = graphContext.graph.internalModules.values().find((internalModule) => {
+		return internalModule.id === internalModuleIdContext.internalModuleId;
 	});
 </script>
 
 <div class="relative flex flex-1 flex-col overflow-hidden">
 	<InternalModulesNavbar />
 	<GraphToolbar />
-	<GraphCanvas
-		{graphSizer}
-		nodes={visibleNodes}
-		connections={graphContext.graph.connections.values()}
-	/>
+	{#if internalModule}
+		<!-- TODO consider creating a lazy connections getter in node, to pass
+		only the needed connections -->
+		<GraphCanvas
+			{graphSizer}
+			connections={graphContext.graph.connections.values()}
+			nodes={internalModule.nodes}
+		/>
+	{/if}
 </div>
