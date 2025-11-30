@@ -27,6 +27,7 @@
 		setProjectNavbarSelectionContext,
 	} from '../projectNavbarSelectionContext';
 	import { setMenuVisibilityContexts } from '../setMenuVisibilityContexts.svelte';
+	import HomeLogoButton from './HomeLogoButton.svelte';
 	import { projectDataContextKey, setProjectDataContext } from './projectDataContext';
 	import ProjectNavbar from './ProjectNavbar.svelte';
 	import { type ProjectToolbarContext, setProjectToolbarContext } from './projectToobalContext';
@@ -104,22 +105,18 @@
 <svelte:head>
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
-<div class="flex h-svh w-screen overflow-hidden max-md:flex-col md:flex-row">
-	<div class="flex flex-1 flex-col overflow-hidden md:order-2">
-		<div class="flex flex-1 flex-col overflow-hidden">
-			{@render children?.()}
-		</div>
-		<div
-			bind:this={projectToolbarContext.projectToolbar}
-			class="flex flex-row items-start overflow-auto border-t-2 border-black/50 max-md:justify-between"
-		>
-			<UndoButton />
-			<RedoButton />
-			<MuteButton />
-		</div>
-		<PianoBar />
+<div class="h-dvh overflow-hidden">
+	<div bind:this={projectToolbarContext.projectToolbar} class="flex flex-row">
+		<HomeLogoButton />
+		<ProjectNavbar />
+		<UndoButton />
+		<RedoButton />
+		<MuteButton />
 	</div>
-	<ProjectNavbar />
+	<div class="flex-1">
+		{@render children?.()}
+	</div>
+	<PianoBar />
 </div>
 
 {#if isCommandPaletteActiveContext.isCommandPaletteActive}

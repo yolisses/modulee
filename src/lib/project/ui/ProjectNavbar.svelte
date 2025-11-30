@@ -12,40 +12,27 @@
 	const internalModuleIdContext = getRequiredContext(internalModuleIdContextKey);
 </script>
 
-<div
-	class="flex flex-row border-black/50 max-md:justify-around max-md:border-t-2 md:order-1 md:flex-col md:border-r-2"
+<a
+	class="navbar-item"
+	href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
+	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
 >
-	<a
-		class="navbar-item"
-		href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
-		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
-	>
-		<Fa fw icon={faProjectDiagram} flip="horizontal" />
-		<div class="navbar-item-text">Graph</div>
-	</a>
-	<a
-		class="navbar-item"
-		href="{baseUrl}/rack"
-		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
-	>
-		<Fa fw icon={faSlidersH} />
-		<div class="navbar-item-text">Rack</div>
-	</a>
-	<a
-		href={baseUrl}
-		class="navbar-item"
-		data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
-	>
-		<Fa fw icon={faFileAlt} />
-		<div class="navbar-item-text">Project</div>
-	</a>
-	<div class="flex-1 max-md:hidden"></div>
-	<a href="/projects" aria-label="Home" title="Go to projects page" class="navbar-item">
-		<picture>
-			<source media="(max-width: 48rem)" srcset="/logo.svg" />
-			<source media="(min-width: 48.0625rem)" srcset="/logo-with-name-beta.svg" />
-			<img height="16" alt="Modulee logo" style="height: 1rem;" src="/logo.svg" />
-		</picture>
-		<div class="navbar-item-text md:hidden">Modulee</div>
-	</a>
-</div>
+	<Fa fw icon={faProjectDiagram} flip="horizontal" />
+	<div class="navbar-item-text">Graph</div>
+</a>
+<a
+	class="navbar-item"
+	href="{baseUrl}/rack"
+	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
+>
+	<Fa fw icon={faSlidersH} />
+	<div class="navbar-item-text">Rack</div>
+</a>
+<a
+	href={baseUrl}
+	class="navbar-item"
+	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
+>
+	<Fa fw icon={faFileAlt} />
+	<div class="navbar-item-text">Project</div>
+</a>
