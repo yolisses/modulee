@@ -31,11 +31,11 @@ export class AddNodeHandler {
 		const { output, input } = addNodeMenuParams;
 		if (input || output) {
 			const outputParams = output
-				? { targetNodeId: output.node.id, outputConnectionId: createId() }
+				? { targetNodeId: output.node.id, connectionId: createId() }
 				: undefined;
 
 			const inputParams = input
-				? { inputPath: input.inputPath, inputConnectionId: createId() }
+				? { inputPath: input.inputPath, connectionId: createId() }
 				: undefined;
 
 			command = new AddConnectedNodeCommand({

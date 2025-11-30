@@ -7,8 +7,8 @@ import { SetConnectionCommand } from '../../connection/SetConnectionCommand';
 import { mockCommandData } from '../../test/mockNodeData';
 import { AddNodeCommand } from './AddNodeCommand';
 
-type InputParams = { inputPath: InputPath; inputConnectionId: string };
-type OutputParams = { targetNodeId: string; outputConnectionId: string };
+type InputParams = { inputPath: InputPath; connectionId: string };
+type OutputParams = { targetNodeId: string; connectionId: string };
 
 export class AddConnectedNodeCommand extends EditorCommand<{
 	node: NodeData;
@@ -27,7 +27,7 @@ export class AddConnectedNodeCommand extends EditorCommand<{
 		this.addNodeCommand.execute(graphRegistry);
 
 		if (inputParams) {
-			const { inputPath, inputConnectionId } = inputParams;
+			const { inputPath, connectionId: inputConnectionId } = inputParams;
 			this.setInputConnectionCommand = new SetConnectionCommand(
 				mockCommandData({
 					connection: { inputPath, id: inputConnectionId, targetNodeId: node.id },
@@ -37,7 +37,7 @@ export class AddConnectedNodeCommand extends EditorCommand<{
 		}
 
 		if (outputParams) {
-			const { targetNodeId, outputConnectionId } = outputParams;
+			const { targetNodeId, connectionId: outputConnectionId } = outputParams;
 			const nodeDefinition = nodeDefinitionsByName[node.type];
 			const firstInput = nodeDefinition.inputs.at(0);
 			if (firstInput) {

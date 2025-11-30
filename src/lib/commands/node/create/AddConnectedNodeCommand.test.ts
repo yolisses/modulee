@@ -13,12 +13,16 @@ test('AddConnectedNodeCommand', () => {
 
 	const command = new AddConnectedNodeCommand(
 		mockCommandData({
-			connectionId: 'connection2',
 			node: { id: 'node2' } as NodeData,
-			inputPath: { nodeId: 'node1', inputKey: 'someInput' },
+			inputParams: {
+				connectionId: 'connection2',
+				inputPath: { nodeId: 'node1', inputKey: 'someInput' },
+			},
 		}),
 	);
 	command.execute(graphRegistry);
+
+	console.log(graphRegistry);
 
 	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 	expect(graphRegistry.connections.values()).toEqual([
