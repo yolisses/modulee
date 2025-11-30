@@ -13,26 +13,26 @@
 </script>
 
 <a
-	class="navbar-item"
-	href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
+	class="horizontal-tab flex flex-row"
 	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'graph'}
+	href="{baseUrl}/internalModules/{internalModuleIdContext.internalModuleId}/graph"
 >
 	<Fa fw icon={faProjectDiagram} flip="horizontal" />
-	<div class="navbar-item-text">Graph</div>
+	Graph
 </a>
 <a
-	class="navbar-item"
-	href="{baseUrl}/rack"
+	class="horizontal-tab flex flex-row"
 	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'rack'}
+	href="{baseUrl}/rack"
 >
 	<Fa fw icon={faSlidersH} />
-	<div class="navbar-item-text">Rack</div>
+	Rack
 </a>
 <a
-	href={baseUrl}
-	class="navbar-item"
+	class="horizontal-tab flex flex-row"
 	data-tab-selected={projectNavbarSelectionContext.projectNavbarSelection === 'project'}
+	href={baseUrl}
 >
 	<Fa fw icon={faFileAlt} />
-	<div class="navbar-item-text">Project</div>
+	Project
 </a>
