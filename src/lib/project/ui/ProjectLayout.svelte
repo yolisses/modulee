@@ -106,16 +106,16 @@
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
 <div class="flex h-dvh flex-col overflow-hidden">
-	<div
-		bind:this={projectToolbarContext.projectToolbar}
-		class="flex flex-row border-b-2 border-black/50"
-	>
+	<div class="flex flex-row flex-wrap border-b-2 border-black/50">
 		<HomeLogoButton />
 		<ProjectNavbar />
 		<div class="flex-1"></div>
-		<UndoButton />
-		<RedoButton />
-		<MuteButton />
+		<div class="flex flex-row">
+			<UndoButton />
+			<RedoButton />
+			<MuteButton />
+			<div bind:this={projectToolbarContext.projectToolbar} class="contents"></div>
+		</div>
 	</div>
 	<div class="flex flex-1 flex-col overflow-hidden">
 		{@render children?.()}
