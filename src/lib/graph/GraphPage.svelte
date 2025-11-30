@@ -41,9 +41,6 @@
 		}),
 	);
 
-	$inspect(internalModule);
-	$inspect(internalModule?.nodes);
-
 	// On internal module change:
 	// 1. Clear positions (min and max)
 	// 2. Update size with current nodes
