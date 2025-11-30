@@ -106,7 +106,10 @@
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
 <div class="flex h-dvh flex-col overflow-hidden">
-	<div bind:this={projectToolbarContext.projectToolbar} class="flex flex-row">
+	<div
+		bind:this={projectToolbarContext.projectToolbar}
+		class="flex flex-row border-b-2 border-black/50"
+	>
 		<HomeLogoButton />
 		<ProjectNavbar />
 		<div class="flex-1"></div>
