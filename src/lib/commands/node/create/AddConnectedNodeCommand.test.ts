@@ -22,8 +22,6 @@ test('AddConnectedNodeCommand', () => {
 	);
 	command.execute(graphRegistry);
 
-	console.log(graphRegistry);
-
 	expect(graphRegistry.nodes.values()).toEqual([{ id: 'node1' }, { id: 'node2' }]);
 	expect(graphRegistry.connections.values()).toEqual([
 		{

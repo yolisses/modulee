@@ -25,6 +25,5 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	removeUnusedNodes(graphRegistry);
 	// makeStereo(graphRegistry);
 	// downloadJson(getGraphData(graphRegistry), 'graphData after.json');
-	// console.log(getGraphData(graphRegistry));
 	return graphRegistry;
 }
