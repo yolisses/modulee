@@ -105,10 +105,11 @@
 <svelte:head>
 	<title>{projectDataContext.projectData.name} - Modulee</title>
 </svelte:head>
-<div class="h-dvh overflow-hidden">
+<div class="flex h-dvh flex-col overflow-hidden">
 	<div bind:this={projectToolbarContext.projectToolbar} class="flex flex-row">
 		<HomeLogoButton />
 		<ProjectNavbar />
+		<div class="flex-1"></div>
 		<UndoButton />
 		<RedoButton />
 		<MuteButton />
