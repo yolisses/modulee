@@ -50,10 +50,6 @@
 	);
 </script>
 
-<svelte:head>
-	<title>Graph Debug - Modulee</title>
-</svelte:head>
-
 <!-- TODO replace "Nodes" by "Graph" in this page and its components since it
 sounds better on singular and contains things like connections too. -->
 <div class="relative flex flex-1 flex-col overflow-hidden">

@@ -10,10 +10,6 @@
 	projectNavbarSelectionContext.projectNavbarSelection = 'rack';
 </script>
 
-<svelte:head>
-	<title>Rack - Modulee</title>
-</svelte:head>
-
 <div class="overflow-auto">
 	{#each graphContext.graph.internalModules.values() as internalModule (internalModule.id)}
 		<RackModuleItem {internalModule} />

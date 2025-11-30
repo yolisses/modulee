@@ -14,10 +14,6 @@
 	const { badges, children, showCloseButton, sideBar, title, topChildren }: Props = $props();
 </script>
 
-<svelte:head>
-	<title>{title} - Modulee</title>
-</svelte:head>
-
 <div class="flex flex-row border-b-2 border-black/50">
 	<h1 class="px-2 py-2 text-xl font-medium">{title}</h1>
 	{@render badges?.()}

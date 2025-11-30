@@ -58,10 +58,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Graph - Modulee</title>
-</svelte:head>
-
 <div class="relative flex flex-1 flex-col overflow-hidden">
 	<InternalModulesNavbar />
 	<GraphToolbar />
