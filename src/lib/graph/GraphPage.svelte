@@ -8,6 +8,7 @@
 	import { setSpaceContext } from '$lib/space/spaceContext';
 	import { setZoomContext } from '$lib/space/zoom/zoomContext';
 	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import { tick, untrack } from 'svelte';
 	import GraphCanvas from './GraphCanvas.svelte';
 	import { graphContextKey } from './graphContext';
 	import { GraphSizer } from './GraphSizer.svelte';
@@ -34,8 +35,46 @@
 		]);
 	});
 
-	const internalModule = graphContext.graph.internalModules.values().find((internalModule) => {
-		return internalModule.id === internalModuleIdContext.internalModuleId;
+	const internalModule = $derived(
+		graphContext.graph.internalModules.values().find((internalModule) => {
+			return internalModule.id === internalModuleIdContext.internalModuleId;
+		}),
+	);
+
+	$inspect(internalModule);
+	$inspect(internalModule?.nodes);
+
+	// On internal module change:
+	// 1. Clear positions (min and max)
+	// 2. Update size with current nodes
+	// 3. Auto scroll to show the nodes
+
+	// If the graph changes but the internal module stays the same, just update
+	// the size with current nodes
+
+	$effect(() => {
+		internalModuleIdContext.internalModuleId; // On internal module change
+		untrack(() => {
+			graphSizer.clearPositions();
+		});
+	});
+
+	$effect(() => {
+		if (internalModule) {
+			graphSizer.handleNodesUpdate(internalModule.nodes);
+		}
+	});
+
+	$effect(() => {
+		internalModuleIdContext.internalModuleId; // On internal module change
+		untrack(() => {
+			// Wait for DOM updates
+			tick().then(() => {
+				if (internalModule) {
+					graphSizer.autoScrollToNodesCenter(internalModule.nodes);
+				}
+			});
+		});
 	});
 </script>
 
