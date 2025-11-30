@@ -14,10 +14,10 @@ import { getNodesMinPosition } from './getNodesMinPosition';
  * which usually causes flickering.
  */
 export class GraphSizer {
-	minPosition = $state<Vector>();
 	maxPosition = $state<Vector>();
-	zoomContext = getRequiredContext(zoomContextKey);
+	minPosition = $state<Vector>();
 	scrollArea = $state<HTMLElement>();
+	zoomContext = getRequiredContext(zoomContextKey);
 
 	clearPositions() {
 		this.minPosition = undefined;
