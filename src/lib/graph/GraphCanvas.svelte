@@ -29,8 +29,8 @@
 
 	const { nodes, graphSizer, connections }: Props = $props();
 	const addNodeInputContext = $state({});
-	const renameNodesStateContext = $state({ nodes: [] });
 	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
+	const renameNodesStateContext = $state({ nodes: [] });
 	const rootElementContext = getRequiredContext(rootElementContextKey);
 	const spaceContext = getRequiredContext(spaceContextKey);
 	let floatingMenuReference = $state<HTMLElement>();
