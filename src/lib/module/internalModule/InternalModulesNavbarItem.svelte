@@ -19,9 +19,8 @@
 	class="horizontal-tab group flex max-w-[10rem] flex-row p-0"
 	data-tab-selected={internalModuleIdContext.internalModuleId === internalModule.id}
 >
-	<!-- DEBUG -->
 	<a
-		title={internalModule.name + ' ' + internalModule.id}
+		title={internalModule.name}
 		class="block overflow-hidden p-2 text-ellipsis whitespace-nowrap"
 		href="/projects/{projectId}/internalModules/{internalModule.id}/graph"
 	>

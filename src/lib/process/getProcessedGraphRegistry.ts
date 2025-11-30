@@ -19,7 +19,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	replaceAudioInputNodes(graphRegistry);
 	addAutoNodes(graphRegistry);
 	addControlNodes(graphRegistry);
-	// DEBUG all comments
+	// DEBUG: all comments
 	// downloadJson(getGraphData(graphRegistry), 'graphData before.json');
 	flattenModuleNodes(graphRegistry);
 	removeUnusedNodes(graphRegistry);

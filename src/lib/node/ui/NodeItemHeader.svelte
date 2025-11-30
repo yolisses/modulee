@@ -119,16 +119,13 @@
 		}}
 		style="width: calc(100% - 0.4lh);"
 	>
-		<!-- DEBUG title-->
 		<div
 			bind:this={element}
 			class="overflow-and-ellipsis"
 			style:padding-inline="0.2lh"
-			title={nodesName[node.type] + node.id}
+			title={nodesName[node.type]}
 		>
 			{node.name ?? nodesName[node.type]}
-			<!-- DEBUG -->
-			{node.id}
 		</div>
 	</PointerEventDispatcher>
 	{@render children?.()}
