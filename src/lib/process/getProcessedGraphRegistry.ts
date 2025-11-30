@@ -3,7 +3,6 @@ import { addAutoNodes } from './autoNodes/addAutoNodes';
 import { cloneGraphRegistry } from './cloneGraphRegistry';
 import { addControlNodes } from './fallbackNodes/addControlNodes';
 import { removeConnectionsToMissingNodes } from './fallbackNodes/removeConnectionsToMissingNodes';
-import { flattenModuleNodes } from './flattenModuleNodes/flattenModuleNodes';
 import { internalizeModules } from './internalizeModules/internalizeModules';
 import { removeReferencesToMissingModules } from './removeReferencesToMissingModules/removeReferencesToMissingModules';
 import { removeUnusedNodes } from './removeUnusedNodes/removeUnusedNodes';
@@ -21,7 +20,7 @@ export function getProcessedGraphRegistry(graphRegistry: GraphRegistry) {
 	addControlNodes(graphRegistry);
 	// DEBUG: all comments
 	// downloadJson(getGraphData(graphRegistry), 'graphData before.json');
-	flattenModuleNodes(graphRegistry);
+	// flattenModuleNodes(graphRegistry);
 	removeUnusedNodes(graphRegistry);
 	// makeStereo(graphRegistry);
 	// downloadJson(getGraphData(graphRegistry), 'graphData after.json');
