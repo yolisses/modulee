@@ -16,12 +16,7 @@
 	import RenameNodesModal from '$lib/node/ui/RenameNodesModal.svelte';
 	import SelectionBox from '$lib/selection/SelectionBox.svelte';
 	import { spaceContextKey } from '$lib/space/spaceContext';
-	import {
-		getElementPosition,
-		getEventClientPosition,
-		rootElementContextKey,
-		selectedNodeIdsContextKey,
-	} from 'nodes-editor';
+	import { getElementPosition, getEventClientPosition, rootElementContextKey } from 'nodes-editor';
 	import GraphCanvasContainer from './GraphCanvasContainer.svelte';
 	import type { GraphSizer } from './GraphSizer.svelte';
 	import HowToAddNodesHint from './HowToAddNodesHint.svelte';
@@ -37,7 +32,6 @@
 	const renameNodesStateContext = $state({ nodes: [] });
 	const addNodeMenuParamsContext = $state<AddNodeMenuParamsContext>({});
 	const rootElementContext = getRequiredContext(rootElementContextKey);
-	const selectedNodeIdsContext = getRequiredContext(selectedNodeIdsContextKey);
 	const spaceContext = getRequiredContext(spaceContextKey);
 	let floatingMenuReference = $state<HTMLElement>();
 	setAddNodeInputContext(addNodeInputContext);
